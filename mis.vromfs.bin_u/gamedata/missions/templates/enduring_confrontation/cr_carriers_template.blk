@@ -1,0 +1,1793 @@
+{
+  "selected_tag": "",
+  "bin_dump_file": "",
+  "mission_settings": {
+    "player": {
+      "army": 1,
+      "wing": "armada_01"
+    },
+    "player_teamB": {
+      "army": 2
+    },
+    "mission": {
+      "level": "levels/water.bin",
+      "type": "singleMission",
+      "environment": "Day",
+      "weather": "clear",
+      "restoreType": "attempts",
+      "optionalTakeOff": false
+    },
+    "spectator_points": {    }
+  },
+  "imports": {  },
+  "triggers": {
+    "isCategory": true,
+    "is_enabled": true,
+    "cr_carriers_init": {
+      "is_enabled": true,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ANY",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "initMission": {        }
+      },
+      "conditions": {
+        "varCompareBool": {
+          "var_value": "cr_t1_carriers_alowed",
+          "value": true,
+          "comparasion_func": "equal"
+        },
+        "varCompareBool": {
+          "var_value": "cr_t2_carriers_alowed",
+          "value": true,
+          "comparasion_func": "equal"
+        }
+      },
+      "actions": {
+        "comment": {
+          "value": "aviki razresheny k spavnu. initim"
+        },
+        "varSetString": {
+          "value": "cr_t1_carrier",
+          "var": "cr_t1_carrier_name"
+        },
+        "varSetString": {
+          "value": "cr_t2_carrier",
+          "var": "cr_t2_carrier_name"
+        },
+        "comment": {
+          "value": ""
+        },
+        "unitLoadBehTree": {
+          "name": "shipMissionUnit",
+          "objects": "@cr_t1_carrier_name",
+          "objects": "@cr_t2_carrier_name"
+        },
+        "comment": {
+          "value": ""
+        },
+        "triggerEnable": {
+          "target": "cr_t1_carriers_start",
+          "target": "cr_t2_carriers_start"
+        }
+      },
+      "else_actions": {
+        "comment": {
+          "value": "aviki zapreshcheny. dizejblim trigger"
+        },
+        "triggerDisable": {
+          "target": "cr_carriers_init"
+        }
+      }
+    },
+    "carriers_spawn": {
+      "isCategory": true,
+      "is_enabled": true,
+      "cr_t1_carriers_start": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_t1_carriers_alowed",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "generiruem odnu iz 4-h tochek spavna"
+          },
+          "varSetRandomInt": {
+            "var": "cr_t1_carrier_random_idx",
+            "from": 1,
+            "to_not_including": 5,
+            "var_to_not_including": "cr_t1_num_ways_count_plus_one"
+          },
+          "comment": {
+            "value": "sozdaem imya spavn tochki avianosca"
+          },
+          "varSetString": {
+            "value": "cr_t1_carrier_spawn_point_",
+            "var": "cr_t1_carrier_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t1_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t1_carrier_spawn_name"
+          },
+          "comment": {
+            "value": "sozdaem imya spavn tochki flota"
+          },
+          "varSetString": {
+            "value": "cr_t1_fleet_spawn_point_",
+            "var": "cr_t1_fleet_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t1_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t1_fleet_spawn_name"
+          },
+          "comment": {
+            "value": "proveryaem est' li nuzhnye ob'ekty"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_carriers_continue"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_carriers_start"
+          }
+        }
+      },
+      "cr_t1_carriers_continue": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {        },
+        "actions": {
+          "comment": {
+            "value": "sozdaem imya puti dvizheniya"
+          },
+          "varSetString": {
+            "value": "cr_t1_carrier_route_",
+            "var": "cr_t1_carrier_route_name"
+          },
+          "varAddString": {
+            "value": "@cr_t1_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t1_carrier_route_name"
+          },
+          "comment": {
+            "value": "sozdaem imya svkada"
+          },
+          "varSetString": {
+            "value": "cr_t1_carrier_squad_",
+            "var": "cr_t1_carrier_squad_name"
+          },
+          "varAddString": {
+            "value": "@cr_t1_respawns_left",
+            "digits": 2,
+            "var": "cr_t1_carrier_squad_name"
+          },
+          "comment": {
+            "value": "proveryaem est' li nuzhnye ob'ekty"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_carriers_exist_check"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_carriers_start"
+          }
+        }
+      },
+      "cr_t2_carriers_start": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_t2_carriers_alowed",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "generiruem odnu iz 4-h tochek spavna"
+          },
+          "varSetRandomInt": {
+            "var": "cr_t2_carrier_random_idx",
+            "from": 1,
+            "to_not_including": 5,
+            "var_to_not_including": "cr_t2_num_ways_count_plus_one"
+          },
+          "comment": {
+            "value": "sozdaem imya spavn tochki avianosca"
+          },
+          "varSetString": {
+            "value": "cr_t2_carrier_spawn_point_",
+            "var": "cr_t2_carrier_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t2_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t2_carrier_spawn_name"
+          },
+          "comment": {
+            "value": "sozdaem imya spavn tochki flota"
+          },
+          "varSetString": {
+            "value": "cr_t2_fleet_spawn_point_",
+            "var": "cr_t2_fleet_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t2_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t2_fleet_spawn_name"
+          },
+          "comment": {
+            "value": "proveryaem est' li nuzhnye ob'ekty"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_carriers_continue"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t2_carriers_start"
+          }
+        }
+      },
+      "cr_t2_carriers_continue": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {        },
+        "actions": {
+          "comment": {
+            "value": "sozdaem imya puti dvizheniya"
+          },
+          "varSetString": {
+            "value": "cr_t2_carrier_route_",
+            "var": "cr_t2_carrier_route_name"
+          },
+          "varAddString": {
+            "value": "@cr_t2_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t2_carrier_route_name"
+          },
+          "comment": {
+            "value": "sozdaem imya svkada"
+          },
+          "varSetString": {
+            "value": "cr_t2_carrier_squad_",
+            "var": "cr_t2_carrier_squad_name"
+          },
+          "varAddString": {
+            "value": "@cr_t2_respawns_left",
+            "digits": 2,
+            "var": "cr_t2_carrier_squad_name"
+          },
+          "comment": {
+            "value": "proveryaem est' li nuzhnye ob'ekty"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_carriers_exist_check"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t2_carriers_start"
+          }
+        }
+      },
+      "cr_t1_carriers_exist_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@cr_t1_carrier_spawn_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@cr_t1_carrier_name",
+            "type": "unit"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "vse sushchnosti sushchestvuyut. mozhem spavnit' avianosec"
+          },
+          "unitRespawn": {
+            "delay": 1.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@cr_t1_carrier_name",
+            "target": "@cr_t1_carrier_spawn_name",
+            "resetFormation": true
+          },
+          "comment": {
+            "value": "naznachaem tochnost' zenitkam"
+          },
+          "unitSetProperties": {
+            "object_marking": 0,
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object_var_value": 0,
+            "targetChangeProf": 0.25,
+            "object": "@cr_t1_carrier_name",
+            "accuracy": 0.8,
+            "effShootingRate": 0.8,
+            "airEffShootingRate": 0.8,
+            "fireRandom": true,
+            "targetChangeInterval": 5.0
+          },
+          "comment": {
+            "value": "naznachaem spavn"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/carriers_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": true,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "resetStrictSpawnIndex": false,
+            "forceCreate": false,
+            "replaceAreas": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@cr_t1_carrier_name",
+            "team": "A",
+            "object": "@cr_t1_carrier_name",
+            "separate_fuel_time": false,
+            "modular_airfield": false,
+            "tags": {
+              "carrier_take_off": true
+            }
+          },
+          "comment": {
+            "value": "naznachaem vidimost'"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t1_carrier_name",
+            "team": "A"
+          },
+          "comment": {
+            "value": "pytaemsya rodit' flot soprovozhdeniya"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_fleet_exist_check"
+          },
+          "comment": {
+            "value": "vklyuchaem otslezhivanie pererozhdeniya"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_carrier_dead_start"
+          },
+          "comment": {
+            "value": "vklyuchaem otslezhivanie obnaruzheniya"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_start"
+          }
+        },
+        "else_actions": {        }
+      },
+      "cr_t2_carriers_exist_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@cr_t2_carrier_spawn_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@cr_t2_carrier_name",
+            "type": "unit"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "vse sushchnosti sushchestvuyut. mozhem spavnit' avianosec"
+          },
+          "unitRespawn": {
+            "delay": 1.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@cr_t2_carrier_name",
+            "target": "@cr_t2_carrier_spawn_name",
+            "resetFormation": true
+          },
+          "comment": {
+            "value": "naznachaem tochnost' zenitkam"
+          },
+          "unitSetProperties": {
+            "object_marking": 0,
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object_var_value": 0,
+            "targetChangeProf": 0.25,
+            "object": "@cr_t2_carrier_name",
+            "accuracy": 0.8,
+            "effShootingRate": 0.8,
+            "airEffShootingRate": 0.8,
+            "fireRandom": true,
+            "targetChangeInterval": 5.0
+          },
+          "comment": {
+            "value": ""
+          },
+          "comment": {
+            "value": "naznachaem spavn"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/carriers_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": true,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "resetStrictSpawnIndex": false,
+            "forceCreate": false,
+            "replaceAreas": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@cr_t2_carrier_name",
+            "team": "B",
+            "object": "@cr_t2_carrier_name",
+            "separate_fuel_time": false,
+            "modular_airfield": false,
+            "tags": {
+              "carrier_take_off": true
+            }
+          },
+          "comment": {
+            "value": "naznachaem vidimost'"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t2_carrier_name",
+            "team": "B"
+          },
+          "comment": {
+            "value": "pytaemsya rodit' flot soprovozhdeniya"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_fleet_exist_check"
+          },
+          "comment": {
+            "value": "vklyuchaem otslezhivanie pererozhdeniya"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_carrier_dead_start"
+          },
+          "comment": {
+            "value": "vklyuchaem otslezhivanie obnaruzheniya"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_start"
+          }
+        },
+        "else_actions": {        }
+      },
+      "cr_t1_fleet_exist_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitSetRoute": {
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "route": "@cr_t1_carrier_route_name",
+            "teleportToStart": false,
+            "object": "@cr_t1_carrier_name"
+          }
+        },
+        "else_actions": {        }
+      },
+      "cr_t2_fleet_exist_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitSetRoute": {
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "route": "@cr_t2_carrier_route_name",
+            "teleportToStart": false,
+            "object": "@cr_t2_carrier_name"
+          }
+        },
+        "else_actions": {        }
+      }
+    },
+    "carriers_respawn": {
+      "isCategory": true,
+      "is_enabled": true,
+      "cr_t1_carrier_respawn_timer": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0,
+            "var": "cr_t1_carrier_respawn_time"
+          }
+        },
+        "conditions": {
+          "varCompareInt": {
+            "var_value": "cr_t1_respawns_left",
+            "value": 0,
+            "comparasion_func": "more"
+          }
+        },
+        "actions": {
+          "varModify": {
+            "operator": "add",
+            "value": -1.0,
+            "var": "cr_t1_respawns_left"
+          },
+          "varSetRandomInt": {
+            "var": "cr_t1_carrier_random_idx",
+            "from": 1,
+            "to_not_including": 5
+          },
+          "comment": {
+            "value": "sozdaem imya respauna"
+          },
+          "varSetString": {
+            "value": "cr_t1_carrier_respawn_point_",
+            "var": "cr_t1_carrier_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t1_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t1_carrier_spawn_name"
+          },
+          "comment": {
+            "value": "sozdaem imya respauna"
+          },
+          "varSetString": {
+            "value": "cr_t1_fleet_respawn_point_",
+            "var": "cr_t1_fleet_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t1_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t1_fleet_spawn_name"
+          },
+          "comment": {
+            "value": "respavnim"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_carriers_continue"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "respavny konchilis'"
+          },
+          "triggerDisable": {
+            "target": "cr_t1_carrier_respawn_timer"
+          }
+        }
+      },
+      "cr_t2_carrier_respawn_timer": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0,
+            "var": "cr_t2_carrier_respawn_time"
+          }
+        },
+        "conditions": {
+          "varCompareInt": {
+            "var_value": "cr_t2_respawns_left",
+            "value": 0,
+            "comparasion_func": "more"
+          }
+        },
+        "actions": {
+          "varModify": {
+            "operator": "add",
+            "value": -1.0,
+            "var": "cr_t2_respawns_left"
+          },
+          "varSetRandomInt": {
+            "var": "cr_t2_carrier_random_idx",
+            "from": 1,
+            "to_not_including": 5
+          },
+          "comment": {
+            "value": "sozdaem imya respauna"
+          },
+          "varSetString": {
+            "value": "cr_t2_carrier_respawn_point_",
+            "var": "cr_t2_carrier_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t2_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t2_carrier_spawn_name"
+          },
+          "comment": {
+            "value": "sozdaem imya respauna"
+          },
+          "varSetString": {
+            "value": "cr_t2_fleet_respawn_point_",
+            "var": "cr_t2_fleet_spawn_name"
+          },
+          "varAddString": {
+            "value": "@cr_t2_carrier_random_idx",
+            "digits": 2,
+            "var": "cr_t2_fleet_spawn_name"
+          },
+          "comment": {
+            "value": "respavnim"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_carriers_continue"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "respavny konchilis'"
+          },
+          "triggerDisable": {
+            "target": "cr_t2_carrier_respawn_timer"
+          }
+        }
+      }
+    },
+    "carriers_detection": {
+      "isCategory": true,
+      "is_enabled": true,
+      "cr_detection_init": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_is_detect_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "karier dolzhen byt' obnaruzhen pered pokazom na karte"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_start",
+            "target": "cr_t2_detection_start"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "vklyuchaem pokaz avianosca na karte dlya vseh"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t1_carrier_name",
+            "target": "@cr_t2_carrier_name",
+            "team": "Both"
+          }
+        }
+      },
+      "cr_t1_detection_start": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_is_detect_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "proverili, chto zapusk avikov dlya etoj komandy razreshen"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_rotator"
+          },
+          "comment": {
+            "value": "zapuskaem proverku na to nuzhden li kvest na obnaruzhenie"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_quest_start_check"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "proveryaem vydachu zadanie na unichtozhenie"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_dead_quest_start_check"
+          }
+        }
+      },
+      "cr_t2_detection_start": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_is_detect_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "proverili, chto zapusk avikov dlya etoj komandy razreshen"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_rotator"
+          },
+          "comment": {
+            "value": "zapuskaem proverku na to nuzhden li kvest na obnaruzhenie"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_quest_start_check"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "proveryaem vydachu zadanie na unichtozhenie"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_dead_quest_start_check"
+          }
+        }
+      },
+      "cr_t1_detection_rotator": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": true
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 10.0
+          }
+        },
+        "conditions": {
+          "misObjStatus": {
+            "target": "cr_t2_detect_carrier_quest",
+            "status": "inProgress"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "schitaem distanciyu obnaruzheniya "
+          },
+          "varSetReal": {
+            "value": 0.0,
+            "var": "cr_t1_detection_range",
+            "var": "cr_t2_detection_range",
+            "input_var": "cr_detection_base_range"
+          },
+          "comment": {
+            "value": "dobavlyaem znachenie ot korrektirovshchika"
+          },
+          "varModify": {
+            "operator": "add",
+            "value": 1.0,
+            "var": "cr_t1_detection_range",
+            "use_variable": true,
+            "var_value": "lpt_t1_detection_bonus"
+          },
+          "varModify": {
+            "operator": "add",
+            "value": 1.0,
+            "var": "cr_t2_detection_range",
+            "use_variable": true,
+            "var_value": "lpt_t2_detection_bonus"
+          },
+          "comment": {
+            "value": "proveryaem distanciyu"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_players_distance_check"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_detection_rotator"
+          }
+        }
+      },
+      "cr_t2_detection_rotator": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": true
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 10.0
+          }
+        },
+        "conditions": {
+          "misObjStatus": {
+            "target": "cr_t1_detect_carrier_quest",
+            "status": "inProgress"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "schitaem distanciyu obnaruzheniya "
+          },
+          "varSetReal": {
+            "value": 0.0,
+            "var": "cr_t1_detection_range",
+            "var": "cr_t2_detection_range",
+            "input_var": "cr_detection_base_range"
+          },
+          "comment": {
+            "value": "dobavlyaem znachenie ot korrektirovshchika"
+          },
+          "varModify": {
+            "operator": "add",
+            "value": 1.0,
+            "var": "cr_t1_detection_range",
+            "use_variable": true,
+            "var_value": "lpt_t1_detection_bonus"
+          },
+          "varModify": {
+            "operator": "add",
+            "value": 1.0,
+            "var": "cr_t2_detection_range",
+            "use_variable": true,
+            "var_value": "lpt_t2_detection_bonus"
+          },
+          "comment": {
+            "value": "proveryaem distanciyu"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_players_distance_check"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t2_detection_rotator"
+          }
+        }
+      },
+      "cr_t1_detection_players_distance_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "unitDistanceBetween": {
+            "value": 4500.0,
+            "math": "2D",
+            "object_type": "isActive",
+            "object_marking": 0,
+            "target_type": "isOnline",
+            "target_marking": 0,
+            "check_objects": "any",
+            "check_targets": "any",
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object": "@cr_t1_carrier_name",
+            "target": "t2_players_squad",
+            "var": "cr_t2_detection_range",
+            "compareCenters": false
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "igroki obnaruzhili avik"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t1_carrier_name",
+            "team": "Both"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "t2_detection_task_completed"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_quest_end_check"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "zapuskaem proverku na lyubogo protivnika"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_distance_check"
+          }
+        }
+      },
+      "cr_t2_detection_players_distance_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "unitDistanceBetween": {
+            "value": 4500.0,
+            "math": "2D",
+            "object_type": "isActive",
+            "object_marking": 0,
+            "target_type": "isOnline",
+            "target_marking": 0,
+            "check_objects": "any",
+            "check_targets": "any",
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object": "@cr_t2_carrier_name",
+            "target": "t1_players_squad",
+            "var": "cr_t1_detection_range",
+            "object_var_value": 0,
+            "compareCenters": false
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "igroki obnaruzhili avik"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t2_carrier_name",
+            "team": "Both"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "t1_detection_task_completed"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_quest_end_check"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "zapuskaem proverku na lyubogo protivnika"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_distance_check"
+          }
+        }
+      },
+      "cr_t1_detection_distance_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "unitWhenEnemyNear": {
+            "object_type": "isActive",
+            "object_marking": 0,
+            "enemy_type": "isActive",
+            "distance": 500.0,
+            "check_objects": "any",
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object_var_value": 0,
+            "object": "@cr_t1_carrier_name",
+            "use_variable": true,
+            "distance_var": "cr_t2_detection_range"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "obnaruzhili ne igroki"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t1_carrier_name",
+            "team": "Both"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_quest_end_check"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "zapuskaem rotaciyu snova"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_rotator"
+          }
+        }
+      },
+      "cr_t2_detection_distance_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "unitWhenEnemyNear": {
+            "object_type": "isActive",
+            "object_marking": 0,
+            "enemy_type": "isActive",
+            "distance": 500.0,
+            "check_objects": "any",
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object_var_value": 0,
+            "object": "@cr_t2_carrier_name",
+            "use_variable": true,
+            "distance_var": "cr_t1_detection_range"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "obnaruzhili ne igroki"
+          },
+          "airfieldSetVisibility": {
+            "target": "@cr_t2_carrier_name",
+            "team": "Both"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "cr_t1_detection_quest_end_check"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "zapuskaem rotaciyu snova"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_detection_rotator"
+          }
+        }
+      },
+      "cr_t1_detection_quest_start_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_detection_quest_is_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "razreshen kvest na nahozhdenie avika"
+          },
+          "comment": {
+            "value": "daem kvest komande B"
+          },
+          "moAddMissionObjective": {
+            "target": "cr_t2_detect_carrier_quest",
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_detection_quest_start_check"
+          }
+        }
+      },
+      "cr_t2_detection_quest_start_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_detection_quest_is_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "razreshen kvest na nahozhdenie avika"
+          },
+          "comment": {
+            "value": "daem kvest komande A"
+          },
+          "moAddMissionObjective": {
+            "target": "cr_t1_detect_carrier_quest",
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t2_detection_quest_start_check"
+          }
+        }
+      },
+      "cr_t1_detection_quest_end_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_detection_quest_is_on",
+            "value": true,
+            "comparasion_func": "equal"
+          },
+          "misObjStatus": {
+            "target": "cr_t1_detect_carrier_quest",
+            "status": "inProgress"
+          }
+        },
+        "actions": {
+          "triggerEnable": {
+            "target": "cr_t1_dead_quest_start_check"
+          },
+          "comment": {
+            "value": "razreshen kvest na nahozhdenie avika"
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t1_detect_carrier_quest",
+            "status": 2,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "extendedEnding": true,
+            "team": "A"
+          },
+          "wait": {
+            "time": 2.0
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t1_detect_carrier_quest",
+            "status": 0,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "team": "A"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_detection_quest_end_check"
+          }
+        }
+      },
+      "cr_t2_detection_quest_end_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_detection_quest_is_on",
+            "value": true,
+            "comparasion_func": "equal"
+          },
+          "misObjStatus": {
+            "target": "cr_t2_detect_carrier_quest",
+            "status": "inProgress"
+          }
+        },
+        "actions": {
+          "triggerEnable": {
+            "target": "cr_t2_dead_quest_start_check"
+          },
+          "comment": {
+            "value": "razreshen kvest na nahozhdenie avika"
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t2_detect_carrier_quest",
+            "status": 2,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "extendedEnding": true,
+            "team": "B"
+          },
+          "wait": {
+            "time": 2.0
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t2_detect_carrier_quest",
+            "status": 0,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "team": "B"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_detection_quest_end_check"
+          }
+        }
+      }
+    },
+    "carriers_dead": {
+      "isCategory": true,
+      "is_enabled": true,
+      "cr_t1_carrier_dead_start": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "unitWhenCountMatches": {
+            "object_type": "isAlive",
+            "object_marking": 0,
+            "func": "less",
+            "value": 1,
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object": "@cr_t1_carrier_name"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "karrier umer. mozhno vklyuchit' respavn"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_carrier_respawn_timer"
+          },
+          "comment": {
+            "value": "proveryaem razresheno li zadanie na ubijstvo"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_dead_quest_end_check"
+          }
+        },
+        "else_actions": {        }
+      },
+      "cr_t2_carrier_dead_start": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "unitWhenCountMatches": {
+            "object_type": "isAlive",
+            "object_marking": 0,
+            "func": "less",
+            "value": 1,
+            "object_var_name": "",
+            "object_var_comp_op": "equal",
+            "object": "@cr_t2_carrier_name"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "karrier umer. mozhno vklyuchit' respavn"
+          },
+          "triggerEnable": {
+            "target": "cr_t2_carrier_respawn_timer"
+          },
+          "comment": {
+            "value": "proveryaem razresheno li zadanie na ubijstvo"
+          },
+          "triggerEnable": {
+            "target": "cr_t1_dead_quest_end_check"
+          }
+        },
+        "else_actions": {        }
+      },
+      "cr_t1_dead_quest_start_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_destroy_quest_is_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "razreshen kvest na nahozhdenie avika"
+          },
+          "moAddMissionObjective": {
+            "target": "cr_t1_destroy_carrier_quest",
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_dead_quest_start_check"
+          }
+        }
+      },
+      "cr_t2_dead_quest_start_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "cr_destroy_quest_is_on",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "razreshen kvest na nahozhdenie avika"
+          },
+          "moAddMissionObjective": {
+            "target": "cr_t2_destroy_carrier_quest",
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t2_dead_quest_start_check"
+          }
+        }
+      },
+      "cr_t1_dead_quest_end_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "misObjStatus": {
+            "target": "cr_t1_destroy_carrier_quest",
+            "status": "inProgress"
+          }
+        },
+        "actions": {
+          "triggerEnable": {
+            "target": "t1_major_task_completed"
+          },
+          "comment": {
+            "value": "razreshen kvest na ubijstvo avika"
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t1_destroy_carrier_quest",
+            "status": 2,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "extendedEnding": true,
+            "team": "A",
+            "unit_or_area": "@cr_t2_carrier_name",
+            "object_type": "any"
+          },
+          "wait": {
+            "time": 2.0
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t1_destroy_carrier_quest",
+            "status": 0,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "team": "A"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t1_dead_quest_end_check"
+          }
+        }
+      },
+      "cr_t2_dead_quest_end_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "misObjStatus": {
+            "target": "cr_t2_destroy_carrier_quest",
+            "status": "inProgress"
+          }
+        },
+        "actions": {
+          "triggerEnable": {
+            "target": "t2_major_task_completed"
+          },
+          "comment": {
+            "value": "razreshen kvest na ubijstvo avika"
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t2_destroy_carrier_quest",
+            "status": 2,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "extendedEnding": true,
+            "team": "B",
+            "unit_or_area": "@cr_t1_carrier_name",
+            "object_type": "any"
+          },
+          "wait": {
+            "time": 2.0
+          },
+          "moSetObjectiveStatus": {
+            "target": "cr_t2_destroy_carrier_quest",
+            "status": 0,
+            "object_var_comp_op": "equal",
+            "object_var_name": "",
+            "object_marking": 0,
+            "team": "B"
+          }
+        },
+        "else_actions": {
+          "triggerDisable": {
+            "target": "cr_t2_dead_quest_end_check"
+          }
+        }
+      }
+    }
+  },
+  "mission_objectives": {
+    "isCategory": true,
+    "is_enabled": true,
+    "cr_t1_destroy_carrier_quest": {
+      "is_enabled": false,
+      "comments": "",
+      "type": "abstractMissionObjective",
+      "props": {
+        "isPrimary": true,
+        "timeLimit": 18000,
+        "team": "A"
+      },
+      "onSuccess": {      },
+      "onFailed": {      }
+    },
+    "cr_t2_destroy_carrier_quest": {
+      "is_enabled": false,
+      "comments": "",
+      "type": "abstractMissionObjective",
+      "props": {
+        "isPrimary": true,
+        "timeLimit": 18000,
+        "team": "B"
+      },
+      "onSuccess": {      },
+      "onFailed": {      }
+    },
+    "cr_t1_detect_carrier_quest": {
+      "is_enabled": false,
+      "comments": "",
+      "type": "abstractMissionObjective",
+      "props": {
+        "isPrimary": true,
+        "timeLimit": 18000,
+        "team": "A"
+      },
+      "onSuccess": {      },
+      "onFailed": {      }
+    },
+    "cr_t2_detect_carrier_quest": {
+      "is_enabled": false,
+      "comments": "",
+      "type": "abstractMissionObjective",
+      "props": {
+        "isPrimary": true,
+        "timeLimit": 18000,
+        "team": "B"
+      },
+      "onSuccess": {      },
+      "onFailed": {      }
+    }
+  },
+  "variables": {
+    "cr_t1_carriers_alowed": false,
+    "cr_t2_carriers_alowed": false,
+    "cr_t1_carrier_random_idx": 0,
+    "cr_t1_carrier_spawn_name": "",
+    "cr_t1_carrier_route_name": "",
+    "cr_t2_carrier_random_idx": 0,
+    "cr_t2_carrier_spawn_name": "",
+    "cr_t2_carrier_route_name": "",
+    "cr_t1_carrier_name": "",
+    "cr_t2_carrier_name": "",
+    "cr_t1_carrier_respawn_time": 600,
+    "cr_t2_carrier_respawn_time": 600,
+    "cr_is_detect_on": false,
+    "cr_t1_detection_range": 0.0,
+    "cr_t2_detection_range": 0.0,
+    "cr_detection_base_range": 4500.0,
+    "cr_detection_quest_is_on": false,
+    "cr_destroy_quest_is_on": false,
+    "cr_t1_respawns_left": 5,
+    "cr_t2_respawns_left": 5,
+    "cr_t1_carrier_squad_name": "",
+    "cr_t2_carrier_squad_name": "",
+    "cr_t1_fleet_spawn_name": "",
+    "cr_t2_fleet_spawn_name": "",
+    "cr_t1_num_ways_count_plus_one": 5,
+    "cr_t2_num_ways_count_plus_one": 5
+  },
+  "dialogs": {  },
+  "airfields": {  },
+  "effects": {  },
+  "units": {  },
+  "areas": {  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    }
+  },
+  "wayPoints": {  }
+}

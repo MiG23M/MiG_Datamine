@@ -1,0 +1,1319 @@
+@const extraInfoBgColor: #b222333f;
+@const slotShadeColor:   #66060808;
+
+@const slotBgColor                  :#B21A2228; 
+@const slotBorderColor              :#ff233844;
+@const slotTopLineColor             :#ff2f4b5c;
+
+@const slotEmptyBgColor             :#B20D2F42; 
+@const slotEmptyBorderColor         :#ff13445f;
+@const slotEmptyTopLineColor        :#ff164d6c;
+
+@const slotWaitingBgColor           :#B20B1E29; 
+@const slotWaitingBorderColor       :#B21E2829;
+@const slotWaitingTopLineColor      :#ff4a5d5b;
+
+@const slotLockedBgColor            :#b21c0000; 
+@const slotLockedBorderColor        :#B231090B;
+@const slotLockedTopLineColor       :#ff781511;
+
+@const slotDisabledBgColor          :#B2101514; 
+@const slotDisabledBorderColor      :#ff2b2c27;
+@const slotDisabledTopLineColor     :#ff43463b;
+
+@const slotOwnedBgColor             :#B225333B; 
+@const slotOwnedBorderColor         :#ff3e5159;
+@const slotOwnedTopLineColor        :#ff57767e;
+
+@const slotPremiumBgColor           :#b2191107; 
+@const slotPremiumBorderColor       :#ff3b2e19;
+@const slotPremiumTopLineColor      :#ff5b4622;
+
+@const slotOwnedPremiumBgColor      :#b22d250f; 
+@const slotOwnedPremiumBorderColor  :#ff5b471f;
+@const slotOwnedPremiumTopLineColor :#ff7b591f;
+
+@const slotSquadronBgColor          :#b218231a; 
+@const slotSquadronBorderColor      :#B2263125;
+@const slotSquadronTopLineColor     :#ff4c6045;
+
+@const slotOwnedSquadronBgColor     :#b2263a1c; 
+@const slotOwnedSquadronBorderColor :#ff3e5c2c;
+@const slotOwnedSquadronTopLineColor:#ff4b712f;
+
+@const slotBrokenBgColor            :#b21c0000; 
+@const slotBrokenBorderColor        :#B231090B;
+@const slotBrokenTopLineColor       :#ff781511;
+
+@const slotSquadronWaitingBgColor     :#b218231a; 
+@const slotSquadronWaitingBorderColor :#ff374736;
+@const slotSquadronWaitingTopLineColor:#ff4c6045;
+
+@const shopInServiceImgBgColor: #ff232C35;
+@const shopInServiceImgBorderColor: #ff3b4a51;
+
+@const shopItemPad: 4*@sf/@pf;
+@const rentIconSize: 26@sf/@pf\2*2;
+@const bottomButtonsDivTopOffset: 1@dp;
+@const extraInfoTopShade: 2@dp;
+@const extraInfoHeight: 1@sIco + 2@bottomButtonsDivTopOffset + 1@extraInfoTopShade;
+@const slotBorderSize: 1@dp;
+@const slotTopLineHeight: 2@dp;
+@const unitTooltipTopLineHeight: 3@dp;
+@const unitTooltipTopLinePad: -1@dp; 
+@const slotBottomShadeHeight: 3@dp;
+@const slotGroupTagHeight: 4@dp;
+@const groupUnfoldMarkWidth: 29@sf/@pf \ 1;
+@const groupUnfoldMarkHeight: 20@sf/@pf \ 1;
+
+unitItemContainer {
+  css-hier-invalidate:yes;
+  padding:1@slotPaddingNoTable;
+}
+
+shopTable, slotbarTable {
+  total-input-transparent:yes;
+}
+rankUpList {
+  input-transparent:yes;
+}
+
+rankUpList[holdTooltipChildren=yes], slotbarTable[holdTooltipChildren=yes] {
+  total-input-transparent:yes;
+  behavior:PosNavigator;
+  navigatorShortcuts:yes;
+  on_pushed:"::gcb.delayedTooltipListPush";
+  on_hold_start:"::gcb.delayedTooltipListHoldStart";
+  on_hold_stop:"::gcb.delayedTooltipListHoldStop";
+}
+
+unitCell {
+  size:@shop_width, @shop_height;
+  padding:@shop_interval, @shop_pad;
+  css-hier-invalidate:yes;
+}
+
+[interactiveChildren=yes] > unitCell {
+  interactive:yes;
+}
+
+slotbarTable > unitCell, unitCell.slotbarClone,
+slotbarTable > unitItemContainer, unitItemContainer.slotbarClone {
+  size:@slot_width, @slot_height + 1@slotbar_pad_top + 1@slotbar_pad_bottom;
+  padding:@slot_interval, @slotbar_pad_top, @slot_interval, @slotbar_pad_bottom;
+  css-hier-invalidate:current;
+}
+
+slotbarPresetsTable > unitCell {
+  size:@slot_width, @slot_height + 2@slot_interval;
+  padding:@slot_interval;
+}
+
+shopTable > unitCell,
+slotbarTable,
+slotbarTable > unitCell {
+  css-hier-invalidate:yes;
+}
+
+slotsScrollDiv[flow=vertical] > slotbarTable > unitCell,
+slotsScrollDiv[flow=vertical] > slotbarTable > unitItemContainer {
+  size:@slot_width, @slot_height+2@slot_vert_pad;
+  padding:@slot_interval, @slot_vert_pad;
+}
+
+unitCell.slotbarClone,
+unitItemContainer.slotbarClone {
+  selected:no;
+  position:root;
+  input-transparent:yes;
+  total-input-transparent:yes;
+}
+
+shopItem {
+  size:pw, ph;
+  pos:0,50%ph-50%h;
+  position:relative;
+  padding:1@shopItemPad;
+  css-hier-invalidate:yes;
+  overflow:visible;
+  total-input-transparent:yes;
+}
+
+[show_console_buttons=yes] shopItem {
+  tooltip-timeout:800;
+}
+
+.shopClone > shopItem,
+.slotbarClone > shopItem {
+  refuseOpenHoverMenu:yes;
+}
+
+shopItem > slotPlate > bottomShade {
+  size:pw, 1@slotBottomShadeHeight;
+  background-color:@slotShadeColor;
+}
+
+shopItem > slotPlate {
+  size:pw, ph;
+  position:absolute;
+  flow:vertical;
+  css-hier-invalidate:yes;
+  total-input-transparent:yes;
+}
+
+shopItem > slotPlate > topLine {
+  size:pw, 1@slotTopLineHeight;
+  position:absolute;
+  background-color:@slotTopLineColor;
+}
+
+tooltipObj > div > topLine {
+  size:pw + 2@framePadding - 2@unitTooltipTopLinePad, 1@unitTooltipTopLineHeight;
+  pos:0.5pw-0.5w, -1@framePadding + 1@unitTooltipTopLinePad;
+  position:absolute;
+  background-color:@slotTopLineColor;
+}
+
+tooltipObj > div[unitRarity], tooltipObj > div[shopStat] {
+  padding-top: 1@unitTooltipTopLineHeight + 1@unitTooltipTopLinePad;
+}
+
+shopItem[group=yes] > slotPlate > topLine {
+  size:pw, 1@slotTopLineHeight + 1@slotGroupTagHeight;
+  pos:0, -1@slotGroupTagHeight;
+
+  re-type:9rect;
+  background-repeat:expand-svg;
+  background-image:#ui/gameuiskin#item_group_line.svg;
+  background-svg-size:45@dp, 6@dp;
+  background-position:42@dp, 0@dp, 2@dp, 0@dp;
+}
+
+shopTable[isShopItemsWide=1] > unitCell > shopItem[group=yes] > slotPlate > topLine {
+  background-image:#ui/gameuiskin#item_group_line_wide.svg;
+  background-svg-size:64@dp, 6@dp;
+  background-position:61@dp, 0@dp, 2@dp, 0@dp;
+}
+
+shopItem > slotPlate > middleBg {
+  size:pw, fh;
+  pos:0, 1@slotTopLineHeight - 1@slotBorderSize;
+  position:relative;
+  background-color:@slotBgColor;
+  border-color:@slotBorderColor;
+  border:yes;
+  border-offset:1@slotBorderSize;
+  css-hier-invalidate:yes;
+}
+shopItem[group=yes] > slotPlate > middleBg {
+  size:pw, fh;
+  pos:0, 1@slotTopLineHeight - 1@slotBorderSize - 1@slotGroupTagHeight;
+  border:no;
+  border-offset:0;
+
+  re-type:9rect;
+  background-repeat:expand-svg;
+  background-image:#ui/gameuiskin#item_group_bg.svg;
+  background-svg-size:45@dp, 10@dp;
+  background-position:42@dp, 7@dp, 2@dp, 2@dp;
+}
+
+shopTable[isShopItemsWide=1] > unitCell > shopItem[group=yes] > slotPlate > middleBg {
+  background-image:#ui/gameuiskin#item_group_bg_wide.svg;
+  background-svg-size:64@dp, 10@dp;
+  background-position:61@dp, 7@dp, 2@dp, 2@dp;
+}
+
+groupFrame {
+  size:pw, ph;
+  position:absolute;
+  re-type:9rect;
+  background-repeat:expand-svg;
+  background-image:#ui/gameuiskin#item_group_frame.svg;
+  background-svg-size:5@dp, 10@dp;
+  background-position:2@dp, 7@dp, 2@dp, 2@dp;
+  background-color:@slotBorderColor;
+  display:hide;
+}
+shopItem[group=yes] > slotPlate > middleBg > groupFrame {
+  display:show;
+}
+
+shopItem[unitRarity=squadron] > slotPlate > topLine,
+tooltipObj > div[unitRarity=squadron] > topLine {
+  background-color:@slotSquadronTopLineColor;
+}
+shopItem[unitRarity=squadron] > slotPlate > middleBg {
+  background-color:@slotSquadronBgColor;
+  border-color:@slotSquadronBorderColor;
+}
+shopItem[unitRarity=squadron] > slotPlate > middleBg > groupFrame {
+  background-color:@slotSquadronBorderColor;
+}
+
+shopItem airResearchProgress {
+  behaviour:progress;
+  re-type:progress;
+  height:1@progressHeightSlot;
+  width: pw;
+  background-color:@cardProgressBGColor;
+  foreground-color:@cardProgressFGColor;
+  min:0;
+  max:1000;
+}
+
+airResearchProgress[type=old] {
+  background-color:@transparent;
+}
+
+airResearchProgress[type=new] {
+  foreground-color:@cardProgressChangeColor;
+}
+
+shopItem[unitRarity=squadron] airResearchProgress[type=new] {
+  foreground-color:@cardProgressChangeSquadronColor;
+}
+
+airResearchProgress[paused=yes] {
+  background-color:@cardProgressDisabledBGColor;
+  foreground-color:@cardProgressDisabledFGColor;
+}
+
+shopAirImg {
+  height: ph - 8;
+  width: 2.7h;
+  re-type:fgPict;
+  background-repeat:expand;
+  foreground-color:@white;
+  foreground-repeat:aspect-ratio;
+  foreground-align:left;
+  pos: 3, 5;
+  position:absolute;
+}
+
+[shopStat=disabled] > shopAirImg{
+  foreground-color:@shopItemDisabled;
+}
+:hover > shopAirImg {
+  foreground-color:@shopItemNotPurchasedHover;
+}
+[shopStat=locked] > shopAirImg{
+  foreground-color:@shopUnitLocked;
+}
+[shopStat=owned] > shopAirImg {
+  foreground-color:@white;
+}
+
+[isPkgDev=yes] > shopAirImg {
+  background-image:#ui/gameuiskin#unit_under_construction;
+  background-color:@white;
+}
+[isPkgDev=yes][shopStat=disabled] > shopAirImg{
+  background-color:@shopItemDisabled;
+}
+[isPkgDev=yes]:hover > shopAirImg {
+  background-color:@shopItemNotPurchasedHover;
+}
+[isPkgDev=yes][shopStat=locked] > shopAirImg{
+  background-color:@shopUnitLocked;
+}
+[isPkgDev=yes][shopStat=owned] > shopAirImg {
+  background-color:@white;
+}
+
+itemWinkBlock {
+  id:item_wink_block;
+  behaviour:basicTransparency;
+  display:hide;
+  size:pw, ph;
+  position:absolute;
+  input-transparent:yes;
+  background-repeat:expand;
+  background-image:#ui/gameuiskin#item_glow;
+  background-color:@shopItemWinkColor;
+  background-position:4, 4, 4, 9;
+  transp-base:255;
+  transp-end:40;
+  transp-time:5000;
+  transp-func:sin;
+  transp-cycled:yes;
+}
+
+shopItem > backImg {
+  size:pw-2*@sf/@pf_outdated, ph-2*@sf/@pf_outdated;
+  pos:50%pw-50%w, 50%ph-50%h;
+  position:absolute;
+  background-color:@white;
+  input-transparent:yes;
+}
+
+slotbarCurAir {
+  pos:pw/2-w/2, -0.5@slotbar_top_shade;
+  size:1@slot_width - 2@slot_interval -2@dp, 1@slotbar_pad_top;
+  position:absolute;
+  background-color:@slotbarSelUnitBgColor;
+  display:hide;
+}
+
+unitCell[selected=yes] > slotbarCurAir,
+unitItemContainer[chosen=yes] > slotbarCurAir {
+  display:show;
+}
+
+bottomButtonsDiv {
+  id:"air_item_bottom_buttons";
+  left:0.5pw - 0.5w;
+  top:ph -7*@sf/@pf_outdated;
+  position:absolute;
+  width:pw;
+  css-hier-invalidate:yes;
+  color-factor:255;
+}
+
+slotbarTable bottomButtonsDiv,
+.slotbarClone > shopItem > bottomButtonsDiv {
+  top:ph + 1@bottomButtonsDivTopOffset;
+}
+
+shopItem[shopStat=canBuy] > slotPlate > topLine,
+tooltipObj > div[shopStat=canBuy] > topLine {
+  background-color:@slotWaitingTopLineColor;
+}
+shopItem[shopStat=canBuy] > slotPlate > middleBg {
+  background-color:@slotWaitingBgColor;
+  border-color:@slotWaitingBorderColor;
+}
+shopItem[shopStat=canBuy] > slotPlate > middleBg > groupFrame {
+  background-color:@slotWaitingBorderColor;
+}
+
+shopItem[shopStat=canBuy][unitRarity=premium] > slotPlate > topLine,
+tooltipObj > div[shopStat=canBuy][unitRarity=premium] > topLine {
+  background-color:@slotPremiumTopLineColor;
+}
+shopItem[shopStat=canBuy][unitRarity=premium] > slotPlate > middleBg {
+  background-color:@slotPremiumBgColor;
+  border-color:@slotPremiumBorderColor;
+}
+shopItem[shopStat=canBuy][unitRarity=premium] > slotPlate > middleBg > groupFrame {
+  background-color:@slotPremiumBorderColor;
+}
+
+shopItem[shopStat=canBuy][unitRarity=squadron] > slotPlate > topLine,
+tooltipObj > div[shopStat=canBuy][unitRarity=squadron] > topLine {
+  background-color:@slotSquadronWaitingTopLineColor;
+}
+shopItem[shopStat=canBuy][unitRarity=squadron] > slotPlate > middleBg {
+  background-color:@slotSquadronWaitingBgColor;
+  border-color:@slotSquadronWaitingBorderColor;
+}
+shopItem[shopStat=canBuy][unitRarity=squadron] > slotPlate > middleBg > groupFrame {
+  background-color:@slotSquadronWaitingBorderColor;
+}
+
+shopItem[shopStat=canResearch] > slotPlate > topLine,
+tooltipObj > div[shopStat=canResearch] > topLine {
+  background-color:@slotWaitingTopLineColor;
+}
+shopItem[shopStat=canResearch] > slotPlate > middleBg {
+  background-color:@slotWaitingBgColor;
+  border-color:@slotWaitingBorderColor;
+}
+shopItem[shopStat=canResearch] > slotPlate > middleBg > groupFrame {
+  background-color:@slotWaitingBorderColor;
+}
+
+shopItem[shopStat=canResearch][unitRarity=squadron] > slotPlate > topLine,
+tooltipObj > div[shopStat=canResearch][unitRarity=squadron] > topLine {
+  background-color:@slotSquadronWaitingTopLineColor;
+}
+shopItem[shopStat=canResearch][unitRarity=squadron] > slotPlate > middleBg {
+  background-color:@slotSquadronWaitingBgColor;
+  border-color:@slotSquadronWaitingBorderColor;
+}
+shopItem[shopStat=canResearch][unitRarity=squadron] > slotPlate > middleBg > groupFrame {
+  background-color:@slotSquadronWaitingBorderColor;
+}
+
+shopItem[shopStat=research] > itemWinkBlock{
+  display:show;
+}
+
+shopItem[shopStat=owned] > slotPlate > topLine,
+tooltipObj > div[shopStat=owned] > topLine {
+  background-color:@slotOwnedTopLineColor;
+}
+shopItem[shopStat=owned] > slotPlate > middleBg {
+  background-color:@slotOwnedBgColor;
+  border-color:@slotOwnedBorderColor;
+}
+shopItem[shopStat=owned] > slotPlate > middleBg > groupFrame {
+  background-color:@slotOwnedBorderColor;
+}
+
+shopItem[shopStat=empty] > slotPlate > topLine {
+  background-color:@slotEmptyTopLineColor;
+}
+shopItem[shopStat=empty] > slotPlate > middleBg {
+  background-color:@slotEmptyBgColor;
+  border-color:@slotEmptyBorderColor;
+}
+
+shopItem[shopStat=owned][unitRarity=premium] > slotPlate > topLine,
+tooltipObj > div[shopStat=owned][unitRarity=premium] > topLine {
+  background-color:@slotOwnedPremiumTopLineColor;
+}
+shopItem[shopStat=owned][unitRarity=premium] > slotPlate > middleBg {
+  background-color:@slotOwnedPremiumBgColor;
+  border-color:@slotOwnedPremiumBorderColor;
+}
+shopItem[shopStat=owned][unitRarity=premium] > slotPlate > middleBg > groupFrame {
+  background-color:@slotOwnedPremiumBorderColor;
+}
+
+shopItem[shopStat=owned][unitRarity=squadron] > slotPlate > topLine,
+tooltipObj > div[shopStat=owned][unitRarity=squadron] > topLine {
+  background-color:@slotOwnedSquadronTopLineColor;
+}
+shopItem[shopStat=owned][unitRarity=squadron] > slotPlate > middleBg {
+  background-color:@slotOwnedSquadronBgColor;
+  border-color:@slotOwnedSquadronBorderColor;
+}
+shopItem[shopStat=owned][unitRarity=squadron] > slotPlate > middleBg > groupFrame {
+  background-color:@slotOwnedSquadronBorderColor;
+}
+
+shopItem[shopStat=mounted] > slotPlate > topLine,
+tooltipObj > div[shopStat=mounted] > topLine {
+  background-color:@slotOwnedTopLineColor;
+}
+shopItem[shopStat=mounted] > slotPlate > middleBg {
+  background-color:@slotOwnedBgColor;
+  border-color:@slotOwnedBorderColor;
+}
+shopItem[shopStat=mounted] > slotPlate > middleBg > groupFrame {
+  background-color:@slotOwnedBorderColor;
+}
+
+shopItem[shopStat=mounted][unitRarity=premium] > slotPlate > topLine,
+tooltipObj > div[shopStat=mounted][unitRarity=premium] > topLine {
+  background-color:@slotOwnedPremiumTopLineColor;
+}
+shopItem[shopStat=mounted][unitRarity=premium] > slotPlate > middleBg {
+  background-color:@slotOwnedPremiumBgColor;
+  border-color:@slotOwnedPremiumBorderColor;
+}
+shopItem[shopStat=mounted][unitRarity=premium] > slotPlate > middleBg > groupFrame {
+  background-color:@slotOwnedPremiumBorderColor;
+}
+
+shopItem[shopStat=mounted][unitRarity=squadron] > slotPlate > topLine,
+tooltipObj > div[shopStat=mounted][unitRarity=squadron] > topLine {
+  background-color:@slotOwnedSquadronTopLineColor;
+}
+shopItem[shopStat=mounted][unitRarity=squadron] > slotPlate > middleBg {
+  background-color:@slotOwnedSquadronBgColor;
+  border-color:@slotOwnedSquadronBorderColor;
+}
+shopItem[shopStat=mounted][unitRarity=squadron] > slotPlate > middleBg > groupFrame {
+  background-color:@slotOwnedSquadronBorderColor;
+}
+
+shopItem[shopStat=disabled] > slotPlate > topLine,
+tooltipObj > div[shopStat=disabled] > topLine {
+  background-color:@slotDisabledTopLineColor;
+}
+shopItem[shopStat=disabled] > slotPlate > middleBg {
+  background-color:@slotDisabledBgColor;
+  border-color:@slotDisabledBorderColor;
+}
+shopItem[shopStat=disabled] > slotPlate > middleBg > groupFrame {
+  background-color:@slotDisabledBorderColor;
+}
+
+[shopStat=disabled] > img {
+  background-color:@shopItemDisabled;
+}
+
+shopItem[isBroken=yes] > slotPlate > topLine,
+tooltipObj > div[isBroken=yes] > topLine {
+  background-color:@slotBrokenTopLineColor;
+}
+shopItem[isBroken=yes] > slotPlate > middleBg {
+  background-color:@slotBrokenBgColor;
+  border-color:@slotBrokenBorderColor;
+}
+shopItem[isBroken=yes] > slotPlate > middleBg > groupFrame {
+  background-color:@slotBrokenBorderColor;
+}
+
+shopItem[isBroken=yes] itemWinkBlock {
+ display: show;
+ transp-time: 0;
+ background-color:@shopItemWinkBroken;
+}
+
+shopItem[shopStat=locked] > slotPlate > topLine,
+tooltipObj > div[shopStat=locked] > topLine {
+  background-color:@slotLockedTopLineColor;
+}
+shopItem[shopStat=locked] > slotPlate > middleBg {
+  background-color:@slotLockedBgColor;
+  border-color:@slotLockedBorderColor;
+}
+shopItem[shopStat=locked] > slotPlate > middleBg > groupFrame {
+  background-color:@slotLockedBorderColor;
+}
+
+slotPlate > middleBg > pattern {
+  type:bright_texture;
+}
+
+[shopStat=owned] > img {
+  background-color:@white;
+}
+
+hoverHighlight {
+  position: absolute;
+  pos: 0, 0;
+  size: pw, ph;
+  re-type:9rect;
+  foreground-image: #ui/gameuiskin#item_glow;
+  foreground-repeat:expand;
+  foreground-color:@shopItemHover;
+  foreground-position:4, 4, 4, 9;
+  css-hier-invalidate: yes;
+  display: hide;
+}
+
+unitCell[selected=yes] > shopItem > hoverHighlight,
+unitItemContainer[chosen=yes] > shopItem > hoverHighlight,
+unitItemContainer[selected=yes] > shopItem > hoverHighlight,
+shopItem:hover > hoverHighlight{
+  display: show;
+}
+
+topline {
+  width:pw-11*@sf/@pf_outdated;
+  pos:pw-w-6*@sf/@pf_outdated, 25%ph-50%h+3*@sf/@pf_outdated;
+  position:absolute;
+  overflow:hidden;
+  css-hier-invalidate:current;
+}
+
+bottomline {
+  pos:pw-w-4*@sf/@pf_outdated, ph-h -7*@sf/@pf_outdated;
+  position:absolute;
+  css-hier-invalidate:current;
+  width: pw - 11*@sf/@pf_outdated;
+  min-height:15*@sf/@pf_outdated;
+  text-align: right;
+}
+
+middleline {
+  width:pw;
+  pos:0, ph/2-h/2;
+  position:absolute;
+  css-hier-invalidate:current;
+  flow:vertical;
+}
+
+middleline > tdiv {
+  left:50%pw-50%w;
+  position:relative;
+  css-hier-invalidate:yes;
+}
+
+shopItemText, shopItemPrice {
+  re-type:textarea;
+  behaviour:textArea;
+  font:@shopItemFont;
+  color:@commonTextColor;
+  padding-right:-3*@sf/@pf_outdated;
+}
+
+shopItemText[text-align=center]
+{
+  padding-right:0;
+}
+
+bottomline shopItemText,
+bottomline > shopItemPrice {
+  margin-left: 0.003@sf;
+}
+
+shopItemText[autoScrollText=hoverOrSelect] {
+  margin-left: 0;
+  padding-right: 0;
+}
+
+bottomline > shopItemPrice {
+  margin-right: 0.008@sf;
+}
+
+eliteIcon {
+  background-image:#ui/gameuiskin#item_icon_elite_slot;
+  background-svg-size: h, ph - 1@slotTopLineHeight - 1@slotBottomShadeHeight - 1@slotBorderSize;
+  height:ph - 1@slotTopLineHeight - 1@slotBottomShadeHeight - 1@slotBorderSize;
+  width:h;
+  pos:pw-w-1@slotBorderSize, 1@slotTopLineHeight;
+  position:absolute;
+  background-color:#AB364C5B;
+  input-transparent:yes;
+}
+
+shopItem[unitRarity=premium] > eliteIcon {
+  background-color:#AB5B3416;
+}
+
+shopItem[shopStat=canBuy][unitRarity=premium] > eliteIcon {
+  background-color:#4D2F17;
+}
+
+shopItem[unitRarity=squadron] > eliteIcon {
+  background-color:#5d7144;
+}
+
+shopItem[shopStat=disabled] > eliteIcon {
+  background-color:#AB35352b;
+}
+
+shopItem[shopStat=locked] > eliteIcon,
+shopItem[isBroken=yes] > eliteIcon {
+  background-color:#AB651919;
+}
+
+shopItem[isElite=no] > eliteIcon {
+  display:hide;
+}
+
+recentlyReleasedIcon {
+  size:50@sf/@pf, 50@sf/@pf;
+  pos:-1@dp, -1@dp;
+  position:absolute;
+  background-image:#ui/gameuiskin#item_new.svg;
+  background-svg-size:50@sf/@pf, 50@sf/@pf;
+  background-color:@white;
+  input-transparent:yes;
+}
+
+shopItem[group=yes] > recentlyReleasedIcon {
+  pos:-1@dp, -5@dp;
+}
+
+shopItem[isRecentlyReleased=no] > recentlyReleasedIcon {
+  display:hide;
+}
+
+bottomline > classIconPlace {
+  pos:0, 50%ph-50%h;
+  position:relative;
+  size:0.015*@sf, 0.015*@sf;
+  margin-left: 0.006@sf;
+}
+
+shopInServiceImg {
+  size:1@cIco, 0.45@cIco;
+  pos:8@sf/@pf, ph -2@dp;
+  position:absolute;
+  overflow:hidden;
+  tooltip:#vehicle/for_crew/available;
+  css-hier-invalidate:yes;
+}
+
+shopInServiceImgBg {
+  re-type:9rect;
+  size:pw, ph;
+  position:absolute;
+  foreground-color:@shopInServiceImgBgColor;
+  foreground-position:1@dp,0,1@dp,1@dp;
+  background-color:@shopInServiceImgBorderColor;
+}
+
+shopInServiceImg[mounted=yes] {
+  size:1@cIco, 0.85@cIco;
+  tooltip:#vehicle/for_crew/engaged;
+}
+
+shopInServiceImg > icon {
+  size:0.5@cIco, 0.5@cIco;
+  pos:pw/2-w/2, ph-h-6@sf/@pf;
+  position:absolute;
+  background-image:#ui/gameuiskin#slot_crew.svg;
+  background-svg-size:@cIco, @cIco;
+  background-color:#48565C;
+  total-input-transparent:yes;
+}
+
+shopInServiceImg[mounted=yes] > icon {
+  background-color:@crewSkills_ready;
+}
+
+slotbarTable shopItemText,
+slotbarTable shopItemPrice,
+slotbarClone shopItemText,
+slotbarClone shopItemPrice {
+  font:@slotItemFont;
+}
+
+shopItemPrice[tinyFont=yes],
+shopItemText[tinyFont=yes] {
+  font:@fontTiny;
+}
+
+unitCell[selected=yes] shopItemText,
+unitCell[selected=yes] shopItemPrice,
+unitItemContainer[chosen=yes] shopItemText,
+unitItemContainer[chosen=yes] shopItemPrice,
+shopItem:hover shopItemText,
+shopItem:hover shopItemPrice {
+  color:@activeTextColor;
+}
+
+shopItemText[progressStatus=researched] {
+  color:@goodTextColor;
+}
+
+shopItemText[progressStatus=research] {
+  color:@cardProgressBonusColor;
+}
+
+shopItemText[header=yes],
+shopItemPrice[header=yes] {
+  min-width:pw;
+  text-align:right;
+  padding-right:0;
+}
+
+shopItemText[isMultiLine=yes] {
+  width:pw;
+}
+
+middleline > shopItemText,
+middleline shopItemPrice {
+  font:@fontNormal;
+  width:pw;
+  left:50%pw-50%w;
+  position:relative;
+  text-align:center;
+}
+
+unitCell bottomline > tdiv > shopItemText[autoScrollText=hoverOrSelect],
+unitCell topline > shopItemText,
+unitItemContainer bottomline > tdiv > shopItemText[autoScrollText=hoverOrSelect],
+unitItemContainer topline > shopItemText,
+bottomline > tdiv > shopItemText[autoScrollText=hoverOrSelect] {
+  behaviour:OverflowScroller;
+  move-pixel-per-sec:10*@scrn_tgt/100.0;
+  move-sleep-time:2000;
+  move-delay-time:2000;
+  move-start:no;
+}
+
+unitCell[selected=yes] bottomline > tdiv > shopItemText[autoScrollText=hoverOrSelect],
+unitCell[selected=yes] topline > shopItemText,
+unitItemContainer[chosen=yes] bottomline > tdiv > shopItemText[autoScrollText=hoverOrSelect],
+unitItemContainer[chosen=yes] topline > shopItemText,
+:hover > bottomline > tdiv > shopItemText[autoScrollText=hoverOrSelect] {
+  move-start:yes;
+}
+
+[noMoney=yes] shopItemPrice, shopItemText[locked=yes] {
+  color:@redMenuButtonColor;
+}
+
+
+shopItemText[header=yes]  {
+  color:@activeTextColor;
+}
+
+shopItemText[disabled=yes]  {
+  color:@fadedTextColor;
+}
+
+classIcon[shopItemType=light_fighter]       { color:@light_fighterColor; }
+classIcon[shopItemType=medium_fighter]      { color:@medium_fighterColor; }
+classIcon[shopItemType=heavy_fighter]       { color:@heavy_fighterColor; }
+classIcon[shopItemType=naval_fighter]       { color:@naval_fighterColor; }
+classIcon[shopItemType=jet_fighter]         { color:@jet_fighterColor; }
+classIcon[shopItemType=light_bomber]        { color:@light_bomberColor; }
+classIcon[shopItemType=medium_bomber]       { color:@medium_bomberColor; }
+classIcon[shopItemType=heavy_bomber]        { color:@heavy_bomberColor; }
+classIcon[shopItemType=naval_bomber]        { color:@naval_bomberColor; }
+classIcon[shopItemType=jet_bomber]          { color:@jet_bomberColor; }
+classIcon[shopItemType=dive_bomber]         { color:@dive_bomberColor; }
+classIcon[shopItemType=common_assault]      { color:@common_assaultColor; }
+classIcon[shopItemType=strike_fighter]      { color:@strike_fighterColor; }
+classIcon[shopItemType=attack_helicopter]   { color:@attack_helicopterColor; }
+classIcon[shopItemType=utility_helicopter]  { color:@utility_helicopterColor; }
+classIcon[shopItemType=light_tank]          { color:@light_tankColor; }
+classIcon[shopItemType=medium_tank]         { color:@medium_tankColor; }
+classIcon[shopItemType=heavy_tank]          { color:@heavy_tankColor; }
+classIcon[shopItemType=tank_destroyer]      { color:@tank_destroyerColor; }
+classIcon[shopItemType=spaa]                { color:@spaaColor; }
+classIcon[shopItemType=lbv]                 { color:@lbvColor; }
+classIcon[shopItemType=mbv]                 { color:@mbvColor; }
+classIcon[shopItemType=hbv]                 { color:@hbvColor; }
+classIcon[shopItemType=ship]                { color:@shipColor; }
+classIcon[shopItemType=boat]                { color:@boatColor; }
+classIcon[shopItemType=heavy_boat]          { color:@heavy_boatColor; }
+classIcon[shopItemType=barge]               { color:@bargeColor; }
+classIcon[shopItemType=destroyer]           { color:@destroyerColor; }
+classIcon[shopItemType=frigate]             { color:@destroyerColor; }
+classIcon[shopItemType=light_cruiser]       { color:@light_cruiserColor; }
+classIcon[shopItemType=cruiser]             { color:@cruiserColor; }
+classIcon[shopItemType=heavy_cruiser]       { color:@cruiserColor; }
+classIcon[shopItemType=battlecruiser]       { color:@battlecruiserColor; }
+classIcon[shopItemType=battleship]          { color:@battleshipColor; }
+classIcon[shopItemType=submarine]           { color:@submarineColor; }
+
+classIcon[shopItemType=infantry]            { color:@infantryColor; }
+classIcon[shopItemType=artillery]           { color:@artilleryColor; }
+classIcon[shopItemType=transport]           { color:@transportColor; }
+
+img[shopItemType=light_fighter]     { background-color:@light_fighterColor; }
+img[shopItemType=medium_fighter]    { background-color:@medium_fighterColor; }
+img[shopItemType=heavy_fighter]     { background-color:@heavy_fighterColor; }
+img[shopItemType=naval_fighter]     { background-color:@naval_fighterColor; }
+img[shopItemType=jet_fighter]       { background-color:@jet_fighterColor; }
+img[shopItemType=light_bomber]      { background-color:@light_bomberColor; }
+img[shopItemType=medium_bomber]     { background-color:@medium_bomberColor; }
+img[shopItemType=heavy_bomber]      { background-color:@heavy_bomberColor; }
+img[shopItemType=naval_bomber]      { background-color:@naval_bomberColor; }
+img[shopItemType=jet_bomber]        { background-color:@jet_bomberColor; }
+img[shopItemType=dive_bomber]       { background-color:@dive_bomberColor; }
+img[shopItemType=common_assault]    { background-color:@common_assaultColor; }
+img[shopItemType=strike_fighter]    { background-color:@strike_fighterColor; }
+img[shopItemType=attack_helicopter] { background-color:@attack_helicopterColor; }
+img[shopItemType=utility_helicopter]{ background-color:@utility_helicopterColor; }
+img[shopItemType=light_tank]        { background-color:@light_tankColor; }
+img[shopItemType=medium_tank]       { background-color:@medium_tankColor; }
+img[shopItemType=heavy_tank]        { background-color:@heavy_tankColor; }
+img[shopItemType=tank_destroyer]    { background-color:@tank_destroyerColor; }
+img[shopItemType=spaa]              { background-color:@spaaColor; }
+img[shopItemType=lbv]               { background-color:@lbvColor; }
+img[shopItemType=mbv]               { background-color:@mbvColor; }
+img[shopItemType=hbv]               { background-color:@hbvColor; }
+img[shopItemType=ship]              { background-color:@shipColor; }
+img[shopItemType=boat]              { background-color:@boatColor; }
+img[shopItemType=heavy_boat]        { background-color:@heavy_boatColor; }
+img[shopItemType=barge]             { background-color:@bargeColor; }
+img[shopItemType=destroyer]         { background-color:@destroyerColor; }
+img[shopItemType=frigate]           { background-color:@destroyerColor; }
+img[shopItemType=light_cruiser]     { background-color:@light_cruiserColor; }
+img[shopItemType=cruiser]           { background-color:@cruiserColor; }
+img[shopItemType=heavy_cruiser]     { background-color:@cruiserColor; }
+img[shopItemType=battlecruiser]     { background-color:@battlecruiserColor; }
+img[shopItemType=battleship]        { background-color:@battleshipColor; }
+img[shopItemType=submarine]         { background-color:@submarineColor; }
+
+img[shopItemType=infantry]          { background-color:@infantryColor; }
+img[shopItemType=artillery]         { background-color:@artilleryColor; }
+img[shopItemType=transport]         { background-color:@transportColor; }
+
+specIconBlock {
+  height:ph;
+  position:relative;
+  input-transparent:yes;
+}
+
+specIconBlock > shopTrainedImg, specIconBlock > warningIcon {
+  size:ph,ph;
+  background-svg-size:ph,ph;
+  background-color:@white;
+}
+
+extraInfoBlock {
+  re-type:9rect;
+  size:pw, 1@extraInfoHeight;
+  pos:pw/2-w/2, ph - 1@extraInfoTopShade;
+  position:absolute;
+  background-color:@extraInfoBgColor;
+  background-position:0,0,0,1@dp;
+  foreground-color:@extraInfoBgColor;
+  foreground-position:1@dp,h-1@dp,1@dp,0;
+  css-hier-invalidate:yes;
+}
+
+crewInfoBlock {
+  height:ph;
+  padding-top: 1@extraInfoTopShade;
+  css-hier-invalidate:yes;
+}
+
+crewInfoBlock > icon {
+  height:@sIco;
+  width:h;
+  pos:ph/2-h/2, ph/2-h/2;
+  position:relative;
+  background-color:@white;
+  background-svg-size:1@sIco,1@sIco;
+  css-hier-invalidate:yes;
+}
+
+crewInfoBlock > shopItemText {
+  pos:0, ph/2-h/2;
+  position:relative;
+  color:@commonTextColor;
+  wink:no;
+  css-hier-invalidate:yes;
+}
+text[crewStatus=show], textareaNoTab[crewStatus=show], textAreaCentered[crewStatus=show],
+shopItem[crewStatus=show] > extraInfoBlock > crewInfoBlock > shopItemText {
+  color:@crewSkillsText_show;
+}
+text[crewStatus=ready], textareaNoTab[crewStatus=ready], textAreaCentered[crewStatus=ready],
+shopItem[crewStatus=ready] > extraInfoBlock > crewInfoBlock > shopItemText {
+  color:@crewSkillsText_ready;
+}
+text[crewStatus=full], textareaNoTab[crewStatus=full], textAreaCentered[crewStatus=full],
+shopItem[crewStatus=full] > extraInfoBlock > crewInfoBlock > shopItemText {
+  color:@crewSkillsText_full;
+  wink:yes;
+}
+text[crewStatus=""], textareaNoTab[crewStatus=""], textAreaCentered[crewStatus=""] {
+  color:@transparent;
+}
+
+text[crewStatus=""][crew_data=yes] {
+  color:@commonTextColor;
+}
+
+crewInfoBlock > shopItemText[wink=no] {
+  color-factor:255;
+}
+
+repairIcon, weaponsIcon {
+  height:@cIco;
+  width:h;
+  pos:0, ph-h;
+  position:relative;
+  background-color:@shopInServiceImgColor;
+  background-svg-size:@cIco, @cIco;
+  input-transparent:yes;
+}
+
+warningIcon {
+  background-image:#ui/gameuiskin#new_icon.svg;
+  background-svg-size:ph,ph;
+}
+
+repairIcon {
+  background-image:#ui/gameuiskin#slot_repair.svg;
+  background-color:@weaponWarning;
+}
+
+weaponsIcon {
+  background-image:#ui/gameuiskin#btn_weapons.svg;
+  background-color:@weaponLightWarning;
+}
+
+weaponsIcon[weaponsStatus=ready] {
+  display:hide;
+}
+
+weaponsIcon[weaponsStatus=zero] {
+  background-color:@weaponWarning;
+}
+
+rentIcon {
+  pos:0.006@scrn_tgt, 0.008@scrn_tgt;
+  position:absolute;
+  size:@rentIconSize, @rentIconSize;
+  background-svg-size:@rentIconSize, @rentIconSize;
+  background-image:#ui/gameuiskin#circular_progress_1.svg;
+  background-color:@black;
+  input-transparent:yes;
+}
+
+rentIcon > progress {
+  re-type:sector;
+  sector-angle-2:360;
+  position:absolute;
+  size:@rentIconSize, @rentIconSize;
+  background-svg-size:@rentIconSize, @rentIconSize;
+  background-image:#ui/gameuiskin#circular_progress_1.svg;
+  background-color:@goodTextColor;
+  input-transparent:yes;
+}
+
+rentIcon > icon {
+  position:absolute;
+  size:20@sf/@pf\2*2, 20@sf/@pf\2*2;
+  pos:pw/2-w/2, ph/2-h/2;
+  background-image:#ui/gameuiskin#item_icon_rent.svg;
+  background-svg-size:20@sf/@pf\2*2, 20@sf/@pf\2*2;
+  background-color:@white;
+  input-transparent:yes;
+}
+
+talismanIcon {
+  background-image:#ui/gameuiskin#item_type_talisman.svg;
+  background-svg-size:@sIco, @sIco;
+  size:@sIco, @sIco;
+  pos:pw/2-w/2, -6@sf/@pf_outdated;
+  position:absolute;
+  background-color:@white;
+  input-transparent:yes;
+}
+talismanIcon[incomplete=yes] {
+  background-color:#808080;
+}
+
+spareCount {
+  re-type:text;
+  pos:pw-w-1@blockInterval, ph/2-h/2;
+  position:absolute;
+  font:@fontSmall;
+  color:#596a71;
+  css-hier-invalidate:yes;
+}
+
+classIcon {
+  re-type:text;
+  pos:pw/2-w/2, ph/2-h/2;
+  position:absolute;
+  font:@fontSmall;
+  text-shade:"smooth:24";
+  text-shade-x:0;
+  text-shade-y:0;
+  text-shade-color:#FF000000;
+  css-hier-invalidate:yes;
+  useColorByType:yes;
+}
+
+groupUnfoldMark {
+  pos:pw/2-w/2, ph -9@sf/@pf;
+  position:absolute;
+  size:1@groupUnfoldMarkWidth, 1@groupUnfoldMarkHeight;
+  background-image:#ui/gameuiskin#group_button.svg;
+  background-svg-size:1@groupUnfoldMarkWidth, 1@groupUnfoldMarkHeight;
+  background-color:@white;
+}
+
+[group=no] > groupUnfoldMark {
+  display:hide;
+}
+
+shopItem[shopStat=locked] > groupUnfoldMark {
+  background-color:@shopItemLocked;
+}
+
+shopItem[shopStat=canResearch] > groupUnfoldMark,
+shopItem[shopStat=researched] > groupUnfoldMark,
+shopItem[shopStat=canBuy] > groupUnfoldMark {
+  background-color:@shopItemWaiting;
+}
+
+shopItem cardImg[background-image], cardImg[background-image][shopItem] {
+  background-color:@commonTextColor;
+}
+
+unitCell[selected=yes] > shopItem cardImg[background-image],
+unitItemContainer[chosen=yes] > shopItem cardImg[background-image],
+shopItem:hover cardImg[background-image] {
+  background-color:@activeTextColor;
+}
+
+shopItem > bonusesDiv {
+  pos:0, ph-h;
+  position:absolute;
+}
+
+shopItem > discount {
+  background-image:#ui/gameuiskin#discount;
+  rotation:-170;
+  pos:-35%w, ph-55%h;
+  position:absolute;
+}
+
+shopItem > bonus {
+  pos:0, 0;
+  position:absolute;
+}
+
+shopItem[group=yes] > bonus {
+  pos:0, -1@slotGroupTagHeight;
+}
+
+shopItem > buttonsDiv {
+  id:buttonsDiv;
+  pos:0, 0;
+  position:absolute;
+  css-hier-invalidate:yes;
+}
+
+buttonsDiv > Button_text{
+  not-input-transparent:yes;   pos:0, -h;
+  position:relative;
+  height:@mainMenuButtonHeight;
+  width:p.p.w;
+  reduceMinimalWidth:yes;
+}
+
+shopItem Button_text.bottomAirItem,
+shopItem Button_text.battle {
+  display: hide;
+  enable:no;
+}
+
+unitCell > shopItem:hover Button_text.bottomAirItem,
+[showButtonsForSelectedChild=yes] unitItemContainer[selected=yes] > shopItem:hover Button_text.bottomAirItem,
+[show_console_buttons=yes] unitItemContainer[chosen=yes] > shopItem:hover Button_text.bottomAirItem,
+[show_console_buttons=no] unitItemContainer[chosen=yes] > shopItem Button_text.bottomAirItem,
+weapon_item_unit:hover Button_text.bottomAirItem,
+shopItem Button_text.bottomAirItem:hover,
+[chosen=yes] > shopItem Button_text.battle {
+  display:show;
+  enable:yes;
+}
+
+Button_text.bottomAirItem[forceHide=yes] {
+  display:hide;
+  enable:no;
+}
+
+shopItem[isInTable=no] {
+  size:@slot_width, @slot_height;
+}
+
+shopLine, shopArrow, shopAngle {
+  background-color:@shopArrowNormalColor;
+  position:absolute;
+  input-transparent:yes;
+}
+
+shopArrow[type=vertical] {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#arrow_simple.svg;
+  background-repeat:expand-svg;
+  background-svg-size:@modArrowWidth, @modArrowWidth;
+  background-position:0@dp, 2@dp, 0@dp, 11@dp;
+}
+
+shopArrow[type=vertical][isOutlineIcon=yes] {
+  background-image:#ui/gameuiskin#arrow_simple_stroke.svg;
+}
+
+shopArrow[type=horizontal] {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#arrow_simple_hor.svg;
+  background-repeat:expand-svg;
+  background-svg-size:@modArrowWidth, @modArrowWidth;
+  background-position:2@dp, 0@dp, 11@dp, 0@dp;
+}
+
+shopArrow[type=horizontal][isOutlineIcon=yes] {
+  background-image:#ui/gameuiskin#arrow_simple_hor_stroke.svg;
+}
+
+shopLine {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#line_lshaped.svg;
+  background-repeat:expand-svg;
+  background-position:2@dp;
+  rotation-centre:0;
+}
+
+shopLine[isOutlineIcon=yes] {
+  background-image:#ui/gameuiskin#line_lshaped_stroke.svg;
+}
+
+shopAngle {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#angle_lshaped.svg;
+  background-repeat:expand-svg;
+  background-position:2@dp;
+}
+
+shopAngle[isOutlineIcon=yes] {
+  background-image:#ui/gameuiskin#angle_lshaped_stroke.svg;
+}
+
+shopArrow[isDisabled = yes],
+shopAngle[isDisabled = yes],
+shopLine[isDisabled = yes] {
+  shopStat:locked;
+}
+
+shopLine[shopStat=locked], shopArrow[shopStat=locked], shopAngle[shopStat=locked] {
+  background-color:@shopArrowLockedColor;
+}
+
+shopRow[type=locked] {
+  background-color:@shopFrameLockedColor;
+  foreground-color:@shopFrameLockedColor;
+}
+
+shopAlarmIcon {
+  height:'1.2@modArrowWidth';
+  width:'1.2@modArrowWidth';
+  position:'absolute';
+  background-color:'@white';
+  background-image:'#ui/gameuiskin#alarmclock_icon.svg';
+  background-svg-size:'1@newWidgetIconHeight, 1@newWidgetIconHeight';
+  background-repeat:'aspect-ratio';
+}
+
+shopBlockTierNum{
+  re-type:text;
+  color:@commonTextColor;
+  font:@fontNormal;
+  text-align:center;
+  height:1@shop_height;
+  width:h;
+  position:absolute;
+  background-image:#ui/gameuiskin#block_bg_rounded_flat@@vs;
+  background-position:4;
+  background-repeat:expand;
+  background-color:@weaponryItem;
+  css-hier-invalidate:yes;
+}
+
+CrewsNest {
+  size: pw, ph;
+}
+
+CrewsNest > slotsScrollDiv {
+  width: fw;
+  max-width: 1@slotbarWidth;
+  padding: @slot_interval +1@slotScrollButtonWidth, 0;
+  css-hier-invalidate: yes;
+}
+
+slotsScrollDiv[flow=vertical] {
+  width:@slot_width+6*@sf/@pf_outdated;
+  max-height:9*(1@slot_height+2@slot_vert_pad)+2@slot_vert_pad+5*@scrn_tgt/100.0;
+  padding:3*@sf/@pf_outdated, @slot_vert_pad+2.5*@scrn_tgt/100.0;
+}
+
+slotsScrollDiv.shopDiv {
+  width:@shop_width + 2@blockInterval;
+  height:ph;
+  max-height:ph;
+  padding:0;
+}
+[_size-timer=1] > slotsScrollDiv.shopDiv {
+    overflow:auto;
+}
+
+rankUpList > unitCell
+{
+  size:@slot_width, @slot_height + 2@slot_vert_pad;
+  padding:@slot_interval, @slot_vert_pad;
+}
+
+slotsHeader {
+  size: @slot_hdr_width, ph;
+  background-position: 2;
+  background-color: @slotbarTabCurrentColor;
+}
+CountriesCrews[hasHeader=yes] slotsHeader {
+  display: show;
+}
+slotsHeader > img {
+  size:@cIco, @cIco;
+  pos: 0.5(pw-w), 1@sf/@pf_outdated;
+  position: relative;
+  background-svg-size:@cIco, @cIco;
+}

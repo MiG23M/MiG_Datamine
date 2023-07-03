@@ -1,0 +1,59 @@
+{
+  "tdiv": {
+    "width": "pw",
+    "padding": "1@blockInterval",
+    "flow": "vertical",
+    "tdiv": {
+      "id": "sysopt_top",
+      "width": "pw",
+      "height": "1@baseTrHeight",
+      "optionsList": {
+        "id": "sysopt_top_left",
+        "class": "optionsTable",
+        "disablePosition": "yes",
+        "width": "33%pw"
+      },
+      "optionsList": {
+        "id": "sysopt_top_middle",
+        "class": "optionsTable",
+        "disablePosition": "yes",
+        "width": "33%pw"
+      },
+      "optionsList": {
+        "id": "sysopt_top_right",
+        "class": "optionsTable",
+        "disablePosition": "yes",
+        "width": "33%pw"
+      }
+    },
+    "HorizontalListBox": {
+      "id": "sysopt_graphicsQuality",
+      "type": "transparent",
+      "pos": "50%pw-50%w, 0",
+      "position": "relative",
+      "margin": "0, 0.015@scrn_tgt",
+      "move-only-hover": "yes",
+      "on_select": "onSystemOptionChanged",
+      "navigatorShortcuts": "yes"
+    },
+    "tdiv": {
+      "width": "pw",
+      "optionsList": {
+        "id": "sysopt_bottom_left",
+        "class": "optionsTable",
+        "disablePosition": "yes",
+        "width": "50%pw",
+        "behavior": "PosOptionsNavigator",
+        "navigatorShortcuts": "yes"
+      },
+      "optionsList": {
+        "id": "sysopt_bottom_right",
+        "class": "optionsTable",
+        "disablePosition": "yes",
+        "width": "50%pw",
+        "behavior": "PosOptionsNavigator",
+        "navigatorShortcuts": "yes"
+      }
+    }
+  }
+}

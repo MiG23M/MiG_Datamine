@@ -1,0 +1,462 @@
+{
+  "selected_tag": "",
+  "bin_dump_file": "",
+  "mission_settings": {
+    "player": {
+      "army": 1,
+      "wing": "t1_player01",
+      "wing": "t1_player02",
+      "wing": "t1_player03",
+      "wing": "t1_player04",
+      "wing": "t1_player05",
+      "wing": "t1_player06",
+      "wing": "t1_player07",
+      "wing": "t1_player08",
+      "wing": "t1_player09",
+      "wing": "t1_player10",
+      "wing": "t1_player11",
+      "wing": "t1_player12",
+      "wing": "t1_player13",
+      "wing": "t1_player14",
+      "wing": "t1_player15",
+      "wing": "t1_player16",
+      "wing": "t1_player17",
+      "wing": "t1_player18",
+      "wing": "t1_player19",
+      "wing": "t1_player20",
+      "wing": "t1_player21",
+      "wing": "t1_player22",
+      "wing": "t1_player23",
+      "wing": "t1_player24",
+      "wing": "t1_player25",
+      "wing": "t1_player26",
+      "wing": "t1_player27",
+      "wing": "t1_player28",
+      "wing": "t1_player29",
+      "wing": "t1_player30",
+      "wing": "t1_player31",
+      "wing": "t1_player32"
+    },
+    "player_teamB": {
+      "army": 2,
+      "wing": "t2_player01",
+      "wing": "t2_player02",
+      "wing": "t2_player03",
+      "wing": "t2_player04",
+      "wing": "t2_player05",
+      "wing": "t2_player06",
+      "wing": "t2_player07",
+      "wing": "t2_player08",
+      "wing": "t2_player09",
+      "wing": "t2_player10",
+      "wing": "t2_player11",
+      "wing": "t2_player12",
+      "wing": "t2_player13",
+      "wing": "t2_player14",
+      "wing": "t2_player15",
+      "wing": "t2_player16",
+      "wing": "t2_player17",
+      "wing": "t2_player18",
+      "wing": "t2_player19",
+      "wing": "t2_player20",
+      "wing": "t2_player21",
+      "wing": "t2_player22",
+      "wing": "t2_player23",
+      "wing": "t2_player24",
+      "wing": "t2_player25",
+      "wing": "t2_player26",
+      "wing": "t2_player27",
+      "wing": "t2_player28",
+      "wing": "t2_player29",
+      "wing": "t2_player30",
+      "wing": "t2_player31",
+      "wing": "t2_player32",
+      "wing": "t2_player33"
+    },
+    "mission": {
+      "level": "levels/avg_snow_alps.bin",
+      "type": "domination",
+      "environment": "Day",
+      "weather": "hazy",
+      "locName": "missions/_ADBttlB;alps/name",
+      "locDesc": "missions/_ADBttl/desc",
+      "scoreLimit": 6000,
+      "timeLimit": 25,
+      "deathPenaltyMul": 0.0,
+      "postfix": "_aadefb",
+      "ctaCaptureZoneEqualPenaltyMul": 0.0,
+      "useAlternativeMapCoord": false,
+      "allowedKillStreaks": true,
+      "randomSpawnTeams": false,
+      "remapAiTankModels": true,
+      "showTacticalMapCellSize": true,
+      "timeLimitWarn": 3600,
+      "country_axis": "germany",
+      "country_allies": "ussr",
+      "restoreType": "attempts",
+      "optionalTakeOff": false,
+      "allowedUnitTypes": {
+        "isAirplanesAllowed": true,
+        "isTanksAllowed": true,
+        "isShipsAllowed": false,
+        "isHelicoptersAllowed": true
+      }
+    },
+    "atmosphere": {
+      "pressure": 760.0,
+      "temperature": -10.0
+    },
+    "briefing": {
+      "place_loc": "",
+      "date_loc": "",
+      "objective_loc": "",
+      "music": "action_01",
+      "part": {
+        "event": "",
+        "minTime": 0,
+        "slide": {
+          "map": true,
+          "minTime": 4,
+          "picture": "",
+          "showAirMap": false,
+          "icon": {
+            "icontype": "tank",
+            "side": "enemy",
+            "target": "briefing_aadef_t2_spawn_01"
+          },
+          "icon": {
+            "icontype": "tank",
+            "side": "enemy",
+            "target": "briefing_aadef_t2_spawn_02"
+          },
+          "icon": {
+            "icontype": "mark",
+            "side": "enemy",
+            "target": "briefing_aadef_ai_target_01"
+          },
+          "icon": {
+            "icontype": "mark",
+            "side": "enemy",
+            "target": "briefing_aadef_ai_target_02"
+          },
+          "icon": {
+            "icontype": "mark",
+            "side": "enemy",
+            "target": "briefing_aadef_ai_target_03"
+          },
+          "icon": {
+            "icontype": "bomber",
+            "side": "ally",
+            "target": "t1_briefing_airspawn",
+            "lookAt": "briefing_aadef_ai_target_01"
+          },
+          "icon": {
+            "icontype": "fighter",
+            "side": "enemy",
+            "target": "t2_briefing_airspawn",
+            "lookAt": "t1_briefing_airspawn"
+          },
+          "battleArea": {
+            "target": "aadef_battle_area"
+          }
+        }
+      }
+    }
+  },
+  "imports": {
+    "import_record": {
+      "file": "gameData/missions/templates/tank_templates/tank_base_logic_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/cta/tanks/alps/template_alps_air_spawn.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/ww_no_attackers_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/cta/tanks/alps/mainareas/template_alps_aadefb.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/tank_templates/aadef_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    }
+  },
+  "triggers": {
+    "isCategory": true,
+    "is_enabled": true
+  },
+  "mission_objectives": {
+    "isCategory": true,
+    "is_enabled": true
+  },
+  "variables": {
+    "defenseMissionTeam": "teamB"
+  },
+  "dialogs": {  },
+  "airfields": {  },
+  "effects": {  },
+  "units": {
+    "area_squad": {
+      "name": "remove_rendinst_area",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    921.797,
+    241.652,
+    550.045,
+],
+      "props": {
+        "squad_members": "remove_rendinst_area_01"
+      }
+    }
+  },
+  "areas": {
+    "aadef_battle_area": {
+      "type": "Box",
+      "tm": [
+    1240.0,
+    0.0,
+    0.0,
+    0.0,
+    100.0,
+    0.0,
+    0.0,
+    0.0,
+    1240.0,
+    1024.0,
+    235.0,
+    1024.0,
+],
+      "objLayer": 4,
+      "props": {      }
+    },
+    "briefing_aadef_t2_spawn_01": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    479.087,
+    201.824,
+    1340.25,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_aadef_t2_spawn_02": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    454.384,
+    235.449,
+    669.084,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "t2_briefing_airspawn": {
+      "type": "Point",
+      "tm": [
+    -0.198457,
+    0.0,
+    0.98011,
+    0.0,
+    1.0,
+    0.0,
+    -0.98011,
+    0.0,
+    -0.198457,
+    474.236,
+    414.211,
+    1052.57,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "t1_briefing_airspawn": {
+      "type": "Point",
+      "tm": [
+    -0.186653,
+    0.0,
+    -0.982426,
+    0.0,
+    1.0,
+    0.0,
+    0.982426,
+    0.0,
+    -0.186653,
+    1528.65,
+    296.9,
+    1366.29,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_aadef_ai_target_01": {
+      "type": "Point",
+      "tm": [
+    0.819152,
+    0.0,
+    0.573577,
+    0.0,
+    1.0,
+    0.0,
+    -0.573577,
+    0.0,
+    0.819152,
+    713.587,
+    322.288,
+    776.195,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_aadef_ai_target_02": {
+      "type": "Point",
+      "tm": [
+    0.819152,
+    0.0,
+    0.573577,
+    0.0,
+    1.0,
+    0.0,
+    -0.573577,
+    0.0,
+    0.819152,
+    634.16,
+    322.286,
+    979.343,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_aadef_ai_target_03": {
+      "type": "Point",
+      "tm": [
+    0.819152,
+    0.0,
+    0.573577,
+    0.0,
+    1.0,
+    0.0,
+    -0.573577,
+    0.0,
+    0.819152,
+    699.487,
+    322.286,
+    1177.43,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "remove_rendinst_area_01": {
+      "type": "Box",
+      "tm": [
+    60.0,
+    0.0,
+    0.0,
+    0.0,
+    10.0,
+    0.0,
+    0.0,
+    0.0,
+    100.0,
+    449.67,
+    242.625,
+    674.135,
+],
+      "objLayer": 0,
+      "props": {      }
+    }
+  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    }
+  },
+  "wayPoints": {  }
+}

@@ -1,0 +1,463 @@
+@const bulletAnimationHeight: (152@sf/@pf)\1;
+@const bulletAnimationWidth: 4@bulletAnimationHeight;
+
+@const modBgColor                 :#ff171b20;
+@const modBorderColor             :#ff263138;
+@const modTopLineColor            :#ff3f4d54;
+@const dropMenuArrowColor         :#3F4D54;
+@const modResearchBgColor         :#14141414;
+@const modUnlockedColor           :#B2192127;
+@const modOwnedColor              :#B2242C31;
+@const modSeparatorColor          :#ff37454d;
+@const bgrPresetColor             :#171b23;
+@const chosenPresetColor          :#28333c;
+@const selectedPresetBorderColor  :#677282;
+
+weaponry_item {
+  mouse-pointer-centering:50, 75;
+  input-transparent:yes;
+  tooltip-float:horizontal;
+}
+
+[interactiveChildren=yes] weaponry_item {
+  interactive:yes;
+}
+weaponry_item:hover > weaponBody > hoverHighlight{
+  pos:0, 1@modIcoSize-1@modItemHeight+1@dp;
+  display: show;
+}
+weaponry_item.dropDown:hover {
+  input-transparent:no; }
+weaponBody {
+  pos:0, 1@slotTopLineHeight - 1@slotBorderSize;
+  position:relative;
+  background-color:@modBgColor;
+  border-color:@modBorderColor;
+  border:yes;
+  border-offset:1@slotBorderSize;
+  mouse-pointer-centering:50, 75;
+}
+
+weaponry_item[wideItemWithSlider=yes], weaponry_item[wideItemWithSlider=yes] > weaponBody {
+  mouse-pointer-centering:13, 75;
+}
+
+weaponBody > topLine {
+  size:pw, 1@slotTopLineHeight;
+  position:absolute;
+  background-color:@modTopLineColor;
+}
+
+weaponry_item[status=canBuyForWP] > weaponBody {
+  border-color:#ff3e5159;
+}
+
+weaponry_item[status=canBuyForWP] > weaponBody > topLine {
+  background-color:#ff8aa9b1;
+}
+
+weaponry_item[status=owned] > weaponBody statusImg,
+weaponry_item[status=canBuyForWP] > weaponBody statusImg,
+weaponry_item[status=unlocked] > weaponBody statusImg {
+  re-type:fgPict;
+  size:@modStatusCheckboxHeight, @modStatusCheckboxHeight;
+  margin:0, 0, 3@dp, 3@dp;
+  border:yes;
+  background-color:@checkboxBgColor;
+  border-color:@checkboxBorderColor;
+  foreground-image:#ui/gameuiskin#check.svg;
+  foreground-svg-size:@modStatusCheckboxHeight, @modStatusCheckboxHeight;
+  background-svg-size:@modStatusCheckboxHeight, @modStatusCheckboxHeight;
+  foreground-repeat:aspect-ratio;
+  foreground-position:0, -0.33h, -0.33w, 0;
+  foreground-color:@transparent;
+  _isCheckboxvisual:yes;
+}
+
+statusImg[_isCheckboxvisual=yes]:hover {
+  background-color:@checkboxHoveredBgColor;
+  border-color:@checkboxHoveredBorderColor;
+}
+statusImg[_isCheckboxvisual=yes]:pushed {
+  background-color:@checkboxPushedBgColor;
+  border-color:@checkboxPushedBorderColor;
+}
+statusImg[_isCheckboxvisual=yes]:disabled {
+  background-color:@checkboxDisabledBgColor;
+  border-color:@checkboxDisabledBorderColor;
+}
+
+[equipped=yes] > weaponBody statusImg[_isCheckboxvisual=yes]
+  { foreground-color:@checkboxCheckColor; }
+statusImg[_isCheckboxvisual=yes]:hover
+  { foreground-color:@checkboxCheckHoveredUncheckedColor; }
+weaponry_item[equipped=yes] > weaponBody statusImg[_isCheckboxvisual=yes]:hover
+  { foreground-color:@checkboxCheckHoveredColor; }
+weaponry_item[equipped=yes] > weaponBody statusImg[_isCheckboxvisual=yes]:pushed
+  { foreground-color:@checkboxCheckPushedColor; }
+statusImg[_isCheckboxvisual=yes]:disabled
+  { foreground-color:@checkboxCheckDisabledColor; }
+
+weaponry_item[status=locked] > weaponBody statusImg {
+  background-image:#ui/gameuiskin#locked.svg;
+  background-color:@shopItemLocked;
+}
+weaponry_item[status=locked] > weaponBody:hover statusImg {
+  background-color:@shopItemLockedFocus;
+}
+
+weaponry_item[status=researchable] > weaponBody statusImg {
+  display: hide;
+}
+
+weaponry_item[equipped=yes] > weaponBody RadioButton {
+  selected:yes;
+}
+
+weaponry_item[isBundle=yes] > weaponBody RadioButton {
+  display: hide;
+}
+
+modIco {
+  css-hier-invalidate:yes;
+  total-input-transparent:yes;
+}
+
+modIcon:hover,
+weaponry_item > weaponBody:hover > modIcon
+{
+  hoverStyle:yes;
+}
+
+modIcon img{
+  input-transparent:yes;
+  background-color:@shopAircraft;
+}
+
+modIcon text {
+  shadeStyle:outline33pct;
+}
+
+modIcon > warningIcon{
+  size:@cIco, @cIco;
+  pos:pw-w-2@sf/@pf_outdated, 3@sf/@pf_outdated;
+  position:absolute;
+  background-image:#ui/gameuiskin#new_icon.svg;
+  background-svg-size:@cIco, @cIco;
+  background-color:@white;
+  input-transparent:yes;
+}
+
+weaponry_item[status=research] > weaponBody > itemWinkBlock {
+  size:pw, ph;
+  pos:0, 3@dp;
+  background-color:@shopItemResearchFocus;
+}
+
+weaponry_item[status=locked] > weaponBody > modIcon                       img { background-color:#771515; }
+weaponry_item[status=locked] > weaponBody > modIcon[hoverStyle=yes]       img { background-color:@shopWeaponLocked; }
+weaponry_item[status=canBuyForWP] > weaponBody > modIcon                  img,
+weaponry_item[status=unlocked] > weaponBody > modIcon                     img{ background-color:#505050; }
+weaponry_item[status=canBuyForWP] > weaponBody > modIcon[hoverStyle=yes]  img,
+weaponry_item[status=unlocked] > weaponBody > modIcon[hoverStyle=yes]     img{ background-color:@shopAircraft; }
+weaponry_item[status=researchable] > weaponBody > modIcon                 img{ background-color:#969696; }
+weaponry_item[status=researchable] > weaponBody > modIcon[hoverStyle=yes] img{ background-color:#eeeeee; }
+weaponry_item[status=owned] > weaponBody > modIcon                        img{ background-color:#eeeeee; }
+weaponry_item[status=owned] > weaponBody > modIcon[hoverStyle=yes]        img{ background-color:@shopAircraftOwned; }
+weaponry_item[equipped=yes] > weaponBody > modIcon                        img{ background-color:@shopAircraftOwned; }
+weaponry_item[status=disabled] > weaponBody > modIcon                     img{ background-color:#323232; }
+weaponry_item[status=disabled] > weaponBody > modIcon                     iconLayer{ color-factor:150; background-color:@shopAircraftDark; }
+weaponry_item[status=research] > weaponBody > modIcon                     img{ background-color:#eeeeee; }
+weaponry_item[status=research] > weaponBody > modIcon[hoverStyle=yes]     img{ background-color:@white; }
+weaponry_item[status=waiting] > weaponBody > modIcon                      img{ background-color:@shopItemWaiting; }
+weaponry_item[status=waiting] > weaponBody > modIcon[hoverStyle=yes]      img,
+[show_console_buttons=yes] [selected=yes] > modIcon[status=waiting]       img{ background-color:@shopItemWaitingFocus; }
+modIcon[ignoreStatus=yes]                                                 img{ background-color:@shopAircraftOwned; }
+
+weaponry_item[status=locked] > weaponBody > wallpaper > pattern { type:bright_texture; }
+weaponry_item[status=locked] > weaponBody { background-color:@slotLockedBgColor; border-color:@slotLockedBorderColor; }
+weaponry_item[status=locked] > weaponBody > topLine {background-color:@slotLockedTopLineColor;}
+weaponry_item[status=researchable] > weaponBody > wallpaper > pattern { type:dark_diag_lines; }
+weaponry_item[status=researchable] > weaponBody> wallpaper,
+weaponry_item[status=research] > weaponBody > wallpaper { background-color:@modResearchBgColor; }
+weaponry_item[status=research] > weaponBody > itemWinkBlock{ display:show; transp-time:3000;}
+weaponry_item[status=research] > weaponBody > wallpaper > pattern { type:bright_texture; }
+weaponry_item[status=waiting] > weaponBody { background-color:@shopItemWaiting; }
+
+weaponBody:hover > itemWinkBlock {display:hide;}
+
+weaponry_item[status=disabled] > weaponBody textareaNoTab,
+weaponry_item[status=disabled] > weaponBody text {
+  color-factor:150;
+}
+
+[show_console_buttons=yes] weaponry_item:hover > selImg {
+  size:pw+10*@sf/@pf_outdated, ph+8*@sf/@pf_outdated;
+  pos:50%pw-50%w, 50%ph-50%h;
+  position:absolute;
+  re-type:9rect;
+  background-position:6;
+  background-repeat:expand;
+  background-image:#ui/gameuiskin#item_selection;
+  background-color:@gamepadFocusFrameColor;
+  behavior:focusFrameTarget;
+  focusImageSource:background;
+  focusAnimColor:@gamepadFocusFrameColor;
+}
+
+.unitItem > weaponry_item {
+  pos:50%pw-50%w, 50%ph-50%h;
+  position:relative;
+}
+
+.unitItem > weaponry_item > weaponBody {
+  enable:no;
+}
+
+modArrow {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#arrow_simple.svg;
+  background-repeat:expand-svg;
+  background-svg-size:@modArrowWidth, @modArrowWidth;
+  background-position:0@dp, 2@dp, 0@dp, 11@dp;
+  background-color:@shopArrowNormalColor;
+  position:absolute;
+}
+modArrow[type=down] {
+  width:@modArrowWidth;
+}
+modArrow[type=right] {
+  background-image:#ui/gameuiskin#arrow_simple_hor.svg;
+  background-position:2@dp, 0@dp, 11@dp, 0@dp;
+  height:@modArrowWidth;
+}
+
+modBlockHor[type=locked] > modBlockTierNum > modArrow,
+modBlockHor[type=locked] > modArrow {
+  background-color:@shopArrowLockedColor;
+}
+
+modArrowPlate{
+  re-type:text;
+  color:@commonTextColor;
+  font:@fontSmall;
+  text-align:center;
+  width:0.35@modCellHeight;
+  padding:3;
+  pos:50%pw-50%w, 50%ph-50%h;
+  position:absolute;
+  background-repeat:expand;
+  background-color:@white;
+  background-position:6,6;
+  background-image:#ui/gameuiskin#window_body;
+}
+modArrowPlate[text=""]{
+  display:hide;
+}
+
+modBlockHeader {
+  re-type:text;
+  color:@activeTextColor;
+  font:@fontNormal;
+  text-align:left;
+  position:absolute;
+  height:@buttonHeight;
+  background-position:0, 0, 0, 1;
+  background-color:@separatorBlockColor;
+  padding:@modPadSize, 0;
+}
+
+modBlockHeader.flat {
+  background-color:@tableHeaderBgColor;
+  background-image:"";
+  background-position:0;
+}
+
+modBlockHeaderRow {
+  height:@buttonHeight;
+  position:absolute;
+}
+
+modBlockHeaderRow > modBlockHeader {
+  position:relative;
+}
+
+modBlockHeaderRow.tiny, modBlockHeaderRow.tiny > modBlockHeader {
+  height:0.3@modCellHeight;
+}
+
+modBlockHor {
+  height:@modCellHeight;
+  position:absolute;
+  background-color:@transparent;
+  css-hier-invalidate:yes;
+}
+modBlockHor[type=locked]   { background-color:@shopFrameLockedColor; }
+modBlockHor[type=owned]    { background-color:@modOwnedColor; }
+
+modBlockTierNum{
+  re-type:text;
+  color:@commonTextColor;
+  font:@fontNormal;
+  text-align:center;
+  height:1@modBlockTierNumHeight;
+  width:h;
+  position:absolute;
+  background-image:#ui/gameuiskin#block_bg_rounded_flat@@vs;
+  background-position:4;
+  background-repeat:expand;
+  background-color:@weaponryItem;
+  css-hier-invalidate:yes;
+}
+
+modBlockTierNum.vehicleRanks {
+  text-align:left;
+  width:3h;
+  padding-left:0.35h;
+  background-color:@transparent;
+}
+
+modBlockTierNum > img {
+  size:pw, ph;
+  background-color:@commonTextColor;
+  pos:50%pw-50%w, 50%ph-50%h;
+  position:absolute;
+}
+
+modBlockTierNum[status=locked] {
+  color:@shopItemLocked;
+}
+
+upgradeImg{
+  pos: 0, ph-h;
+  position: absolute;
+  width: @cIco;
+  height: @cIco;
+  background-color: @white;
+  background-svg-size:@cIco, @cIco;
+}
+
+upgradeImg[upgradeStatus=""] {
+  display:hide;
+}
+
+upgradeImg[upgradeStatus = full]{
+  background-image: #ui/gameuiskin#weapon_upgrade.svg;
+}
+
+upgradeImg[upgradeStatus = part]{
+  background-image: #ui/gameuiskin#weapon_upgrade_inactive.svg;
+}
+
+upgradeImg[upgradeStatus = mod]{
+  background-image: #ui/gameuiskin#weapon_required_mod.svg;
+}
+
+modUpgradeImg {
+  size:40*@sf/@pf, 20*@sf/@pf;
+  position:absolute;
+  re-type: fgPict;
+  background-repeat:aspect-ratio;
+  background-align:left;
+  background-svg-size:@sIco, @sIco;
+  foreground-image:#ui/gameuiskin#mark_overdrive.svg;
+  foreground-repeat:aspect-ratio;
+  foreground-align:right;
+  foreground-svg-size:@sIco, @sIco;
+  behaviour:bhvUpdater;
+  input-transparent:yes;
+}
+
+modResearchProgress {
+  behaviour:progress;
+  re-type:progress;
+  height:1@progressHeightSlot;
+  width:pw;
+  background-color:@cardProgressBGColor;
+  foreground-color:@cardProgressFGColor;
+  min:0;
+  max:1000;
+}
+
+modResearchProgress[type=old] {
+  background-color:@transparent;
+}
+
+modResearchProgress[type=new] {
+  foreground-color:@cardProgressChangeColor;
+}
+
+modResearchProgress[paused=yes] {
+  background-color:@cardProgressDisabledBGColor;
+  foreground-color:@cardProgressDisabledFGColor;
+}
+
+
+table[modTestTable] {
+  border:yes; border-color:@blue;
+}
+
+table[modTestTable] > tr > td {
+  size:0.5@modCellWidth, 0.5@modCellHeight;
+}
+
+weapon_item_unit, weapon_item_unit > td {
+  css-hier-invalidate:yes;
+}
+
+weaponryTier {
+  background-position:1;
+  background-color:@frameHeaderColor;
+  css-hier-invalidate:yes;
+}
+weaponryTier:disabled {
+  background-color:#CC1B2027;
+}
+
+weaponryPreset {
+  background-color:@bgrPresetColor;
+}
+
+weaponryPreset[selected=yes] {
+  background-position:1;
+  background-color:@rowHoverBackgroundColor;
+}
+
+weaponryPreset[chosen=yes] {
+  background-color:@chosenPresetColor;
+}
+
+[show_console_buttons=no] weaponryTier[selected=yes],
+[show_console_buttons=no] presetHeader[selected=yes]{
+  border:yes;
+  border-offset:@dp;
+  border-color:@selectedPresetBorderColor;
+}
+
+fadedImageFrame {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#block_bg_rounded_dark;
+  background-color:@white;
+  background-repeat:expand;
+  background-position:4;
+  foreground-repeat:repeat;
+  foreground-color:@white;
+  foreground-position:4,4;
+  foreground-image:#ui/gameuiskin#pattern_bright_hor_lines;
+  padding: 1@fadedImageFramePad;
+}
+
+fadingBox {
+  re-type:9rect;
+  background-repeat:expand;
+  background-image:#ui/gameuiskin#white_with_gradient_alpha;
+}
+
+fadingBox[type=right] {
+  rotation:180;
+}
+
+fadedImageFrame fadingBox {
+  background-color:@fadedImageFrameColor;
+  background-position:0, 4;
+}

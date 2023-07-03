@@ -1,0 +1,86 @@
+@const subUnlockProgressBarWidth: 350@sf/@pf;
+
+substrateImg{
+  background-image: "#ui/gameuiskin#stage_substrate";
+  position: absolute;
+  pos: 0, 0;
+  display: hide;
+}
+
+:hover > substrateImg{
+  display: show;
+}
+
+unlockStages > locked > img,
+unlockStages > unlocked > img,
+unlockStages > locked > substrateImg,
+unlockStages > unlocked > substrateImg{
+  size: @unlockStageIconSize, @unlockStageIconSize;
+  background-color: @white;
+}
+
+locked, unlocked{
+  size: @unlockStageIconSize, @unlockStageIconSize;
+}
+
+locked.even, unlocked.even{
+  position: relative;
+  pos: -w/2, 0;
+}
+
+locked.odd, unlocked.odd{
+  position: relative;
+  pos: -w/2, 0.86h;
+}
+
+hiddenDiv unlockCondition {
+  width:pw/2-1;   margin-left:0;
+}
+
+unlockCondition battleTaskProgress {
+  width: @subUnlockProgressBarWidth;
+}
+
+layeredIconContainer{
+  css-hier-invalidate: yes;
+}
+
+iconLayer {
+  background-color: @white;
+  background-repeat:aspect-ratio;
+  input-transparent:yes;
+  css-hier-invalidate:yes;
+}
+
+iconLayer[background-image=""] {
+  background-color:@transparent;
+}
+
+layeredIconContainer[effectType=darkened] > iconLayer {
+  background-color: @lockedDecal;
+}
+
+layeredIconContainer[effectType=desaturated] > iconLayer {
+  background-color: @gray;
+  background-saturate: 0;
+}
+
+awardDiv > layeredIconContainer {
+  height:ph;
+  width:h;
+  pos:(pw-w)/2, (ph-h)/2;
+  position:absolute;
+}
+
+awardDiv.unlockFrame {
+  re-type:9rect;
+  background-image:#ui/gameuiskin#button_;
+  background-color:@white;
+  background-position:6;
+  background-repeat:expand;
+  padding:2;
+}
+
+awardDiv.unlockFrame > layeredIconContainer {
+  height:ph - 4;
+}

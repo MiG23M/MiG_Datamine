@@ -1,0 +1,35 @@
+{
+  "width": "@modCellWidth",
+  "height": "0",
+  "pos": "50%pw-50%w, ph",
+  "position": "absolute",
+  "overflow": "hidden",
+  "height-base": "0",
+  "height-end": "100",
+  "size-scale": "",
+  "_size-timer": "0",
+  "on_anim_finish": "onBundleAnimFinish",
+  "on_hover": "onBundleHover",
+  "div": {
+    "pos": "50%pw-50%w, ph-h-1@modBundlePopupBgPadH",
+    "position": "absolute",
+    "padding": "0, 1@modBundlePopupBgPadH",
+    "border": "yes",
+    "border-offset": "1@dp",
+    "border-color": "@frameDarkMenuBorderColor",
+    "background-color": "@frameDarkBackgroundColor",
+    "css-hier-invalidate": "yes",
+    "weaponBundleBlock": {
+      "id": "items_field",
+      "width": "@modCellWidth",
+      "height": "@modCellHeight",
+      "behavior": "posNavigator",
+      "navigatorShortcuts": "cancelNoSelect",
+      "moveX": "closest",
+      "moveY": "linear",
+      "disableFocusParent": "yes",
+      "css-hier-invalidate": "yes",
+      "on_cancel_edit": "onCloseBundle"
+    }
+  }
+}

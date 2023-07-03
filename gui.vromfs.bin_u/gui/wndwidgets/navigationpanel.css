@@ -1,0 +1,47 @@
+emptyButton {
+  min-width:'h';
+  background-color:'@transparent';
+  css-hier-invalidate:'yes';
+  snd_click:'click';
+  padding:'0.1h, 0';
+}
+
+emptyButton:hover {
+  background-color:'@menuButtonColorHover';
+}
+
+emptyButton:pushed {
+  background-color:'@menuButtonColorPushed';
+}
+
+emptyButton.navigationExpand {
+  order-popup:'yes';
+}
+
+
+emptyButton.navigationCollapse > icon,
+emptyButton.navigationExpand > icon {
+  size:@cIco, @cIco;
+  valign:'center';
+  background-image:'#ui/gameuiskin#spinnerListBox_arrow_up.svg';
+  background-svg-size:@cIco, @cIco;
+  background-color:'@gray';
+  input-transparent:'yes';
+}
+
+[show_console_buttons=no] emptyButton.navigationCollapse > icon,
+[show_console_buttons=no] emptyButton.navigationExpand > icon {
+  position:'absolute';
+  pos:'(pw-w)/2, (ph-h)/2';
+}
+
+emptyButton.navigationExpand:hover > icon,
+emptyButton.navigationCollapse:hover > icon {
+  background-color:'@white';
+}
+
+
+[show_console_buttons=yes] emptyButton.navigationExpand > ButtonImg,
+[show_console_buttons=yes] emptyButton.navigationCollapse > ButtonImg {
+  valign:center;
+}

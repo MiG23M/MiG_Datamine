@@ -1,0 +1,504 @@
+{
+  "curCircuit": "production",
+  "baseP2PPort": 20010,
+  "maxP2PConnections": 200,
+  "voiceMinPort": 20400,
+  "voiceMaxPort": 20500,
+  "timeouts": {
+    "dedicated": {
+      "loadLimitTime": 35000,
+      "loadWaitTime": 4000,
+      "saveLimitTime": 65000,
+      "saveWaitTime": 4000,
+      "curlConnectionTimeout": 10,
+      "curlProcessingTimeout": 60,
+      "fastModeTimeout": 3
+    },
+    "client": {
+      "loadLimitTime": 35000,
+      "loadWaitTime": 4000,
+      "saveLimitTime": 35000,
+      "saveWaitTime": 4000,
+      "retryLimitTime": 35000,
+      "retryWaitTime": 4000,
+      "curlConnectionTimeout": 10,
+      "curlProcessingTimeout": 20,
+      "fastModeTimeout": 3
+    }
+  },
+  "_common": {
+    "vivoxServerURL": "https://www.wtp.vivox.com/api2",
+    "vivoxEcho": "sip:confctl-2@wtp.vivox.com",
+    "skinsDecalsCacheSzPS4": 157286400,
+    "skinsDecalsCacheUGC": "contentUGC",
+    "eventLog": {
+      "host": "client-logs.gaijin.net"
+    },
+    "additionalDNS": {
+      "dns": "8.8.8.8",
+      "dns": "1.2.4.8"
+    },
+    "webVromfs": {
+      "maxSize": 471859200,
+      "timeoutSec": 10,
+      "mainThreadTimeoutSec": 10,
+      "allowCacheVromFallback": true,
+      "baseUrls": {
+        "url": {
+          "weight": 5.0,
+          "url": "https://webfs1.cdn.gaijin.net/content/warthunder/webfs/"
+        },
+        "url": {
+          "weight": 1.0,
+          "url": "https://webfs2.cdn.gaijin.net/content/warthunder/webfs/"
+        }
+      },
+      "substFileTypes": {
+        ".tga": "*ui/subst/pic.tga",
+        "": "*ui/subst/pic.ddsx",
+        ".avif": "*ui/subst/pic.avif",
+        ".png": "*ui/subst/pic.png",
+        ".svg": "*ui/subst/pic.svg",
+        ".ddsx": "*ui/subst/pic.ddsx"
+      }
+    },
+    "skinsDecalsCDN": {
+      "maxSizePS4": 157286400,
+      "hashesReqUrl": "https://public-configs.warthunder.com/staging/dldata.info",
+      "baseUrls": {
+        "url": {
+          "weight": 5.0,
+          "url": "https://dldata-aws.warthunder.com/staging/"
+        },
+        "url": {
+          "weight": 1.0,
+          "url": "https://dldata-warthunder.cdn.gaijin.net/staging/"
+        }
+      }
+    }
+  },
+  "_common_skinsDecalsCDN": {
+    "url": "https://dldata-aws.warthunder.com/staging/",
+    "url": "https://dldata-aws.warthunder.com/staging/",
+    "url": "https://dldata-warthunder.cdn.gaijin.net/staging/",
+    "url": "https://dldata-aws.warthunder.com/staging/",
+    "hashesReqUrl": "https://public-configs.warthunder.com/staging/dldata.info"
+  },
+  "_common_ugcSkinsDecalsCDN": {
+    "ugcServerUrl": "https://ugcinfo-test-lw-nl-01.gaijin.net/char",
+    "ugcServerUrl": "https://ugcinfo-test-lw-nl-02.gaijin.net/char",
+    "enableUGC": false,
+    "url": "https://wt-ugc.cdn.gaijin.net/"
+  },
+  "message_queue": {
+    "port": 11300,
+    "host": "127.0.0.1"
+  },
+  "production": {
+    "appPerm": 79,
+    "jwtAuthorizationPercent": 100,
+    "matchServer": "mgate-sv-lux1-01.warthunder.com:7853",
+    "matchServer": "mgate-sv-lx-01.warthunder.com:7853",
+    "matchServer": "mgate20am-uk.warthunder.com:7853",
+    "matchServer": "mgate21am-uk.warthunder.com:7853",
+    "matchServer": "mgate22am-uk.warthunder.com:7853",
+    "matchServer": "mgate31am-uk.warthunder.com:7853",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "chat-lw-nl-02.warthunder.com:443",
+    "ircServer": "chat-lw-nl-03.warthunder.com:443",
+    "charServer": "https://char-lw-nl-005-2.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-3.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-4.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-5.warthunder.com/char",
+    "enableSslCertCheck": true,
+    "skinsDecalsCDN_useCommon": false,
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-warthunder.cdn.gaijin.net/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info",
+    "enableApex": true,
+    "marketplaceURL": "https://trade.gaijin.net/",
+    "enableUGC": true,
+    "ugcSkinsDecalsCDN_useCommon": false,
+    "ugcSkinsDecalsCDN": "https://wt-ugc.cdn.gaijin.net/",
+    "skinsDecalsCDN": {
+      "replaceUrls": "production.skinsDecalsCDN.baseUrls",
+      "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info"
+    },
+    "ps4updater": {
+      "enabled": true
+    },
+    "inventory": {
+      "servers": {
+        "url": "https://inventory-proxy.gaijin.net/char"
+      }
+    },
+    "ww_leaderboard": {
+      "servers": {
+        "url": "https://char-lw-nl-005-2.warthunder.com/char",
+        "url": "https://char-lw-nl-005-3.warthunder.com/char",
+        "url": "https://char-lw-nl-005-4.warthunder.com/char",
+        "url": "https://char-lw-nl-005-5.warthunder.com/char"
+      }
+    },
+    "userstat": {
+      "servers": {
+        "url": "https://userstat-proxy-01.gaijin.net/char",
+        "url": "https://userstat-proxy-02.gaijin.net/char"
+      }
+    },
+    "contacts": {
+      "servers": {
+        "url": "https://contact-proxy-01.gaijin.net/json",
+        "url": "https://contact-proxy-02.gaijin.net/json"
+      }
+    },
+    "ugc_settings": {
+      "ugcServerUrl": "https://ugcinfo-proxy-01.gaijin.net/char",
+      "ugcServerUrl": "https://ugcinfo-proxy-02.gaijin.net/char"
+    },
+    "unstableClusters": {
+      "UA": {
+        "RU": true
+      }
+    }
+  },
+  "production.skinsDecalsCDN.baseUrls": {
+    "url": {
+      "weight": 5.0,
+      "url": "https://dldata-aws.warthunder.com/production/"
+    },
+    "url": {
+      "weight": 1.0,
+      "url": "https://dldata-warthunder.cdn.gaijin.net/production/"
+    }
+  },
+  "production_scee": {
+    "matchServer": "mgate-elb-01.warthunder.com:7853",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "chat-lw-nl-02.warthunder.com:443",
+    "ircServer": "chat-lw-nl-03.warthunder.com:443",
+    "charServer": "https://char-lw-nl-005-2.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-3.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-4.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-5.warthunder.com/char",
+    "enableSslCertCheck": true,
+    "skinsDecalsCDN_useCommon": false,
+    "skinsDecalsCDN": "https://dldata-warthunder.cdn.gaijin.net/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info",
+    "enableApex": true,
+    "skinsDecalsCDN": {
+      "replaceUrls": "production.skinsDecalsCDN.baseUrls",
+      "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info"
+    },
+    "ps4updater": {
+      "enabled": true
+    },
+    "unstableClusters": {
+      "UA": {
+        "RU": true
+      }
+    }
+  },
+  "production_scea": {
+    "matchServer": "mgate-elb-01.warthunder.com:7853",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "chat-lw-nl-02.warthunder.com:443",
+    "ircServer": "chat-lw-nl-03.warthunder.com:443",
+    "charServer": "https://char-lw-nl-005-2.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-3.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-4.warthunder.com/char",
+    "charServer": "https://char-lw-nl-005-5.warthunder.com/char",
+    "enableSslCertCheck": true,
+    "skinsDecalsCDN_useCommon": false,
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-warthunder.cdn.gaijin.net/production/",
+    "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info",
+    "enableApex": true,
+    "skinsDecalsCDN": {
+      "replaceUrls": "production.skinsDecalsCDN.baseUrls",
+      "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info"
+    },
+    "ps4updater": {
+      "enabled": true
+    },
+    "unstableClusters": {
+      "UA": {
+        "RU": true
+      }
+    }
+  },
+  "dev-stable": {
+    "appPerm": 78,
+    "matchServer": "match-dev-lw-nl-01.warthunder.com:7853",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "chat-devstable.warthunder.com:6667",
+    "charServer": "https://char-dev-10.warthunder.com:10443/char",
+    "charServer": "https://char-dev-09.warthunder.com:10443/char",
+    "disableScaleWPByPlayers": true,
+    "enableSslCertCheck": true,
+    "enableUGC": true,
+    "ugcSkinsDecalsCDN_useCommon": false,
+    "ugcSkinsDecalsCDN": "https://wt-ugc.cdn.gaijin.net/",
+    "inventory": {
+      "servers": {
+        "url": "https://inventory-dev-stable-01.gaijin.net:8443/char",
+        "url": "https://inventory-dev-stable-02.gaijin.net:8443/char"
+      }
+    },
+    "ww_leaderboard": {
+      "servers": {
+        "url": "https://char-dev-10.warthunder.com:10443/char",
+        "url": "https://char-dev-09.warthunder.com:10443/char"
+      }
+    },
+    "userstat": {
+      "servers": {
+        "url": "https://userstat-dev-stable.gaijin.net:13443/char"
+      }
+    },
+    "ugc_settings": {
+      "ugcServerUrl": "https://inventory-dev-stable-01.gaijin.net:8443/char"
+    }
+  },
+  "dev": {
+    "appPerm": 78,
+    "matchServer": "match-dev-lw-nl-01.warthunder.com:7852",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "chat-dev.warthunder.com:6667",
+    "charServer": "https://char-dev-12.warthunder.com:443/char",
+    "charServer": "https://char-dev-11.warthunder.com:443/char",
+    "circuitPostfix": "-dev",
+    "disableScaleWPByPlayers": true,
+    "enableSslCertCheck": true,
+    "enableApex": true,
+    "marketplaceURL": "https://trade-dev.gaijin.net/",
+    "enableUGC": true,
+    "ugcSkinsDecalsCDN_useCommon": false,
+    "ugcSkinsDecalsCDN": "https://wt-ugc.cdn.gaijin.net/",
+    "inventory": {
+      "servers": {
+        "url": "https://inventory-dev-01.gaijin.net:6443/char",
+        "url": "https://inventory-dev-02.gaijin.net:6443/char"
+      }
+    },
+    "ww_leaderboard": {
+      "servers": {
+        "url": "https://char-dev-12.warthunder.com:443/char",
+        "url": "https://char-dev-11.warthunder.com:443/char"
+      }
+    },
+    "contacts": {
+      "servers": {
+        "url": "https://contact-staging-sv-lx-136.gaijin.net:443/json",
+        "url": "https://contact-staging-sv-lx-137.gaijin.net:443/json"
+      }
+    },
+    "userstat": {
+      "servers": {
+        "url": "https://char-dev-01.gaijin.net:3443/char",
+        "url": "https://char-dev-02.gaijin.net:3443/char"
+      }
+    },
+    "ugc_settings": {
+      "ugcServerUrl": "https://ugcinfo-dev-01.gaijin.net:7443/char",
+      "ugcServerUrl": "https://ugcinfo-dev-02.gaijin.net:7443/char"
+    }
+  },
+  "nightly": {
+    "matchServer": "match-nightly-lw-nl-01.warthunder.com:7853",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "chat-nightly.warthunder.com:6666",
+    "charServer": "https://char-nightly-sv-nl-01.warthunder.com:443/char",
+    "charServer": "https://char-nightly-sv-nl-01.warthunder.com:10443/char",
+    "circuitPostfix": "-test",
+    "queryTimeoutMs": 180000,
+    "disableScaleWPByPlayers": true,
+    "enableApex": true,
+    "marketplaceURL": "https://trade.gaijin.net/",
+    "enableUGC": true,
+    "ugcSkinsDecalsCDN_useCommon": false,
+    "ugcSkinsDecalsCDN": "https://wt-ugc.cdn.gaijin.net/",
+    "ps4updater": {
+      "enabled": true
+    },
+    "inventory": {
+      "servers": {
+        "url": "https://common-char-nightly-im-ru-27.gaijin.net/char"
+      }
+    },
+    "ww_leaderboard": {
+      "servers": {
+        "url": "https://char-nightly-sv-nl-01.warthunder.com:443/char",
+        "url": "https://char-nightly-sv-nl-01.warthunder.com:10443/char"
+      }
+    },
+    "userstat": {
+      "servers": {
+        "url": "https://common-char-nightly-im-ru-27.gaijin.net:5443/char"
+      }
+    },
+    "contacts": {
+      "servers": {
+        "url": "https://common-char-nightly-im-ru-27.gaijin.net:4443/json"
+      }
+    },
+    "ugc_settings": {
+      "ugcServerUrl": "https://inventory-dev-stable-01.gaijin.net:8443/char",
+      "ugcServerUrl": "https://inventory-dev-stable-01.gaijin.net:8443/char"
+    }
+  },
+  "ps4submission": {
+    "matchServer": "ps4sub-match.warthunder.com:7870",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "ps4sub-chat.warthunder.com:6668",
+    "charServer": "https://ps4sub-char.warthunder.com:443/char",
+    "circuitPostfix": "-test",
+    "queryTimeoutMs": 180000,
+    "disableScaleWPByPlayers": true,
+    "enableApex": true,
+    "ps4updater": {
+      "enabled": true
+    }
+  },
+  "xbox-submission": {
+    "matchServer": "xbsub-match.warthunder.com:7870",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "ircServer": "xbsub-chat.warthunder.com:6667",
+    "charServer": "https://xbsub-char.warthunder.com:443/char",
+    "circuitPostfix": "-test",
+    "queryTimeoutMs": 180000,
+    "disableScaleWPByPlayers": true,
+    "enableApex": true
+  },
+  "test": {
+    "appPerm": 33,
+    "matchServer": "match-test-gj-msk-01.gaijin.ops:7852",
+    "ircServer": "chat-test-gj-msk-01.gaijin.ops:6668",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "charServer": "http://warthunder.gaijin.lan:10080/char",
+    "charServer": "http://warthunder.gaijin.lan:10085/char",
+    "circuitPostfix": "-test",
+    "queryTimeoutMs": 180000,
+    "disableScaleWPByPlayers": true,
+    "enableNetConsole": true,
+    "marketplaceURL": "http://market-test.gaijin.ops/marketPlace/",
+    "enableUGC": true,
+    "enableApex": true,
+    "skinsDecalsCacheSz": 1073741824,
+    "webVromfs": {
+      "replaceUrls": "test.webVromfs.baseUrls"
+    },
+    "inventory": {
+      "servers": {
+        "url": "http://inventory-test-gj-msk-01.gaijin.ops:8080/char"
+      }
+    },
+    "ww_leaderboard": {
+      "servers": {
+        "url": "http://wt-test-char-master.gaijin.lan:10080/char",
+        "url": "http://wt-test-char-master.gaijin.lan:10085/char"
+      }
+    },
+    "userstat": {
+      "servers": {
+        "url": "http://test-char-01.gaijin.ops:13085/char",
+        "url": "http://test-char-01.gaijin.ops:13086/char"
+      }
+    },
+    "nickserver": {
+      "servers": {
+        "url": "https://nick-server.gaijin.net/public/resolve/nicks"
+      }
+    },
+    "contacts": {
+      "servers": {
+        "url": "http://moon-contact.gaijin.ops:7443/json"
+      }
+    },
+    "unstableClusters": {
+      "RU": {
+        "debug": true
+      }
+    }
+  },
+  "test.webVromfs.baseUrls": {
+    "url": "http://webfs-test-gj-msk-01.gaijin.ops:8000/content/warthunder/webfs/"
+  },
+  "experimental": {
+    "matchServer": "match-test-gj-msk-01.gaijin.ops:7870",
+    "ircServer": "chat-test-gj-msk-01.gaijin.ops:7001",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "charServer": "https://wtdb.gaijin.lan:2443/char",
+    "charServer": "https://wtdb.gaijin.lan:12443/char",
+    "circuitPostfix": "-test",
+    "queryTimeoutMs": 180000,
+    "disableScaleWPByPlayers": true,
+    "enableApex": true,
+    "enableUGC": true
+  },
+  "experimental2": {
+    "matchServer": "match-test-gj-msk-01.gaijin.ops:7872",
+    "ircServer": "chat-test-gj-msk-01.gaijin.ops:7001",
+    "useTamVoice": true,
+    "vivoxServerURL": "https://not.used",
+    "vivoxEcho": "tamvchn://echo123",
+    "charServer": "https://wtdb.gaijin.lan:2443/char",
+    "charServer": "https://wtdb.gaijin.lan:12443/char",
+    "circuitPostfix": "-test",
+    "queryTimeoutMs": 180000,
+    "disableScaleWPByPlayers": true,
+    "enableApex": true
+  },
+  "tournament": {
+    "matchServer": "mgate-elb-02.warthunder.com:7853",
+    "charServer": "https://char-elb-01.warthunder.com/char",
+    "ircServer": "54.194.237.51:443",
+    "enableSslCertCheck": true,
+    "skinsDecalsCDN_useCommon": false,
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-aws.warthunder.com/production/",
+    "skinsDecalsCDN": "https://dldata-warthunder.cdn.gaijin.net/production/",
+    "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info",
+    "enableApex": true,
+    "skinsDecalsCDN": {
+      "replaceUrls": "production.skinsDecalsCDN.baseUrls",
+      "hashesReqUrl": "https://public-configs.warthunder.com/production/dldata.info"
+    }
+  },
+  "curCircuitRemap": {
+    "client": {
+      "ps4": {
+        "production_scea": "production",
+        "production_scee": "production"
+      }
+    }
+  }
+}

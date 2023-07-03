@@ -1,0 +1,104 @@
+{
+  "root": {
+    "blur": {    },
+    "blur_foreground": {    },
+    "frame": {
+      "id": "countryChoice-root",
+      "width": "0.75@scrn_tgt",
+      "pos": "0.5pw-0.5w, 0.5ph-0.5h",
+      "position": "absolute",
+      "class": "wndNav",
+      "style": "padding:0, 1@frameTopPadding, 0, 0",
+      "frame_header": {
+        "activeText": {
+          "caption": "yes",
+          "text": "#mainmenu/btnTutorial"
+        },
+        "top_right_holder": {
+          "hasRightIndent": "yes",
+          "CheckBox": {
+            "id": "skip_tutorial",
+            "pos": "0, 50%ph-50%h",
+            "position": "relative",
+            "text": "#options/doNotAskMeAgain",
+            "tooltip": "#options/doNotAskMeAgain/tutorial/hint",
+            "on_change_value": "onSkipTutorial",
+            "btnName": "Y",
+            "CheckBoxImg": {            },
+            "ButtonImg": {            }
+          }
+        },
+        "Button_close": {
+          "id": "btn_close_tutorial",
+          "on_click": "onClose",
+          "userInputType": "mouse"
+        },
+        "dummy": {
+          "on_click": "onClose",
+          "accessKey": "Esc",
+          "userInputType": "keyboard"
+        },
+        "dummy": {
+          "on_click": "onClose",
+          "btnName": "B",
+          "userInputType": "gamepad"
+        }
+      },
+      "tdiv": {
+        "width": "pw",
+        "max-height": "1@rh - 1@frameTopPadding - 0.5w - 1@battleButtonHeight",
+        "pos": "0.5pw-0.5w, 0",
+        "position": "relative",
+        "flow": "vertical",
+        "overflow-y": "auto",
+        "textAreaCentered": {
+          "id": "msgText",
+          "width": "pw",
+          "position": "relative",
+          "padding-bottom": "1@blockInterval"
+        },
+        "tdiv": {
+          "id": "rewards",
+          "pos": "0.5pw-0.5w, 0",
+          "position": "relative",
+          "flow": "vertical",
+          "padding-bottom": "1@blockInterval",
+          "display": "hide"
+        }
+      },
+      "Button_text": {
+        "id": "btn_start",
+        "size": "pw, 0.5w+1@battleButtonHeight",
+        "position": "relative",
+        "visualStyle": "bigImg",
+        "iconPos": "middleBottom",
+        "btnName": "X",
+        "userInputType": "mouse",
+        "on_click": "onStart",
+        "img": {
+          "id": "tutorial_image",
+          "width": "pw",
+          "height": "0.5w",
+          "background-image": "#ui/images/tutorial_fighter?P1",
+          "background-color": "@white"
+        },
+        "text": {
+          "size": "pw, 1@battleButtonHeight",
+          "text": "#multiplayer/btnStart"
+        },
+        "focus_border": {        },
+        "ButtonImg": {        }
+      },
+      "dummy": {
+        "on_click": "onStart",
+        "accessKey": "Space | Enter | NumEnter",
+        "userInputType": "keyboard"
+      },
+      "dummy": {
+        "on_click": "onStart",
+        "btnName": "X",
+        "userInputType": "gamepad"
+      }
+    }
+  }
+}

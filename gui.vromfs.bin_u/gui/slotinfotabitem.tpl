@@ -1,0 +1,23 @@
+<<#items>>
+shopFilter
+{
+  size:t='1@arrowButtonHeight, 1@arrowButtonHeight'
+  margin-left:t='0'
+  margin-top:t='0'
+  margin-bottom:t='0'
+  tooltip:t='<<tooltip>>'
+  shopFilterImg
+  {
+    id:t='<<imgId>>'
+    background-image:t='<<imgBg>>'
+  }
+  discount_notification
+  {
+    id:t='<<discountId>>';
+    type:t='box_left';
+    noShift:t='yes';
+    text:t='';
+    tooltip:t=''
+  }
+}
+<</items>>

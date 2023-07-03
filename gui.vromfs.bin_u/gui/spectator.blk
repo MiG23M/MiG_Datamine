@@ -1,0 +1,800 @@
+{
+  "tdiv": {
+    "id": "spectator_root",
+    "size": "sw - 2@bw, sh - 2@bh",
+    "pos": "pw/2-w/2, ph/2-h/2",
+    "position": "absolute",
+    "multiplayerScore": {
+      "pos": "50%pw-50%w, 2@spectatorToolbarPadding + 1@spectatorToolbarBtnSize + 0.02@scrn_tgt",
+      "position": "absolute"
+    },
+    "tdiv": {
+      "id": "stats_left",
+      "css-hier-invalidate": "yes",
+      "re-type": "9rect",
+      "width": "1@spectatorTableWidth + 1@spectatorBw",
+      "position": "absolute",
+      "pos": "-1@spectatorBw -4@dp, 1@spectatorTopOffset",
+      "min-height": "2@sIco",
+      "background-image": "#ui/gameuiskin#expandable_item_ww_transp_reflect",
+      "background-position": "2, 2, 0, 2",
+      "background-repeat": "expand",
+      "background-color": "#99999999",
+      "padding": "1@spectatorBw, 1@dp, 1@framePadding, 1@dp",
+      "flow": "vertical",
+      "tdiv": {
+        "id": "content",
+        "overflow-y": "auto",
+        "scroll-align": "left",
+        "width": "1@spectatorRowWidth",
+        "pos": "0, 0",
+        "position": "relative",
+        "min-height": "1@spectatorRowHeight",
+        "max-height": "p.p.h -1@spectatorTopOffset -1@mIco -1@spectatorTableWidth -24@sf/@pf",
+        "invisibleSelection": "yes",
+        "table": {
+          "id": "table_team1",
+          "class": "spectatorTeamTable",
+          "side": "left",
+          "team": "",
+          "behavior": "posNavigator",
+          "clearOnFocusLost": "yes",
+          "navigatorShortcuts": "yes",
+          "selfFocusBorder": "yes",
+          "on_click": "onPlayerClick",
+          "on_r_click": "onPlayerRClick",
+          "on_activate": "onSelectPlayer",
+          "on_set_focus": "onChangeFocusTable"
+        }
+      },
+      "dyncampresult": {
+        "id": "header",
+        "pos": "1.5@mIco, -0.5@mIco -h/2",
+        "position": "absolute",
+        "textShade": "yes"
+      }
+    },
+    "tdiv": {
+      "id": "stats_right",
+      "css-hier-invalidate": "yes",
+      "re-type": "9rect",
+      "width": "1@spectatorTableWidth + 1@spectatorBw",
+      "position": "absolute",
+      "pos": "pw - w + 4@dp +1@spectatorBw, 1@spectatorTopOffset",
+      "min-height": "2@sIco",
+      "background-image": "#ui/gameuiskin#expandable_item_ww_transp",
+      "background-position": "0, 2, 2, 2",
+      "background-repeat": "expand",
+      "background-color": "#99999999",
+      "padding": "1@framePadding, 1@dp, 1@spectatorBw, 1@dp",
+      "flow": "vertical",
+      "tdiv": {
+        "id": "content",
+        "overflow-y": "auto",
+        "scroll-align": "right",
+        "width": "1@spectatorRowWidth",
+        "pos": "pw-w, 0",
+        "position": "relative",
+        "min-height": "1@spectatorRowHeight",
+        "max-height": "p.p.h -1@spectatorTopOffset -1@mIco -1@spectatorTableWidth -24@sf/@pf",
+        "invisibleSelection": "yes",
+        "table": {
+          "id": "table_team2",
+          "class": "spectatorTeamTable",
+          "side": "right",
+          "team": "",
+          "behavior": "posNavigator",
+          "clearOnFocusLost": "yes",
+          "navigatorShortcuts": "yes",
+          "selfFocusBorder": "yes",
+          "on_click": "onPlayerClick",
+          "on_r_click": "onPlayerRClick",
+          "on_activate": "onSelectPlayer",
+          "on_set_focus": "onChangeFocusTable"
+        }
+      },
+      "dyncampresult": {
+        "id": "header",
+        "pos": "pw - w - 1.5@mIco, -0.5@mIco -h/2",
+        "position": "absolute",
+        "textShade": "yes"
+      }
+    },
+    "spectatorFrame": {
+      "id": "log_div",
+      "css-hier-invalidate": "yes",
+      "position": "absolute",
+      "pos": "-1@spectatorBw -4@dp, ph-h",
+      "min-height": "2@sIco",
+      "padding-left": "1@spectatorBw",
+      "flow": "vertical",
+      "tdiv": {
+        "id": "content",
+        "size": "1@spectatorTableWidth, 1@spectatorTableWidth",
+        "flow": "vertical",
+        "HorizontalListBox": {
+          "id": "tabs",
+          "width": "pw",
+          "class": "tabs",
+          "smallFont": "yes",
+          "navigatorShortcuts": "yes",
+          "on_select": "onBtnLogTabSwitch"
+        },
+        "tdiv": {
+          "size": "pw, fh",
+          "tdiv": {
+            "id": "history_container",
+            "position": "absolute",
+            "size": "pw, ph",
+            "display": "show",
+            "overflow-y": "auto",
+            "scroll-align": "left",
+            "auto-scroll": "yes",
+            "css-hier-invalidate": "yes",
+            "historyLog": {
+              "id": "history_log",
+              "width": "pw",
+              "punctuation-exception": "-.,'"():/\@[]=^+",
+              "text": ""
+            }
+          },
+          "chatPlaceSpectator": {
+            "id": "chat_container",
+            "position": "absolute",
+            "size": "pw, ph",
+            "display": "hide"
+          },
+          "tdiv": {
+            "id": "order_status",
+            "position": "absolute",
+            "size": "pw, ph"
+          }
+        }
+      }
+    },
+    "spectatorFrame": {
+      "id": "map_div",
+      "css-hier-invalidate": "yes",
+      "position": "absolute",
+      "pos": "pw - w + 4@dp + 1@spectatorBw, ph-h",
+      "min-height": "2@sIco",
+      "padding": "1@framePadding",
+      "padding-right": "1@spectatorBw+4@dp",
+      "flow": "vertical",
+      "tdiv": {
+        "id": "content",
+        "size": "1@spectatorTableWidth, 1@spectatorTableWidth",
+        "tacticalMap": {
+          "size": "pw, ph",
+          "behaviour": "button",
+          "on_click": "onMapClick"
+        }
+      }
+    },
+    "tdiv": {
+      "id": "spectator_hud_damage",
+      "size": "0.15@shHud, 0.15@shHud",
+      "position": "absolute",
+      "pos": "1@spectatorTableWidth +0.01@shHud, ph-h"
+    },
+    "hudActionBar": {
+      "id": "spectator_hud_action_bar",
+      "position": "absolute",
+      "pos": "pw/2-w/2, ph-h",
+      "tdiv": {
+        "id": "actions_nest"
+      }
+    },
+    "tdiv": {
+      "pos": "pw/2-w/2, ph-h - 0.06@shHud - 1@sIco",
+      "position": "absolute",
+      "flow": "vertical",
+      "tdiv": {
+        "id": "hud_hints_nest",
+        "width": "2/3@rwHud",
+        "flow": "vertical",
+        "css-hier-invalidate": "yes",
+        "behavior": "Timer",
+        "tdiv": {
+          "width": "pw",
+          "position": "absolute",
+          "pos": "pw/2 - w/2, -h",
+          "flow": "vertical",
+          "tdiv": {
+            "id": "common_priority_hints",
+            "width": "pw",
+            "flow": "vertical"
+          },
+          "tdiv": {
+            "id": "ship_obstacle_rf",
+            "size": "pw, 0.04@shHud"
+          },
+          "tdiv": {
+            "width": "pw",
+            "min-height": "0.1@shHud",
+            "tdiv": {
+              "id": "mission_hints",
+              "width": "pw",
+              "position": "relative",
+              "pos": "0, ph-h",
+              "flow": "vertical"
+            }
+          },
+          "tdiv": {
+            "id": "mission_action_hints_holder",
+            "position": "relative",
+            "tdiv": {
+              "id": "mission_action_hints",
+              "width": "pw",
+              "position": "relative",
+              "pos": "0, ph-h",
+              "flow": "vertical"
+            }
+          }
+        },
+        "hudMessages": {
+          "id": "hud_message_zone_capture_notification",
+          "width": "pw",
+          "height": "0.065@shHud",
+          "pos": "0.5pw-0.5w, -@tankGunsAmmoBlockHeight",
+          "message_style": "zone_capture_notification",
+          "input-transparent": "yes"
+        },
+        "tdiv": {
+          "height": "0.08@shHud",
+          "position": "relative",
+          "left": "pw/2 - w/2",
+          "div": {
+            "id": "iconed_hints",
+            "height": "ph"
+          },
+          "div": {
+            "id": "display_timers",
+            "height": "ph"
+          }
+        },
+        "tdiv": {
+          "id": "actionbar_hints_nest",
+          "width": "1@shHud",
+          "height": "0.065@shHud",
+          "left": "0.5pw-0.5w",
+          "position": "relative",
+          "tdiv": {
+            "width": "pw",
+            "position": "absolute",
+            "pos": "0, ph-h",
+            "flow": "vertical",
+            "tdiv": {
+              "id": "actionbar_hints",
+              "width": "pw",
+              "flow": "vertical"
+            }
+          }
+        },
+        "hudMessages": {
+          "id": "hud_message_player_damage_notification",
+          "message_style": "player_damage_notification",
+          "left": "0.2@shHud",
+          "position": "relative",
+          "flow": "vertical",
+          "width": "pw - 0.2@shHud"
+        },
+        "textAreaCentered": {
+          "id": "low-quality-model-warning",
+          "width": "pw",
+          "style": "color:@warningTextColor; font:@fontHudNormal;",
+          "text": "#low_quality_model_in_hangar",
+          "display": "hide"
+        },
+        "tdiv": {
+          "id": "tutorial_hints",
+          "width": "pw",
+          "position": "root",
+          "pos": "50%sw-50%w, 1@bhHud + 0.67@shHud",
+          "flow": "vertical"
+        },
+        "tdiv": {
+          "id": "minor_priority_hints",
+          "width": "pw",
+          "position": "root",
+          "pos": "50%sw-50%w, @shHud - h",
+          "flow": "vertical"
+        }
+      },
+      "activeText": {
+        "id": "waiting_for_target_spawn",
+        "pos": "pw/2-w/2, 0",
+        "position": "relative",
+        "padding-bottom": "12@sf/@pf",
+        "text": "#spectator/waiting_for_target_spawn",
+        "display": "hide"
+      },
+      "targetInfo": {
+        "id": "target_info",
+        "pos": "pw/2-w/2, 0",
+        "position": "relative",
+        "flow": "vertical",
+        "display": "hide",
+        "activeText": {
+          "id": "target_state",
+          "pos": "pw/2-w/2, 0",
+          "position": "relative",
+          "text": ""
+        },
+        "tdiv": {
+          "id": "spectator_live_stats_nest",
+          "pos": "pw/2-w/2, 0",
+          "position": "relative",
+          "display": "hide"
+        }
+      }
+    },
+    "spectatorFrame": {
+      "id": "controls_div",
+      "pos": "50%pw-50%w, -1@spectatorToolbarPadding",
+      "position": "absolute",
+      "padding": "1@spectatorToolbarPadding",
+      "input-transparent": "yes",
+      "hoverButton": {
+        "id": "ID_FLIGHTMENU",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "icon": {
+          "background-image": "#ui/gameuiskin#btn_modifications.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_MPSTATSCREEN",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "icon": {
+          "background-image": "#ui/gameuiskin#leaderboard.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "controls_mpstats_replays",
+        "tooltip": "#hotkeys/ID_MPSTATSCREEN",
+        "_on_click": "onBtnMpStatScreen",
+        "icon": {
+          "background-image": "#ui/gameuiskin#leaderboard.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_PREV_PLANE",
+        "on_click": "onBtnShortcut",
+        "is_shortcut": "yes",
+        "icon": {
+          "background-image": "#ui/gameuiskin#spinnerListBox_arrow_up.svg",
+          "rotation": "270"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_NEXT_PLANE",
+        "on_click": "onBtnShortcut",
+        "is_shortcut": "yes",
+        "icon": {
+          "background-image": "#ui/gameuiskin#spinnerListBox_arrow_up.svg",
+          "rotation": "90"
+        }
+      },
+      "tdiv": {
+        "id": "controls_cameras_icon",
+        "top": "ph/2-h/2",
+        "position": "relative",
+        "size": "@spectatorToolbarBtnSize, @spectatorToolbarBtnSize",
+        "inactive": "yes",
+        "img": {
+          "pos": "pw-1.2w, ph/2-h/2",
+          "position": "relative",
+          "size": "@sIco, @sIco",
+          "style": "background-color:#4c4c4c4c",
+          "input-transparent": "yes",
+          "background-image": "#ui/gameuiskin#player_spectator.svg",
+          "background-svg-size": "@sIco, @sIco"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_CAMERA_DEFAULT",
+        "text": "1",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_TOGGLE_FOLLOWING_CAMERA",
+        "text": "2",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_OPERATOR",
+        "text": "3",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_FLYBY",
+        "text": "4",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_WING",
+        "text": "5",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_GUN",
+        "text": "6",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_RANDOMIZE",
+        "text": "#mainmenu/btnReplayCameraRandom",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_FREE",
+        "text": "#mainmenu/btnReplayCameraFree",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_FREE_PARENTED",
+        "text": "#mainmenu/btnReplayCameraFreeParented",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_FREE_ATTACHED",
+        "text": "#mainmenu/btnReplayCameraFreeAttached",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_CAMERA_HOVER",
+        "text": "#mainmenu/btnReplayCameraHover",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_TOGGLE_FORCE_SPECTATOR_CAM_ROT",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut",
+        "icon": {
+          "background-image": "#ui/gameuiskin#cursor.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_SHOW_MARKERS",
+        "text": "#icon/mpstats/raceLastCheckpoint",
+        "is_shortcut": "yes",
+        "on_click": "onBtnShortcut"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_SLOWER",
+        "on_click": "onBtnShortcut",
+        "is_shortcut": "yes",
+        "icon": {
+          "background-image": "#ui/gameuiskin#replay_forward.svg",
+          "rotation": "180",
+          "background-position": "0, h"
+        }
+      },
+      "text": {
+        "id": "txt_replay_time_speed",
+        "top": "ph/2-h/2",
+        "position": "relative",
+        "width": "0.07@sf;",
+        "text": "#ui/not_applicable",
+        "enable": "no"
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_FASTER",
+        "on_click": "onBtnShortcut",
+        "is_shortcut": "yes",
+        "icon": {
+          "background-image": "#ui/gameuiskin#replay_forward.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_BACKWARD",
+        "on_click": "onBtnBackward",
+        "is_shortcut": "yes",
+        "icon": {
+          "background-image": "#ui/gameuiskin#replay_restart.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_PAUSE",
+        "on_click": "onBtnShortcut",
+        "is_shortcut": "yes",
+        "icon": {
+          "id": "icon",
+          "background-image": "#ui/gameuiskin#replay_pause.svg"
+        }
+      },
+      "hoverButton": {
+        "id": "ID_REPLAY_FORWARD",
+        "on_click": "onBtnForward",
+        "is_shortcut": "yes",
+        "icon": {
+          "background-image": "#ui/gameuiskin#replay_restart.svg",
+          "rotation": "180"
+        }
+      },
+      "tdiv": {
+        "id": "controls_timeline",
+        "top": "ph/2-h/2",
+        "position": "relative",
+        "text": {
+          "id": "txt_replay_time_current",
+          "width": "0.10@sf",
+          "top": "ph/2-h/2",
+          "position": "relative",
+          "text": "#ui/not_applicable"
+        },
+        "expProgress": {
+          "id": "timeline_progress",
+          "top": "ph/2-h/2",
+          "position": "relative",
+          "width": "1@spectatorTimerProgressWidth",
+          "max": "1000",
+          "value": "0"
+        },
+        "text": {
+          "id": "txt_replay_time_total",
+          "width": "0.10@sf",
+          "top": "ph/2-h/2",
+          "position": "relative",
+          "text": "#ui/not_applicable"
+        }
+      },
+      "buttons_block": {
+        "id": "controls_timer",
+        "height": "@spectatorToolbarBtnSize",
+        "enable": "no",
+        "text": {
+          "id": "txt_mission_timer",
+          "top": "ph/2-h/2",
+          "position": "relative",
+          "width": "0.07@sf;",
+          "text": "#ui/not_applicable"
+        }
+      }
+    },
+    "toggleButton": {
+      "id": "btnToggleStats1",
+      "on_click": "onToggleButtonClick",
+      "attachSide": "left",
+      "toggled": "yes",
+      "toggleObj": "stats_left",
+      "pos": "-4@dp, 1@spectatorTopOffset - h",
+      "position": "absolute",
+      "icon": {      }
+    },
+    "toggleButton": {
+      "id": "btnToggleStats2",
+      "on_click": "onToggleButtonClick",
+      "attachSide": "right",
+      "toggled": "yes",
+      "toggleObj": "stats_right",
+      "pos": "pw-w +4@dp, 1@spectatorTopOffset - h",
+      "position": "absolute",
+      "icon": {      }
+    },
+    "toggleButton": {
+      "id": "btnToggleLog",
+      "on_click": "onToggleButtonClick",
+      "attachSide": "left",
+      "toggled": "yes",
+      "toggleObj": "log_div",
+      "pos": "-4@dp, ph-h - 1@spectatorTableWidth -16@sf/@pf",
+      "position": "absolute",
+      "icon": {      }
+    },
+    "toggleButton": {
+      "id": "btnToggleMap",
+      "on_click": "onToggleButtonClick",
+      "attachSide": "right",
+      "toggled": "yes",
+      "toggleObj": "map_div",
+      "pos": "pw-w +4@dp, ph-h - 1@spectatorTableWidth -16@sf/@pf",
+      "position": "absolute",
+      "icon": {      }
+    },
+    "spectatorFrame": {
+      "id": "map_large_div",
+      "display": "hide",
+      "width": "1@rh $min (1@rw -2@spectatorTableWidth -16@sf/@pf)",
+      "height": "1@rh $min (1@rw -2@spectatorTableWidth -16@sf/@pf)",
+      "pos": "pw/2-w/2, ph/2-h/2",
+      "position": "absolute",
+      "css-hier-invalidate": "yes",
+      "padding": "1@framePadding",
+      "behaviour": "button",
+      "on_click": "onMapClick",
+      "tacticalMap": {
+        "id": "tactical_map",
+        "enable": "no",
+        "display": "hide",
+        "width": "pw",
+        "height": "ph",
+        "behaviour": "button",
+        "on_click": "onMapClick"
+      },
+      "Button_close": {
+        "id": "btnCloseMap",
+        "on_click": "onMapClick",
+        "pos": "pw-w-1@framePadding, 1@framePadding",
+        "position": "absolute",
+        "have_shortcut": "no"
+      }
+    },
+    "hitCamera": {
+      "id": "hud_hitcamera",
+      "position": "absolute",
+      "pos": "pw - w, ph-h - 1@spectatorTableWidth -2@framePadding - @cIco - 2@blockInterval",
+      "input-transparent": "yes",
+      "total-input-transparent": "yes",
+      "result": "",
+      "_transp-timer": "0",
+      "hitCameraRender": {
+        "hitCameraTitle": {
+          "id": "title"
+        },
+        "hitCameraCrew": {
+          "id": "crew_nest",
+          "pos": "1@blockInterval, 0.2ph",
+          "position": "absolute",
+          "img": {
+            "size": "1@cIco, 1@cIco",
+            "pos": "0, ph-h",
+            "position": "relative",
+            "margin-left": "1@blockInterval",
+            "background-image": "#ui/gameuiskin#ship_crew.svg",
+            "background-svg-size": "1@cIco, 1@cIco"
+          },
+          "tdiv": {
+            "pos": "0, ph-h",
+            "position": "relative",
+            "hitCameraLostCrew": {
+              "id": "lost_crew_count",
+              "pos": "pw-w, -h",
+              "position": "absolute",
+              "flow": "vertical"
+            },
+            "textareaNoTab": {
+              "id": "crew_count"
+            }
+          },
+          "textareaNoTab": {
+            "id": "max_crew_count",
+            "pos": "0, ph-h",
+            "position": "relative",
+            "overlayTextColor": "active"
+          }
+        },
+        "enemyDamageStatusPanel": {
+          "flow": "vertical",
+          "tdiv": {
+            "id": "hpIndicator",
+            "width": "pw",
+            "padding": "0.01@shHud, 0",
+            "pos": "0.5pw-0.5w, 0",
+            "position": "relative",
+            "flow": "horizontal",
+            "display": "hide",
+            "textareaNoTab": {
+              "id": "damage",
+              "pos": "0.5pw-0.5w, -0.6h",
+              "position": "absolute"
+            },
+            "textareaNoTab": {
+              "id": "hpCount",
+              "pos": "0, 0.5ph-0.5h",
+              "position": "relative",
+              "padding-right": "0.01@shHud",
+              "overlayTextColor": "active"
+            },
+            "hpProgressBar": {
+              "id": "hpProgressBar",
+              "size": "fw, 0.005@shHud",
+              "pos": "0, 0.5ph-0.5h",
+              "position": "relative",
+              "value": "0"
+            }
+          },
+          "tdiv": {
+            "id": "damageStatus",
+            "pos": "0.5pw-0.5w, 0",
+            "position": "relative"
+          }
+        },
+        "hitCameraInfo": {
+          "id": "info"
+        },
+        "tdiv": {
+          "size": "pw, ph",
+          "position": "absolute",
+          "overflow": "hidden",
+          "hitCameraCritAnim": {
+            "id": "critAnim",
+            "height": "1@hitCameraHeight",
+            "needAnim": "no",
+            "_size-timer": "0",
+            "_transp-timer": "0",
+            "color-factor": "255"
+          }
+        }
+      }
+    },
+    "textareaNoTab": {
+      "id": "txt_replay_session_id",
+      "pos": "0.085@sf, sh-0.015@sf",
+      "position": "root",
+      "tinyFont": "yes",
+      "textHide": "yes",
+      "text": ""
+    },
+    "timer": {
+      "id": "update_timer",
+      "timer_handler_func": "onUpdate"
+    },
+    "tdiv": {
+      "behaviour": "darg",
+      "position": "root",
+      "pos": "0, 0",
+      "size": "sw, sh"
+    },
+    "tdiv": {
+      "id": "replay_paused_block",
+      "position": "absolute",
+      "pos": "pw/2-w/2, ph/2 - h/2",
+      "display": "hide",
+      "flow": "vertical",
+      "textareaNoTab": {
+        "overlayTextColor": "active",
+        "text": "#hints/replay_paused"
+      },
+      "tdiv": {
+        "margin-top": "1@blockInterval",
+        "halign": "center",
+        "textareaNoTab": {
+          "id": "replay_download_status",
+          "valign": "center",
+          "margin-right": "2@blockInterval",
+          "overlayTextColor": "active"
+        },
+        "animated_wait_icon": {
+          "background-rotation": "0"
+        }
+      },
+      "Button_text": {
+        "margin-top": "2@blockInterval",
+        "halign": "center",
+        "text": "#mainmenu/btnCancel",
+        "on_click": "onBtnCancelReplayDownload"
+      }
+    }
+  },
+  "tdiv": {
+    "id": "hud_message_timers"
+  },
+  "timer": {
+    "id": "hud_message_timer"
+  }
+}

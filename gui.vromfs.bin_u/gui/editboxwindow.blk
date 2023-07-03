@@ -1,0 +1,80 @@
+{
+  "root": {
+    "blur": {    },
+    "blur_foreground": {    },
+    "frame": {
+      "width": "50*@scrn_tgt/100.0",
+      "pos": "50%pw-50%w, 40%ph-40%h",
+      "position": "absolute",
+      "flow": "vertical",
+      "class": "wnd",
+      "frame_header": {
+        "activeText": {
+          "id": "edit_box_window_header",
+          "caption": "yes",
+          "text": ""
+        },
+        "Button_close": {
+          "id": "btn_back"
+        }
+      },
+      "textAreaCentered": {
+        "id": "editbox_label",
+        "width": "pw",
+        "text": "",
+        "position": "relative",
+        "pos": "50%pw-50%w, 1@frameHeaderHeight",
+        "padding": "0.025@scrn_tgt, 0",
+        "display": "hide"
+      },
+      "textareaNoTab": {
+        "id": "editbox_label_left_aligned",
+        "width": "pw",
+        "text": "",
+        "position": "relative",
+        "pos": "50%pw-50%w, 1@frameHeaderHeight",
+        "padding": "0.025@scrn_tgt, 0",
+        "display": "hide"
+      },
+      "tdiv": {
+        "width": "45*@scrn_tgt/100.0",
+        "pos": "50%pw-50%w, 3*@scrn_tgt/100.0",
+        "position": "relative",
+        "EditBox": {
+          "id": "edit_box_window_text",
+          "width": "pw",
+          "display": "hide",
+          "enable": "no",
+          "on_activate": "onOk",
+          "_on_cancel_edit": "goBack",
+          "on_change_value": "onChangeValue"
+        },
+        "EditBox": {
+          "id": "edit_box_window_text_multiline",
+          "size": "pw, 4@buttonHeight",
+          "multiline": "yes",
+          "display": "hide",
+          "enable": "no",
+          "_on_cancel_edit": "goBack",
+          "on_change_value": "onChangeValue"
+        }
+      },
+      "div": {
+        "pos": "50%pw-50%w, 0.03@scrn_tgt",
+        "position": "relative",
+        "Button_text": {
+          "id": "btn_ok",
+          "text": "#msgbox/btn_ok",
+          "on_click": "onOk",
+          "btnName": "X",
+          "ButtonImg": {          },
+          "textarea": {
+            "id": "btn_ok_text",
+            "class": "buttonText",
+            "text": "#msgbox/btn_ok"
+          }
+        }
+      }
+    }
+  }
+}

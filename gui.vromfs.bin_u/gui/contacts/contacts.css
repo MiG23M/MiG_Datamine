@@ -1,0 +1,38 @@
+contactItem {
+  behaviour: button;
+  re-type:text;
+  size: pw, 0.04@scrn_tgt;
+  padding:1@blockInterval, 0;
+  css-hier-invalidate:yes;
+}
+
+contactItem:current {
+  background-color:@contactSelColor;
+}
+
+contactItem:current > text {
+  color:@activeTextColor;
+}
+
+contactItem > text {
+  position: relative;
+  top: ph/2 - h/2;
+}
+
+contactItem textareaNoTab[contact_presence=yes] {
+  font:@fontSmall;
+}
+
+contact_buttons_holder {
+  input-transparent:yes;
+}
+
+[show_console_buttons=no] contactItem:hover > contact_buttons_holder {
+  display: show;
+}
+
+contactStatusImg {
+  size:1@sIco, 1@sIco;
+  background-svg-size:1@sIco, 1@sIco;
+  input-transparent:yes;
+}

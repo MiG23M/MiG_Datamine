@@ -1,0 +1,380 @@
+{
+  "selected_tag": "",
+  "bin_dump_file": "",
+  "mission_settings": {
+    "player": {
+      "army": 1,
+      "wing": "t1_player01",
+      "wing": "t1_player02",
+      "wing": "t1_player03",
+      "wing": "t1_player04",
+      "wing": "t1_player05",
+      "wing": "t1_player06",
+      "wing": "t1_player07",
+      "wing": "t1_player08",
+      "wing": "t1_player09",
+      "wing": "t1_player10",
+      "wing": "t1_player11",
+      "wing": "t1_player12",
+      "wing": "t1_player13",
+      "wing": "t1_player14",
+      "wing": "t1_player15",
+      "wing": "t1_player16",
+      "wing": "t1_player17",
+      "wing": "t1_player18",
+      "wing": "t1_player19",
+      "wing": "t1_player20",
+      "wing": "t1_player21",
+      "wing": "t1_player22",
+      "wing": "t1_player23",
+      "wing": "t1_player24",
+      "wing": "t1_player25",
+      "wing": "t1_player26",
+      "wing": "t1_player27",
+      "wing": "t1_player28",
+      "wing": "t1_player29",
+      "wing": "t1_player30",
+      "wing": "t1_player31",
+      "wing": "t1_player32"
+    },
+    "player_teamB": {
+      "army": 2,
+      "wing": "t2_player01",
+      "wing": "t2_player02",
+      "wing": "t2_player03",
+      "wing": "t2_player04",
+      "wing": "t2_player05",
+      "wing": "t2_player06",
+      "wing": "t2_player07",
+      "wing": "t2_player08",
+      "wing": "t2_player09",
+      "wing": "t2_player10",
+      "wing": "t2_player11",
+      "wing": "t2_player12",
+      "wing": "t2_player13",
+      "wing": "t2_player14",
+      "wing": "t2_player15",
+      "wing": "t2_player16",
+      "wing": "t2_player17",
+      "wing": "t2_player18",
+      "wing": "t2_player19",
+      "wing": "t2_player20",
+      "wing": "t2_player21",
+      "wing": "t2_player22",
+      "wing": "t2_player23",
+      "wing": "t2_player24",
+      "wing": "t2_player25",
+      "wing": "t2_player26",
+      "wing": "t2_player27",
+      "wing": "t2_player28",
+      "wing": "t2_player29",
+      "wing": "t2_player30",
+      "wing": "t2_player31",
+      "wing": "t2_player32",
+      "wing": "t2_player33"
+    },
+    "mission": {
+      "level": "levels/avg_ardennes.bin",
+      "type": "domination",
+      "environment": "Day",
+      "weather": "hazy",
+      "locName": "missions/_CnvA;ardennes/name",
+      "locDesc": "ardennes/desc;missions/_Cnv/desc",
+      "scoreLimit": 10000,
+      "timeLimit": 25,
+      "deathPenaltyMul": 0.0,
+      "postfix": "_CnvA",
+      "allowedKillStreaks": true,
+      "randomSpawnTeams": false,
+      "remapAiTankModels": true,
+      "showTacticalMapCellSize": true,
+      "country_axis": "germany",
+      "country_allies": "ussr",
+      "restoreType": "attempts",
+      "optionalTakeOff": false,
+      "allowedUnitTypes": {
+        "isAirplanesAllowed": true,
+        "isTanksAllowed": true,
+        "isShipsAllowed": false,
+        "isHelicoptersAllowed": true
+      }
+    },
+    "briefing": {
+      "place_loc": "",
+      "date_loc": "",
+      "objective_loc": "",
+      "music": "action_01",
+      "part": {
+        "event": "",
+        "minTime": 0,
+        "slide": {
+          "map": true,
+          "minTime": 4,
+          "picture": "",
+          "showAirMap": false,
+          "arrow": {
+            "width": 1,
+            "side": "ally",
+            "point": "briefing_tanks",
+            "point": "briefing_convoy_waypoint01",
+            "point": "briefing_convoy_waypoint02",
+            "point": "briefing_convoy_waypoint03",
+            "point": "briefing_convoy_waypoint04",
+            "point": "briefing_convoy_waypoint04"
+          },
+          "icon": {
+            "icontype": "bomber",
+            "side": "enemy",
+            "target": "briefing_bombers",
+            "lookAt": "briefing_tanks"
+          },
+          "icon": {
+            "icontype": "tank",
+            "side": "ally",
+            "target": "briefing_tanks"
+          },
+          "icon": {
+            "icontype": "tank",
+            "side": "enemy",
+            "target": "briefing_t2_tanks_spawn"
+          }
+        }
+      }
+    }
+  },
+  "imports": {
+    "import_record": {
+      "file": "gameData/missions/cta/tanks/ardennes/mainareas/template_ardennes_cnva.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/tank_templates/tank_base_logic_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/tank_convoy_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/cta/tanks/ardennes/template_ardennes_air_spawn.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/ww_no_attackers_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    }
+  },
+  "triggers": {
+    "isCategory": true,
+    "is_enabled": true
+  },
+  "mission_objectives": {
+    "isCategory": true,
+    "is_enabled": true
+  },
+  "variables": {  },
+  "dialogs": {  },
+  "airfields": {  },
+  "effects": {  },
+  "units": {  },
+  "areas": {
+    "briefing_bombers": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    806.9,
+    421.95,
+    3676.15,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_tanks": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    3836.8,
+    277.75,
+    258.95,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_convoy_waypoint01": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    3149.31,
+    334.821,
+    989.502,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_convoy_waypoint02": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    2115.35,
+    332.85,
+    1262.84,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_convoy_waypoint03": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1297.84,
+    369.295,
+    1550.59,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_convoy_waypoint04": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    238.724,
+    322.216,
+    2257.34,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_t2_tanks_spawn": {
+      "type": "Point",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    2619.17,
+    274.247,
+    1992.05,
+],
+      "objLayer": 0,
+      "props": {      }
+    }
+  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    }
+  },
+  "wayPoints": {  }
+}

@@ -1,0 +1,50 @@
+blockSeparator {
+  size: 1@dp, ph;
+  pos: 0, 50%ph-50%h;
+  position: relative;
+  background-color: @separatorBlockColor;
+}
+
+gamercard blockSeparator {
+  size: 1@dp, ph - 6@dp;
+  pos: 0, 50%ph-50%h;
+  position: relative;
+  margin:1@bigButtonTextPadding, 0;
+  background-color: @black;
+  display:show;
+}
+
+gamercard activateTab > blockSeparator {
+  pos:pw, 50%ph-50%h;
+  position:absolute;
+  margin:0;
+}
+
+SlotbarBackground[hasPresetsPanel=yes] > blockSeparator {
+  size:pw, 3@dp;
+  pos:0, ph - h;
+  position:absolute;
+  background-color:@listboxSelOptionColor;
+}
+
+chapterSeparator {
+  width:1@dp;
+  height:ph;
+  input-transparent:yes;
+  background-color:@separatorBlockColor;
+}
+
+chapterSeparator.notFull {
+  height:ph-0.04@sf;
+}
+
+chapterSeparator.inTheMiddle {
+  pos: 50%pw-50%w, 50%ph-50%h;
+  position:absolute;
+}
+
+rowSeparator {
+  size: pw, 1@dp;
+  position: relative;
+  background-color: @separatorBlockColor;
+}

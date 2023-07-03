@@ -1,0 +1,192 @@
+{
+  "selected_tag": "",
+  "bin_dump_file": "",
+  "mission_settings": {
+    "player": {
+      "army": 1
+    },
+    "player_teamB": {
+      "army": 2
+    },
+    "mission": {
+      "type": "domination",
+      "level": "levels/stalingrad.bin",
+      "environment": "Day",
+      "weather": "hazy"
+    }
+  },
+  "imports": {  },
+  "triggers": {
+    "isCategory": true,
+    "is_enabled": true,
+    "small_airfields_init": {
+      "is_enabled": true,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ALL",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "initMission": {        }
+      },
+      "conditions": {      },
+      "actions": {
+        "varSetString": {
+          "value": "small_capture_area_01",
+          "var": "capture_zone_01_name"
+        },
+        "varSetString": {
+          "value": "small_capture_area_02",
+          "var": "capture_zone_02_name"
+        },
+        "varSetString": {
+          "value": "small_capture_area_03",
+          "var": "capture_zone_03_name"
+        },
+        "varSetString": {
+          "value": "small_airfield_01",
+          "var": "airfield_01_name"
+        },
+        "varSetString": {
+          "value": "small_airfield_02",
+          "var": "airfield_02_name"
+        }
+      },
+      "else_actions": {      }
+    }
+  },
+  "mission_objectives": {
+    "isCategory": true,
+    "is_enabled": true
+  },
+  "variables": {  },
+  "dialogs": {  },
+  "airfields": {  },
+  "effects": {  },
+  "units": {
+    "objectGroups": {
+      "name": "small_airfield_01",
+      "tm": [
+    -7.45058e-8,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    -7.45058e-8,
+    -7947.36,
+    155.989,
+    -15192.2,
+],
+      "unit_class": "dynaf_universal_1line_a",
+      "objLayer": 4,
+      "props": {
+        "army": 0,
+        "active": true
+      }
+    },
+    "objectGroups": {
+      "name": "small_airfield_02",
+      "tm": [
+    -7.45058e-8,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    -1.0,
+    0.0,
+    -7.45058e-8,
+    14.01,
+    145.312,
+    -15195.4,
+],
+      "unit_class": "dynaf_universal_1line_a",
+      "objLayer": 4,
+      "props": {
+        "army": 0,
+        "active": true
+      }
+    }
+  },
+  "areas": {
+    "small_capture_area_01": {
+      "type": "Box",
+      "tm": [
+    550.0,
+    0.0,
+    0.0,
+    0.0,
+    350.0,
+    0.0,
+    0.0,
+    0.0,
+    1750.0,
+    -7954.29,
+    155.904,
+    -15190.5,
+],
+      "objLayer": 3,
+      "props": {      }
+    },
+    "small_capture_area_02": {
+      "type": "Box",
+      "tm": [
+    550.0,
+    0.0,
+    0.0,
+    0.0,
+    350.0,
+    0.0,
+    0.0,
+    0.0,
+    1750.0,
+    -21.08,
+    147.275,
+    -15190.5,
+],
+      "objLayer": 3,
+      "props": {      }
+    },
+    "small_capture_area_03": {
+      "type": "Cylinder",
+      "tm": [
+    1500.0,
+    0.0,
+    3.05176e-5,
+    0.0,
+    3500.0,
+    0.0,
+    -3.05176e-5,
+    0.0,
+    1500.0,
+    -3963.9,
+    500.2,
+    -15194.7,
+],
+      "objLayer": 4,
+      "props": {      }
+    }
+  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    }
+  },
+  "wayPoints": {  }
+}

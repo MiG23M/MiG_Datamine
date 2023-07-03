@@ -1,0 +1,335 @@
+{
+  "root": {
+    "type": "big",
+    "blur": {    },
+    "blur_foreground": {    },
+    "frame": {
+      "id": "wnd_frame",
+      "width": "0.99sw $min 1.7sh",
+      "height": "@rh $min 0.588sw",
+      "pos": "0.5pw-0.5w, 0.5ph-0.5h",
+      "position": "relative",
+      "class": "wnd",
+      "flow": "vertical",
+      "frame_header": {
+        "flow": "horizontal",
+        "position": "relative",
+        "activeText": {
+          "id": "wizard-title",
+          "caption": "yes",
+          "text": "#hotkeys/msg/choose_preset_or_wizard",
+          "textHide": "yes",
+          "smallFont": "yes"
+        },
+        "tdiv": {
+          "id": "options-wnd",
+          "pos": "0, 0.5ph-0.5h",
+          "position": "relative",
+          "display": "hide",
+          "margin-left": "1@blockInterval",
+          "smallFont": "yes",
+          "controlsBox": {
+            "id": "optionlist"
+          }
+        },
+        "Button_text": {
+          "id": "btn_controlsWizard",
+          "display": "hide",
+          "text": "#mainmenu/btnControlsWizard",
+          "_on_click": "onContinue",
+          "hideConsoleImage": "no",
+          "btnName": "X",
+          "margin-left": "1@blockInterval",
+          "position": "relative",
+          "smallFont": "yes",
+          "ButtonImg": {          }
+        },
+        "Button_text": {
+          "id": "btn_selectPreset",
+          "display": "hide",
+          "text": "#controls/presetSelect",
+          "_on_click": "onPresetDone",
+          "hideConsoleImage": "no",
+          "btnName": "X",
+          "margin-left": "1@blockInterval",
+          "position": "relative",
+          "smallFont": "yes",
+          "ButtonImg": {          }
+        },
+        "Button_close": {
+          "id": "btn_back"
+        }
+      },
+      "tdiv": {
+        "id": "preview-wnd",
+        "size": "pw, ph",
+        "position": "relative"
+      },
+      "tdiv": {
+        "id": "shortcut-wnd",
+        "display": "hide",
+        "width": "pw",
+        "min-height": "0.3@scrn_tgt",
+        "pos": "50%pw-50%w, 30%ph-30%h",
+        "position": "absolute",
+        "flow": "vertical",
+        "tdalign": "center",
+        "tdiv": {
+          "id": "input-listener",
+          "size": "sw, sh",
+          "position": "root",
+          "behaviour": "ControlsInput",
+          "shortcutCancel": "Esc",
+          "shortcutActivate": "J:Start",
+          "on_activate": "switchAllListenModes",
+          "on_end_edit": "onButtonEntered",
+          "on_cancel_edit": "onCancelButtonInput",
+          "on_change_value": "onButtonAdded",
+          "check_analog": "0",
+          "device0": "",
+          "button0": "",
+          "device1": "",
+          "button1": "",
+          "device2": "",
+          "button2": "",
+          "behavior": "Timer",
+          "timer_handler_func": "onAxisInputTimer"
+        },
+        "activeText": {
+          "id": "shortcut_text",
+          "max-width": "pw",
+          "pos": "50%pw-50%w, 0",
+          "position": "relative",
+          "mediumFont": "yes"
+        },
+        "textarea": {
+          "id": "curAssign_text",
+          "pos": "50%pw-50%w, 0",
+          "position": "relative",
+          "removeParagraphIndent": "yes",
+          "max-width": "pw"
+        },
+        "img": {
+          "id": "shortcut_image",
+          "height": "95",
+          "width": "160",
+          "pos": "50%pw-50%w, 0.02@scrn_tgt",
+          "position": "relative"
+        },
+        "activeText": {
+          "id": "shortcut_current_button",
+          "pos": "50%pw-50%w, 2*@scrn_tgt/100.0",
+          "position": "relative",
+          "mediumFont": "yes",
+          "text": "?"
+        },
+        "activeText": {
+          "id": "hold_axis",
+          "pos": "50%pw-50%w, 0.01@scrn_tgt",
+          "position": "relative",
+          "text": ""
+        },
+        "activeText": {
+          "id": "bind-axis-name",
+          "pos": "50%pw-50%w, 0.5*@scrn_tgt/100.0",
+          "position": "relative",
+          "mediumFont": "yes",
+          "text": "?"
+        },
+        "frame": {
+          "id": "test-axis",
+          "size": "0.25@scrn_tgt, 0.03@scrn_tgt",
+          "pos": "50%pw-50%w, 0.01@scrn_tgt",
+          "position": "relative",
+          "axisPoint1": {
+            "id": "test-real-box",
+            "pos": "50%pw-50%w, 50%ph-50%h",
+            "position": "absolute"
+          }
+        },
+        "frame": {
+          "id": "test-axis-vert",
+          "size": "0.03@scrn_tgt, 0.2@scrn_tgt",
+          "pos": "50%pw-50%w, 0.01@scrn_tgt",
+          "position": "relative",
+          "axisPoint1": {
+            "id": "test-real-box-vert",
+            "pos": "50%pw-50%w, 50%ph-50%h",
+            "position": "absolute"
+          }
+        }
+      },
+      "tdiv": {
+        "id": "msgBox-wnd",
+        "display": "hide",
+        "width": "pw",
+        "pos": "50%pw-50%w, 40%ph-40%h",
+        "position": "absolute",
+        "flow": "vertical",
+        "textarea": {
+          "id": "msgBox_text",
+          "pos": "50%pw-50%w, 0",
+          "position": "relative",
+          "removeParagraphIndent": "yes",
+          "text-align": "center",
+          "max-width": "pw",
+          "overflow-y": "auto",
+          "mediumFont": "yes"
+        },
+        "msgBoxButtonsHolder": {
+          "id": "msgBox_buttons",
+          "max-width": "pw",
+          "pos": "50%pw-50%w, ph + 0.4(57%p.p.h - 50%ph - h)",
+          "position": "absolute",
+          "flow": "h-flow"
+        }
+      },
+      "tdiv": {
+        "id": "msg-wnd",
+        "display": "hide",
+        "width": "pw",
+        "pos": "50%pw-50%w, 40%ph-40%h",
+        "position": "absolute",
+        "flow": "vertical",
+        "textarea": {
+          "id": "msg_text",
+          "removeParagraphIndent": "yes",
+          "max-width": "pw",
+          "text-align": "center",
+          "pos": "50%pw-50%w, 0",
+          "position": "relative",
+          "mediumFont": "yes"
+        },
+        "frame": {
+          "id": "msg-axis",
+          "size": "0.25@scrn_tgt, 0.03@scrn_tgt",
+          "pos": "50%pw-50%w, 0.01@scrn_tgt",
+          "position": "relative",
+          "locked": "yes",
+          "axisPoint1": {
+            "id": "msg-real-box1",
+            "pos": "50%pw-50%w, 50%ph-50%h",
+            "position": "absolute"
+          },
+          "axisPoint1": {
+            "id": "msg-real-box2",
+            "pos": "50%pw-50%w, 50%ph-50%h",
+            "position": "absolute"
+          }
+        },
+        "frame": {
+          "id": "msg-axis-vert",
+          "size": "0.03@scrn_tgt, 0.2@scrn_tgt",
+          "pos": "50%pw-50%w, 0.01@scrn_tgt",
+          "position": "relative",
+          "locked": "yes",
+          "axisPoint1": {
+            "id": "msg-real-box-vert1",
+            "pos": "50%pw-50%w, 50%ph-50%h",
+            "position": "absolute"
+          },
+          "axisPoint1": {
+            "id": "msg-real-box-vert2",
+            "pos": "50%pw-50%w, 50%ph-50%h",
+            "position": "absolute"
+          }
+        }
+      },
+      "tdiv": {
+        "id": "listbox-wnd",
+        "display": "hide",
+        "size": "pw, 0.5@sf",
+        "pos": "50%pw-50%w, 40%ph-40%h",
+        "position": "absolute",
+        "flow": "vertical",
+        "textarea": {
+          "id": "listbox_text",
+          "pos": "50%pw-50%w, 0",
+          "position": "relative",
+          "mediumFont": "yes",
+          "removeParagraphIndent": "yes",
+          "max-width": "pw"
+        },
+        "HorizontalListBox": {
+          "id": "listbox",
+          "pos": "50%pw-50%w, 0.1@scrn_tgt",
+          "position": "relative",
+          "on_dbl_click": "onListboxDblClick",
+          "on_select": "onListboxSelect",
+          "class": "options",
+          "style": "height:0.07@scrn_tgt"
+        },
+        "Button_text": {
+          "id": "btn_select",
+          "pos": "50%pw-50%w, 0.05@scrn_tgt",
+          "position": "relative",
+          "text": "#mainmenu/btnSelect",
+          "_on_click": "onListboxDblClick",
+          "btnName": "A",
+          "ButtonImg": {          }
+        },
+        "textarea": {
+          "id": "listbox-hint",
+          "removeParagraphIndent": "yes",
+          "width": "pw-2@framePadding",
+          "pos": "50%pw-50%w, ph-h",
+          "position": "absolute",
+          "text-align": "center"
+        }
+      },
+      "navBar": {
+        "display": "hide",
+        "navLeft": {
+          "Button_text": {
+            "id": "btn_prevItem",
+            "display": "hide",
+            "text": "#mainmenu/btnPrev",
+            "_on_click": "onPrevItem",
+            "hideConsoleImage": "no",
+            "btnName": "LB",
+            "ButtonImg": {            }
+          },
+          "Button_text": {
+            "id": "btn_switchAllModes",
+            "display": "hide",
+            "text": "#mainmenu/shortcuts",
+            "_on_click": "switchAllListenModes",
+            "hideText": "yes",
+            "btnName": "start",
+            "ButtonImg": {            },
+            "textarea": {
+              "id": "btn_switchAllModes_text",
+              "class": "buttonText"
+            }
+          },
+          "Button_text": {
+            "id": "btn-reset-axis-input",
+            "pos": "50%pw-50%w, ph-h",
+            "position": "relative",
+            "display": "hide",
+            "text": "#mainmenu/btnReset",
+            "on_click": "onResetAxisInput",
+            "btnName": "start",
+            "ButtonImg": {            }
+          }
+        },
+        "navRight": {
+          "Button_text": {
+            "id": "keep_assign_btn",
+            "text": "#hotkeys/tip/KeepCurrentAssign",
+            "display": "hide",
+            "accessKey": "Esc | J:X",
+            "on_click": "onCancelButtonInput",
+            "hideConsoleImage": "no",
+            "btnName": "X",
+            "ButtonImg": {            }
+          }
+        }
+      }
+    },
+    "timer": {
+      "id": "update-timer",
+      "timer_handler_func": "onUpdate"
+    }
+  }
+}

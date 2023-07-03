@@ -1,0 +1,151 @@
+button {
+  behaviour:button;
+  re-type:9rect;
+  selected-border:none;
+
+  font:@fontNormal;
+
+  text-align:center;
+
+  color:@commonMenuButtonColor;
+  snd_click:click;
+  css-hier-invalidate:yes;
+}
+
+button:hover {
+  color:@hoverMenuButtonColor;
+}
+
+button:pushed {
+  color:@pushedMenuButtonColor;
+}
+
+emptyButton {
+  behaviour:button;
+}
+
+menu_button {
+  behaviour:button;
+  re-type:9rect;
+  left:50%pw-50%w;
+  position:relative;
+  height:@mainMenuButtonHeight;
+  min-width:pw;
+  padding:40@sf/@pf, 3@sf/@pf;
+  background-image:#ui/gameuiskin#bottom_bar_straight;
+  background-color:@transparent;
+  font:@fontMedium;
+  color:@commonMenuButtonColor;
+  text-align:center;
+  snd_click:click;
+  mouse-pointer-centering:50, 80;
+  css-hier-invalidate:current;
+}
+
+menu_button[selected=yes]
+{
+  color:@hoverMenuButtonColor;
+  background-color:#1E1E1E1E;
+}
+
+menu_button:hover {
+  color:@hoverMenuButtonColor;
+  background-color:#48484848;
+}
+
+menu_button:pushed {
+  color:@pushedMenuButtonColor;
+}
+
+[toggled=yes] airInfoButton {
+  background-color:@transparent;
+}
+[toggled=no] airInfoButton, airInfoButton:hover {
+  background-color:#99999999;
+}
+
+underline {
+  width:pw;
+  height:(@sf/@pf) $max 1;
+  top:ph-h;
+  left:50%pw-50%w;
+  position:absolute;
+  background-color:@commonMenuButtonColor;
+}
+:hover > underline
+{
+  background-color:@hoverMenuButtonColor;
+}
+:pushed > underline
+{
+  background-color:@pushedMenuButtonColor;
+}
+
+[show_console_buttons=yes] button.link[btnName] > underline {
+  width:pw-ph;
+  left:0.5*(pw - w + ph);
+}
+
+hoverBgButton {
+  behaviour:button;
+  re-type:fgPict;
+  background-position:6;
+  background-repeat:expand;
+  foreground-color:@white;
+  foreground-svg-size: ph, ph;
+  foreground-repeat:aspect-ratio;
+}
+
+hoverBgButton[foreground-image=""] {
+  foreground-color:@transparent;
+}
+
+hoverBgButton:hover {
+  background-image:#ui/gameuiskin#header_button_;
+  background-color:@white;
+}
+
+[show_console_buttons=yes] hoverBgButton:hover {
+  needFocusBorder:back;
+}
+
+hoverBgButton:pushed {
+  background-image:#ui/gameuiskin#header_button_active;
+  background-color:@white;
+}
+
+hoverBgButton:disabled {
+  background-image:#ui/gameuiskin#header_button_active;
+  background-color:@transparent;
+  foreground-color:@navButtonDisabledImgColor;
+}
+
+imageButton {
+  behaviour:button;
+  re-type:fgPict;
+  background-position:0;
+  background-repeat:expand;
+  background-color:@commonMenuButtonColor;
+  css-hier-invalidate:yes;
+}
+
+imageButton:hover {
+  background-color:@hoverMenuButtonColor;
+}
+
+imageButton:pushed {
+  background-color:@pushedMenuButtonColor;
+}
+
+imageButton:disabled {
+  background-color:@inactiveButtonBgColor;
+}
+
+dummy {
+  behaviour:button;
+  re-type:9rect;
+  background-color:@transparent;
+  color:@transparent;
+  selected-border:none;
+  border:none;
+}

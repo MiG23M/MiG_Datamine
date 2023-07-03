@@ -1,0 +1,130 @@
+{
+  "rocketGun": true,
+  "preset_cost": 2,
+  "bullets": 1,
+  "shotFreq": 2.0,
+  "sound_path": "ships/weapon_common/rockets",
+  "sound_pathStudio": "naval/weapon/rockets",
+  "sound": "75mm_m3",
+  "isBulletBelt": true,
+  "helicopterGroup": 2,
+  "bulletsCartridge": 20,
+  "reloadTime": 60.0,
+  "allowHumanReload": true,
+  "mesh": "depth_charge_hedgehog",
+  "tags": {
+    "antiTankRocket": true,
+    "antiShipRocket": true
+  },
+  "rocket": {
+    "bulletName": "up_mk1",
+    "statType": "hydra",
+    "caliber": 0.177,
+    "length": 0.68,
+    "WdK": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "CxK": 1.0,
+    "distFromCmToStab": 0.01,
+    "mass": 16.0,
+    "massEnd": 6.74,
+    "timeFire": 0.7,
+    "force": 3300.0,
+    "thrustDeviation": 0.003,
+    "useStartSpeed": true,
+    "startSpeed": 0.0,
+    "endSpeed": 120.0,
+    "maxDistance": 5515.0,
+    "minDistance": 30.0,
+    "maxDeltaAngle": 0.5,
+    "normalizationPreset": "heat",
+    "ricochetPreset": "he",
+    "secondaryShattersPreset": "ap_rocket",
+    "stabilityThreshold": 0.5,
+    "stabilityCaliberToArmorThreshold": 5.0,
+    "stabilityReductionAfterRicochet": 0.3,
+    "stabilityReductionAfterPenetration": 0.15,
+    "bulletType": "rocket_tank",
+    "slopeEffectPreset": "ap",
+    "fresnel": [
+      0.23,
+      0.1,
+      2.0
+    ],
+    "explodeOnRendinst": true,
+    "useEffectiveArmorThicknessForShatter": true,
+    "shellAnimation": "video/shells_animations/rocket_he.ivf",
+    "explosiveType": "tnt",
+    "explosiveMass": 0.228,
+    "dragCx": 0.007,
+    "selfDestructionFx": "explosion_air_selfexplosion_small",
+    "explosionEffect": "",
+    "groundCollisionEffect": "",
+    "ricochetEffect": "",
+    "waterCollisionEffect": "hit_39_58mm_water",
+    "explosionPatchRadius": 1.4,
+    "smokeEffect": "smoke_rocket_tail_short",
+    "distanceFuse": false,
+    "relativeVelHitShift": [
+      300.0,
+      1000.0
+    ],
+    "relativeVelArmorShift": [
+      200.0,
+      1000.0
+    ],
+    "spawnExplosionWreckage": false,
+    "spawnExplosionFx": false,
+    "explosionOffset": 0.05,
+    "explodeTreshold": 0.1,
+    "rendinstDamageRadius": 4.0,
+    "price": 3000.0,
+    "stabilityRicochetModifier": {
+      "mod1": [
+        0.0,
+        0.5
+      ],
+      "mod2": [
+        15.0,
+        0.7
+      ],
+      "mod3": [
+        30.0,
+        0.99
+      ]
+    },
+    "pressureDamage": {
+      "damageType": "pressure"
+    },
+    "star": {
+      "parachuteDelay": 10.0,
+      "startDelay": 99.0,
+      "workingTime": 43.0,
+      "fallingSpeed": 4.0,
+      "fallingVisc": 0.1,
+      "rotationVisc": 6.5,
+      "openingTime": 0.5
+    },
+    "damage": {
+      "kinetic": {
+        "damageType": "generic"
+      },
+      "shatter": {
+        "useRealShatters": true,
+        "countPortion": 0.05,
+        "segment": {
+          "radiusScale": 1.0,
+          "penetrationScale": 1.0,
+          "damageScale": 1.0,
+          "angles": [
+            0.0,
+            180.0
+          ],
+          "countPortion": 1.0
+        }
+      }
+    }
+  }
+}

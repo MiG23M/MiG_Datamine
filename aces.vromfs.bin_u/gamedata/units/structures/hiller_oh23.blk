@@ -1,0 +1,54 @@
+{
+  "model": "hiller_oh23",
+  "subclass": "fortification",
+  "dynCollisionGeom": true,
+  "hasExpl": false,
+  "expClass": "exp_zero",
+  "toGround": true,
+  "timeToFire": 5.0,
+  "maxFwdSpeed": 0.0,
+  "maxRevSpeed": 0.0,
+  "maxAngSpeed": 0.0,
+  "maxAccel": 0.0,
+  "maxDecel": 0.0,
+  "maxAngAccel0": 0.0,
+  "maxAngAccelV": 0.0,
+  "maxAngAccel": 0.0,
+  "groundNormSmoothViscosity": 0.1,
+  "useDestrPhysObj": true,
+  "damageCollisionMultiplier": 0.001,
+  "explosionImpulse": 10000.0,
+  "fireFx": "fire_ground_black_fx",
+  "DamageParts": {
+    "steel": {
+      "body_dm": {
+        "hp": 150.0
+      }
+    }
+  },
+  "DamageEffects": {
+    "part": {
+      "name": "body_dm",
+      "onHit": {
+        "smoke": 0.0,
+        "fire": 0.0
+      },
+      "onKill": {
+        "expl": 0.0
+      }
+    }
+  },
+  "explosion": {
+    "expl": {
+      "node": "body",
+      "partNo": 0,
+      "timeToExplode": 0.5,
+      "preEffectName": "",
+      "postEffectName": "smoke_ground_black_fx",
+      "explosionEffectName": "explosion_midair_medium",
+      "timeForPostEffect": 60.0,
+      "preScale": 1.0,
+      "postScale": 1.0
+    }
+  }
+}

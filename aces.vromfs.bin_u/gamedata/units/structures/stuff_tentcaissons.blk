@@ -1,0 +1,51 @@
+{
+  "model": "tent_caisson01_a",
+  "subclass": "fortification",
+  "dynCollisionGeom": true,
+  "hasExpl": true,
+  "expClass": "exp_structure",
+  "damageableByGun": true,
+  "timeToFire": 5.0,
+  "maxFwdSpeed": 0.0,
+  "maxRevSpeed": 0.0,
+  "maxAngSpeed": 0.0,
+  "maxAccel": 0.0,
+  "maxDecel": 0.0,
+  "maxAngAccel0": 0.0,
+  "maxAngAccelV": 0.0,
+  "maxAngAccel": 0.0,
+  "groundNormSmoothViscosity": 0.1,
+  "fireFx": "fire_ground_black_fx",
+  "DamageParts": {
+    "steel": {
+      "body_dm": {
+        "hp": 170.0
+      }
+    }
+  },
+  "DamageEffects": {
+    "part": {
+      "name": "body_dm",
+      "onHit": {
+        "smoke": 0.5,
+        "fire": 0.5
+      },
+      "onKill": {
+        "expl": 1.0
+      }
+    }
+  },
+  "explosion": {
+    "expl": {
+      "node": "body",
+      "partNo": 0,
+      "timeToExplode": 0.5,
+      "preEffectName": "",
+      "postEffectName": "smoke_ground_black_fx",
+      "explosionEffectName": "explosion_midair_medium",
+      "timeForPostEffect": 60.0,
+      "preScale": 1.0,
+      "postScale": 1.0
+    }
+  }
+}

@@ -24,7 +24,10 @@ if (isPlatformXboxOne) {
   logX("Registering for state change update")
   crossnetworkPrivilege.subscribe(function(v) {
     logX($"xboxLib.crossnetworkPrivilege updated -> {v}")
-    crossNetworkPlayStatus(v)
+    if (crossNetworkPlayStatus.value != v)
+      crossNetworkPlayStatus.update(v)
+    else
+      crossNetworkPlayStatus.trigger()
   })
 }
 

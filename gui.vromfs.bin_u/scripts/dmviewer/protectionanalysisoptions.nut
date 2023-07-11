@@ -166,6 +166,12 @@ options.addTypes <- function(typesTable) {
   this.types.sort(@(a, b) a.sortId <=> b.sortId)
 }
 
+let function addParamsToBulletSet(bSet, bData) {
+  foreach (param in ["explosiveType", "explosiveMass"])
+    bSet[param] <- bData?[param]
+
+  return bSet
+}
 local sortIdCount = 0
 options.addTypes({
   UNKNOWN = {
@@ -321,12 +327,12 @@ options.addTypes({
             local addDiv = ""
 
             if (isBulletBelt) {
-              local bSet = bulletsSet.__merge({ bullets = [bulletName] })
               let bData = bulletsSet.bulletDataByType[bulletName]
-
-              foreach (param in ["explosiveType", "explosiveMass", "bulletAnimations"]) {
-                bSet[param] <- bData?[param]
-              }
+              local bSet = bulletsSet.__merge({
+                bullets = [bulletName]
+                bulletAnimations = bData.bulletAnimations
+              })
+              addParamsToBulletSet(bSet, bData)
 
               addDiv = SINGLE_BULLET.getMarkup(unit.name, bulletName, {
                 modName = value,
@@ -389,17 +395,20 @@ options.addTypes({
           sortVal = curBlk?.caliber ?? 0
         })
 
+        local bSet
+        if (isBullet)
+          bSet = addParamsToBulletSet({}, curBlk).__merge({
+            caliber = (curBlk?.caliber ?? 0) * 1000
+            bullets = weaponBlk % "bullet"
+            cartridge = 0
+            bulletAnimations = [curBlk?.shellAnimation ?? ""]
+          })
+
         this.items.append({
           text = locName
           addDiv = isBullet
             ? SINGLE_BULLET.getMarkup(unit.name, curBlk.bulletType, {
-              modName = "",
-              bSet = {
-                caliber = (curBlk?.caliber ?? 0) * 1000
-                bullets = weaponBlk % "bullet"
-                bulletAnimations = [curBlk?.shellAnimation ?? ""]
-                cartridge = 0
-              },
+              bSet
               bulletParams
             })
             : SINGLE_WEAPON.getMarkup(unit.name, {

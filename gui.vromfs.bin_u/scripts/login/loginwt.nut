@@ -27,6 +27,7 @@ let { bqSendStart }    = require("%scripts/bigQuery/bigQueryClient.nut")
 let { get_meta_missions_info } = require("guiMission")
 let { forceUpdateGameModes } = require("%scripts/matching/matchingGameModes.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
+let { disableMarkSeenAllResourcesForNewUser } = require("%scripts/seen/markSeenResources.nut")
 
 ::my_user_id_str <- ""
 ::my_user_id_int64 <- -1
@@ -209,6 +210,7 @@ let function go_to_account_web_page(bqKey = "") {
     }
     function() {
       if (isNeedFirstCountryChoice()) {
+        disableMarkSeenAllResourcesForNewUser()
         forceUpdateGameModes()
         ::gui_start_countryChoice()
         ::gui_handlers.FontChoiceWnd.markSeen()

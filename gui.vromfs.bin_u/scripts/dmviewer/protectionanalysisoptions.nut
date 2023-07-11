@@ -8,7 +8,7 @@ let { format } = require("string")
 let { calculate_tank_bullet_parameters } = require("unitCalculcation")
 let enums = require("%sqStdLibs/helpers/enums.nut")
 let stdMath = require("%sqstd/math.nut")
-let { WEAPON_TYPE,
+let { WEAPON_TYPE, TRIGGER_TYPE,
         getLinkedGunIdx,
         getWeaponNameByBlkPath } = require("%scripts/weaponry/weaponryInfo.nut")
 let { getBulletsList,
@@ -365,7 +365,8 @@ options.addTypes({
       let knownWeapBlkArray = []
 
       foreach (weap in weapons) {
-        if (!weap?.blk || weap?.dummy || isInArray(weap.blk, knownWeapBlkArray))
+        if (!weap?.blk || weap?.dummy || weap.trigger == TRIGGER_TYPE.COUNTERMEASURES
+          || isInArray(weap.blk, knownWeapBlkArray))
           continue
         knownWeapBlkArray.append(weap.blk)
 

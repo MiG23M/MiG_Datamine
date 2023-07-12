@@ -215,6 +215,9 @@ let function go_to_account_web_page(bqKey = "") {
         ::gui_start_countryChoice()
         ::gui_handlers.FontChoiceWnd.markSeen()
         tutorialModule.saveVersion()
+
+        if(havePlayerTag("steamlogin"))
+          ::save_local_account_settings("disabledReloginSteamAccount", true)
       }
       else
         tutorialModule.saveVersion(0)

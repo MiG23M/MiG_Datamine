@@ -1777,6 +1777,52 @@ enums.addTypesByGlobalName("g_hud_hints", {
     isHideOnDeath = true
     isHideOnWatchedHeroChanged = true
   }
+
+  BURAV_IN_DELAY = {
+    hintType = ::g_hud_hint_types.COMMON
+    locId = "hints/burav_in_delay"
+    showEvent = "hint:burav_in_delay:show"
+    hideEvent = "hint:burav_in_delay:hide"
+    isHideOnDeath = true
+    isHideOnWatchedHeroChanged = true
+  }
+
+  BURAV_ENEMY_CTRL = {
+    hintType = ::g_hud_hint_types.COMMON
+    locId = "hints/burav_ctrl_by_enemy"
+    showEvent = "hint:burav_ctrl_by_enemy:show"
+    lifeTime = 5.0
+    isHideOnDeath = true
+    isHideOnWatchedHeroChanged = true
+  }
+
+  BURAV_ALLY_CTRL = {
+    hintType = ::g_hud_hint_types.COMMON
+    locId = "hints/burav_ctrl_by_ally"
+    showEvent = "hint:burav_ctrl_by_ally:show"
+    lifeTime = 5.0
+    isHideOnDeath = true
+    isHideOnWatchedHeroChanged = true
+  }
+
+  BURAV_CONTROLING = {
+    hintType = ::g_hud_hint_types.COMMON
+    locId = "hints/burav_controlling"
+    showEvent = "hint:burav_controlling:show"
+    hideEvent = "hint:burav_controlling:hide"
+    lifeTime = 5.0
+    isHideOnDeath = true
+    isHideOnWatchedHeroChanged = true
+  }
+
+  BURAV_IN_DELAY_CLICK = {
+    hintType = ::g_hud_hint_types.COMMON
+    locId = "hints/burav_in_delay_click"
+    showEvent = "hint:burav_in_delay_click"
+    lifeTime = 5.0
+    isHideOnDeath = true
+    isHideOnWatchedHeroChanged = true
+  }
 },
 function() {
   this.name = "hint_" + this.typeName.tolower()

@@ -77,6 +77,7 @@ const SHOW_RLIST_BEFORE_OPEN_DEFAULT = 10
   ::gui_start_modal_wnd(::gui_handlers.EventsHandler, {
     curEventId = eventId
     curChapterId = chapterId
+    autoJoin = options?.autoJoin ?? false
   })
 }
 
@@ -86,6 +87,7 @@ const SHOW_RLIST_BEFORE_OPEN_DEFAULT = 10
   eventsListObj  = null
   curEventId     = ""
   curChapterId = ""
+  autoJoin = false
   slotbarActions = ["aircraft", "crew", "sec_weapons", "weapons", "showroom", "repair"]
 
   queueToShow    = null
@@ -159,7 +161,7 @@ const SHOW_RLIST_BEFORE_OPEN_DEFAULT = 10
 
   function updateWindow() {
     let event = ::events.getEvent(this.curEventId)
-    let showOverrideSlotbar = needShowOverrideSlotbar(::events.getEvent(this.curEventId))
+    let showOverrideSlotbar = needShowOverrideSlotbar(event)
     if (showOverrideSlotbar)
       updateOverrideSlotbar(::events.getEventMission(this.curEventId))
     else
@@ -621,6 +623,8 @@ const SHOW_RLIST_BEFORE_OPEN_DEFAULT = 10
       this.curEventId = "" //curEvent not found
       this.curChapterId = ""
     }
+    else if(this.autoJoin)
+      this.joinEvent()
 
     this.eventsListObj.setValue(this.selectedIdx)
     this.onItemSelectAction(false)

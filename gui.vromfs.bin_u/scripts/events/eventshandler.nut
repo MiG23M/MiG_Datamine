@@ -746,13 +746,13 @@ addPromoButtonConfig({
     local buttonObj = null
     local show = this.isShowAllCheckBoxEnabled()
     if (show)
-      buttonObj = ::showBtn(id, show, this.scene)
+      buttonObj = showObjById(id, show, this.scene)
     else {
       show = hasFeature("Events")
         && ::events.getEventsVisibleInEventsWindowCount()
         && isMultiplayerPrivilegeAvailable.value
         && ::g_promo.getVisibilityById(id)
-      buttonObj = ::showBtn(id, show, this.scene)
+      buttonObj = showObjById(id, show, this.scene)
     }
 
     if (!show || !checkObj(buttonObj))

@@ -13,7 +13,6 @@ let { getPlayerName } = require("%scripts/clientState/platform.nut")
 let { isEqual } = u
 let { clear_contacts, EPLX_PS4_FRIENDS } = require("%scripts/contacts/contactsManager.nut")
 let { requestUserInfoData } = require("%scripts/user/usersInfoManager.nut")
-let { utf8ToLower } = require("%sqstd/string.nut")
 
 ::contacts_handler <- null
 ::contacts_groups <- []
@@ -102,11 +101,6 @@ loadOnce("%scripts/contacts/" + fn)
 
 registerPersistentData("ContactsGlobals", getroottable(),
   ["contacts_groups", "contacts_players", "contacts"])
-
-::sortContacts <- function sortContacts(a, b) {
-  return b.presence.sortOrder <=> a.presence.sortOrder
-    || utf8ToLower(a.name) <=> utf8ToLower(b.name)
-}
 
 ::getContactsGroupUidList <- function getContactsGroupUidList(groupName) {
   let res = []

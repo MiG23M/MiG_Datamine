@@ -27,6 +27,10 @@ let { searchContactsResults, searchContacts, addContact, removeContact
 ::contacts_prev_scenes <- [] //{ scene, show }
 ::last_contacts_scene_show <- false
 
+let sortContacts = @(a, b)
+  b.presence.sortOrder <=> a.presence.sortOrder
+    || a.lowerName <=> b.lowerName
+
 ::ContactsHandler <- class extends ::gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.CUSTOM
   searchText = ""
@@ -63,7 +67,7 @@ let { searchContactsResults, searchContacts, addContact, removeContact
       return
 
     foreach (group in ::contacts_groups)
-      ::contacts[group].sort(::sortContacts)
+      ::contacts[group].sort(sortContacts)
 
     this.sceneShow(false)
     this.scene = obj
@@ -533,8 +537,7 @@ let { searchContactsResults, searchContacts, addContact, removeContact
       if (!checkObj(contactObject))
         continue
 
-      local contactName = utf8ToLower(contact_data.name)
-      contactName = platformModule.getPlayerName(contactName)
+      let contactName = platformModule.getPlayerName(contact_data.lowerName)
       let searchResult = this.searchText == "" || contactName.indexof(this.searchText) != null
       contactObject.show(searchResult)
       contactObject.enable(searchResult)
@@ -553,7 +556,7 @@ let { searchContactsResults, searchContacts, addContact, removeContact
     local data = ""
     let groups_array = this.getContactsGroups()
     foreach (_gIdx, gName in groups_array) {
-      ::contacts[gName].sort(::sortContacts)
+      ::contacts[gName].sort(sortContacts)
       local activateEvent = "onPlayerMsg"
       if (::show_console_buttons || !isChatEnabled())
         activateEvent = "onPlayerMenu"
@@ -633,13 +636,13 @@ let { searchContactsResults, searchContacts, addContact, removeContact
     }
 
     if (groupName && groupName in ::contacts) {
-      ::contacts[groupName].sort(::sortContacts)
+      ::contacts[groupName].sort(sortContacts)
       this.fillPlayersList(groupName)
     }
     else
       foreach (group in this.getContactsGroups())
         if (group in ::contacts) {
-          ::contacts[group].sort(::sortContacts)
+          ::contacts[group].sort(sortContacts)
           this.fillPlayersList(group)
         }
   }

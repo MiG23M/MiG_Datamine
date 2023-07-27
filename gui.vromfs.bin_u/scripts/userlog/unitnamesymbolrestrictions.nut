@@ -6,8 +6,9 @@ let function getUnitCountry(unitName) {
   return $"({country})"
 }
 
-let function getClearUnitName(unitName) {
-  let name = utf8(::getUnitName(unitName).replace(" ", " "))
+let function getClearUnitName(unitName, isLockId = false) {
+  local name = isLockId ? loc(unitName) : ::getUnitName(unitName)
+  name = utf8(name.replace(" ", " "))
   if(countrySymbols.indexof(name.slice(0, 1)) == null)
     return "".concat(name)
 

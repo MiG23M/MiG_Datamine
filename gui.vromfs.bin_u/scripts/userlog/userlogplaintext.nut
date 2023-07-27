@@ -295,7 +295,7 @@ let function get_userlog_plain_text(logObj) {
         }
 
         if (boostersArray.len())
-          usedItems.append(getActiveBoostersDescription(boostersArray, effectType))
+          usedItems.append(getActiveBoostersDescription(boostersArray, effectType, null, true))
       }
 
     if (usedItems.len())

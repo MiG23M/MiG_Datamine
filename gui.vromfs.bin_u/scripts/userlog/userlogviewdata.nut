@@ -391,8 +391,8 @@ let function getLinkMarkup(text, url, acccessKeyName = null) {
       }
       let lbStatsBlk = ::getLeaderboardItemWidgets({ items = items })
       if (!("descriptionBlk" in res))
-        res.descriptionBlkBottom <- ""
-      res.descriptionBlkBottom += format("tdiv { width:t='pw'; flow:t='h-flow'; %s }", lbStatsBlk)
+        res.descriptionBlk <- ""
+      res.descriptionBlk += format("tdiv { width:t='pw'; flow:t='h-flow'; %s }", lbStatsBlk)
     }
 
     let roomId = logObj?.roomId ?? 0
@@ -434,8 +434,8 @@ let function getLinkMarkup(text, url, acccessKeyName = null) {
     if (hasFeature("ServerReplay"))
       if (getTblValue("dedicatedReplay", logObj, false)) {
         if (!("descriptionBlk" in res))
-          res.descriptionBlkBottom <- ""
-        res.descriptionBlkBottom += getLinkMarkup(loc("mainmenu/btnViewServerReplay"),
+          res.descriptionBlk <- ""
+        res.descriptionBlk += getLinkMarkup(loc("mainmenu/btnViewServerReplay"),
                                                 loc("url/serv_replay", { roomId = logObj.roomId }), "Y")
       }
   }
@@ -1650,18 +1650,18 @@ let function getLinkMarkup(text, url, acccessKeyName = null) {
       stripTags(res.description), "';}",
     )
 
-    if("compensation" in res) {
+    if ("compensation" in res) {
       let compensationBlk = handyman.renderCached("%gui/userLog/userLogCompensation.tpl", {compensation = res.compensation})
       res.descriptionBlk = "".concat(res.descriptionBlk, compensationBlk)
     }
 
-    if("descriptionBottom" in res) {
+    if ("descriptionBottom" in res) {
       res.descriptionBlk = "".concat(res.descriptionBlk, "textareaNoTab { id:t='descriptionBottom'; width:t='pw'; text:t='",
         stripTags(res.descriptionBottom), "';}")
     }
 
-    if(logObj.type == EULT_SESSION_RESULT && is_platform_pc)
-       res.descriptionBlk = "".concat(res.descriptionBlk,
+    if (logObj.type == EULT_SESSION_RESULT && is_platform_pc)
+      res.descriptionBlk = "".concat(res.descriptionBlk,
         "textareaNoTab { position:t='absolute';pos:t='pw-w, ph-h'; text:t='#userlog/copyToClipboard' }")
   }
 

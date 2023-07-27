@@ -67,7 +67,8 @@ let tableColumns = [
   {
     id = "unit"
     titleLocId = "options/unit"
-    cellTransformFn =  @(cellValue, _) { text = loc($"{cellValue}_shop") }
+    cellTransformFn = @(cellValue, reward) { text = reward.isPlainText ? getClearUnitName(cellValue)
+      : loc($"{cellValue}_shop") }
   }
   {
     id = "activity"
@@ -84,10 +85,10 @@ let tableColumns = [
     titleLocId = "options/unit"
     cellTransformFn = function(_, reward) {
       let unitName = loc($"{reward?.offenderUnit}_shop")
-      let offenderUnitLoc = reward.isPlainText ? getClearUnitName(unitName) : unitName
+      let offenderUnitLoc = reward.isPlainText ? getClearUnitName(reward?.offenderUnit) : unitName
       if (reward?.offenderOwnedUnit) {
         let offenderOwnedUnitName = loc($"{reward?.offenderOwnedUnit}_shop")
-        let offenderOwnedUnitLoc = reward.isPlainText ? getClearUnitName(offenderOwnedUnitName) : offenderOwnedUnitName
+        let offenderOwnedUnitLoc = reward.isPlainText ? getClearUnitName(reward?.offenderOwnedUnit) : offenderOwnedUnitName
         return { text = $"{offenderUnitLoc} ({offenderOwnedUnitLoc})" }
       }
       return { text = offenderUnitLoc }
@@ -108,7 +109,7 @@ let tableColumns = [
       let foundUnitControl = unitControlToLocIdMap?[reward?.victimUnitControl]
       let postfix = foundUnitControl ? $"({loc(foundUnitControl)})" : ""
       let unitName = loc(unitLocId)
-      return { text = " ".concat(reward.isPlainText ? getClearUnitName(unitName) : unitName, postfix) }
+      return { text = " ".concat(reward.isPlainText ? getClearUnitName(unitLocId, true) : unitName, postfix) }
     }
   }
   {

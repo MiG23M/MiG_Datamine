@@ -918,9 +918,8 @@ let function fillAirCharProgress(progressObj, vMin, vMax, cur) {
 
   let isInFlight = ::is_in_flight()
 
-  let { showLocalState = true, needCrewModificators = false, needShopInfo = false,
-    needCrewInfo = false, rentTimeHours = -1, isReceivedPrizes = false, researchExpInvest = 0
-  } = params
+  let { showLocalState = true, needCrewModificators = false, needShopInfo = false, needCrewInfo = false,
+    rentTimeHours = -1, isReceivedPrizes = false, researchExpInvest = 0, numSpares = 0 } = params
   let warbondId = params?.wbId
   let getEdiffFunc = handler?.getCurrentEdiff
   let ediff = getEdiffFunc ? getEdiffFunc.call(handler) : ::get_current_ediff()
@@ -1605,6 +1604,8 @@ let function fillAirCharProgress(progressObj, vMin, vMax, cur) {
     }
     else
       addInfoTextsList.append(colorize("userlogColoredText", loc("trophy/unlockables_names/trophy")))
+    if(numSpares > 0)
+      addInfoTextsList.append(colorize("userlogColoredText", loc("mainmenu/giftSpares", { num = numSpares })))
     if (isOwn && !isReceivedPrizes) {
       let text = loc("mainmenu/itemReceived") + loc("ui/dot") + " " +
         loc(params?.relatedItem ? "mainmenu/activateOnlyOnce" : "mainmenu/receiveOnlyOnce")

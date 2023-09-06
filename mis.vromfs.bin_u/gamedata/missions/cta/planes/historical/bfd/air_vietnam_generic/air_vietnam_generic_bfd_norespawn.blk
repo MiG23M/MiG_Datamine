@@ -510,6 +510,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -585,28 +599,28 @@
       "conditions": {      },
       "actions": {
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_tanks_squad",
           "object": "t2_tanks_squad",
           "object": "t1_art_squad",
           "object": "t2_art_squad",
           "object": "t1_bunkers_squad",
           "object": "t2_bunkers_squad",
-          "accuracy": 0.0,
-          "effShootingRate": 0.0
-        },
-        "unitSetProperties": {
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
+          "accuracy": 0.0,
+          "effShootingRate": 0.0
+        },
+        "unitSetProperties": {
           "object": "t1_trucks_aaa_squad",
           "object": "t2_trucks_aaa_squad",
           "object": "t1_big_aaa_squad",
           "object": "t2_big_aaa_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.1,
@@ -5367,6 +5381,52 @@
         "attack_type": "fire_at_will"
       },
       "way": {      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -40052.8,
+    145.8,
+    14522.5,
+],
+      "props": {
+        "squad_members": "bdt_t1_aaa_squad",
+        "squad_members": "t1_big_aaa_squad",
+        "squad_members": "t1_trucks_squad",
+        "squad_members": "t1_trucks_aaa_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -38307.1,
+    145.8,
+    18685.3,
+],
+      "props": {
+        "squad_members": "bdt_t2_aaa_squad",
+        "squad_members": "t2_big_aaa_squad",
+        "squad_members": "t2_trucks_squad",
+        "squad_members": "t2_trucks_aaa_squad"
+      }
     }
   },
   "areas": {

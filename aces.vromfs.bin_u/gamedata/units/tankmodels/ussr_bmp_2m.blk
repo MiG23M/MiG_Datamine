@@ -169,6 +169,9 @@
       "turret_02_back_dm": {
         "armorThickness": 5.0
       },
+      "turret_01_top_dm": {
+        "armorThickness": 10.0
+      },
       "turret_02_top_dm": {
         "armorThickness": 16.0
       },
@@ -191,7 +194,9 @@
       "ex_armor_turret_l_03_dm": {      },
       "ex_armor_turret_05_dm": {      },
       "ex_armor_turret_r_06_dm": {      },
-      "ex_armor_r_12_dm": {      }
+      "ex_armor_r_12_dm": {      },
+      "ex_armor_07_dm": {      },
+      "ex_armor_r_01_dm": {      }
     },
     "body_aluminium_parts": {
       "armorClass": "aluminium",
@@ -201,12 +206,10 @@
       "createSecondaryShatters": false,
       "hidableInViewer": true,
       "ex_armor_08_dm": {      },
-      "ex_armor_07_dm": {      },
       "ex_armor_05_dm": {      },
       "ex_armor_l_01_dm": {      },
       "ex_armor_l_02_dm": {      },
       "ex_armor_l_03_dm": {      },
-      "ex_armor_r_01_dm": {      },
       "ex_armor_r_02_dm": {      },
       "ex_armor_r_03_dm": {      },
       "ex_armor_l_04_dm": {      },
@@ -531,6 +534,26 @@
       "ammo_turret_53_dm": {      },
       "ammo_turret_54_dm": {      },
       "ammo_turret_55_dm": {      },
+      "ammo_turret_56_dm": {      },
+      "ammo_turret_57_dm": {      },
+      "ammo_turret_58_dm": {      },
+      "ammo_turret_59_dm": {      },
+      "ammo_turret_60_dm": {      },
+      "ammo_turret_61_dm": {      },
+      "ammo_turret_62_dm": {      },
+      "ammo_turret_63_dm": {      },
+      "ammo_turret_64_dm": {      },
+      "ammo_turret_65_dm": {      },
+      "ammo_turret_66_dm": {      },
+      "ammo_turret_67_dm": {      },
+      "ammo_turret_68_dm": {      },
+      "ammo_turret_69_dm": {      },
+      "ammo_turret_70_dm": {      },
+      "ammo_turret_71_dm": {      },
+      "ammo_turret_72_dm": {      },
+      "ammo_turret_73_dm": {      },
+      "ammo_turret_74_dm": {      },
+      "ammo_turret_75_dm": {      },
       "ammo_body_dm": {      },
       "ammo_body_01_dm": {      },
       "ammo_body_02_dm": {      },
@@ -1024,6 +1047,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.08,
@@ -1652,6 +1679,30 @@
       "node": "body_shutter_r",
       "absoluteValue": true,
       "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
     }
   },
   "VehiclePhys": {
@@ -1705,6 +1756,7 @@
       "type": "diesel"
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 56000.0,
       "driveGearRadius": 0.27,
       "mainGearRatio": 0.946,
@@ -1948,6 +2000,134 @@
       },
       "point": {
         "nameTemplate": "bone_roll_12_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_13_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_13_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_14_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_14_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_15_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_15_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_16_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_16_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_17_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_17_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_18_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_18_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_19_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_19_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_20_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_20_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_21_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_21_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_22_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_22_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_23_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_23_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_24_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_24_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_25_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_25_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_26_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_26_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_27_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_27_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_28_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_28_02"
       }
     }
   },
@@ -2775,7 +2955,7 @@
     "tank_new_gun": {    },
     "modern_tank_laser_rangefinder": {
       "tier": 3,
-      "modClass": "protection",
+      "modClass": "firepower",
       "effects": {
         "rangefinderMounted": true,
         "isLaser": true,
@@ -2844,8 +3024,9 @@
     },
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
+      "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "tier": 2,
-      "modClass": "protection",
+      "modClass": "firepower",
       "effects": {
         "nightVision": {
           "gunnerThermal": {
@@ -2877,7 +3058,7 @@
       }
     },
     "tank_smoke_screen_system_mod": {
-      "modClass": "protection",
+      "modClass": "firepower",
       "tier": 4,
       "effects": {
         "commonWeapons": {
@@ -3276,7 +3457,7 @@
     "manual_extinguisher": {    },
     "tank_tool_kit": {    },
     "airstrike": {
-      "modClass": "protection",
+      "modClass": "firepower",
       "tier": 1
     },
     "improved_optics": {    },

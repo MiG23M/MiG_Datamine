@@ -108,6 +108,30 @@
       "node": "body_shutter_r",
       "absoluteValue": true,
       "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
     }
   },
   "DamageParts": {
@@ -144,9 +168,7 @@
       },
       "ex_armor_01_dm": {
         "armorThickness": 20.0,
-        "hp": 120.0,
-        "armorClass": "tank_barrel",
-        "armorThrough": 20.0
+        "armorClass": "tank_structural_steel"
       },
       "turret_01_top_dm": {
         "armorThickness": 5.0
@@ -459,6 +481,26 @@
       "ammo_turret_53_dm": {      },
       "ammo_turret_54_dm": {      },
       "ammo_turret_55_dm": {      },
+      "ammo_turret_56_dm": {      },
+      "ammo_turret_57_dm": {      },
+      "ammo_turret_58_dm": {      },
+      "ammo_turret_59_dm": {      },
+      "ammo_turret_60_dm": {      },
+      "ammo_turret_61_dm": {      },
+      "ammo_turret_62_dm": {      },
+      "ammo_turret_63_dm": {      },
+      "ammo_turret_64_dm": {      },
+      "ammo_turret_65_dm": {      },
+      "ammo_turret_66_dm": {      },
+      "ammo_turret_67_dm": {      },
+      "ammo_turret_68_dm": {      },
+      "ammo_turret_69_dm": {      },
+      "ammo_turret_70_dm": {      },
+      "ammo_turret_71_dm": {      },
+      "ammo_turret_72_dm": {      },
+      "ammo_turret_73_dm": {      },
+      "ammo_turret_74_dm": {      },
+      "ammo_turret_75_dm": {      },
       "ammo_body_dm": {      },
       "ammo_body_01_dm": {      },
       "ammo_body_02_dm": {      },
@@ -967,6 +1009,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.1,
@@ -1788,6 +1834,7 @@
       "minRPM": 600.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 60000.0,
       "driveGearRadius": 0.28,
       "mainGearRatio": 1.36,
@@ -1948,6 +1995,134 @@
       },
       "point": {
         "nameTemplate": "bone_roll_12_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_13_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_13_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_14_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_14_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_15_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_15_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_16_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_16_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_17_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_17_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_18_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_18_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_19_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_19_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_20_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_20_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_21_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_21_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_22_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_22_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_23_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_23_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_24_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_24_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_25_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_25_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_26_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_26_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_27_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_27_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_28_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_28_02"
       }
     }
   },

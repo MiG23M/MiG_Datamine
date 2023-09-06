@@ -195,6 +195,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -252,10 +266,6 @@
           "var": "nearDamageDistance"
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_mguns_squad",
           "object": "t2_mguns_squad",
           "object": "t1_artillery_squad",
@@ -264,18 +274,22 @@
           "object": "t2_soldiers_squad",
           "object": "t1_bunkers_squad",
           "object": "t2_bunkers_squad",
-          "accuracy": 0.0,
-          "effShootingRate": 0.0
-        },
-        "unitSetProperties": {
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
+          "accuracy": 0.0,
+          "effShootingRate": 0.0
+        },
+        "unitSetProperties": {
           "object": "t1_small_aaa_squad",
           "object": "t1_big_aaa_squad",
           "object": "t2_small_aaa_squad",
           "object": "t2_big_aaa_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.1
@@ -2825,7 +2839,6 @@
     663.45,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_mgun_01",
         "squad_members": "t1_mgun_02",
         "squad_members": "t1_mgun_03",
@@ -2849,7 +2862,8 @@
         "squad_members": "t1_mgun_21",
         "squad_members": "t1_mgun_22",
         "squad_members": "t1_mgun_23",
-        "squad_members": "t1_mgun_24"
+        "squad_members": "t1_mgun_24",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -4069,7 +4083,6 @@
     -753.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_mgun_01",
         "squad_members": "t2_mgun_02",
         "squad_members": "t2_mgun_03",
@@ -4093,7 +4106,8 @@
         "squad_members": "t2_mgun_21",
         "squad_members": "t2_mgun_22",
         "squad_members": "t2_mgun_23",
-        "squad_members": "t2_mgun_24"
+        "squad_members": "t2_mgun_24",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -4663,7 +4677,6 @@
     969.85,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_art_01",
         "squad_members": "t1_art_02",
         "squad_members": "t1_art_03",
@@ -4698,7 +4711,8 @@
         "squad_members": "t1_art_32",
         "squad_members": "t1_art_33",
         "squad_members": "t1_art_34",
-        "squad_members": "t1_art_35"
+        "squad_members": "t1_art_35",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -5268,7 +5282,6 @@
     -1062.25,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_art_01",
         "squad_members": "t2_art_02",
         "squad_members": "t2_art_03",
@@ -5303,7 +5316,8 @@
         "squad_members": "t2_art_32",
         "squad_members": "t2_art_33",
         "squad_members": "t2_art_34",
-        "squad_members": "t2_art_35"
+        "squad_members": "t2_art_35",
+        "object_marking": 0
       }
     },
     "infantry": {
@@ -6123,7 +6137,6 @@
     835.5,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_soldier_01",
         "squad_members": "t1_soldier_02",
         "squad_members": "t1_soldier_03",
@@ -6131,7 +6144,8 @@
         "squad_members": "t1_soldier_05",
         "squad_members": "t1_soldier_06",
         "squad_members": "t1_soldier_07",
-        "squad_members": "t1_soldier_08"
+        "squad_members": "t1_soldier_08",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6151,7 +6165,6 @@
     -2011.45,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_soldier_01",
         "squad_members": "t2_soldier_02",
         "squad_members": "t2_soldier_03",
@@ -6159,7 +6172,8 @@
         "squad_members": "t2_soldier_05",
         "squad_members": "t2_soldier_06",
         "squad_members": "t2_soldier_07",
-        "squad_members": "t2_soldier_08"
+        "squad_members": "t2_soldier_08",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -7079,7 +7093,6 @@
     297.0,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_bunker_01",
         "squad_members": "t1_bunker_02",
         "squad_members": "t1_bunker_03",
@@ -7097,7 +7110,8 @@
         "squad_members": "t1_bunker_15",
         "squad_members": "t1_bunker_16",
         "squad_members": "t1_bunker_17",
-        "squad_members": "t1_bunker_18"
+        "squad_members": "t1_bunker_18",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -8017,7 +8031,6 @@
     -882.0,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_bunker_01",
         "squad_members": "t2_bunker_02",
         "squad_members": "t2_bunker_03",
@@ -8035,7 +8048,8 @@
         "squad_members": "t2_bunker_15",
         "squad_members": "t2_bunker_16",
         "squad_members": "t2_bunker_17",
-        "squad_members": "t2_bunker_18"
+        "squad_members": "t2_bunker_18",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -8505,7 +8519,6 @@
     387.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_small_aaa_01",
         "squad_members": "t1_small_aaa_02",
         "squad_members": "t1_small_aaa_03",
@@ -8514,7 +8527,8 @@
         "squad_members": "t1_small_aaa_06",
         "squad_members": "t1_small_aaa_07",
         "squad_members": "t1_small_aaa_08",
-        "squad_members": "t1_small_aaa_09"
+        "squad_members": "t1_small_aaa_09",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -8984,7 +8998,6 @@
     -981.75,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_small_aaa_01",
         "squad_members": "t2_small_aaa_02",
         "squad_members": "t2_small_aaa_03",
@@ -8993,7 +9006,8 @@
         "squad_members": "t2_small_aaa_06",
         "squad_members": "t2_small_aaa_07",
         "squad_members": "t2_small_aaa_08",
-        "squad_members": "t2_small_aaa_09"
+        "squad_members": "t2_small_aaa_09",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -9263,12 +9277,12 @@
     492.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_big_aaa_01",
         "squad_members": "t1_big_aaa_02",
         "squad_members": "t1_big_aaa_03",
         "squad_members": "t1_big_aaa_04",
-        "squad_members": "t1_big_aaa_05"
+        "squad_members": "t1_big_aaa_05",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -9538,12 +9552,12 @@
     -533.6,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_big_aaa_01",
         "squad_members": "t2_big_aaa_02",
         "squad_members": "t2_big_aaa_03",
         "squad_members": "t2_big_aaa_04",
-        "squad_members": "t2_big_aaa_05"
+        "squad_members": "t2_big_aaa_05",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9563,10 +9577,10 @@
     3980.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_mguns_squad",
         "squad_members": "t1_small_aaa_squad",
-        "squad_members": "t1_big_aaa_squad"
+        "squad_members": "t1_big_aaa_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9586,10 +9600,10 @@
     -3262.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_mguns_squad",
         "squad_members": "t2_small_aaa_squad",
-        "squad_members": "t2_big_aaa_squad"
+        "squad_members": "t2_big_aaa_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9609,8 +9623,8 @@
     3708.95,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t1_artillery_squad"
+        "squad_members": "t1_artillery_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9630,8 +9644,8 @@
     -1539.5,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t2_artillery_squad"
+        "squad_members": "t2_artillery_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9651,8 +9665,8 @@
     4038.8,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t1_bunkers_squad"
+        "squad_members": "t1_bunkers_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9672,8 +9686,8 @@
     -2242.6,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t2_bunkers_squad"
+        "squad_members": "t2_bunkers_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9693,10 +9707,10 @@
     4285.35,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_20_points_squad",
         "squad_members": "t1_40_points_squad",
-        "squad_members": "t1_100_points_squad"
+        "squad_members": "t1_100_points_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9716,10 +9730,10 @@
     -2379.55,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_20_points_squad",
         "squad_members": "t2_40_points_squad",
-        "squad_members": "t2_100_points_squad"
+        "squad_members": "t2_100_points_squad",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -10239,7 +10253,6 @@
     3726.05,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_def_big_aaa_01",
         "squad_members": "t1_def_big_aaa_02",
         "squad_members": "t1_def_big_aaa_03",
@@ -10249,7 +10262,8 @@
         "squad_members": "t1_def_small_aaa_03",
         "squad_members": "t1_def_small_aaa_04",
         "squad_members": "t1_def_small_aaa_05",
-        "squad_members": "t1_def_small_aaa_06"
+        "squad_members": "t1_def_small_aaa_06",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -13357,6 +13371,48 @@
       "props": {
         "army": 0,
         "active": true
+      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -10087.9,
+    824.95,
+    5118.35,
+],
+      "props": {
+        "squad_members": "t1_small_aaa_squad",
+        "squad_members": "t1_big_aaa_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -13668.8,
+    824.95,
+    2388.9,
+],
+      "props": {
+        "squad_members": "t2_small_aaa_squad",
+        "squad_members": "t2_big_aaa_squad"
       }
     }
   },

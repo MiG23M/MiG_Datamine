@@ -241,8 +241,9 @@
           "setScopeRangeSet": {
             "scopeRangeSet": "common"
           },
-          "setIllumination": {
-            "illumination": false
+          "setFsmActive": {
+            "fsm": "illumination",
+            "active": false
           }
         },
         "setSearchMode": {
@@ -278,8 +279,9 @@
           "setScopeRangeSet": {
             "scopeRangeSet": "common"
           },
-          "setIllumination": {
-            "illumination": false
+          "setFsmActive": {
+            "fsm": "illumination",
+            "active": false
           }
         },
         "resetSearchMode": {
@@ -326,8 +328,9 @@
             "signal": "track"
           },
           "clearTargets": {          },
-          "setIllumination": {
-            "illumination": false
+          "setFsmActive": {
+            "fsm": "illumination",
+            "active": false
           }
         },
         "setBoresightLockMode": {
@@ -369,8 +372,9 @@
           "setScopeRangeSet": {
             "scopeRangeSet": "boresightLock"
           },
-          "setIllumination": {
-            "illumination": false
+          "setFsmActive": {
+            "fsm": "illumination",
+            "active": false
           }
         },
         "setTrackMode": {
@@ -409,8 +413,9 @@
           "setSignal": {
             "signal": "track"
           },
-          "setIllumination": {
-            "illumination": true
+          "setFsmActive": {
+            "fsm": "illumination",
+            "active": true
           }
         }
       },
@@ -773,6 +778,45 @@
             "setRelSpeedGatePos": {
               "source": "activeTargetOfInterest",
               "width": 0.0
+            }
+          }
+        }
+      }
+    },
+    "illumination": {
+      "stateInit": "init",
+      "transitions": {
+        "activate": {
+          "event": "fsmActivate",
+          "stateTo": "active",
+          "actions": {
+            "checkIlluminationTimeOut": {
+              "transiver": true
+            }
+          }
+        },
+        "deactivate": {
+          "event": "fsmDeactivate",
+          "stateTo": "inactive",
+          "actions": {
+            "setIllumination": {
+              "transiver": false
+            }
+          }
+        },
+        "activateIllumination": {
+          "event": "sarhMissileLaunch",
+          "actions": {
+            "setIlluminationTimeOut": {
+              "timeOut": 60.0
+            }
+          }
+        },
+        "updateIllumination": {
+          "event": "update",
+          "actions": {
+            "checkIlluminationTimeOut": {
+              "transiver": true
             }
           }
         }

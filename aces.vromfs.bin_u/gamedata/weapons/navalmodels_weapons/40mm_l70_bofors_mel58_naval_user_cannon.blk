@@ -61,6 +61,22 @@
       30.0
     ]
   },
+  "visualOverheat": {
+    "shotsToMax": 60,
+    "cooldownTime": 9.0,
+    "cooldownDelay": 2.4,
+    "fxType": "smoke_overheat_big",
+    "decalOffset": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "decalSize": [
+      3.0,
+      4.5,
+      4.5
+    ]
+  },
   "bullet": {
     "mass": 0.96,
     "caliber": 0.04,
@@ -70,6 +86,7 @@
     "maxDistance": 11000.0,
     "normalizationPreset": "heat",
     "ricochetPreset": "he",
+    "groundRicochetPreset": "he",
     "secondaryShattersPreset": "ap",
     "stabilityThreshold": 0.05,
     "stabilityCaliberToArmorThreshold": 5.0,
@@ -401,6 +418,7 @@
       "maxDistance": 11000.0,
       "normalizationPreset": "heat",
       "ricochetPreset": "he",
+      "groundRicochetPreset": "he",
       "secondaryShattersPreset": "ap",
       "stabilityThreshold": 0.05,
       "stabilityCaliberToArmorThreshold": 5.0,
@@ -733,6 +751,7 @@
       "maxDistance": 11000.0,
       "normalizationPreset": "heat",
       "ricochetPreset": "he",
+      "groundRicochetPreset": "he",
       "secondaryShattersPreset": "ap",
       "stabilityThreshold": 0.05,
       "stabilityCaliberToArmorThreshold": 5.0,
@@ -746,6 +765,8 @@
         2.0
       ],
       "explodeOnRendinst": true,
+      "fuseOnWater": true,
+      "fuseOnWaterProbability": 1.0,
       "shellAnimation": "video/shells_animations/he_vt.ivf",
       "bulletName": "40mm_he_t_pf",
       "hasProximityFuse": true,
@@ -1072,6 +1093,7 @@
       "maxDistance": 11000.0,
       "normalizationPreset": "ap",
       "ricochetPreset": "ap",
+      "groundRicochetPreset": "ap",
       "secondaryShattersPreset": "ap",
       "stabilityThreshold": 0.05,
       "stabilityCaliberToArmorThreshold": 5.0,

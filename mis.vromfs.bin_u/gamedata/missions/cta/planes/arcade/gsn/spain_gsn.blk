@@ -91,26 +91,26 @@
           "arrow": {
             "width": 1,
             "side": "ally",
-            "point": "briefing_t1_tanks_01",
+            "point": "briefing_t1_tank_01",
             "point": "briefing_central_point"
           },
           "arrow": {
             "width": 1,
             "side": "ally",
-            "point": "briefing_t1_tanks_02",
+            "point": "briefing_t1_tank_02",
             "point": "t2_bomb_target_02",
             "point": "t2_bomb_target_02"
           },
           "arrow": {
             "width": 1,
             "side": "enemy",
-            "point": "briefing_t2_tanks_01",
+            "point": "briefing_t2_tank_01",
             "point": "briefing_central_point"
           },
           "arrow": {
             "width": 1,
             "side": "enemy",
-            "point": "briefing_t2_tanks_02",
+            "point": "briefing_t2_tank_02",
             "point": "t1_bomb_target_02",
             "point": "t1_bomb_target_02"
           },
@@ -129,22 +129,22 @@
           "icon": {
             "icontype": "tank",
             "side": "ally",
-            "target": "briefing_t1_tanks_01"
+            "target": "briefing_t1_tank_01"
           },
           "icon": {
             "icontype": "tank",
             "side": "ally",
-            "target": "briefing_t1_tanks_02"
+            "target": "briefing_t1_tank_02"
           },
           "icon": {
             "icontype": "tank",
             "side": "enemy",
-            "target": "briefing_t2_tanks_01"
+            "target": "briefing_t2_tank_01"
           },
           "icon": {
             "icontype": "tank",
             "side": "enemy",
-            "target": "briefing_t2_tanks_02"
+            "target": "briefing_t2_tank_02"
           },
           "icon": {
             "icontype": "building",
@@ -275,6 +275,20 @@
     },
     "import_record": {
       "file": "gameData/missions/templates/air_templates/gs/template_at_gs_planeset.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
       "importAreas": true,
       "importUnits": true,
       "importTriggers": true,
@@ -419,10 +433,6 @@
           "team": "A"
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_tanks_squad",
           "object": "t2_tanks_squad",
           "object": "t1_artillery_squad",
@@ -431,17 +441,21 @@
           "object": "t2_bunkers_squad",
           "object": "t1_trucks_squad",
           "object": "t2_trucks_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "accuracy": 0.0,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.0
         },
         "unitSetProperties": {
+          "object": "t1_aaa_squad",
+          "object": "t2_aaa_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_aaa_squad",
-          "object": "t2_aaa_squad",
           "targetGnd": false,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
@@ -8967,6 +8981,48 @@
         "attack_type": "fire_at_will"
       },
       "way": {      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    10231.4,
+    2095.2,
+    -45824.0,
+],
+      "props": {
+        "squad_members": "t1_aaa_squad",
+        "squad_members": "t1_trucks_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    12117.4,
+    2095.2,
+    -45824.0,
+],
+      "props": {
+        "squad_members": "t2_aaa_squad",
+        "squad_members": "t2_trucks_squad"
+      }
     }
   },
   "areas": {
@@ -9065,7 +9121,7 @@
       "objLayer": 4,
       "props": {      }
     },
-    "briefing_t1_tanks_01": {
+    "briefing_t1_tank_01": {
       "type": "Point",
       "tm": [
     -0.819152,
@@ -9083,7 +9139,7 @@
 ],
       "props": {      }
     },
-    "briefing_t1_tanks_02": {
+    "briefing_t1_tank_02": {
       "type": "Point",
       "tm": [
     0.258819,
@@ -9101,7 +9157,7 @@
 ],
       "props": {      }
     },
-    "briefing_t2_tanks_01": {
+    "briefing_t2_tank_01": {
       "type": "Point",
       "tm": [
     -0.382684,
@@ -9119,7 +9175,7 @@
 ],
       "props": {      }
     },
-    "briefing_t2_tanks_02": {
+    "briefing_t2_tank_02": {
       "type": "Point",
       "tm": [
     0.258819,

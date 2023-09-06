@@ -1453,6 +1453,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.08,
@@ -2205,8 +2209,7 @@
     },
     "collisionProps": {
       "cls_turret": "convex_hull",
-      "cls_body": "convex_hull",
-      "cls_body_01": "convex_hull"
+      "cls_body": "convex_hull"
     },
     "engine": {
       "horsePowers": 1519.0,
@@ -2217,6 +2220,7 @@
       "type": "gasturbine"
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 250000.0,
       "driveGearRadius": 0.32,
       "mainGearRatio": 3.87,
@@ -3028,7 +3032,8 @@
           "node": "roll_03",
           "node": "roll_04",
           "node": "ex_lantern_04",
-          "node": "ex_lantern_03"
+          "node": "ex_lantern_03",
+          "node": "cls_body_01"
         }
       }
     },
@@ -3409,6 +3414,7 @@
     },
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
+      "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "tier": 3,
       "effects": {
         "nightVision": {

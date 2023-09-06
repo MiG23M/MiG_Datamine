@@ -122,6 +122,30 @@
       "node": "body_shutter_r",
       "absoluteValue": true,
       "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
     }
   },
   "DamageParts": {
@@ -366,6 +390,14 @@
       },
       "turret_09_side_dm": {
         "armorThickness": 25.0
+      }
+    },
+    "hull_turret_spaced_armor": {
+      "armorClass": "RHA_tank",
+      "composite_armor_hull_01_dm": {
+        "armorThickness": 15.0,
+        "hidableInViewer": true,
+        "hidableInXrayViewer": true
       }
     },
     "hull_side_special_armor": {
@@ -970,6 +1002,15 @@
           "dmPart": "turret_07_side_dm"
         }
       }
+    },
+    "armorArrayHullFront": {
+      "xrayDmPart": "composite_armor_hull_01_dm",
+      "titleLoc": "RHA_tank",
+      "armorArrayText": {
+        "layer": {
+          "dmPart": "composite_armor_hull_01_dm"
+        }
+      }
     }
   },
   "sound": {
@@ -1317,6 +1358,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.08,
@@ -2214,6 +2259,7 @@
       "minRPM": 600.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 270000.0,
       "driveGearRadius": 0.33,
       "mainGearRatio": 7.4,
@@ -3487,6 +3533,7 @@
     },
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
+      "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "effects": {
         "nightVision": {
           "gunnerThermal": {

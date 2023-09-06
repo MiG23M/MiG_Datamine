@@ -44,18 +44,18 @@
     "mission": {
       "level": "levels/avg_eastern_europe.bin",
       "type": "domination",
-      "restoreType": "attempts",
-      "optionalTakeOff": false,
       "environment": "Day",
       "weather": "hazy",
+      "locName": "missions/_AfD;eastern_europe/name",
+      "locDesc": "missions/_AfD/main/desc;missions/_AfD/2zones",
       "scoreLimit": 9000,
       "timeLimit": 20,
       "deathPenaltyMul": 0.4,
       "ctaCaptureZoneEqualPenaltyMul": 0.0,
       "country_axis": "germany",
       "country_allies": "ussr",
-      "locName": "missions/_AfD;eastern_europe/name",
-      "locDesc": "missions/_AfD/main/desc;missions/_AfD/2zones",
+      "restoreType": "attempts",
+      "optionalTakeOff": false,
       "allowedUnitTypes": {
         "isAirplanesAllowed": true,
         "isTanksAllowed": false,
@@ -164,6 +164,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -187,14 +201,14 @@
           "target": "t2_all_land_destroyed"
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_tanks_squad",
           "object": "t1_trucks_squad",
           "object": "t2_tanks_squad",
           "object": "t2_trucks_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "accuracy": 0.3,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.3
@@ -231,6 +245,9 @@
           "isIndividual": false,
           "resetStrictSpawnIndex": false,
           "onlyOnePlayerPerSpawnPoint": false,
+          "forceCreate": false,
+          "ignoreTeamsOnReuse": false,
+          "replaceAreas": false,
           "target": "t1_bombers_spawn",
           "team": "A",
           "tags": {
@@ -253,6 +270,9 @@
           "isIndividual": false,
           "resetStrictSpawnIndex": false,
           "onlyOnePlayerPerSpawnPoint": false,
+          "forceCreate": false,
+          "ignoreTeamsOnReuse": false,
+          "replaceAreas": false,
           "target": "t2_bombers_spawn",
           "team": "B",
           "tags": {
@@ -271,7 +291,8 @@
           "canCaptureInAir": false,
           "canCaptureByGM": true,
           "airfield": "airfield_01",
-          "createRespawnBaseFromAirfield": false
+          "createRespawnBaseFromAirfield": false,
+          "zoneDefenders": {          }
         },
         "missionMarkAsCaptureZone": {
           "army": 0,
@@ -283,7 +304,8 @@
           "canCaptureInAir": false,
           "canCaptureByGM": true,
           "airfield": "airfield_02",
-          "createRespawnBaseFromAirfield": false
+          "createRespawnBaseFromAirfield": false,
+          "zoneDefenders": {          }
         },
         "wait": {
           "time": 5.0
@@ -448,6 +470,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 5,
@@ -484,8 +508,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -521,6 +545,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 5,
@@ -557,8 +583,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -594,6 +620,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 5,
@@ -630,8 +658,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -667,6 +695,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 5,
@@ -703,8 +733,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -782,6 +812,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 6,
@@ -818,8 +850,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -855,6 +887,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 6,
@@ -891,8 +925,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -928,6 +962,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 6,
@@ -964,8 +1000,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -1001,6 +1037,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 6,
@@ -1037,8 +1075,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -1074,6 +1112,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -1211,6 +1251,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 0,
         "count": 1,
@@ -1392,6 +1434,46 @@
       "props": {
         "squad_members": "t2_heavy_units_squad",
         "squad_members": "t2_light_units_squad"
+      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -8729.85,
+    72.4,
+    -1327.1,
+],
+      "props": {
+        "squad_members": "t1_trucks_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -8287.55,
+    72.4,
+    -3824.25,
+],
+      "props": {
+        "squad_members": "t2_trucks_squad"
       }
     }
   },
@@ -1981,6 +2063,44 @@
     10410.2,
     1500.0,
     6652.4,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "t1_bombers_spawn_far": {
+      "type": "Sphere",
+      "tm": [
+    253.017,
+    0.0,
+    161.19,
+    0.0,
+    300.0,
+    0.0,
+    -161.19,
+    0.0,
+    253.017,
+    -5427.0,
+    3000.0,
+    -2503.75,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "t2_bombers_spawn_far": {
+      "type": "Sphere",
+      "tm": [
+    -253.017,
+    0.0,
+    -161.19,
+    0.0,
+    300.0,
+    0.0,
+    161.19,
+    0.0,
+    -253.017,
+    9806.5,
+    3000.0,
+    6310.8,
 ],
       "objLayer": 0,
       "props": {      }

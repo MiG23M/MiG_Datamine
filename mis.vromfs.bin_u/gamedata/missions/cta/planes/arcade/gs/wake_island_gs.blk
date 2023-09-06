@@ -153,6 +153,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -302,57 +316,55 @@
           "name_for_respawn_base": "",
           "timeMultiplier": 8.0,
           "disableZone": false,
-          "showBorderOnMap": false,
-          "borderWidthCoef": 1.0,
-          "borderTransparencyCoef": 1.0,
           "target": "capture_area",
           "canCaptureOnGround": false,
           "canCaptureInAir": false,
           "canCaptureByGM": true,
           "zoneType": "capture",
+          "showBorderOnMap": false,
           "zoneDefenders": {          }
         },
         "unitSetProperties": {
+          "object": "t1_tanks_squad",
+          "object": "t2_tanks_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_tanks_squad",
-          "object": "t2_tanks_squad",
           "accuracy": 0.0,
           "effShootingRate": 0.0
         },
         "unitSetProperties": {
+          "object": "t1_destroyers_squad",
+          "object": "t2_destroyers_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_destroyers_squad",
-          "object": "t2_destroyers_squad",
           "targetGnd": false,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.1
         },
         "unitSetProperties": {
+          "object": "t1_mothership_squad",
+          "object": "t2_mothership_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_mothership_squad",
-          "object": "t2_mothership_squad",
           "targetGnd": false,
           "accuracy": 0.6,
           "effShootingRate": 0.6,
           "airEffShootingRate": 0.6
         },
         "unitSetProperties": {
+          "object": "t1_lcvp_squad",
+          "object": "t2_lcvp_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_lcvp_squad",
-          "object": "t2_lcvp_squad",
           "targetGnd": false,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
@@ -1745,9 +1757,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -1769,13 +1781,13 @@
     4370.65,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_mothership_01",
         "squad_members": "t1_mothership_02",
         "squad_members": "t1_mothership_03",
         "squad_members": "t1_mothership_04",
         "squad_members": "t1_mothership_05",
-        "squad_members": "t1_mothership_06"
+        "squad_members": "t1_mothership_06",
+        "object_marking": 0
       }
     },
     "ships": {
@@ -1845,9 +1857,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_01_wp_02": {
@@ -1869,9 +1881,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_01_wp_03": {
@@ -1892,8 +1904,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -1917,11 +1929,11 @@
     3372.8,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_lcvp_swarm_01",
         "squad_members": "t1_lcvp_swarm_03",
         "squad_members": "t1_lcvp_swarm_02",
-        "squad_members": "t1_lcvp_swarm_04"
+        "squad_members": "t1_lcvp_swarm_04",
+        "object_marking": 0
       }
     },
     "ships": {
@@ -1991,9 +2003,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_02_wp_02": {
@@ -2015,9 +2027,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_02_wp_03": {
@@ -2038,8 +2050,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2113,9 +2125,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_03_wp_02": {
@@ -2137,9 +2149,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_03_wp_03": {
@@ -2160,8 +2172,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2235,9 +2247,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_04_wp_02": {
@@ -2259,9 +2271,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_04_wp_03": {
@@ -2283,9 +2295,9 @@
           "props": {
             "speed": 10.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -2357,9 +2369,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -2431,9 +2443,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_tank_02_wp_02": {
@@ -2455,9 +2467,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -2529,9 +2541,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -2553,11 +2565,11 @@
     2339.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_tank_01",
         "squad_members": "t1_tank_03",
         "squad_members": "t1_tank_02",
-        "squad_members": "t1_tank_04"
+        "squad_members": "t1_tank_04",
+        "object_marking": 0
       }
     },
     "armada": {
@@ -2631,11 +2643,11 @@
     3648.75,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_destroyers_squad",
         "squad_members": "t1_mothership_squad",
         "squad_members": "t1_tanks_squad",
-        "squad_members": "t1_lcvp_squad"
+        "squad_members": "t1_lcvp_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -2655,11 +2667,11 @@
     9432.25,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_destroyers_squad",
         "squad_members": "t2_mothership_squad",
         "squad_members": "t2_tanks_squad",
-        "squad_members": "t2_lcvp_squad"
+        "squad_members": "t2_lcvp_squad",
+        "object_marking": 0
       }
     },
     "ships": {
@@ -2729,9 +2741,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_01_wp_02": {
@@ -2753,9 +2765,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_01_wp_03": {
@@ -2777,9 +2789,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_01_wp_04": {
@@ -2801,9 +2813,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_01_wp_05": {
@@ -2825,9 +2837,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_01_wp_06": {
@@ -2849,9 +2861,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -2923,9 +2935,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -2997,9 +3009,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3071,9 +3083,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3145,9 +3157,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3219,9 +3231,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3293,9 +3305,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_02_wp_02": {
@@ -3317,9 +3329,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_02_wp_03": {
@@ -3341,9 +3353,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_02_wp_04": {
@@ -3365,9 +3377,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3439,9 +3451,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_03_wp_02": {
@@ -3463,9 +3475,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_03_wp_03": {
@@ -3487,9 +3499,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_03_wp_04": {
@@ -3511,9 +3523,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3585,9 +3597,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_04_wp_02": {
@@ -3609,9 +3621,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_04_wp_03": {
@@ -3633,9 +3645,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_04_wp_04": {
@@ -3657,9 +3669,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_04_wp_05": {
@@ -3681,9 +3693,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_04_wp_06": {
@@ -3705,9 +3717,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3779,9 +3791,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_05_wp_02": {
@@ -3803,9 +3815,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_05_wp_03": {
@@ -3827,9 +3839,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_05_wp_04": {
@@ -3851,9 +3863,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_05_wp_05": {
@@ -3875,9 +3887,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -3949,9 +3961,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_06_wp_02": {
@@ -3973,9 +3985,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_06_wp_03": {
@@ -3997,9 +4009,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_06_wp_04": {
@@ -4021,9 +4033,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_06_wp_05": {
@@ -4045,9 +4057,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4119,9 +4131,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_07_wp_02": {
@@ -4143,9 +4155,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_07_wp_03": {
@@ -4167,9 +4179,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_07_wp_04": {
@@ -4191,9 +4203,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_07_wp_05": {
@@ -4215,9 +4227,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4289,9 +4301,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_08_wp_02": {
@@ -4313,9 +4325,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_08_wp_03": {
@@ -4337,9 +4349,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_08_wp_04": {
@@ -4361,9 +4373,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_destroyer_08_wp_05": {
@@ -4385,9 +4397,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4459,9 +4471,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4533,9 +4545,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4607,9 +4619,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4681,9 +4693,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4755,9 +4767,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4829,9 +4841,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -4853,13 +4865,13 @@
     -7287.35,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_mothership_01",
         "squad_members": "t2_mothership_02",
         "squad_members": "t2_mothership_03",
         "squad_members": "t2_mothership_04",
         "squad_members": "t2_mothership_05",
-        "squad_members": "t2_mothership_06"
+        "squad_members": "t2_mothership_06",
+        "object_marking": 0
       }
     },
     "ships": {
@@ -4929,9 +4941,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_01_wp_02": {
@@ -4953,9 +4965,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_01_wp_03": {
@@ -4977,9 +4989,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5051,9 +5063,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_02_wp_02": {
@@ -5075,9 +5087,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_02_wp_03": {
@@ -5099,9 +5111,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5173,9 +5185,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_03_wp_02": {
@@ -5197,9 +5209,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_03_wp_03": {
@@ -5221,9 +5233,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5295,9 +5307,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_04_wp_02": {
@@ -5319,9 +5331,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_04_wp_03": {
@@ -5343,9 +5355,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5417,9 +5429,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_05_wp_02": {
@@ -5441,9 +5453,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_05_wp_03": {
@@ -5465,9 +5477,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5539,9 +5551,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_06_wp_02": {
@@ -5563,9 +5575,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_06_wp_03": {
@@ -5587,9 +5599,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5661,9 +5673,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_07_wp_02": {
@@ -5685,9 +5697,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_07_wp_03": {
@@ -5709,9 +5721,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5783,9 +5795,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_08_wp_02": {
@@ -5807,9 +5819,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_destroyer_08_wp_03": {
@@ -5831,9 +5843,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5905,9 +5917,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -5979,9 +5991,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -6053,9 +6065,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -6127,9 +6139,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -6201,9 +6213,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t1_lcvp_swarm_05_wp_03": {
@@ -6225,9 +6237,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_01_wp_01": {
@@ -6248,8 +6260,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -6323,9 +6335,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_02_wp_02": {
@@ -6347,9 +6359,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_02_wp_03": {
@@ -6370,8 +6382,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -6445,9 +6457,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_03_wp_02": {
@@ -6469,9 +6481,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_03_wp_03": {
@@ -6492,8 +6504,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -6567,9 +6579,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_04_wp_02": {
@@ -6591,9 +6603,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         },
         "t2_lcvp_swarm_04_wp_03": {
@@ -6614,8 +6626,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -6639,11 +6651,11 @@
     -6174.35,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_lcvp_swarm_01",
         "squad_members": "t2_lcvp_swarm_03",
         "squad_members": "t2_lcvp_swarm_02",
-        "squad_members": "t2_lcvp_swarm_04"
+        "squad_members": "t2_lcvp_swarm_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6663,11 +6675,11 @@
     -6749.25,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_01",
         "squad_members": "t2_tank_03",
         "squad_members": "t2_tank_02",
-        "squad_members": "t2_tank_04"
+        "squad_members": "t2_tank_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6687,7 +6699,6 @@
     529.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_destroyer_01",
         "squad_members": "t1_destroyer_02",
         "squad_members": "t1_destroyer_03",
@@ -6695,7 +6706,8 @@
         "squad_members": "t1_destroyer_05",
         "squad_members": "t1_destroyer_06",
         "squad_members": "t1_destroyer_07",
-        "squad_members": "t1_destroyer_08"
+        "squad_members": "t1_destroyer_08",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6715,7 +6727,6 @@
     -7573.85,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_destroyer_01",
         "squad_members": "t2_destroyer_02",
         "squad_members": "t2_destroyer_03",
@@ -6723,7 +6734,8 @@
         "squad_members": "t2_destroyer_05",
         "squad_members": "t2_destroyer_06",
         "squad_members": "t2_destroyer_07",
-        "squad_members": "t2_destroyer_08"
+        "squad_members": "t2_destroyer_08",
+        "object_marking": 0
       }
     },
     "tankModels": {
@@ -6793,9 +6805,9 @@
           "props": {
             "speed": 30.0,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
-            "canUsePathFinder": false,
-            "tas": false
+            "canUsePathFinder": false
           }
         }
       }
@@ -6817,11 +6829,11 @@
     3715.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_destroyers_squad",
         "squad_members": "t1_mothership_squad",
         "squad_members": "t1_tanks_squad",
-        "squad_members": "t1_lcvp_squad"
+        "squad_members": "t1_lcvp_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6841,11 +6853,51 @@
     9172.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_destroyers_squad",
         "squad_members": "t2_mothership_squad",
         "squad_members": "t2_tanks_squad",
-        "squad_members": "t2_lcvp_squad"
+        "squad_members": "t2_lcvp_squad",
+        "object_marking": 0
+      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -24209.9,
+    0.0,
+    -6323.35,
+],
+      "props": {
+        "squad_members": "t1_destroyers_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -21109.4,
+    0.0,
+    -16307.0,
+],
+      "props": {
+        "squad_members": "t2_destroyers_squad"
       }
     }
   },

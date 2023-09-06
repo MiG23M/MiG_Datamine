@@ -2,6 +2,7 @@
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
 
+let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { split_by_chars, format } = require("string")
 let regexp2 = require("regexp2")
 let mapPreferences = require("mapPreferences")
@@ -14,7 +15,6 @@ let { getGameModesByEconomicName } = require("%scripts/matching/matchingGameMode
 let { getMaxEconomicRank } = require("%appGlobals/ranks_common_shared.nut")
 
 const MIN_AVAILABLE_VEHICLE_BR   = 1.0
-const VEHICLE_TO_MAP_MIN_BR_DIFF = -1.0
 
 let mapsListByEvent = {}
 
@@ -105,7 +105,7 @@ let function getInactiveMaps(curEvent, mapsList) {
 
 let function getBattleRatingsRangeText(minRank, maxRank) {
   let minVehicleBr = max(
-    ::calc_battle_rating_from_rank(minRank) + VEHICLE_TO_MAP_MIN_BR_DIFF
+    ::calc_battle_rating_from_rank(minRank)
     MIN_AVAILABLE_VEHICLE_BR
   )
   let maxVehicleBr = ::calc_battle_rating_from_rank(maxRank)
@@ -216,7 +216,7 @@ let function getMapsListImpl(curEvent) {
 
   if (assertMisNames.len() > 0) {
     let invalidMissions = assertMisNames.reduce(@(a, b) a + ", " + b) // warning disable: -declared-never-used
-    ::script_net_assert_once("MapPreferencesParams:",
+    script_net_assert_once("MapPreferencesParams:",
       "".concat("Some missions have no level to show map preferences.",
       "Ask designers to check missions from invalidMissions callstack variable in matching configs"))
   }

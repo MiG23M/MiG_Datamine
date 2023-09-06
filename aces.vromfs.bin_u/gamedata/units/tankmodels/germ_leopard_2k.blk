@@ -1204,6 +1204,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.08,
@@ -1755,6 +1759,30 @@
           -9.0,
           -9.0
         ]
+      },
+      "gunStabilizer": {
+        "hasVerticalGunFreeMode": false,
+        "hasHorizontal": true,
+        "horizontalOmegaMult": 1.0,
+        "horizontalSpeedLimitKPH": 75.0,
+        "hasVertical": true,
+        "verticalOmegaMult": 1.0,
+        "verticalSpeedLimitKPH": 75.0,
+        "speedFromVehicleVerticalMult": -1.0,
+        "errorKPHToDegrees": {
+          "row": [
+            5.0,
+            0.0
+          ],
+          "row": [
+            45.0,
+            0.015
+          ],
+          "row": [
+            80.0,
+            0.02
+          ]
+        }
       }
     },
     "Weapon": {
@@ -1917,6 +1945,7 @@
       "minRPM": 600.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 250000.0,
       "driveGearRadius": 0.295,
       "mainGearRatio": 1.475,
@@ -3064,6 +3093,30 @@
                 -9.0,
                 -9.0
               ]
+            },
+            "gunStabilizer": {
+              "hasVerticalGunFreeMode": false,
+              "hasHorizontal": true,
+              "horizontalOmegaMult": 1.0,
+              "horizontalSpeedLimitKPH": 75.0,
+              "hasVertical": true,
+              "verticalOmegaMult": 1.0,
+              "verticalSpeedLimitKPH": 75.0,
+              "speedFromVehicleVerticalMult": -1.0,
+              "errorKPHToDegrees": {
+                "row": [
+                  5.0,
+                  0.0
+                ],
+                "row": [
+                  45.0,
+                  0.015
+                ],
+                "row": [
+                  80.0,
+                  0.02
+                ]
+              }
             }
           },
           "Weapon": {

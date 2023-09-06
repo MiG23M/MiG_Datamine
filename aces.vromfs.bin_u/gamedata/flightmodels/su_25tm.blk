@@ -2310,8 +2310,8 @@
       0.09,
       0.0
     ],
-    "mirrorNode": "mirror1",
-    "mirrorNode": "mirror2",
+    "mirrorNode": "blister9",
+    "mirrorNode": "blister10",
     "lightPos": [
       3.841,
       0.072,
@@ -2668,6 +2668,10 @@
       "blk": "gameData/FlightModels/weaponPresets/su_25tm_r_60m_rls.blk"
     },
     "preset": {
+      "name": "su_25tm_r_73_rls",
+      "blk": "gameData/FlightModels/weaponPresets/su_25tm_r_73_rls.blk"
+    },
+    "preset": {
       "name": "su_25tm_fab_100_r60m",
       "blk": "gameData/FlightModels/weaponPresets/su_25tm_fab_100_r60m.blk"
     },
@@ -2952,7 +2956,7 @@
       "tier": 11,
       "order": 1,
       "WeaponPreset": {
-        "iconType": "missile_type_b_air_to_air",
+        "iconType": "missile_air_to_air",
         "name": "r_60m",
         "ShowNodes": {
           "node": "apu_60m_001"
@@ -2971,6 +2975,22 @@
       "index": 2,
       "tier": 10,
       "order": 3,
+      "WeaponPreset": {
+        "iconType": "missile_type_b_air_to_air",
+        "name": "r_73",
+        "reqModification": "mig_29_r_73",
+        "ShowNodes": {
+          "node": "apu_73_002"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/su_r_73.blk",
+          "emitter": "r_73_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
       "WeaponPreset": {
         "iconType": "nar_large",
         "name": "s_8ko",
@@ -4460,6 +4480,10 @@
           "emitter": "su_800l_su_17_22_25_drop_tank_003",
           "bullets": 1,
           "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "ptb_left"
         }
       }
     },
@@ -5036,6 +5060,22 @@
       "tier": 2,
       "order": 4,
       "WeaponPreset": {
+        "iconType": "missile_type_b_air_to_air",
+        "name": "r_73",
+        "reqModification": "mig_29_r_73",
+        "ShowNodes": {
+          "node": "apu_73_003"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/su_r_73.blk",
+          "emitter": "r_73_003",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
         "iconType": "nar_large",
         "name": "s_8ko",
         "ShowNodes": {
@@ -5246,7 +5286,7 @@
       "tier": 1,
       "order": 2,
       "WeaponPreset": {
-        "iconType": "missile_type_b_air_to_air",
+        "iconType": "missile_air_to_air",
         "name": "r_60m",
         "ShowNodes": {
           "node": "apu_60m_002"
@@ -5530,6 +5570,11 @@
       "deactivationIsAllowed": false,
       "modClass": "weapon",
       "tier": 3
+    },
+    "mig_29_r_73": {
+      "prevModification": "mi_28_C13",
+      "modClass": "weapon",
+      "tier": 4
     },
     "su_17_x25": {
       "modClass": "weapon",

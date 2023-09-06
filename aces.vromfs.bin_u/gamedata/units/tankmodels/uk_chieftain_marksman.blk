@@ -116,6 +116,30 @@
       "node": "body_shutter_r",
       "absoluteValue": true,
       "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
     }
   },
   "DamageParts": {
@@ -344,17 +368,41 @@
       "ex_armor_body_r_01_dm": {      },
       "ex_armor_body_r_02_dm": {      },
       "ex_armor_body_r_03_dm": {      },
-      "ex_armor_body_r_04_dm": {      },
-      "ex_armor_body_r_05_dm": {      },
-      "ex_armor_body_r_06_dm": {      },
-      "ex_armor_body_r_07_dm": {      },
+      "ex_armor_body_r_04_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
+      "ex_armor_body_r_05_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
+      "ex_armor_body_r_06_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
+      "ex_armor_body_r_07_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
       "ex_armor_body_l_01_dm": {      },
       "ex_armor_body_l_02_dm": {      },
       "ex_armor_body_l_03_dm": {      },
-      "ex_armor_body_l_04_dm": {      },
-      "ex_armor_body_l_05_dm": {      },
-      "ex_armor_body_l_06_dm": {      },
-      "ex_armor_body_l_07_dm": {      },
+      "ex_armor_body_l_04_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
+      "ex_armor_body_l_05_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
+      "ex_armor_body_l_06_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
+      "ex_armor_body_l_07_dm": {
+        "armorThickness": 19.0,
+        "armorClass": "aluminium"
+      },
       "turret_06_back_dm": {
         "armorThickness": 5.0
       },
@@ -1154,6 +1202,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.1,
@@ -2100,7 +2152,18 @@
     "tracks": {
       "animationMultiplier": -0.62,
       "width": 0.61,
-      "height": 0.06
+      "height": 0.06,
+      "tracksTensionK": [
+        5.0,
+        9.0,
+        5.0
+      ],
+      "trackMesh": "uk_chieftain_mk_5_phys_track",
+      "trackLen": 0.167,
+      "trackCount": 94,
+      "trackFadeTime": 1.5,
+      "trackEmitSparks": false,
+      "trackStartOffset": 0.06
     },
     "collisionProps": {
       "cls_turret": "convex_hull",
@@ -2112,6 +2175,7 @@
       "minRPM": 850.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 228800.0,
       "driveGearRadius": 0.299,
       "mainGearRatio": 3.93,

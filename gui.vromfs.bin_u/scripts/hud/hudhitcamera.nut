@@ -1,12 +1,7 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
 
-let { DM_HIT_RESULT_NONE, DM_HIT_RESULT_RICOSHET, DM_HIT_RESULT_BOUNCE, DM_HIT_RESULT_HIT,
-  DM_HIT_RESULT_BURN, DM_HIT_RESULT_CRITICAL, DM_HIT_RESULT_KILL,
-  DM_HIT_RESULT_METAPART, DM_HIT_RESULT_AMMO, DM_HIT_RESULT_FUEL,
-  DM_HIT_RESULT_CREW, DM_HIT_RESULT_TORPEDO, DM_HIT_RESULT_BREAKING, DM_HIT_RESULT_INVULNERABLE = 14,
-  HIT_CAMERA_START, HIT_CAMERA_FADE_OUT
-} = require("hitCamera")
+from "hitCamera" import *
 let { setTimeout, clearTimer } = require("dagor.workcycle")
 let { utf8ToUpper } = require("%sqstd/string.nut")
 let { addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
@@ -125,7 +120,7 @@ let function updateFadeAnimation() {
 }
 
 let getHitCameraAABB = @() ::get_dagui_obj_aabb(scene)
-let isKillingHitResult = @(result) result >= DM_HIT_RESULT_KILL
+let isKillingHitResult = @(result) result >= DM_HIT_RESULT_KILL && result != DM_HIT_RESULT_INVULNERABLE
 
 let function reset() {
   isVisible = false

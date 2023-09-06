@@ -109,6 +109,30 @@
       "node": "body_shutter_r",
       "absoluteValue": true,
       "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
     }
   },
   "dmgAngles": {
@@ -443,6 +467,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.1,
@@ -866,44 +894,6 @@
       "dmPart": "commander_dm",
       "role": "tank_gunner",
       "role": "commander"
-    }
-  },
-  "xray_viewer_data": {
-    "armorArrayHull": {
-      "xrayDmPart": "composite_armor_hull_01_dm",
-      "titleLoc": "RHA_tank_modern",
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "composite_armor_hull_01_dm"
-        }
-      }
-    },
-    "armorArrayHull": {
-      "xrayDmPart": "composite_armor_hull_02_dm",
-      "titleLoc": "RHA_tank_modern",
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "composite_armor_hull_02_dm"
-        }
-      }
-    },
-    "armorArrayHull": {
-      "xrayDmPart": "composite_armor_hull_03_dm",
-      "titleLoc": "RHA_tank_modern",
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "composite_armor_hull_03_dm"
-        }
-      }
-    },
-    "armorArrayHull": {
-      "xrayDmPart": "composite_armor_hull_04_dm",
-      "titleLoc": "RHA_tank_modern",
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "composite_armor_hull_04_dm"
-        }
-      }
     }
   },
   "MetaParts": {
@@ -2746,107 +2736,12 @@
   },
   "xray_viewer_data": {
     "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_10_dm",
+      "xrayDmPart": "ex_era_hull_%02d_dm",
       "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_10_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_09_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_09_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_08_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_08_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_07_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_07_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_06_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_06_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_05_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_05_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_04_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_04_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_03_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_03_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_02_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_02_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_hull_01_dm",
-      "titleLoc": "uk_era_romor_a",
+      "xrayDmPartRange": [
+        1,
+        10
+],
       "kineticProtectionEquivalent": 30.0,
       "cumulativeProtectionEquivalent": 300.0,
       "armorArrayText": {
@@ -2856,112 +2751,17 @@
       }
     },
     "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_10_dm",
+      "xrayDmPart": "ex_era_turret_%02d_dm",
       "titleLoc": "uk_era_romor_a",
+      "xrayDmPartRange": [
+        1,
+        10
+],
       "kineticProtectionEquivalent": 30.0,
       "cumulativeProtectionEquivalent": 300.0,
       "armorArrayText": {
         "layer": {
-          "dmPart": "ex_era_hull_10_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_09_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_09_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_08_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_08_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_07_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_07_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_06_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_06_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_05_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_05_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_04_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_04_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_03_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_03_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_02_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_02_dm"
-        }
-      }
-    },
-    "armorArrayERA": {
-      "xrayDmPart": "ex_era_turret_01_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_01_dm"
+          "dmPart": "ex_era_turret_01_dm"
         }
       }
     },
@@ -3434,6 +3234,7 @@
     "105mm_DM33_APDS_FS_ammo_pack": {    },
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
+      "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "tier": 2,
       "effects": {
         "nightVision": {

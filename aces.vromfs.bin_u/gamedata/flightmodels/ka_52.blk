@@ -11,6 +11,8 @@
   "haveCCIPForTurret": true,
   "haveCCRPForGun": false,
   "haveCCRPForTurret": true,
+  "ils28K": true,
+  "mfdCamShkvalKa52": true,
   "gearSinkRangeLR": 0.22,
   "gearSinkRangeC": 0.25,
   "tpsCameraTargetOffsetAtZoom": [
@@ -373,6 +375,14 @@
         "smoke": 0.2
       },
       "onHit": {
+        "damage": 20.0,
+        "tail_dm": 0.2
+      },
+      "onHit": {
+        "damage": 30.0,
+        "tail_dm": 0.4
+      },
+      "onHit": {
         "damage": 50.0,
         "tail_dm": 0.6
       },
@@ -382,7 +392,16 @@
       },
       "onHit": {
         "damage": 100.0,
+        "tail_dm": 0.9
+      },
+      "onHit": {
+        "damage": 200.0,
         "tail_dm": 1.0
+      },
+      "onHit": {
+        "damage": 300.0,
+        "tail_dm": 1.0,
+        "expl": 1.0
       },
       "onKill": {
         "tail_dm": 1.0,
@@ -411,21 +430,32 @@
       "onKill": {
         "damage": 30.0,
         "tail_dm": 1.0,
-        "nothing": 5.0
+        "expl": 0.3
       },
       "onKill": {
         "damage": 50.0,
         "tail_dm": 1.0,
-        "nothing": 4.0
+        "expl": 0.4
       },
       "onKill": {
         "damage": 70.0,
         "tail_dm": 1.0,
-        "nothing": 3.0
+        "expl": 0.5
       },
       "onKill": {
         "damage": 100.0,
-        "tail_dm": 1.0
+        "tail_dm": 1.0,
+        "expl": 0.5
+      },
+      "onKill": {
+        "damage": 200.0,
+        "tail_dm": 1.0,
+        "expl": 0.5
+      },
+      "onKill": {
+        "damage": 300.0,
+        "tail_dm": 1.0,
+        "expl": 1.0
       }
     },
     "part": {
@@ -1274,12 +1304,17 @@
   },
   "Sound": {
     "Engine": "engine_ka50",
+    "voiceWarningSystem": "rita",
     "gun": "gun_default",
     "turretTurnSfxPath": "sounds/effects",
     "turretTurnSfxPathStudio": "aircraft/effects",
     "turretTurnSfxName": "turret_turn_servo"
   },
   "cockpit": {
+    "mfdTextureSize": [
+      2732,
+      1024
+],
     "headPos": [
       2.57,
       0.463,
@@ -1298,8 +1333,8 @@
     ],
     "mirrorNorm": [
       0.0,
-      0.0,
-      3.4
+      -0.2,
+      1.0
     ],
     "mirrorNode": "blister11",
     "mirrorNode": "blister12",
@@ -1536,7 +1571,7 @@
           "speed": {
             "texture": "su_mfd_speed",
             "position": [
-              60.0,
+              120.0,
               110.0
             ],
             "arrowTexCoord": [
@@ -1552,7 +1587,7 @@
               0.91
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "color": [0, 255, 255, 255],
@@ -1593,7 +1628,7 @@
           "vario": {
             "texture": "su_mfd_vario",
             "position": [
-              276.0,
+              552.0,
               110.0
             ],
             "arrowTexCoord": [
@@ -1609,7 +1644,7 @@
               0.89
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "color": [255, 30, 30, 255],
@@ -1638,7 +1673,7 @@
           "altitude_hour": {
             "texture": "su_mfd_altitude",
             "position": [
-              276.0,
+              552.0,
               402.0
             ],
             "backgroundTexCoord": [
@@ -1654,7 +1689,7 @@
               0.86
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "ranges": {
@@ -1669,7 +1704,7 @@
           "altitude_min": {
             "texture": "su_mfd_altitude",
             "position": [
-              276.0,
+              552.0,
               402.0
             ],
             "backgroundTexCoord": [
@@ -1685,7 +1720,7 @@
               0.4
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "color": [255, 30, 30, 255],
@@ -1704,7 +1739,7 @@
             "texture": "su_mfd_ahorizon",
             "arrowTex": "su_mfd_ahorizon_scale",
             "position": [
-              170.0,
+              340.0,
               256.0
             ],
             "backgroundTexCoord": [
@@ -1720,7 +1755,7 @@
               1.0
             ],
             "size": [
-              90.0,
+              180.0,
               180.0
             ],
             "ranges": {
@@ -1735,7 +1770,7 @@
           "aviahorizon_roll": {
             "texture": "su_mfd_ahorizon",
             "position": [
-              170.0,
+              340.0,
               256.0
             ],
             "arrowTexCoord": [
@@ -1745,7 +1780,7 @@
               0.8
             ],
             "size": [
-              90.0,
+              180.0,
               180.0
             ],
             "notDrawBackground": true,
@@ -1760,6 +1795,9 @@
           }
         },
         "page": {
+          "type": "ils_duplicate"
+        },
+        "page": {
           "type": "target_tracking",
           "turretIdx": 0
         },
@@ -1769,6 +1807,13 @@
         },
         "page": {
           "type": "map"
+        },
+        "page": {
+          "type": "rwr"
+        },
+        "page": {
+          "type": "radar",
+          "radarScale": 0.85
         }
       },
       "display": {
@@ -1779,7 +1824,7 @@
           0.5
         ],
         "page": {
-          "type": "rwr"
+          "type": "ils_duplicate"
         },
         "page": {
           "type": "map"
@@ -1791,6 +1836,13 @@
         "page": {
           "type": "thermal",
           "turretIdx": 0
+        },
+        "page": {
+          "type": "rwr"
+        },
+        "page": {
+          "type": "radar",
+          "radarScale": 0.85
         }
       },
       "display": {
@@ -1801,11 +1853,19 @@
           0.75
         ],
         "page": {
+          "type": "rwr"
+        },
+        "page": {
           "type": "radar",
           "radarScale": 0.85
         },
         "page": {
-          "type": "rwr"
+          "type": "target_tracking",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "thermal",
+          "turretIdx": 0
         },
         "page": {
           "type": "map"
@@ -1815,7 +1875,7 @@
           "speed": {
             "texture": "su_mfd_speed",
             "position": [
-              60.0,
+              120.0,
               110.0
             ],
             "arrowTexCoord": [
@@ -1831,7 +1891,7 @@
               0.91
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "color": [0, 255, 255, 255],
@@ -1872,7 +1932,7 @@
           "vario": {
             "texture": "su_mfd_vario",
             "position": [
-              276.0,
+              552.0,
               110.0
             ],
             "arrowTexCoord": [
@@ -1888,7 +1948,7 @@
               0.89
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "color": [255, 30, 30, 255],
@@ -1917,7 +1977,7 @@
           "altitude_hour": {
             "texture": "su_mfd_altitude",
             "position": [
-              276.0,
+              552.0,
               402.0
             ],
             "backgroundTexCoord": [
@@ -1933,7 +1993,7 @@
               0.86
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "ranges": {
@@ -1948,7 +2008,7 @@
           "altitude_min": {
             "texture": "su_mfd_altitude",
             "position": [
-              276.0,
+              552.0,
               402.0
             ],
             "backgroundTexCoord": [
@@ -1964,7 +2024,7 @@
               0.4
             ],
             "size": [
-              96.0,
+              192.0,
               192.0
             ],
             "color": [255, 30, 30, 255],
@@ -1983,7 +2043,7 @@
             "texture": "su_mfd_ahorizon",
             "arrowTex": "su_mfd_ahorizon_scale",
             "position": [
-              170.0,
+              340.0,
               256.0
             ],
             "backgroundTexCoord": [
@@ -1999,7 +2059,7 @@
               1.0
             ],
             "size": [
-              90.0,
+              180.0,
               180.0
             ],
             "ranges": {
@@ -2014,7 +2074,7 @@
           "aviahorizon_roll": {
             "texture": "su_mfd_ahorizon",
             "position": [
-              170.0,
+              340.0,
               256.0
             ],
             "arrowTexCoord": [
@@ -2024,7 +2084,7 @@
               0.8
             ],
             "size": [
-              90.0,
+              180.0,
               180.0
             ],
             "notDrawBackground": true,
@@ -2047,32 +2107,36 @@
           1.0
         ],
         "page": {
+          "type": "target_tracking",
+          "turretIdx": 0
+        },
+        "page": {
           "type": "thermal",
           "turretIdx": 0
         },
         "page": {
-          "type": "target_tracking",
-          "turretIdx": 0
+          "type": "rwr"
+        },
+        "page": {
+          "type": "radar",
+          "radarScale": 0.85
+        },
+        "page": {
+          "type": "map"
         }
       },
       "display": {
         "textureArea": [
           0.0,
           0.0,
-          0.8,
-          0.8
+          1.0,
+          1.0
         ],
         "page": {
-          "type": "pilot_hud",
-          "ilsNode": "ils",
+          "type": "plane_ils",
           "ilsSize": [
-            0.28,
-            0.28
-          ],
-          "ilsProjSize": [
-            0.184,
-            0.176,
-            0.02
+            0.24,
+            0.24
           ],
           "ilsOffsetForce": 0.2,
           "brightnessMult": 3.5
@@ -2351,7 +2415,7 @@
         "ShowNodes": {
           "node": "exhaust_shield"
         },
-        "HideNodes": {
+        "ShowNodes": {
           "node": "fuse2",
           "node": "fuse4",
           "node": "exhaust"
@@ -4354,6 +4418,13 @@
       "group": "countermeasures",
       "tier": 2,
       "effects": {
+        "enginesInfraRedBrightnessMult": 0.7,
+        "commonWeapons": {
+          "Weapon": {
+            "slot": 0,
+            "preset": "2a42_exhaust_common"
+          }
+        },
         "sensors": {
           "sensor": {
             "blk": "gameData/sensors/su_rn_01_arbalet.blk",

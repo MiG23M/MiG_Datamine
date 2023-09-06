@@ -1772,41 +1772,6 @@
       "part": "engine4"
     }
   },
-  "commonWeapons": {
-    "Weapon": {
-      "trigger": "cannon",
-      "blk": "gameData/Weapons/cannonN37D.blk",
-      "emitter": "flare1",
-      "flash": "flare1",
-      "shell": "emtr_shellrejection1",
-      "dm": "cannon3_dm",
-      "bullets": 40,
-      "spread": 1.0
-    },
-    "Weapon": {
-      "trigger": "machine gun",
-      "blk": "gameData/Weapons/cannonNR23.blk",
-      "emitter": "flare2",
-      "flash": "flare2",
-      "shell": "emtr_shellrejection2",
-      "dm": "cannon2_dm",
-      "bullets": 80,
-      "spread": 1.0
-    },
-    "Weapon": {
-      "trigger": "machine gun",
-      "blk": "gameData/Weapons/cannonNR23.blk",
-      "emitter": "flare3",
-      "flash": "flare3",
-      "shell": "emtr_shellrejection3",
-      "dm": "cannon1_dm",
-      "bullets": 80,
-      "spread": 1.0
-    },
-    "hideNodes": {
-      "node": "aero_14a_pylon"
-    }
-  },
   "weapon_presets": {
     "preset": {
       "name": "mig_17_default",
@@ -1815,7 +1780,7 @@
     "preset": {
       "name": "mig_17_bombs",
       "blk": "gameData/FlightModels/weaponPresets/mig_17_bombs.blk",
-      "reqModification": "bd-2-48"
+      "reqModification": "d-4-50"
     },
     "preset": {
       "name": "mig_17_16xs_5k_rockets",
@@ -2100,14 +2065,14 @@
     "ns23_stealth": {    },
     "ns37_air_target": {    },
     "ns37_armor_target": {    },
-    "bd-2-48": {
+    "d-4-50": {
       "modClass": "weapon",
       "tier": 1
     },
     "C5": {
       "modClass": "weapon",
       "tier": 2,
-      "reqModification": "bd-2-48"
+      "reqModification": "d-4-50"
     },
     "C5M": {
       "modClass": "weapon",
@@ -2275,6 +2240,41 @@
   },
   "attach": {
     "pilot1": "pilot_su_500"
+  },
+  "commonWeapons": {
+    "Weapon": {
+      "trigger": "cannon",
+      "blk": "gameData/Weapons/cannonType37_1.blk",
+      "emitter": "flare1",
+      "flash": "flare1",
+      "shell": "emtr_shellrejection1",
+      "dm": "cannon3_dm",
+      "bullets": 40,
+      "spread": 1.0
+    },
+    "Weapon": {
+      "trigger": "machine gun",
+      "blk": "gameData/Weapons/cannonType_23_1_plane.blk",
+      "emitter": "flare2",
+      "flash": "flare2",
+      "shell": "emtr_shellrejection2",
+      "dm": "cannon2_dm",
+      "bullets": 80,
+      "spread": 1.0
+    },
+    "Weapon": {
+      "trigger": "machine gun",
+      "blk": "gameData/Weapons/cannonType_23_1_plane.blk",
+      "emitter": "flare3",
+      "flash": "flare3",
+      "shell": "emtr_shellrejection3",
+      "dm": "cannon1_dm",
+      "bullets": 80,
+      "spread": 1.0
+    },
+    "hideNodes": {
+      "node": "aero_14a_pylon"
+    }
   },
   "default_skin": {
     "replace_tex": {

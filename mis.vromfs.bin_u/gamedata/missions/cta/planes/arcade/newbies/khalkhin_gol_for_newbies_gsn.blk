@@ -187,6 +187,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -232,29 +246,29 @@
           "value": "nachinaetsya logika missii"
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_artillery_squad",
           "object": "t2_trucks_squad",
           "object": "t1_trucks_squad",
           "object": "t2_artillery_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "targetAir": false,
           "accuracy": 0.0,
           "effShootingRate": 0.0
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_aaa_squad",
           "object": "t1_def_aaa_squad",
           "object": "t2_truck_aaa_squad",
           "object": "t2_def_aaa_squad",
           "object": "t1_truck_aaa_squad",
           "object": "t2_aaa_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.1
@@ -432,11 +446,11 @@
           }
         },
         "unitSetProperties": {
+          "object": "t2_quest_units_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t2_quest_units_squad",
           "calmDetection": true
         },
         "comment": {
@@ -8825,6 +8839,52 @@
         "attack_type": "fire_at_will"
       },
       "way": {      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    0.737277,
+    0.0,
+    0.67559,
+    0.0,
+    1.0,
+    0.0,
+    -0.67559,
+    0.0,
+    0.737277,
+    -3726.7,
+    230.1,
+    6870.9,
+],
+      "props": {
+        "squad_members": "t1_trucks_squad",
+        "squad_members": "t1_aaa_squad",
+        "squad_members": "t1_truck_aaa_squad",
+        "object_marking": 0
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    0.737277,
+    0.0,
+    0.67559,
+    0.0,
+    1.0,
+    0.0,
+    -0.67559,
+    0.0,
+    0.737277,
+    -3469.25,
+    230.1,
+    5776.65,
+],
+      "props": {
+        "squad_members": "t2_trucks_squad",
+        "squad_members": "t2_aaa_squad",
+        "squad_members": "t2_truck_aaa_squad",
+        "object_marking": 0
+      }
     }
   },
   "areas": {

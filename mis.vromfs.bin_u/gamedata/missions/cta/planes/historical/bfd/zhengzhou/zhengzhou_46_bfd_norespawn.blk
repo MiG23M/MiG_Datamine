@@ -332,6 +332,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -388,16 +402,16 @@
           "var": "historical_destroy_timer"
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t2_big_aaa_squad",
           "object": "t2_small_aaa_squad",
           "object": "t2_medium_aaa_squad",
           "object": "t1_big_aaa_squad",
           "object": "t1_small_aaa_squad",
           "object": "t1_medium_aaa_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "checkVisibilityTarget": true,
           "effShootingRate": 0.3,
           "airEffShootingRate": 0.3,
@@ -406,16 +420,16 @@
           "targetChangeProb": 0.25
         },
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t2_long_range_artillery_squad",
           "object": "t2_tanks_squad",
           "object": "t2_artillery_squad",
           "object": "t1_tanks_squad",
           "object": "t1_long_range_artillery_squad",
           "object": "t1_artillery_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "checkVisibilityTarget": false,
           "effShootingRate": 0.0,
           "effShootingRateByPlayer": 0.0,
@@ -428,20 +442,20 @@
           "var": "historical_destroy_timer"
         },
         "unitSetIndication": {
-          "target_marking": 0,
           "set": true,
+          "target": "t1_quest_units_squad",
+          "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "t1_quest_units_squad"
+          "object_var_value": 0
         },
         "unitSetIndication": {
-          "target_marking": 0,
           "set": true,
+          "target": "t2_quest_units_squad",
+          "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "t2_quest_units_squad"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }
@@ -517,10 +531,8 @@
           "timeMultiplier": 1.0,
           "disableZone": false,
           "name_for_respawn_base": "",
-          "showBorderOnMap": false,
-          "borderWidthCoef": 1.0,
-          "borderTransparencyCoef": 1.0,
           "target": "capture_zone",
+          "showBorderOnMap": false,
           "zoneDefenders": {          }
         },
         "moAddMissionObjective": {
@@ -568,6 +580,7 @@
           "status": 3,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "A"
         },
         "moSetObjectiveStatus": {
@@ -575,6 +588,7 @@
           "status": 2,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "B"
         },
         "triggerEnable": {
@@ -617,6 +631,7 @@
           "status": 2,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "A"
         },
         "moSetObjectiveStatus": {
@@ -624,6 +639,7 @@
           "status": 3,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "B"
         },
         "triggerEnable": {
@@ -809,10 +825,10 @@
     -32525.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_subquest_units_01",
         "squad_members": "t1_subquest_units_02",
-        "squad_members": "t1_subquest_units_03"
+        "squad_members": "t1_subquest_units_03",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -832,10 +848,10 @@
     -32525.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_subquest_units_01",
         "squad_members": "t2_subquest_units_02",
-        "squad_members": "t2_subquest_units_03"
+        "squad_members": "t2_subquest_units_03",
+        "object_marking": 0
       }
     },
     "wheeled_vehicles": {
@@ -2405,8 +2421,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2429,8 +2445,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2453,8 +2469,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2528,8 +2544,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2552,8 +2568,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2576,8 +2592,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2600,8 +2616,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2624,8 +2640,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2699,8 +2715,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2723,8 +2739,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2747,8 +2763,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2771,8 +2787,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2795,8 +2811,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2870,8 +2886,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2894,8 +2910,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2918,8 +2934,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2942,8 +2958,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2966,8 +2982,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -2990,8 +3006,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -3015,11 +3031,11 @@
     2963.3,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_01",
         "squad_members": "t2_tank_02",
         "squad_members": "t2_tank_03",
-        "squad_members": "t2_tank_04"
+        "squad_members": "t2_tank_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -3039,7 +3055,6 @@
     2159.0,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_bunker_01",
         "squad_members": "t2_bunker_02",
         "squad_members": "t2_bunker_03",
@@ -3056,7 +3071,8 @@
         "squad_members": "t2_bunker_14",
         "squad_members": "t2_bunker_15",
         "squad_members": "t2_bunker_16",
-        "squad_members": "t2_bunker_17"
+        "squad_members": "t2_bunker_17",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -3076,9 +3092,9 @@
     3564.25,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tanks_squad",
-        "squad_members": "t2_bunkers_squad"
+        "squad_members": "t2_bunkers_squad",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -3298,11 +3314,11 @@
     -542.576,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_big_aaa_01",
         "squad_members": "t2_big_aaa_02",
         "squad_members": "t2_big_aaa_03",
-        "squad_members": "t2_big_aaa_04"
+        "squad_members": "t2_big_aaa_04",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -4172,7 +4188,6 @@
     -215.562,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_small_aaa_01",
         "squad_members": "t2_small_aaa_02",
         "squad_members": "t2_small_aaa_03",
@@ -4189,7 +4204,8 @@
         "squad_members": "t2_small_aaa_14",
         "squad_members": "t2_small_aaa_15",
         "squad_members": "t2_small_aaa_16",
-        "squad_members": "t2_small_aaa_17"
+        "squad_members": "t2_small_aaa_17",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -4559,14 +4575,14 @@
     -444.535,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_medium_aaa_01",
         "squad_members": "t2_medium_aaa_02",
         "squad_members": "t2_medium_aaa_03",
         "squad_members": "t2_medium_aaa_04",
         "squad_members": "t2_medium_aaa_05",
         "squad_members": "t2_medium_aaa_06",
-        "squad_members": "t2_medium_aaa_07"
+        "squad_members": "t2_medium_aaa_07",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -5086,7 +5102,6 @@
     -74.2473,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_long_range_art_01",
         "squad_members": "t2_long_range_art_02",
         "squad_members": "t2_long_range_art_03",
@@ -5096,7 +5111,8 @@
         "squad_members": "t2_long_range_art_07",
         "squad_members": "t2_long_range_art_08",
         "squad_members": "t2_long_range_art_09",
-        "squad_members": "t2_long_range_art_10"
+        "squad_members": "t2_long_range_art_10",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -6816,7 +6832,6 @@
     34.375,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_art_01",
         "squad_members": "t2_art_02",
         "squad_members": "t2_art_03",
@@ -6850,7 +6865,8 @@
         "squad_members": "t2_art_31",
         "squad_members": "t2_art_32",
         "squad_members": "t2_art_33",
-        "squad_members": "t2_art_34"
+        "squad_members": "t2_art_34",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6870,12 +6886,12 @@
     6073.05,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_big_aaa_squad",
         "squad_members": "t2_small_aaa_squad",
         "squad_members": "t2_medium_aaa_squad",
         "squad_members": "t2_long_range_artillery_squad",
-        "squad_members": "t2_artillery_squad"
+        "squad_members": "t2_artillery_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6895,8 +6911,8 @@
     6269.35,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t2_big_aaa_squad"
+        "squad_members": "t2_big_aaa_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6916,8 +6932,8 @@
     7006.84,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t2_tanks_squad"
+        "squad_members": "t2_tanks_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -6937,9 +6953,9 @@
     6610.89,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_light_units_squad",
-        "squad_members": "t2_heavy_units_squad"
+        "squad_members": "t2_heavy_units_squad",
+        "object_marking": 0
       }
     },
     "tracked_vehicles": {
@@ -7009,8 +7025,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7033,8 +7049,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7057,8 +7073,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7132,8 +7148,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7156,8 +7172,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7180,8 +7196,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7204,8 +7220,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7279,8 +7295,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7303,8 +7319,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7327,8 +7343,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7402,8 +7418,8 @@
 ],
           "props": {
             "speed": 10.0,
-            "tas": false,
             "moveType": "GATHER_TO",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7426,8 +7442,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "USE_SPLINES",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7450,8 +7466,8 @@
 ],
           "props": {
             "speed": 30.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -7659,11 +7675,11 @@
     2218.5,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_tank_01",
         "squad_members": "t1_tank_02",
         "squad_members": "t1_tank_03",
-        "squad_members": "t1_tank_04"
+        "squad_members": "t1_tank_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -7683,9 +7699,9 @@
     3337.77,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_tanks_squad",
-        "squad_members": "t1_bunkers_squad"
+        "squad_members": "t1_bunkers_squad",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -8105,7 +8121,6 @@
     1572.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_bunker_01",
         "squad_members": "t1_bunker_02",
         "squad_members": "t1_bunker_03",
@@ -8113,7 +8128,8 @@
         "squad_members": "t1_bunker_05",
         "squad_members": "t1_bunker_06",
         "squad_members": "t1_bunker_07",
-        "squad_members": "t1_bunker_08"
+        "squad_members": "t1_bunker_08",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -8483,14 +8499,14 @@
     2556.24,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_long_range_art_01",
         "squad_members": "t1_long_range_art_02",
         "squad_members": "t1_long_range_art_03",
         "squad_members": "t1_long_range_art_04",
         "squad_members": "t1_long_range_art_05",
         "squad_members": "t1_long_range_art_06",
-        "squad_members": "t1_long_range_art_07"
+        "squad_members": "t1_long_range_art_07",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -8860,14 +8876,14 @@
     4053.6,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_big_aaa_01",
         "squad_members": "t1_big_aaa_02",
         "squad_members": "t1_big_aaa_03",
         "squad_members": "t1_big_aaa_04",
         "squad_members": "t1_big_aaa_05",
         "squad_members": "t1_big_aaa_06",
-        "squad_members": "t1_big_aaa_07"
+        "squad_members": "t1_big_aaa_07",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -8887,11 +8903,11 @@
     7049.32,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_big_aaa_squad",
         "squad_members": "t1_small_aaa_squad",
         "squad_members": "t1_medium_aaa_squad",
-        "squad_members": "t1_artillery_squad"
+        "squad_members": "t1_artillery_squad",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -9311,7 +9327,6 @@
     3715.64,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_small_aaa_01",
         "squad_members": "t1_small_aaa_02",
         "squad_members": "t1_small_aaa_03",
@@ -9319,7 +9334,8 @@
         "squad_members": "t1_small_aaa_05",
         "squad_members": "t1_small_aaa_06",
         "squad_members": "t1_small_aaa_07",
-        "squad_members": "t1_small_aaa_08"
+        "squad_members": "t1_small_aaa_08",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -9589,12 +9605,12 @@
     3280.25,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_medium_aaa_01",
         "squad_members": "t1_medium_aaa_02",
         "squad_members": "t1_medium_aaa_03",
         "squad_members": "t1_medium_aaa_04",
-        "squad_members": "t1_medium_aaa_05"
+        "squad_members": "t1_medium_aaa_05",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -10414,7 +10430,6 @@
     2556.29,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_art_01",
         "squad_members": "t1_art_02",
         "squad_members": "t1_art_03",
@@ -10430,7 +10445,8 @@
         "squad_members": "t1_art_13",
         "squad_members": "t1_art_14",
         "squad_members": "t1_art_15",
-        "squad_members": "t1_art_16"
+        "squad_members": "t1_art_16",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -10450,8 +10466,8 @@
     8781.73,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t1_tanks_squad"
+        "squad_members": "t1_tanks_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -10471,8 +10487,8 @@
     8997.28,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t1_big_aaa_squad"
+        "squad_members": "t1_big_aaa_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -10492,9 +10508,53 @@
     9729.58,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_heavy_units_squad",
-        "squad_members": "t1_light_units_squad"
+        "squad_members": "t1_light_units_squad",
+        "object_marking": 0
+      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -40052.8,
+    145.8,
+    14522.5,
+],
+      "props": {
+        "squad_members": "bdt_t1_aaa_squad",
+        "squad_members": "t1_big_aaa_squad",
+        "squad_members": "t1_small_aaa_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -38307.1,
+    145.8,
+    18685.3,
+],
+      "props": {
+        "squad_members": "bdt_t2_aaa_squad",
+        "squad_members": "t2_big_aaa_squad",
+        "squad_members": "t2_small_aaa_squad"
       }
     }
   },

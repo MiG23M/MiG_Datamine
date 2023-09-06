@@ -211,10 +211,11 @@
       AIRFRAME_GEOMETRY: 1,
       COLLISION_GEOMETRY: 2,
       SYSTEMS: 3,
-      MESSAGES: 4,
-      DM_PART: 5,
-      SKELETON_NODE: 6,
-      MAX: 7
+      AUTOPILOT: 4,
+      MESSAGES: 5,
+      DM_PART: 6,
+      SKELETON_NODE: 7,
+      MAX: 8
     }
     
     //State
@@ -3221,6 +3222,9 @@
           <tr>
             <td><input type="checkbox" id="CheckBoxIndication3", onclick="setIndicationVisible(IndicationFlag.SYSTEMS, this)">Systems</td>
           <tr>
+          <tr>
+            <td><input type="checkbox" id="CheckBoxIndication3", onclick="setIndicationVisible(IndicationFlag.AUTOPILOT, this)">Autopilot</td>
+          <tr>          
             <td class="left"><input type="checkbox" id="CheckBoxIndication4", onclick="setIndicationVisible(IndicationFlag.MESSAGES, this)">Messages</td>
           </tr>
           <tr>

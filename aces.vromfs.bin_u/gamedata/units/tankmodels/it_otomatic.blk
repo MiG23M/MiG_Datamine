@@ -961,6 +961,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.1,
@@ -1824,12 +1828,17 @@
       "minRPM": 800.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 172000.0,
       "driveGearRadius": 0.33,
       "mainGearRatio": 1.0,
       "sideGearRatio": 4.2,
       "neutralGearRatio": 10.0,
       "gearRatios": {
+        "ratio": -1.0,
+        "ratio": -1.335,
+        "ratio": -1.67,
+        "ratio": -2.135,
         "ratio": -2.6,
         "ratio": -3.62,
         "ratio": -4.64,
@@ -2926,6 +2935,7 @@
     },
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
+      "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "tier": 3,
       "effects": {
         "nightVision": {

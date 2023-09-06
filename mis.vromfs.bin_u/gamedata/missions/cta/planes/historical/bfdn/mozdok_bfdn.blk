@@ -279,6 +279,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/templates/air_templates/aat_aaa_template.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -340,14 +354,14 @@
       "conditions": {      },
       "actions": {
         "unitSetProperties": {
-          "object_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "object": "t1_aaa_squad",
           "object": "t1_trucks_aaa_squad",
           "object": "t2_trucks_squad",
           "object": "t2_aaa_squad",
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "accuracy": 0.1,
           "effShootingRate": 0.0,
           "airEffShootingRate": 0.1,
@@ -356,33 +370,33 @@
           "targetChangeProb": 0.25
         },
         "unitSetProperties": {
+          "object": "t1_artillery_squad",
+          "object": "t2_tanks_squad",
+          "object": "t1_light_bunkers_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_artillery_squad",
-          "object": "t2_tanks_squad",
-          "object": "t1_light_bunkers_squad",
           "accuracy": 0.0,
           "effShootingRate": 0.0
         },
         "unitSetProperties": {
+          "object": "t1_soldiers_squad",
+          "object": "t2_soldiers_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "t1_soldiers_squad",
-          "object": "t2_soldiers_squad",
           "accuracy": 0.1,
           "effShootingRate": 0.1,
           "airEffShootingRate": 0.1
         },
         "unitSetProperties": {
+          "object": "bridge_units_squad",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "bridge_units_squad",
           "ignoresObstaclesAfterTime": false
         },
         "wait": {
@@ -453,6 +467,7 @@
           "status": 3,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "A"
         },
         "moSetObjectiveStatus": {
@@ -460,6 +475,7 @@
           "status": 2,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "B"
         },
         "triggerEnable": {
@@ -522,6 +538,7 @@
           "status": 2,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "A"
         },
         "moSetObjectiveStatus": {
@@ -529,6 +546,7 @@
           "status": 3,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "B"
         },
         "triggerEnable": {
@@ -570,6 +588,7 @@
           "status": 3,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "A"
         },
         "moSetObjectiveStatus": {
@@ -577,6 +596,7 @@
           "status": 2,
           "object_var_comp_op": "equal",
           "object_var_name": "",
+          "object_marking": 0,
           "team": "B"
         },
         "triggerEnable": {
@@ -632,6 +652,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_01",
           "move_type": "teleport"
         },
@@ -655,6 +678,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_01"
         }
       },
@@ -707,6 +733,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_02",
           "move_type": "teleport"
         },
@@ -730,6 +759,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_02"
         }
       },
@@ -782,6 +814,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_03",
           "move_type": "teleport"
         },
@@ -805,6 +840,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_03"
         }
       },
@@ -857,6 +895,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_04",
           "move_type": "teleport"
         },
@@ -880,6 +921,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "t2_soldier_04"
         }
       },
@@ -1009,6 +1053,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -1215,6 +1260,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1263,6 +1309,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1311,6 +1358,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -1349,13 +1397,13 @@
     10685.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_small_aaa_01",
         "squad_members": "t1_small_aaa_02",
         "squad_members": "t1_small_aaa_04",
         "squad_members": "t1_small_aaa_05",
         "squad_members": "t1_small_aaa_09",
-        "squad_members": "t1_small_aaa_11"
+        "squad_members": "t1_small_aaa_11",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -1388,6 +1436,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1436,6 +1485,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1484,6 +1534,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -1535,6 +1586,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -1573,7 +1625,6 @@
     9915.81,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_soldier_01",
         "squad_members": "t1_soldier_07",
         "squad_members": "t1_soldier_08",
@@ -1586,7 +1637,8 @@
         "squad_members": "t1_soldier_19",
         "squad_members": "t1_soldier_21",
         "squad_members": "t1_soldier_22",
-        "squad_members": "t1_soldier_24"
+        "squad_members": "t1_soldier_24",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -1606,13 +1658,13 @@
     10588.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_art_06",
         "squad_members": "t1_art_07",
         "squad_members": "t1_art_08",
         "squad_members": "t1_art_09",
         "squad_members": "t1_art_10",
-        "squad_members": "t1_art_12"
+        "squad_members": "t1_art_12",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -1632,7 +1684,6 @@
     11256.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_base_01_stuff_01",
         "squad_members": "t1_base_01_stuff_02",
         "squad_members": "t1_base_01_stuff_03",
@@ -1640,7 +1691,8 @@
         "squad_members": "t1_base_01_stuff_05",
         "squad_members": "t1_base_01_stuff_06",
         "squad_members": "t1_base_01_stuff_07",
-        "squad_members": "t1_base_01_stuff_08"
+        "squad_members": "t1_base_01_stuff_08",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -1660,12 +1712,12 @@
     7625.22,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_aaa_squad",
         "squad_members": "t1_artillery_squad",
         "squad_members": "t1_base_01_squad",
         "squad_members": "t1_base_02_squad",
-        "squad_members": "t1_base_03_squad"
+        "squad_members": "t1_base_03_squad",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -1698,6 +1750,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1746,6 +1799,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1794,6 +1848,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1842,6 +1897,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1890,6 +1946,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1938,6 +1995,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1986,6 +2044,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2034,6 +2093,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2082,6 +2142,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2130,6 +2191,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2181,6 +2243,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2232,6 +2295,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2283,6 +2347,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2334,6 +2399,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2385,6 +2451,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2436,6 +2503,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2487,6 +2555,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2538,6 +2607,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2589,6 +2659,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "attack_type": "fire_at_will",
@@ -2640,6 +2711,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2688,6 +2760,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2736,6 +2809,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2784,6 +2858,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2832,6 +2907,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2867,10 +2943,10 @@
     9718.05,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "bridges_42",
         "squad_members": "bridges_43",
-        "squad_members": "bridges_3"
+        "squad_members": "bridges_3",
+        "object_marking": 0
       }
     },
     "wheeled_vehicles": {
@@ -2903,6 +2979,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -2939,8 +3016,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -2963,8 +3040,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -2987,8 +3064,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3011,8 +3088,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3035,8 +3112,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3059,8 +3136,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3083,8 +3160,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -3107,12 +3184,12 @@
     10568.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_truck_01",
         "squad_members": "t1_truck_02",
         "squad_members": "t1_truck_03",
         "squad_members": "t1_truck_04",
-        "squad_members": "t1_truck_05"
+        "squad_members": "t1_truck_05",
+        "object_marking": 0
       }
     },
     "wheeled_vehicles": {
@@ -3145,6 +3222,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -3181,8 +3259,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3205,8 +3283,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3229,8 +3307,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3253,8 +3331,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3277,8 +3355,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3301,8 +3379,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3325,8 +3403,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -3362,6 +3440,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -3398,8 +3477,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3422,8 +3501,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3446,8 +3525,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3470,8 +3549,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3494,8 +3573,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3518,8 +3597,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3542,8 +3621,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3566,8 +3645,8 @@
           "props": {
             "speed": 10.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -3603,6 +3682,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -3639,8 +3719,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3663,8 +3743,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3687,8 +3767,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3711,8 +3791,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3735,8 +3815,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3759,8 +3839,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3783,8 +3863,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -3820,6 +3900,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 7,
@@ -3856,8 +3937,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3880,8 +3961,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3904,8 +3985,8 @@
           "props": {
             "speed": 40.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3928,8 +4009,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3952,8 +4033,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -3976,8 +4057,8 @@
           "props": {
             "speed": 50.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4000,8 +4081,8 @@
           "props": {
             "speed": 15.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -4037,6 +4118,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 3,
@@ -4073,8 +4155,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4097,8 +4179,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4121,8 +4203,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4145,8 +4227,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4169,8 +4251,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4193,8 +4275,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4217,8 +4299,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4241,8 +4323,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -4278,6 +4360,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 3,
@@ -4314,8 +4397,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4338,8 +4421,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4362,8 +4445,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4386,8 +4469,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4410,8 +4493,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4434,8 +4517,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4458,8 +4541,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -4495,6 +4578,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 3,
@@ -4531,8 +4615,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4555,8 +4639,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4579,8 +4663,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4603,8 +4687,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4627,8 +4711,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4651,8 +4735,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4675,8 +4759,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4699,8 +4783,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -4736,6 +4820,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 5,
@@ -4772,8 +4857,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4796,8 +4881,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4820,8 +4905,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4844,8 +4929,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4868,8 +4953,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -4892,8 +4977,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -4916,8 +5001,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -4940,11 +5025,11 @@
     24983.1,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_01",
         "squad_members": "t2_tank_02",
         "squad_members": "t2_tank_03",
-        "squad_members": "t2_tank_04"
+        "squad_members": "t2_tank_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -4964,11 +5049,11 @@
     24827.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_truck_01",
         "squad_members": "t2_truck_02",
         "squad_members": "t2_truck_03",
-        "squad_members": "t2_truck_04"
+        "squad_members": "t2_truck_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -4988,12 +5073,12 @@
     25185.0,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_aaa_squad",
         "squad_members": "t2_base_units_squad",
         "squad_members": "t2_base_01_squad",
         "squad_members": "t2_base_02_squad",
-        "squad_members": "t2_base_03_squad"
+        "squad_members": "t2_base_03_squad",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -5026,6 +5111,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5074,6 +5160,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5122,6 +5209,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5170,6 +5258,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5218,6 +5307,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5266,6 +5356,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5314,6 +5405,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5349,7 +5441,6 @@
     25623.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_small_aaa_01",
         "squad_members": "t2_small_aaa_02",
         "squad_members": "t2_small_aaa_03",
@@ -5358,7 +5449,8 @@
         "squad_members": "t2_small_aaa_06",
         "squad_members": "t2_small_aaa_07",
         "squad_members": "t2_small_aaa_08",
-        "squad_members": "t2_small_aaa_09"
+        "squad_members": "t2_small_aaa_09",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5378,7 +5470,6 @@
     17144.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_base_01_stuff_01",
         "squad_members": "t2_base_01_stuff_02",
         "squad_members": "t2_base_01_stuff_03",
@@ -5386,7 +5477,8 @@
         "squad_members": "t2_base_01_stuff_05",
         "squad_members": "t2_base_01_stuff_06",
         "squad_members": "t2_base_01_stuff_07",
-        "squad_members": "t2_base_01_stuff_08"
+        "squad_members": "t2_base_01_stuff_08",
+        "object_marking": 0
       }
     },
     "infantry": {
@@ -5419,6 +5511,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -5470,6 +5563,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -5521,6 +5615,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -5572,6 +5667,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -5610,14 +5706,14 @@
     23530.5,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_soldier_01",
         "squad_members": "t2_soldier_02",
         "squad_members": "t2_soldier_03",
         "squad_members": "t2_soldier_04",
         "squad_members": "t2_soldier_05",
         "squad_members": "t2_soldier_06",
-        "squad_members": "t2_soldier_07"
+        "squad_members": "t2_soldier_07",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5637,8 +5733,8 @@
     22144.1,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t2_tanks_squad"
+        "squad_members": "t2_tanks_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5658,9 +5754,9 @@
     22125.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_heavy_units_squad",
-        "squad_members": "t2_light_units_squad"
+        "squad_members": "t2_light_units_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5680,8 +5776,8 @@
     22662.4,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t2_trucks_squad"
+        "squad_members": "t2_trucks_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5701,8 +5797,8 @@
     13594.7,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "t1_trucks_squad"
+        "squad_members": "t1_trucks_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5722,8 +5818,8 @@
     13487.8,
 ],
       "props": {
-        "object_marking": 0,
-        "squad_members": "structures_01"
+        "squad_members": "structures_01",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -5743,9 +5839,9 @@
     13986.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_heavy_units_squad",
-        "squad_members": "t1_light_units_squad"
+        "squad_members": "t1_light_units_squad",
+        "object_marking": 0
       }
     },
     "wheeled_vehicles": {
@@ -5778,6 +5874,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 4,
@@ -5814,8 +5911,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -5838,8 +5935,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -5862,8 +5959,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -5886,8 +5983,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -5910,8 +6007,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -5934,8 +6031,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -5958,8 +6055,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -5982,8 +6079,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -6019,6 +6116,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 5,
@@ -6055,8 +6153,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -6079,8 +6177,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6103,8 +6201,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6127,8 +6225,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6151,8 +6249,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6175,8 +6273,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -6199,8 +6297,8 @@
           "props": {
             "speed": 18.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -6236,6 +6334,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 4,
@@ -6272,8 +6371,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -6296,8 +6395,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6320,8 +6419,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6344,8 +6443,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6368,8 +6467,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6392,8 +6491,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -6416,8 +6515,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6440,8 +6539,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -6477,6 +6576,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 2,
@@ -6513,8 +6613,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -6537,8 +6637,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6561,8 +6661,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6585,8 +6685,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6609,8 +6709,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -6633,8 +6733,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -6657,8 +6757,8 @@
           "props": {
             "speed": 20.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -6694,6 +6794,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6742,6 +6843,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6790,6 +6892,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6838,6 +6941,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6886,6 +6990,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6934,6 +7039,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6982,6 +7088,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -7030,6 +7137,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -7078,6 +7186,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -7126,6 +7235,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -7161,7 +7271,6 @@
     8504.67,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_def_small_aaa_01",
         "squad_members": "t1_def_small_aaa_02",
         "squad_members": "t1_def_small_aaa_03",
@@ -7171,7 +7280,8 @@
         "squad_members": "t1_def_big_aaa_01",
         "squad_members": "t1_def_big_aaa_02",
         "squad_members": "t1_def_big_aaa_03",
-        "squad_members": "t1_def_big_aaa_04"
+        "squad_members": "t1_def_big_aaa_04",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -7204,6 +7314,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7252,6 +7363,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7300,6 +7412,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7348,6 +7461,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7396,6 +7510,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7444,6 +7559,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7492,6 +7608,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7540,6 +7657,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7588,6 +7706,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7636,6 +7755,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7671,7 +7791,6 @@
     22398.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_def_small_aaa_01",
         "squad_members": "t2_def_small_aaa_02",
         "squad_members": "t2_def_small_aaa_03",
@@ -7681,7 +7800,8 @@
         "squad_members": "t2_def_big_aaa_01",
         "squad_members": "t2_def_big_aaa_02",
         "squad_members": "t2_def_big_aaa_03",
-        "squad_members": "t2_def_big_aaa_04"
+        "squad_members": "t2_def_big_aaa_04",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -7701,10 +7821,10 @@
     13079.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "bridges_42",
         "squad_members": "bridges_3",
-        "squad_members": "bridges_43"
+        "squad_members": "bridges_43",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -7724,10 +7844,10 @@
     11348.5,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_trucks_squad",
         "squad_members": "t2_trucks_squad",
-        "squad_members": "t2_tanks_squad"
+        "squad_members": "t2_tanks_squad",
+        "object_marking": 0
       }
     },
     "infantry": {
@@ -7760,6 +7880,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -7811,6 +7932,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -7862,6 +7984,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "attack_type": "fire_at_will",
@@ -7913,6 +8036,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -7961,6 +8085,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8075,6 +8200,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8123,6 +8249,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8171,6 +8298,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8219,6 +8347,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8267,6 +8396,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8315,6 +8445,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8363,6 +8494,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8411,6 +8543,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8459,6 +8592,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8507,6 +8641,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8555,6 +8690,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -8603,6 +8739,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -8651,6 +8788,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8699,6 +8837,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8747,6 +8886,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8795,6 +8935,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8843,6 +8984,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8891,6 +9033,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8939,6 +9082,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -8974,7 +9118,6 @@
     19606.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_base_02_stuff_01",
         "squad_members": "t2_base_02_stuff_02",
         "squad_members": "t2_base_02_stuff_03",
@@ -8982,7 +9125,8 @@
         "squad_members": "t2_base_02_stuff_05",
         "squad_members": "t2_base_02_stuff_06",
         "squad_members": "t2_base_02_stuff_07",
-        "squad_members": "t2_base_02_stuff_08"
+        "squad_members": "t2_base_02_stuff_08",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -9015,6 +9159,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9063,6 +9208,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9111,6 +9257,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9159,6 +9306,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9207,6 +9355,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9255,6 +9404,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9303,6 +9453,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -9338,7 +9489,6 @@
     21428.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_base_03_stuff_01",
         "squad_members": "t2_base_03_stuff_02",
         "squad_members": "t2_base_03_stuff_03",
@@ -9346,7 +9496,8 @@
         "squad_members": "t2_base_03_stuff_05",
         "squad_members": "t2_base_03_stuff_06",
         "squad_members": "t2_base_03_stuff_07",
-        "squad_members": "t2_base_03_stuff_08"
+        "squad_members": "t2_base_03_stuff_08",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -9366,11 +9517,11 @@
     12041.2,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_truck_aaa_01",
         "squad_members": "t1_truck_aaa_02",
         "squad_members": "t1_truck_aaa_03",
-        "squad_members": "t1_truck_aaa_04"
+        "squad_members": "t1_truck_aaa_04",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -9403,6 +9554,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9451,6 +9603,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9499,6 +9652,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9547,6 +9701,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9595,6 +9750,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9643,6 +9799,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9691,6 +9848,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9739,6 +9897,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9853,6 +10012,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9901,6 +10061,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9949,6 +10110,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9997,6 +10159,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10045,6 +10208,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10093,6 +10257,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10141,6 +10306,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10189,6 +10355,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10312,7 +10479,6 @@
     12092.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_base_02_stuff_01",
         "squad_members": "t1_base_02_stuff_02",
         "squad_members": "t1_base_02_stuff_03",
@@ -10320,7 +10486,8 @@
         "squad_members": "t1_base_02_stuff_05",
         "squad_members": "t1_base_02_stuff_06",
         "squad_members": "t1_base_02_stuff_07",
-        "squad_members": "t1_base_02_stuff_08"
+        "squad_members": "t1_base_02_stuff_08",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -10353,6 +10520,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10401,6 +10569,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10449,6 +10618,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10497,6 +10667,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10545,6 +10716,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10593,6 +10765,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10641,6 +10814,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10689,6 +10863,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10812,7 +10987,6 @@
     13828.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_base_03_stuff_01",
         "squad_members": "t1_base_03_stuff_02",
         "squad_members": "t1_base_03_stuff_03",
@@ -10820,7 +10994,8 @@
         "squad_members": "t1_base_03_stuff_05",
         "squad_members": "t1_base_03_stuff_06",
         "squad_members": "t1_base_03_stuff_07",
-        "squad_members": "t1_base_03_stuff_08"
+        "squad_members": "t1_base_03_stuff_08",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -10853,6 +11028,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10901,6 +11077,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10949,6 +11126,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -10997,6 +11175,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -11045,6 +11224,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -11093,6 +11273,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -11141,6 +11322,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -11176,7 +11358,6 @@
     10926.4,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_bunker_light_01",
         "squad_members": "t1_bunker_light_02",
         "squad_members": "t1_bunker_light_03",
@@ -11186,7 +11367,8 @@
         "squad_members": "t1_bunker_light_07",
         "squad_members": "t1_bunker_light_08",
         "squad_members": "t1_bunker_light_09",
-        "squad_members": "t1_bunker_light_10"
+        "squad_members": "t1_bunker_light_10",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -11206,9 +11388,9 @@
     15231.8,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_01",
-        "squad_members": "t2_truck_01"
+        "squad_members": "t2_truck_01",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -11228,9 +11410,9 @@
     16885.8,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_02",
-        "squad_members": "t2_truck_02"
+        "squad_members": "t2_truck_02",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -11250,9 +11432,9 @@
     17558.0,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_03",
-        "squad_members": "t2_truck_03"
+        "squad_members": "t2_truck_03",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -11272,9 +11454,9 @@
     18427.9,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_tank_04",
-        "squad_members": "t2_truck_04"
+        "squad_members": "t2_truck_04",
+        "object_marking": 0
       }
     },
     "air_defence": {
@@ -11307,6 +11489,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -11355,6 +11538,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 2,
@@ -11391,8 +11575,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11415,8 +11599,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11439,8 +11623,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11463,8 +11647,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11487,8 +11671,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11511,8 +11695,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11535,8 +11719,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11559,8 +11743,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11583,8 +11767,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         }
@@ -11620,6 +11804,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 2,
@@ -11656,8 +11841,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11680,8 +11865,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11704,8 +11889,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11728,8 +11913,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11752,8 +11937,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11776,8 +11961,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11800,8 +11985,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11824,8 +12009,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11848,8 +12033,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -11872,10 +12057,10 @@
     20501.7,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_base_truck_01",
         "squad_members": "t1_base_escort_01",
-        "squad_members": "t1_base_escort_02"
+        "squad_members": "t1_base_escort_02",
+        "object_marking": 0
       }
     },
     "wheeled_vehicles": {
@@ -11908,6 +12093,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -11944,8 +12130,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "GATHER_TO",
-            "shouldKeepFormation": false,
             "tas": false,
+            "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
         },
@@ -11968,8 +12154,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -11992,8 +12178,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -12016,8 +12202,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -12040,8 +12226,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -12064,8 +12250,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -12088,8 +12274,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -12112,8 +12298,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         },
@@ -12136,8 +12322,8 @@
           "props": {
             "speed": 30.0,
             "moveType": "USE_SPLINES",
-            "shouldKeepFormation": true,
             "tas": false,
+            "shouldKeepFormation": true,
             "canUsePathFinder": false
           }
         }
@@ -12160,9 +12346,9 @@
     1077.75,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_trucks_squad",
-        "squad_members": "t1_bunkers_light_squad"
+        "squad_members": "t1_bunkers_light_squad",
+        "object_marking": 0
       }
     },
     "squad": {
@@ -12182,9 +12368,9 @@
     29538.6,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t2_trucks_squad",
-        "squad_members": "t2_tanks_squad"
+        "squad_members": "t2_tanks_squad",
+        "object_marking": 0
       }
     },
     "structures": {
@@ -12217,6 +12403,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 0,
         "count": 1,
@@ -12255,7 +12442,6 @@
     16104.6,
 ],
       "props": {
-        "object_marking": 0,
         "squad_members": "t1_bunker_light_01",
         "squad_members": "t1_bunker_light_02",
         "squad_members": "t1_bunker_light_03",
@@ -12265,7 +12451,50 @@
         "squad_members": "t1_bunker_light_07",
         "squad_members": "t1_bunker_light_08",
         "squad_members": "t1_bunker_light_09",
-        "squad_members": "t1_bunker_light_10"
+        "squad_members": "t1_bunker_light_10",
+        "object_marking": 0
+      }
+    },
+    "squad": {
+      "name": "t1_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -4320.75,
+    117.15,
+    -1300.9,
+],
+      "props": {
+        "squad_members": "t1_aaa_squad",
+        "squad_members": "t1_trucks_squad"
+      }
+    },
+    "squad": {
+      "name": "t2_all_aaa_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -5902.7,
+    105.3,
+    -780.95,
+],
+      "props": {
+        "squad_members": "t2_aaa_squad",
+        "squad_members": "t2_trucks_squad"
       }
     }
   },

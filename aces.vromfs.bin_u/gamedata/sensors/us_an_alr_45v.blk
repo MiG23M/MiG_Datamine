@@ -13,12 +13,15 @@
   ],
   "range": 50000.0,
   "signalSfxName": "alarm_radar",
-  "band3": true,
   "band4": true,
-  "band5": true,
   "band6": true,
-  "band7": true,
   "band8": true,
+  "detectTracking": false,
+  "detectLaunch": false,
+  "targetTracking": false,
+  "mandatoryRecognition": true,
+  "band5": true,
+  "band7": true,
   "band9": true,
   "receivers": {
     "receiver": {
@@ -34,6 +37,109 @@
       "azimuthWidth": 180.0,
       "elevationWidth": 90.0,
       "angleFinder": true
+    }
+  },
+  "groups": {
+    "group": {
+      "name": "AI HIGH",
+      "type": "Sapphire-21",
+      "type": "Sapphire-23d_tp_23",
+      "type": "Sapphire-23ml_tp_23m",
+      "type": "Sapphire-23mla_tp_23m",
+      "type": "Sapphire-23mla-2_tp_23m"
+    },
+    "group": {
+      "name": "AI/AAA MID",
+      "type": "AN/APS-6",
+      "type": "AN/APS-19",
+      "type": "AN/APS-21",
+      "type": "AN/APS-67",
+      "type": "NASARR",
+      "type": "US R21G M1",
+      "type": "AN/APQ-72",
+      "type": "AN/APQ-100",
+      "type": "AN/APQ-104",
+      "type": "AN/APQ-120",
+      "type": "AN/APQ-126",
+      "type": "AN/APQ-159",
+      "type": "AN/APQ-50",
+      "type": "AN/APQ-51",
+      "type": "AN/APQ-94",
+      "type": "AN/APG-26",
+      "type": "AN/APG-33",
+      "type": "Thorium",
+      "type": "RP-5",
+      "type": "CD-30",
+      "type": "Cyrano Ibis",
+      "type": "Cyrano II",
+      "type": "Cyrano-IV",
+      "type": "Cyrano-IVMR",
+      "type": "DRAC-25A",
+      "type": "DRAC-32A",
+      "type": "DRAA 3D AIDA",
+      "type": "AI Mk.23",
+      "type": "AI Mk.18",
+      "type": "PS-03",
+      "type": "PS-011A 71H IR",
+      "type": "PS-42",
+      "type": "Type 1492",
+      "type": "Type 208A",
+      "type": "AN/APG-30",
+      "type": "AN/ASG-14",
+      "type": "AN/ASG-19",
+      "type": "SRD-1",
+      "type": "SRD-5",
+      "type": "AIDA 2",
+      "type": "ARI.5820",
+      "type": "ARI.5857",
+      "type": "Marconi Type 226",
+      "type": "ELTA EL/M-2001B",
+      "type": "1RL34"
+    },
+    "group": {
+      "name": "AAA LOW"
+    },
+    "group": {
+      "name": "SAM HIGH",
+      "detectTracking": true,
+      "detectLaunch": true,
+      "type": "4R-90-Yatagan"
+    },
+    "group": {
+      "name": "SAM MID",
+      "detectTracking": true,
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "SAM LOW",
+      "detectTracking": true,
+      "detectLaunch": true
+    }
+  },
+  "targetsPresenceGroups": {
+    "targetsPresenceGroup": {
+      "text": "AI",
+      "group": "AI HIGH"
+    },
+    "targetsPresenceGroup": {
+      "text": "AIAA",
+      "group": "AI/AAA MID"
+    },
+    "targetsPresenceGroup": {
+      "text": "AAA",
+      "group": "AAA LOW"
+    },
+    "targetsPresenceGroup": {
+      "text": "S125",
+      "group": "SAM HIGH"
+    },
+    "targetsPresenceGroup": {
+      "text": "SAM",
+      "group": "SAM MID"
+    },
+    "targetsPresenceGroup": {
+      "text": "SA75",
+      "group": "SAM LOW"
     }
   }
 }

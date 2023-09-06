@@ -110,6 +110,30 @@
       "node": "body_shutter_r",
       "absoluteValue": true,
       "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
     }
   },
   "DamageParts": {
@@ -205,6 +229,14 @@
       "ex_decor_29_dm": {
         "armorThickness": 5.0,
         "armorClass": "tank_structural_steel"
+      }
+    },
+    "hull_turret_spaced_armor": {
+      "armorClass": "RHA_tank",
+      "composite_armor_hull_01_dm": {
+        "armorThickness": 15.0,
+        "hidableInViewer": true,
+        "hidableInXrayViewer": true
       }
     },
     "turret": {
@@ -831,9 +863,20 @@
       }
     }
   },
+  "xray_viewer_data": {
+    "armorArrayHullFront": {
+      "xrayDmPart": "composite_armor_hull_01_dm",
+      "titleLoc": "RHA_tank",
+      "armorArrayText": {
+        "layer": {
+          "dmPart": "composite_armor_hull_01_dm"
+        }
+      }
+    }
+  },
   "attachables": {
-    "cd_body_dm": true,
-    "cd_turret_dm": true,
+    "turret_05_bottom_dm": true,
+    "turret_05_front_dm": true,
     "ex_decor_26_dm": true,
     "ex_decor_21_dm": true,
     "ex_decor_22_dm": true,
@@ -1182,6 +1225,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.1,
@@ -2042,6 +2089,7 @@
       "minRPM": 600.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 150000.0,
       "driveGearRadius": 0.33,
       "mainGearRatio": 7.4,

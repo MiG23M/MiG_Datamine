@@ -8,6 +8,7 @@
   "gyroSight": true,
   "haveCCIPForGun": true,
   "haveCCIPForTurret": true,
+  "ilsASP17": true,
   "hasPointOfInterestMemory": false,
   "gearSinkRangeLR": 0.316,
   "gearSinkRangeC": 0.25,
@@ -1258,10 +1259,65 @@
   },
   "Sound": {
     "Engine": "engine_mi24",
+    "voiceWarningSystem": "rita",
     "gun": "gun_default",
     "turretTurnSfxPath": "tanks/effects_tanks",
     "turretTurnSfxPathStudio": "aircraft/effects",
-    "turretTurnSfxName": "turret_turn_servo"
+    "turretTurnSfxName": "turret_turn_servo",
+    "voiceWarningSystemOverride": {
+      "vws_right": {      },
+      "vws_left": {      },
+      "vws_ahead": {      },
+      "vws_behind": {      },
+      "vws_high": {      },
+      "vws_low": {      },
+      "vws_missile": {      },
+      "vws_counter": {      },
+      "vws_lock": {      },
+      "vws_chaff_flare": {      },
+      "vws_chaff_flare_low": {      },
+      "vws_out": {      },
+      "vws_jammer": {      },
+      "vws_critical_angle": {      },
+      "vws_over_g": {      },
+      "vws_critical_speed": {      },
+      "vws_dangerous_close": {      },
+      "vws_gear_down": {      },
+      "vws_check_gear": {      },
+      "vws_pull_up": {      },
+      "vws_roll_left": {      },
+      "vws_roll_right": {      },
+      "vws_fire": {      },
+      "vws_engine_fire": {      },
+      "vws_engine_fire_left": {      },
+      "vws_engine_fire_right": {      },
+      "vws_decrease_engine_rpm": {      },
+      "vws_decrease_left_engine_rpm": {      },
+      "vws_decrease_right_engine_rpm": {      },
+      "vws_critical_engine_vibration": {      },
+      "vws_critical_left_engine_vibration": {      },
+      "vws_critical_right_engine_vibration": {      },
+      "vws_caution": {      },
+      "vws_engine_overheat": {      },
+      "vws_left_engine_overheat": {      },
+      "vws_right_engine_overheat": {      },
+      "vws_engine_failure": {      },
+      "vws_left_engine_failure": {      },
+      "vws_right_engine_failure": {      },
+      "vws_warning": {      },
+      "vws_generator_failure": {      },
+      "vws_left_generator_failure": {      },
+      "vws_right_generator_failure": {      },
+      "vws_main_gearbox_failure": {      },
+      "vws_tailrotor_gearbox_failure": {      },
+      "vws_bingo": {      },
+      "vws_check_fuel": {      },
+      "vws_fuel_low": {      },
+      "vws_lock_cockpit": {      },
+      "vws_hydrosystem_failure": {      },
+      "vws_increase_engine_rpm": {      },
+      "vws_check_mech": {      }
+    }
   },
   "cockpit": {
     "headPos": [
@@ -1527,6 +1583,26 @@
         0.0
       ]
     },
+    "multifunctionDisplays": {
+      "display": {
+        "textureArea": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "page": {
+          "type": "plane_ils",
+          "ilsSize": [
+            0.2,
+            0.2
+          ],
+          "ilsOffsetForce": 0.2,
+          "brightnessMult": 3.5,
+          "ilsColor": [10, 101, 202, 180]
+        }
+      }
+    },
     "parts_holes_dmg": {
       "part": "fuse"
     },
@@ -1660,11 +1736,7 @@
       "node": "lipa",
       "node": "lipa_off",
       "node": "ub_57_16_b001",
-      "node": "ub_57_16_b002",
-      "node": "fuse2",
-      "node": "fuse4",
-      "node": "lipa",
-      "node": "lipa_off"
+      "node": "ub_57_16_b002"
     },
     "HideDmParts": {
       "node": "cover5_dm",
@@ -1681,7 +1753,7 @@
       "WeaponPreset": {
         "name": "gun_yak_b_common",
         "ShowNodes": {
-          "node": "fuse2"
+          "node": "fuse4"
         },
         "Weapon": {
           "dummy": true,
@@ -1766,7 +1838,8 @@
       "WeaponPreset": {
         "name": "gun_yak_b_exhaust_common",
         "ShowNodes": {
-          "node": "fuse2"
+          "node": "fuse2",
+          "node": "fuse4"
         },
         "Weapon": {
           "dummy": true,
@@ -3683,6 +3756,7 @@
       "tier": 3,
       "group": "countermeasures",
       "effects": {
+        "enginesInfraRedBrightnessMult": 0.7,
         "counterMeasures": {
           "counterMeasure": {
             "blk": "gameData/counterMeasures/l_166.blk"

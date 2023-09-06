@@ -45,6 +45,7 @@
     "maxDistance": 10000.0,
     "normalizationPreset": "heat",
     "ricochetPreset": "he",
+    "groundRicochetPreset": "he",
     "secondaryShattersPreset": "ap",
     "stabilityThreshold": 0.5,
     "stabilityCaliberToArmorThreshold": 5.0,
@@ -107,6 +108,7 @@
     ],
     "fuseOnWater": true,
     "fuseOnWaterProbability": 1.0,
+    "ricochetTimeToLive": 0.085,
     "fuseDelayDist": 0.4,
     "shutterDamage": true,
     "shutterDamageRadius": 18.5,
@@ -132,6 +134,11 @@
       0.8
     ],
     "explosionPatchRadius": 1.5,
+    "waterRicochetEffect": "hit_81_105mm_water_ap",
+    "groundRicochetEffect": "hit_81_105mm_dirt_ap",
+    "destructionBreakFx": "smoke_shell_explosion",
+    "destructionFireFx": "fire_thermite",
+    "destructionExplosionFx": "explosion_tank_ammunition_smoke",
     "stabilityRicochetModifier": {
       "mod1": [
         0.0,
@@ -148,7 +155,8 @@
     },
     "collisions": {
       "steel": {
-        "fx": "smoke_shell_explosion"
+        "fx": "smoke_shell_explosion",
+        "ricochetFx": "hit_59_80mm_stone_ap"
       }
     },
     "visual": {

@@ -50,6 +50,96 @@
   "rearmSmokeTimeOnField": 60.0,
   "canReloadNonGuns": true,
   "rearmTimeOnField": 60.0,
+  "controlDevices": {
+    "device": {
+      "type": "turretTurnH",
+      "turnSpeed": 0.6,
+      "node": "bone_roll_turret_h",
+      "node_handle": "bone_roll_turret_h_handle"
+    },
+    "device": {
+      "type": "turretTurnV",
+      "turnSpeed": -1.0,
+      "node": "bone_roll_turret_v",
+      "node_handle": "bone_roll_turret_v_handle"
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -3.0,
+      "node": "bone_roll_driver",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "engineFan",
+      "turnSpeed": 1.0,
+      "node": "bone_roll_engine_01"
+    },
+    "device": {
+      "type": "engineFan",
+      "turnSpeed": 1.0,
+      "node": "bone_roll_engine_02"
+    },
+    "device": {
+      "type": "engineFan",
+      "turnSpeed": 1.0,
+      "node": "bone_roll_engine_03"
+    },
+    "device": {
+      "type": "engineFan",
+      "turnSpeed": 1.0,
+      "node": "bone_roll_engine_04"
+    },
+    "device": {
+      "type": "engineFan",
+      "turnSpeed": 1.0,
+      "node": "bone_roll_engine_05"
+    },
+    "device": {
+      "type": "engineFan",
+      "turnSpeed": 1.0,
+      "node": "bone_roll_engine_06"
+    },
+    "device": {
+      "type": "waterJetShutter",
+      "turnSpeed": 1.5,
+      "maxValue": -1.7,
+      "node": "body_shutter_l",
+      "absoluteValue": true,
+      "progressive": true
+    },
+    "device": {
+      "type": "waterJetShutter",
+      "turnSpeed": 1.5,
+      "maxValue": 1.7,
+      "node": "body_shutter_r",
+      "absoluteValue": true,
+      "progressive": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_l_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_l_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.5,
+      "node": "bone_roll_driver_r_01",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": -0.2,
+      "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
+    }
+  },
   "DamageParts": {
     "formatVersion": 2,
     "armorClass": "RHAHH_tank",
@@ -960,6 +1050,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.1,
@@ -1535,48 +1629,6 @@
     "vertical": true,
     "horizontal": true
   },
-  "chainIK": {
-    "points": {
-      "point": {
-        "nameTemplate": "bone_roll_01_01"
-      },
-      "point": {
-        "nameTemplate": "bone_roll_01_02"
-      }
-    },
-    "points": {
-      "point": {
-        "nameTemplate": "bone_roll_01_04"
-      },
-      "point": {
-        "nameTemplate": "bone_roll_01_03"
-      }
-    },
-    "points": {
-      "point": {
-        "nameTemplate": "bone_roll_01_06"
-      },
-      "point": {
-        "nameTemplate": "bone_roll_01_07"
-      }
-    },
-    "points": {
-      "point": {
-        "nameTemplate": "bone_roll_01_05"
-      },
-      "point": {
-        "nameTemplate": "bone_roll_01_08"
-      }
-    },
-    "points": {
-      "point": {
-        "nameTemplate": "bone_roll_01_09"
-      },
-      "point": {
-        "nameTemplate": "bone_roll_01_10"
-      }
-    }
-  },
   "dmgAngles": {
     "hatch_07": [
       60.0,
@@ -1616,6 +1668,7 @@
       "shellCasingScale": 0.15,
       "shellCasingImpulseOffset": 0.02,
       "recoilOffset": 0.3,
+      "jammedReloadTime": 15.0,
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
       "barrelDP": "gun_barrel_dm",
@@ -1838,6 +1891,12 @@
       "dampeningRelaxationRatio": 0.15,
       "dampeningCompressionRatio": 0.05,
       "brokenWheelSteeringDeflection": -15.0,
+      "steeringNodes": {
+        "wheel_r_01": "bone_wheel_r_01",
+        "wheel_l_01": "bone_wheel_l_01",
+        "wheel_r_02": "bone_wheel_r_02",
+        "wheel_l_02": "bone_wheel_l_02"
+      },
       "steeringDeflection": {
         "wheel_l_01": 25.0,
         "wheel_l_02": 10.0,
@@ -1970,11 +2029,33 @@
   "PhysSys": {
     "find": "^bone_suspension_(._\d\d)$",
     "points": {
-      "suspension": {
+      "lever": {
+        "limitMin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "limitMax": [
+          0.0,
+          0.0,
+          0.0
+        ],
         "name": "bone_suspension_$1"
       },
+      "suspension_01_02": {
+        "limitMin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "limitMax": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "name": "bone_suspension_$1_02"
+      },
       "wheel": {
-        "name": "bone_wheel_$1",
         "limitMin": [
           -1.0,
           -1.0,
@@ -1984,13 +2065,263 @@
           1.0,
           1.0,
           0.0
-        ]
+        ],
+        "name": "bone_wheel_$1"
+      },
+      "suspension_01_03": {
+        "limitMin": [
+          -1.0,
+          -1.0,
+          0.0
+        ],
+        "limitMax": [
+          1.0,
+          1.0,
+          0.0
+        ],
+        "name": "bone_suspension_$1_03"
       }
     },
     "constraints": {
       "edge": {
-        "from": "suspension",
+        "to": "wheel",
+        "from": "lever"
+      },
+      "projection": {
+        "to": "wheel",
+        "from": "lever",
+        "point": "suspension_01_02"
+      },
+      "projection": {
+        "point": "suspension_01_03",
+        "from": "lever",
         "to": "wheel"
+      }
+    }
+  },
+  "chainIK": {
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_01_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_01_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_02_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_02_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_03_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_03_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_04_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_04_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_05_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_05_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_06_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_06_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_07_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_07_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_08_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_08_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_09_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_09_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_10_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_10_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_11_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_11_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_12_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_12_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_13_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_13_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_14_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_14_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_15_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_15_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_16_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_16_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_17_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_17_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_18_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_18_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_19_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_19_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_20_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_20_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_21_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_21_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_22_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_22_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_23_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_23_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_24_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_24_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_25_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_25_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_26_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_26_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_27_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_27_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_28_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_28_02"
       }
     }
   },
@@ -2757,7 +3088,7 @@
     "improved_optics": {    },
     "night_vision_system": {
       "tier": 2,
-      "modClass": "protection",
+      "modClass": "firepower",
       "effects": {
         "nightVision": {
           "gunnerIr": {
@@ -2790,9 +3121,15 @@
         }
       }
     },
-    "30mm_2a72_BTR_HE": {    },
-    "30mm_2a72_BTR_AP": {    },
-    "30mm_2a42_APDS": {    },
+    "30mm_2a72_BTR_HE": {
+      "maxToRespawn": 1
+    },
+    "30mm_2a72_BTR_AP": {
+      "maxToRespawn": 1
+    },
+    "30mm_2a42_APDS": {
+      "maxToRespawn": 1
+    },
     "30mm_2a72_BTR_HE_ammo_pack": {    },
     "30mm_2a72_BTR_AP_ammo_pack": {
       "tier": 1
@@ -2822,6 +3159,7 @@
             "shellCasingScale": 0.15,
             "shellCasingImpulseOffset": 0.02,
             "recoilOffset": 0.3,
+            "jammedReloadTime": 15.0,
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
             "barrelDP": "gun_barrel_dm",

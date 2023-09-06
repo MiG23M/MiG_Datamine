@@ -1376,6 +1376,10 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
+      "name": "fuel_tank_exterior_r_01_dm",
+      "name": "fuel_tank_exterior_r_02_dm",
+      "name": "fuel_tank_exterior_l_01_dm",
+      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.08,
@@ -3289,6 +3293,7 @@
       "minRPM": 800.0
     },
     "mechanics": {
+      "steerType": "clutch_braking",
       "maxBrakeForce": 200000.0,
       "driveGearRadius": 0.3,
       "mainGearRatio": 4.3,
@@ -3593,7 +3598,7 @@
           "Weapon": {
             "trigger": "gunner4",
             "triggerGroup": "smoke",
-            "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
+            "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
             "startFx": "",
             "useEmitter": true,
@@ -3649,6 +3654,7 @@
     },
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
+      "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "tier": 2,
       "modClass": "protection",
       "effects": {

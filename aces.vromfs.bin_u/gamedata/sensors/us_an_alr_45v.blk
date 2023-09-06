@@ -23,6 +23,7 @@
   "band5": true,
   "band7": true,
   "band9": true,
+  "detectTracking": true,
   "receivers": {
     "receiver": {
       "azimuth": 0.0,
@@ -41,15 +42,20 @@
   },
   "groups": {
     "group": {
-      "name": "AI HIGH",
-      "type": "Sapphire-21",
-      "type": "Sapphire-23d_tp_23",
-      "type": "Sapphire-23ml_tp_23m",
-      "type": "Sapphire-23mla_tp_23m",
-      "type": "Sapphire-23mla-2_tp_23m"
+      "name": "SAM LOW",
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "AAA LOW"
+    },
+    "group": {
+      "name": "SAM MID",
+      "detectLaunch": true,
+      "type": "4R-90-Yatagan"
     },
     "group": {
       "name": "AI/AAA MID",
+      "detectLaunch": true,
       "type": "AN/APS-6",
       "type": "AN/APS-19",
       "type": "AN/APS-21",
@@ -68,7 +74,10 @@
       "type": "AN/APG-26",
       "type": "AN/APG-33",
       "type": "Thorium",
-      "type": "RP-5",
+      "type": "RP-1 TA",
+      "type": "RP-1 TT",
+      "type": "RP-5 TA",
+      "type": "RP-5 TT",
       "type": "CD-30",
       "type": "Cyrano Ibis",
       "type": "Cyrano II",
@@ -81,7 +90,8 @@
       "type": "AI Mk.18",
       "type": "PS-03",
       "type": "PS-011A 71H IR",
-      "type": "PS-42",
+      "type": "PS-42 TA",
+      "type": "PS-42 TT",
       "type": "Type 1492",
       "type": "Type 208A",
       "type": "AN/APG-30",
@@ -94,52 +104,75 @@
       "type": "ARI.5857",
       "type": "Marconi Type 226",
       "type": "ELTA EL/M-2001B",
-      "type": "1RL34"
-    },
-    "group": {
-      "name": "AAA LOW"
+      "type": "1RL34",
+      "type": "Marconi S-400",
+      "type": "MR-102-Baklan",
+      "type": "MR-104-Rys",
+      "type": "MR-105",
+      "type": "4R-90-Yatagan",
+      "type": "Yakor-M",
+      "type": "Type-275",
+      "type": "Type 903",
+      "type": "AN-SPG-48",
+      "type": "MK25-radar",
+      "type": "WM-27",
+      "type": "SGR-108"
     },
     "group": {
       "name": "SAM HIGH",
-      "detectTracking": true,
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "AI HIGH",
       "detectLaunch": true,
-      "type": "4R-90-Yatagan"
+      "type": "Sapphire-21",
+      "type": "Sapphire-23d_tp_23",
+      "type": "Sapphire-23ml_tp_23m",
+      "type": "Sapphire-23mla_tp_23m",
+      "type": "Sapphire-23mla-2_tp_23m"
+    }
+  },
+  "targetsDirectionGroups": {
+    "targetsDirectionGroup": {
+      "text": "LO",
+      "group": "SAM LOW",
+      "group": "AAA LOW"
     },
-    "group": {
-      "name": "SAM MID",
-      "detectTracking": true,
-      "detectLaunch": true
+    "targetsDirectionGroup": {
+      "text": "MID",
+      "group": "SAM MID",
+      "group": "AI/AAA MID"
     },
-    "group": {
-      "name": "SAM LOW",
-      "detectTracking": true,
-      "detectLaunch": true
+    "targetsDirectionGroup": {
+      "text": "HI",
+      "group": "SAM HIGH",
+      "group": "AI HIGH"
     }
   },
   "targetsPresenceGroups": {
     "targetsPresenceGroup": {
-      "text": "AI",
-      "group": "AI HIGH"
-    },
-    "targetsPresenceGroup": {
-      "text": "AIAA",
-      "group": "AI/AAA MID"
-    },
-    "targetsPresenceGroup": {
-      "text": "AAA",
-      "group": "AAA LOW"
-    },
-    "targetsPresenceGroup": {
-      "text": "S125",
-      "group": "SAM HIGH"
+      "text": "SAM LO",
+      "group": "SAM LOW"
     },
     "targetsPresenceGroup": {
       "text": "SAM",
       "group": "SAM MID"
     },
     "targetsPresenceGroup": {
-      "text": "SA75",
-      "group": "SAM LOW"
+      "text": "SAM HI",
+      "group": "SAM HIGH"
+    },
+    "targetsPresenceGroup": {
+      "text": "AAA LO",
+      "group": "AAA LOW"
+    },
+    "targetsPresenceGroup": {
+      "text": "AI/AAA",
+      "group": "AI/AAA MID"
+    },
+    "targetsPresenceGroup": {
+      "text": "AI HI",
+      "group": "AI HIGH"
     }
   }
 }

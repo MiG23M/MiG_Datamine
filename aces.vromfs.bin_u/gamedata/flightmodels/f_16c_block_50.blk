@@ -2265,6 +2265,10 @@
       "blk": "gameData/FlightModels/weaponPresets/f_16c_block_50_aim_9l.blk"
     },
     "preset": {
+      "name": "f_16c_block_50_aim_9m",
+      "blk": "gameData/FlightModels/weaponPresets/f_16c_block_50_aim_9m.blk"
+    },
+    "preset": {
       "name": "f_16c_block_50_lau_3",
       "blk": "gameData/FlightModels/weaponPresets/f_16c_block_50_lau_3.blk"
     },
@@ -2431,6 +2435,19 @@
           "external": true,
           "separate": true
         }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air",
+        "name": "aim_9m_wingtip",
+        "reqModification": "us_aim_9m",
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9m_sidewinder.blk",
+          "emitter": "aim_9e_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
       }
     },
     "WeaponSlot": {
@@ -2453,6 +2470,23 @@
           "external": true,
           "separate": true
         }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air",
+        "name": "aim_9m",
+        "reqModification": "us_aim_9m",
+        "ShowNodes": {
+          "node": "pylon1",
+          "node": "launcher_aim9_2"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9m_sidewinder.blk",
+          "emitter": "aim_9e_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
       }
     },
     "WeaponSlot": {
@@ -2470,6 +2504,23 @@
         "Weapon": {
           "trigger": "aam",
           "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder.blk",
+          "emitter": "aim_9e_003",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air",
+        "name": "aim_9m",
+        "reqModification": "us_aim_9m",
+        "ShowNodes": {
+          "node": "pylon3",
+          "node": "launcher_aim9_3"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9m_sidewinder.blk",
           "emitter": "aim_9e_003",
           "bullets": 1,
           "external": true,
@@ -2866,22 +2917,6 @@
             "blk": "gameData/sensors/ir_tracker_tgp.blk",
             "node": "optic2_gun"
           }
-        },
-        "DependentWeaponPreset": {
-          "slot": 3,
-          "preset": "gbu12_slot3"
-        },
-        "DependentWeaponPreset": {
-          "slot": 3,
-          "preset": "gbu24"
-        },
-        "DependentWeaponPreset": {
-          "slot": 8,
-          "preset": "gbu12_slot8"
-        },
-        "DependentWeaponPreset": {
-          "slot": 8,
-          "preset": "gbu24"
         }
       }
     },
@@ -3028,6 +3063,23 @@
         "Weapon": {
           "trigger": "aam",
           "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder.blk",
+          "emitter": "aim_9e_004",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air",
+        "name": "aim_9m",
+        "reqModification": "us_aim_9m",
+        "ShowNodes": {
+          "node": "pylon7",
+          "node": "launcher_aim9_4"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9m_sidewinder.blk",
           "emitter": "aim_9e_004",
           "bullets": 1,
           "external": true,
@@ -3261,6 +3313,23 @@
           "external": true,
           "separate": true
         }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air",
+        "name": "aim_9m",
+        "reqModification": "us_aim_9m",
+        "ShowNodes": {
+          "node": "pylon8",
+          "node": "launcher_aim9_5"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9m_sidewinder.blk",
+          "emitter": "aim_9e_005",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
       }
     },
     "WeaponSlot": {
@@ -3273,6 +3342,19 @@
         "Weapon": {
           "trigger": "aam",
           "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
+          "emitter": "aim_9e_006",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air",
+        "name": "aim_9m_wingtip",
+        "reqModification": "us_aim_9m",
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9m_sidewinder.blk",
           "emitter": "aim_9e_006",
           "bullets": 1,
           "external": true,
@@ -3532,6 +3614,11 @@
     "us_aim_9l": {
       "reqModification": "us_aim_7m",
       "tier": 3,
+      "modClass": "weapon"
+    },
+    "us_aim_9m": {
+      "reqModification": "us_aim_9l",
+      "tier": 4,
       "modClass": "weapon"
     }
   },

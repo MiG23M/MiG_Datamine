@@ -14,31 +14,51 @@
   "range": 50000.0,
   "signalSfxName": "alarm_radar",
   "band4": true,
+  "band5": true,
   "band6": true,
+  "band7": true,
   "band8": true,
-  "detectTracking": false,
-  "detectLaunch": false,
-  "targetTracking": false,
+  "band9": true,
+  "detectTracking": true,
   "mandatoryRecognition": true,
   "receivers": {
     "receiver": {
-      "azimuth": 0.0,
+      "azimuth": -45.0,
       "elevation": 0.0,
-      "azimuthWidth": 180.0,
+      "azimuthWidth": 100.0,
       "elevationWidth": 90.0,
       "angleFinder": true
     },
     "receiver": {
-      "azimuth": -180.0,
+      "azimuth": 45.0,
       "elevation": 0.0,
-      "azimuthWidth": 180.0,
+      "azimuthWidth": 100.0,
+      "elevationWidth": 90.0,
+      "angleFinder": true
+    },
+    "receiver": {
+      "azimuth": -135.0,
+      "elevation": 0.0,
+      "azimuthWidth": 100.0,
+      "elevationWidth": 90.0,
+      "angleFinder": true
+    },
+    "receiver": {
+      "azimuth": 135.0,
+      "elevation": 0.0,
+      "azimuthWidth": 100.0,
       "elevationWidth": 90.0,
       "angleFinder": true
     }
   },
   "groups": {
     "group": {
-      "name": "AI X/W",
+      "name": "E-H",
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "I",
+      "detectLaunch": true,
       "type": "AN/APS-6",
       "type": "AN/APS-19",
       "type": "AN/APS-21",
@@ -57,7 +77,10 @@
       "type": "AN/APG-26",
       "type": "AN/APG-33",
       "type": "Thorium",
-      "type": "RP-5",
+      "type": "RP-1 TA",
+      "type": "RP-1 TT",
+      "type": "RP-5 TA",
+      "type": "RP-5 TT",
       "type": "CD-30",
       "type": "Cyrano Ibis",
       "type": "Cyrano II",
@@ -70,12 +93,10 @@
       "type": "AI Mk.18",
       "type": "PS-03",
       "type": "PS-011A 71H IR",
-      "type": "PS-42",
+      "type": "PS-42 TA",
+      "type": "PS-42 TT",
       "type": "Type 1492",
-      "type": "Type 208A"
-    },
-    "group": {
-      "name": "AI DAY",
+      "type": "Type 208A",
       "type": "AN/APG-30",
       "type": "AN/ASG-14",
       "type": "AN/ASG-19",
@@ -85,45 +106,154 @@
       "type": "ARI.5820",
       "type": "ARI.5857",
       "type": "Marconi Type 226",
-      "type": "ELTA EL/M-2001B"
+      "type": "ELTA EL/M-2001B",
+      "type": "1RL34",
+      "type": "Marconi S-400",
+      "type": "MR-102-Baklan",
+      "type": "MR-104-Rys",
+      "type": "MR-105",
+      "type": "4R-90-Yatagan",
+      "type": "Yakor-M",
+      "type": "Type-275",
+      "type": "Type 903",
+      "type": "AN-SPG-48",
+      "type": "MK25-radar",
+      "type": "WM-27",
+      "type": "SGR-108"
     },
     "group": {
-      "name": "AAA",
+      "name": "I+CW",
+      "search": false,
+      "track": false,
+      "launch": true,
+      "detectLaunch": true,
+      "type": "AN/APQ-51",
+      "type": "AN/APQ-72",
+      "type": "AN/APQ-100",
+      "type": "AN/APQ-120",
+      "type": "AN/APG-59",
+      "type": "AN/ASG-14",
+      "type": "NASARR",
+      "type": "US R21G M1",
+      "type": "Type 208A"
+    },
+    "group": {
+      "name": "I+HPRF",
+      "detectLaunch": true,
+      "type": "AN/APG-59",
+      "type": "AN/AWG-9",
+      "type": "AN/AWG-9 / AN/AXX-1 TCS",
+      "type": "Thomson-CSF RDI",
+      "type": "marconi_ai_mk24",
+      "type": "marconi_ai_mk24z",
+      "type": "AI.24 Foxhunter Stage 2G",
+      "type": "weapon"
+    },
+    "group": {
+      "name": "I+MPRF+CW",
+      "search": false,
+      "track": false,
+      "launch": true,
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "J",
+      "detectLaunch": true,
+      "type": "Sapphire-21",
+      "type": "Sapphire-23d_tp_23",
+      "type": "Sapphire-23ml_tp_23m",
+      "type": "Sapphire-23mla_tp_23m",
+      "type": "Sapphire-23mla-2_tp_23m",
+      "type": "1RL33",
+      "type": "1RL114 TT",
+      "type": "Gepard TT",
+      "type": "Roland TT",
+      "type": "Crotale TT",
+      "type": "9K330 TT"
+    },
+    "group": {
+      "name": "J+CW",
+      "search": false,
+      "track": false,
+      "launch": true,
+      "detectLaunch": true,
+      "type": "Sapphire-23d_tp_23",
+      "type": "Sapphire-23ml_tp_23m",
+      "type": "Sapphire-23mla_tp_23m",
+      "type": "Sapphire-23mla-2_tp_23m"
+    },
+    "group": {
+      "name": "I+TWS",
+      "search": false,
+      "track": true,
+      "launch": true,
+      "type": "4R-90-Yatagan",
       "type": "1RL34"
     },
     "group": {
-      "name": "I",
-      "detectTracking": true,
-      "detectLaunch": true,
-      "type": "4R-90-Yatagan"
-    },
-    "group": {
-      "name": "G",
-      "detectTracking": true,
-      "detectLaunch": true
-    },
-    "group": {
-      "name": "E",
-      "detectTracking": true,
-      "detectLaunch": true
+      "name": "J+TWS",
+      "search": false,
+      "track": true,
+      "launch": true,
+      "type": "1RL33"
     }
   },
   "targetsPresenceGroups": {
     "targetsPresenceGroup": {
-      "text": "AI",
-      "group": "AI X/W"
+      "text": "E-H",
+      "group": "E-H"
     },
     "targetsPresenceGroup": {
-      "text": "AI/RO",
-      "group": "AI DAY"
+      "text": "I",
+      "group": "I",
+      "group": "I+TWS",
+      "group": "I+HPRF",
+      "group": "I+MPRF+CW",
+      "group": "I+CW"
     },
     "targetsPresenceGroup": {
-      "text": "AAA",
-      "group": "AAA"
+      "text": "J",
+      "group": "J",
+      "group": "J+TWS",
+      "group": "J+CW"
     },
     "targetsPresenceGroup": {
-      "text": "S125",
-      "group": "I"
+      "text": "PULSE",
+      "group": "E-H",
+      "group": "I",
+      "group": "J"
+    },
+    "targetsPresenceGroup": {
+      "text": "TWS",
+      "group": "I+TWS",
+      "group": "J+TWS"
+    },
+    "targetsPresenceGroup": {
+      "text": "CW",
+      "group": "I+HPRF",
+      "group": "I+MPRF+CW",
+      "group": "I+CW",
+      "group": "J+CW"
+    }
+  },
+  "targetsDirectionGroups": {
+    "targetsDirectionGroup": {
+      "text": "E-H",
+      "group": "E-H"
+    },
+    "targetsDirectionGroup": {
+      "text": "I",
+      "group": "I",
+      "group": "I+TWS",
+      "group": "I+HPRF",
+      "group": "I+MPRF+CW",
+      "group": "I+CW"
+    },
+    "targetsDirectionGroup": {
+      "text": "J",
+      "group": "J",
+      "group": "J+TWS",
+      "group": "J+CW"
     }
   }
 }

@@ -173,7 +173,7 @@ gui_handlers.MRoomPlayersListWidget <- class extends gui_handlers.BaseGuiHandler
   function onPlayerHover(obj) {
     if (!checkObj(obj) || !obj.isHovered())
       return
-    let value = ::to_integer_safe(obj?.rowIdx, -1, false)
+    let value = to_integer_safe(obj?.rowIdx, -1, false)
     let listObj = obj.getParent()
     if (listObj.getValue() != value && value >= 0 && value < listObj.childrenCount())
       listObj.setValue(value)

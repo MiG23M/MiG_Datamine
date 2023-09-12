@@ -16,7 +16,7 @@ enum GamercardDrawerState {
 gui_handlers.GamercardDrawer <- class extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.CUSTOM
   sceneBlkName = "%gui/gamercardDrawer.blk"
-  heightPID = ::dagui_propid.add_name_id("height")
+  heightPID = dagui_propid_add_name_id("height")
   currentTarget = null
   currentVisible = false
   currentState = GamercardDrawerState.STATE_CLOSED

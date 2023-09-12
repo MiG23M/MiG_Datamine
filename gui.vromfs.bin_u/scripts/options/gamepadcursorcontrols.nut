@@ -15,14 +15,14 @@ const IS_GAMEPAD_CURSOR_ENABLED_DEFAULT = true
 
   function init() {
     this.currentOptionValue = this.getValue()
-    ::get_cur_gui_scene()?.setUseGamepadCursorControl(this.currentOptionValue)
+    get_cur_gui_scene()?.setUseGamepadCursorControl(this.currentOptionValue)
   }
 
 
   function setValue(newValue) {
     if (!this.canChangeValue() || this.currentOptionValue == newValue)
       return
-    ::get_cur_gui_scene()?.setUseGamepadCursorControl(newValue)
+    get_cur_gui_scene()?.setUseGamepadCursorControl(newValue)
     if (::g_login.isProfileReceived())
       ::set_gui_option_in_mode(
         USEROPT_GAMEPAD_CURSOR_CONTROLLER,

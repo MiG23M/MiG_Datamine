@@ -572,7 +572,7 @@ gui_handlers.BattlePassWnd <- BattlePassWnd
 
 let function openBattlePassWnd(params = {}) {
   if (isUserstatMissingData.value) {
-    ::showInfoMsgBox(loc("userstat/missingDataMsg"), "userstat_missing_data_msgbox")
+    showInfoMsgBox(loc("userstat/missingDataMsg"), "userstat_missing_data_msgbox")
     return
   }
 

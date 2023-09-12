@@ -1,3 +1,5 @@
+from "%sqDagui/daguiNativeApi.nut" import *
+
 let { check_obj } = require("%sqDagui/daguiUtil.nut")
 let { format } = require("string")
 let { handlerType } = require("handlerType.nut")
@@ -9,6 +11,7 @@ let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { broadcastEvent } = subscriptions
 let { logerr } = require("%globalScripts/logs.nut")
 let { gui_handlers } = require("gui_handlers.nut")
+let { reset_msg_box_check_anim_time, destroy_all_msg_boxes, saved_scene_msg_box } = require("msgBox.nut")
 
 ::current_base_gui_handler <- null //active base handler in main gui scene
 ::always_reload_scenes <- false //debug only
@@ -95,8 +98,8 @@ let handlersManager = {
 
     this.restoreHandlers(handlerClass)
 
-    if (hType == handlerType.BASE && ::saved_scene_msg_box)
-      ::saved_scene_msg_box()
+    if (hType == handlerType.BASE && saved_scene_msg_box.value!=null)
+      saved_scene_msg_box.value()
 
     this._loadHandlerRecursionLevel--
     if (!this._loadHandlerRecursionLevel)
@@ -143,11 +146,11 @@ let handlersManager = {
       let hType = this.getHandlerType(handler.getclass())
       if (hType == handlerType.MODAL) {
         if (check_obj(handler.scene))
-          ::get_cur_gui_scene().destroyElement(handler.scene)
+          get_cur_gui_scene().destroyElement(handler.scene)
       }
       else if (hType == handlerType.CUSTOM) {
         if (check_obj(handler.scene))
-          ::get_cur_gui_scene().replaceContentFromText(handler.scene, "", 0, null)
+          get_cur_gui_scene().replaceContentFromText(handler.scene, "", 0, null)
         handler.scene = null
       }
       else
@@ -178,7 +181,7 @@ let handlersManager = {
   }
 
   function loadBaseHandler(handlerClass, params = {}) {
-    let guiScene = ::get_gui_scene()
+    let guiScene = get_gui_scene()
     if (guiScene?.isInAct()) { //isInAct appear at 18.11.2020
       script_net_assert_once("loadBaseHandler", "Try to load baseHandler while in dagui::ObjScene::act")
       return null
@@ -234,7 +237,7 @@ let handlersManager = {
     }
 
     local newLoadedRootHandler = null
-    let guiScene = ::get_cur_gui_scene()
+    let guiScene = get_cur_gui_scene()
     local rootHandler = this.findHandlerClassInScene(handler.rootHandlerClass)
     if (!this.isHandlerValid(rootHandler, true)) {
       rootHandler = handler.rootHandlerClass(guiScene, {})
@@ -263,7 +266,7 @@ let handlersManager = {
       return handler
     }
 
-    let guiScene = ::get_gui_scene()
+    let guiScene = get_gui_scene()
     handler = this.createHandler(handlerClass, guiScene, params)
     this.handlers[handlerType.MODAL].append(handler.weakref())
 
@@ -280,7 +283,7 @@ let handlersManager = {
   }
 
   function loadCustomHandler(handlerClass, params = {}) {
-    let guiScene = ::get_gui_scene()
+    let guiScene = get_gui_scene()
     let handler = this.createHandler(handlerClass, guiScene, params)
     if (!handler.sceneBlkName && !handler.sceneTplName) {
       debug_dump_stack()
@@ -321,7 +324,7 @@ let handlersManager = {
   }
 
   function switchBaseHandler(handler) {
-    let guiScene = ::get_cur_gui_scene()
+    let guiScene = get_cur_gui_scene()
     this.closeAllModals(guiScene)
 
     let curHandler = this.getActiveBaseHandler()
@@ -356,7 +359,7 @@ let handlersManager = {
     if (curRootHandler)
       this.showBaseHandler(curRootHandler, false)
 
-    this.removeHandlerFromListByGuiScene(this.activeRootHandlers, ::get_cur_gui_scene())
+    this.removeHandlerFromListByGuiScene(this.activeRootHandlers, get_cur_gui_scene())
 
     let newRootHandler = rootHandlerClass && this.findHandlerClassInScene(rootHandlerClass)
     if (newRootHandler) {
@@ -374,7 +377,7 @@ let handlersManager = {
   }
 
   function onBaseHandlerSwitch() {
-    ::reset_msg_box_check_anim_time() //no need msg box anim right after scene switch
+    reset_msg_box_check_anim_time() //no need msg box anim right after scene switch
   }
 
   function showBaseHandler(handler, show) {
@@ -398,7 +401,7 @@ let handlersManager = {
   //if guiScene == null, will be used current scene
   function clearScene(guiScene = null) {
     if (!guiScene)
-      guiScene = ::get_cur_gui_scene()
+      guiScene = get_cur_gui_scene()
     if (guiScene?.isInAct()) { //isInAct appear at 18.11.2020
       script_net_assert_once("clearSceneInAct", "Try to clear scene while in dagui::ObjScene::act")
       return
@@ -414,7 +417,7 @@ let handlersManager = {
     this.setGuiRootOptions(guiScene, false)
     this.startActionsDelay()
     guiScene.initCursor("%gui/cursor.blk", "normal")
-    if (!guiScene.isEqual(::get_cur_gui_scene())) {
+    if (!guiScene.isEqual(get_cur_gui_scene())) {
       this.onClearScene(guiScene)
       broadcastEvent("GuiSceneCleared")
       return
@@ -453,11 +456,11 @@ let handlersManager = {
   }
 
   function isMainGuiSceneActive() {
-    return ::get_cur_gui_scene().isEqual(::get_main_gui_scene())
+    return get_cur_gui_scene().isEqual(get_main_gui_scene())
   }
 
   function needReloadScene() {
-    return this.needFullReload || ::always_reload_scenes || !check_obj(::get_cur_gui_scene()["root_loaded"])
+    return this.needFullReload || ::always_reload_scenes || !check_obj(get_cur_gui_scene()["root_loaded"])
            || this.isNeedReloadSceneSpecific()
   }
 
@@ -484,7 +487,7 @@ let handlersManager = {
 
   function onEventScriptsReloaded(_p) {
     this.markfullReloadOnSwitchScene(false)
-    let startData = this.findLastBaseHandlerStartData(::get_gui_scene())
+    let startData = this.findLastBaseHandlerStartData(get_gui_scene())
     if (!startData)
       return
 
@@ -545,12 +548,12 @@ let handlersManager = {
   }
 
   function closeAllModals(guiScene = null) {
-    if ((guiScene ?? ::get_cur_gui_scene())?.isInAct()) { //isInAct appear at 18.11.2020
+    if ((guiScene ?? get_cur_gui_scene())?.isInAct()) { //isInAct appear at 18.11.2020
       script_net_assert_once("closeAllModals", "Try to close all modals while in dagui::ObjScene::act")
       return
     }
 
-    ::destroy_all_msg_boxes(guiScene)
+    destroy_all_msg_boxes(guiScene)
 
     let group = this.handlers[handlerType.MODAL]
     for (local i = group.len() - 1; i >= 0; i--) {
@@ -598,7 +601,7 @@ let handlersManager = {
   }
 
   function getActiveBaseHandler() {
-    let curGuiScene = ::get_cur_gui_scene()
+    let curGuiScene = get_cur_gui_scene()
     foreach (handler in this.activeBaseHandlers)
       if (handler.guiScene && handler.guiScene.isEqual(curGuiScene) && this.isHandlerValid(handler, false))
         return handler
@@ -606,7 +609,7 @@ let handlersManager = {
   }
 
   function getActiveRootHandler() {
-    let curGuiScene = ::get_cur_gui_scene()
+    let curGuiScene = get_cur_gui_scene()
     foreach (handler in this.activeRootHandlers)
       if (handler.guiScene && handler.guiScene.isEqual(curGuiScene) && this.isHandlerValid(handler, false))
         return handler
@@ -683,13 +686,13 @@ let handlersManager = {
 
   function getLastBaseHandlerStartParams(guiScene = null) {
     if (!guiScene)
-      guiScene = ::get_gui_scene()
+      guiScene = get_gui_scene()
     return this.findLastBaseHandlerStartData(guiScene)?.startParams
   }
 
   function setLastBaseHandlerStartParams(startParams, guiScene = null, handlerLocId = null) {
     if (!guiScene)
-      guiScene = ::get_gui_scene()
+      guiScene = get_gui_scene()
     local data = this.findLastBaseHandlerStartData(guiScene)
     if (!data) {
       data = { guiScene, startParams = {}, handlerLocId }
@@ -727,7 +730,7 @@ let handlersManager = {
   function startActionsDelay() {
     if (!this.delayedActions.len())
       return
-    this.delayedActionsGuiScene = ::get_cur_gui_scene()
+    this.delayedActionsGuiScene = get_cur_gui_scene()
     this.delayedActionsGuiScene.performDelayed(this, function() {
       this.delayedActionsGuiScene = null
       let actions = clone this.delayedActions
@@ -739,7 +742,7 @@ let handlersManager = {
 
   function checkActionsDelayGuiScene() {
     if (this.delayedActions.len()
-      && (!this.delayedActionsGuiScene || !this.delayedActionsGuiScene.isEqual(::get_cur_gui_scene())))
+      && (!this.delayedActionsGuiScene || !this.delayedActionsGuiScene.isEqual(get_cur_gui_scene())))
       this.startActionsDelay()
   }
 

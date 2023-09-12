@@ -165,7 +165,7 @@ global enum chatErrorName {
 }
 
 ::g_chat.getRoomById <- function getRoomById(id) {
-  return u.search(this.rooms, (@(id) function (room) { return room.id == id })(id))
+  return u.search(this.rooms, function (room) { return room.id == id })
 }
 
 ::g_chat.isRoomJoined <- function isRoomJoined(roomId) {
@@ -406,7 +406,7 @@ global enum chatErrorName {
 ::g_chat.openRoomCreationWnd <- function openRoomCreationWnd() {
   let devoiceMsg = penalties.getDevoiceMessage("activeTextColor")
   if (devoiceMsg)
-    return ::showInfoMsgBox(devoiceMsg)
+    return showInfoMsgBox(devoiceMsg)
 
   ::gui_start_modal_wnd(gui_handlers.CreateRoomWnd)
 }

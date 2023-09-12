@@ -11,7 +11,7 @@ let { USEROPT_RANDB_CLUSTER } = require("%scripts/options/optionsExtNames.nut")
 let function checkShowUnstableSelectedMsg(curVal, prevVal, clusterOpt) {
   for (local i = 0; i < clusterOpt.values.len(); ++i)
     if (is_bit_set(curVal, i) && !is_bit_set(prevVal, i) && clusterOpt.items[i].isUnstable) {
-      ::showInfoMsgBox(loc("multiplayer/cluster_connection_unstable"))
+      showInfoMsgBox(loc("multiplayer/cluster_connection_unstable"))
       return
     }
 }

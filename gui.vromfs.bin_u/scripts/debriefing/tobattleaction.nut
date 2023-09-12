@@ -24,7 +24,7 @@ local function goToBattleAction(lastEvent) {
     return
   }
 
-  ::get_cur_gui_scene().performDelayed({}, function() {
+  get_cur_gui_scene().performDelayed({}, function() {
     if (hasAlredyActiveJoinProcess())
       return
     if (::g_squad_manager.isSquadMember() && !::g_squad_manager.isMeReady()) {
@@ -49,7 +49,7 @@ local function goToBattleAction(lastEvent) {
 
     if (!handler && eventDisplayType.showInEventsWindow) {
       ::gui_start_modal_events()
-      ::get_cur_gui_scene().performDelayed(getroottable(), function() {
+      get_cur_gui_scene().performDelayed(getroottable(), function() {
         if (hasAlredyActiveJoinProcess())
           return
         handler = handlersManager.findHandlerClassInScene(gui_handlers.EventsHandler)

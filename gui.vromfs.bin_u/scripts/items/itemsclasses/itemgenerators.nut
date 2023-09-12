@@ -231,7 +231,7 @@ local ItemGenerator = class {
 
     let allowableItems = {}
     foreach (itemId in split_by_chars(allowableItemsForRecipes, "_"))
-      allowableItems[::to_integer_safe(itemId, itemId, false)] <- true
+      allowableItems[to_integer_safe(itemId, itemId, false)] <- true
 
     return allowableItems
   }

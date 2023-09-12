@@ -1,7 +1,5 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
-
-
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { format } = require("string")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
@@ -12,6 +10,7 @@ let unitTypes = require("%scripts/unit/unitTypesList.nut")
 let { shopCountriesList } = require("%scripts/shop/shopCountriesList.nut")
 let { cutPrefix } = require("%sqstd/string.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 gui_handlers.ShopSearchWnd <- class extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.MODAL
@@ -76,7 +75,7 @@ gui_handlers.ShopSearchWnd <- class extends gui_handlers.BaseGuiHandlerWT {
         continue
 
       let countryView = {
-        countryIcon = ::get_country_icon(countryId)
+        countryIcon = getCountryIcon(countryId)
         armyTypes = []
       }
 

@@ -137,7 +137,7 @@ gui_handlers.WwOperationsListModal <- class extends gui_handlers.BaseGuiHandlerW
       return false
 
     let newOperation = opObj?.collapse_header ? null
-      : getOperationById(::to_integer_safe(opObj?.id))
+      : getOperationById(to_integer_safe(opObj?.id))
     if (newOperation == this.selOperation)
       return false
     let isChanged = !newOperation || !this.selOperation || !this.selOperation.isEqual(newOperation)
@@ -297,7 +297,7 @@ gui_handlers.WwOperationsListModal <- class extends gui_handlers.BaseGuiHandlerW
       return this.selOperation.join(reasonData.country)
     }
 
-    ::scene_msg_box(
+    scene_msg_box(
       "cant_join_operation",
       null,
       reasonData.reasonText,

@@ -22,7 +22,7 @@ let getFixedValue = @() //return -1 when not fixed
 
 let compatibleGetValue = function() {
   let value = !::g_login.isAuthorized() ?
-    ::to_float_safe(::getSystemConfigOption("video/safearea", defValue), defValue) :
+    to_float_safe(::getSystemConfigOption("video/safearea", defValue), defValue) :
     ::get_gui_option_in_mode(USEROPT_MENU_SCREEN_SAFE_AREA, OPTIONS_MODE_GAMEPLAY, defValue)
 
   if (value < 0.5)

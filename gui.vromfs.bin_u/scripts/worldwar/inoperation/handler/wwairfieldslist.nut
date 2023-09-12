@@ -347,8 +347,8 @@ gui_handlers.WwAirfieldsList <- class extends ::BaseGuiHandler {
   }
 
   function onAirfieldClick(obj) {
-    let index = ::to_integer_safe(obj.id.slice(this.airfieldIdPrefix.len()), -1)
-    let mapObj = ::get_cur_gui_scene()["worldwar_map"]
+    let index = to_integer_safe(obj.id.slice(this.airfieldIdPrefix.len()), -1)
+    let mapObj = get_cur_gui_scene()["worldwar_map"]
     ::ww_gui_bhv.worldWarMapControls.selectAirfield.call(
       ::ww_gui_bhv.worldWarMapControls, mapObj, { airfieldIdx = index })
   }

@@ -210,7 +210,7 @@ let openIngameStoreImpl = kwarg(
     }
 
     ::queues.checkAndStart(function() {
-      ::get_gui_scene().performDelayed(getroottable(),
+      get_gui_scene().performDelayed(getroottable(),
         function() {
           if (item)
             item.showDescription(statsdMetric)

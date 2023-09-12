@@ -4,6 +4,7 @@ let { LayersIcon } = require("%scripts/viewUtils/layeredIcon.nut")
 
 let { Cost } = require("%scripts/money.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
 
 
 let { format } = require("string")
@@ -139,7 +140,7 @@ let time = require("%scripts/time.nut")
 
   function initMissionOrderMode(blk) {
     this.orderType = ::g_order_type.getOrderTypeByName(blk?.type)
-    this.typeParams = ::buildTableFromBlk(blk)
+    this.typeParams = u.isDataBlock(blk) ? convertBlk(blk) : {}
   }
 
   /**

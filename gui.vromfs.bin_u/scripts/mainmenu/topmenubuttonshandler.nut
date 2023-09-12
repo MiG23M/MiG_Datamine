@@ -202,7 +202,7 @@ gui_handlers.TopMenuButtonsHandler <- class extends gui_handlers.BaseGuiHandlerW
       return
 
     obj["_size-timer"] = "0"
-    obj.setFloatProp(::dagui_propid.add_name_id("_size-timer"), 0.0)
+    obj.setFloatProp(dagui_propid_add_name_id("_size-timer"), 0.0)
     obj.height = "0"
   }
 
@@ -272,7 +272,7 @@ gui_handlers.TopMenuButtonsHandler <- class extends gui_handlers.BaseGuiHandlerW
 
     mergeIdx += direction
     if (mergeIdx < 0 || mergeIdx >= this.sectionsOrder.len()) {
-      ::set_dirpad_event_processed(false)
+      set_dirpad_event_processed(false)
       return
     }
 

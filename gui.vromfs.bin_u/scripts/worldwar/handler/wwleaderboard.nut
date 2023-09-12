@@ -394,7 +394,7 @@ gui_handlers.WwLeaderboard <- class extends gui_handlers.LeaderboardWindow {
   function onRewards() {
     let curRewardsBlk = this.getCurModeAwards()
     if (!curRewardsBlk)
-      return ::showInfoMsgBox(loc("leaderboards/has_no_rewards"))
+      return showInfoMsgBox(loc("leaderboards/has_no_rewards"))
 
     wwRewards.open({
       isClanRewards = this.forClans

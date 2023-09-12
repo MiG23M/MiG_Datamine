@@ -56,6 +56,8 @@ let { openPersonalTasks } = require("%scripts/unlocks/personalTasks.nut")
 let { set_option } = require("%scripts/options/optionsExt.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { USEROPT_SKIP_WEAPON_WARNING } = require("%scripts/options/optionsExtNames.nut")
+let { loadLocalByScreenSize, saveLocalByScreenSize
+} = require("%scripts/clientState/localProfile.nut")
 
 ::last_ca_aircraft <- null
 ::used_planes <- {}
@@ -753,7 +755,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
 
     let cantSpawnReason = this.getCantSpawnReason(crew)
     if (cantSpawnReason)
-      ::showInfoMsgBox(cantSpawnReason.text, cantSpawnReason.id, true)
+      showInfoMsgBox(cantSpawnReason.text, cantSpawnReason.id, true)
   }
 
   function isUnitRandom(unit) {
@@ -1091,7 +1093,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
     let cantSpawnReason = this.getCantSpawnReason(crew, silent)
     if (cantSpawnReason) {
       if (!silent)
-        ::showInfoMsgBox(cantSpawnReason.text, cantSpawnReason.id, true)
+        showInfoMsgBox(cantSpawnReason.text, cantSpawnReason.id, true)
       return null
     }
 
@@ -1250,7 +1252,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
         debugTableData(this.lastRequestData)
         this.lastRequestData = null
         if (!checkObj(this.guiScene["char_connecting_error"]))
-          ::showInfoMsgBox(loc($"changeAircraftResult/{result}"), "char_connecting_error")
+          showInfoMsgBox(loc($"changeAircraftResult/{result}"), "char_connecting_error")
         break
     }
   }
@@ -1546,7 +1548,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
     this.doRespawnCalled = doRespawnPlayer()
     if (!this.doRespawnCalled) {
       this.onApply()
-      ::showInfoMsgBox(loc("msg/error_when_try_to_respawn"), "error_when_try_to_respawn", true)
+      showInfoMsgBox(loc("msg/error_when_try_to_respawn"), "error_when_try_to_respawn", true)
       return
     }
 
@@ -2061,7 +2063,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
     this.showSceneBtn("mis_obj_text_header", !this.canSwitchChatSize)
     this.showSceneBtn("mis_obj_button_header", this.canSwitchChatSize)
 
-    this.isChatFullSize = !this.canSwitchChatSize ? true : ::loadLocalByScreenSize("isRespawnChatFullSize", null)
+    this.isChatFullSize = !this.canSwitchChatSize ? true : loadLocalByScreenSize("isRespawnChatFullSize", null)
     this.updateChatSize(this.isChatFullSize)
 
     let separatorHeight = leftPanelObj.getSize()[1] - unitOptionsObj.getSize()[1] -
@@ -2078,7 +2080,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
       return
 
     this.updateChatSize(!this.isChatFullSize)
-    ::saveLocalByScreenSize("isRespawnChatFullSize", this.isChatFullSize)
+    saveLocalByScreenSize("isRespawnChatFullSize", this.isChatFullSize)
   }
 
   function updateChatSize(newIsChatFullSize) {
@@ -2131,7 +2133,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
 
   let objPos  = obj.getPosRC()
   let objSize = obj.getSize()
-  let cursorPos = ::get_dagui_mouse_cursor_pos_RC()
+  let cursorPos = get_dagui_mouse_cursor_pos_RC()
   if (cursorPos[0] >= objPos[0] && cursorPos[0] <= objPos[0] + objSize[0] && cursorPos[1] >= objPos[1] && cursorPos[1] <= objPos[1] + objSize[1])
     return [
       1.0 * (cursorPos[0] - objPos[0]) / objSize[0],

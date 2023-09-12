@@ -8,6 +8,8 @@ let api = require("dagor.webpoll")
 let { get_time_msec } = require("dagor.time")
 let DataBlock = require("DataBlock")
 let { web_rpc } = require("%scripts/webRPC.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 const WEBPOLL_TOKENS_VALIDATION_TIMEOUT_MS = 3000000
 const REQUEST_AUTHORIZATION_TIMEOUT_MS = 3600000
@@ -40,13 +42,13 @@ let function canRequestAuthorization(pollId) {
 let function loadVotedPolls() {
   if (!::g_login.isProfileReceived())
     return
-  votedPolls = ::load_local_account_settings(VOTED_POLLS_SAVE_ID, DataBlock())
+  votedPolls = loadLocalAccountSettings(VOTED_POLLS_SAVE_ID, DataBlock())
 }
 
 let function saveVotedPolls() {
   if (!::g_login.isProfileReceived())
     return
-  ::save_local_account_settings(VOTED_POLLS_SAVE_ID, votedPolls)
+  saveLocalAccountSettings(VOTED_POLLS_SAVE_ID, votedPolls)
 }
 
 let function getVotedPolls() {
@@ -58,7 +60,7 @@ let function getVotedPolls() {
 }
 
 local function webpollEvent(id, token, voted) {
-  id = ::to_integer_safe(id)
+  id = to_integer_safe(id)
   if (!id || token == null)
     return
 
@@ -98,7 +100,7 @@ let function invalidateTokensCache(pollId = null) {
     tokenInvalidationTimeById.rawdelete(pollId)
   }
 
-  ::get_cur_gui_scene().performDelayed(this,
+  get_cur_gui_scene().performDelayed(this,
     function() { broadcastEvent("WebPollTokenInvalidated", { pollId = pollId?.tostring() }) })
 }
 

@@ -121,7 +121,7 @@ gui_handlers.ProtectionAnalysisHint <- class extends gui_handlers.BaseGuiHandler
 
     let resultCfg = results.getResultTypeByParams(params)
     this.cursorObj["background-color"] = isCursorActive
-      ? ::get_main_gui_scene().getConstantValue(resultCfg.color)
+      ? get_main_gui_scene().getConstantValue(resultCfg.color)
       : "#00000000"
 
     if (!isShow)
@@ -145,7 +145,7 @@ gui_handlers.ProtectionAnalysisHint <- class extends gui_handlers.BaseGuiHandler
   function onTargetingCursorTimer(obj, _dt) {
     if (!checkObj(obj))
       return
-    let cursorPos = ::get_dagui_mouse_cursor_pos_RC()
+    let cursorPos = get_dagui_mouse_cursor_pos_RC()
     obj.left = cursorPos[0] - this.cursorRadius
     obj.top  = cursorPos[1] - this.cursorRadius
   }

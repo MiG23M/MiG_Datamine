@@ -97,7 +97,7 @@ require("%scripts/worldWar/wwInviteOperation.nut")
 
 
 foreach (bhvName, bhvClass in ::ww_gui_bhv)
-  ::replace_script_gui_behaviour(bhvName, bhvClass)
+  replace_script_gui_behaviour(bhvName, bhvClass)
 
 ::ww_event <- function ww_event(name, params = {}) {
   broadcastEvent($"WW{name}", params || {})

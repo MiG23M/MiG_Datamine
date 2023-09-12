@@ -51,7 +51,9 @@ let { OPTIONS_MODE_GAMEPLAY, USEROPT_HELPERS_MODE, USEROPT_CONTROLS_PRESET, USER
   USEROPT_MOUSE_USAGE_NO_AIM, USEROPT_INSTRUCTOR_GEAR_CONTROL, USEROPT_SEPERATED_ENGINE_CONTROL_SHIP,
   USEROPT_BULLET_COUNT0, userOptionNameByIdx
 } = require("%scripts/options/optionsExtNames.nut")
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
+let { shopIsModificationEnabled } = require("chardResearch")
 
 let PS4_CONTROLS_MODE_ACTIVATE = "ps4ControlsAdvancedModeActivated"
 
@@ -203,7 +205,7 @@ local axisMappedOnMouse = {
 
 ::gui_start_controls <- function gui_start_controls() {
   if (isPlatformSony || isPlatformXboxOne || isPlatformShieldTv()) {
-    if (::load_local_account_settings(PS4_CONTROLS_MODE_ACTIVATE, true)) {
+    if (loadLocalAccountSettings(PS4_CONTROLS_MODE_ACTIVATE, true)) {
       ::gui_start_controls_console()
       return
     }
@@ -1597,7 +1599,7 @@ gui_handlers.Hotkeys <- class extends gui_handlers.GenericOptions {
         onSelectCallback = function(path) {
           let isSaved = ::export_current_layout_by_path(path)
           if (!isSaved)
-            ::showInfoMsgBox(loc("msgbox/errorSavingPreset"))
+            showInfoMsgBox(loc("msgbox/errorSavingPreset"))
           return isSaved
         }
         extension = "blk"
@@ -1620,7 +1622,7 @@ gui_handlers.Hotkeys <- class extends gui_handlers.GenericOptions {
           if (isOpened)
             broadcastEvent("ControlsPresetChanged")
           else
-            ::showInfoMsgBox($"{loc("msgbox/errorLoadingPreset")}: {path}")
+            showInfoMsgBox($"{loc("msgbox/errorLoadingPreset")}: {path}")
           return isOpened && ::is_last_load_controls_succeeded
         }
         extension = "blk"
@@ -1959,7 +1961,7 @@ let getLocaliazedPS4ControlName = @(text) loc($"xinp/{text}", "")
 }
 
 ::switchControlsMode <- function switchControlsMode(value) {
-  ::save_local_account_settings(PS4_CONTROLS_MODE_ACTIVATE, value)
+  saveLocalAccountSettings(PS4_CONTROLS_MODE_ACTIVATE, value)
 }
 
 ::getUnmappedControlsForCurrentMission <- function getUnmappedControlsForCurrentMission() {
@@ -2307,9 +2309,9 @@ let function getWeaponFeatures(weaponsList) {
     controls = [ "gm_throttle", "gm_steering", "gm_mouse_aim_x", "gm_mouse_aim_y", "ID_TOGGLE_VIEW_GM", "ID_FIRE_GM", "ID_REPAIR_TANK" ]
 
     if (is_platform_pc && !isXInputDevice()) {
-      if (::shop_is_modification_enabled(unitId, "manual_extinguisher"))
+      if (shopIsModificationEnabled(unitId, "manual_extinguisher"))
         controls.append("ID_ACTION_BAR_ITEM_6")
-      if (::shop_is_modification_enabled(unitId, "art_support")) {
+      if (shopIsModificationEnabled(unitId, "art_support")) {
         controls.append("ID_ACTION_BAR_ITEM_5")
         controls.append("ID_SHOOT_ARTILLERY")
       }

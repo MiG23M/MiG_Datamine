@@ -229,7 +229,7 @@ gui_handlers.wwMapTooltip <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function updatePos() {
-    let cursorPos = ::get_dagui_mouse_cursor_pos_RC()
+    let cursorPos = get_dagui_mouse_cursor_pos_RC()
     cursorPos[0] = cursorPos[0]  + "+1@wwMapTooltipOffset"
     setObjPosition(this.scene, cursorPos, ["@bw", "@bh"])
   }

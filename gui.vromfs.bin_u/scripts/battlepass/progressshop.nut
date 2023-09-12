@@ -28,7 +28,7 @@ let { getUnlockCost, buyUnlock, isUnlockOpened } = require("%scripts/unlocks/unl
 const SEEN_OUT_OF_DATE_DAYS = 30
 
 let getSortedAdditionalTrophyItems = @(additionalTrophy) additionalTrophy
-  .map(@(itemId) ::ItemsManager.findItemById(::to_integer_safe(itemId, itemId, false)))
+  .map(@(itemId) ::ItemsManager.findItemById(to_integer_safe(itemId, itemId, false)))
   .sort(@(a, b) (a?.getCost() ?? 0) <=> (b?.getCost() ?? 0))
 
 let getAdditionalTrophyItemForBuy = @(additionalTrophyItems) (additionalTrophyItems
@@ -38,7 +38,7 @@ let canExchangeItem = @(passExchangeItem) (passExchangeItem?.canReceivePrize() ?
   && (passExchangeItem?.hasUsableRecipeOrNotRecipes() ?? false)
 
 let findExchangeItem = @(battlePassUnlockExchangeId) ::ItemsManager.findItemById(
-  ::to_integer_safe(battlePassUnlockExchangeId ?? -1, battlePassUnlockExchangeId ?? -1, false))
+  to_integer_safe(battlePassUnlockExchangeId ?? -1, battlePassUnlockExchangeId ?? -1, false))
 
 //do not update anything in battle or profile not recived, as it can be time consuming and not needed in battle anyway
 let canUpdateConfig = Computed(@() isProfileReceived.value && !isInBattleState.value)
@@ -326,7 +326,7 @@ gui_handlers.BattlePassShopWnd <- BattlePassShopWnd
 
 let function openBattlePassShopWnd() {
   if (isUserstatMissingData.value) {
-    ::showInfoMsgBox(loc("userstat/missingDataMsg"), "userstat_missing_data_msgbox")
+    showInfoMsgBox(loc("userstat/missingDataMsg"), "userstat_missing_data_msgbox")
     return
   }
 

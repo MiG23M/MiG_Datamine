@@ -1,3 +1,5 @@
+from "%sqDagui/daguiNativeApi.nut" import *
+
 let { loadOnce } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
 
 foreach (fn in [

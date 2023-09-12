@@ -241,7 +241,7 @@ gui_handlers.clanChangeMembershipReqWnd <- class extends gui_handlers.BaseGuiHan
 
 
   function sendRequirementsToChar(newRequirements, autoAccept) {
-    let resultCB = Callback((@(newRequirements, autoAccept) function() {
+    let resultCB = Callback( function() {
       this.clanData.membershipRequirements = newRequirements;
       this.clanData.autoAcceptMembership = autoAccept;
 
@@ -250,7 +250,7 @@ gui_handlers.clanChangeMembershipReqWnd <- class extends gui_handlers.BaseGuiHan
 
       broadcastEvent("ClanRquirementsChanged")
       this.goBack()
-    })(newRequirements, autoAccept), this)
+    }, this)
 
     let taskId = ::clan_request_set_membership_requirements(this.clanData.id, newRequirements, autoAccept)
 

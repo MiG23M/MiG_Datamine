@@ -6,6 +6,7 @@ let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { find_in_array } = require("%sqStdLibs/helpers/u.nut")
 let { shopCountriesList } = require("%scripts/shop/shopCountriesList.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 /**
  * Action to perform after change country window closes.
@@ -101,7 +102,7 @@ gui_handlers.ChangeCountry <- class extends gui_handlers.BaseGuiHandlerWT {
       shopFilterItems.append({
         shopFilterId = country
         shopFilterText = loc(country)
-        shopFilterImage = ::get_country_icon(country, true, !this.isCountryUnlocked(country))
+        shopFilterImage = getCountryIcon(country, true, !this.isCountryUnlocked(country))
       })
     }
     return shopFilterItems

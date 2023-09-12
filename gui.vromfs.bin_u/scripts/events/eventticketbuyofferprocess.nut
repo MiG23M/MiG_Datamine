@@ -57,7 +57,7 @@ let subscriptions = require("%sqStdLibs/helpers/subscriptions.nut")
           timeleft = time.secondsToString(tournamentData.timeToWait)
         }))
       }
-      ::scene_msg_box("cant_join", null,  "\n".join(msgArr, true), [["ok"]], "ok")
+      scene_msg_box("cant_join", null,  "\n".join(msgArr, true), [["ok"]], "ok")
     }
     else {
       let windowParams = {

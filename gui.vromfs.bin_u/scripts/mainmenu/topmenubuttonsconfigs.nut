@@ -31,6 +31,8 @@ let { isShowGoldBalanceWarning, hasMultiplayerRestritionByBalance
 } = require("%scripts/user/balanceFeatures.nut")
 let { isGuestLogin } = require("%scripts/user/userUtils.nut")
 let { isBattleTasksAvailable } = require("%scripts/unlocks/battleTasks.nut")
+let { setShopDevMode, getShopDevMode, ShopDevModeOption } = require("%scripts/debugTools/dbgShop.nut")
+let { add_msg_box } = require("%sqDagui/framework/msgBox.nut")
 
 let template = {
   id = ""
@@ -132,7 +134,7 @@ let list = {
     text = @() "#mainmenu/btnCampaign"
     onClickFunc = function(_obj, handler) {
       if (contentStateModule.isHistoricalCampaignDownloading())
-        return ::showInfoMsgBox(loc("mainmenu/campaignDownloading"), "question_wait_download")
+        return showInfoMsgBox(loc("mainmenu/campaignDownloading"), "question_wait_download")
 
       if (::is_any_campaign_available())
         return handler.checkedNewFlight(@() ::gui_start_campaign())
@@ -208,7 +210,7 @@ let list = {
   EXIT = {
     text = @() "#mainmenu/btnExit"
     onClickFunc = function(...) {
-      ::add_msg_box("topmenu_question_quit_game", loc("mainmenu/questionQuitGame"),
+      add_msg_box("topmenu_question_quit_game", loc("mainmenu/questionQuitGame"),
         [
           ["yes", exitGame],
           ["no", @() null ]
@@ -218,8 +220,18 @@ let list = {
   }
   DEBUG_UNLOCK = {
     text = @() "#mainmenu/btnDebugUnlock"
-    onClickFunc = @(_obj, _handler) ::add_msg_box("debug unlock", "Debug unlock enabled", [["ok", gui_do_debug_unlock]], "ok")
+    onClickFunc = @(_obj, _handler) add_msg_box("debug unlock", "Debug unlock enabled", [["ok", gui_do_debug_unlock]], "ok")
     isHidden = @(...) !::is_dev_version
+  }
+  DEBUG_SHOP = {
+    text = @() $"[DEV] Debug Shop"
+    onClickFunc = function(_obj, _handler) {
+      let isDevModeEnabled = !!getShopDevMode()
+      let devMode = isDevModeEnabled ? null : ShopDevModeOption.SHOW_ALL_BATTLE_RATINGS
+      let stateText = isDevModeEnabled ? "disabled" : "enabled"
+      add_msg_box("Shop Debug", $"Shop Developer Mode: {stateText}", [["ok", @() setShopDevMode(devMode)]], "ok")
+    }
+    isHidden = @(...) !hasFeature("DevShopMode")
   }
   DEBUG_URL = {
     text = @() "Debug: Enter Url"
@@ -244,7 +256,7 @@ let list = {
       else if (!isMultiplayerPrivilegeAvailable.value)
         checkAndShowMultiplayerPrivilegeWarning()
       else if (!isShowGoldBalanceWarning())
-        checkAndShowCrossplayWarning(@() ::showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
+        checkAndShowCrossplayWarning(@() showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
     }
     isDelayed = false
     link = "#url/tss"
@@ -288,7 +300,7 @@ let list = {
     text = @() "#charServer/chapter/eagles"
     onClickFunc = @(_obj, handler) hasFeature("EnableGoldPurchase")
       ? handler.startOnlineShop("eagles", null, "topmenu")
-      : ::showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
+      : showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
     image = @() "#ui/gameuiskin#shop_warpoints_premium.svg"
     needDiscountIcon = true
     isHidden = @(...) !hasFeature("SpendGold") || !::isInMenu()

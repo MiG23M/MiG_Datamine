@@ -64,8 +64,8 @@ let function getFavoriteVoiceMessageOption(index) {
     id = "favorite_voice_message_" + index
     type = CONTROL_TYPE.SPINNER
     options = getFavoriteVoiceMessagesVariants()
-    value = (@(index) function(_joyParams) { return ::get_option_favorite_voice_message(index - 1) + 1 })(index)
-    setValue = (@(index) function(_joyParams, objValue) { ::set_option_favorite_voice_message(index - 1, objValue - 1); })(index)
+    value =  function(_joyParams) { return ::get_option_favorite_voice_message(index - 1) + 1 }
+    setValue =  function(_joyParams, objValue) { ::set_option_favorite_voice_message(index - 1, objValue - 1); }
   }
 }
 

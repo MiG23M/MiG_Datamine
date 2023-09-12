@@ -513,7 +513,7 @@ local expireTypes = {
       return false
 
     if (this.hasReachedMaxAmount()) {
-      ::scene_msg_box("reached_max_amount", null, loc(this.getLocIdsList().reachedMaxAmount),
+      scene_msg_box("reached_max_amount", null, loc(this.getLocIdsList().reachedMaxAmount),
         [["cancel"]], "cancel")
       return false
     }

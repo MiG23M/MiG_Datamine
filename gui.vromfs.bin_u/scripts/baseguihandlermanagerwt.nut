@@ -28,11 +28,12 @@ let { get_team_colors } = require("guiMission")
 let { getFromSettingsBlk } = require("%scripts/clientState/clientStates.nut")
 let { check_obj } = require("%sqDagui/daguiUtil.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { is_active_msg_box_in_scene } = require("%sqDagui/framework/msgBox.nut")
 
 require("%scripts/options/fonts.nut") //!!!FIX ME: Need move g_font to module. This require is used to create the global table g_font
 
-::dagui_propid.add_name_id("has_ime")
-::dagui_propid.add_name_id("platformId")
+dagui_propid_add_name_id("has_ime")
+dagui_propid_add_name_id("platformId")
 
 local lastScreenHeightForFont = 0
 local lastInFlight = false  //to reload scenes on change inFlight
@@ -191,7 +192,7 @@ handlersManager.__update({
   isCurSceneBgBlurred = false
 
   function beforeClearScene(_guiScene) {
-    let sh = screenInfo.getScreenHeightForFonts(::screen_width(), ::screen_height())
+    let sh = screenInfo.getScreenHeightForFonts(screen_width(), screen_height())
     if (lastScreenHeightForFont && lastScreenHeightForFont != sh)
       this.shouldResetFontsCache = true
     lastScreenHeightForFont = sh
@@ -226,7 +227,7 @@ handlersManager.__update({
     if ((hType == handlerType.BASE || hType == handlerType.ROOT)
         && ::g_login.isLoggedIn()
         && this.lastGuiScene
-        && this.lastGuiScene.isEqual(::get_main_gui_scene())
+        && this.lastGuiScene.isEqual(get_main_gui_scene())
         && !this.isMainGuiSceneActive())
       this.clearScene(this.lastGuiScene)
   }
@@ -266,7 +267,7 @@ handlersManager.__update({
     if (!hasInitializedFont || currentFont != font) { //need update font for darg
       let hasValueChangedInDb = updateExtWatched({
         fontGenId = font.fontGenId
-        fontSizePx = font.getFontSizePx(::screen_width(), ::screen_height())
+        fontSizePx = font.getFontSizePx(screen_width(), screen_height())
       })
       if (hasValueChangedInDb)
         reloadDargUiScript(false)
@@ -286,11 +287,11 @@ handlersManager.__update({
       haveChanges = true
     }
 
-    ::set_dagui_pre_include_css("")
+    set_dagui_pre_include_css("")
 
     let cssStringPost = generatePostLoadCssString()
-    if (::get_dagui_post_include_css_str() != cssStringPost) {
-      ::set_dagui_post_include_css_str(cssStringPost)
+    if (get_dagui_post_include_css_str() != cssStringPost) {
+      set_dagui_post_include_css_str(cssStringPost)
       let forcedColors = ::g_login.isLoggedIn() ? get_team_colors() : {}
       send("recalculateTeamColors", { forcedColors })
       haveChanges = true
@@ -315,7 +316,7 @@ handlersManager.__update({
   function calcCurrentControlsAllowMask() {
     if (checkObj(::current_wait_screen))
       return CtrlsInGui.CTRL_ALLOW_NONE
-    if (::is_active_msg_box_in_scene(::get_cur_gui_scene()))
+    if (is_active_msg_box_in_scene(get_cur_gui_scene()))
       return CtrlsInGui.CTRL_ALLOW_NONE
 
     local res = CtrlsInGui.CTRL_ALLOW_FULL
@@ -480,12 +481,12 @@ handlersManager.__update({
   let handler = handlersManager.getActiveBaseHandler()
   if (handler)
     return handler
-  return gui_handlers.BaseGuiHandlerWT(::get_cur_gui_scene())
+  return gui_handlers.BaseGuiHandlerWT(get_cur_gui_scene())
 }
 
 ::gui_start_empty_screen <- function gui_start_empty_screen() {
   handlersManager.emptyScreen()
-  let guiScene = ::get_cur_gui_scene()
+  let guiScene = get_cur_gui_scene()
   if (guiScene)
     guiScene.clearDelayed() //delayed actions doesn't work in empty screen.
 }
@@ -514,7 +515,7 @@ handlersManager.__update({
   if (!child.isValid())
     return
   child.scrollToView()
-  ::get_cur_gui_scene().performDelayed({}, function() {
+  get_cur_gui_scene().performDelayed({}, function() {
     if (!child?.isValid())
       return
     child.setMouseCursorOnObject()
@@ -536,7 +537,7 @@ handlersManager.__update({
 }
 
 let needDebug = getFromSettingsBlk("debug/debugGamepadCursor", false)
-::get_cur_gui_scene()?.setGamepadCursorDebug(needDebug)
+get_cur_gui_scene()?.setGamepadCursorDebug(needDebug)
 
 handlersManager.init()
 

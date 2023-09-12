@@ -188,7 +188,7 @@ let openIngameStoreImpl = kwarg(
 
     ::queues.checkAndStart(Callback(function() {
       xboxSetPurchCb(afterCloseFunc)
-      ::get_gui_scene().performDelayed(getroottable(),
+      get_gui_scene().performDelayed(getroottable(),
         function() {
           local curItem = shopData.getShopItem(curItemId)
           if (curItem)

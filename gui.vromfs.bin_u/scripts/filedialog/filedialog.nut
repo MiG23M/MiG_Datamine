@@ -2,9 +2,9 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let DataBlock = require("DataBlock")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
@@ -740,7 +740,7 @@ gui_handlers.FileDialog <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     let settingName = this.FILEDIALOG_PATH_SETTING_ID + "/" + this.pathTag
-    let loadBlk = ::load_local_account_settings(settingName)
+    let loadBlk = loadLocalAccountSettings(settingName)
     this.dirPath  = getTblValue("dirPath",  loadBlk, this.dirPath)
     this.fileName = getTblValue("fileName", loadBlk, this.fileName)
 
@@ -761,7 +761,7 @@ gui_handlers.FileDialog <- class extends gui_handlers.BaseGuiHandlerWT {
     let saveBlk = DataBlock()
     saveBlk.dirPath = stdpath.parentPath(path)
     saveBlk.fileName = stdpath.fileName(path)
-    ::save_local_account_settings(settingName, saveBlk)
+    saveLocalAccountSettings(settingName, saveBlk)
   }
 
 
@@ -827,7 +827,7 @@ gui_handlers.FileDialog <- class extends gui_handlers.BaseGuiHandlerWT {
       return true
     }
     else
-      ::showInfoMsgBox(loc("filesystem/folderDeleted", { path = path }))
+      showInfoMsgBox(loc("filesystem/folderDeleted", { path = path }))
   }
 
 
@@ -841,12 +841,12 @@ gui_handlers.FileDialog <- class extends gui_handlers.BaseGuiHandlerWT {
       if (this.isSaveFile) {
         let folderPath = stdpath.parentPath(path)
         if (this.shouldAskOnRewrite && this.isExists(file))
-          ::scene_msg_box("filesystem_rewrite_msg_box", null,
+          scene_msg_box("filesystem_rewrite_msg_box", null,
             loc("filesystem/askRewriteFile", { path = path }),
             [["ok", Callback(this.executeSelectCallback, this) ],
             ["cancel", function() {} ]], "cancel", {})
         else if (!this.isDirectory(this.readFileInfo(folderPath)))
-          ::showInfoMsgBox(loc("filesystem/folderDeleted", { path = folderPath }))
+          showInfoMsgBox(loc("filesystem/folderDeleted", { path = folderPath }))
         else {
           if (!this.isExists(file) && this.extension
             && !endsWith(this.finallySelectedPath, "." + this.extension))
@@ -858,7 +858,7 @@ gui_handlers.FileDialog <- class extends gui_handlers.BaseGuiHandlerWT {
         if (this.isExists(file))
           this.executeSelectCallback()
         else
-          ::showInfoMsgBox(loc("filesystem/fileNotExists", { path = path }))
+          showInfoMsgBox(loc("filesystem/fileNotExists", { path = path }))
       }
     }
   }

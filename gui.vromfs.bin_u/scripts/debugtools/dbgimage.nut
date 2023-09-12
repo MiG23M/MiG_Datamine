@@ -15,7 +15,7 @@ let { debug_get_skyquake_path } = require("%scripts/debugTools/dbgUtils.nut")
 let { slice } = require("%sqstd/string.nut")
 
 let function debug_svg(image, size = null, bgColor = "#808080") {
-  let baseHeight = u.isInteger(size) ? 1080 : ::screen_height()
+  let baseHeight = u.isInteger(size) ? 1080 : screen_height()
   let view = {
     image = image
     bgColor = bgColor

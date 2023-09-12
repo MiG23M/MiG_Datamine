@@ -2,7 +2,7 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
+let { loadLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { Point2 } = require("dagor.math")
@@ -21,6 +21,7 @@ let { LEADER_OPERATION_STATES,
 let { isPlatformShieldTv } = require("%scripts/clientState/platform.nut")
 let { Timer } = require("%sqDagui/timer/timer.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { create_ObjMoveToOBj } = require("%sqDagui/guiBhv/bhvAnim.nut")
 
 gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
   sceneBlkName = "%gui/worldWar/worldWarMap.blk"
@@ -54,7 +55,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
   leftSectionHandlerWeak = null
   savedReinforcements = null
 
-  static renderFlagPID = ::dagui_propid.add_name_id("_renderFlag")
+  static renderFlagPID = dagui_propid_add_name_id("_renderFlag")
 
   afkData = null
 
@@ -99,7 +100,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
     this.markMainObjectiveZones()
 
     ::g_operations.forcedFullUpdate()
-    ::g_ww_logs.lastReadLogMark = ::loadLocalByAccount(::g_world_war.getSaveOperationLogId(), "")
+    ::g_ww_logs.lastReadLogMark = loadLocalByAccount(::g_world_war.getSaveOperationLogId(), "")
     ::g_ww_logs.requestNewLogs(WW_LOG_MAX_LOAD_AMOUNT, !::g_ww_logs.loaded.len())
 
     this.scene.findObject("update_timer").setUserData(this)
@@ -407,7 +408,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function onStart() {
     if (::g_world_war.isCurrentOperationFinished())
-      return ::showInfoMsgBox(loc("worldwar/operation_complete"))
+      return showInfoMsgBox(loc("worldwar/operation_complete"))
 
     if (::g_squad_manager.isSquadMember())
       switch (getLeaderOperationState()) {
@@ -427,7 +428,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
 
     let playerSide = ::ww_get_player_side()
     if (playerSide == SIDE_NONE)
-      return ::showInfoMsgBox(loc("msgbox/internal_error_header"))
+      return showInfoMsgBox(loc("msgbox/internal_error_header"))
 
     this.openBattleDescriptionModal(::WwBattle())
   }
@@ -459,7 +460,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onArmyMove(_obj) {
-    let cursorPos = ::get_dagui_mouse_cursor_pos()
+    let cursorPos = get_dagui_mouse_cursor_pos()
 
     if (this.currentSelectedObject == mapObjectSelect.ARMY ||
         this.currentSelectedObject == mapObjectSelect.LOG_ARMY)
@@ -980,7 +981,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
 
         objStartBox.animation = "hide"
 
-        ::create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = 0.6, bhvFunc = "square" })
+        create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = 0.6, bhvFunc = "square" })
       },
     this)
 
@@ -1246,7 +1247,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
 
     if (!cantJoinReason.canJoin) {
       this.goBackToHangar()
-      ::showInfoMsgBox(cantJoinReason.reasonText)
+      showInfoMsgBox(cantJoinReason.reasonText)
     }
   }
 
@@ -1280,7 +1281,7 @@ gui_handlers.WwMap <- class extends gui_handlers.BaseGuiHandlerWT {
 
     let animationFunc = function() {
       objStartBox.animation = "hide"
-      ::create_ObjMoveToOBj(this.scene, objStart, objTarget,
+      create_ObjMoveToOBj(this.scene, objStart, objTarget,
         { time = 0.6, bhvFunc = "square", isTargetVisible = true })
     }
 

@@ -18,7 +18,7 @@ let unitActions = require("%scripts/unit/unitActions.nut")
 let { topMenuHandler, topMenuShopActive } = require("%scripts/mainmenu/topMenuStates.nut")
 let unitTypes = require("%scripts/unit/unitTypesList.nut")
 let { placePriceTextToButton } = require("%scripts/viewUtils/objectTextUpdate.nut")
-let { getStatusTbl, getTimedStatusTbl, updateCellStatus, updateCellTimedStatus, initCell
+let { getStatusTbl, getTimedStatusTbl, updateCellStatus, updateCellTimedStatus, initCell, getUnitRankText
 } = require("shopUnitCellFill.nut")
 let unitContextMenuState = require("%scripts/unit/unitContextMenuState.nut")
 let { hideWaitIcon } = require("%scripts/utils/delayedTooltip.nut")
@@ -39,6 +39,7 @@ let DataBlock = require("DataBlock")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { getShopDevMode, setShopDevMode, getShopDevModeOptions } = require("%scripts/debugTools/dbgShop.nut")
 
 local lastUnitType = null
 
@@ -132,6 +133,7 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
     this.navBarObj = this.scene.findObject("nav-help")
 
+    this.initDevModeOptions()
     this.initShowMode(this.navBarObj)
     this.loadFullAircraftsTable(this.curAirName)
 
@@ -751,7 +753,7 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     if (isEraAvailable) {
       let unitsCount = this.boughtVehiclesCount[rank]
       let unitsTotal = this.totalVehiclesCount[rank]
-      tooltipRank = loc("shop/age/tooltip") + loc("ui/colon") + colorize("userlogColoredText", ::get_roman_numeral(rank))
+      tooltipRank = loc("shop/age/tooltip") + loc("ui/colon") + colorize("userlogColoredText", get_roman_numeral(rank))
         + "\n" + loc("shop/tier/unitsBought") + loc("ui/colon") + colorize("userlogColoredText", format("%d/%d", unitsCount, unitsTotal))
     }
     else {
@@ -762,8 +764,8 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
         let unitsLeft = max(0, unitsNeed - unitsCount)
 
         if (unitsLeft > 0) {
-          let txtThisRank = colorize("userlogColoredText", ::get_roman_numeral(rank))
-          let txtPrevRank = colorize("userlogColoredText", ::get_roman_numeral(prevRank))
+          let txtThisRank = colorize("userlogColoredText", get_roman_numeral(rank))
+          let txtPrevRank = colorize("userlogColoredText", get_roman_numeral(prevRank))
           let txtUnitsNeed = colorize("badTextColor", unitsNeed)
           let txtUnitsLeft = colorize("badTextColor", unitsLeft)
           let txtCounter = format("%d/%d", unitsCount, unitsNeed)
@@ -836,7 +838,7 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       data += format(modBlockFormat,
                   status,
                   (prevEraPos + curFakeRowRankCount).tostring(),
-                  loc("shop/age/num", { num = ::get_roman_numeral(i) }),
+                  loc("shop/age/num", { num = get_roman_numeral(i) }),
                   stripTags(texts.tooltipRank))
 
       data += arrowData
@@ -1296,7 +1298,7 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onHighlightedCellClick(obj) {
-    let value = ::to_integer_safe(cutPrefix(obj?.id, "high_") ?? "-1", -1, false)
+    let value = to_integer_safe(cutPrefix(obj?.id, "high_") ?? "-1", -1, false)
     if (value >= 0)
       this.selCellOnSearchQuit = value
     this.guiScene.performDelayed(this, function() {
@@ -1391,7 +1393,7 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     let leftPos = (tdPos[0] + tdSize[0] / 2) + " -50%w"
 
     let cellHeight = tdSize[1] || 86 // To avoid division by zero
-    let screenHeight = ::screen_height()
+    let screenHeight = screen_height()
     let safeareaHeight = this.guiScene.calcString("@rh", null)
     let safeareaBorderHeight = floor((screenHeight - safeareaHeight) / 2)
     let containerHeight = item.airsGroup.len() * cellHeight
@@ -1926,6 +1928,21 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     this.updateShowModeTooltip(obj)
   }
 
+  function initDevModeOptions() {
+    let mode = getShopDevMode()
+    let obj = showObjById("dev_options_select", mode != null, this.navBarObj)
+    if (!mode)
+      return
+
+    let devModOptionsView = {
+      optionTag = "option"
+      options = getShopDevModeOptions()
+    }
+    let data = handyman.renderCached("%gui/options/spinnerOptions.tpl", devModOptionsView)
+
+    this.guiScene.replaceContentFromText(obj, data, data.len(), this)
+  }
+
   function updateShowModeTooltip(obj) {
     if (!checkObj(obj))
       return
@@ -1971,6 +1988,16 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     this._isShowModeInChange = false
   }
 
+  function onChangeDevMode(obj) {
+    let { value } = getShopDevModeOptions()[obj.getValue()]
+    setShopDevMode(value)
+  }
+
+  function onEventShopDevModeChange(_p) {
+    this.initDevModeOptions()
+    this.doWhenActiveOnce("fillAircraftsList")
+  }
+
   function getCurrentEdiff() {
     return this.hasModeList() ? getShopDiffCode() : ::get_current_ediff()
   }
@@ -1993,7 +2020,7 @@ gui_handlers.ShopMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
         if (checkObj(unitObj)) {
           let obj = unitObj.findObject("rankText")
           if (checkObj(obj))
-            obj.setValue(::get_unit_rank_text(unit, null, true, curEdiff))
+            obj.setValue(getUnitRankText(unit, true, curEdiff))
 
           if (!this.shopResearchMode) {
             let hasObjective = ::isUnitGroup(unit)

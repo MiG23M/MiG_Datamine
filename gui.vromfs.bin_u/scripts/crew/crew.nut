@@ -362,13 +362,13 @@ let getCrew = @(countryId, idInCountry) ::g_crews_list.get()?[countryId].crews[i
 
 ::g_crew.upgradeUnitSpec <- function upgradeUnitSpec(crew, unit, crewUnitTypeToCheck = null, nextSpecType = null) {
   if (!unit)
-    return ::showInfoMsgBox(loc("shop/aircraftNotSelected"))
+    return showInfoMsgBox(loc("shop/aircraftNotSelected"))
 
   if ((crew?.id ?? -1) == -1)
-    return ::showInfoMsgBox(loc("mainmenu/needRecruitCrewWarning"))
+    return showInfoMsgBox(loc("mainmenu/needRecruitCrewWarning"))
 
   if (!unit.isUsable())
-    return ::showInfoMsgBox(loc("weaponry/unit_not_bought"))
+    return showInfoMsgBox(loc("weaponry/unit_not_bought"))
 
   let curSpecType = ::g_crew_spec_type.getTypeByCrewAndUnit(crew, unit)
   if (curSpecType == ::g_crew_spec_type.UNKNOWN) {
@@ -405,7 +405,7 @@ let getCrew = @(countryId, idInCountry) ::g_crews_list.get()?[countryId].crews[i
       local msgText = loc("crew/msg/qualifyRequirement", msgLocParams)
       if (crewUnitTypeToCheck != null && crewUnitType != crewUnitTypeToCheck)
         msgText += "\n" + unitTypeSkillsMsg
-      ::showInfoMsgBox(msgText)
+      showInfoMsgBox(msgText)
       return
     }
     else {
@@ -430,7 +430,7 @@ let getCrew = @(countryId, idInCountry) ::g_crews_list.get()?[countryId].crews[i
           bonuses = nextSpecType.getFullBonusesText(crewUnitType, curSpecType.code) })
       + "\n" + unitTypeSkillsMsg,
     cost)
-  ::scene_msg_box("purchase_ask", null, msgText,
+  scene_msg_box("purchase_ask", null, msgText,
     [
       ["yes", function() {
                  if (::check_balance_msgBox(cost))
@@ -451,7 +451,7 @@ let getCrew = @(countryId, idInCountry) ::g_crews_list.get()?[countryId].crews[i
   let taskId = ::shop_specialize_crew(crew.id, unit.name)
   let progBox = { showProgressBox = true }
   upgradesAmount--
-  let onTaskSuccess = (@(crew, unit, upgradesAmount) function() {
+  let onTaskSuccess =  function() {
     ::updateAirAfterSwitchMod(unit)
     ::update_gamercards()
     broadcastEvent("QualificationIncreased", { unit = unit, crew = crew })
@@ -459,8 +459,8 @@ let getCrew = @(countryId, idInCountry) ::g_crews_list.get()?[countryId].crews[i
     if (upgradesAmount > 0)
       return ::g_crew._upgradeUnitSpec(crew, unit, upgradesAmount)
     if (getTblValue("aircraft", crew) != unit.name)
-      ::showInfoMsgBox(format(loc("msgbox/qualificationIncreased"), ::getUnitName(unit)))
-  })(crew, unit, upgradesAmount)
+      showInfoMsgBox(format(loc("msgbox/qualificationIncreased"), ::getUnitName(unit)))
+  }
 
   ::g_tasker.addTask(taskId, progBox, onTaskSuccess)
 }

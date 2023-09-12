@@ -199,7 +199,7 @@ gui_handlers.WeaponrySelectModal <- class extends gui_handlers.BaseGuiHandlerWT 
   }
 
   function onModItemClick(obj) {
-    let idx = ::to_integer_safe(obj?.holderId, -1)
+    let idx = to_integer_safe(obj?.holderId, -1)
     if (idx < 0)
       return
     this.selIdx = idx

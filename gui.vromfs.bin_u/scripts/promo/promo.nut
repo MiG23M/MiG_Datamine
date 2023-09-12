@@ -1,6 +1,7 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
 let DataBlock = require("DataBlock")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { split_by_chars } = require("string")
@@ -18,6 +19,7 @@ let { is_chat_message_empty } = require("chat")
 let { checkUnlockString } = require("%scripts/unlocks/unlocksModule.nut")
 let { split, cutPrefix } = require("%sqstd/string.nut")
 let { get_charserver_time_sec } = require("chard")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 const BUTTON_OUT_OF_DATE_DAYS = 15
 const DEFAULT_TIME_SWITCH_SEC = 10
@@ -96,7 +98,7 @@ let function performPromoAction(handler, obj) {
 }
 
 let getPromoActionParamsKey = @(id) $"perform_action_{id}"
-let cutPromoActionParamsKey = @(id) cutPrefix(id, "perform_action_", id)
+let cutPromoActionParamsKey = @(idd) cutPrefix(idd, "perform_action_", idd)
 //---------------- </ACTIONS> -----------------------------
 
 //-------------- <SHOW ALL CHECK BOX> ---------------------
@@ -204,21 +206,21 @@ let function enablePromoPlayMenuMusic(playlistArray, periodSec) {
 //--------------------- <TOGGLE> ----------------------------
 
 let function isPromoCollapsed(id) {
-  let blk = ::loadLocalByAccount("seen/promo_collapsed")
+  let blk = loadLocalByAccount("seen/promo_collapsed")
   return blk?[id] ?? false
 }
 
 let function changeToggleStatus(id, value) {
   let newValue = !value
-  let blk = ::loadLocalByAccount("seen/promo_collapsed") ?? DataBlock()
+  let blk = loadLocalByAccount("seen/promo_collapsed") ?? DataBlock()
   blk[id] = newValue
 
-  ::saveLocalByAccount("seen/promo_collapsed", blk)
+  saveLocalByAccount("seen/promo_collapsed", blk)
   return newValue
 }
 
 let function updateCollapseStatuses(arr) {
-  let blk = ::loadLocalByAccount("seen/promo_collapsed")
+  let blk = loadLocalByAccount("seen/promo_collapsed")
   if (!blk)
     return
 
@@ -230,7 +232,7 @@ let function updateCollapseStatuses(arr) {
     clearedBlk[id] = status
   }
 
-  ::saveLocalByAccount("seen/promo_collapsed", clearedBlk)
+  saveLocalByAccount("seen/promo_collapsed", clearedBlk)
 }
 
 let function togglePromoItem(toggleButtonObj) {
@@ -246,7 +248,7 @@ let function togglePromoItem(toggleButtonObj) {
 //----------- <NEW ICON WIDGET> ----------------------------
 
 let function isWidgetSeenById(id) {
-  let blk = ::loadLocalByAccount("seen/promo")
+  let blk = loadLocalByAccount("seen/promo")
   return id in blk
 }
 
@@ -277,7 +279,7 @@ let function updateSimpleWidgetsData(table) {
     blk[id] = day
   }
 
-  ::saveLocalByAccount("seen/promo", blk)
+  saveLocalByAccount("seen/promo", blk)
   updateCollapseStatuses(idOnRemoveArray)
 }
 
@@ -285,8 +287,8 @@ let function setSimpleWidgetData(widgetsTable, id, widgetsWithCounter = []) {
   if (isInArray(id, widgetsWithCounter))
     return
 
-  let blk = ::loadLocalByAccount("seen/promo")
-  let table = ::buildTableFromBlk(blk)
+  let blk = loadLocalByAccount("seen/promo")
+  let table = convertBlk(blk)
   if (id not in table)
     table[id] <- time.getUtcDays()
 
@@ -304,7 +306,7 @@ let oldRecordsCheckTable = {
 }
 
 let function checkOldRecordsOnInit() {
-  let blk = ::loadLocalByAccount("seen")
+  let blk = loadLocalByAccount("seen")
   if (!blk)
     return
 
@@ -325,7 +327,7 @@ let function checkOldRecordsOnInit() {
 
       newBlk[id] <- lastTimeSeen
     }
-    ::saveLocalByAccount($"seen/{blockName}", newBlk)
+    saveLocalByAccount($"seen/{blockName}", newBlk)
   }
 }
 
@@ -508,7 +510,7 @@ let function checkMultiVisibleBlocks(block) {
   local countVisible = 0
   let blocksCount = block.blockCount()
   for (local i = 0; i < blocksCount; ++i)
-    if (checkBlockTime(::buildTableFromBlk(block.getBlock(i))))
+    if (checkBlockTime(convertBlk(block.getBlock(i))))
       ++countVisible
   return countVisible > 1
 }
@@ -549,7 +551,7 @@ let isValueCurrentInMultiBlock = @(id, value)
 
 let function generatePromoBlockView(block) {
   let id = block.getBlockName()
-  let view = ::buildTableFromBlk(block)
+  let view = convertBlk(block)
   let promoButtonConfig = getPromoButtonConfig(id)
   let multiBlockTbl = {}
   view.id <- id
@@ -570,10 +572,10 @@ let function generatePromoBlockView(block) {
   view.radiobuttons <- []
 
   if (isMultiblock) {
-    let value = ::to_integer_safe(multiblockData?[id]?.value ?? 0)
-    let switchVal = ::to_integer_safe(block?.switch_time_sec
+    let value = to_integer_safe(multiblockData?[id]?.value ?? 0)
+    let switchVal = to_integer_safe(block?.switch_time_sec
       || DEFAULT_TIME_SWITCH_SEC)
-    let mSwitchVal = ::to_integer_safe(block?.manual_switch_time_multiplayer
+    let mSwitchVal = to_integer_safe(block?.manual_switch_time_multiplayer
       || DEFAULT_MANUAL_SWITCH_TIME_MULTIPLAYER)
     let lifeTimeVal = multiblockData?[id].life_time ?? switchVal
     multiblockData[id] <- {
@@ -590,7 +592,7 @@ let function generatePromoBlockView(block) {
   local counter = 0
   for (local i = 0; i < requiredBlocks; ++i) {
     let checkBlock = isMultiblock ? block.getBlock(i) : block
-    let fillBlock = ::buildTableFromBlk(checkBlock)
+    let fillBlock = convertBlk(checkBlock)
     let isVisibleSubBlock = checkBlockTime(fillBlock)
 
     if (isMultiblock)

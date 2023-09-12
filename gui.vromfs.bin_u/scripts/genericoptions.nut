@@ -349,7 +349,7 @@ gui_handlers.GenericOptions <- class extends gui_handlers.BaseGuiHandlerWT {
         if (!this.isValid())
           return
 
-        ::showInfoMsgBox(message)
+        showInfoMsgBox(message)
         this.updateOption(USEROPT_TANK_ALT_CROSSHAIR)
       })
     }

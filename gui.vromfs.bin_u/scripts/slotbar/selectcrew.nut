@@ -24,7 +24,7 @@ let function getObjPosInSafeArea(obj) {
   let pos = obj.getPosRC()
   let size = obj.getSize()
   let safeArea = getSafearea()
-  let screen = [::screen_width(), ::screen_height()]
+  let screen = [screen_width(), screen_height()]
   local border = safeArea.map(@(value, idx) (screen[idx] * (1.0 - value) / 2).tointeger())
   return pos.map(@(val, idx) clamp(val, border[idx], screen[idx] - border[idx] - size[idx]))
 }
@@ -53,7 +53,7 @@ gui_handlers.SelectCrew <- class extends gui_handlers.BaseGuiHandlerWT {
   isSelectByGroups = false
 
   function initScreen() {
-    if (!this.unit || !this.unit.isUsable() || this.isUnitInSlotbar() || !checkObj(this.unitObj)) {
+    if (!this.unit || !this.unit.isUsable() || this.isUnitInSlotbar()) {
       this.goBack()
       return
     }
@@ -63,17 +63,26 @@ gui_handlers.SelectCrew <- class extends gui_handlers.BaseGuiHandlerWT {
 
     this.guiScene.setUpdatesEnabled(false, false)
 
-    let tdObj = this.unitObj.getParent()
-    let tdPos = getObjPosInSafeArea(tdObj)
+    local tdClone = null
+    if (this.unitObj != null) {
+      let tdObj = this.unitObj.getParent()
+      let tdPos = getObjPosInSafeArea(tdObj)
 
-    gui_handlers.ActionsList.removeActionsListFromObject(tdObj)
+      gui_handlers.ActionsList.removeActionsListFromObject(tdObj)
 
-    let tdClone = tdObj.getClone(this.scene, this)
-    tdClone.pos = tdPos[0] + ", " + tdPos[1]
-    tdClone["class"] = this.cellClass
-    tdClone.position = "root"
+      tdClone = tdObj.getClone(this.scene, this)
+      tdClone.pos = tdPos[0] + ", " + tdPos[1]
+      tdClone["class"] = this.cellClass
+      tdClone.position = "root"
+    } else {
+      local icon = ::build_aircraft_item(this.unit.name, this.unit, {})
+      this.guiScene.appendWithBlk(this.scene, icon, this)
+      tdClone = this.scene.findObject($"td_{this.unit.name}")
+      tdClone.position = "absolute"
+      tdClone.pos = "0.5sw - w/2, 0.5sh - h"
+    }
+
     ::fill_unit_item_timers(tdClone.findObject(this.unit.name), this.unit)
-
     if (!hasFeature("GlobalShowBattleRating") && hasFeature("SlotbarShowBattleRating")) {
       let rankObj = tdClone.findObject("rank_text")
       if (checkObj(rankObj)) {

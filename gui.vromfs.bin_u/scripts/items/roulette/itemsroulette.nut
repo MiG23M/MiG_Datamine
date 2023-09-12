@@ -10,7 +10,7 @@ let { frnd } = require("dagor.random")
 let { GUI } = require("%scripts/utils/configs.nut")
 let ItemGenerators = require("%scripts/items/itemsClasses/itemGenerators.nut")
 let rouletteAnim = require("%scripts/items/roulette/rouletteAnim.nut")
-
+let { updateTransparencyRecursive } = require("%sqDagui/guiBhv/bhvBasic.nut")
 /*
 ItemsRoulette API:
   resetData() - rewrite params for future usage;
@@ -455,8 +455,8 @@ let function initItemsRoulette(trophyName, rewardsArray, imageObj, handler, afte
 
   reinitParams()
 
-  let totalLen = ::to_integer_safe(placeObj?.totalLen, 1)
-  let insertRewardFromEnd = ::to_integer_safe(placeObj?.insertRewardFromEnd, 1)
+  let totalLen = to_integer_safe(placeObj?.totalLen, 1)
+  let insertRewardFromEnd = to_integer_safe(placeObj?.insertRewardFromEnd, 1)
   insertRewardIdx = totalLen - insertRewardFromEnd - 1
   if (insertRewardIdx < 0 || insertRewardIdx >= totalLen) {
     assert(false, $"Insert index is wrong: {insertRewardIdx} / {totalLen}")
@@ -490,7 +490,7 @@ let function initItemsRoulette(trophyName, rewardsArray, imageObj, handler, afte
   placeObj.getScene().replaceContentFromText(rouletteObj, data, data.len(), handler)
   placeObj.show(true)
 
-  ::updateTransparencyRecursive(placeObj, 0)
+  updateTransparencyRecursive(placeObj, 0)
   placeObj.animation = "show"
 
   let blackoutObj = imageObj.findObject("blackout_background")

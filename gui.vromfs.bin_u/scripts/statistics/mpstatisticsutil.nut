@@ -16,6 +16,7 @@ let { is_replay_playing } = require("replays")
 let { get_game_mode } = require("mission")
 let { get_mission_difficulty_int, get_mission_difficulty, get_mp_session_info } = require("guiMission")
 let { stripTags } = require("%sqstd/string.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::gui_start_mpstatscreen_ <- function gui_start_mpstatscreen_(params = {}) { // used from native code
   let isFromGame = params?.isFromGame ?? false
@@ -185,7 +186,7 @@ let function guiStartMPStatScreenFromGame() {
 
         local icon = ""
         if (!isEmpty && country != "")
-          icon = ::get_country_icon(country)
+          icon = getCountryIcon(country)
         tdData += format("size:t='ph%s,ph';"
           + "img{ pos:t='(pw-w)/2,(ph-h)/2'; position:t='relative'; size:t='@tableIcoSize,@tableIcoSize';"
           +   "background-image:t='%s'; background-svg-size:t='@cIco, @cIco';"
@@ -428,7 +429,7 @@ let function guiStartMPStatScreenFromGame() {
         let objImg = objTd.getChild(0)
         local icon = ""
         if (country != "")
-          icon = ::get_country_icon(country)
+          icon = getCountryIcon(country)
         objImg["background-image"] = icon
       }
       else if (hdr == "status") {

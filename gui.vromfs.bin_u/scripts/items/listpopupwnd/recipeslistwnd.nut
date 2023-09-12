@@ -122,7 +122,7 @@ gui_handlers.RecipesListWnd <- class extends gui_handlers.BaseGuiHandlerWT {
     if (!recipesListObj?.isValid())
       return
 
-    let cursorPos = ::get_dagui_mouse_cursor_pos_RC()
+    let cursorPos = get_dagui_mouse_cursor_pos_RC()
     let idx = findChildIndex(recipesListObj, function(childObj) {
       let posRC = childObj.getPosRC()
       let size = childObj.getSize()
@@ -180,7 +180,7 @@ gui_handlers.RecipesListWnd <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function onRecipeApply() {
     if (this.curRecipe && this.curRecipe.isRecipeLocked())
-      return ::scene_msg_box("cant_cancel_craft", null,
+      return scene_msg_box("cant_cancel_craft", null,
         colorize("badTextColor", loc(this.curRecipe.getCantAssembleMarkedFakeLocId())),
         [[ "ok" ]],
         "ok")

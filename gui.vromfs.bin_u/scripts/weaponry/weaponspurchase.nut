@@ -162,7 +162,7 @@ local class WeaponsPurchaseProcess {
       ["yes", performAction ],
       ["no", cancelAction ]
     ]
-    ::scene_msg_box("mechanic_execute_msg", null, text, buttons, defButton,
+    scene_msg_box("mechanic_execute_msg", null, text, buttons, defButton,
       { cancel_fn = cancelAction, baseHandler = this })
   }
 
@@ -242,7 +242,7 @@ local class WeaponsPurchaseProcess {
   //-------------- <BUY SPARE> --------------------------------------
 
   function fillSpareParams(amount = 1) {
-    this.mainFunc = Callback(function(amount) { this.sendPurchaseSpareRequest(amount) }, this)
+    this.mainFunc = Callback(function(amnt) { this.sendPurchaseSpareRequest(amnt) }, this)
     this.checkRepair = false
     this.msgLocId = "onlineShop/needMoneyQuestion"
     this.msgLocParams = {
@@ -273,7 +273,7 @@ local class WeaponsPurchaseProcess {
   //-------------- <BUY WEAPON> --------------------------------------
 
   function fillWeaponParams(amount = 1) {
-    this.mainFunc = Callback(function(amount) { this.sendPurchaseWeaponRequest(amount) }, this)
+    this.mainFunc = Callback(function(amnt) { this.sendPurchaseWeaponRequest(amnt) }, this)
     this.checkRepair = false
     this.msgLocId = "onlineShop/needMoneyQuestion"
     this.repairMsgLocId = "msgBox/repair_and_single_mod_purchase"
@@ -308,7 +308,7 @@ local class WeaponsPurchaseProcess {
   //-------------- <BUY SINGLE MOD> --------------------------------------
 
   function fillModificationParams(amount = 1) {
-    this.mainFunc = Callback(function(amount) { this.sendPurchaseModificationRequest(amount) }, this)
+    this.mainFunc = Callback(function(amnt) { this.sendPurchaseModificationRequest(amnt) }, this)
     this.msgLocId = this.open ? "shop/needMoneyQuestion_purchaseModificationForGold"
       : "onlineShop/needMoneyQuestion"
     this.repairMsgLocId = "msgBox/repair_and_single_mod_purchase"

@@ -131,7 +131,7 @@ registerPersistentData("ContactsGlobals", getroottable(),
   if (::contacts[groupName].len() < EPL_MAX_PLAYERS_IN_LIST)
     return true
 
-  ::showInfoMsgBox(
+  showInfoMsgBox(
     format(loc("msg/cant_add/too_many_contacts"), EPL_MAX_PLAYERS_IN_LIST),
     "cant_add_contact"
   )
@@ -161,7 +161,7 @@ registerPersistentData("ContactsGlobals", getroottable(),
     }
 
     func(null)
-    ::showInfoMsgBox(loc("chat/error/item-not-found", { nick = getPlayerName(playerName) }), "incorrect_user")
+    showInfoMsgBox(loc("chat/error/item-not-found", { nick = getPlayerName(playerName) }), "incorrect_user")
   }
 
   let taskId = ::find_nicks_by_prefix(playerName, 1, false)
@@ -191,7 +191,7 @@ registerPersistentData("ContactsGlobals", getroottable(),
     }
   }
   else {
-    let guiScene = ::get_gui_scene()
+    let guiScene = get_gui_scene()
     obj = guiScene[objName]
     if (!checkObj(obj)) {
       guiScene.appendWithBlk("", "tdiv { id:t='" + objName + "' }")

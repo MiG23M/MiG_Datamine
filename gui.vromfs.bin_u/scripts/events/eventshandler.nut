@@ -32,6 +32,8 @@ let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { setPromoButtonText, getPromoVisibilityById } = require("%scripts/promo/promo.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_MP_DOMINATION } = require("%scripts/options/optionsExtNames.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings, loadLocalByAccount, saveLocalByAccount
+} = require("%scripts/clientState/localProfile.nut")
 
 const COLLAPSED_CHAPTERS_SAVE_ID = "events_collapsed_chapters"
 const ROOMS_LIST_OPEN_COUNT_SAVE_ID = "tutor/roomsListOpenCount"
@@ -103,7 +105,7 @@ gui_handlers.EventsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   isQueueWasStartedWithRoomsList = false
 
   listMap = null
-  listIdxPID = ::dagui_propid.add_name_id("listIdx")
+  listIdxPID = dagui_propid_add_name_id("listIdx")
   hoveredIdx  = -1
   selectedIdx = -1
   isMouseMode = true
@@ -250,7 +252,7 @@ gui_handlers.EventsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     let maxCount = eventRoomsListCfgBlk?.askBeforeOpenCount ?? SHOW_RLIST_BEFORE_OPEN_DEFAULT
-    if (maxCount < ::load_local_account_settings(ROOMS_LIST_OPEN_COUNT_SAVE_ID, 0)) {
+    if (maxCount < loadLocalAccountSettings(ROOMS_LIST_OPEN_COUNT_SAVE_ID, 0)) {
       this.canAskAboutRoomsList = false
       return
     }
@@ -425,8 +427,8 @@ gui_handlers.EventsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   function onRoomsList() {
     gui_handlers.EventRoomsHandler.open(::events.getEvent(this.curEventId), true)
     this.canAskAboutRoomsList = false
-    ::save_local_account_settings(ROOMS_LIST_OPEN_COUNT_SAVE_ID,
-      ::load_local_account_settings(ROOMS_LIST_OPEN_COUNT_SAVE_ID, 0) + 1)
+    saveLocalAccountSettings(ROOMS_LIST_OPEN_COUNT_SAVE_ID,
+      loadLocalAccountSettings(ROOMS_LIST_OPEN_COUNT_SAVE_ID, 0) + 1)
   }
 
   function onDownloadPack() {
@@ -704,12 +706,12 @@ gui_handlers.EventsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
     chapterObj.collapsed = collapsed ? "no" : "yes"
     this.getCollapsedChapters()[chapterId] = collapsed ? null : true
-    ::saveLocalByAccount(COLLAPSED_CHAPTERS_SAVE_ID, this.getCollapsedChapters())
+    saveLocalByAccount(COLLAPSED_CHAPTERS_SAVE_ID, this.getCollapsedChapters())
   }
 
   function getCollapsedChapters() {
     if (this.collapsedChapters == null)
-      this.collapsedChapters = ::loadLocalByAccount(COLLAPSED_CHAPTERS_SAVE_ID, DataBlock())
+      this.collapsedChapters = loadLocalByAccount(COLLAPSED_CHAPTERS_SAVE_ID, DataBlock())
     return this.collapsedChapters
   }
   //----END_VIEW----//

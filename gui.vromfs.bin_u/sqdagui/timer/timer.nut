@@ -1,3 +1,4 @@
+from "%sqDagui/daguiNativeApi.nut" import *
 
 let Callback = require("%sqStdLibs/helpers/callback.nut").Callback
 let { check_obj } = require("%sqDagui/daguiUtil.nut")
@@ -9,7 +10,7 @@ let Timer = class {
   guiScene    = null
   timerGuiObj = null
 
-  static timeNowPID = ::dagui_propid.add_name_id("timer-timenow")
+  static timeNowPID = dagui_propid_add_name_id("timer-timenow")
 
   constructor(parentObj, delay, onTimeOut_, handler = null, cycled_ = false, isDelayed_ = false) {
     if (!onTimeOut_)

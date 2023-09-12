@@ -1,7 +1,8 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { hangar_focus_model, hangar_set_dm_viewer_mode } = require("hangar")
 let protectionAnalysisOptions = require("%scripts/dmViewer/protectionAnalysisOptions.nut")
@@ -80,7 +81,7 @@ gui_handlers.ProtectionAnalysis <- class extends gui_handlers.BaseGuiHandlerWT {
     let cbVerticalAngleObj = showObjById("checkboxVerticalAngle", isShowProtectionMapOptions)
     showObjById("rowSeparator", isShowProtectionMapOptions)
     if (isShowProtectionMapOptions) {
-      let value = ::load_local_account_settings(CB_VERTICAL_ANGLE, true)
+      let value = loadLocalAccountSettings(CB_VERTICAL_ANGLE, true)
       cbVerticalAngleObj.setValue(value)
       if (!value) //Need change because y_nulling value is true by default
         set_protection_map_y_nulling(!value)
@@ -199,7 +200,7 @@ gui_handlers.ProtectionAnalysis <- class extends gui_handlers.BaseGuiHandlerWT {
   onProtectionMap = @() this.buildProtectionMap()
   onConsiderVerticalAngle = function(obj) {
     let value = obj.getValue()
-    ::save_local_account_settings(CB_VERTICAL_ANGLE, value)
+    saveLocalAccountSettings(CB_VERTICAL_ANGLE, value)
     set_protection_map_y_nulling(!value)
   }
 

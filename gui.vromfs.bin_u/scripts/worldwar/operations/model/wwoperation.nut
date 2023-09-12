@@ -172,7 +172,7 @@ enum WW_OPERATION_PRIORITY { //bit enum
     let cantJoinReason = this.getCantJoinReasonData(country)
     if (!cantJoinReason.canJoin && !forced) { // Forced when invite in operation
       if (!isSilence)
-        ::showInfoMsgBox(cantJoinReason.reasonText)
+        showInfoMsgBox(cantJoinReason.reasonText)
       return false
     }
 

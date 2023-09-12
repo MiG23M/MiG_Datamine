@@ -23,7 +23,7 @@ let function hasLegalRestictions(restrictedInCountries) {
 }
 
 let function showLegalRestrictionsNotice() {
-  ::scene_msg_box("legalRestrictionsNotice", null, loc("msgbox/legalRestrictionsNotice"),
+  scene_msg_box("legalRestrictionsNotice", null, loc("msgbox/legalRestrictionsNotice"),
     [["ok"]], "ok")
 }
 
@@ -71,7 +71,7 @@ let function checkLegalRestrictions(restrictedInCountries, onSuccessCb) {
     return onSuccessCb()
 
   let text = loc("msgbox/countryConfirmation", { country = countryName })
-  ::scene_msg_box("countryConfirmation", null, text,
+  scene_msg_box("countryConfirmation", null, text,
     [["yes", onCountryConfirmed], ["no", onCountryDeclined]], "yes", { cancel_fn = @() null })
 }
 

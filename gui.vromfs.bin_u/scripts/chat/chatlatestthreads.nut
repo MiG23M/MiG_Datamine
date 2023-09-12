@@ -1,8 +1,7 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
-
-
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let { split_by_chars } = require("string")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { get_time_msec } = require("dagor.time")
@@ -114,7 +113,7 @@ let { get_time_msec } = require("dagor.time")
     return
   }
 
-  let langsStr = ::loadLocalByAccount("chat/latestThreadsLangs", "")
+  let langsStr = loadLocalByAccount("chat/latestThreadsLangs", "")
   let savedLangs = split_by_chars(langsStr, ",")
 
   this.langsList.clear()
@@ -133,7 +132,7 @@ let { get_time_msec } = require("dagor.time")
   if (!this.langsInited || !this.isCustomLangsList)
     return
   let chatIds = this.langsList.map(@(l) l.chatId)
-  ::saveLocalByAccount("chat/latestThreadsLangs", ",".join(chatIds, true))
+  saveLocalByAccount("chat/latestThreadsLangs", ",".join(chatIds, true))
 }
 
 ::g_chat_latest_threads._setSearchLangs <- function _setSearchLangs(values) {

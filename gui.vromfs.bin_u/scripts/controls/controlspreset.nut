@@ -811,13 +811,13 @@ let function isSameMapping(lhs, rhs) {
 
   function getButtonName(deviceId, buttonId) {
     if (deviceId != JOYSTICK_DEVICE_0_ID)
-      return loc(::get_button_name(deviceId, buttonId)) // C++ function
+      return loc(get_button_name(deviceId, buttonId)) // C++ function
 
     let buttonLocalized = loc("composite/button")
 
     local name = null
     local connected = false
-    name = ::get_button_name(deviceId, buttonId) // C++ function
+    name = get_button_name(deviceId, buttonId) // C++ function
 
     foreach (idx, joy in this.deviceMapping) {
       if (buttonId < joy.buttonsOffset || buttonId >= joy.buttonsOffset + joy.buttonsCount)

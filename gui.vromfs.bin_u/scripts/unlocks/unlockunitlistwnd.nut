@@ -1,7 +1,5 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
-
-
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { format } = require("string")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
@@ -14,6 +12,7 @@ let unitTypes = require("%scripts/unit/unitTypesList.nut")
 let { shopCountriesList } = require("%scripts/shop/shopCountriesList.nut")
 let { getUnlockById } = require("%scripts/unlocks/unlocksCache.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 let function getUnitsData(unlockId) {
   let data = {}
@@ -39,7 +38,7 @@ let function getUnitsData(unlockId) {
 }
 
 let getUnitBrText = @(u, ediff) format("%.1f", u.getBattleRating(ediff))
-let getUnitRankText = @(u) ::get_roman_numeral(u.rank)
+let getUnitRankText = @(u) get_roman_numeral(u.rank)
 
 let function getCountriesView(unlockId) {
   let ediff = getShopDiffCode()
@@ -75,7 +74,7 @@ let function getCountriesView(unlockId) {
 
     if (armyTypes.len() > 0)
       view.append({
-        countryIcon = ::get_country_icon(countryId)
+        countryIcon = getCountryIcon(countryId)
         armyTypes
       })
   }

@@ -207,7 +207,7 @@ getroottable().dbgExample <- function(textObjId = "menu_chat_text")
   ])
 
   local res = systemMsg.jsonStringToLang(json)
-  local testObj = ::get_gui_scene()[textObjId]
+  local testObj = get_gui_scene()[textObjId]
   if (checkObj(testObj))
     testObj.setValue(res)
   return json

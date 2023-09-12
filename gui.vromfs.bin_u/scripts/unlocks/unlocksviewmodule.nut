@@ -450,7 +450,7 @@ let function getUsualCondValueText(condType, v, condition) {
       return loc($"missions/{v}")
     case "era":
     case "maxUnitsRankOnStartMission":
-      return ::get_roman_numeral(v)
+      return get_roman_numeral(v)
     case "events":
       return ::events.getNameByEconomicName(v)
     case "offenderIsSupportGun":
@@ -506,7 +506,7 @@ let function addUniqConditionsText(groupsList, condition) {
   }
 
   if (condType == "atLeastOneUnitsRankOnStartMission") {
-    let valuesTexts = condition.values?.map(::get_roman_numeral) ?? []
+    let valuesTexts = condition.values?.map(get_roman_numeral) ?? []
     addValueToGroup(groupsList, condType, "-".join(valuesTexts, true))
     return true
   }
@@ -675,14 +675,14 @@ let function getUnlockMainCondDesc(condition, curValue = null, maxValue = null, 
   if (maxValue == null)
     maxValue = getTblValue("rewardNum", condition) || getTblValue("num", condition)
 
-  if (::is_numeric(curValue)) {
+  if (is_numeric(curValue)) {
     if (bitMode)
       curValue = number_of_set_bits(curValue)
-    else if (::is_numeric(maxValue) && curValue > maxValue) // validate values if numeric
+    else if (is_numeric(maxValue) && curValue > maxValue) // validate values if numeric
       curValue = maxValue
   }
 
-  if (bitMode && ::is_numeric(maxValue))
+  if (bitMode && is_numeric(maxValue))
     maxValue = number_of_set_bits(maxValue)
 
   if (isCheckedBySingleAttachment(modeType)
@@ -701,17 +701,17 @@ let function getUnlockMainCondDesc(condition, curValue = null, maxValue = null, 
     if (curValue == null || params?.showValueForBitList)
       progressText = ", ".join(getLocForBitValues(modeType, condition.values), true)
 
-    if (::is_numeric(maxValue) && maxValue != condition.values.len()) {
+    if (is_numeric(maxValue) && maxValue != condition.values.len()) {
       textId = $"{textId}/withValue"
       textParams.value <- colorize("unlockActiveColor", maxValue)
     }
   }
   else if (modeType == "maxUnitsRankOnStartMission") {
-    let valuesText = condition.values?.map(::get_roman_numeral) ?? []
+    let valuesText = condition.values?.map(get_roman_numeral) ?? []
     progressText = "-".join(valuesText, true)
   }
   else if (modeType == "amountDamagesZone") {
-    if (::is_numeric(curValue) && ::is_numeric(maxValue)) {
+    if (is_numeric(curValue) && is_numeric(maxValue)) {
       let a = round_by_value(curValue * 0.001, 0.001)
       let b = round_by_value(maxValue * 0.001, 0.001)
       progressText = $"{a}/{b}"
@@ -820,8 +820,8 @@ let function getUnlockMultDesc(condition) {
         continue
 
       let rankText = (rank - 1 == lastAddedRank)
-        ? ::get_roman_numeral(rank)
-        : getRangeString(::get_roman_numeral(lastAddedRank + 1), ::get_roman_numeral(rank))
+        ? get_roman_numeral(rank)
+        : getRangeString(get_roman_numeral(lastAddedRank + 1), get_roman_numeral(rank))
 
       mulRanks.append($"{rankText}{::nbsp}(x{curRankMul})")
       lastAddedRank = rank

@@ -1,6 +1,7 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
 let { isUnlockOpened } = require("%scripts/unlocks/unlocksModule.nut")
 let time = require("%scripts/time.nut")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
@@ -66,7 +67,7 @@ let { get_charserver_time_sec } = require("chard")
   if (!u.isDataBlock(result))
     return false
 
-  let newPartnerUnlocks = ::buildTableFromBlk(result)
+  let newPartnerUnlocks = convertBlk(result)
   if (u.isEqual(this.partnerExectutedUnlocks, newPartnerUnlocks))
     return false
 
@@ -82,7 +83,7 @@ let { get_charserver_time_sec } = require("chard")
     return false
   if (!durationMin)
     return true
-  if (!::is_numeric(durationMin))
+  if (!is_numeric(durationMin))
     return false
 
   let durationSec = time.minutesToSeconds(durationMin)

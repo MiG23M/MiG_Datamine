@@ -130,7 +130,7 @@ gui_handlers.DecorLayoutPresets <- class extends gui_handlers.BaseGuiHandlerWT {
     if (newName == oldName)
       return
     if (isInArray(newName, this.presetBySkinIdx))
-      return ::showInfoMsgBox(loc("rename/cant/nameAlreadyTaken"))
+      return showInfoMsgBox(loc("rename/cant/nameAlreadyTaken"))
 
     ::hangar_customization_preset_set_name(oldName, newName)
     ::save_profile(false)

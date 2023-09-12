@@ -242,7 +242,7 @@ local class TopMenu extends gui_handlers.BaseGuiHandlerWT {
 
       shopMove.moveOut = "yes"
       shopMove["_size-timer"] = "1"
-      shopMove.setFloatProp(::dagui_propid.add_name_id("_size-timer"), 1.0)
+      shopMove.setFloatProp(dagui_propid_add_name_id("_size-timer"), 1.0)
       shopMove.height = "sh"
 
       this.guiScene.performDelayed(this, function () { this.updateOnShopWndAnim(true) })

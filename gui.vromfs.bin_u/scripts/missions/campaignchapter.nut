@@ -2,9 +2,9 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
+let { saveLocalAccountSettings, loadLocalAccountSettings, loadLocalByAccount, saveLocalByAccount
+} = require("%scripts/clientState/localProfile.nut")
 let DataBlock = require("DataBlock")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -42,7 +42,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
   curMissionIdx = -1
   missionDescWeak = null
 
-  listIdxPID = ::dagui_propid.add_name_id("listIdx")
+  listIdxPID = dagui_propid_add_name_id("listIdx")
   hoveredIdx = -1
   isMouseMode = true
 
@@ -95,12 +95,12 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function loadCollapsedChapters() {
-    let collapsedList = ::load_local_account_settings(this.getCollapseListSaveId(), "")
+    let collapsedList = loadLocalAccountSettings(this.getCollapseListSaveId(), "")
     this.collapsedCamp = split(collapsedList, ";")
   }
 
   function saveCollapsedChapters() {
-    ::save_local_account_settings(this.getCollapseListSaveId(), ";".join(this.collapsedCamp, true))
+    saveLocalAccountSettings(this.getCollapseListSaveId(), ";".join(this.collapsedCamp, true))
   }
 
   function getCollapseListSaveId() {
@@ -401,7 +401,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
       return
     }
 
-    this.isOnlyFavorites = ::loadLocalByAccount(this.getFavoritesSaveId(), false)
+    this.isOnlyFavorites = loadLocalByAccount(this.getFavoritesSaveId(), false)
     let objValid = this.showSceneBtn("favorite_missions_switch", true)
     if (objValid)
       objValid.setValue(this.isOnlyFavorites)
@@ -413,7 +413,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     this.isOnlyFavorites = value
-    ::saveLocalByAccount(this.getFavoritesSaveId(), this.isOnlyFavorites)
+    saveLocalByAccount(this.getFavoritesSaveId(), this.isOnlyFavorites)
     this.applyMissionFilter()
     this.updateCollapsedItems()
   }
@@ -460,7 +460,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
       if (showMsgbox) {
         let unitNameLoc = colorize("activeTextColor", ::getUnitName(this.curMission.mustHaveUnit))
         let requirements = loc("conditions/char_unit_exist/single", { value = unitNameLoc })
-        ::showInfoMsgBox(loc("charServer/needUnlock") + "\n\n" + requirements)
+        showInfoMsgBox(loc("charServer/needUnlock") + "\n\n" + requirements)
       }
       return false
     }
@@ -468,13 +468,13 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
       if (showMsgbox) {
         let unlockId = this.curMission.blk.chapter + "/" + this.curMission.blk.name
         let msg = loc("charServer/needUnlock") + "\n\n" + getFullUnlockDescByName(unlockId, 1)
-        ::showInfoMsgBox(msg, "in_demo_only_singlemission_unlock")
+        showInfoMsgBox(msg, "in_demo_only_singlemission_unlock")
       }
       return false
     }
     if ((this.gm == GM_CAMPAIGN) && (this.curMission.progress >= 4)) {
       if (showMsgbox)
-        ::showInfoMsgBox(loc("campaign/unlockPrevious"))
+        showInfoMsgBox(loc("campaign/unlockPrevious"))
       return false
     }
     if ((this.gm != GM_CAMPAIGN) && !this.curMission.isUnlocked) {
@@ -482,7 +482,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
         local msg = loc("ui/unavailable")
         if ("mustHaveUnit" in this.curMission)
           msg = format("%s\n%s", loc("unlocks/need_to_unlock"), ::getUnitName(this.curMission.mustHaveUnit))
-        ::showInfoMsgBox(msg)
+        showInfoMsgBox(msg)
       }
       return false
     }
@@ -506,7 +506,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
       if (this.curMission.isUnlocked)
         this.playChapterVideo(this.curMission.id)
       else
-        ::showInfoMsgBox(loc("campaign/unlockPreviousChapter"))
+        showInfoMsgBox(loc("campaign/unlockPreviousChapter"))
       return
     }
 
@@ -812,7 +812,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
     if (::SessionLobby.isInRoom())
       curMisListType = ::SessionLobby.getMisListType()
     else {
-      let typeName = ::loadLocalByAccount("wnd/chosenMisListType", "")
+      let typeName = loadLocalByAccount("wnd/chosenMisListType", "")
       curMisListType = ::g_mislist_type.getTypeByName(typeName)
     }
 
@@ -865,7 +865,7 @@ gui_handlers.CampaignChapter <- class extends gui_handlers.BaseGuiHandlerWT {
 
     let typeName = obj.getChild(value).id
     this.misListType = ::g_mislist_type.getTypeByName(typeName)
-    ::saveLocalByAccount("wnd/chosenMisListType", this.misListType.id)
+    saveLocalByAccount("wnd/chosenMisListType", this.misListType.id)
     this.updateFavorites()
     this.updateWindow()
   }
@@ -1079,7 +1079,7 @@ gui_handlers.SingleMissionsModal <- class extends gui_handlers.SingleMissions {
         return
 
       this.isOnlyFavorites = value
-      ::saveLocalByAccount(this.getFavoritesSaveId(), this.isOnlyFavorites)
+      saveLocalByAccount(this.getFavoritesSaveId(), this.isOnlyFavorites)
     }
     else {
       let bit = objId.split("_")[1].tointeger()

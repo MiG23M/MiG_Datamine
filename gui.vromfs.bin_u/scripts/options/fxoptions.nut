@@ -3,6 +3,7 @@ from "%scripts/dagui_library.nut" import *
 
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 const LOCAL_PATH_SHOWED_HDR_ON_START = "isShowedHdrSettingsOnStart"
 
@@ -96,7 +97,7 @@ gui_handlers.fxOptions <- class extends ::BaseGuiHandler {
   function goBack() {
     ::save_profile(false)
     if (this.LOCAL_PATH_SHOWED_ON_START != null)
-      ::saveLocalByAccount(this.LOCAL_PATH_SHOWED_ON_START, true)
+      saveLocalByAccount(this.LOCAL_PATH_SHOWED_ON_START, true)
     base.goBack()
   }
 }
@@ -109,5 +110,5 @@ return {
       { id = "hdr_brightness", min = 0.5, max = 2, step = 1, scale = 10, recScale = true }, //0.5 - 2
       { id = "hdr_shadows", min = 0, max = 2, step = 1, scale = 10, recScale = true }
   ] })
-  needShowHdrSettingsOnStart = @() ::is_hdr_enabled() && !::loadLocalByAccount(LOCAL_PATH_SHOWED_HDR_ON_START, false)
+  needShowHdrSettingsOnStart = @() ::is_hdr_enabled() && !loadLocalByAccount(LOCAL_PATH_SHOWED_HDR_ON_START, false)
 }

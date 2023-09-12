@@ -47,11 +47,11 @@ local mpChatModel = {
   function getLogForBanhammer() {
     let logObj = mpChatState.log.map(@(message) {
       from = message.sender
-      userColor = message.userColor != "" ? ::get_main_gui_scene().getConstantValue(cutPrefix(message.userColor, "@")) : ""
+      userColor = message.userColor != "" ? get_main_gui_scene().getConstantValue(cutPrefix(message.userColor, "@")) : ""
       fromUid = message.uid
       clanTag = message.clanTag
       msgs = [message.text]
-      msgColor = message.msgColor != "" ? ::get_main_gui_scene().getConstantValue(cutPrefix(message.msgColor, "@")) : ""
+      msgColor = message.msgColor != "" ? get_main_gui_scene().getConstantValue(cutPrefix(message.msgColor, "@")) : ""
       mode = message.mode
       sTime = message.sTime
       time = message.time

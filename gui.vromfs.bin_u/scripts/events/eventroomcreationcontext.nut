@@ -7,6 +7,8 @@ let { get_gui_option } = require("guiOptions")
 let { USEROPT_CLUSTER, USEROPT_RANK, USEROPT_COUNTRIES_SET,
   USEROPT_BIT_COUNTRIES_TEAM_A, USEROPT_BIT_COUNTRIES_TEAM_B
 } = require("%scripts/options/optionsExtNames.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 enum CREWS_READY_STATUS {
   HAS_ALLOWED              = 0x0001
@@ -170,7 +172,7 @@ const CHOSEN_EVENT_MISSIONS_SAVE_KEY = "mission"
       res.activeJoinButton = false
       if (!res.actionFunc)
         res.actionFunc = function (reasonData) {
-          ::showInfoMsgBox(reasonData.reasonText, "cant_create_event_room")
+          showInfoMsgBox(reasonData.reasonText, "cant_create_event_room")
         }
     }
     return res
@@ -200,7 +202,7 @@ const CHOSEN_EVENT_MISSIONS_SAVE_KEY = "mission"
 
   function loadChosenMissions() {
     this.chosenMissionsList.clear()
-    let blk = ::load_local_account_settings(this.getMissionsSaveId())
+    let blk = loadLocalAccountSettings(this.getMissionsSaveId())
     if (!u.isDataBlock(blk))
       return
 
@@ -212,7 +214,7 @@ const CHOSEN_EVENT_MISSIONS_SAVE_KEY = "mission"
 
   function saveChosenMissions() {
     let names = this.chosenMissionsList.map(@(m) m.id)
-    ::save_local_account_settings(this.getMissionsSaveId(), ::array_to_blk(names, CHOSEN_EVENT_MISSIONS_SAVE_KEY))
+    saveLocalAccountSettings(this.getMissionsSaveId(), ::array_to_blk(names, CHOSEN_EVENT_MISSIONS_SAVE_KEY))
   }
 
   function setChosenMissions(missions) {
@@ -271,7 +273,7 @@ const CHOSEN_EVENT_MISSIONS_SAVE_KEY = "mission"
       return
 
     if (this.onUnitAvailabilityChanged)
-      ::get_cur_gui_scene().performDelayed(this, function() { this.onUnitAvailabilityChanged() })
+      get_cur_gui_scene().performDelayed(this, function() { this.onUnitAvailabilityChanged() })
   }
 
   function getRoomCreateParams() {

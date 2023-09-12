@@ -99,6 +99,10 @@ let function initWeaponry(weaponry, blk, esUnitType) {
   if (weaponry.name == "tank_additional_armor")
     weaponry.requiresModelReload <- true
 
+  if (weaponry.name == "premExpMul")
+    weaponry.modificationAnimation <- (weaponBlk % "animationByUnit")
+      .findvalue(@(anim) anim.unitType == esUnitType)?.src
+
   foreach (p in weaponProperties) {
     let val = blk?[p] ?? weaponBlk?[p]
     if (val != null)

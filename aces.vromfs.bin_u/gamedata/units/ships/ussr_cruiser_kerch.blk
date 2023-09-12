@@ -1544,28 +1544,28 @@
       "genericDamageMult": 0.1,
       "shatterDamageMult": 0.1,
       "cover_01_dm": {
-        "hp": 9400.0
+        "hp": 5600.0
       },
       "cover_02_dm": {
-        "hp": 9400.0
+        "hp": 5600.0
       },
       "cover_03_dm": {
-        "hp": 9400.0
+        "hp": 5600.0
       },
       "cover_04_dm": {
-        "hp": 7500.0
+        "hp": 4500.0
       },
       "cover_05_dm": {
-        "hp": 9400.0
+        "hp": 5600.0
       },
       "cover_06_dm": {
-        "hp": 7500.0
+        "hp": 4500.0
       },
       "cover_07_dm": {
-        "hp": 8098.0
+        "hp": 4688.0
       },
       "cover_08_dm": {
-        "hp": 9400.0
+        "hp": 5600.0
       }
     },
     "superstructures": {
@@ -2392,6 +2392,12 @@
       "dmgState": 0.0,
       "napalmDamageMult": 1.0,
       "antenna_target_location_01_dm": {
+        "hp": 350.0
+      },
+      "antenna_target_location_02_dm": {
+        "hp": 350.0
+      },
+      "antenna_target_tagging_01_dm": {
         "hp": 350.0
       }
     },
@@ -3298,10 +3304,15 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/naval/su_foot_n_search.blk",
+      "blk": "gameData/sensors/naval/su_guys_1b.blk",
       "designationFromBody": true,
       "designationTurretIndex": 1,
-      "dmPart": "antenna_target_location_01_dm"
+      "dmPart": "antenna_target_location_01_dm",
+      "dmPart": "antenna_target_location_02_dm"
+    },
+    "sensor": {
+      "blk": "gameData/sensors/naval/su_redan.blk",
+      "dmPart": "antenna_target_tagging_01_dm"
     },
     "fireDirecting": {
       "dmPartMain": "fire_control_room_01_dm",
@@ -8463,7 +8474,7 @@
       "texture": "flag_poland_01_c*"
     },
     "ship_flag_south_vietnam_01": {
-      "category": "national",
+      "category": "naval",
       "unlockId": "ship_flag_south_vietnam_01",
       "nameLocId": "ship_flag_south_vietnam_01/name",
       "texture": "flag_south_vietnam_01_c*"
@@ -8574,7 +8585,7 @@
       "category": "national",
       "unlockId": "ship_flag_antigua_and_barbuda_01",
       "nameLocId": "ship_flag_antigua_and_barbuda_01/name",
-      "texture": "flag_angola_01_c*"
+      "texture": "flag_antigua_and_barbuda_01_c*"
     },
     "ship_flag_argentina_01": {
       "category": "national",
@@ -9674,19 +9685,29 @@
       "nameLocId": "ship_flag_northern_ireland_01/name",
       "texture": "flag_northern_ireland_01_c*"
     },
-    "ship_flag_arkansas_01": {
+    "ship_flag_cardsuit_01": {
       "category": "other",
-      "unlockId": "ship_flag_arkansas_01",
-      "nameLocId": "ship_flag_arkansas_01/name",
-      "descLocId": "ship_flag_arkansas_01/desc",
-      "texture": "flag_arkansas_01_c*"
+      "unlockId": "ship_flag_cardsuit_01",
+      "nameLocId": "ship_flag_cardsuit_01/name",
+      "texture": "flag_cardsuit_01_c*"
     },
-    "ship_flag_petropavlovsk_01": {
+    "ship_flag_cardsuit_02": {
       "category": "other",
-      "unlockId": "ship_flag_petropavlovsk_01",
-      "nameLocId": "ship_flag_petropavlovsk_01/name",
-      "descLocId": "ship_flag_petropavlovsk_01/desc",
-      "texture": "flag_petropavlovsk_01_c*"
+      "unlockId": "ship_flag_cardsuit_02",
+      "nameLocId": "ship_flag_cardsuit_02/name",
+      "texture": "flag_cardsuit_02_c*"
+    },
+    "ship_flag_cardsuit_03": {
+      "category": "other",
+      "unlockId": "ship_flag_cardsuit_03",
+      "nameLocId": "ship_flag_cardsuit_03/name",
+      "texture": "flag_cardsuit_03_c*"
+    },
+    "ship_flag_cardsuit_04": {
+      "category": "other",
+      "unlockId": "ship_flag_cardsuit_04",
+      "nameLocId": "ship_flag_cardsuit_04/name",
+      "texture": "flag_cardsuit_04_c*"
     },
     "ship_flag_pirate_01": {
       "category": "other",
@@ -9765,6 +9786,20 @@
       "unlockId": "ship_flag_racing_01",
       "nameLocId": "ship_flag_racing_01/name",
       "texture": "flag_racing_01_c*"
+    },
+    "ship_flag_arkansas_01": {
+      "category": "other",
+      "unlockId": "ship_flag_arkansas_01",
+      "nameLocId": "ship_flag_arkansas_01/name",
+      "descLocId": "ship_flag_arkansas_01/desc",
+      "texture": "flag_arkansas_01_c*"
+    },
+    "ship_flag_petropavlovsk_01": {
+      "category": "other",
+      "unlockId": "ship_flag_petropavlovsk_01",
+      "nameLocId": "ship_flag_petropavlovsk_01/name",
+      "descLocId": "ship_flag_petropavlovsk_01/desc",
+      "texture": "flag_petropavlovsk_01_c*"
     }
   }
 }

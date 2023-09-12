@@ -1,8 +1,8 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
-
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let DataBlock  = require("DataBlock")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { format } = require("string")
@@ -94,7 +94,7 @@ local WorkshopSet = class {
     this.craftTrees = (blk % "craftTree").map(workshopCraftTree.bindenv(this))
 
     if (this.hasSubsets)
-      this.curSubsetId = ::load_local_account_settings(CURRENT_SUBSET_SAVE_PATH + this.id, firstSubsetId)
+      this.curSubsetId = loadLocalAccountSettings(CURRENT_SUBSET_SAVE_PATH + this.id, firstSubsetId)
 
     subscribe_handler(this, ::g_listener_priority.CONFIG_VALIDATION)
     this.checkForcedDisplayTime(blk?.forcedDisplayWithoutFeature)
@@ -276,7 +276,7 @@ local WorkshopSet = class {
   }
 
   static function clearOutdatedData(actualSets) {
-    let knownBlk = ::load_local_account_settings(KNOWN_ITEMS_SAVE_ID)
+    let knownBlk = loadLocalAccountSettings(KNOWN_ITEMS_SAVE_ID)
     if (!knownBlk)
       return
 
@@ -295,7 +295,7 @@ local WorkshopSet = class {
       hasChanges = true
     }
     if (hasChanges)
-      ::save_local_account_settings(KNOWN_ITEMS_SAVE_ID, knownBlk)
+      saveLocalAccountSettings(KNOWN_ITEMS_SAVE_ID, knownBlk)
   }
 
   function loadKnownItemsOnce() {
@@ -303,7 +303,7 @@ local WorkshopSet = class {
       return
 
     this.knownItemdefs = {}
-    let knownBlk = ::load_local_account_settings(KNOWN_ITEMS_SAVE_ID)
+    let knownBlk = loadLocalAccountSettings(KNOWN_ITEMS_SAVE_ID)
     if (!knownBlk)
       return
 
@@ -318,7 +318,7 @@ local WorkshopSet = class {
       return
 
     this.knownReqItemdefs = {}
-    let knownBlk = ::load_local_account_settings(KNOWN_REQ_ITEMS_SAVE_ID)
+    let knownBlk = loadLocalAccountSettings(KNOWN_REQ_ITEMS_SAVE_ID)
     if (!knownBlk)
       return
 
@@ -362,18 +362,18 @@ local WorkshopSet = class {
     if (!newKnownIds.len())
       return
 
-    local knownBlk = ::load_local_account_settings(saveId)
+    local knownBlk = loadLocalAccountSettings(saveId)
     if (!knownBlk)
       knownBlk = DataBlock()
     foreach (d in newKnownIds)
       knownBlk[KNOWN_ITEMS_SAVE_KEY] <- d
 
-    ::save_local_account_settings(saveId, knownBlk)
+    saveLocalAccountSettings(saveId, knownBlk)
   }
 
   getPreviewedSaveId   = @() PREVIEWED_SAVE_PATH + this.id
-  needShowPreview      = @() this.hasPreview() && !::load_local_account_settings(this.getPreviewedSaveId(), false)
-  markPreviewed        = @() ::save_local_account_settings(this.getPreviewedSaveId(), true)
+  needShowPreview      = @() this.hasPreview() && !loadLocalAccountSettings(this.getPreviewedSaveId(), false)
+  markPreviewed        = @() saveLocalAccountSettings(this.getPreviewedSaveId(), true)
 
   function invalidateItemsCache() {
     this.visibleSeenIds = null
@@ -440,7 +440,7 @@ local WorkshopSet = class {
       return
 
     this.curSubsetId = subsetId
-    ::save_local_account_settings(CURRENT_SUBSET_SAVE_PATH + this.id, subsetId)
+    saveLocalAccountSettings(CURRENT_SUBSET_SAVE_PATH + this.id, subsetId)
   }
 
   function getSubsetIdByItemId(itemId) {
@@ -496,7 +496,7 @@ local WorkshopSet = class {
     this.isRequireCondition(itemBlock?.reqItemExistsForDisplaying, itemsList, this.hasAmountFunc)
 
   function findTutorialItem() {
-    if (::load_local_account_settings(this.getCraftTreeIdPathForSave(), false))
+    if (loadLocalAccountSettings(this.getCraftTreeIdPathForSave(), false))
       return null
 
     let craftTree = this.getCraftTree()
@@ -533,7 +533,7 @@ local WorkshopSet = class {
   }
 
   getCraftTreeIdPathForSave = @() "".join([ACCENT_CRAFT_TREE_SAVE_PATH, this.id])
-  saveTutorialWasShown = @() ::save_local_account_settings(this.getCraftTreeIdPathForSave(), true)
+  saveTutorialWasShown = @() saveLocalAccountSettings(this.getCraftTreeIdPathForSave(), true)
 
   function checkForcedDisplayTime(forcedDisplayWithoutFeature) {
     if (!forcedDisplayWithoutFeature)

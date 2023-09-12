@@ -5,6 +5,7 @@ let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let subscriptions = require("%sqStdLibs/helpers/subscriptions.nut")
 let { ps4RegionName, isPlatformSony, isPlatformXboxOne } = require("%scripts/clientState/platform.nut")
 let { GUI } = require("%scripts/utils/configs.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
 
 let cache = persist("cache", @() {})
 let function clearCache() {
@@ -27,7 +28,7 @@ let function getBundlesList(blockName) {
     if (!guiBlk)
       return ""
 
-    cache[blockName] = ::buildTableFromBlk(guiBlk[blockName])
+    cache[blockName] = convertBlk(guiBlk[blockName])
   }
 
   return cache[blockName]

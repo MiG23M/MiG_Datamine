@@ -18,8 +18,8 @@ let function crossnetwork_comms_to_int(state) {
 let function check_privilege_with_resolution(privilege, attempt_resolution, callback) {
   retrieve_current_state(privilege, function(success, state, reason) {
     if (state == State.ResolutionRequired && attempt_resolution) {
-      resolve_with_ui(privilege, function(success, state) {
-        callback?(success, state, DenyReason.None);
+      resolve_with_ui(privilege, function(success_, state_) {
+        callback?(success_, state_, DenyReason.None);
       });
     }
     else {

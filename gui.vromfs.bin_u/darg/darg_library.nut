@@ -98,7 +98,7 @@ let function wrap(elems, params=wrapParams) {
   if (paddingLeft && !isFlowHor)
     flowElems.append(paddingLeft)
   local tail = elems
-  let function buildFlowElem(elems, gap, flowElemProto, dimensionLim) {  //warning disable: -ident-hides-ident
+  let function buildFlowElem(elems, gap, flowElemProto, dimensionLim) {  //warning disable: -ident-hides-ident -param-hides-param
     let children = []
     local curwidth=0.0
     local tailidx = 0

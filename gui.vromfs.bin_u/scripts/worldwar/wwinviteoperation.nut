@@ -1,7 +1,5 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
-
-
 let DataBlock  = require("DataBlock")
 let { requestUsersInfo } = require("%scripts/user/usersInfoManager.nut")
 let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
@@ -9,9 +7,11 @@ let { actionWithGlobalStatusRequest } = require("%scripts/worldWar/operations/mo
 let { notifyMailRead } = require("%scripts/matching/serviceNotifications/postbox.nut")
 let { draw_attention_to_inactive_window } = require("app")
 let { get_charserver_time_sec } = require("chard")
+let { registerInviteClass, findInviteClass } = require("%scripts/invites/invitesClasses.nut")
+let BaseInvite = require("%scripts/invites/inviteBase.nut")
 
 let function removeInvite(operationId) {
-  let uid = ::g_invites_classes.Operation.getUidByParams({ mail = { operationId = operationId } })
+  let uid = findInviteClass("Operation")?.getUidByParams({ mail = { operationId = operationId } })
   let invite = ::g_invites.findInviteByUid(uid)
   if (invite)
     ::g_invites.remove(invite)
@@ -20,7 +20,7 @@ let function removeInvite(operationId) {
 const WW_OPERATION_INVITE_EXPIRE_SEC = 3600
 let inviteActiveColor = "userlogColoredText"
 
-::g_invites_classes.Operation <- class extends ::BaseInvite {
+let Operation = class extends BaseInvite {
   mailId           = null
   operationId      = -1
   senderId         = ""
@@ -145,3 +145,5 @@ let inviteActiveColor = "userlogColoredText"
     removeInvite(this.operationId)
   }
 }
+
+registerInviteClass("Operation", Operation)

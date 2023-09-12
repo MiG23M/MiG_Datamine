@@ -105,8 +105,8 @@ gui_handlers.ShopCheckResearch <- class extends gui_handlers.ShopMenuHandler {
     let unitsNeed = ::getUnitsNeedBuyToOpenNextInEra(this.unitCountry, this.unitType, rank, ranksBlk)
     let reqUnits = max(0, unitsNeed - unitsCount)
     if (reqUnits > 0) {
-      let text = loc("shop/unlockTier/locked", { rank = ::get_roman_numeral(nextRank) }) + "\n"
-                    + loc("shop/unlockTier/reqBoughtUnitsPrevRank", { amount = reqUnits, prevRank = ::get_roman_numeral(rank) })
+      let text = loc("shop/unlockTier/locked", { rank = get_roman_numeral(nextRank) }) + "\n"
+                    + loc("shop/unlockTier/reqBoughtUnitsPrevRank", { amount = reqUnits, prevRank = get_roman_numeral(rank) })
       this.msgBox("locked_rank", text, [["ok", function() {}]], "ok", { cancel_fn = function() {} })
     }
   }
@@ -365,10 +365,10 @@ gui_handlers.ShopCheckResearch <- class extends gui_handlers.ShopMenuHandler {
   */
 
   function setUnitOnResearch(unit = null, afterDoneFunc = null) {
-    let executeAfterDoneFunc = (@(afterDoneFunc) function() {
+    let executeAfterDoneFunc =  function() {
         if (afterDoneFunc)
           afterDoneFunc()
-      })(afterDoneFunc)
+      }
 
     if (unit && ::isUnitResearched(unit)) {
       executeAfterDoneFunc()

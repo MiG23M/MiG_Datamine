@@ -2,15 +2,15 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
-const OFFLINE_SQUAD_TEXT_COLOR = "contactOfflineColor"
-
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let squadsListData = require("%scripts/squads/clanSquadsList.nut")
 let squadApplications = require("%scripts/squads/squadApplications.nut")
-::dagui_propid.add_name_id("leaderUid")
+let { findInviteClass } = require("%scripts/invites/invitesClasses.nut")
+
+const OFFLINE_SQUAD_TEXT_COLOR = "contactOfflineColor"
+
+dagui_propid_add_name_id("leaderUid")
 
 gui_handlers.MyClanSquadsListModal <- class extends gui_handlers.BaseGuiHandlerWT {
   wndType      = handlerType.MODAL
@@ -198,7 +198,7 @@ gui_handlers.MyClanSquadsListModal <- class extends gui_handlers.BaseGuiHandlerW
   }
 
   function getInvitationInSquad(squad) {
-    let uid = ::g_invites_classes.Squad.getUidByParams({ squadId = squad.leader })
+    let uid = findInviteClass("Squad")?.getUidByParams({ squadId = squad.leader })
     return ::g_invites.findInviteByUid(uid)
   }
 
@@ -310,7 +310,7 @@ gui_handlers.MyClanSquadsListModal <- class extends gui_handlers.BaseGuiHandlerW
     if (!leaderUidStr)
       return this.getSelectedSquadInHover()
 
-    let leaderUid = ::to_integer_safe(leaderUidStr)
+    let leaderUid = to_integer_safe(leaderUidStr)
     foreach (squad in this.curList)
       if (squad?.leader && squad?.leader == leaderUid)
         return squad

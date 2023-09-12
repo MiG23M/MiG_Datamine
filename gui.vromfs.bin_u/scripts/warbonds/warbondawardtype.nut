@@ -173,7 +173,7 @@ enums.addTypesByGlobalName("g_wb_award_type", {
   [EWBAT_ITEM]                 = makeWbAwardItem(),
   [EWBAT_TROPHY]               = makeWbAwardItem(),
   [EWBAT_EXT_INVENTORY_ITEM]   = makeWbAwardItem({
-    getItem = @(blk) ::ItemsManager.findItemById(::to_integer_safe(blk.name))
+    getItem = @(blk) ::ItemsManager.findItemById(to_integer_safe(blk.name))
   }),
 
   [EWBAT_SKIN] = {

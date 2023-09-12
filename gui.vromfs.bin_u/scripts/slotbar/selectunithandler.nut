@@ -691,7 +691,7 @@ local class SelectUnitHandler extends gui_handlers.BaseGuiHandlerWT {
 gui_handlers.SelectUnitHandler <- SelectUnitHandler
 
 return {
-  open = @(crew, slotbar) ::get_cur_gui_scene().performDelayed({},
+  open = @(crew, slotbar) get_cur_gui_scene().performDelayed({},
     function() {
 
       let params = getParamsFromSlotbarConfig(crew, slotbar)

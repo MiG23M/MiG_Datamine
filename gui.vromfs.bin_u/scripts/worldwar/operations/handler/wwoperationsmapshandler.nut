@@ -30,14 +30,16 @@ let wwVehicleSetModal = require("%scripts/worldWar/operations/handler/wwVehicleS
 let { get_charserver_time_sec } = require("chard")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { USEROPT_CLUSTER } = require("%scripts/options/optionsExtNames.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 const MY_CLUSRTERS = "ww/clusters"
 
 let WW_DAY_SEASON_OVER_NOTICE = "worldWar/seasonOverNotice/day"
 local WW_SEASON_OVER_NOTICE_PERIOD_DAYS = 7
 
-::dagui_propid.add_name_id("countryId")
-::dagui_propid.add_name_id("mapId")
+dagui_propid_add_name_id("countryId")
+dagui_propid_add_name_id("mapId")
 
 gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   sceneBlkName   = "%gui/worldWar/wwOperationsMaps.blk"
@@ -661,13 +663,13 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
 
   function joinOperation(operation, country) {
     if (operation == null)
-      return ::showInfoMsgBox(loc("worldwar/operationNotFound"), "cant_join_operation")
+      return showInfoMsgBox(loc("worldwar/operationNotFound"), "cant_join_operation")
 
     let reasonData = operation.getCantJoinReasonData(country)
     if (reasonData.canJoin)
       return operation.join(country)
 
-    ::showInfoMsgBox(loc(reasonData.reasonText), "cant_join_operation")
+    showInfoMsgBox(loc(reasonData.reasonText), "cant_join_operation")
   }
 
   onBackOperation = @(obj)
@@ -678,7 +680,7 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
 
 
   function loadAndCheckMyClusters() {
-    let clustersStr = ::load_local_account_settings(MY_CLUSRTERS, "")
+    let clustersStr = loadLocalAccountSettings(MY_CLUSRTERS, "")
     if (clustersStr == "")
       return
 
@@ -738,14 +740,14 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
 
   function onClusterApply(values) {
     this.clustersList = values ? ",".join(values) : null
-    ::save_local_account_settings(MY_CLUSRTERS, this.clustersList)
+    saveLocalAccountSettings(MY_CLUSRTERS, this.clustersList)
     this.updateButtons()
     this.updateClustersTxt()
   }
 
   function onJoinQueue(obj) {
     if (!this.clustersList)
-      return ::scene_msg_box("cant_join_operation", null, loc("worldwar/must_select_cluster"),
+      return scene_msg_box("cant_join_operation", null, loc("worldwar/must_select_cluster"),
        [
          ["ok", Callback(@() this.clusterOptionsSelector.onAction(), this)],
          ["cancel", @() null]
@@ -778,7 +780,7 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
     }
 
     log($"cln_ww_autoselect_operation: operationId={operationId}, country={country}")
-    ::destroyMsgBox(progressBox)
+    destroyMsgBox(progressBox)
     switchProfileCountry(country)
     let operation = getOperationById(operationId)
     if (!operation) {
@@ -810,14 +812,14 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
 
   function findRandomOperationByCountry(countryId) {
     this.isRequestCanceled = false
-    let progressBox = ::scene_msg_box("join_operation", null, loc("worldwar/searchingOperation"),
+    let progressBox = scene_msg_box("join_operation", null, loc("worldwar/searchingOperation"),
       [["cancel", Callback(@() this.isRequestCanceled = true, this)]], null, { waitAnim = true })
     this.requestRandomOperationByCountry(countryId, progressBox)
   }
 
   function onFindOperationBtn(obj) {
     if (!this.clustersList)
-      return ::scene_msg_box("cant_join_operation", null, loc("worldwar/must_select_cluster"),
+      return scene_msg_box("cant_join_operation", null, loc("worldwar/must_select_cluster"),
        [
          ["ok", Callback(@() this.clusterOptionsSelector.onAction(), this)],
          ["cancel", @() null]
@@ -830,7 +832,7 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
       ? getOperationById(::g_world_war.lastPlayedOperationId) : null
     let countryId = obj.countryId
     if (myLastOperation || isMyClanOperation)
-      return ::scene_msg_box("disjoin_operation", null,
+      return scene_msg_box("disjoin_operation", null,
         loc("worldwar/disjoin_operation",
           { id = myLastOperation?.getNameText(false) ?? myClanOperation?.getNameText(false) ?? "" }),
         [
@@ -1142,12 +1144,12 @@ gui_handlers.WwOperationsMapsHandler <- class extends gui_handlers.BaseGuiHandle
 
   function showSeasonIsOverNotice() {
     let curDay = time.getUtcDays()
-    let seasonOverNotice = ::load_local_account_settings(WW_DAY_SEASON_OVER_NOTICE, 0)
+    let seasonOverNotice = loadLocalAccountSettings(WW_DAY_SEASON_OVER_NOTICE, 0)
       + WW_SEASON_OVER_NOTICE_PERIOD_DAYS
     if (seasonOverNotice && seasonOverNotice > curDay)
       return
-    ::save_local_account_settings(WW_DAY_SEASON_OVER_NOTICE, curDay)
-    ::scene_msg_box("season_is_over_notice", null, loc("worldwar/seasonIsOverNotice"),
+    saveLocalAccountSettings(WW_DAY_SEASON_OVER_NOTICE, curDay)
+    scene_msg_box("season_is_over_notice", null, loc("worldwar/seasonIsOverNotice"),
       [["ok", null]], "ok")
   }
 

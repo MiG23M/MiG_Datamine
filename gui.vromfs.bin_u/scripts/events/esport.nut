@@ -9,6 +9,7 @@ let { secondsToString } = require("%appGlobals/timeLoc.nut")
 let { secondsToDays } = require("%sqstd/time.nut")
 let { trim, utf8ToUpper } = require("%sqstd/string.nut")
 let { get_charserver_time_sec } = require("chard")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 const NEXT_DAYS = 14
 
@@ -204,7 +205,7 @@ let function getTourCommonViewParams(tour, tourParams, reverseCountries = false)
     // Need to reverse icon order to get shadow matched to mockup
     let idx = reverseCountries ? cNames.len() - 1 - i : i
     countries.append({
-      icon = ::get_country_icon($"{trim(cNames[idx])}_round")
+      icon = getCountryIcon($"{trim(cNames[idx])}_round")
       xPos = idx
       halfLen = 0.5 * cNames.len()
     })
@@ -223,7 +224,7 @@ let function getTourCommonViewParams(tour, tourParams, reverseCountries = false)
     itemBgr =  $"#ui/images/tournament_{armyId}"
     tournamentName = loc($"tournament/{tour.id}")
     vehicleType = loc($"tournaments/battle_{armyId}")
-    rank = $"{utf8ToUpper(loc("shop/age"))} {::get_roman_numeral(tour.rank)}"
+    rank = $"{utf8ToUpper(loc("shop/age"))} {get_roman_numeral(tour.rank)}"
     tournamentType = $" {loc("country/VS")} ".join(teamSizes)
     divisionImg = "#ui/gameuiskin#icon_progress_bar_stage_07" //!!!FIX IMG PATH
     battleDate = getBattleDateStr(tour)
@@ -354,9 +355,9 @@ let function getSeasonsList() {
 let function getTourActiveTicket(eName, tourId) {
   if (!::have_you_valid_tournament_ticket(eName))
     return null
-  let tickets = ::ItemsManager.getInventoryList(itemType.TICKET, (@(tourId) function (item) {
+  let tickets = ::ItemsManager.getInventoryList(itemType.TICKET, function (item) {
     return item.isForEvent(tourId) && item.isActive()
-  })(tourId))
+  })
   return tickets.len() > 0 ? tickets[0] : null
 }
 

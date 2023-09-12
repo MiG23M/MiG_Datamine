@@ -48,7 +48,7 @@ let function debug_show_all_streaks() {
     else {
       let paramShift = unlock?.stage.param ?? 0
       foreach (key, _stageId in multiStageLocIdConfig[unlock.id]) {
-        let stage = ::is_numeric(key) ? key : 99
+        let stage = is_numeric(key) ? key : 99
         let data = ::build_log_unlock_data({ id = unlock.id, stage = stage - paramShift })
         data.title = unlock.id + " / " + stage
         awardsList.append(data)
@@ -121,7 +121,7 @@ let function _gen_all_unlocks_desc_to_blk(path, showCost, showValue, langsInfo, 
   }
 
   //delayed to easy see progress, and avoid watchdog crash.
-  let guiScene = ::get_main_gui_scene()
+  let guiScene = get_main_gui_scene()
   guiScene.performDelayed(this, function() {
     self(path, showCost, showValue, langsInfo, curLang, status)
   })

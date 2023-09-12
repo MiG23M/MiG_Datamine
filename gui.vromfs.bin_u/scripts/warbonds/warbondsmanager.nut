@@ -2,7 +2,7 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let { subscribe_handler } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let seenWarbondsShop = require("%scripts/seen/seenList.nut").get(SEEN.WARBONDS_SHOP)
@@ -38,11 +38,11 @@ let OUT_OF_DATE_DAYS_WARBONDS_SHOP = 28
 }
 
 ::g_warbonds.getVisibleList <- function getVisibleList(filterFunc = null) {
-  return this.getList((@(filterFunc) function(wb) {
+  return this.getList( function(wb) {
                    if (!wb.isVisible())
                      return false
                    return filterFunc ? filterFunc(wb) : true
-                 })(filterFunc))
+                 })
 }
 
 ::g_warbonds.validateList <- function validateList() {
@@ -134,7 +134,7 @@ let OUT_OF_DATE_DAYS_WARBONDS_SHOP = 28
 
 ::g_warbonds.openShop <- function openShop(params = {}) {
   if (!this.isShopAvailable())
-    return ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+    return showInfoMsgBox(loc("msgbox/notAvailbleYet"))
 
   handlersManager.loadHandler(gui_handlers.WarbondsShop, params)
 }
@@ -161,7 +161,7 @@ let OUT_OF_DATE_DAYS_WARBONDS_SHOP = 28
     return true
 
   if (!silent) {
-    ::scene_msg_box("warbonds_over_limit",
+    scene_msg_box("warbonds_over_limit",
       null,
       loc("warbond/msg/awardMayBeLost", { maxWarbonds = limit, lostWarbonds = newBalance - limit }),
       [
@@ -189,7 +189,7 @@ seenWarbondsShop.setListGetter(@() ::g_warbonds.getUnseenAwardIds())
 seenWarbondsShop.setCompatibilityLoadData(function() {
    let res = {}
    let savePath = "seen/warbond_shop_award"
-   let blk = ::loadLocalByAccount(savePath)
+   let blk = loadLocalByAccount(savePath)
    if (!u.isDataBlock(blk))
      return res
 
@@ -198,6 +198,6 @@ seenWarbondsShop.setCompatibilityLoadData(function() {
      for (local j = 0; j < warbondBlk.paramCount(); j++)
        res[warbondBlk.getBlockName() + "_" + warbondBlk.getParamName(j)] <- warbondBlk.getParamValue(j)
    }
-   ::saveLocalByAccount(savePath, null)
+   saveLocalByAccount(savePath, null)
    return res
   })

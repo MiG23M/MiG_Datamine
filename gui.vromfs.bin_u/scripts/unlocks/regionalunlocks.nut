@@ -65,7 +65,7 @@ let getRegionalUnlockTypeById = @(unlockId)
   ::get_unlock_type(acceptedUnlocksBlk.value?[unlockId].type)
 
 let function claimRegionalUnlockRewards() {
-  let unlocks = acceptedUnlocksBlk.value.filter(@(u) !(u?.manualOpen ?? false))
+  let unlocks = unclaimedUnlocks.value.filter(@(u) !(u?.manualOpen ?? false))
   if (unlocks.len() == 0)
     return
 
@@ -77,6 +77,7 @@ let function claimRegionalUnlockRewards() {
   foreach (id, _ in unlocks) {
     let unlockId = id
     handler.doWhenActive(@() receiveRewards(unlockId))
+    break
   }
 }
 

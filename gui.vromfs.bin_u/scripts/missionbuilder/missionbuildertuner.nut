@@ -263,7 +263,7 @@ gui_handlers.MissionBuilderTuner <- class extends gui_handlers.BaseGuiHandlerWT 
   }
 
   function onChangeAircraft(obj) {
-    let i = ::to_integer_safe(cutPostfix(obj?.id ?? "", "_a", "-1"), -1)
+    let i = to_integer_safe(cutPostfix(obj?.id ?? "", "_a", "-1"), -1)
     if (this.listA?[i] == null)
       return
 

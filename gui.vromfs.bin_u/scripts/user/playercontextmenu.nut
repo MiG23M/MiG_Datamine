@@ -44,8 +44,8 @@ let getPlayerCardInfoTable = function(uid, name) {
   return info
 }
 
-let showLiveCommunicationsRestrictionMsgBox = @() ::showInfoMsgBox(loc("xbox/actionNotAvailableLiveCommunications"))
-let showCrossNetworkCommunicationsRestrictionMsgBox = @() ::showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkCommunications"))
+let showLiveCommunicationsRestrictionMsgBox = @() showInfoMsgBox(loc("xbox/actionNotAvailableLiveCommunications"))
+let showCrossNetworkCommunicationsRestrictionMsgBox = @() showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkCommunications"))
 let showNotAvailableActionPopup = @() ::g_popups.add(null, loc("xbox/actionNotAvailableDiffPlatform"))
 let showBlockedPlayerPopup = @(playerName) ::g_popups.add(null, loc("chat/player_blocked", { playerName = getPlayerName(playerName) }))
 let showNoInviteForDiffPlatformPopup = @() ::g_popups.add(null, loc("msg/squad/noPlayersForDiffConsoles"))

@@ -23,6 +23,7 @@ let { cutPrefix } = require("%sqstd/string.nut")
 let { create_option_switchbox } = require("%scripts/options/optionsExt.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 let clan_member_list = [
   { id = "onlineStatus", lbDataType = lbDataType.TEXT, myClanOnly = true, iconStyle = true, needHeader = false }
@@ -427,11 +428,11 @@ gui_handlers.clanPageModal <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function setCurDMode(mode) {
-    ::saveLocalByAccount("wnd/clanDiffMode", mode)
+    saveLocalByAccount("wnd/clanDiffMode", mode)
   }
 
   function getCurDMode() {
-    let diffMode = ::loadLocalByAccount(
+    let diffMode = loadLocalByAccount(
       "wnd/clanDiffMode",
       ::get_current_shop_difficulty().diffCode
     )
@@ -728,7 +729,7 @@ gui_handlers.clanPageModal <- class extends gui_handlers.BaseGuiHandlerWT {
     if (columnId == ::ranked_column_prefix)
       fieldName = $"{::ranked_column_prefix}{::g_difficulty.getDifficultyByDiffCode(this.curMode).clanDataEnding}"
     else {
-      let category = u.search(clan_member_list, (@(columnId) function(category) { return category.id == columnId })(columnId))
+      let category = u.search(clan_member_list,  function(category) { return category.id == columnId })
       let field = category?.field ?? columnId
       fieldName = u.isFunction(field) ? field() : field
     }
@@ -859,7 +860,7 @@ gui_handlers.clanPageModal <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function getColumnDataById(id) {
-    return u.search(clan_member_list, (@(id) function(c) { return c.id == id })(id))
+    return u.search(clan_member_list,  function(c) { return c.id == id })
   }
 
   function onStatsCategory(obj) {
@@ -896,7 +897,7 @@ gui_handlers.clanPageModal <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     let isHover = obj.isHovered()
-    let dataIdx = ::to_integer_safe(cutPrefix(obj.id, "row_", ""), -1, false)
+    let dataIdx = to_integer_safe(cutPrefix(obj.id, "row_", ""), -1, false)
     if (isHover == (dataIdx == this.lastHoveredDataIdx))
      return
 

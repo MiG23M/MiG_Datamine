@@ -29,7 +29,7 @@ let { USEROPT_DAMAGE_INDICATOR_SIZE, USEROPT_TACTICAL_MAP_SIZE, USEROPT_HUD_VISI
   USEROPT_HUD_VISIBLE_CHAT_PLACE, USEROPT_HUD_VISIBLE_ORDERS, OPTIONS_MODE_GAMEPLAY
 } = require("%scripts/options/optionsExtNames.nut")
 
-::dagui_propid.add_name_id("fontSize")
+dagui_propid_add_name_id("fontSize")
 
 let UNMAPPED_CONTROLS_WARNING_TIME_WINK = 3.0
 let getUnmappedControlsWarningTime = @() get_game_mode() == GM_TRAINING ? 180000.0 : 30.0

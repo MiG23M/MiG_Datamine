@@ -78,7 +78,7 @@ enums.addTypesByGlobalName("g_chat_thread_tag", {
     isReadOnly = true
 
     setThreadInfoProperty = function(threadInfo, valueString) {
-      threadInfo[this.threadInfoParamName] = ::to_integer_safe(valueString)
+      threadInfo[this.threadInfoParamName] = to_integer_safe(valueString)
     }
     updateThreadWhenNoTag = function(threadInfo) {
       this.setThreadInfoProperty(threadInfo, 0)
@@ -107,7 +107,7 @@ enums.addTypesByGlobalName("g_chat_thread_tag", {
     isReadOnly = true
 
     setThreadInfoProperty = function(threadInfo, valueString) {
-      threadInfo[this.threadInfoParamName] = ::to_integer_safe(valueString)
+      threadInfo[this.threadInfoParamName] = to_integer_safe(valueString)
     }
     updateThreadWhenNoTag = function(threadInfo) {
       this.setThreadInfoProperty(threadInfo, -1)

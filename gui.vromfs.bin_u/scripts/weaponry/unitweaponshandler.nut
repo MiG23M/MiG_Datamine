@@ -485,7 +485,7 @@ gui_handlers.unitWeaponsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function getBulletGroupByItemId(id) {
     let idxStr = cutPrefix(id, this.bulletsIdPrefix, -1)
-    return this.getBulletGroupByIndex(::to_integer_safe(idxStr, -1))
+    return this.getBulletGroupByIndex(to_integer_safe(idxStr, -1))
   }
 
   function openChangeWeaponryMenu(obj) {
@@ -513,7 +513,7 @@ gui_handlers.unitWeaponsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
         this.bulletsManager.openChooseBulletsWnd(group.groupIndex, this.getSelectionItemParams(), obj)
     }
     else
-      ::showInfoMsgBox(loc("msg/secondaryWeaponrequired"))
+      showInfoMsgBox(loc("msg/secondaryWeaponrequired"))
   }
 
   function onModItemClick(obj) {
@@ -529,7 +529,7 @@ gui_handlers.unitWeaponsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   function onModChangeBulletsSlider(obj) {
     if (!checkObj(obj))
       return
-    let groupIndex = ::to_integer_safe(obj?.groupIdx ?? "", -1)
+    let groupIndex = to_integer_safe(obj?.groupIdx ?? "", -1)
     let bulGroup = this.getBulletGroupByIndex(groupIndex)
     if (!bulGroup)
       return
@@ -550,7 +550,7 @@ gui_handlers.unitWeaponsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
     let itemObj = listObj.getChild(idx)
     let id = cutPrefix(itemObj.id, this.bulletsIdPrefix, -1)
-    let groupIdx = ::to_integer_safe(id, -1)
+    let groupIdx = to_integer_safe(id, -1)
     let group = this.getBulletGroupByIndex(groupIdx)
     if (!group)
       return

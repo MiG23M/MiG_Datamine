@@ -187,7 +187,7 @@ gui_handlers.LeaderboardTable <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     let isHover = obj.isHovered()
-    let dataIdx = ::to_integer_safe(cutPrefix(obj.id, "row_", ""), -1, false)
+    let dataIdx = to_integer_safe(cutPrefix(obj.id, "row_", ""), -1, false)
     if (isHover == (dataIdx == this.lastHoveredDataIdx))
      return
 

@@ -8,6 +8,7 @@ let { set_option } = require("%scripts/options/optionsExt.nut")
 let { OPTIONS_MODE_TRAINING, USEROPT_BULLETS0, USEROPT_BULLET_COUNT0,
   USEROPT_AIRCRAFT, USEROPT_WEAPONS, USEROPT_SKIN
 } = require("%scripts/options/optionsExtNames.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 const MIS_NAME = "tutorial_destroyer_battle_arcade"
 
@@ -30,7 +31,7 @@ let function canStartShipTrainingMission() {
   if (!::my_stats.isStatsLoaded() || !::g_login.isProfileReceived())
     return false
 
-  let hasLaunches = ::loadLocalByAccount($"tutor/mission_launched_{MIS_NAME}", false)
+  let hasLaunches = loadLocalByAccount($"tutor/mission_launched_{MIS_NAME}", false)
   if (hasLaunches)
     return false
 
@@ -96,7 +97,7 @@ let function startShipTrainingMission() {
   select_training_mission(misBlk)
   ::gui_start_flight()
 
-  ::saveLocalByAccount($"tutor/mission_launched_{MIS_NAME}", true)
+  saveLocalByAccount($"tutor/mission_launched_{MIS_NAME}", true)
   ::save_profile(false)
 }
 

@@ -152,7 +152,7 @@ local ItemExternal = class extends ::BaseItem {
   function getTradebleTimestamp(itemDesc) {
     if (!hasFeature("Marketplace"))
       return 0
-    let res = ::to_integer_safe(itemDesc?.tradable_after_timestamp || 0)
+    let res = to_integer_safe(itemDesc?.tradable_after_timestamp || 0)
     return res > get_charserver_time_sec() ? res : 0
   }
 
@@ -185,7 +185,7 @@ local ItemExternal = class extends ::BaseItem {
     if (str == "")
       return -1
 
-    local res = ::to_integer_safe(str, -1, false)
+    local res = to_integer_safe(str, -1, false)
     if (res < 0)
       res = time.getTimestampFromIso8601(str) //compatibility with old inventory version
     return res
@@ -490,7 +490,7 @@ local ItemExternal = class extends ::BaseItem {
       return false
 
     if (this.cantConsumeYet()) {
-      ::scene_msg_box("cant_consume_yet", null, loc(this.getLocIdsList().cantConsumeYet), [["cancel"]], "cancel")
+      scene_msg_box("cant_consume_yet", null, loc(this.getLocIdsList().cantConsumeYet), [["cancel"]], "cancel")
       return false
     }
 
@@ -511,7 +511,7 @@ local ItemExternal = class extends ::BaseItem {
         : null
     }
     let item = this //we need direct link, to not lose action on items list refresh.
-    ::scene_msg_box("coupon_exchange", null, text, [
+    scene_msg_box("coupon_exchange", null, text, [
       [ "yes", @() item.consumeImpl(cb, params) ],
       [ "no" ]
     ], "yes", msgboxParams)
@@ -643,13 +643,13 @@ local ItemExternal = class extends ::BaseItem {
     let warbondItem = ::ItemsManager.findItemById(recipe.generatorId)
     let warbond = warbondItem && warbondItem.getWarbond()
     if (!warbond) {
-      ::showInfoMsgBox(loc("mainmenu/warbondsShop/notAvailable"))
+      showInfoMsgBox(loc("mainmenu/warbondsShop/notAvailable"))
       return true
     }
 
     let leftWbAmount = ::g_warbonds.getLimit() - warbond.getBalance()
     if (leftWbAmount <= 0) {
-      ::showInfoMsgBox(loc("items/cantExchangeToWarbondsMessage"))
+      showInfoMsgBox(loc("items/cantExchangeToWarbondsMessage"))
       return true
     }
 
@@ -687,7 +687,7 @@ local ItemExternal = class extends ::BaseItem {
       item = this.getName()
       currency = convertAmount * warbondItem.getWarbondsAmount() + loc(warbondItem.getWarbond()?.fontIcon)
     })
-    ::scene_msg_box("warbond_exchange", null, msg, [
+    scene_msg_box("warbond_exchange", null, msg, [
       [ "yes", @() recipe.doExchange(warbondItem, convertAmount) ],
       [ "no" ]
     ], "yes", { cancel_fn = @() null })

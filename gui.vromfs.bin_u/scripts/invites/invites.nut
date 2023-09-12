@@ -1,13 +1,13 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
-
-
 let DataBlock = require("DataBlock")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { registerPersistentDataFromRoot, PERSISTENT_DATA_PARAMS } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
 let { startsWith } = require("%sqstd/string.nut")
 let { get_charserver_time_sec } = require("chard")
+let { findInviteClass, invitesClasses } = require("%scripts/invites/invitesClasses.nut")
+let BaseInvite = require("%scripts/invites/inviteBase.nut")
 
 ::g_invites <- {
   [PERSISTENT_DATA_PARAMS] = ["list", "newInvitesAmount"]
@@ -21,6 +21,11 @@ let { get_charserver_time_sec } = require("chard")
 }
 
 ::g_invites.addInvite <- function addInvite(inviteClass, params) {
+  if (inviteClass == null) {
+    logerr("[Invites] inviteClass is null")
+    return null
+  }
+
   this.checkCleanList()
 
   let uid = inviteClass.getUidByParams(params)
@@ -52,11 +57,11 @@ let { get_charserver_time_sec } = require("chard")
 }
 
 ::g_invites.addChatRoomInvite <- function addChatRoomInvite(roomId, inviterName) {
-  return this.addInvite(::g_invites_classes.ChatRoom, { roomId = roomId, inviterName = inviterName })
+  return this.addInvite(findInviteClass("ChatRoom"), { roomId = roomId, inviterName = inviterName })
 }
 
 ::g_invites.addSessionRoomInvite <- function addSessionRoomInvite(roomId, inviterUid, inviterName, password = null) {
-  return this.addInvite(::g_invites_classes.SessionRoom,
+  return this.addInvite(findInviteClass("SessionRoom"),
                    {
                      roomId      = roomId
                      inviterUid  = inviterUid
@@ -66,7 +71,7 @@ let { get_charserver_time_sec } = require("chard")
 }
 
 ::g_invites.addTournamentBattleInvite <- function addTournamentBattleInvite(battleId, inviteTime, startTime, endTime) {
-  return this.addInvite(::g_invites_classes.TournamentBattle,
+  return this.addInvite(findInviteClass("TournamentBattle"),
                    {
                      battleId = battleId
                      inviteTime = inviteTime
@@ -76,11 +81,11 @@ let { get_charserver_time_sec } = require("chard")
 }
 
 ::g_invites.addInviteToSquad <- function addInviteToSquad(squadId, leaderId) {
-  return this.addInvite(::g_invites_classes.Squad, { squadId = squadId, leaderId = leaderId })
+  return this.addInvite(findInviteClass("Squad"), { squadId = squadId, leaderId = leaderId })
 }
 
 ::g_invites.removeInviteToSquad <- function removeInviteToSquad(squadId) {
-  let uid = ::g_invites_classes.Squad.getUidByParams({ squadId = squadId })
+  let uid = findInviteClass("Squad")?.getUidByParams({ squadId = squadId })
   let invite = this.findInviteByUid(uid)
   if (invite)
     this.remove(invite)
@@ -89,7 +94,7 @@ let { get_charserver_time_sec } = require("chard")
 ::g_invites.addFriendInvite <- function addFriendInvite(name, uid) {
   if (u.isEmpty(name) || u.isEmpty(uid))
     return
-  return this.addInvite(::g_invites_classes.Friend, { inviterName = name, inviterUid = uid })
+  return this.addInvite(findInviteClass("Friend"), { inviterName = name, inviterUid = uid })
 }
 
 ::g_invites._lastCleanTime <- -1
@@ -130,7 +135,7 @@ let { get_charserver_time_sec } = require("chard")
 }
 
 ::g_invites.acceptInviteByLink <- function acceptInviteByLink(link) {
-  if (!startsWith(link, ::BaseInvite.chatLinkPrefix))
+  if (!startsWith(link, BaseInvite.chatLinkPrefix))
     return false
 
   let invite = ::g_invites.findInviteByChatLink(link)
@@ -243,7 +248,7 @@ let { get_charserver_time_sec } = require("chard")
 ::g_invites.onEventScriptsReloaded <- function onEventScriptsReloaded(_p) {
   this.list = this.list.map(function(invite) {
     let params = invite.reloadParams
-    foreach (inviteClass in ::g_invites_classes)
+    foreach (inviteClass in invitesClasses)
       if (inviteClass.getUidByParams(params) == invite.uid) {
         let newInvite = inviteClass(params)
         newInvite.afterScriptsReload(invite)

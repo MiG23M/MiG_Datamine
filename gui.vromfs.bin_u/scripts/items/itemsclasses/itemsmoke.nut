@@ -95,7 +95,7 @@ let { OPTIONS_MODE_TRAINING, USEROPT_AEROBATICS_SMOKE_TYPE, USEROPT_WEAPONS,
     }
 
     let item = this
-    ::scene_msg_box("offer_unit_change", null, loc("decoratorPreview/autoselectedUnit", {
+    scene_msg_box("offer_unit_change", null, loc("decoratorPreview/autoselectedUnit", {
         previewUnit = colorize("activeTextColor", ::getUnitName(unit))
         hangarUnit = colorize("activeTextColor", ::getUnitName(currUnit))
       }),

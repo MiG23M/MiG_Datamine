@@ -48,7 +48,7 @@ let { web_rpc } = require("%scripts/webRPC.nut")
                      ::g_missions_manager.fastStartSkirmishMission(mis)
                    }
 
-  ::scene_msg_box("start_mission_from_live_confirmation",
+  scene_msg_box("start_mission_from_live_confirmation",
                   null,
                   loc("urlMissions/live/loadAndStartConfirmation", params),
                   [["yes", function() { ::g_url_missions.loadBlk(mission, callback) }],

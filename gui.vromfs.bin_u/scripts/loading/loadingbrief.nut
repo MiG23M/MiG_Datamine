@@ -24,6 +24,9 @@ let { getUrlOrFileMissionMetaInfo } = require("%scripts/missions/missionsUtils.n
 let { get_current_mission_desc } = require("guiMission")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { USEROPT_WEAPONS } = require("%scripts/options/optionsExtNames.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
+let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
+let { getCountryFlagsPresetName, getCountryFlagImg } = require("%scripts/options/countryFlagsPreset.nut")
 
 const MIN_SLIDE_TIME = 2.0
 
@@ -75,7 +78,7 @@ gui_handlers.LoadingBrief <- class extends gui_handlers.BaseGuiHandlerWT {
         country = ::getCountryByAircraftName(missionBlk.getStr("player_class", ""))
       log("0 player_class = " + missionBlk.getStr("player_class", "") + "; country = " + country)
       if (country != "" && !(get_game_type() & GT_VERSUS) && this.gm != GM_TRAINING)
-        this.guiScene["briefing-flag"]["background-image"] = ::get_country_flag_img("bgflag_" + country)
+        this.guiScene["briefing-flag"]["background-image"] = getCountryFlagImg($"bgflag_{country}")
 
       this.misObj_add = this.count_misObj_add(missionBlk)
     }
@@ -83,7 +86,7 @@ gui_handlers.LoadingBrief <- class extends gui_handlers.BaseGuiHandlerWT {
     this.partsList = []
     if (this.briefing) {
       let guiBlk = GUI.get()
-      let exclBlock = guiBlk?.slides_exclude?[::get_country_flags_preset()]
+      let exclBlock = guiBlk?.slides_exclude?[getCountryFlagsPresetName()]
       let excludeArray = exclBlock ? (exclBlock % "name") : []
 
       local sceneInfo = ""
@@ -125,7 +128,7 @@ gui_handlers.LoadingBrief <- class extends gui_handlers.BaseGuiHandlerWT {
             let image = slideBlock.getStr("picture", "")
             if (image != "") {
               if (find_in_array(excludeArray, image, -1) >= 0) {
-                log("EXCLUDE by: " + ::get_country_flags_preset() + "; slide " + image)
+                log($"EXCLUDE by: {getCountryFlagsPresetName()}; slide {image}")
                 continue
               }
             }
@@ -191,10 +194,10 @@ gui_handlers.LoadingBrief <- class extends gui_handlers.BaseGuiHandlerWT {
         let parts = split_by_chars(missionHelpPath, "/.")
         let helpId = parts.len() >= 2 ? parts[parts.len() - 2] : ""
         let cfgPath = "seen/help_mission_type/" + helpId
-        let isSeen = ::loadLocalByAccount(cfgPath, 0)
+        let isSeen = loadLocalByAccount(cfgPath, 0)
         if (!isSeen) {
           this.onHelp()
-          ::saveLocalByAccount(cfgPath, 1)
+          saveLocalByAccount(cfgPath, 1)
         }
       }
     }
@@ -229,7 +232,7 @@ gui_handlers.LoadingBrief <- class extends gui_handlers.BaseGuiHandlerWT {
           m_condition += (m_condition != "" ? "; " : "") + ::get_mission_time_text(m_time)
         let m_weather = blk.getStr("weather", "")
         if (m_weather != "")
-          m_condition += (m_condition != "" ? "; " : "") + loc("options/weather" + m_weather)
+          m_condition += (m_condition != "" ? "; " : "") + getWeatherLocName(m_weather)
       }
     }
     if (m_condition != "")

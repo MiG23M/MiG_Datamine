@@ -72,7 +72,7 @@ gui_handlers.modifyUrlMissionWnd <- class extends gui_handlers.BaseGuiHandlerWT 
 
   function onApply() {
     if (!this.isValuesValid)
-      return ::showInfoMsgBox(loc("msg/allFieldsMustBeFilled"))
+      return showInfoMsgBox(loc("msg/allFieldsMustBeFilled"))
 
     local res = true
     let name = clearBorderSymbols(this.curName, [" "])

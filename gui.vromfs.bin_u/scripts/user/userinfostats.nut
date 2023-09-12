@@ -2,11 +2,12 @@
 from "%scripts/dagui_library.nut" import *
 let { isUnlockOpened } = require("%scripts/unlocks/unlocksModule.nut")
 let DataBlock = require("DataBlock")
+let { isDataBlock } = require("%sqStdLibs/helpers/u.nut")
 let { format } = require("string")
 let time = require("%scripts/time.nut")
 let avatars = require("%scripts/user/avatars.nut")
 let { hasAllFeatures } = require("%scripts/user/features.nut")
-let { eachParam, eachBlock } = require("%sqstd/datablock.nut")
+let { convertBlk, eachParam, eachBlock } = require("%sqstd/datablock.nut")
 let { shopCountriesList } = require("%scripts/shop/shopCountriesList.nut")
 let lbDataType = require("%scripts/leaderboard/leaderboardDataType.nut")
 let { getUnlocksByTypeInBlkOrder } = require("%scripts/unlocks/unlocksCache.nut")
@@ -303,9 +304,9 @@ let function getPlayerStatsFromBlk(blk) {
     crews = []
 
     //stats & leaderboards
-    summary = blk?.summary ? ::buildTableFromBlk(blk.summary) : {}
+    summary = isDataBlock(blk?.summary) ? convertBlk(blk.summary) : {}
     userstat = blk?.userstat ? getAirsStatsFromBlk(blk.userstat) : {}
-    leaderboard = blk?.leaderboard ? ::buildTableFromBlk(blk.leaderboard) : {}
+    leaderboard = isDataBlock(blk?.leaderboard) ? convertBlk(blk.leaderboard) : {}
   }
 
   if (blk?.userid != null)

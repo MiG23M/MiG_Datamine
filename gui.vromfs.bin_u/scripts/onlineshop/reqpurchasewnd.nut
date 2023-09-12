@@ -82,7 +82,7 @@ gui_handlers.ReqPurchaseWnd <- class extends gui_handlers.BaseGuiHandlerWT {
       let country = profileCountrySq.value
       this.image = rndImg.subst({ country = cutPrefix(country, "country_", country) })
     }
-    if (::is_numeric(imgBlk?.imageRatio))
+    if (is_numeric(imgBlk?.imageRatio))
       this.imageRatioHeight = imgBlk.imageRatio
   }
 

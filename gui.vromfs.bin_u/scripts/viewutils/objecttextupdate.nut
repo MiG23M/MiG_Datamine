@@ -24,7 +24,7 @@ local function setDoubleTextToButton(nestObj, firstBtnId, firstText, secondText 
   let textBlockObj = showObjById($"{firstBtnId}_text_block", hasTextBlock, fObj)
   hasTextBlock = hasTextBlock && checkObj(textBlockObj)
   if (hasTextBlock) {
-    let guiScene = ::get_cur_gui_scene()
+    let guiScene = get_cur_gui_scene()
     if (guiScene != null)
       guiScene.replaceContentFromText(textBlockObj, textBlock, textBlock.len(), {})
   }
@@ -78,7 +78,7 @@ let function setHelpTextOnLoading(nestObj = null) {
 }
 
 let function setVersionText(scene = null) {
-  let verObj = scene ? scene.findObject("version_text") : ::get_cur_gui_scene()["version_text"]
+  let verObj = scene ? scene.findObject("version_text") : get_cur_gui_scene()["version_text"]
   if (checkObj(verObj))
     verObj.setValue(format(loc("mainmenu/version"), get_game_version_str()))
 }

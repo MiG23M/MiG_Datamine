@@ -34,7 +34,7 @@ require("%scripts/viewUtils/bhvHelpFrame.nut")
 
 ::gui_start_flight_menu_help <- function gui_start_flight_menu_help() {
   if (!hasFeature("ControlsHelp")) {
-    ::get_gui_scene().performDelayed(getroottable(), function() {
+    get_gui_scene().performDelayed(getroottable(), function() {
       ::close_ingame_gui()
       if (::is_game_paused())
         ::pause_game(false)

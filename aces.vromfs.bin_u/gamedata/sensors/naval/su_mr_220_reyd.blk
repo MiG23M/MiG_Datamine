@@ -4,20 +4,20 @@
   "transivers": {
     "search": {
       "pulsePower": 50000.0,
-      "pulseWidth": 2.0,
-      "prf": 1500.0,
+      "pulseWidth": 10.0,
+      "prf": 300.0,
       "band": 0,
-      "rcs": 100.0,
-      "range": 36000.0,
-      "rangeMax": 40000.0,
+      "rcs": 27.45,
+      "range": 120000.0,
+      "rangeMax": 150000.0,
       "antenna": {
         "azimuth": {
-          "angleHalfSens": 15.0,
-          "sideLobesSensitivity": -30.0
+          "angleHalfSens": 7.5,
+          "sideLobesSensitivity": -40.0
         },
         "elevation": {
-          "angleHalfSens": 20.0,
-          "sideLobesSensitivity": -30.0
+          "angleHalfSens": 25.0,
+          "sideLobesSensitivity": -40.0
         }
       }
     }
@@ -26,17 +26,17 @@
     "search": {
       "type": "cylinder",
       "azimuthLimits": [
-        -180.0,
-        180.0
+        -150.0,
+        150.0
       ],
       "elevationLimits": [
-        -10.0,
-        50.0
+        -15.0,
+        75.0
       ],
       "yawStabLimit": 180.0,
-      "pitchStabLimit": 40.0,
-      "rollStabLimit": 15.0,
-      "period": 2.0,
+      "pitchStabLimit": 50.0,
+      "rollStabLimit": 20.0,
+      "period": 3.0,
       "barHeight": 15.0,
       "barsCount": 1,
       "rowMajor": true
@@ -47,18 +47,18 @@
       "aircraftAsTarget": true,
       "groundVehiclesAsTarget": false,
       "groundClutter": false,
-      "friendFoeId": false,
+      "friendFoeId": true,
       "distance": {
         "presents": true,
         "minValue": 1000.0,
-        "maxValue": 40000.0
+        "maxValue": 150000.0
       }
     }
   },
   "scopeRanges": {
-    "range2": 10000.0,
-    "range3": 20000.0,
-    "range4": 40000.0
+    "range1": 10000.0,
+    "range2": 20000.0,
+    "range3": 50000.0
   },
   "fsms": {
     "main": {
@@ -84,12 +84,12 @@
           },
           "setTargetDesignationRange": {
             "azimuthRange": [
-              -180.0,
-              180.0
+              -150.0,
+              150.0
             ],
             "distanceRange": [
               0.0,
-              40000.0
+              150000.0
             ]
           }
         },

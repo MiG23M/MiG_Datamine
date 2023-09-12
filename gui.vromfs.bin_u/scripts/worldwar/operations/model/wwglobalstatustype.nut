@@ -99,7 +99,7 @@ enums.addTypesByGlobalName("g_ww_global_status_type", {
       foreach (name, mapData in data)
         this.cachedList[name] <- WwMap(name, mapData)
 
-      let guiScene = ::get_cur_gui_scene()
+      let guiScene = get_cur_gui_scene()
       if (guiScene) //need all other configs invalidate too before push event
         guiScene.performDelayed(this,
           function() {

@@ -31,6 +31,8 @@ let { isModAvailableOrFree } = require("%scripts/weaponry/modificationInfo.nut")
 let { deep_clone } = require("%sqstd/underscore.nut")
 let { promptReqModInstall, needReqModInstall } = require("%scripts/weaponry/checkInstallMods.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 const MY_FILTERS = "weaponry_presets/filters"
 
@@ -110,7 +112,7 @@ gui_handlers.weaponryPresetsModal <- class extends gui_handlers.BaseGuiHandlerWT
     ::move_mouse_on_obj(this.scene.findObject($"presetHeader_{this.chosenPresetIdx}"))
 
     this.filterObj = this.scene.findObject("filter_nest")
-    this.myFilters = ::load_local_account_settings($"{MY_FILTERS}/{this.unit.name}", DataBlock())
+    this.myFilters = loadLocalAccountSettings($"{MY_FILTERS}/{this.unit.name}", DataBlock())
     this.fillFilterTypesList()
     // No need to update items if no stored filters for current unit
     if (this.myFilters != null)
@@ -326,9 +328,9 @@ gui_handlers.weaponryPresetsModal <- class extends gui_handlers.BaseGuiHandlerWT
   function onBuy(item) {
     if (!::shop_is_weapon_available(this.unit.name, item.name, false, true))
       return
-    this.checkSaveBulletsAndDo(Callback((@(unit, item) function() { //-ident-hides-ident
-      weaponsPurchase(unit, { modItem = item, open = false })
-    })(this.unit, item), this))
+    this.checkSaveBulletsAndDo(Callback(function() { //-param-hides-param
+      weaponsPurchase(this.unit, { modItem = item, open = false })
+    }, this))
   }
 
   function checkSaveBulletsAndDo(func = null) {
@@ -601,7 +603,7 @@ gui_handlers.weaponryPresetsModal <- class extends gui_handlers.BaseGuiHandlerWT
         idx   = idx
         isDisable = (key == FILTER_OPTIONS[0] && !this.isFavoritesExist())
           || (key == FILTER_OPTIONS[1] && !this.isAvailablesExist())
-        text  = isRank ? $"{loc("conditions/rank")} {::get_roman_numeral(key)}"
+        text  = isRank ? $"{loc("conditions/rank")} {get_roman_numeral(key)}"
           : loc($"mainmenu/only{key}")
       }
     }
@@ -663,7 +665,7 @@ gui_handlers.weaponryPresetsModal <- class extends gui_handlers.BaseGuiHandlerWT
     }
 
     this.updateAllByFilters()
-    ::save_local_account_settings($"{MY_FILTERS}/{this.unit.name}",
+    saveLocalAccountSettings($"{MY_FILTERS}/{this.unit.name}",
       ::build_blk_from_container(this.filterStates))
   }
 

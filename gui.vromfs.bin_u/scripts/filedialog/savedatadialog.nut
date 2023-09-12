@@ -4,13 +4,13 @@ from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
-
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
-
 let time = require("%scripts/time.nut")
 let progressMsg = require("%sqDagui/framework/progressMsg.nut")
 let DataBlock = require("DataBlock")
+
 const SAVEDATA_PROGRESS_MSG_ID = "SAVEDATA_IO_OPERATION"
 const LOCAL_SORT_ENTITIES_ID = "saveDataLastSort"
 
@@ -107,7 +107,7 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
     if (!checkObj(obj))
       return
 
-    let curVal = ::loadLocalByAccount(LOCAL_SORT_ENTITIES_ID, 0)
+    let curVal = loadLocalByAccount(LOCAL_SORT_ENTITIES_ID, 0)
     let view = {
       id = "sort_params_list"
       btnName = "RB"
@@ -125,13 +125,13 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function onChangeSortParam(obj) {
     let val = obj.getValue()
-    ::saveLocalByAccount(LOCAL_SORT_ENTITIES_ID, val)
+    saveLocalByAccount(LOCAL_SORT_ENTITIES_ID, val)
 
     this.updateEntriesList()
   }
 
   function sortEntries() {
-    let val = ::loadLocalByAccount(LOCAL_SORT_ENTITIES_ID, 0)
+    let val = loadLocalByAccount(LOCAL_SORT_ENTITIES_ID, 0)
     let p = this.sortParams[val].param
     let isAscending = this.sortParams[val].asc
     this.entries.sort(@(a, b) (isAscending ? 1 : -1) * (a[p] <=> b[p]))
@@ -173,7 +173,7 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
     if (!fileTableObj)
       return
 
-    let curSortIdx = ::loadLocalByAccount(LOCAL_SORT_ENTITIES_ID, 0)
+    let curSortIdx = loadLocalByAccount(LOCAL_SORT_ENTITIES_ID, 0)
     let sortParam = this.sortParams[curSortIdx].param
     let headerRow = []
     this.tableParams.each(function(p, _idx) {
@@ -280,7 +280,7 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
     log("SAVE DIALOG: onBtnDelete for entry")
     debugTableData(curEntry)
 
-    ::scene_msg_box("savedata_delete_msg_box",
+    scene_msg_box("savedata_delete_msg_box",
                     null,
                     loc("save/confirmDelete", { name = curEntry.comment }),
                     [["yes", Callback(@() this.doDelete(curEntry), this)], ["no", function() {}]],
@@ -291,7 +291,7 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
   function onBtnSave() {
     let entryName = this.getObj("file_name").getValue()
     if (entryName == "") {
-      ::showInfoMsgBox(loc("save/saveNameMissing"))
+      showInfoMsgBox(loc("save/saveNameMissing"))
       return
     }
 
@@ -323,7 +323,7 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function doRewrite(entry) {
-    ::scene_msg_box("savedata_overwrite_msg_box",
+    scene_msg_box("savedata_overwrite_msg_box",
       null,
       loc("save/confirmOverwrite", { name = entry.comment }),
       [
@@ -342,7 +342,7 @@ gui_handlers.SaveDataDialog <- class extends gui_handlers.BaseGuiHandlerWT {
     log("SAVE DIALOG: onBtnLoad for entry:")
     debugTableData(curEntry)
 
-    ::scene_msg_box("savedata_confirm_load_msg_box",
+    scene_msg_box("savedata_confirm_load_msg_box",
                     null,
                     loc("save/confirmLoad", { name = curEntry.comment }),
                     [["yes", Callback(@() this.doLoad(curEntry), this)], ["no", function() {}]],

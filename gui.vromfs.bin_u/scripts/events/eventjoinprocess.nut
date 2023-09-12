@@ -21,7 +21,7 @@ let hasAlredyActiveJoinProcess = @() activeEventJoinProcess.len() > 0
 let function setSquadReadyFlag(event) {
   //Don't allow to change ready status, leader don't know about members balance
   if (!::events.haveEventAccessByCost(event))
-    ::showInfoMsgBox(loc("events/notEnoughMoney"))
+    showInfoMsgBox(loc("events/notEnoughMoney"))
   else if (::events.eventRequiresTicket(event) && ::events.getEventActiveTicket(event) == null)
     ::events.checkAndBuyTicket(event)
   else
@@ -114,7 +114,7 @@ let function setSquadReadyFlag(event) {
       return this.remove()
 
     if (!::events.isEventAllowedByComaptibilityMode(this.event)) {
-      ::showInfoMsgBox(loc("events/noCompatibilityMode/msg"))
+      showInfoMsgBox(loc("events/noCompatibilityMode/msg"))
       this.remove()
       return
     }
@@ -224,7 +224,7 @@ let function setSquadReadyFlag(event) {
   //
 
   function msgBox(id, text, buttons, def_btn, options = {}) {
-    ::scene_msg_box(id, null, text, buttons, def_btn, options)
+    scene_msg_box(id, null, text, buttons, def_btn, options)
   }
 }
 

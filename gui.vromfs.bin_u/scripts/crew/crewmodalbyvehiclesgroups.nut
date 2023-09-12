@@ -124,6 +124,6 @@ return {
     if (hasFeature("CrewSkills"))
       handlersManager.loadHandler(CrewModalByVehiclesGroups, params)
     else
-      ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+      showInfoMsgBox(loc("msgbox/notAvailbleYet"))
   }
 }

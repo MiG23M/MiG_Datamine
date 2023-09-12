@@ -107,7 +107,6 @@ foreach (fn in [
   "%scripts/onlineInfo/clustersManagement.nut"
 
   "%scripts/user/presenceType.nut"
-  "%scripts/squads/msquadService.nut"
   "%scripts/squads/squadMember.nut"
   "%scripts/squads/squadManager.nut"
   "%scripts/squads/squadUtils.nut"
@@ -129,7 +128,6 @@ foreach (fn in [
   "%scripts/chat/mpChat.nut"
 
   "%scripts/invites/invites.nut"
-  "%scripts/invites/inviteBase.nut"
   "%scripts/invites/inviteChatRoom.nut"
   "%scripts/invites/inviteSessionRoom.nut"
   "%scripts/invites/inviteTournamentBattle.nut"

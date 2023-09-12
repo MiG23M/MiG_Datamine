@@ -11,9 +11,7 @@ let { OPTIONS_MODE_GAMEPLAY, USEROPT_SHOW_SOCIAL_NOTIFICATIONS
 } = require("%scripts/options/optionsExtNames.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
 
-::g_invites_classes <- {}
-
-::BaseInvite <- class {
+let BaseInvite = class {
   static lifeTimeMsec = 3600000
   static chatLinkPrefix = "INV_"
 
@@ -227,3 +225,5 @@ let { getPlayerName } = require("%scripts/user/remapNick.nut")
       && isCrossNetworkMessageAllowed(this.inviterName)
   }
 }
+
+return BaseInvite

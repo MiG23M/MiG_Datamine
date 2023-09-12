@@ -4,7 +4,7 @@ from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { Cost } = require("%scripts/money.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
-
+let { saveLocalAccountSettings } = require("%scripts/clientState/localProfile.nut")
 let { disableSeenUserlogs } = require("%scripts/userLog/userlogUtils.nut")
 let { format } = require("string")
 
@@ -57,7 +57,7 @@ let handlerClass = class extends gui_handlers.clanVehiclesModal {
   }
 
   function onSkipInfo(obj) {
-    ::save_local_account_settings(SKIP_CLAN_FLUSH_EXP_INFO_SAVE_ID, obj.getValue())
+    saveLocalAccountSettings(SKIP_CLAN_FLUSH_EXP_INFO_SAVE_ID, obj.getValue())
   }
 
   function onUnitActivate(obj) {

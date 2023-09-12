@@ -15,6 +15,7 @@ let { getBulletsSetData,
         getBulletsInfoForPrimaryGuns } = require("%scripts/weaponry/bulletsInfo.nut")
 let { OPTIONS_MODE_TRAINING, USEROPT_SKIP_LEFT_BULLETS_WARNING
 } = require("%scripts/options/optionsExtNames.nut")
+let { shopIsModificationPurchased } = require("chardResearch")
 
 global enum bulletsAmountState {
   READY
@@ -238,7 +239,7 @@ global enum bulletsAmountState {
     foreach (_idx, mod in modsList) {
       if (this.checkPurchased
           && !("isDefaultForGroup" in mod)
-          && !::shop_is_modification_purchased(this.unit.name, mod.name))
+          && !shopIsModificationPurchased(this.unit.name, mod.name))
         continue
 
       list.append({

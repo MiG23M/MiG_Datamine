@@ -5,6 +5,8 @@ let { getSuggestedSkins } = require("%scripts/customization/downloadableDecorato
 let DataBlock = require("DataBlock")
 let { getDecorator } = require("%scripts/customization/decorCache.nut")
 let { get_charserver_time_sec } = require("chard")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 const SUGGESTED_SKIN_SAVE_ID = "seen/suggestedUnitsSkins/"
 const UNIT_DATE_SAVE_ID = "lastSuggestedDate"
@@ -16,10 +18,10 @@ let getSaveId = @(unitName) $"{SUGGESTED_SKIN_SAVE_ID}{unitName}"
 let getSkin = @(skinId) getDecorator(skinId, ::g_decorator_type.SKINS)
 
 let function getSeenSuggestedSkins(unitName) {
-  let seenSkinsList = ::load_local_account_settings(getSaveId(unitName))
+  let seenSkinsList = loadLocalAccountSettings(getSaveId(unitName))
   //this code need for compatibility with old format. Format changed in 2.16.1.X, 31.05.2022
   let oldSaveId = $"seen/suggestedSkins/{unitName}"
-  let oldSeenSkinsList = ::load_local_account_settings(oldSaveId)
+  let oldSeenSkinsList = loadLocalAccountSettings(oldSaveId)
   if (oldSeenSkinsList == null)
     return seenSkinsList
 
@@ -29,8 +31,8 @@ let function getSeenSuggestedSkins(unitName) {
   for (local i = 0; i < skinCount; i++)
     validSkinsCfg[oldSeenSkinsList.getParamName(i)] = currentTime
 
-  ::save_local_account_settings(getSaveId(unitName), validSkinsCfg)
-  ::save_local_account_settings(oldSaveId, null)
+  saveLocalAccountSettings(getSaveId(unitName), validSkinsCfg)
+  saveLocalAccountSettings(oldSaveId, null)
   return validSkinsCfg
 }
 
@@ -77,7 +79,7 @@ let function saveSeenSuggestedSkin(unitName, skinId) {
   let curTime = get_charserver_time_sec()
   seenSuggestedSkins[skinId] = curTime
   seenSuggestedSkins[UNIT_DATE_SAVE_ID] = curTime
-  ::save_local_account_settings(getSaveId(unitName), seenSuggestedSkins)
+  saveLocalAccountSettings(getSaveId(unitName), seenSuggestedSkins)
 }
 
 return {

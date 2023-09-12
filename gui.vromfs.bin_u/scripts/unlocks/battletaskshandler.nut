@@ -26,7 +26,7 @@ let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 
 ::gui_start_battle_tasks_wnd <- function gui_start_battle_tasks_wnd(taskId = null, tabType = null) {
   if (!isBattleTasksAvailable())
-    return ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+    return showInfoMsgBox(loc("msgbox/notAvailbleYet"))
 
   ::gui_start_modal_wnd(gui_handlers.BattleTasksWnd, {
     currentTaskId = taskId,

@@ -133,12 +133,12 @@ gui_handlers.BrowserModalHandler <- class extends ::BaseGuiHandler {
 
         this.msgBox("error", loc("browser/error_should_resend_data"),
             [["#mainmenu/btnBack", this.browserGoBack],
-             ["#mainmenu/btnRefresh", (@(params) function() { ::browser_go(params.url) })(params)]],
+             ["#mainmenu/btnRefresh",  function() { ::browser_go(params.url) }]],
              "#mainmenu/btnBack")
         break;
       case BROWSER_EVENT_CANT_DOWNLOAD:
         this.toggleWaitAnimation(false)
-        ::showInfoMsgBox(loc("browser/error_cant_download"))
+        showInfoMsgBox(loc("browser/error_cant_download"))
         break;
       case BROWSER_EVENT_BEGIN_LOADING_FRAME:
         if (params.isMainFrame) {

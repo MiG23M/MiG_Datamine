@@ -3,7 +3,7 @@ from "%scripts/dagui_library.nut" import *
 
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let DataBlock = require("DataBlock")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { ceil, floor } = require("math")
@@ -421,7 +421,7 @@ gui_handlers.LeaderboardWindow <- class extends gui_handlers.BaseGuiHandlerWT {
       this.lb_presets = ::leaderboards_list
 
     this.curLbCategory = this.lb_presets[0]
-    this.lbType = ::loadLocalByAccount("leaderboards_type", ETTI_VALUE_INHISORY)
+    this.lbType = loadLocalByAccount("leaderboards_type", ETTI_VALUE_INHISORY)
     this.platformFilter = getSeparateLeaderboardPlatformName()
     this.setRowsInPage()
 
@@ -613,7 +613,7 @@ gui_handlers.LeaderboardWindow <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function onChangeType(obj) {
     this.lbType = obj.getValue() ? ETTI_VALUE_INHISORY : ETTI_VALUE_TOTAL
-    ::saveLocalByAccount("leaderboards_type", this.lbType)
+    saveLocalByAccount("leaderboards_type", this.lbType)
     this.fetchLbData()
   }
 

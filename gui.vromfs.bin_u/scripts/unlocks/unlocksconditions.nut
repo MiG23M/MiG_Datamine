@@ -183,10 +183,10 @@ let function getRangeTextByPoint2(val, formatParams = {}, romanNumerals = false)
   formatParams = formatParamsDefault.__merge(formatParams)
   let { rangeStr, itemStr, valueStr, maxOnlyStr, minOnlyStr, bothStr } = formatParams
   let a = val.x.tointeger() > 0
-    ? romanNumerals ? ::get_roman_numeral(val.x) : format(valueStr, val.x)
+    ? romanNumerals ? get_roman_numeral(val.x) : format(valueStr, val.x)
     : ""
   let b = val.y.tointeger() > 0
-    ? romanNumerals ? ::get_roman_numeral(val.y) : format(valueStr, val.y)
+    ? romanNumerals ? get_roman_numeral(val.y) : format(valueStr, val.y)
     : ""
   if (a == "" && b == "")
     return ""

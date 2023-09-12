@@ -15,7 +15,7 @@ let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 
 ::gui_start_search_squadPlayer <- function gui_start_search_squadPlayer() {
   if (!::g_squad_manager.canInviteMember()) {
-    ::showInfoMsgBox(loc("squad/not_a_leader"), "squad_not_available")
+    showInfoMsgBox(loc("squad/not_a_leader"), "squad_not_available")
     return
   }
 

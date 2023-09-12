@@ -38,8 +38,6 @@
     2.0
   ],
   "timeForSmokingWrecks": 2.0,
-  "carrierCatapultFxType": "air_steam_catapult",
-  "carrierCatapultFxCount": 6,
   "shipWaterSplashEnabled": true,
   "HdirtTopSpawnRateMinSpd": 1.0,
   "dirtTopSpawnRateMaxSpd": 5.0,
@@ -601,7 +599,7 @@
     "sfxPathStudio": "aircraft/effects"
   },
   "air_steam_catapult": {
-    "fx": "smoke_overheat_big_cmps_fx",
+    "fx": "aircraft_catapult_steam_b_cmps_fx",
     "lifeTime": 8.0,
     "numInstances": 40,
     "numReserved": 6
@@ -2922,7 +2920,7 @@
   },
   "smoke_gunpowder_ejector": {
     "fx": "smoke_gunpowder_ejector_cmps_fx",
-    "lifeTime": 3.0,
+    "lifeTime": 2.2,
     "numInstances": 70,
     "numReserved": 20,
     "onePointNumber": 4,
@@ -3390,6 +3388,54 @@
     "numInstances": 70,
     "numReserved": 20,
     "onePointNumber": 4
+  },
+  "explosion_smoke_bullet_big": {
+    "fx": "explosion_smoke_bullet_big_cmps_fx",
+    "lifeTime": 0.0,
+    "softnessDepth": 1.0,
+    "granularity": 4,
+    "numInstances": 100,
+    "numReserved": 30,
+    "sfxPath": "tanks/explosions_tanks",
+    "sfxPathStudio": "ground/explosions",
+    "sfxEvent": "explosion_gr_smoke",
+    "soundEnableDistance": 1000.0
+  },
+  "explosion_smoke_bullet_med": {
+    "fx": "explosion_smoke_bullet_med_cmps_fx",
+    "lifeTime": 0.0,
+    "softnessDepth": 1.0,
+    "granularity": 4,
+    "numInstances": 100,
+    "numReserved": 30,
+    "sfxPath": "tanks/explosions_tanks",
+    "sfxPathStudio": "ground/explosions",
+    "sfxEvent": "explosion_gr_smoke",
+    "soundEnableDistance": 1000.0
+  },
+  "smoke_shell_explosion": {
+    "fx": "explosion_smoke_cmps_fx",
+    "lifeTime": 0.0,
+    "softnessDepth": 1.0,
+    "granularity": 4,
+    "numInstances": 100,
+    "numReserved": 30,
+    "sfxPath": "tanks/explosions_tanks",
+    "sfxPathStudio": "ground/explosions",
+    "sfxEvent": "explosion_gr_smoke",
+    "soundEnableDistance": 1000.0
+  },
+  "smoke_shell_explosion_old": {
+    "fx": "explosion_smoke_old_cmps_fx",
+    "lifeTime": 0.0,
+    "softnessDepth": 1.0,
+    "granularity": 4,
+    "numInstances": 100,
+    "numReserved": 30,
+    "sfxPath": "tanks/explosions_tanks",
+    "sfxPathStudio": "ground/explosions",
+    "sfxEvent": "explosion_gr_smoke",
+    "soundEnableDistance": 1000.0
   },
   "muzzle_air_8mm": {
     "fx": "muzzle_air_8mm_cmps_fx",
@@ -6446,6 +6492,83 @@
     "numReserved": 20,
     "onePointNumber": 10
   },
+  "destruction_decorators_model_small": {
+    "fx": "dust_destruction_decorators_model_small_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_model_med": {
+    "fx": "dust_destruction_decorators_model_med_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_model_big": {
+    "fx": "dust_destruction_decorators_model_big_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_birch": {
+    "fx": "dust_destruction_decorators_birch_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_sakura": {
+    "fx": "dust_destruction_decorators_sakura_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_foliage": {
+    "fx": "dust_destruction_decorators_foliage_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_autumn": {
+    "fx": "dust_destruction_decorators_autumn_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_palm": {
+    "fx": "dust_destruction_decorators_palm_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_palm_banana": {
+    "fx": "dust_destruction_decorators_palm_banana_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_desert": {
+    "fx": "dust_destruction_decorators_desert_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
+  "destruction_decorators_hay": {
+    "fx": "dust_destruction_decorators_hay_cmps_fx",
+    "numInstances": 180,
+    "numReserved": 40,
+    "onePointNumber": 3,
+    "onePointRadius": 1.0
+  },
   "misc_fake_glow": {
     "fx": "misc_fake_glow_cmps_fx",
     "numInstances": 70,
@@ -7034,6 +7157,14 @@
     "numReserved": 20,
     "onePointNumber": 2
   },
+  "fire_stream_pyro": {
+    "fx": "fire_stream_pyro_cmps_fx",
+    "numInstances": 70,
+    "numReserved": 20,
+    "onePointNumber": 32,
+    "sfxPath": "sounds/effects",
+    "sfxPathStudio": "aircraft/effects"
+  },
   "repair_ground": {
     "fx": "misc_markers_repair_ground_cmps_fx",
     "group": "highres",
@@ -7443,34 +7574,6 @@
     "numReserved": 5,
     "sfxPath": "sounds/effects",
     "sfxPathStudio": "aircraft/effects"
-  },
-  "smoke_shell_explosion": {
-    "fx": "explosion_smoke_cmps_fx",
-    "lifeTime": 0.0,
-    "softnessDepth": 1.0,
-    "granularity": 4,
-    "numInstances": 100,
-    "numReserved": 30,
-    "minScale": 1.0,
-    "maxScale": 1.0,
-    "sfxPath": "tanks/explosions_tanks",
-    "sfxPathStudio": "ground/explosions",
-    "sfxEvent": "explosion_gr_smoke",
-    "soundEnableDistance": 1000.0
-  },
-  "smoke_shell_explosion_old": {
-    "fx": "explosion_smoke_old_cmps_fx",
-    "lifeTime": 0.0,
-    "softnessDepth": 1.0,
-    "granularity": 4,
-    "numInstances": 100,
-    "numReserved": 30,
-    "minScale": 1.0,
-    "maxScale": 1.0,
-    "sfxPath": "tanks/explosions_tanks",
-    "sfxPathStudio": "ground/explosions",
-    "sfxEvent": "explosion_gr_smoke",
-    "soundEnableDistance": 1000.0
   },
   "bonfire_composite": {
     "fx": "fire_bonfire_cmps_fx",

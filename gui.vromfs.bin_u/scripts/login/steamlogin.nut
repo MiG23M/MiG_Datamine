@@ -9,7 +9,8 @@ let { setVersionText } = require("%scripts/viewUtils/objectTextUpdate.nut")
 let exitGame = require("%scripts/utils/exitGame.nut")
 let { setGuiOptionsMode } = require("guiOptions")
 let { is_running } = require("steam")
-let { saveLocalSharedSettings } = require("%scripts/clientState/localProfile.nut")
+let { saveLocalSharedSettings, loadLocalSharedSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { OPTIONS_MODE_GAMEPLAY } = require("%scripts/options/optionsExtNames.nut")
 
 gui_handlers.LoginWndHandlerSteam <- class extends gui_handlers.LoginWndHandler {
@@ -32,7 +33,7 @@ gui_handlers.LoginWndHandlerSteam <- class extends gui_handlers.LoginWndHandler 
     if (::g_login.isAuthorized())
       return
 
-    let useSteamLoginAuto = ::load_local_shared_settings(USE_STEAM_LOGIN_AUTO_SETTING_ID, true)
+    let useSteamLoginAuto = loadLocalSharedSettings(USE_STEAM_LOGIN_AUTO_SETTING_ID, true)
     if (!useSteamLoginAuto) //can be null or false
       this.goToLoginWnd(useSteamLoginAuto == null)
     else
@@ -64,7 +65,7 @@ gui_handlers.LoginWndHandlerSteam <- class extends gui_handlers.LoginWndHandler 
   }
 
   function goBack(_obj) {
-    ::scene_msg_box("steam_question_quit_game",
+    scene_msg_box("steam_question_quit_game",
       this.guiScene,
       loc("mainmenu/questionQuitGame"),
       [

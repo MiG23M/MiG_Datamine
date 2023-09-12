@@ -254,11 +254,11 @@ let function newRoom(id, customScene = null, ownerHandler = null) {
     function getLogForBanhammer() {
       let logObj = this.mBlocks.map(@(mBlock) {
         from = mBlock.from
-        userColor = mBlock.userColor != "" ? ::get_main_gui_scene().getConstantValue(cutPrefix(mBlock.userColor, "@")) : ""
+        userColor = mBlock.userColor != "" ? get_main_gui_scene().getConstantValue(cutPrefix(mBlock.userColor, "@")) : ""
         fromUid = mBlock.uid
         clanTag = mBlock.clanTag
         msgs = mBlock.msgsSrc
-        msgColor = mBlock.msgColor != "" ? ::get_main_gui_scene().getConstantValue(cutPrefix(mBlock.msgColor, "@")) : ""
+        msgColor = mBlock.msgColor != "" ? get_main_gui_scene().getConstantValue(cutPrefix(mBlock.msgColor, "@")) : ""
         sTime = mBlock.sTime
       })
       return this.chatLogFormatForBanhammer().__merge({ chatLog = logObj })

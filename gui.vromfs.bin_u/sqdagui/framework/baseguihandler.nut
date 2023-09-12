@@ -1,3 +1,4 @@
+from "%sqDagui/daguiNativeApi.nut" import *
 
 let { handlerType } = require("handlerType.nut")
 let { check_obj, show_obj } = require("%sqDagui/daguiUtil.nut")
@@ -6,8 +7,9 @@ let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { open_url_by_obj } = require("open_url_by_obj.nut")
 let checkObj = @(obj) obj != null && obj?.isValid()
+let { gui_scene_boxes, scene_msg_box } = require("msgBox.nut")
 
-::BaseGuiHandler <- class {
+let BaseGuiHandler = class {
   wndType = handlerType.BASE
   sceneBlkName = "%gui/emptyScene.blk"
   sceneNavBlkName = null
@@ -92,7 +94,7 @@ let checkObj = @(obj) obj != null && obj?.isValid()
   }
 
   function isInCurrentScene() {
-    return this.guiScene.isEqual(::get_cur_gui_scene())
+    return this.guiScene.isEqual(get_cur_gui_scene())
   }
 
   function loadNavBar() {
@@ -147,19 +149,19 @@ let checkObj = @(obj) obj != null && obj?.isValid()
   }
 
   function showSceneBtn(id, status) {
-    let obj = checkObj(this.scene) ? this.scene.findObject(id) : ::get_cur_gui_scene()[id]
+    let obj = checkObj(this.scene) ? this.scene.findObject(id) : get_cur_gui_scene()[id]
     return show_obj(obj, status)
   }
 
   function msgBox(id, text, buttons, def_btn, options = {}) {
-    for (local i = 0; i < ::gui_scene_boxes.len(); i++) {
-      if (::gui_scene_boxes[i].id == id)
+    for (local i = 0; i < gui_scene_boxes.len(); i++) {
+      if (gui_scene_boxes[i].id == id)
         return null
     }
     if (!options)
       options = {}
     options.baseHandler <- this
-    return ::scene_msg_box(id, this.guiScene, text, buttons, def_btn, options)
+    return scene_msg_box(id, this.guiScene, text, buttons, def_btn, options)
   }
 
   function onMsgLink(obj) {
@@ -294,6 +296,9 @@ let checkObj = @(obj) obj != null && obj?.isValid()
 
   _tostring = @() $"BaseGuiHandler(sceneBlkName = {this.sceneBlkName})"
 }
+
+::BaseGuiHandler <- BaseGuiHandler
+
 return {
-  BaseGuiHandler = ::BaseGuiHandler
+  BaseGuiHandler
 }

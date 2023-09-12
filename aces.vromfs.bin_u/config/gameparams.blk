@@ -11,9 +11,18 @@
     7.0
   ],
   "tankFuelLeakSpeed": [
-    5.0,
+    8.0,
     0.4,
     2.5
+  ],
+  "tankFuelLeakDecalOpacity": [
+    0.75,
+    2.0,
+    -0.03
+  ],
+  "tankFuelLeakDecalSize": [
+    0.6,
+    1.0
   ],
   "grassAlphaSuffix": "_a",
   "enableRiExplosionDamage": true,
@@ -73,6 +82,9 @@
   "long_flak_explosion_percent": 25,
   "groundRicochetAngle": 60.0,
   "groundRicochetCosinePower": 2.0,
+  "defaultHullWaterCoeff": 5.0,
+  "defaultTrackWaterCoeff": 0.5,
+  "enableDoubleDifferentialByDefault": false,
   "artilleryCooldown": 120.0,
   "forcePartsCutOnAircraftExplosion": false,
   "applyCollisionAircraftToPlayerVehicle": false,
@@ -7076,6 +7088,32 @@
       }
     }
   },
+  "ambientWindParams": {
+    "maxWindNoiseSpeed": 1.432,
+    "minWindNoiseSpeed": 0.795,
+    "maxWindNoiseScale": 43.709,
+    "minWindNoiseScale": 41.423,
+    "minWindNoiseStrength": 3.528,
+    "maxWindNoiseStrength": 3.741,
+    "maxWindNoisePerpendicularStrength": 1.775,
+    "minWindNoisePerpendicularStrength": 1.379,
+    "maxGrassWindNoiseSpeed": 30.0,
+    "minGrassWindNoiseSpeed": 1.0,
+    "maxGrassWindNoiseScale": 50.0,
+    "minGrassWindNoiseScale": 12.0,
+    "maxGrassWindNoiseStrength": 60.0,
+    "minGrassWindNoiseStrength": 8.0,
+    "maxGrassWindNoisePerpendicularStrength": 0.5,
+    "minGrassWindNoisePerpendicularStrength": 0.2,
+    "windNoiseTextureName": "perlin_noise_wind_ati1n",
+    "windMapBorders": [
+      -2048.0,
+      -2048.0,
+      2048.0,
+      2048.0
+    ],
+    "windFlowTextureName": ""
+  },
   "commonScenes": {
     "scene": "gameData/scenes/common_scene.blk"
   },
@@ -7143,7 +7181,7 @@
     "maxPatchesUnitSmall": 8000,
     "maxPatchesUnitLarge": 1000,
     "maxPatchesUnitVolume": 200,
-    "maxPatchesRendinst": 1000,
+    "maxPatchesRendinst": 10000,
     "maxDropRadius": 0.002,
     "maxPatches": 200,
     "slopedDecalsAngleThreshold": 45.0
@@ -11361,6 +11399,22 @@
       "my": "tagging_radar",
       "enemy": "tagging_radar"
     },
+    "antenna_target_tagging_07": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_08": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_09": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_10": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
     "antenna_target_tagging_mount_01": {
       "my": "tagging_radar",
       "enemy": "tagging_radar"
@@ -11382,6 +11436,22 @@
       "enemy": "tagging_radar"
     },
     "antenna_target_tagging_mount_06": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_mount_07": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_mount_08": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_mount_09": {
+      "my": "tagging_radar",
+      "enemy": "tagging_radar"
+    },
+    "antenna_target_tagging_mount_10": {
       "my": "tagging_radar",
       "enemy": "tagging_radar"
     },
@@ -12850,6 +12920,7 @@
       "p": "aps_sensor_",
       "p": "aps_launcher_",
       "p": "ex_era_hull_",
+      "p": "ex_aps_launcher_",
       "p": "ex_era_turret_",
       "p": "bow",
       "p": "compartment",
@@ -12946,6 +13017,7 @@
       "p": "composite_armor_hull_",
       "p": "composite_armor_turret_",
       "p": "ex_era_hull_",
+      "p": "ex_aps_launcher_",
       "p": "ex_era_turret_",
       "p": {
         "name": "aps_sensor_",
@@ -16254,6 +16326,10 @@
         "hideIfDead": true
       },
       "p": {
+        "name": "ex_aps_launcher_",
+        "hideIfDead": true
+      },
+      "p": {
         "name": "at_bulge_",
         "unit": "ship",
         "hideIfDead": true
@@ -19416,31 +19492,5 @@
     "name": "location_ground_leaves",
     "name": "location_ground_papers",
     "name": "dust_pieces"
-  },
-  "ambientWindParams": {
-    "maxWindNoiseSpeed": 1.432,
-    "minWindNoiseSpeed": 0.795,
-    "maxWindNoiseScale": 43.709,
-    "minWindNoiseScale": 41.423,
-    "minWindNoiseStrength": 3.528,
-    "maxWindNoiseStrength": 3.741,
-    "maxWindNoisePerpendicularStrength": 1.775,
-    "minWindNoisePerpendicularStrength": 1.379,
-    "maxGrassWindNoiseSpeed": 30.0,
-    "minGrassWindNoiseSpeed": 1.0,
-    "maxGrassWindNoiseScale": 50.0,
-    "minGrassWindNoiseScale": 12.0,
-    "maxGrassWindNoiseStrength": 60.0,
-    "minGrassWindNoiseStrength": 8.0,
-    "maxGrassWindNoisePerpendicularStrength": 0.5,
-    "minGrassWindNoisePerpendicularStrength": 0.2,
-    "windNoiseTextureName": "perlin_noise_wind_ati1n",
-    "windMapBorders": [
-      -2048.0,
-      -2048.0,
-      2048.0,
-      2048.0
-    ],
-    "windFlowTextureName": ""
   }
 }

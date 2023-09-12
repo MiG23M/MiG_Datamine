@@ -443,7 +443,7 @@ let { get_mission_difficulty_int, get_respawns_left,
     let valueRank = this.getRandomUnitsGroupValueRange(randomGroups, getRank)
     let minRank = valueRank.minValue
     let maxRank = valueRank.maxValue
-    return ::get_roman_numeral(minRank) + ((minRank != maxRank) ? "-" + ::get_roman_numeral(maxRank) : "")
+    return get_roman_numeral(minRank) + ((minRank != maxRank) ? "-" + get_roman_numeral(maxRank) : "")
   }
 
   function getRandomUnitsGroupValueRange(randomGroups, getValue) {

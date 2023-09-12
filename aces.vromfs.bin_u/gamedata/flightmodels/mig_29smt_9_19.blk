@@ -60,9 +60,6 @@
   "fightAiBehaviour": "fighter",
   "autopilotImpl": "FBW",
   "paratrooper": "su_k_36_ejection_para",
-  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
-  "customImage": "!#ui/unitskin#image_in_progress",
-  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -2482,8 +2479,8 @@
       },
       "display": {
         "textureArea": [
-          0.0,
-          0.0,
+          0.5,
+          0.5,
           1.0,
           1.0
         ],
@@ -2493,17 +2490,17 @@
           "aviahorizon_pitch": {
             "arrowTex": "su_gauge_artificial_horizon_type_agr_81m_15_slider_c",
             "position": [
-              683.0,
-              768.0
+              341.0,
+              256.0
             ],
             "arrowTexCoord": [
               0.0,
               0.4,
-              2.0,
-              2.0
+              1.0,
+              1.0
             ],
             "size": [
-              1366.0,
+              683.0,
               512.0
             ],
             "notDrawBackground": true,
@@ -2610,7 +2607,7 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/su_n_010.blk",
+      "blk": "gameData/sensors/su_n_010m.blk",
       "dmPart": "radar_dm"
     },
     "sensor": {
@@ -4456,22 +4453,22 @@
       "modClass": "armor",
       "invertEnableLogic": false
     },
-    "mig_29_r_73": {
+    "mig_29_r_27r": {
       "modClass": "weapon",
       "tier": 1
-    },
-    "mig_29_r_27r": {
-      "reqModification": "mig_29_r_73",
-      "modClass": "weapon",
-      "tier": 2
     },
     "mig_29_r_27t": {
       "reqModification": "mig_29_r_27r",
       "modClass": "weapon",
+      "tier": 2
+    },
+    "mig_29_r_73": {
+      "reqModification": "mig_29_r_27t",
+      "modClass": "weapon",
       "tier": 3
     },
     "mig_29_r_27er": {
-      "prevModification": "mig_29_r_27t",
+      "prevModification": "mig_29_r_73",
       "modClass": "weapon",
       "tier": 4
     },

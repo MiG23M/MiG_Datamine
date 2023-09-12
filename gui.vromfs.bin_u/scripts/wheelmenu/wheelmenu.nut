@@ -69,7 +69,7 @@ const ITEMS_PER_PAGE = 8
  * */
 
 
-::dagui_propid.add_name_id("index") // for navigation with mouse in wheelmenu
+dagui_propid_add_name_id("index") // for navigation with mouse in wheelmenu
 
 gui_handlers.wheelMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.CUSTOM

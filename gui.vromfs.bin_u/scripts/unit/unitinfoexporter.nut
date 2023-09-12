@@ -64,7 +64,7 @@ let class UnitInfoExporter {
     this.path = genPath
 
     this.exportCalculationParameters()
-    ::get_main_gui_scene().performDelayed(this, this.nextLangExport)
+    get_main_gui_scene().performDelayed(this, this.nextLangExport)
   }
 
   function _tostring() {
@@ -157,7 +157,7 @@ let class UnitInfoExporter {
     ::g_language.setGameLocalization(this.curLang, false, false)
 
     this.debugLog($"Exporter: gen all units info to {this.getLangFullPath()}")
-    ::get_main_gui_scene().performDelayed(this, this.startExport) //delay to show exporter logs
+    get_main_gui_scene().performDelayed(this, this.startExport) //delay to show exporter logs
   }
 
   function getCalculationParemetersFullPath() {
@@ -195,7 +195,7 @@ let class UnitInfoExporter {
 
   function finishExport(fBlk) {
     fBlk.saveToTextFile(this.getLangFullPath())
-    ::get_main_gui_scene().performDelayed(this, this.nextLangExport) //delay to show exporter logs
+    get_main_gui_scene().performDelayed(this, this.nextLangExport) //delay to show exporter logs
   }
 
   function exportUnitType(fBlk) {
@@ -219,7 +219,7 @@ let class UnitInfoExporter {
     fBlk[RANK_GROUP].texts = DataBlock()
 
     for (local rank = 1; rank <= ::max_country_rank; rank++)
-      fBlk[RANK_GROUP]["texts"][rank.tostring()] = ::get_roman_numeral(rank)
+      fBlk[RANK_GROUP]["texts"][rank.tostring()] = get_roman_numeral(rank)
   }
 
   function exportCommonParams(fBlk) {
@@ -258,7 +258,7 @@ let class UnitInfoExporter {
       return true
 
     if (this.isNeedFrame()) {
-      ::get_main_gui_scene().performDelayed(this, this.onFrameRedrawnWhileExporting)
+      get_main_gui_scene().performDelayed(this, this.onFrameRedrawnWhileExporting)
       return false
     }
 

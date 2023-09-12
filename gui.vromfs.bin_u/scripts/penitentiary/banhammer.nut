@@ -250,7 +250,7 @@ gui_handlers.ComplainHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     if(this.chatLog?.chatLog == null)
       return
     let messages = this.chatLog.chatLog
-      .filter(@(l) ::to_integer_safe(l.fromUid, 0, false) == pi.userId.tointeger())
+      .filter(@(l) to_integer_safe(l.fromUid, 0, false) == pi.userId.tointeger())
       .map(function(l) {
         let fullName = ::g_contacts.getPlayerFullName(l.from, ::get_player_tag(l.from))
         let messageTime = l?.time ?? 0

@@ -1,8 +1,7 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
-
-
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let regexp2 = require("regexp2")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
@@ -55,7 +54,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
 
   function init() {
     isAlreadySendMissingPresetError = false
-    this.presetsVersion = ::loadLocalByAccount($"slotbar_presets/{PRESETS_VERSION_SAVE_ID}", 0)
+    this.presetsVersion = loadLocalByAccount($"slotbar_presets/{PRESETS_VERSION_SAVE_ID}", 0)
     foreach (country in shopCountriesList)
       if (::isCountryAvailable(country))
         this.initCountry(country)
@@ -118,7 +117,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
 
   function initCountry(countryId) {
     this.presets[countryId] <- this.getPresetsList(countryId)
-    local selPresetId = ::loadLocalByAccount("slotbar_presets/" + countryId + "/selected", null)
+    local selPresetId = loadLocalByAccount("slotbar_presets/" + countryId + "/selected", null)
     let slotbarPreset = this.createPresetFromSlotbar(countryId)
     if (selPresetId != null && (selPresetId in this.presets[countryId])
         && isEqualPreset(this.presets[countryId][selPresetId], slotbarPreset)) {
@@ -356,7 +355,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
 
     if (this.presetsVersion < PRESETS_VERSION) {
       this.presetsVersion = PRESETS_VERSION
-      ::saveLocalByAccount($"slotbar_presets/{PRESETS_VERSION_SAVE_ID}", this.presetsVersion)
+      saveLocalByAccount($"slotbar_presets/{PRESETS_VERSION_SAVE_ID}", this.presetsVersion)
     }
 
     if (hasChanges)
@@ -368,7 +367,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
       countryId = profileCountrySq.value
     if (!this.canEditCountryPresets(countryId) || !(countryId in this.presets))
       return false
-    let cfgBlk = ::loadLocalByAccount("slotbar_presets/" + countryId)
+    let cfgBlk = loadLocalByAccount("slotbar_presets/" + countryId)
     local blk = null
     if (this.presets[countryId].len() > 0) {
       let curPreset = getTblValue(this.selected[countryId], this.presets[countryId])
@@ -403,7 +402,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
     if (u.isEqual(blk, cfgBlk))
       return false
 
-    ::saveLocalByAccount("slotbar_presets/" + countryId, blk, shouldSaveProfile ? forceSaveProfile : @() null)
+    saveLocalByAccount("slotbar_presets/" + countryId, blk, shouldSaveProfile ? forceSaveProfile : @() null)
     return true
   }
 
@@ -415,7 +414,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
       return false
     if (!::isCountryAllCrewsUnlockedInHangar(country)) {
       if (verbose)
-        ::showInfoMsgBox(loc("charServer/updateError/52"), "slotbar_presets_forbidden")
+        showInfoMsgBox(loc("charServer/updateError/52"), "slotbar_presets_forbidden")
       return false
     }
     return true
@@ -434,7 +433,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
     }
 
     if (!isSilent)
-      ::showInfoMsgBox(loc("msg/cantUseUnitInCurrentBattle",
+      showInfoMsgBox(loc("msg/cantUseUnitInCurrentBattle",
                        { unitName = colorize("userlogColoredText", preset.title) }))
     return false
   }
@@ -588,7 +587,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
 
   function getPresetsList(countryId) {
     let res = []
-    let blk = ::loadLocalByAccount("slotbar_presets/" + countryId)
+    let blk = loadLocalByAccount("slotbar_presets/" + countryId)
     if (blk) {
       let presetsBlk = blk % "preset"
       foreach (idx, strPreset in presetsBlk) {
@@ -596,7 +595,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
         if (data.len() < 3)
           continue
         let preset = this._createPresetTemplate(idx)
-        preset.selected = ::to_integer_safe(data[0], -1)
+        preset.selected = to_integer_safe(data[0], -1)
         let title = this.validatePresetName(getTblValue(3, data, ""))
         if (title.len())
           preset.title = title
@@ -613,7 +612,7 @@ let isEqualPreset = @(p1, p2) isEqual(p1.crews, p2.crews) && isEqual(p1.units, p
           local crewId = crewIds[i]
           if (crewId == "" && this.presetsVersion == 0)
             continue
-          crewId = ::to_integer_safe(crewIds[i], -1)
+          crewId = to_integer_safe(crewIds[i], -1)
           if (!getAircraftByName(unitName) || crewId < 0)
             continue
 

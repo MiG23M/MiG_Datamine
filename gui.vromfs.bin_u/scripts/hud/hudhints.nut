@@ -17,7 +17,7 @@ let { get_mission_difficulty } = require("guiMission")
 const DEFAULT_MISSION_HINT_PRIORITY = 100
 const CATASTROPHIC_HINT_PRIORITY = 0
 
-let animTimerPid = ::dagui_propid.add_name_id("_transp-timer")
+let animTimerPid = dagui_propid_add_name_id("_transp-timer")
 
 enum MISSION_HINT_TYPE {
   STANDARD   = "standard"
@@ -776,10 +776,15 @@ enums.addTypesByGlobalName("g_hud_hints", {
     hintType = ::g_hud_hint_types.COMMON
     locId = "hints/critical_buoyancy"
     noKeyLocId = "hints/critical_buoyancy_nokey"
-    shortcuts = "ID_REPAIR_BREACHES"
     showEvent = "hint:critical_buoyancy:show"
     hideEvent = "hint:critical_buoyancy:hide"
     shouldBlink = true
+    getShortcuts = function(eventData) {
+      if (eventData?.showRepairButton) {
+        return "ID_REPAIR_BREACHES"
+      }
+      return null
+    }
   }
 
   SHIP_BROKEN_GUNS_HINT = {
@@ -1251,6 +1256,16 @@ enums.addTypesByGlobalName("g_hud_hints", {
     getShortcuts = function(_data) {
       return ::g_hud_action_bar_type.REPAIR_BREACHES.getVisualShortcut()
     }
+  }
+
+  UNREPARIRABLE_BREACHES_WARNING = {
+    hintType  = ::g_hud_hint_types.MISSION_ACTION_HINTS
+    locId     = "hints/ship_unrepairable_breaches"
+    showEvent = "hint:ship_unrepairable_breaches:show"
+    hideEvent = "hint:ship_unrepairable_breaches:hide"
+    lifeTime  = 15.0
+    shouldBlink = true
+    buildText = @(_data) colorize("@criticalTextColor", loc(this.locId))
   }
 
   UNDERWATERING_OFFER = {

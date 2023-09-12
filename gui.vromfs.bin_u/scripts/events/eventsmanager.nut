@@ -37,6 +37,7 @@ let { getGameModesByEconomicName, getModeById } = require("%scripts/matching/mat
 let { debug_dump_stack } = require("dagor.debug")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 ::event_ids_for_main_game_mode_list <- [
   "tank_event_in_random_battles_arcade"
@@ -548,7 +549,7 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
   }
 
   function getLastPlayedEvent() {
-    let eventData = ::loadLocalByAccount("lastPlayedEvent", null)
+    let eventData = loadLocalByAccount("lastPlayedEvent", null)
     if (eventData == null)
       return null
     let event = this.getEvent(eventData?.eventName)
@@ -1239,7 +1240,7 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
     if (teamData.haveRestrictions && teamData.canFlyout)
       buttons.insert(0, ["yes", continueQueueFunc ])
 
-    ::scene_msg_box("members_cant_fly",
+    scene_msg_box("members_cant_fly",
                     null,
                     systemMsg.configToLang(langConfig, null, "\n"),
                     buttons,
@@ -1814,8 +1815,8 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
     if ("ranks" in rule) {
       let minRank = max(1, rule.ranks?.min ?? 1)
       let maxRank = rule.ranks?.max ?? ::max_country_rank
-      local rankText = ::get_roman_numeral(minRank)
-                     + ((minRank != maxRank) ? " - " + ::get_roman_numeral(maxRank) : "")
+      local rankText = get_roman_numeral(minRank)
+                     + ((minRank != maxRank) ? " - " + get_roman_numeral(maxRank) : "")
       rankText = format(loc("events/rank"), rankText)
       if (ruleString.len())
         ruleString += loc("ui/parentheses/space", { text = rankText })
@@ -1951,7 +1952,7 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
         if (startTime > 0)
           messageText +=  "\n" + format(loc("events/event_starts_in"), colorize("activeTextColor",
             time.hoursToString(time.secondsToHours(startTime))))
-        ::scene_msg_box("cant_join", null, messageText,
+        scene_msg_box("cant_join", null, messageText,
             [["ok", function() {}]], "ok")
       }
     }
@@ -2038,12 +2039,12 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
     if (data.actionFunc == null && !data.checkStatus) {
       data.actionFunc = function(reasonData) {
         if (!reasonData.checkXboxOverlayMessage)
-          ::showInfoMsgBox(reasonData.msgboxReasonText || reasonData.reasonText, "cant_join")
+          showInfoMsgBox(reasonData.msgboxReasonText || reasonData.reasonText, "cant_join")
         else if (!isMultiplayerPrivilegeAvailable.value)
           checkAndShowMultiplayerPrivilegeWarning()
         else if (!isShowGoldBalanceWarning())
           checkAndShowCrossplayWarning(
-            @() ::showInfoMsgBox(reasonData.msgboxReasonText || reasonData.reasonText, "cant_join"))
+            @() showInfoMsgBox(reasonData.msgboxReasonText || reasonData.reasonText, "cant_join"))
       }
     }
 
@@ -2213,7 +2214,7 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
         eventName = this.getEventNameText(event)
       }
       let message = loc("msgbox/need_ticket/no_tickets", locParams)
-      ::showInfoMsgBox(message, "no_tickets")
+      showInfoMsgBox(message, "no_tickets")
     }
     // Player has to purchase one of available tickets via special window.
     else {
@@ -2488,7 +2489,7 @@ systemMsg.registerLocTags({ [SQUAD_NOT_READY_LOC_TAG] = "msgbox/squad_not_ready_
 
     let purchData = ::OnlineShopModel.getFeaturePurchaseData(feature)
     if (!purchData.canBePurchased)
-      return ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+      return showInfoMsgBox(loc("msgbox/notAvailbleYet"))
 
     let entitlementItem = getEntitlementConfig(purchData.sourceEntitlement)
     let msg = loc("msg/eventAccess/needEntitlements",
@@ -2606,13 +2607,13 @@ seenEvents.setSubListGetter(SEEN.S_EVENTS_WINDOW,
 seenEvents.setCompatibilityLoadData(function() {
     let res = {}
     let savePath = "seen/events"
-    let blk = ::loadLocalByAccount(savePath)
+    let blk = loadLocalByAccount(savePath)
     if (!u.isDataBlock(blk))
       return res
 
     for (local i = 0; i < blk.paramCount(); i++)
       res[blk.getParamName(i)] <- blk.getParamValue(i)
-    ::saveLocalByAccount(savePath, null)
+    saveLocalByAccount(savePath, null)
     return res
   })
 

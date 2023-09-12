@@ -46,7 +46,7 @@ let popupList = class extends gui_handlers.BaseGuiHandlerWT {
     if (!this.clickPropagation)
       return
 
-    let [mouseX, mouseY] = ::get_dagui_mouse_cursor_pos()
+    let [mouseX, mouseY] = get_dagui_mouse_cursor_pos()
     this.guiScene.simulateMouseClick(mouseX, mouseY, 1)
   }
 }

@@ -12,6 +12,8 @@ let { getUnlockById } = require("%scripts/unlocks/unlocksCache.nut")
 let { getDecorator } = require("%scripts/customization/decorCache.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { get_charserver_time_sec } = require("chard")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 let curPersonalOffer = mkWatched(persist, "curPersonalOffer", null)
 let checkedOffers = mkWatched(persist, "checkedOffers", {})
@@ -24,23 +26,23 @@ let function clearOfferCache() {
 }
 
 let hasSendToBq = @(offerName)
-  ::load_local_account_settings($"personalOffer/{offerName}/hasSendToBq") ?? false
+  loadLocalAccountSettings($"personalOffer/{offerName}/hasSendToBq") ?? false
 
 let function sendDataToBqOnce(data) {
   if (hasSendToBq(data.offerName))
     return
   sendBqEvent("CLIENT_POPUP_1", "personal_offer_restriction", data)
-  ::save_local_account_settings($"personalOffer/{data.offerName}/hasSendToBq", true)
+  saveLocalAccountSettings($"personalOffer/{data.offerName}/hasSendToBq", true)
 }
 
 let function markSeenPersonalOffer(offerName) {
   let seenCountId = $"personalOffer/{offerName}/visibleOfferCount"
-  ::save_local_account_settings(seenCountId, (::load_local_account_settings(seenCountId) ?? 0) + 1)
+  saveLocalAccountSettings(seenCountId, (loadLocalAccountSettings(seenCountId) ?? 0) + 1)
   sendDataToBqOnce({ offerName, serverTime = get_charserver_time_sec(), reason = "personal_offer_window_is_show" })
 }
 
 let isSeenOffer = @(offerName)
-  (::load_local_account_settings($"personalOffer/{offerName}/visibleOfferCount") ?? 0) > 0
+  (loadLocalAccountSettings($"personalOffer/{offerName}/visibleOfferCount") ?? 0) > 0
 
 let function getReceivedOfferContent(offerContent) {
   let res = []
@@ -67,7 +69,7 @@ let function getReceivedOfferContent(offerContent) {
 
 let function checkCompletedSuccessfully(currentOfferData) {
   curPersonalOffer(currentOfferData)
-  ::save_local_account_settings($"personalOffer/{currentOfferData.offerName}/finishTime", currentOfferData.timeExpired)
+  saveLocalAccountSettings($"personalOffer/{currentOfferData.offerName}/finishTime", currentOfferData.timeExpired)
   setTimeout(currentOfferData.timeExpired - get_charserver_time_sec(), clearOfferCache)
 }
 
@@ -123,7 +125,7 @@ let function validatePersonalOffer(personalOffer, currentOfferData) {
     return false
   }
 
-  let finishTime = ::load_local_account_settings($"personalOffer/{offerName}/finishTime") ?? 0
+  let finishTime = loadLocalAccountSettings($"personalOffer/{offerName}/finishTime") ?? 0
   if (finishTime == 0
       && ((serverTime + duration_in_seconds) > (personalOffer?.timeExpired ?? 0).tointeger())) {
     sendDataToBqOnce({ offerName, serverTime, reason = "expired_time_less_duration_time" })

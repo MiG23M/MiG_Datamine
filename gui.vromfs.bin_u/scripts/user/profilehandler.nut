@@ -2,7 +2,9 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-let { saveLocalSharedSettings } = require("%scripts/clientState/localProfile.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
+let { saveLocalSharedSettings, loadLocalAccountSettings, saveLocalByAccount, loadLocalByAccount
+} = require("%scripts/clientState/localProfile.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
@@ -63,6 +65,7 @@ let { doPreviewUnlockPrize } = require("%scripts/unlocks/unlocksView.nut")
 let { isBattleTask } = require("%scripts/unlocks/battleTasks.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_PILOT } = require("%scripts/options/optionsExtNames.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 enum profileEvent {
   AVATAR_CHANGED = "AvatarChanged"
@@ -376,7 +379,7 @@ gui_handlers.Profile <- class extends gui_handlers.UserCardHandler {
   function updateButtons() {
     let sheet = this.getCurSheet()
     let isProfileOpened = sheet == "Profile"
-    let needHideChangeAccountBtn = ::steam_is_running() && ::load_local_account_settings("disabledReloginSteamAccount", false)
+    let needHideChangeAccountBtn = ::steam_is_running() && loadLocalAccountSettings("disabledReloginSteamAccount", false)
     let buttonsList = {
       btn_changeAccount = ::isInMenu() && isProfileOpened && !isPlatformSony && !needHideChangeAccountBtn
       btn_changeName = ::isInMenu() && isProfileOpened && !isMeXBOXPlayer() && !isMePS4Player()
@@ -485,7 +488,7 @@ gui_handlers.Profile <- class extends gui_handlers.UserCardHandler {
       let categoriesListObj = this.scene.findObject("decals_group_list")
       this.guiScene.replaceContentFromText(categoriesListObj, data, data.len(), this)
 
-      let selCategory = this.filterGroupName ?? ::loadLocalByAccount("wnd/decalsCategory", "")
+      let selCategory = this.filterGroupName ?? loadLocalByAccount("wnd/decalsCategory", "")
       if (this.isDecalGroup(selCategory))
         this.openDecalCategory(categoriesListObj, selCategory.split("/")[0])
 
@@ -535,7 +538,7 @@ gui_handlers.Profile <- class extends gui_handlers.UserCardHandler {
           selIdx = item == curCountry ? idx : selIdx
           view.items.append(
             {
-              image = ::get_country_icon(item)
+              image = getCountryIcon(item)
               tooltip = "#" + item
             }
           )
@@ -579,7 +582,7 @@ gui_handlers.Profile <- class extends gui_handlers.UserCardHandler {
   function onDecalCategorySelect(listObj) {
     let categoryId = listObj.getChild(listObj.getValue()).id
     this.openDecalCategory(listObj, categoryId)
-    ::saveLocalByAccount("wnd/decalsCategory", categoryId)
+    saveLocalByAccount("wnd/decalsCategory", categoryId)
     this.fillDecalsList()
   }
 
@@ -1335,7 +1338,7 @@ gui_handlers.Profile <- class extends gui_handlers.UserCardHandler {
   function showUnlockPrizes(obj) {
     let trophy = ::ItemsManager.findItemById(obj.trophyId)
     let content = trophy.getContent()
-      .map(@(i) ::buildTableFromBlk(i))
+      .map(@(i) u.isDataBlock(i) ? convertBlk(i) : {})
       .sort(::trophyReward.rewardsSortComparator)
 
     ::gui_start_open_trophy_rewards_list({ rewardsArray = content })

@@ -101,7 +101,7 @@ gui_handlers.ArtilleryMap <- class extends gui_handlers.BaseGuiHandlerWT {
     this.setParams(params)
 
     let isStick = this.pointingDevice == POINTING_DEVICE.GAMEPAD || this.pointingDevice == POINTING_DEVICE.JOYSTICK
-    this.prevMousePos = isStick ? ::get_dagui_mouse_cursor_pos() : [-1, -1]
+    this.prevMousePos = isStick ? get_dagui_mouse_cursor_pos() : [-1, -1]
     this.mapCoords = isStick ? [0.5, 0.5] : null
     this.stuckAxis = ::joystickInterface.getAxisStuck(this.watchAxis)
 
@@ -120,7 +120,7 @@ gui_handlers.ArtilleryMap <- class extends gui_handlers.BaseGuiHandlerWT {
     this.checkArtilleryEnabledByTimer(dt)
 
     local curPointingice = this.pointingDevice
-    let mousePos = ::get_dagui_mouse_cursor_pos()
+    let mousePos = get_dagui_mouse_cursor_pos()
     let axisData = ::joystickInterface.getAxisData(this.watchAxis, this.stuckAxis)
     let joystickData = ::joystickInterface.getMaxDeviatedAxisInfo(axisData)
 
@@ -356,7 +356,7 @@ gui_handlers.ArtilleryMap <- class extends gui_handlers.BaseGuiHandlerWT {
   function getMouseCursorMapCoords() {
     local res = isXInputDevice() && !this.isGamepadMouse ? this.mapCoords : null
 
-    let cursorPos = ::get_dagui_mouse_cursor_pos()
+    let cursorPos = get_dagui_mouse_cursor_pos()
     if (cursorPos[0] >= this.mapPos[0] && cursorPos[0] <= this.mapPos[0] + this.mapSize[0] && cursorPos[1] >= this.mapPos[1] && cursorPos[1] <= this.mapPos[1] + this.mapSize[1])
       res = [
         1.0 * (cursorPos[0] - this.mapPos[0]) / this.mapSize[0],

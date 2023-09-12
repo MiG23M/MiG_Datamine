@@ -24,7 +24,6 @@ let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { isPromoLinkVisible, getPromoLinkText, getPromoLinkBtnText, launchPromoAction,
   gatherPromoActionsParamsData
 } = require("%scripts/promo/promo.nut")
-let { isVietnameseVersion } = require("%scripts/langUtils/language.nut")
 
 ::delayed_unlock_wnd <- []
 ::showUnlockWnd <- function showUnlockWnd(config) {
@@ -164,7 +163,7 @@ gui_handlers.ShowUnlockHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function updateButtons() {
     this.showSceneBtn("btn_sendEmail", getTblValue("showSendEmail", this.config, false)
-                                  && !isVietnameseVersion())
+                                  && !::is_vietnamese_version())
 
     local linkText = getPromoLinkText(this.config)
     if (this.config?.pollId && this.config?.link) {

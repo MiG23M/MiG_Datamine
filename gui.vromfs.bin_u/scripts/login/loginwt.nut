@@ -35,8 +35,6 @@ let { resetBattleTasks } = require("%scripts/unlocks/battleTasks.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { get_charserver_time_sec } = require("chard")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings } = require("%scripts/clientState/localProfile.nut")
-let { shouldAgreeEula = @(ver, typeE) ::should_agree_eula(ver, typeE), getAgreedEulaVersion = @(typeE) null } = require_optional("sqEulaUtils")
 
 const EMAIL_VERIFICATION_SEEN_DATE_SETTING_PATH = "emailVerification/lastSeenDate"
 let EMAIL_VERIFICATION_INTERVAL_SEC = 7 * 24 * 60 * 60
@@ -200,14 +198,12 @@ let function go_to_account_web_page(bqKey = "") {
         try { getroottable()[sver] = l.tointeger() }
         catch(e) { assert(0, $"can't convert '{l}' to version {sver}") }
       }
-      let agreedEulaVersion = getAgreedEulaVersion(::TEXT_EULA)
 
-      if (agreedEulaVersion != null && agreedEulaVersion < ::eula_version) {
-        ::gui_start_eula(false, agreedEulaVersion > 0)
-      }
+      if (::should_agree_eula(::eula_version, ::TEXT_EULA))
+        ::gui_start_eula()
     }
     function() {
-      if (shouldAgreeEula(::eula_version, ::TEXT_EULA))
+      if (::should_agree_eula(::eula_version, ::TEXT_EULA))
         return PT_STEP_STATUS.SUSPEND
       return null
     }
@@ -229,7 +225,7 @@ let function go_to_account_web_page(bqKey = "") {
         tutorialModule.saveVersion()
 
         if(havePlayerTag("steamlogin"))
-          saveLocalAccountSettings("disabledReloginSteamAccount", true)
+          ::save_local_account_settings("disabledReloginSteamAccount", true)
       }
       else
         tutorialModule.saveVersion(0)
@@ -256,7 +252,7 @@ let function go_to_account_web_page(bqKey = "") {
   if (!this.initOptionsPseudoThread)
     return
 
-  get_cur_gui_scene().performDelayed(getroottable(),
+  ::get_cur_gui_scene().performDelayed(getroottable(),
     function() {
       handlersManager.loadHandler(gui_handlers.WaitForLoginWnd)
       startPseudoThread(::g_login.initOptionsPseudoThread, startLogout)
@@ -278,7 +274,7 @@ let function go_to_account_web_page(bqKey = "") {
   broadcastEvent("LoginComplete")
 
   //animatedSwitchScene sync function, so we need correct finish current call
-  get_cur_gui_scene().performDelayed(getroottable(), function() {
+  ::get_cur_gui_scene().performDelayed(getroottable(), function() {
     handlersManager.markfullReloadOnSwitchScene()
     handlersManager.animatedSwitchScene(function() {
       ::g_login.firstMainMenuLoad()
@@ -292,10 +288,10 @@ let function needAutoStartBattle() {
       || ::disable_network()
       || ::stat_get_value_respawns(0, 1) > 0
       || !::g_login.isProfileReceived()
-      || !loadLocalAccountSettings("needAutoStartBattle", true))
+      || !::load_local_account_settings("needAutoStartBattle", true))
     return false
 
-  saveLocalAccountSettings("needAutoStartBattle", false)
+  ::save_local_account_settings("needAutoStartBattle", false)
   return true
 }
 
@@ -331,7 +327,7 @@ let function needAutoStartBattle() {
   }
 
   let curTime = get_charserver_time_sec()
-  let verificationSeenDate = loadLocalAccountSettings(EMAIL_VERIFICATION_SEEN_DATE_SETTING_PATH, 0)
+  let verificationSeenDate = ::load_local_account_settings(EMAIL_VERIFICATION_SEEN_DATE_SETTING_PATH, 0)
   if (
     !havePlayerTag("email_verified")
     && !::is_me_newbie()
@@ -340,7 +336,7 @@ let function needAutoStartBattle() {
     && curTime - verificationSeenDate > EMAIL_VERIFICATION_INTERVAL_SEC
   )
     handler.doWhenActive(function () {
-      saveLocalAccountSettings(EMAIL_VERIFICATION_SEEN_DATE_SETTING_PATH, curTime)
+      ::save_local_account_settings(EMAIL_VERIFICATION_SEEN_DATE_SETTING_PATH, curTime)
       this.msgBox(
       "email_not_verified_msg_box",
       loc("mainmenu/email_not_verified"),

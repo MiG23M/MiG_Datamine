@@ -109,7 +109,7 @@ let function getEntitlementAmount(ent) {
   return 1
 }
 
-let function getEntitlementTimeText(ent) { // -return-different-types
+let function getEntitlementTimeText(ent) {
   if ("ttl" in ent)
     return ent.ttl + loc("measureUnits/days")
   if ("httl" in ent)

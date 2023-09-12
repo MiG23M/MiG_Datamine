@@ -22,7 +22,6 @@ let { get_mission_difficulty_int, get_mp_tbl_teams } = require("guiMission")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_ORDER_AUTO_ACTIVATE
 } = require("%scripts/options/optionsExtNames.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 const OVERRIDE_COUNTRY_ID = "override_country"
 
@@ -175,7 +174,7 @@ local MPStatistics = class extends gui_handlers.BaseGuiHandlerWT {
 
     let countryFlagObj = showObjById(OVERRIDE_COUNTRY_ID, countryIcon != null, teamObj)
     if (checkObj(countryFlagObj))
-      countryFlagObj["background-image"] = getCountryIcon(countryIcon)
+      countryFlagObj["background-image"] = ::get_country_icon(countryIcon)
   }
 
   /**
@@ -192,7 +191,7 @@ local MPStatistics = class extends gui_handlers.BaseGuiHandlerWT {
       countries = shopCountriesList
         .map(@(countryName) {
           countryName = countryName
-          countryIcon = getCountryIcon(countryName)
+          countryIcon = ::get_country_icon(countryName)
         })
         .append({
           countryName = OVERRIDE_COUNTRY_ID

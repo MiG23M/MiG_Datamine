@@ -10,7 +10,6 @@ let { findChildIndex, getObjValidIndex } = require("%sqDagui/daguiUtil.nut")
 let { shopCountriesList } = require("%scripts/shop/shopCountriesList.nut")
 let { ceil } = require("%sqstd/math.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 let MAX_SLOT_COUNT_X = 4
 
@@ -111,7 +110,7 @@ local handlerClass = class extends gui_handlers.BaseGuiHandlerWT {
         view.checkbox.append({
           id = isUnitType ? $"unit_{inst.unitType.esUnitType}" : inst.id
           idx = isUnitType ? inst.unitType.esUnitType : inst.idx
-          image = isUnitType ? inst.unitType.testFlightIcon : getCountryIcon(inst.id)
+          image = isUnitType ? inst.unitType.testFlightIcon : ::get_country_icon(inst.id)
           text = isUnitType ? inst.unitType.getArmyLocName() : loc(inst.id)
           value = false
         })
@@ -235,7 +234,7 @@ local handlerClass = class extends gui_handlers.BaseGuiHandlerWT {
 
     local bonusData = unit.name
     if (::isUnitGroup(unit))
-      bonusData = unit.airsGroup.map(@(unt) unt.name)
+      bonusData = unit.airsGroup.map(@(unit) unit.name)
     ::showAirExpWpBonus(placeObj.findObject(unit.name + "-bonus"), bonusData)
   }
 

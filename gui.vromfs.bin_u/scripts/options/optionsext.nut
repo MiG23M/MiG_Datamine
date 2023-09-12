@@ -38,7 +38,8 @@ let crossplayModule = require("%scripts/social/crossplay.nut")
 let soundDevice = require("soundDevice")
 let holidays = require("holidays")
 let { getBulletsListHeader } = require("%scripts/weaponry/weaponryDescription.nut")
-let { setUnitLastBullets, getOptionsBulletsList } = require("%scripts/weaponry/bulletsInfo.nut")
+let { setUnitLastBullets,
+        getOptionsBulletsList } = require("%scripts/weaponry/bulletsInfo.nut")
 let unitTypes = require("%scripts/unit/unitTypesList.nut")
 let { bombNbr } = require("%scripts/unit/unitStatus.nut")
 let { saveProfile } = require("%scripts/clientState/saveProfile.nut")
@@ -86,11 +87,6 @@ let { setLastSkin, getAutoSkin, getSkinsOption
 } = require("%scripts/customization/skins.nut")
 let { isStringInteger, isStringFloat, toUpper, stripTags } = require("%sqstd/string.nut")
 let { getUrlOrFileMissionMetaInfo } = require("%scripts/missions/missionsUtils.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings, loadLocalByAccount, saveLocalByAccount
-} = require("%scripts/clientState/localProfile.nut")
-let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
-let { getCountryFlagsPresetName, getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
-let { isChineseHarmonized } = require("%scripts/langUtils/language.nut")
 
 ::BOMB_ASSAULT_FUSE_TIME_OPT_VALUE <- -1
 const SPEECH_COUNTRY_UNIT_VALUE = 2
@@ -546,8 +542,6 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
       fillBoolOption(descr, "fixGunInMouseLook", OPTION_FIX_GUN_IN_MOUSE_LOOK); break;
     case USEROPT_ENABLE_SOUND_SPEED:
       fillBoolOption(descr, "enableSoundSpeed", OPTION_ENABLE_SOUND_SPEED); break;
-    case USEROPT_VWS_ONLY_IN_COCKPIT:
-      fillBoolOption(descr, "vwsOnlyInCockpit", OPTION_VWS_ONLY_IN_COCKPIT); break;
     case USEROPT_PITCH_BLOCKER_WHILE_BRACKING:
       fillBoolOption(descr, "pitchBlockerWhileBraking", OPTION_PITCH_BLOCKER_WHILE_BRACKING); break;
     case USEROPT_SAVE_DIR_WHILE_SWITCH_TRIGGER:
@@ -587,11 +581,11 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
 
     case USEROPT_BOMB_ACTIVATION_TIME:
       let diffCode = context?.diffCode ?? ::get_difficulty_by_ediff(::get_mission_mode()).diffCode
-      let bombActivationType = loadLocalAccountSettings($"useropt/bomb_activation_type/{diffCode}",
+      let bombActivationType = ::load_local_account_settings($"useropt/bomb_activation_type/{diffCode}",
         ::get_option_bomb_activation_type())
       let isBombActivationAssault = bombActivationType == BOMB_ACT_ASSAULT
       let assaultFuseTime = ::get_bomb_activation_auto_time()
-      let bombActivationTime = max(loadLocalAccountSettings(
+      let bombActivationTime = max(::load_local_account_settings(
         $"useropt/bomb_activation_time/{diffCode}",
           ::get_option_bomb_activation_time()), assaultFuseTime)
 
@@ -726,7 +720,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
       descr.values = [0, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
       if (::aircraft_for_weapons)
         descr.value = u.find_in_array(descr.values, get_unit_option(::aircraft_for_weapons, USEROPT_ROCKET_FUSE_DIST), null)
-      if (!is_numeric(descr.value))
+      if (!::is_numeric(descr.value))
         descr.value = u.find_in_array(descr.values, ::get_option_rocket_fuse_dist(), null)
       defaultValue = 0
       break
@@ -742,7 +736,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
       }
       if (::aircraft_for_weapons)
         descr.value = u.find_in_array(descr.values, get_unit_option(::aircraft_for_weapons, USEROPT_TORPEDO_DIVE_DEPTH), null)
-      if (!is_numeric(descr.value))
+      if (!::is_numeric(descr.value))
         descr.value = u.find_in_array(descr.values, ::get_option_torpedo_dive_depth(), null)
       defaultValue = 0
       break
@@ -1364,9 +1358,6 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
     case USEROPT_VOLUME_VWS:
       fillSoundDescr(descr, SND_TYPE_VWS, "volume_vws")
       break
-    case USEROPT_VOLUME_RWR:
-      fillSoundDescr(descr, SND_TYPE_RWR, "volume_rwr")
-      break
     case USEROPT_VOLUME_TINNITUS:
       fillSoundDescr(descr, SND_TYPE_TINNITUS, "volume_tinnitus")
       break
@@ -1457,9 +1448,18 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
 
     case USEROPT_CLIME:
       descr.id = "weather"
-      descr.values = ["clear", "good", "hazy", "mist", "thin_clouds", "cloudy_windy", "cloudy",
-        "overcast", "poor", "blind", /*"shower"*/ "rain", "thunder"]
-      descr.items = descr.values.map(getWeatherLocName)
+      descr.items = ["#options/weatherclear",
+                     "#options/weathergood",
+                     "#options/weatherhazy",
+                     "#options/weatherthinclouds",
+                     "#options/weathercloudy",
+                     "#options/weatherpoor",
+                     "#options/weatherblind",
+//                     "#options/weathershower",
+                     "#options/weatherrain",
+                     "#options/weatherstorm"
+                    ]
+      descr.values = ["clear", "good", "hazy", "thin_clouds", "cloudy", "poor", "blind", /*"shower"*/ "rain", "thunder"]
       defaultValue = "cloudy"
       if (::SessionLobby.isInRoom())
         prevValue = ::SessionLobby.getMissionParam("weather", null)
@@ -2596,7 +2596,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
         let isEnabled = (allowedMask & (1 << nc)) != 0
         descr.items.append({
           text = "#" + country
-          image = getCountryIcon(country, true)
+          image = ::get_country_icon(country, true)
           enabled = isEnabled
           isVisible = isEnabled
         })
@@ -2626,8 +2626,8 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
       foreach (idx, countriesSet in (context?.countriesSetList ?? [])) {
         descr.items.append({
           text = loc("country/VS")
-          images = countriesSet.countries[0].map(@(c) { image = getCountryIcon(c) })
-          imagesAfterText = countriesSet.countries[1].map(@(c) { image = getCountryIcon(c) })
+          images = countriesSet.countries[0].map(@(c) { image = ::get_country_icon(c) })
+          imagesAfterText = countriesSet.countries[1].map(@(c) { image = ::get_country_icon(c) })
           textStyle = "margin:t='3@blockInterval, 0';"
         })
         descr.values.append(idx)
@@ -2769,7 +2769,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
 
       if (!descr.values.len())
         for (local i = 1; i <= ::max_country_rank; i++) {
-          descr.items.append(loc("shop/age/num", { num = get_roman_numeral(i) }))
+          descr.items.append(loc("shop/age/num", { num = ::get_roman_numeral(i) }))
           descr.values.append(i)
         }
       break
@@ -2794,7 +2794,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
       descr.items = []
       descr.values = []
       for (local i = 1; i <= ::max_country_rank; i++) {
-        descr.items.append(get_roman_numeral(i))
+        descr.items.append(::get_roman_numeral(i))
         descr.values.append(i)
       }
       break
@@ -2917,7 +2917,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
           }
 
           local text = "#" + c
-          local image = getCountryIcon(c, true)
+          local image = ::get_country_icon(c, true)
           local enabled = false
           local tooltip = ""
 
@@ -2928,7 +2928,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
               assert(false, ("Not found unlock " + countryId))
             else {
               text = "#country_" + ::current_campaign.countries[i]
-              image = getCountryIcon($"country_{::current_campaign.countries[i]}", true)
+              image = ::get_country_icon("country_" + ::current_campaign.countries[i], true)
               enabled = isUnlockOpened(countryId, UNLOCKABLE_DYNCAMPAIGN)
               tooltip = enabled ? "" : getFullUnlockDesc(::build_conditions_config(unlock))
             }
@@ -3079,9 +3079,9 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
           }
         }
 
-        if (!is_numeric(prevValue)) {
+        if (!::is_numeric(prevValue)) {
           prevValue = get_gui_option(USEROPT_LOAD_FUEL_AMOUNT);
-          if (!is_numeric(prevValue))
+          if (!::is_numeric(prevValue))
             prevValue = -1
         }
 
@@ -3213,7 +3213,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
                           && (!event || ::events.isCountryAvailable(event, country))
           descr.items.append({
             text = "#" + country
-            image = getCountryIcon(country, true, !enabled)
+            image = ::get_country_icon(country, true, !enabled)
             enabled = enabled
           })
           descr.values.append(country)
@@ -3831,7 +3831,7 @@ let fillSoundDescr = @(descr, sndType, id, title = null) descr.__update(
       for (local rank = 0; rank <= ::max_country_rank; ++rank) {
         descr.values.append(format("option_%s", rank.tostring()))
         descr.items.append({
-          text = (rank == 0 ? loc("clan/membRequirementsRankAny") : get_roman_numeral(rank))
+          text = (rank == 0 ? loc("clan/membRequirementsRankAny") : ::get_roman_numeral(rank))
         })
       }
       descr.value = u.find_in_array(descr.values, "option_0")
@@ -4320,8 +4320,8 @@ let function set_option(optionId, value, descr = null) {
       let bombActivationType = isBombActivationAssault ? BOMB_ACT_ASSAULT : BOMB_ACT_TIME
       ::set_option_bomb_activation_type(bombActivationType)
       ::set_option_bomb_activation_time(bombActivationDelay)
-      saveLocalAccountSettings($"useropt/bomb_activation_time/{descr.diffCode}", bombActivationDelay)
-      saveLocalAccountSettings($"useropt/bomb_activation_type/{descr.diffCode}", bombActivationType)
+      ::save_local_account_settings($"useropt/bomb_activation_time/{descr.diffCode}", bombActivationDelay)
+      ::save_local_account_settings($"useropt/bomb_activation_type/{descr.diffCode}", bombActivationType)
       break
     case USEROPT_BOMB_SERIES:
       ::set_option_bombs_series(descr.values[value])
@@ -4508,7 +4508,7 @@ let function set_option(optionId, value, descr = null) {
 
     case USEROPT_DELAYED_DOWNLOAD_CONTENT:
       ::set_option_delayed_download_content(value)
-      saveLocalAccountSettings("delayDownloadContent", value)
+      ::save_local_account_settings("delayDownloadContent", value)
       break
 
     case USEROPT_REPLAY_SNAPSHOT_ENABLED:
@@ -4671,9 +4671,6 @@ let function set_option(optionId, value, descr = null) {
       break
     case USEROPT_VOLUME_VWS:
       set_sound_volume(SND_TYPE_VWS, value / 100.0, true)
-      break
-    case USEROPT_VOLUME_RWR:
-      set_sound_volume(SND_TYPE_RWR, value / 100.0, true)
       break
     case USEROPT_VOLUME_TINNITUS:
       set_sound_volume(SND_TYPE_TINNITUS, value / 100.0, true)
@@ -5074,13 +5071,8 @@ let function set_option(optionId, value, descr = null) {
       if (optionIdx >= 0 && u.isBool(value))
         set_option_bool(optionIdx, value)
       break
-    case USEROPT_VWS_ONLY_IN_COCKPIT:
-      let optionIdx = getTblValue("boolOptionIdx", descr, -1)
-      if (optionIdx >= 0 && u.isBool(value))
-        set_option_bool(optionIdx, value)
-      break
 
-     case USEROPT_COMMANDER_CAMERA_IN_VIEWS:
+    case USEROPT_COMMANDER_CAMERA_IN_VIEWS:
       ::set_commander_camera_in_views(value)
       break
 
@@ -5501,7 +5493,7 @@ let function set_option(optionId, value, descr = null) {
 }
 
 ::get_current_wnd_difficulty <- function get_current_wnd_difficulty() {
-  let diffCode = loadLocalByAccount("wnd/diffMode", ::get_current_shop_difficulty().diffCode)
+  let diffCode = ::loadLocalByAccount("wnd/diffMode", ::get_current_shop_difficulty().diffCode)
   local diff = ::g_difficulty.getDifficultyByDiffCode(diffCode)
   if (!diff.isAvailable())
     diff = ::g_difficulty.ARCADE
@@ -5509,7 +5501,7 @@ let function set_option(optionId, value, descr = null) {
 }
 
 ::set_current_wnd_difficulty <- function set_current_wnd_difficulty(mode = 0) {
-  saveLocalByAccount("wnd/diffMode", mode)
+  ::saveLocalByAccount("wnd/diffMode", mode)
 }
 
 ::create_options_container <- function create_options_container(name, options, is_centered, columnsRatio = 0.5, absolutePos = true, context = null, hasTitle = true) {
@@ -5683,7 +5675,7 @@ local unitsImgPreset = null
   if (unitsImgPreset == null) {
     unitsImgPreset = {}
     let guiBlk = GUI.get()
-    let blk = guiBlk?.units_presets?[getCountryFlagsPresetName()]
+    let blk = guiBlk?.units_presets?[::get_country_flags_preset()]
     if (blk)
       for (local i = 0; i < blk.paramCount(); i++)
         unitsImgPreset[blk.getParamName(i)] <- blk.getParamValue(i)
@@ -5694,7 +5686,7 @@ local unitsImgPreset = null
 
 ::is_harmonized_unit_image_reqired <- function is_harmonized_unit_image_reqired(unit) {
   return unit.shopCountry == "country_japan" && unit.unitType == unitTypes.AIRCRAFT
-    && isChineseHarmonized()
+    && ::is_chinese_harmonized()
 }
 
 return {

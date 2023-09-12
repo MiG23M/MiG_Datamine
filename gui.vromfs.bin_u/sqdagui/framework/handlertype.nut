@@ -1,4 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
 
 enum handlerType {
   ROOT    //root handler dosn't destroy on switch between base handlers. Share object where to create base handlers

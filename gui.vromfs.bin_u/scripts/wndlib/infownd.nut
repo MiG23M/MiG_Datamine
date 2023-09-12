@@ -3,8 +3,7 @@ from "%scripts/dagui_library.nut" import *
 
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
+
 let subscriptions = require("%sqStdLibs/helpers/subscriptions.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -64,15 +63,15 @@ gui_handlers.InfoWnd <- class extends ::BaseGuiHandler {
   }
 
   static function canShowAgain(chkId) {
-    return !chkId || loadLocalAccountSettings(INFO_WND_SAVE_PATH + "/" + chkId, true)
+    return !chkId || ::load_local_account_settings(INFO_WND_SAVE_PATH + "/" + chkId, true)
   }
 
   static function setCanShowAgain(chkId, isCanShowAgain) {
-    saveLocalAccountSettings(INFO_WND_SAVE_PATH + "/" + chkId, isCanShowAgain)
+    ::save_local_account_settings(INFO_WND_SAVE_PATH + "/" + chkId, isCanShowAgain)
   }
 
   static function clearAllSaves() {
-    saveLocalAccountSettings(INFO_WND_SAVE_PATH, null)
+    ::save_local_account_settings(INFO_WND_SAVE_PATH, null)
   }
 
   function initScreen() {

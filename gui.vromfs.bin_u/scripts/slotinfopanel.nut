@@ -1,7 +1,6 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
+
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -113,7 +112,7 @@ let class SlotInfoPanel extends gui_handlers.BaseGuiHandlerWT {
       this.updateUnitIcon(unit)
 
       let savedIndex = ::g_login.isProfileReceived() ?
-        loadLocalAccountSettings(this.configSavePath, 0) : 0
+        ::load_local_account_settings(this.configSavePath, 0) : 0
       this.listboxObj.setValue(min(savedIndex, showTabsCount - 1))
       this.updateContentVisibility()
 
@@ -174,7 +173,7 @@ let class SlotInfoPanel extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onShowExtendedHintsChange(obj) {
-    saveLocalAccountSettings("dmViewer/needShowExtHints", obj.getValue())
+    ::save_local_account_settings("dmViewer/needShowExtHints", obj.getValue())
     ::dmViewer.resetXrayCache()
   }
 
@@ -200,7 +199,7 @@ let class SlotInfoPanel extends gui_handlers.BaseGuiHandlerWT {
     this.showSceneBtn("slot_info_content", ! isPanelHidden)
     this.updateVisibleTabContent(true)
     if (::g_login.isProfileReceived())
-      saveLocalAccountSettings(this.configSavePath, currentIndex)
+      ::save_local_account_settings(this.configSavePath, currentIndex)
   }
 
   function updateVisibleTabContent(isTabSwitch = false) {

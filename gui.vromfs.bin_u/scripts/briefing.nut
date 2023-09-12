@@ -18,7 +18,6 @@ let { dynamicSetTakeoffMode } = require("dynamicMission")
 let { restartCurrentMission } = require("%scripts/missions/missionsUtilsModule.nut")
 let { registerPersistentData } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
 let { isHostInRoom } = require("%scripts/matching/serviceNotifications/mrooms.nut")
-let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
 
 let backFromBriefingParams = persist("backFromBriefingParams", @() Watched({ globalFunctionName = "gui_start_mainmenu"}))
 
@@ -119,7 +118,7 @@ let backFromBriefingParams = persist("backFromBriefingParams", @() Watched({ glo
       if (!isHostInRoom())
         ::SessionLobby.continueCoopWithSquad(::mission_settings);
       else
-        scene_msg_box("wait_host_leave", null, loc("msgbox/please_wait"),
+        ::scene_msg_box("wait_host_leave", null, loc("msgbox/please_wait"),
           [["cancel", function() {}]], "cancel",
             {
               cancel_fn = function() { ::SessionLobby.continueCoopWithSquad(::mission_settings); },
@@ -338,7 +337,7 @@ let function get_mission_desc_text(missionBlk) {
 
   let sm_weather = missionBlk.getStr("weather", "")
   if (sm_weather != "")
-    descrAdd += (descrAdd != "" ? "; " : "") + getWeatherLocName(sm_weather)
+    descrAdd += (descrAdd != "" ? "; " : "") + loc("options/weather" + sm_weather)
 
   let aircraft = missionBlk.getStr("player_class", "")
   if (aircraft != "") {
@@ -743,7 +742,7 @@ gui_handlers.Briefing <- class extends gui_handlers.GenericOptions {
 
       let guihandler = this
       local nextFunc = function() {
-          get_gui_scene().performDelayed(guihandler, function() {
+          ::get_gui_scene().performDelayed(guihandler, function() {
             ::show_gui(true);
             this.applyOptions()
           })

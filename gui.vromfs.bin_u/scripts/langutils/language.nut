@@ -53,20 +53,6 @@ let function getShortName() {
   return curLangShortName.value
 }
 
-let isChineseHarmonized = @() getLanguageName() == "HChinese" //we need to check language too early when get_language from profile not work
-
-let isVietnameseVersion = @() getLanguageName() == "Vietnamese" //we need to check language too early when get_language from profile not work
-
-let function isChineseVersion() {
-  let language = getLanguageName()
-  return language == "Chinese"
-    || language == "TChinese"
-    || language == "Korean"
-}
-
-let canSwitchGameLocalization = @() !isPlatformSony && !isPlatformXboxOne
-  && !isChineseHarmonized() && !isVietnameseVersion()
-
 let function _addLangOnce(id, icon = null, chatId = null, hasUnitSpeech = null, isDev = false) {
   if (id in langsById)
     return
@@ -104,7 +90,7 @@ let function checkInitList() {
   let existingLangs = ttBlk % "lang"
 
   let guiBlk = GUI.get()
-  let blockName = isVietnameseVersion() ? "vietnam" : "default"
+  let blockName = ::is_vietnamese_version() ? "vietnam" : "default"
   let preset = guiBlk?.game_localization[blockName] ?? DataBlock()
   for (local l = 0; l < preset.blockCount(); l++) {
     let lang = preset.getBlock(l)
@@ -198,6 +184,10 @@ saveLanguage(::get_settings_blk()?.language ?? ::get_settings_blk()?.game_start?
 
   ::check_localization_package_and_ask_download()
   needCheckLangPack = false
+}
+
+::canSwitchGameLocalization <- function canSwitchGameLocalization() {
+  return !isPlatformSony && !isPlatformXboxOne && !::is_chinese_harmonized() && !::is_vietnamese_version()
 }
 
 ::g_language.getEmptyLangInfo <- function getEmptyLangInfo() {
@@ -310,8 +300,4 @@ register_command(@() ::g_language.reload(), "ui.language_reload")
 return {
   currentLanguageW
   curLangShortName
-  isChineseHarmonized
-  isVietnameseVersion
-  isChineseVersion
-  canSwitchGameLocalization
 }

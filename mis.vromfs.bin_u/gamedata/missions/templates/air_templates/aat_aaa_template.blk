@@ -414,20 +414,9 @@
           "comment": {
             "value": ""
           },
-          "varSetString": {
-            "value": "t1_def_aaa_squad",
-            "var": "aat_t1_aaa_squad_name"
-          },
-          "varSetString": {
-            "value": "t2_def_aaa_squad",
-            "var": "aat_t2_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
           "triggerEnable": {
-            "target": "aat_t1_rlc_check_default_name",
-            "target": "aat_t2_rlc_check_default_name"
+            "target": "aat_t1_check_rlc_enemy_near",
+            "target": "aat_t2_check_rlc_enemy_near"
           }
         },
         "else_actions": {
@@ -436,344 +425,6 @@
           },
           "triggerDisable": {
             "target": "aat_rlc_logic_turn_on"
-          }
-        }
-      },
-      "aat_t1_rlc_check_default_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t1_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_check_rlc_enemy_near",
-            "target": "aat_t1_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "t1_def_aaa_top_squad",
-            "var": "aat_t1_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_rlc_check_top_name"
-          }
-        }
-      },
-      "aat_t1_rlc_check_top_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t1_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_check_rlc_enemy_near",
-            "target": "aat_t1_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "t1_def_aaa_high_squad",
-            "var": "aat_t1_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_rlc_check_high_name"
-          }
-        }
-      },
-      "aat_t1_rlc_check_high_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t1_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_check_rlc_enemy_near",
-            "target": "aat_t1_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "ft_t1_aaa_squad",
-            "var": "aat_t1_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_rlc_check_ec_name"
-          }
-        }
-      },
-      "aat_t1_rlc_check_ec_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t1_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t1_check_rlc_enemy_near",
-            "target": "aat_t1_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerDisable": {
-            "target": "aat_t1_rlc_check_ec_name"
-          }
-        }
-      },
-      "aat_t2_rlc_check_default_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t2_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t2_check_rlc_enemy_near",
-            "target": "aat_t2_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "t2_def_aaa_top_squad",
-            "var": "aat_t2_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t2_rlc_check_top_name"
-          }
-        }
-      },
-      "aat_t2_rlc_check_top_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t2_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t2_check_rlc_enemy_near",
-            "target": "aat_t2_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "t2_def_aaa_high_squad",
-            "var": "aat_t2_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t2_rlc_check_high_name"
-          }
-        }
-      },
-      "aat_t2_rlc_check_high_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t2_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t2_check_rlc_enemy_near",
-            "target": "aat_t2_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "ft_t2_aaa_squad",
-            "var": "aat_t2_aaa_squad_name"
-          },
-          "comment": {
-            "value": ""
-          },
-          "triggerDisable": {
-            "target": "aat_t2_rlc_check_high_name"
-          }
-        }
-      },
-      "aat_t2_rlc_check_ec_name": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 0.0
-          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@aat_t2_aaa_squad_name",
-            "type": "squad"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerEnable": {
-            "target": "aat_t2_check_rlc_enemy_near",
-            "target": "aat_t2_check_rlc_enemy_far"
-          }
-        },
-        "else_actions": {
-          "comment": {
-            "value": ""
-          },
-          "triggerDisable": {
-            "target": "aat_t2_rlc_check_ec_name"
           }
         }
       },
@@ -791,31 +442,30 @@
           }
         },
         "conditions": {
-          "unitDistanceBetween": {
-            "value": 15000.0,
-            "math": "2D",
+          "unitWhenEnemyNear": {
             "object_type": "isActive",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
-            "target_type": "isActive",
-            "target_marking": 0,
+            "object_var_value": 0,
+            "enemy_type": "isActive",
+            "distance": 15000.0,
             "check_objects": "any",
-            "check_targets": "any",
-            "object": "@aat_t1_aaa_squad_name",
-            "target": "t2_players_squad",
-            "compareCenters": false,
-            "check_all_units": true
+            "object": "t1_def_aaa_squad"
           }
         },
         "actions": {
           "unitSetProperties": {
-            "object": "@aat_t1_aaa_squad_name",
-            "useForTriggerFiltered": true,
+            "object": "t1_def_aaa_squad",
             "useSearchRadar": true
           }
         },
-        "else_actions": {        }
+        "else_actions": {
+          "unitSetProperties": {
+            "object": "t1_def_aaa_squad",
+            "useSearchRadar": false
+          }
+        }
       },
       "aat_t2_check_rlc_enemy_near": {
         "is_enabled": false,
@@ -831,109 +481,30 @@
           }
         },
         "conditions": {
-          "unitDistanceBetween": {
-            "value": 15000.0,
-            "math": "2D",
+          "unitWhenEnemyNear": {
             "object_type": "isActive",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
-            "target_type": "isActive",
-            "target_marking": 0,
+            "object_var_value": 0,
+            "enemy_type": "isActive",
+            "distance": 15000.0,
             "check_objects": "any",
-            "check_targets": "any",
-            "object": "@aat_t2_aaa_squad_name",
-            "target": "t1_players_squad",
-            "compareCenters": false,
-            "check_all_units": true
+            "object": "t2_def_aaa_squad"
           }
         },
         "actions": {
           "unitSetProperties": {
-            "object": "@aat_t2_aaa_squad_name",
+            "object": "t2_def_aaa_squad",
             "useSearchRadar": true
           }
         },
-        "else_actions": {        }
-      },
-      "aat_t1_check_rlc_enemy_far": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": true
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 1.0
-          }
-        },
-        "conditions": {
-          "unitDistanceBetween": {
-            "value": 15000.0,
-            "math": "notNear2D",
-            "object_type": "isActive",
-            "object_marking": 0,
-            "object_var_name": "",
-            "object_var_comp_op": "equal",
-            "target_type": "isActive",
-            "target_marking": 0,
-            "check_objects": "any",
-            "check_targets": "all",
-            "object": "@aat_t1_aaa_squad_name",
-            "target": "t2_players_squad",
-            "compareCenters": false,
-            "check_all_units": true
-          }
-        },
-        "actions": {
+        "else_actions": {
           "unitSetProperties": {
-            "object": "@aat_t1_aaa_squad_name",
-            "useForTriggerFiltered": true,
+            "object": "t2_def_aaa_squad",
             "useSearchRadar": false
           }
-        },
-        "else_actions": {        }
-      },
-      "aat_t2_check_rlc_enemy_far": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": true
-        },
-        "events": {
-          "periodicEvent": {
-            "time": 1.0
-          }
-        },
-        "conditions": {
-          "unitDistanceBetween": {
-            "value": 15000.0,
-            "math": "notNear2D",
-            "object_type": "isActive",
-            "object_marking": 0,
-            "object_var_name": "",
-            "object_var_comp_op": "equal",
-            "target_type": "isActive",
-            "target_marking": 0,
-            "check_objects": "any",
-            "check_targets": "all",
-            "object": "@aat_t2_aaa_squad_name",
-            "target": "t1_players_squad",
-            "compareCenters": false,
-            "check_all_units": true
-          }
-        },
-        "actions": {
-          "unitSetProperties": {
-            "object": "@aat_t2_aaa_squad_name",
-            "useSearchRadar": false
-          }
-        },
-        "else_actions": {        }
+        }
       }
     }
   },
@@ -942,9 +513,7 @@
     "is_enabled": true
   },
   "variables": {
-    "aat_matching_rank": 0,
-    "aat_t1_aaa_squad_name": "",
-    "aat_t2_aaa_squad_name": ""
+    "aat_matching_rank": 0
   },
   "dialogs": {  },
   "airfields": {  },

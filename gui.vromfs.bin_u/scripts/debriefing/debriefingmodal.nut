@@ -60,7 +60,7 @@ let { dynamicGetLayout, dynamicGetList } = require("dynamicMission")
 let { refreshUserstatUnlocks } = require("%scripts/userstat/userstat.nut")
 let { getUnlockById } = require("%scripts/unlocks/unlocksCache.nut")
 let { stripTags, toUpper } = require("%sqstd/string.nut")
-let { reqUnlockByClient, canDoUnlock } = require("%scripts/unlocks/unlocksModule.nut")
+let { reqUnlockByClient } = require("%scripts/unlocks/unlocksModule.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { sendFinishTestFlightToBq } = require("%scripts/missionBuilder/testFlightBQInfo.nut")
 let { isBattleTask, isSpecialBattleTask, isBattleTasksAvailable, isBattleTaskDone,
@@ -70,12 +70,6 @@ let { isBattleTask, isSpecialBattleTask, isBattleTasksAvailable, isBattleTaskDon
 } = require("%scripts/unlocks/battleTasks.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
-let { regionalUnlocks } = require("%scripts/unlocks/regionalUnlocks.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings, loadLocalByAccount, saveLocalByAccount
-} = require("%scripts/clientState/localProfile.nut")
-let { add_msg_box, update_msg_boxes } = require("%sqDagui/framework/msgBox.nut")
-let { blendProp } = require("%sqDagui/guiBhv/bhvBasic.nut")
-let { create_ObjMoveToOBj } = require("%sqDagui/guiBhv/bhvAnim.nut")
 
 const DEBR_LEADERBOARD_LIST_COLUMNS = 2
 const DEBR_AWARDS_LIST_COLUMNS = 3
@@ -120,9 +114,9 @@ let statTooltipColumnParamByType = {
 ::gui_start_debriefing_replay <- function gui_start_debriefing_replay() {
   ::gui_start_debriefing()
 
-  add_msg_box("replay_question", loc("mainmenu/questionSaveReplay"), [
+  ::add_msg_box("replay_question", loc("mainmenu/questionSaveReplay"), [
         ["yes", function() {
-          let guiScene = get_gui_scene()
+          let guiScene = ::get_gui_scene()
           guiScene.performDelayed(getroottable(), function() {
             if (::debriefing_handler != null) {
               ::debriefing_handler.onSaveReplay(null)
@@ -131,21 +125,21 @@ let statTooltipColumnParamByType = {
         }],
         ["no", function() { if (::debriefing_handler != null) ::debriefing_handler.onSelect(null) } ],
         ["viewAgain", function() {
-          let guiScene = get_gui_scene()
+          let guiScene = ::get_gui_scene()
           guiScene.performDelayed(getroottable(), function() {
             if (::debriefing_handler != null)
               ::debriefing_handler.onViewReplay(null)
           })
         }]
         ], "yes")
-  update_msg_boxes()
+  ::update_msg_boxes()
 }
 
 ::gui_start_debriefing <- function gui_start_debriefing() {
   if (needLogoutAfterSession.value) {
     ::destroy_session_scripted("on needLogoutAfterSession from gui_start_debriefing")
     //need delay after destroy session before is_multiplayer become false
-    get_gui_scene().performDelayed(getroottable(), startLogout)
+    ::get_gui_scene().performDelayed(getroottable(), startLogout)
     return
   }
 
@@ -349,9 +343,9 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
           resReward = "".concat(loc("debriefing/MissionWinReward"), loc("ui/colon"), victoryBonus)
 
         let currentMajorVersion = get_game_version() >> 16
-        let lastWinVersion = loadLocalAccountSettings(LAST_WON_VERSION_SAVE_ID, 0)
+        let lastWinVersion = ::load_local_account_settings(LAST_WON_VERSION_SAVE_ID, 0)
         this.isFirstWinInMajorUpdate = currentMajorVersion > lastWinVersion
-        saveLocalAccountSettings(LAST_WON_VERSION_SAVE_ID, currentMajorVersion)
+        ::save_local_account_settings(LAST_WON_VERSION_SAVE_ID, currentMajorVersion)
       }
       else if (mpResult == STATS_RESULT_FAIL) {
         resTitle = loc("MISSION_FAIL")
@@ -380,9 +374,8 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
 
     this.gatherAwardsLists()
 
-    let hasDoableRegionalUnlock = regionalUnlocks.value.findindex(@(r) canDoUnlock(r)) != null
     let hasChallengeAward = this.challengesAwardsList.len() > 0
-    if (hasChallengeAward || hasDoableRegionalUnlock)
+    if (hasChallengeAward)
       refreshUserstatUnlocks()
 
     //update mp table
@@ -914,7 +907,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
     if (this.skipAnim)
       newValue = targetValue
     else
-      newValue = blendProp(newSliderObj.getValue(), targetValue, this.statsTime, dt).tointeger()
+      newValue = ::blendProp(newSliderObj.getValue(), targetValue, this.statsTime, dt).tointeger()
 
     newSliderObj.setValue(newValue)
   }
@@ -1115,7 +1108,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
 
       if (!this.skipAnim) {
         let objStart = this.scene.findObject("start_bonus_place")
-        create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = this.statsBonusTime })
+        ::create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = this.statsBonusTime })
         this.guiScene.playSound("deb_medal")
       }
     }
@@ -1266,7 +1259,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
 
       local nextValue = 0
       if (!this.skipAnim) {
-        nextValue = blendProp(row.curValues[p], targetValue, row.isOverall ? this.totalStatsTime : this.statsTime, dt)
+        nextValue = ::blendProp(row.curValues[p], targetValue, row.isOverall ? this.totalStatsTime : this.statsTime, dt)
         if (nextValue != targetValue)
           finished = false
         if (p != "value" || !isInArray(row.rowType, ["mul", "tim", "pct", "ptm", "tnt"]))
@@ -1330,7 +1323,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
     foreach (p in [ "exp", "wp", "expTeaser", "wpTeaser" ])
       if (this.totalCurValues[p] != this.totalTarValues[p]) {
         this.totalCurValues[p] = this.skipAnim ? this.totalTarValues[p] :
-          blendProp(this.totalCurValues[p], this.totalTarValues[p], this.totalStatsTime, dt).tointeger()
+          ::blendProp(this.totalCurValues[p], this.totalTarValues[p], this.totalStatsTime, dt).tointeger()
 
         let obj = this.totalObj.findObject(p)
         if (checkObj(obj)) {
@@ -2003,7 +1996,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
     if (!this.skipAnim) {
       let objStart = this.scene.findObject(this.currentAwardsListConfig.startplaceObId)
       let objTarget = obj.findObject("move_part")
-      create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = this.awardFlyTime })
+      ::create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = this.awardFlyTime })
 
       obj["_size-timer"] = "0"
       obj.width = "0"
@@ -2123,7 +2116,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
 
     if (!this.skipAnim && hasPlace) {
       let objStart = this.scene.findObject("my_place_move_box_start")
-      create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = this.myPlaceTime })
+      ::create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = this.myPlaceTime })
     }
   }
 
@@ -2182,7 +2175,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
     let filters = ::HudBattleLog.getFilters()
 
     if (filterIdx == null) {
-      filterIdx = loadLocalByAccount("wnd/battleLogFilterDebriefing", 0)
+      filterIdx = ::loadLocalByAccount("wnd/battleLogFilterDebriefing", 0)
 
       let obj = this.scene.findObject("battle_log_filter")
       if (checkObj(obj)) {
@@ -2567,7 +2560,7 @@ gui_handlers.DebriefingModal <- class extends gui_handlers.MPStatistics {
     if (!checkObj(obj))
       return
     let filterIdx = obj.getValue()
-    saveLocalByAccount("wnd/battleLogFilterDebriefing", filterIdx)
+    ::saveLocalByAccount("wnd/battleLogFilterDebriefing", filterIdx)
     this.loadBattleLog(filterIdx)
   }
 

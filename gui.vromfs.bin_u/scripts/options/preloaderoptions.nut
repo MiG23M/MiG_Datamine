@@ -3,10 +3,6 @@ from "%scripts/dagui_library.nut" import *
 
 let { addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { getCurLoadingBgData } = require("%scripts/loading/loadingBgData.nut")
-let { isDataBlock } = require("%sqStdLibs/helpers/u.nut")
-let { convertBlk } = require("%sqstd/datablock.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 const BANNED_SCREENS_SAVE_ID = "preloaderOptions/bannedScreens"
 
@@ -19,11 +15,11 @@ let function initOnce() {
 
   isInited = true
 
-  let blk = loadLocalAccountSettings(BANNED_SCREENS_SAVE_ID, null)
-  if (!isDataBlock(blk))
+  let blk = ::load_local_account_settings(BANNED_SCREENS_SAVE_ID, null)
+  if (!blk)
     return
 
-  bannedScreens = convertBlk(blk)
+  bannedScreens = ::buildTableFromBlk(blk)
 
   // validation
   foreach (screenId, _w in getCurLoadingBgData().list)
@@ -31,7 +27,7 @@ let function initOnce() {
       return
 
   bannedScreens.rawdelete(getCurLoadingBgData().reserveBg)
-  saveLocalAccountSettings(BANNED_SCREENS_SAVE_ID, bannedScreens)
+  ::save_local_account_settings(BANNED_SCREENS_SAVE_ID, bannedScreens)
 }
 
 let function invalidateCache() {
@@ -49,7 +45,7 @@ let function toggleLoadingScreenBan(screenId) {
   else
     bannedScreens[screenId] <- true
 
-  saveLocalAccountSettings(BANNED_SCREENS_SAVE_ID, bannedScreens)
+  ::save_local_account_settings(BANNED_SCREENS_SAVE_ID, bannedScreens)
 }
 
 let function isLoadingScreenBanned(screenId) {

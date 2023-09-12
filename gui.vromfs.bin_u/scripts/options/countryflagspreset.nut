@@ -1,24 +1,35 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
+
+let { loadOnce } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
+
 let { add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
+loadOnce("%scripts/options/bhvHarmonizedImage.nut")
 let { eachParam } = require("%sqstd/datablock.nut")
 let { GUI } = require("%scripts/utils/configs.nut")
 let DataBlock = require("DataBlock")
-let { isVietnameseVersion, isChineseVersion } = require("%scripts/langUtils/language.nut")
 
-local countryFlagsPreset = {}
+::country_flags_preset <- {}
 
-let getCountryFlagsPresetName = @() isChineseVersion() ? "chinese"
-  : isVietnameseVersion() ? "vietnam"
-  : "default"
+::get_country_flags_preset <- function get_country_flags_preset() {
+  if (::is_chinese_version())
+    return "chinese"
+  if (::is_vietnamese_version())
+    return "vietnam"
+  return "default"
+}
 
-let getCountryFlagImg = @(id) countryFlagsPreset?[id] ?? ""
+::get_country_flag_img <- function get_country_flag_img(id) {
+  return (id in ::country_flags_preset) ? ::country_flags_preset[id] : ""
+}
 
-let getCountryIcon = @(countryId, big = false, locked = false)
-  getCountryFlagImg($"{countryId}{(big ? "_big" : "")}{(locked ? "_locked" : "")}")
+::get_country_icon <- function get_country_icon(countryId, big = false, locked = false) {
+  let id = countryId + (big ? "_big" : "") + (locked ? "_locked" : "")
+  return ::get_country_flag_img(id)
+}
 
-let function initCountryFlagsPreset() {
+::init_country_flags_preset <- function init_country_flags_preset() {
   let blk = GUI.get()
   if (!blk)
     return
@@ -29,11 +40,11 @@ let function initCountryFlagsPreset() {
   }
 
   let defPreset = "default"
-  let presetsList = [getCountryFlagsPresetName()]
+  let presetsList = [::get_country_flags_preset()]
   if (presetsList[0] != defPreset)
     presetsList.append(defPreset)
 
-  countryFlagsPreset = {}
+  ::country_flags_preset = {}
 
   foreach (blockName in presetsList) {
     let block = texBlk?[blockName]
@@ -41,22 +52,14 @@ let function initCountryFlagsPreset() {
       continue
 
     eachParam(block, function(value, name) {
-      if (!(name in countryFlagsPreset) && type(value) == "string")
-        countryFlagsPreset[name] <- value
+      if (!(name in ::country_flags_preset) && type(value) == "string")
+        ::country_flags_preset[name] <- value
     })
   }
 }
 
-add_event_listener("GameLocalizationChanged", @(_params) initCountryFlagsPreset(),
-  null, ::g_listener_priority.CONFIG_VALIDATION)
+add_event_listener("GameLocalizationChanged", function(_params) {
+    ::init_country_flags_preset()
+  }, null, ::g_listener_priority.CONFIG_VALIDATION)
 
-initCountryFlagsPreset()
-
-let getCountryFlagForUnitTooltip = @(id) $"#ui/images/flags/unit_tooltip/{id}.avif:0:P"
-
-return {
-  getCountryFlagForUnitTooltip
-  getCountryFlagsPresetName
-  getCountryFlagImg
-  getCountryIcon
-}
+::init_country_flags_preset()

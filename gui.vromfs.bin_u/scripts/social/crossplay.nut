@@ -9,8 +9,6 @@ let { check_crossnetwork_communications_permission } = require("%scripts/xbox/pe
 let { crossnetworkPrivilege } = require("%xboxLib/crossnetwork.nut")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_PS4_ONLY_LEADERBOARD
 } = require("%scripts/options/optionsExtNames.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 let PS4_CROSSPLAY_OPT_ID = "ps4CrossPlay"
 let PS4_CROSSNETWORK_CHAT_OPT_ID = "ps4CrossNetworkChat"
@@ -49,7 +47,7 @@ let updateCrossNetworkPlayStatus = function(needOverrideValue = false) {
     return
 
   if (isPlatformSony && hasFeature("PS4CrossNetwork") && ::g_login.isProfileReceived())
-    crossNetworkPlayStatus(loadLocalAccountSettings(PS4_CROSSPLAY_OPT_ID, true))
+    crossNetworkPlayStatus(::load_local_account_settings(PS4_CROSSPLAY_OPT_ID, true))
   else
     crossNetworkPlayStatus(true)
 }
@@ -65,7 +63,7 @@ let setCrossNetworkPlayStatus = function(val) {
     return
 
   resetCrossPlayStatus()
-  saveLocalAccountSettings(PS4_CROSSPLAY_OPT_ID, val)
+  ::save_local_account_settings(PS4_CROSSPLAY_OPT_ID, val)
   updateCrossNetworkPlayStatus()
 }
 
@@ -76,7 +74,7 @@ let updateCrossNetworkChatStatus = function(needOverrideValue = false) {
   if (isPlatformXboxOne)
     crossNetworkChatStatus(check_crossnetwork_communications_permission())
   else if (isPlatformSony && hasFeature("PS4CrossNetwork") && ::g_login.isProfileReceived())
-    crossNetworkChatStatus(loadLocalAccountSettings(PS4_CROSSNETWORK_CHAT_OPT_ID, XBOX_COMMUNICATIONS_ALLOWED))
+    crossNetworkChatStatus(::load_local_account_settings(PS4_CROSSNETWORK_CHAT_OPT_ID, XBOX_COMMUNICATIONS_ALLOWED))
   else
     crossNetworkChatStatus(XBOX_COMMUNICATIONS_ALLOWED)
 }
@@ -94,7 +92,7 @@ let setCrossNetworkChatStatus = function(boolVal) {
 
   let val = boolVal ? XBOX_COMMUNICATIONS_ALLOWED : XBOX_COMMUNICATIONS_BLOCKED
   resetCrossNetworkChatStatus()
-  saveLocalAccountSettings(PS4_CROSSNETWORK_CHAT_OPT_ID, val)
+  ::save_local_account_settings(PS4_CROSSNETWORK_CHAT_OPT_ID, val)
   updateCrossNetworkChatStatus()
 }
 

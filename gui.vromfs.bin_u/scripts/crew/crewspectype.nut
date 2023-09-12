@@ -3,7 +3,6 @@ from "%scripts/dagui_library.nut" import *
 
 let { Cost } = require("%scripts/money.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-let { convertBlk } = require("%sqstd/datablock.nut")
 
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 
@@ -251,7 +250,7 @@ let enums = require("%sqStdLibs/helpers/enums.nut")
   local expUpgradeText = ""
   let totalExp = this.getTotalExpByUnit(unit)
   foreach (i, dataItem in this.getExpUpgradeDiscountData()) {
-    let romanNumeral = get_roman_numeral(i + 1)
+    let romanNumeral = ::get_roman_numeral(i + 1)
     let markerView = {
       markerRatio = dataItem.percent.tofloat() / 100
       markerText = romanNumeral
@@ -271,7 +270,7 @@ let enums = require("%sqStdLibs/helpers/enums.nut")
   }
 
   // Marker at 100% progress.
-  let romanNumeral = get_roman_numeral(view.markers.len() + 1)
+  let romanNumeral = ::get_roman_numeral(view.markers.len() + 1)
   view.markers.append({
     markerRatio = 1
     markerText = romanNumeral
@@ -446,7 +445,7 @@ enums.addTypesByGlobalName("g_crew_spec_type", {
         return discountData
 
       foreach (stageBlk in reduceBlk % "stage")
-        discountData.append(convertBlk(stageBlk))
+        discountData.append(::buildTableFromBlk(stageBlk))
       discountData.sort(function (a, b) {
         let percentA = getTblValue("percent", a, 0)
         let percentB = getTblValue("percent", b, 0)

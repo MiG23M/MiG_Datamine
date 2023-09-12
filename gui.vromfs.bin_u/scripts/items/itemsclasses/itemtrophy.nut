@@ -2,8 +2,11 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { LayersIcon } = require("%scripts/viewUtils/layeredIcon.nut")
+
 let { Cost } = require("%scripts/money.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
+
+
 let DataBlock  = require("DataBlock")
 let { getPrizeChanceLegendMarkup } = require("%scripts/items/prizeChance.nut")
 let { hoursToString, secondsToHours, getTimestampFromStringUtc, calculateCorrectTimePeriodYears,
@@ -11,7 +14,6 @@ let { hoursToString, secondsToHours, getTimestampFromStringUtc, calculateCorrect
 let { getLocIdsArray } = require("%scripts/langUtils/localization.nut")
 let { get_charserver_time_sec } = require("chard")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::items_classes.Trophy <- class extends ::BaseItem {
   static iType = itemType.TROPHY
@@ -368,7 +370,7 @@ let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
   function getContentIconData() {
     if (this.showCountryFlag != "")
       return {
-        contentIcon = getCountryIcon(this.showCountryFlag)
+        contentIcon = ::get_country_icon(this.showCountryFlag)
         contentType = "flag"
       }
 

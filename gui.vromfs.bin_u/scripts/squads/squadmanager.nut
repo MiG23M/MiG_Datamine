@@ -43,14 +43,6 @@ enum squadStatusUpdateState {
   BATTLE
 }
 
-enum msquadErrorId {
-  ALREADY_IN_SQUAD = "ALREADY_IN_SQUAD"
-  NOT_SQUAD_LEADER = "NOT_SQUAD_LEADER"
-  NOT_SQUAD_MEMBER = "NOT_SQUAD_MEMBER"
-  SQUAD_FULL = "SQUAD_FULL"
-  SQUAD_NOT_INVITED = "SQUAD_NOT_INVITED"
-}
-
 const DEFAULT_SQUADS_VERSION = 1
 const SQUAD_REQEST_TIMEOUT = 45000
 
@@ -68,13 +60,6 @@ let SQUAD_SIZE_FEATURES_CHECK = {
 let DEFAULT_SQUAD_PRESENCE = ::g_presence_type.IDLE.getParams()
 let DEFAULT_SQUAD_CHAT_INFO = { name = "", password = "" }
 let DEFAULT_SQUAD_WW_OPERATION_INFO = { id = -1, country = "", battle = null }
-
-let convertIdToInt = @(id) u.isString(id) ? id.tointeger() : id
-
-let requestSquadInfo = @(successCallback, errorCallback = null, requestOptions = null)
-  ::request_matching("msquad.get_info", successCallback, errorCallback, null, requestOptions)
-
-let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_squad", successCallback)
 
 ::g_squad_manager <- {
   [PERSISTENT_DATA_PARAMS] = ["squadData", "meReady", "isMyCrewsReady", "lastUpdateStatus", "state",
@@ -326,7 +311,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
     if (!this.isSquadLeader())
       return
 
-    ::request_matching("msquad.set_squad_data", null, null, this.squadData)
+    ::msquad.setData(this.squadData)
   }
 
   function setPsnSessionId(id = null) {
@@ -492,7 +477,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
     memberData.online = true
     ::updateContact(memberData.getData())
 
-    ::request_matching("msquad.set_member_data", null, null, { userId = ::my_user_id_int64, data })
+    ::msquad.setMyMemberData(::my_user_id_str, data)
     broadcastEvent(squadEvent.DATA_UPDATED)
   }
 
@@ -527,7 +512,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
   function updateInvitedData(invites) {
     let newInvitedData = {}
     foreach (uidInt64 in invites) {
-      if (!is_numeric(uidInt64))
+      if (!::is_numeric(uidInt64))
         continue
 
       let uid = uidInt64.tostring()
@@ -664,7 +649,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     this.setState(squadState.JOINING)
-    ::request_matching("msquad.create_squad", @(_) ::g_squad_manager.requestSquadData(callback))
+    ::msquad.create(function(_response) { ::g_squad_manager.requestSquadData(callback) })
   }
 
   function joinSquadChatRoom() {
@@ -709,7 +694,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     this.setState(squadState.LEAVING)
-    ::request_matching("msquad.disband_squad")
+    ::msquad.disband()
   }
 
   function checkForSquad() {
@@ -740,11 +725,11 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       squadApplications.updateApplicationsList(response?.applications ?? [])
     }
 
-    requestSquadInfo(callback, callback, { showError = false })
+    ::msquad.requestInfo(callback, callback, { showError = false })
   }
 
   function requestSquadData(callback = null) {
-    let fullCallback =  function(response) {
+    let fullCallback = (@(callback) function(response) {
       if ("squad" in response) {
         broadcastEvent(squadEvent.DATA_RECEIVED, response?.squad)
 
@@ -756,9 +741,9 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
 
       if (callback != null)
         callback()
-    }
+    })(callback)
 
-    requestSquadInfo(fullCallback)
+    ::msquad.requestInfo(fullCallback)
   }
 
   function leaveSquad(cb = null) {
@@ -766,12 +751,11 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     this.setState(squadState.LEAVING)
-    leaveSquadImpl(
-      function(_response) {
-        ::g_squad_manager.reset()
-        if (cb)
-          cb()
-      })
+    ::msquad.leave(function(_response) {
+      ::g_squad_manager.reset()
+      if (cb)
+        cb()
+    })
   }
 
   function joinToSquad(uid) {
@@ -779,13 +763,14 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     this.setState(squadState.JOINING)
-    ::request_matching("msquad.join_player",
+    ::msquad.joinPlayerSquad(
+      uid,
       @(_response) ::g_squad_manager.requestSquadData(),
       function(_response) {
         ::g_squad_manager.setState(squadState.NOT_IN_SQUAD)
         ::g_squad_manager.rejectSquadInvite(uid)
-      },
-      { userId = convertIdToInt(uid) })
+      }
+    )
   }
 
   function inviteToSquad(uid, name = null) {
@@ -823,7 +808,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       ::g_squad_manager.requestSquadData()
     }
 
-    ::request_matching("msquad.invite_player", callback, null, { userId = convertIdToInt(uid) })
+    ::msquad.invitePlayer(uid, callback.bindenv(this))
   }
 
   function processDelayedInvitations() {
@@ -857,7 +842,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     let fullCallback = @(_response) ::g_squad_manager.requestSquadData(@() callback?())
-    ::request_matching("msquad.revoke_invite", fullCallback, null, { userId = convertIdToInt(uid) })
+    ::msquad.revokeInvite(uid, fullCallback)
   }
 
   function membershipAplication(sid) {
@@ -910,7 +895,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     if (this.squadData.members?[uid])
-      ::request_matching("msquad.dismiss_member", null, null, { userId = convertIdToInt(uid) })
+      ::msquad.dismissMember(uid)
   }
 
   function dismissFromSquadByName(name) {
@@ -967,7 +952,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
     if (!this.canTransferLeadership(uid))
       return
 
-    ::request_matching("msquad.transfer_squad", null, null, { userId = convertIdToInt(uid) })
+    ::msquad.transferLeadership(uid)
     broadcastEvent(squadEvent.LEADERSHIP_TRANSFER, { uid = uid })
   }
 
@@ -982,20 +967,19 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
       return
 
     this.setState(squadState.JOINING)
-    ::request_matching("msquad.accept_invite",
+    ::msquad.acceptInvite(sid,
       function(_response) {
         this.requestSquadData()
       }.bindenv(this),
       function(_response) {
         this.setState(squadState.NOT_IN_SQUAD)
         this.rejectSquadInvite(sid)
-      }.bindenv(this),
-      { squadId = convertIdToInt(sid) }
+      }.bindenv(this)
     )
   }
 
   function rejectSquadInvite(sid) {
-    ::request_matching("msquad.reject_invite", null, null, { squadId = convertIdToInt(sid) })
+    ::msquad.rejectInvite(sid)
   }
 
   function requestMemberData(uid) {
@@ -1006,7 +990,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
     }
 
     let callback = @(response) ::g_squad_manager.requestMemberDataCallback(uid, response)
-    ::request_matching("msquad.get_member_data", callback, null, { userId = convertIdToInt(uid) })
+    ::msquad.requestMemberData(uid, callback)
   }
 
   function requestMemberDataCallback(uid, response) {
@@ -1191,11 +1175,11 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
     let alreadyInSquad = this.isInSquad()
 
     let newSquadId = resSquadData?.id
-    if (is_numeric(newSquadId)) //bad squad data
+    if (::is_numeric(newSquadId)) //bad squad data
       this.squadData.id = newSquadId.tostring() //!!FIX ME: why this convertion to string?
     else if (!alreadyInSquad) {
       script_net_assert_once("no squad id", "Error: received squad data without squad id")
-      leaveSquadImpl() //leave broken squad
+      ::msquad.leave() //leave broken squad
       this.setState(squadState.NOT_IN_SQUAD)
       return
     }
@@ -1204,7 +1188,7 @@ let leaveSquadImpl = @(successCallback = null) ::request_matching("msquad.leave_
     let newMembersData = {}
     this.membersNames.clear()
     foreach (uidInt64 in resMembers) {
-      if (!is_numeric(uidInt64))
+      if (!::is_numeric(uidInt64))
         continue
 
       let uid = uidInt64.tostring()

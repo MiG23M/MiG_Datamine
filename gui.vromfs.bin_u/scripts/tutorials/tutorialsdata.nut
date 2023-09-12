@@ -10,7 +10,6 @@ let { set_game_mode, get_game_mode } = require("mission")
 let { getUnlockRewardCostByName, isUnlockOpened } = require("%scripts/unlocks/unlocksModule.nut")
 let { getDecoratorByResource } = require("%scripts/customization/decorCache.nut")
 let { USEROPT_DIFFICULTY } = require("%scripts/options/optionsExtNames.nut")
-let { saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 let skipTutorialBitmaskId = "skip_tutorial_bitmask"
 
@@ -296,7 +295,7 @@ let function getSuitableUncompletedTutorialData(unit, diff = -1) {
 }
 
 let function resetTutorialSkip() {
-  saveLocalByAccount(skipTutorialBitmaskId, 0)
+  ::saveLocalByAccount(skipTutorialBitmaskId, 0)
 }
 
 let reqTimeInMode = 60 //req time in mode when no need check tutorial
@@ -350,7 +349,7 @@ let function checkDiffTutorial(diff, unitType, needMsgBox = true, cancelCb = nul
   msgText += "\n<color=@userlogColoredText>" + loc("missions/" + mData.mission.name) + "</color>"
 
   if (needMsgBox)
-    scene_msg_box("req_tutorial_msgbox", null, msgText,
+    ::scene_msg_box("req_tutorial_msgbox", null, msgText,
       [
         ["startTutorial", function() {
           mData.mission.setStr("difficulty", ::get_option(USEROPT_DIFFICULTY).values[diff])

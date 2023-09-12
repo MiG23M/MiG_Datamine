@@ -47,7 +47,7 @@ struct EventFireSystemStartBurnWithOffender
   fireFxId : int
   offender : OffenderData
 
-[cpp_event(unicast, routing=ROUTING_SERVER_TO_CLIENT)]
+[cpp_event(unicast)]
 struct EventFireSystemStartBurnWithOffenderInPos
   partId : PartId
   fireParamsId : int

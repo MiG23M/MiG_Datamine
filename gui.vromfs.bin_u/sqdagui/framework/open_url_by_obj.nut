@@ -1,5 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
-
 let { loc } = require("dagor.localize")
 let { check_obj } = require("%sqDagui/daguiUtil.nut")
 

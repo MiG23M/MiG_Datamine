@@ -12,12 +12,9 @@
   "haveCCRPForBombs": true,
   "haveCCRPForGun": true,
   "ilsElbit967": true,
-  "hmdShelZoom": true,
   "hasMissileCommandLine": false,
   "havePointOfInterestDesignator": true,
   "isBwOpticSight": true,
-  "hasPointOfInterestMemory": true,
-  "needTpsNightVision": true,
   "jetEnginePowerFullScale": true,
   "standardExhaustFxType": "jet_exhaust",
   "afterburnerExhaustFxType": "jet_afterburner_exhaust",
@@ -77,6 +74,9 @@
   "autopilotImpl": "FBW",
   "laserDesignator": true,
   "paratrooper": "usa_irvin_5000_ejection_para",
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -2204,6 +2204,7 @@
           1.0,
           1.0
         ],
+        "cameraFromTargetingPod": true,
         "page": {
           "type": "thermal",
           "turretIdx": 0
@@ -2270,7 +2271,7 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/us_an_apg_68_v_5.blk",
+      "blk": "gameData/sensors/us_an_apg_68_v_7.blk",
       "dmPart": "radar_dm"
     },
     "sensor": {
@@ -2305,8 +2306,8 @@
     },
     "TV": {
       "pos": [
-        2.6,
-        -0.15,
+        0.8,
+        0.3,
         0.0
       ],
       "head": "optic1_turret",
@@ -2348,10 +2349,6 @@
     "preset": {
       "name": "f_16d_block_40_barak_2_aim_9m",
       "blk": "gameData/FlightModels/weaponPresets/f_16d_block_40_barak_2_aim_9m.blk"
-    },
-    "preset": {
-      "name": "f_16d_block_40_barak_2_aim_7",
-      "blk": "gameData/FlightModels/weaponPresets/f_16d_block_40_barak_2_aim_7.blk"
     },
     "preset": {
       "name": "f_16d_block_40_barak_2_mk82",
@@ -2706,22 +2703,6 @@
         }
       },
       "WeaponPreset": {
-        "iconType": "missile_air_to_air_midrange_special",
-        "name": "aim_7m",
-        "reqModification": "us_aim_7m",
-        "ShowNodes": {
-          "node": "pylon2_aim7"
-        },
-        "Weapon": {
-          "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow.blk",
-          "emitter": "aim_7e_001",
-          "bullets": 1,
-          "external": true,
-          "separate": true
-        }
-      },
-      "WeaponPreset": {
         "iconType": "bombs_small_group_x4",
         "name": "ver_mk82",
         "reqModification": "us_500lb_mk82",
@@ -2915,7 +2896,7 @@
         },
         "Weapon": {
           "trigger": "guided bombs",
-          "blk": "gameData/Weapons/BombGuns/us_2000lb_gbu_15v2.blk",
+          "blk": "gameData/Weapons/BombGuns/us_2000lb_gbu_15v1.blk",
           "emitter": "bomb_2000lb_001",
           "bullets": 1,
           "external": true,
@@ -3410,22 +3391,6 @@
         }
       },
       "WeaponPreset": {
-        "iconType": "missile_air_to_air_midrange_special",
-        "name": "aim_7m",
-        "reqModification": "us_aim_7m",
-        "ShowNodes": {
-          "node": "pylon6_aim7"
-        },
-        "Weapon": {
-          "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow.blk",
-          "emitter": "aim_7e_002",
-          "bullets": 1,
-          "external": true,
-          "separate": true
-        }
-      },
-      "WeaponPreset": {
         "iconType": "bombs_small_group_x4",
         "name": "ver_mk82",
         "reqModification": "us_500lb_mk82",
@@ -3619,7 +3584,7 @@
         },
         "Weapon": {
           "trigger": "guided bombs",
-          "blk": "gameData/Weapons/BombGuns/us_2000lb_gbu_15v2.blk",
+          "blk": "gameData/Weapons/BombGuns/us_2000lb_gbu_15v1.blk",
           "emitter": "bomb_2000lb_004",
           "bullets": 1,
           "external": true,
@@ -3938,6 +3903,22 @@
       "tier": 4,
       "reqModification": "us_1000lb_mk83"
     },
+    "M60_air_targets": {    },
+    "M60_armor_targets": {    },
+    "M60_stealth": {    },
+    "M60_belt_pack": {
+      "tier": 1
+    },
+    "M60_new_gun": {
+      "reqModification": "M60_belt_pack",
+      "tier": 3
+    },
+    "us_gbu_15v1": {
+      "modClass": "weapon",
+      "tier": 4,
+      "prevModification": "M60_new_gun",
+      "reqModification": "us_2000lb_mk84"
+    },
     "gr_litening_pod": {
       "modClass": "weapon",
       "tier": 1
@@ -3957,33 +3938,12 @@
       "modClass": "weapon",
       "tier": 4
     },
-    "M60_air_targets": {    },
-    "M60_armor_targets": {    },
-    "M60_stealth": {    },
-    "M60_belt_pack": {
-      "tier": 1
-    },
-    "M60_new_gun": {
-      "reqModification": "M60_belt_pack",
-      "tier": 3
-    },
-    "us_gbu_15v1": {
-      "modClass": "weapon",
-      "tier": 4,
-      "prevModification": "M60_new_gun",
-      "reqModification": "us_gbu_10"
-    },
     "us_aim_9p": {
       "tier": 1,
       "modClass": "weapon"
     },
-    "us_aim_7m": {
-      "reqModification": "us_aim_9p",
-      "tier": 2,
-      "modClass": "weapon"
-    },
     "us_aim_9l": {
-      "reqModification": "us_aim_7m",
+      "reqModification": "us_aim_9p",
       "tier": 3,
       "modClass": "weapon"
     },
@@ -3991,41 +3951,6 @@
       "reqModification": "us_aim_9l",
       "tier": 4,
       "modClass": "weapon"
-    }
-  },
-  "default_skin": {
-    "name": "barak_2",
-    "replace_tex": {
-      "from": "f_16a_block_10_launcher_aim9_c*",
-      "to": "f_16d_block_40_barak_2_launcher_aim9_c*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_launcher_aim9_n*",
-      "to": "f_16d_block_40_barak_2_launcher_aim9_n*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_pylon1_c*",
-      "to": "f_16d_block_40_barak_2_pylon1_c*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_pylon1_n*",
-      "to": "f_16d_block_40_barak_2_pylon1_n*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_pylon2_c*",
-      "to": "f_16d_block_40_barak_2_pylon2_c*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_pylon2_n*",
-      "to": "f_16d_block_40_barak_2_pylon2_n*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_pylon2a_c*",
-      "to": "f_16d_block_40_barak_2_pylon2a_c*"
-    },
-    "replace_tex": {
-      "from": "f_16a_block_10_pylon2a_n*",
-      "to": "f_16d_block_40_barak_2_pylon2a_n*"
     }
   },
   "user_skin": {

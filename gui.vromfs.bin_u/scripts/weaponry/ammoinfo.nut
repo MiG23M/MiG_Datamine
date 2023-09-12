@@ -5,7 +5,6 @@ let unitTypes = require("%scripts/unit/unitTypesList.nut")
 let { Cost } = require("%scripts/money.nut")
 let { get_game_params } = require("gameparams")
 let { getSavedBullets } = require("%scripts/weaponry/savedWeaponry.nut")
-let { shopIsModificationPurchased } = require("chardResearch")
 
 let AMMO = {
   PRIMARY      = 0, //bullets, modifications
@@ -18,7 +17,7 @@ let function getAmmoAmount(unit, ammoName, ammoType) {
   if (!ammoName)
     return 0
   if (ammoType == AMMO.MODIFICATION)
-    return shopIsModificationPurchased(unit.name, ammoName)
+    return ::shop_is_modification_purchased(unit.name, ammoName)
   return  ::shop_is_weapon_purchased(unit.name, ammoName)
 }
 

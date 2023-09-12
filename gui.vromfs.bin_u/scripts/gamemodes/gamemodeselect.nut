@@ -15,9 +15,8 @@ let { checkAndShowMultiplayerPrivilegeWarning, checkAndShowCrossplayWarning,
 let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
 let openClustersMenuWnd = require("%scripts/onlineInfo/clustersMenuWnd.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
-dagui_propid_add_name_id("modeId")
+::dagui_propid.add_name_id("modeId")
 
 gui_handlers.GameModeSelect <- class extends gui_handlers.BaseGuiHandlerWT {
   sceneTplName = "%gui/gameModeSelect/gameModeSelect.tpl"
@@ -370,7 +369,7 @@ gui_handlers.GameModeSelect <- class extends gui_handlers.BaseGuiHandlerWT {
     }
 
     foreach (country in countries)
-      res.append({ img = getCountryIcon(country, false, needShowLocked) })
+      res.append({ img = ::get_country_icon(country, false, needShowLocked) })
     return res
   }
 
@@ -427,7 +426,7 @@ gui_handlers.GameModeSelect <- class extends gui_handlers.BaseGuiHandlerWT {
 
     let event = ::game_mode_manager.getGameModeEvent(gameMode)
     if (event && !this.isCrossPlayEventAvailable(event)) {
-      checkAndShowCrossplayWarning(@() showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
+      checkAndShowCrossplayWarning(@() ::showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
       return
     }
 

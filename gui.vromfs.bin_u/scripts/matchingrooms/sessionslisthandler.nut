@@ -2,6 +2,7 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
+
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { registerPersistentData } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
@@ -19,7 +20,6 @@ let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
 let { get_game_mode } = require("mission")
 let { OPTIONS_MODE_SEARCH, USEROPT_SEARCH_GAMEMODE, USEROPT_SEARCH_DIFFICULTY
 } = require("%scripts/options/optionsExtNames.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::match_search_gm <- -1
 
@@ -432,7 +432,7 @@ gui_handlers.SessionsList <- class extends gui_handlers.GenericOptions {
   if (obj.childrenCount() != shopCountriesList.len()) {
     let view = {
       countries = shopCountriesList.map(@(countryName) { countryName = countryName
-          countryIcon = getCountryIcon(countryName)
+          countryIcon = ::get_country_icon(countryName)
         })
     }
     let markup = handyman.renderCached("%gui/countriesList.tpl", view)

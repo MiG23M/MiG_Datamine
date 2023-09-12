@@ -48,7 +48,7 @@ hint {
       background-image:t='#ui/gameuiskin#circular_progress_1.svg'
 
       tdiv {
-        position:t='relative'
+        position:t='absolute'
         size:t='pw, ph'
         background-svg-size:t='0.06@shHud, 0.06@shHud'
         background-color:t='#33555555';
@@ -68,9 +68,7 @@ hint {
     <</image>>
     <<#text>>
     textareaNoTab {
-      position:t='relative'
       text:t='<<textValue>>'
-      pos:t='0, ph/2 - h/2'
     }
     <</text>>
     <</slices>>

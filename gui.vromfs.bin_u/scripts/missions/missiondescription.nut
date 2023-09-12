@@ -11,8 +11,6 @@ let DataBlock = require("DataBlock")
 let { get_game_mode } = require("mission")
 let { setMapPreview } = require("%scripts/missions/mapPreview.nut")
 let { USEROPT_TIME_LIMIT } = require("%scripts/options/optionsExtNames.nut")
-let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 /* API:
   static create(nest, mission = null)
@@ -211,7 +209,7 @@ gui_handlers.MissionDescription <- class extends gui_handlers.BaseGuiHandlerWT {
 
       local sm_weather = blk.getStr("weather", "")
       if (sm_weather != "")
-        sm_weather = getWeatherLocName(sm_weather)
+        sm_weather = loc("options/weather" + sm_weather)
 
       config.condition += sm_location
       config.condition += (config.condition != "" ? "; " : "") + sm_time
@@ -234,7 +232,7 @@ gui_handlers.MissionDescription <- class extends gui_handlers.BaseGuiHandlerWT {
 
       let country = ::getShopCountry(aircraft)
       log("aircraft = " + aircraft + " country = " + country)
-      config.flag <- getCountryIcon(country, true)
+      config.flag <- ::get_country_icon(country, true)
     }
 
 

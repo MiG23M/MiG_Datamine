@@ -45,7 +45,6 @@ enums.addTypesByGlobalName("g_top_menu_left_side_sections", [
         "community"
         buttonsList.EXIT
         buttonsList.DEBUG_UNLOCK
-        buttonsList.DEBUG_SHOP
       ]
     ]
   },

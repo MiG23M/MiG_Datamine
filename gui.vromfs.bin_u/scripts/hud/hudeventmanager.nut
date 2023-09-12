@@ -2,7 +2,6 @@
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
 let { subscribeHudEvents } = require("hudMessages")
-let { convertBlk } = require("%sqstd/datablock.nut")
 
 
 ::g_hud_event_manager <-
@@ -55,7 +54,7 @@ let { convertBlk } = require("%sqstd/datablock.nut")
 
   function handleData(data) {
     if (u.isDataBlock(data))
-      return convertBlk(data)
+      return ::buildTableFromBlk(data)
 
     let res = {}
     foreach (paramName, param in data)

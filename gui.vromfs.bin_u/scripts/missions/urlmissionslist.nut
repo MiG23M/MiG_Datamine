@@ -2,7 +2,8 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
+
+
 let DataBlock = require("DataBlock")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -26,7 +27,7 @@ const MAX_URL_MISSION_NAME_LENGTH = 24
   if (this.isLoaded)
     return
 
-  let listBlk = loadLocalByAccount(this.listSavePath)
+  let listBlk = ::loadLocalByAccount(this.listSavePath)
   if (u.isDataBlock(listBlk))
     foreach (misUrlBlk in listBlk % "mission")
       if (u.isDataBlock(misUrlBlk)) {
@@ -70,7 +71,7 @@ const MAX_URL_MISSION_NAME_LENGTH = 24
   let saveBlk = DataBlock()
   foreach (mission in this.list)
     saveBlk.mission <- mission.getSaveBlk()
-  saveLocalByAccount(this.listSavePath, saveBlk)
+  ::saveLocalByAccount(this.listSavePath, saveBlk)
 }
 
 ::g_url_missions.getList <- function getList() {
@@ -89,7 +90,7 @@ const MAX_URL_MISSION_NAME_LENGTH = 24
 
 ::g_url_missions.openDeleteUrlMissionConfirmationWnd <- function openDeleteUrlMissionConfirmationWnd(urlMission) {
   let text = loc("urlMissions/msgBox/deleteConfirmation" { name = urlMission.name })
-  scene_msg_box("delete_url_mission_confirmation", null, text, [
+  ::scene_msg_box("delete_url_mission_confirmation", null, text, [
       [ "yes", @() ::g_url_missions.deleteMission(urlMission) ],
       [ "no", @() null ]
     ], "no", { cancel_fn = @() null })
@@ -128,7 +129,7 @@ const MAX_URL_MISSION_NAME_LENGTH = 24
   if (errorMsg == "")
     return true
 
-  showInfoMsgBox(errorMsg)
+  ::showInfoMsgBox(errorMsg)
   return false
 }
 
@@ -164,7 +165,7 @@ const MAX_URL_MISSION_NAME_LENGTH = 24
   this.loadOnce()
   if (this.list.len() < MAX_URL_MISSIONS)
     return true
-  showInfoMsgBox(loc("urlMissions/tooMuchMissions", { max = MAX_URL_MISSIONS }))
+  ::showInfoMsgBox(loc("urlMissions/tooMuchMissions", { max = MAX_URL_MISSIONS }))
   return false
 }
 
@@ -202,10 +203,10 @@ const MAX_URL_MISSION_NAME_LENGTH = 24
 
 ::g_url_missions.findMissionByUrl <- function findMissionByUrl(url) {
   this.loadOnce()
-  return u.search(this.list,  function(m) { return m.url == url })
+  return u.search(this.list, (@(url) function(m) { return m.url == url })(url))
 }
 
 ::g_url_missions.findMissionByName <- function findMissionByName(name) {
   this.loadOnce()
-  return u.search(this.list,  function(m) { return m.name == name })
+  return u.search(this.list, (@(name) function(m) { return m.name == name })(name))
 }

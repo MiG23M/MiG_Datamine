@@ -189,6 +189,78 @@
               "behavior": "PosOptionsNavigator",
               "navigatorShortcuts": "noSelect"
             },
+            "verticalCellsOptions": {
+              "id": "flags_navigator",
+              "class": "optionsMultiColumn",
+              "baseRow": "yes",
+              "css-hier-invalidate": "yes",
+              "freeWidthOptions": "yes",
+              "width": "pw",
+              "behavior": "PosOptionsNavigator",
+              "navigatorShortcuts": "noSelect",
+              "tr": {
+                "id": "user_flags_block",
+                "flow": "vertical",
+                "text": {
+                  "text": "#decals/germany_flag_decal",
+                  "left": "1@framePadding",
+                  "position": "relative",
+                  "smallFont": "no",
+                  "overlayTextColor": "silver"
+                },
+                "td": {
+                  "cellType": "bottom",
+                  "tdiv": {
+                    "background-color": "@comboBgColor",
+                    "size": "pw - 1@buttonHeight - 1@buttonImgPadding, ph",
+                    "position": "relative",
+                    "text": {
+                      "pos": "0, 50%ph-50%h",
+                      "id": "flag_name",
+                      "padding-left": "1@framePadding",
+                      "position": "relative"
+                    }
+                  },
+                  "tdiv": {
+                    "pos": "0,50%ph-50%h",
+                    "position": "relative",
+                    "Button_text": {
+                      "id": "btn_update_flags_list",
+                      "tooltip": "#flags/resetFlagToDefault/tooltip",
+                      "on_click": "resetFlagToDefault",
+                      "class": "image",
+                      "showConsoleImage": "no",
+                      "not-input-transparent": "yes",
+                      "img": {
+                        "background-image": "#ui/gameuiskin#refresh.svg"
+                      }
+                    }
+                  }
+                }
+              },
+              "tdiv": {
+                "id": "flag_div",
+                "margin-top": "8@dp",
+                "position": "relative",
+                "tdiv": {
+                  "id": "slots_flag_list",
+                  "width": "pw",
+                  "left": "50%pw-50%w",
+                  "position": "relative",
+                  "flow": "h-flow",
+                  "flow-align": "left",
+                  "behaviour": "posNavigator",
+                  "moveX": "linear",
+                  "moveY": "linear",
+                  "navigatorShortcuts": "active",
+                  "css-hier-invalidate": "yes",
+                  "total-input-transparent": "yes",
+                  "on_select": "onFlagSlotSelect",
+                  "on_hover": "onSlotsHoverChange",
+                  "on_unhover": "onSlotsHoverChange"
+                }
+              }
+            },
             "textareaNoTab": {
               "id": "decal_text_area",
               "width": "75%pw",
@@ -267,71 +339,6 @@
         "left": "pw-w-1@buttonMargin",
         "position": "relative",
         "flow": "vertical",
-        "tdiv": {
-          "id": "flagslots_div",
-          "pos": "pw-w, -1@dp",
-          "position": "relative",
-          "frame": {
-            "id": "slots_flag_list_edge",
-            "flow": "vertical",
-            "width": "1@customizationBlockWidth",
-            "tr": {
-              "flow": "vertical",
-              "width": "pw",
-              "text": {
-                "text": "#decals/germany_flag_decal",
-                "left": "1@framePadding",
-                "position": "relative",
-                "smallFont": "no",
-                "overlayTextColor": "silver"
-              },
-              "td": {
-                "cellType": "bottom",
-                "width": "pw",
-                "tdiv": {
-                  "background-color": "@comboBgColor",
-                  "size": "pw - 1@buttonHeight - 1@buttonImgPadding, ph",
-                  "position": "relative",
-                  "text": {
-                    "pos": "0, 50%ph-50%h",
-                    "id": "flag_name",
-                    "padding-left": "1@framePadding",
-                    "position": "relative"
-                  }
-                },
-                "tdiv": {
-                  "pos": "0,50%ph-50%h",
-                  "position": "relative",
-                  "Button_text": {
-                    "id": "btn_update_flags_list",
-                    "tooltip": "#flags/resetFlagToDefault/tooltip",
-                    "on_click": "resetFlagToDefault",
-                    "class": "image",
-                    "showConsoleImage": "no",
-                    "not-input-transparent": "yes",
-                    "img": {
-                      "background-image": "#ui/gameuiskin#refresh.svg"
-                    }
-                  }
-                }
-              }
-            },
-            "tdiv": {
-              "id": "slots_flag_list",
-              "flow": "horizontal",
-              "behaviour": "posNavigator",
-              "moveX": "linear",
-              "moveY": "linear",
-              "navigatorShortcuts": "active",
-              "move-only-hover": "yes",
-              "css-hier-invalidate": "yes",
-              "total-input-transparent": "yes",
-              "on_select": "onFlagSlotSelect",
-              "on_hover": "onSlotsHoverChange",
-              "on_unhover": "onSlotsHoverChange"
-            }
-          }
-        },
         "tdiv": {
           "id": "attachable_div",
           "pos": "pw-w, -1@dp",

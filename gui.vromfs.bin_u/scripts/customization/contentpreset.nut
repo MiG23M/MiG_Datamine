@@ -3,8 +3,6 @@ from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
 let { eachBlock } = require("%sqstd/datablock.nut")
 let { OPTIONS_MODE_GAMEPLAY } = require("%scripts/options/optionsExtNames.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 let contentPresets = []
 local contentPresetIdxByName = {}
@@ -38,12 +36,12 @@ let function getCurPresetId(diffCode) {
 let function getAgreedPreset(diffCode) {
   let saveId = AGREED_PRESET_SAVE_ID_PREFIX + diffCode
   let difficulty = ::g_difficulty.getDifficultyByDiffCode(diffCode)
-  return loadLocalAccountSettings(saveId, difficulty.contentAllowedPresetOptionDefVal)
+  return ::load_local_account_settings(saveId, difficulty.contentAllowedPresetOptionDefVal)
 }
 
 let function setAgreedPreset(diffCode, presetId) {
   let saveId = AGREED_PRESET_SAVE_ID_PREFIX + diffCode
-  saveLocalAccountSettings(saveId, presetId)
+  ::save_local_account_settings(saveId, presetId)
 }
 
 let function setPreset(diffCode, presetId, needSetAgreed) {

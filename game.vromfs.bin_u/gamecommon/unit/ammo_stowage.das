@@ -21,22 +21,13 @@ require %game.unit.ammo_stowage_events
 require %game.events
 
 
-[with_bundle(v)]
-def ammo_stowage_restore_slots(var v : tuple<
-                                 ammo_slots__state : UInt32List
-                               >) : void
-  // water is cleared upon repair/respawn, so it is safe to just set FLOODED to false for all slots
-  for state in v.ammo_slots__state
-    set_flag(state, AmmoSlotState ENABLED, true)
-    set_flag(state, AmmoSlotState FLOODED, false)
-
-
 [es, with_bundle(v)]
 def ammo_stowage_respawn_handle(evt : EventUnitRespawn; eid : EntityId;
                                 var v : tuple<
                                   ammo_slots__state : UInt32List
                                 >) : void
-  ammo_stowage_restore_slots() <| v
+  for state in v.ammo_slots__state
+    set_flag(state, AmmoSlotState ENABLED, true)
   sendEvent(eid, [[EventBulletsAmountChanged isRefill=true]])
 
 
@@ -45,7 +36,8 @@ def ammo_stowage_repair_handle(evt : EventUnitRepair; eid : EntityId;
                                var v : tuple<
                                  ammo_slots__state : UInt32List
                                >) : void
-  ammo_stowage_restore_slots() <| v
+  for state in v.ammo_slots__state
+    set_flag(state, AmmoSlotState ENABLED, true)
   sendEvent(eid, [[EventBulletsAmountChanged isRefill=false]])
 
 

@@ -2,9 +2,9 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
+
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
+
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { get_time_msec } = require("dagor.time")
@@ -25,7 +25,6 @@ let openClustersMenuWnd = require("%scripts/onlineInfo/clustersMenuWnd.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_MP_DOMINATION } = require("%scripts/options/optionsExtNames.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 enum eRoomFlags { //bit enum. sorted by priority
   CAN_JOIN              = 0x8000 //set by CAN_JOIN_MASK, used for sorting
@@ -74,7 +73,7 @@ gui_handlers.EventRoomsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
   eventDescription = null
 
-  listIdxPID = dagui_propid_add_name_id("listIdx")
+  listIdxPID = ::dagui_propid.add_name_id("listIdx")
   hoveredIdx  = -1
   selectedIdx = -1
   isMouseMode = true
@@ -117,7 +116,7 @@ gui_handlers.EventRoomsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     this.roomsListObj = this.scene.findObject("items_list")
     this.roomsListData = ::MRoomsList.getMRoomsListByRequestParams({ eventEconomicName = ::events.getEventEconomicName(this.event) })
     this.eventDescription = ::create_event_description(this.scene)
-    this.showOnlyAvailableRooms = loadLocalAccountSettings("events/showOnlyAvailableRooms", true)
+    this.showOnlyAvailableRooms = ::load_local_account_settings("events/showOnlyAvailableRooms", true)
     let obj = this.showSceneBtn("only_available_rooms", true)
     obj.setValue(this.showOnlyAvailableRooms)
     this.refreshList()
@@ -591,7 +590,7 @@ gui_handlers.EventRoomsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function getFlagsArrayByCountriesArray(countriesArray) {
-    return countriesArray.map(@(country) { image = getCountryIcon(country) })
+    return countriesArray.map(@(country) { image = ::get_country_icon(country) })
   }
 
   function onCollapsedChapter() {
@@ -793,7 +792,7 @@ gui_handlers.EventRoomsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     this.showOnlyAvailableRooms = newValue
-    saveLocalAccountSettings("events/showOnlyAvailableRooms", newValue)
+    ::save_local_account_settings("events/showOnlyAvailableRooms", newValue)
     this.fillRoomsList()
   }
 }

@@ -16,7 +16,6 @@ let { getLastWeapon,
 let { canBuyMod, canResearchMod, isModUpgradeable, isReqModificationsUnlocked,
   getModificationByName } = require("%scripts/weaponry/modificationInfo.nut")
 let { getSavedBullets } = require("%scripts/weaponry/savedWeaponry.nut")
-let { shopIsModificationEnabled } = require("chardResearch")
 
 let function getItemAmount(unit, item) {
   return ::g_weaponry_types.getUpgradeTypeByItem(item).getAmount(unit, item)
@@ -82,7 +81,7 @@ let function getItemStatusTbl(unit, item) {
       res.unlocked = isOwn
     else {
       res.maxAmount = ::wp_get_modification_max_count(unit.name, item.name)
-      res.equipped = res.amount && shopIsModificationEnabled(unit.name, item.name)
+      res.equipped = res.amount && ::shop_is_modification_enabled(unit.name, item.name)
       res.unlocked = res.amount || canBuyMod(unit, item)
       res.showPrice = false //amount < maxAmount
     }
@@ -107,7 +106,7 @@ let function getItemStatusTbl(unit, item) {
           && res.maxAmount == 1
           && res.canBuyMore
           && getItemCost(unit, item).wp > 0
-        res.equipped = res.amount && shopIsModificationEnabled(unit.name, item.name)
+        res.equipped = res.amount && ::shop_is_modification_enabled(unit.name, item.name)
         res.goldUnlockable = !res.unlocked && hasFeature("SpendGold")
           && isReqModificationsUnlocked(unit, item) && canBeResearched(unit, item, false)
         if (item.type == weaponsItem.expendables)
@@ -223,7 +222,7 @@ let function countWeaponsUpgrade(unit, item) {
     upgradesTotal++
 
     foreach (modName in modsArray)
-      if (shopIsModificationEnabled(unit.name, modName)) {
+      if (::shop_is_modification_enabled(unit.name, modName)) {
         upgraded++
         break
       }

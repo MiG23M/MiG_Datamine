@@ -46,6 +46,9 @@
   "destroysRendInstances": true,
   "destroysTrees": true,
   "type": "typeLightTank",
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "rearmSmokeTimeOnField": 60.0,
   "rearmTimeOnField": 120.0,
   "canReloadNonGuns": true,
@@ -68,6 +71,7 @@
       "body_back_dm": {      },
       "superstructure_bottom_dm": {      },
       "superstructure_top_dm": {      },
+      "turret_05_bottom_dm": {      },
       "body_top_dm": {      },
       "turret_05_back_dm": {      },
       "ex_decor_l_04_dm": {      },
@@ -78,10 +82,6 @@
       },
       "ex_decor_r_03_dm": {
         "armorThickness": 5.0
-      },
-      "composite_armor_hull_01_dm": {
-        "armorThickness": 5.0,
-        "hidableInXrayViewer": true
       }
     },
     "body_screens": {
@@ -178,7 +178,6 @@
       "ex_armor_turret_08_dm": {      },
       "ex_armor_turret_10_dm": {      },
       "ex_armor_turret_12_dm": {      },
-      "turret_05_bottom_dm": {      },
       "turret_03_top_dm": {      }
     },
     "turret_internal": {
@@ -211,10 +210,6 @@
       "optic_turret_02_dm": {
         "armorThickness": 3.0,
         "hp": 20.0
-      },
-      "optic_body_dm": {
-        "armorThickness": 3.0,
-        "hp": 20.0
       }
     },
     "aps_screens": {
@@ -227,30 +222,6 @@
     "aps_sensors": {
       "armorThickness": 7.5,
       "turret_03_front_dm": {      }
-    },
-    "aps_launchers": {
-      "armorClass": "RHA_tank",
-      "hp": 200.0,
-      "armorThickness": 15.0,
-      "restrainDamage": 0.5,
-      "createSecondaryShatters": false,
-      "ex_aps_launcher_01_dm": {      },
-      "ex_aps_launcher_02_dm": {      },
-      "ex_aps_launcher_03_dm": {      },
-      "ex_aps_launcher_04_dm": {      },
-      "ex_aps_launcher_05_dm": {      },
-      "ex_aps_launcher_06_dm": {      },
-      "ex_aps_launcher_07_dm": {      },
-      "ex_aps_launcher_l_01_dm": {      },
-      "ex_aps_launcher_l_02_dm": {      },
-      "ex_aps_launcher_l_03_dm": {      },
-      "ex_aps_launcher_l_04_dm": {      },
-      "ex_aps_launcher_l_05_dm": {      },
-      "ex_aps_launcher_r_01_dm": {      },
-      "ex_aps_launcher_r_02_dm": {      },
-      "ex_aps_launcher_r_03_dm": {      },
-      "ex_aps_launcher_r_04_dm": {      },
-      "ex_aps_launcher_r_05_dm": {      }
     },
     "chassis": {
       "armorClass": "tank_steel_wheels",
@@ -658,32 +629,6 @@
         "hp": 100.0
       }
     }
-  },
-  "attachables": {
-    "ex_armor_12_dm": true,
-    "ex_armor_13_dm": true,
-    "ex_armor_14_dm": true,
-    "ex_armor_15_dm": true,
-    "ex_armor_16_dm": true,
-    "ex_armor_17_dm": true,
-    "ex_armor_18_dm": true,
-    "ex_armor_turret_01_dm": true,
-    "ex_armor_turret_02_dm": true,
-    "ex_armor_turret_06_dm": true,
-    "ex_armor_turret_08_dm": true,
-    "ex_armor_turret_10_dm": true,
-    "ex_armor_turret_11_dm": true,
-    "ex_armor_turret_12_dm": true,
-    "ex_armor_01_dm": true,
-    "ex_armor_02_dm": true,
-    "ex_armor_10_dm": true,
-    "ex_armor_11_dm": true,
-    "ex_armor_turret_04_dm": true,
-    "ex_armor_turret_05_dm": true,
-    "ex_armor_turret_07_dm": true,
-    "ex_armor_turret_09_dm": true,
-    "ex_armor_turret_03_dm": true,
-    "ex_decor_06_dm": true
   },
   "xray_viewer_data": {
     "armorArrayHull": {
@@ -1693,7 +1638,7 @@
       "speedYaw": 60.0,
       "speedPitch": 60.0,
       "fireConeAngle": 1.0,
-      "bullets": 348,
+      "bullets": 400,
       "salvoAmount": 100.0,
       "ChainfireTime": 0.0,
       "DelayAfterShoot": 5.0,
@@ -1730,12 +1675,12 @@
       "limitsTable": {
         "lim1": [
           -180.0,
-          -135.0,
-          -3.0,
-          -3.0
+          -160.0,
+          -7.0,
+          -7.0
         ],
         "lim2": [
-          -135.0,
+          -160.0,
           -25.0,
           -10.0,
           -10.0
@@ -1743,20 +1688,20 @@
         "lim3": [
           -25.0,
           -1.0,
-          -10.0,
-          -10.0
+          -7.0,
+          -7.0
         ],
         "lim4": [
           -1.0,
-          135.0,
+          115.0,
           -10.0,
           -10.0
         ],
         "lim5": [
-          135.0,
+          115.0,
           180.0,
-          -3.0,
-          -3.0
+          -7.0,
+          -7.0
         ]
       },
       "gunStabilizer": {
@@ -1796,7 +1741,6 @@
         2
 ],
       "emitterGenFmt": "bone_rocket_%02d",
-      "ammoDpGenFmt": "ammo_turret_%02d_dm",
       "skipAxisEmitterCheck": true,
       "recoilMultiplier": 0.1,
       "changeBulletTypeForSet": true,
@@ -1806,7 +1750,6 @@
       "createGunEffects": true,
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
-      "barrelDP": "gun_barrel_03_dm",
       "speedYaw": 25.0,
       "speedPitch": 25.0,
       "fireConeAngle": 1.0,
@@ -1878,42 +1821,37 @@
         "head": "bone_mg_aa_h",
         "gun": "bone_mg_aa_v",
         "gunnerDm": "commander_dm",
-        "hasNightVision": true,
-        "rotatedTurret": "bone_mg_aa_h"
+        "hasNightVision": true
       },
       "limits": {
         "yaw": [
-          -95.0,
-          20.0
+          -180.0,
+          180.0
         ],
         "pitch": [
           -10.0,
           65.0
         ]
       },
-      "gunStabilizer": {
-        "hasVerticalGunFreeMode": false,
-        "hasHorizontal": true,
-        "horizontalOmegaMult": 1.0,
-        "horizontalSpeedLimitKPH": 75.0,
-        "hasVertical": true,
-        "verticalOmegaMult": 1.0,
-        "verticalSpeedLimitKPH": 75.0,
-        "speedFromVehicleVerticalMult": -1.0,
-        "errorKPHToDegrees": {
-          "row": [
-            5.0,
-            0.0
-          ],
-          "row": [
-            45.0,
-            0.015
-          ],
-          "row": [
-            80.0,
-            0.02
-          ]
-        }
+      "limitsTable": {
+        "lim1": [
+          -180.0,
+          30.0,
+          -10.0,
+          -10.0
+        ],
+        "lim2": [
+          30.0,
+          80.0,
+          0.0,
+          0.0
+        ],
+        "lim3": [
+          80.0,
+          180.0,
+          -10.0,
+          -10.0
+        ]
       }
     },
     "Weapon": {
@@ -1921,7 +1859,7 @@
       "triggerGroup": "coaxial",
       "blk": "gameData/Weapons/groundModels_weapons/7_62mm_M240_user_machinegun.blk",
       "emitter": "bone_mg_twin",
-      "flash": "emtr_mg_flame_02",
+      "flash": "bone_mg_twin",
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
       "barrelDP": "gun_barrel_01_dm",
@@ -1957,58 +1895,6 @@
         "pitch": [
           -0.0,
           0.0
-        ]
-      }
-    },
-    "Weapon": {
-      "trigger": "gunner5",
-      "triggerGroup": "commander",
-      "blk": "gameData/Weapons/dummy_weapon.blk",
-      "emitter": "bone_commander_sight_v",
-      "defaultYaw": 0.0,
-      "defaultPitch": 0.0,
-      "parkInDeadzone": false,
-      "speedYaw": 120.0,
-      "speedPitch": 90.0,
-      "gunStabilizer": {
-        "hasVerticalGunFreeMode": false,
-        "forceEnabled": true,
-        "hasHorizontal": true,
-        "horizontalOmegaMult": 1.0,
-        "horizontalSpeedLimitKPH": 75.0,
-        "hasVertical": true,
-        "verticalOmegaMult": 1.0,
-        "verticalSpeedLimitKPH": 75.0,
-        "speedFromVehicleVerticalMult": -1.0,
-        "errorKPHToDegrees": {
-          "row": [
-            5.0,
-            0.0
-          ],
-          "row": [
-            45.0,
-            0.00015
-          ],
-          "row": [
-            80.0,
-            0.0002
-          ]
-        }
-      },
-      "turret": {
-        "head": "bone_mg_aa_h",
-        "gun": "bone_commander_sight_v",
-        "gunnerDm": "commander_dm",
-        "rotatedTurret": "bone_mg_aa_h"
-      },
-      "limits": {
-        "yaw": [
-          -95.0,
-          20.0
-        ],
-        "pitch": [
-          -9.0,
-          65.0
         ]
       }
     },
@@ -2827,16 +2713,6 @@
       }
     }
   },
-  "commanderView": {
-    "aimModeAvailable": true,
-    "optics": "commander_optics_round",
-    "zoomOutFov": 37.5,
-    "zoomInFov": 5.0,
-    "sightSize": [
-      0.8,
-      0.8
-    ]
-  },
   "cockpit": {
     "zoomOutFov": 37.49,
     "zoomInFov": 9.217,
@@ -2844,54 +2720,15 @@
     "sightName": "type_89_sight",
     "headPos": [
       0.0,
-      3.7,
-      -8.5
+      3.5,
+      -7.5
     ],
     "headPosOnShooting": [
-      0.5,
-      4.2,
+      -0.1,
+      3.0,
       -0.1
     ],
     "detectionHeight": 3.3
-  },
-  "ammoStowages": {
-    "ammo1": {
-      "weaponTrigger": "gunner0",
-      "removeLoadedAmmo": false,
-      "fatalFire": true,
-      "fatalExplosion": true,
-      "shells": {
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
-        "ammo_body_01_dm": {
-          "count": 116
-        },
-        "ammo_turret_02_dm": {
-          "count": 116
-        },
-        "ammo_turret_01_dm": {
-          "count": 116
-        }
-      }
-    },
-    "ammo2": {
-      "weaponTrigger": "gunner1",
-      "removeLoadedAmmo": false,
-      "fatalFire": false,
-      "fatalExplosion": false,
-      "shells": {
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
-        "ammo_turret_38_dm": {
-          "count": 1
-        },
-        "ammo_turret_37_dm": {
-          "count": 1
-        }
-      }
-    }
   },
   "modifications": {
     "new_tank_tracks": {    },
@@ -2999,7 +2836,7 @@
             "speedYaw": 60.0,
             "speedPitch": 60.0,
             "fireConeAngle": 1.0,
-            "bullets": 348,
+            "bullets": 400,
             "salvoAmount": 100.0,
             "ChainfireTime": 0.0,
             "DelayAfterShoot": 5.0,
@@ -3036,12 +2873,12 @@
             "limitsTable": {
               "lim1": [
                 -180.0,
-                -135.0,
-                -3.0,
-                -3.0
+                -160.0,
+                -7.0,
+                -7.0
               ],
               "lim2": [
-                -135.0,
+                -160.0,
                 -25.0,
                 -10.0,
                 -10.0
@@ -3049,20 +2886,20 @@
               "lim3": [
                 -25.0,
                 -1.0,
-                -10.0,
-                -10.0
+                -7.0,
+                -7.0
               ],
               "lim4": [
                 -1.0,
-                135.0,
+                115.0,
                 -10.0,
                 -10.0
               ],
               "lim5": [
-                135.0,
+                115.0,
                 180.0,
-                -3.0,
-                -3.0
+                -7.0,
+                -7.0
               ]
             },
             "gunStabilizer": {
@@ -3102,7 +2939,6 @@
               2
 ],
             "emitterGenFmt": "bone_rocket_%02d",
-            "ammoDpGenFmt": "ammo_turret_%02d_dm",
             "skipAxisEmitterCheck": true,
             "recoilMultiplier": 0.1,
             "changeBulletTypeForSet": true,
@@ -3112,7 +2948,6 @@
             "createGunEffects": true,
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
-            "barrelDP": "gun_barrel_03_dm",
             "speedYaw": 25.0,
             "speedPitch": 25.0,
             "fireConeAngle": 1.0,
@@ -3184,42 +3019,37 @@
               "head": "bone_mg_aa_h",
               "gun": "bone_mg_aa_v",
               "gunnerDm": "commander_dm",
-              "hasNightVision": true,
-              "rotatedTurret": "bone_mg_aa_h"
+              "hasNightVision": true
             },
             "limits": {
               "yaw": [
-                -95.0,
-                20.0
+                -180.0,
+                180.0
               ],
               "pitch": [
                 -10.0,
                 65.0
               ]
             },
-            "gunStabilizer": {
-              "hasVerticalGunFreeMode": false,
-              "hasHorizontal": true,
-              "horizontalOmegaMult": 1.0,
-              "horizontalSpeedLimitKPH": 75.0,
-              "hasVertical": true,
-              "verticalOmegaMult": 1.0,
-              "verticalSpeedLimitKPH": 75.0,
-              "speedFromVehicleVerticalMult": -1.0,
-              "errorKPHToDegrees": {
-                "row": [
-                  5.0,
-                  0.0
-                ],
-                "row": [
-                  45.0,
-                  0.015
-                ],
-                "row": [
-                  80.0,
-                  0.02
-                ]
-              }
+            "limitsTable": {
+              "lim1": [
+                -180.0,
+                30.0,
+                -10.0,
+                -10.0
+              ],
+              "lim2": [
+                30.0,
+                80.0,
+                0.0,
+                0.0
+              ],
+              "lim3": [
+                80.0,
+                180.0,
+                -10.0,
+                -10.0
+              ]
             }
           },
           "Weapon": {
@@ -3227,7 +3057,7 @@
             "triggerGroup": "coaxial",
             "blk": "gameData/Weapons/groundModels_weapons/7_62mm_M240_user_machinegun.blk",
             "emitter": "bone_mg_twin",
-            "flash": "emtr_mg_flame_02",
+            "flash": "bone_mg_twin",
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
             "barrelDP": "gun_barrel_01_dm",
@@ -3263,58 +3093,6 @@
               "pitch": [
                 -0.0,
                 0.0
-              ]
-            }
-          },
-          "Weapon": {
-            "trigger": "gunner5",
-            "triggerGroup": "commander",
-            "blk": "gameData/Weapons/dummy_weapon.blk",
-            "emitter": "bone_commander_sight_v",
-            "defaultYaw": 0.0,
-            "defaultPitch": 0.0,
-            "parkInDeadzone": false,
-            "speedYaw": 120.0,
-            "speedPitch": 90.0,
-            "gunStabilizer": {
-              "hasVerticalGunFreeMode": false,
-              "forceEnabled": true,
-              "hasHorizontal": true,
-              "horizontalOmegaMult": 1.0,
-              "horizontalSpeedLimitKPH": 75.0,
-              "hasVertical": true,
-              "verticalOmegaMult": 1.0,
-              "verticalSpeedLimitKPH": 75.0,
-              "speedFromVehicleVerticalMult": -1.0,
-              "errorKPHToDegrees": {
-                "row": [
-                  5.0,
-                  0.0
-                ],
-                "row": [
-                  45.0,
-                  0.00015
-                ],
-                "row": [
-                  80.0,
-                  0.0002
-                ]
-              }
-            },
-            "turret": {
-              "head": "bone_mg_aa_h",
-              "gun": "bone_commander_sight_v",
-              "gunnerDm": "commander_dm",
-              "rotatedTurret": "bone_mg_aa_h"
-            },
-            "limits": {
-              "yaw": [
-                -95.0,
-                20.0
-              ],
-              "pitch": [
-                -9.0,
-                65.0
               ]
             }
           },
@@ -3460,1718 +3238,6 @@
     "replace_tex": {
       "from": "ger_camo_bronzegruen*",
       "to": "hu_camo_four_color*"
-    }
-  },
-  "ActiveProtectionSystem": {
-    "rearmTime": 45.0,
-    "model": "amap_ads",
-    "verAngles": [
-      -10.0,
-      25.0
-    ],
-    "horAngles": [
-      -180.0,
-      180.0
-    ],
-    "reactionTime": 0.00056,
-    "reloadTime": 0.35,
-    "targetSpeed": [
-      70.0,
-      700.0
-    ],
-    "shotCount": 30,
-    "FrontRight0": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_03_dm",
-      "horAngles": [
-        0.0,
-        20.0
-      ],
-      "emitterGenRange": [
-        40,
-        41
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "FrontRight1": {
-      "shotCount": 1,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_04_dm",
-      "horAngles": [
-        15.0,
-        30.0
-      ],
-      "emitter": "emtr_mortar_flame_39",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "FrontLeft0": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_02_dm",
-      "horAngles": [
-        -20.0,
-        0.0
-      ],
-      "emitterGenRange": [
-        42,
-        43
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "FrontLeft1": {
-      "shotCount": 1,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_01_dm",
-      "horAngles": [
-        -30.0,
-        -15.0
-      ],
-      "emitter": "emtr_mortar_flame_44",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Left1": {
-      "shotCount": 3,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_l_01_dm",
-      "horAngles": [
-        -55.0,
-        -25.0
-      ],
-      "emitterGenRange": [
-        21,
-        23
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Left2": {
-      "shotCount": 1,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_l_02_dm",
-      "horAngles": [
-        -90.0,
-        -50.0
-      ],
-      "emitter": "emtr_mortar_flame_24",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Left3": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_l_03_dm",
-      "horAngles": [
-        -130.0,
-        -80.0
-      ],
-      "emitterGenRange": [
-        25,
-        26
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Left4": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_l_04_dm",
-      "horAngles": [
-        -145.0,
-        -130.0
-      ],
-      "emitterGenRange": [
-        25,
-        26
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Left5": {
-      "shotCount": 1,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_l_05_dm",
-      "horAngles": [
-        -165.0,
-        -140.0
-      ],
-      "emitter": "emtr_mortar_flame_29",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Right1": {
-      "shotCount": 3,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_r_01_dm",
-      "horAngles": [
-        25.0,
-        55.0
-      ],
-      "emitterGenRange": [
-        21,
-        23
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Right2": {
-      "shotCount": 1,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_r_02_dm",
-      "horAngles": [
-        50.0,
-        90.0
-      ],
-      "emitter": "emtr_mortar_flame_24",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Right3": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_r_03_dm",
-      "horAngles": [
-        80.0,
-        130.0
-      ],
-      "emitterGenRange": [
-        25,
-        26
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Right4": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_r_04_dm",
-      "horAngles": [
-        130.0,
-        145.0
-      ],
-      "emitterGenRange": [
-        25,
-        26
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "Right5": {
-      "shotCount": 1,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_r_05_dm",
-      "horAngles": [
-        140.0,
-        165.0
-      ],
-      "emitter": "emtr_mortar_flame_29",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "BackLeft": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_05_dm",
-      "horAngles": [
-        -175.0,
-        -160.0
-      ],
-      "emitterGenRange": [
-        45,
-        46
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "BackCentral": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_06_dm",
-      "horAngles": [
-        170.0,
-        -170.0
-      ],
-      "emitterGenRange": [
-        49,
-        50
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
-    },
-    "BackRight": {
-      "shotCount": 2,
-      "sensorPos": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "dmPart": "optic_turret_01_dm",
-      "launcherDmPart": "ex_aps_launcher_07_dm",
-      "horAngles": [
-        160.0,
-        175.0
-      ],
-      "emitterGenRange": [
-        47,
-        48
-],
-      "emitterGenFmt": "emtr_mortar_flame_%02d",
-      "verAngles": [
-        -10.0,
-        25.0
-      ],
-      "distance": 7.5,
-      "sensorDistance": 100.0,
-      "reloadTime": 0.3,
-      "blastDistance": 0.5,
-      "additionalHeight": 5.0,
-      "aiming": true,
-      "shotFx": "muzzle_ground_8mm_cmps_fx",
-      "explosionFx": "hit_28_38mm_metal_he",
-      "mountNode": "root",
-      "reactionTime": 0.00056,
-      "targets": {
-        "all": {
-          "speed": [
-            70.0,
-            700.0
-          ],
-          "size": [
-            0.05,
-            0.5
-          ],
-          "self": false,
-          "ally": false
-        }
-      },
-      "ammo": {
-        "mass": 10.0,
-        "explosiveType": "comp_b",
-        "explosiveMass": 0.75,
-        "damage": {
-          "shatter": {
-            "useRealShatters": true,
-            "countPortion": 1.75,
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.0,
-                0.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -0.5,
-                0.0
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                0.5,
-                1.5
-              ],
-              "countPortion": 0.25
-            },
-            "segment": {
-              "radiusScale": 2.0,
-              "penetrationScale": 1.0,
-              "damageScale": 1.0,
-              "angles": [
-                -1.5,
-                -0.5
-              ],
-              "countPortion": 0.25
-            }
-          },
-          "shatterDamage": {
-            "breachConeAngle": 45.0
-          }
-        }
-      }
     }
   }
 }

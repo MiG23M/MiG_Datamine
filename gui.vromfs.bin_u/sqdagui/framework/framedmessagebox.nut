@@ -1,11 +1,9 @@
-from "%sqDagui/daguiNativeApi.nut" import *
-
 let u = require("%sqStdLibs/helpers/u.nut")
 let { check_obj, setPopupMenuPosAndAlign } = require("%sqDagui/daguiUtil.nut")
 let { handlerType } = require("handlerType.nut")
 let { handlersManager } = require("baseGuiHandlerManager.nut")
 let { gui_handlers, register_gui_handler } = require("gui_handlers.nut")
-let { BaseGuiHandler } = require("baseGuiHandler.nut")
+
 /*
   FramedMessageBox is a message box, with visible frame.
   Config {
@@ -21,7 +19,7 @@ let { BaseGuiHandler } = require("baseGuiHandler.nut")
     }
   }
 */
-let FramedMessageBox = class extends BaseGuiHandler {
+let FramedMessageBox = class extends ::BaseGuiHandler { //-undefined-global
   wndType      = handlerType.MODAL
   sceneTplName = "%gui/framedMessageBox.tpl"
 
@@ -78,7 +76,7 @@ let FramedMessageBox = class extends BaseGuiHandler {
     if (!check_obj(buttonsObj))
       return array(2, 0)
 
-    return get_dagui_mouse_cursor_pos_RC()
+    return ::get_dagui_mouse_cursor_pos_RC()
   }
 
   function onButtonClick(obj) {

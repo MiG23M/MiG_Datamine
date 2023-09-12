@@ -10,7 +10,6 @@
   "haveCCIPForBombs": true,
   "gyroSight": true,
   "haveCCIPForGun": true,
-  "haveCCRPForGun": true,
   "haveCCRPForBombs": true,
   "havePointOfInterestDesignator": true,
   "haveOpticTurret": true,
@@ -18,6 +17,7 @@
   "isBwOpticSight": true,
   "needTpsNightVision": true,
   "type": "typeFighter",
+  "paratrooper": "usa_para",
   "advancedInstructor": true,
   "advancedMouseAim": true,
   "standardExhaustFxType": "jet_exhaust",
@@ -47,10 +47,15 @@
     0.3
   ],
   "canTakeoffWithoutGear": true,
-  "paratrooper": "usa_irvin_5000_ejection_para",
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
+        "hp": 15.0
+      },
+      "cannon2_dm": {
         "hp": 15.0
       }
     },
@@ -144,9 +149,6 @@
         "hp": 19.5
       },
       "cover3_dm": {
-        "hp": 19.5
-      },
-      "cover4_dm": {
         "hp": 19.5
       }
     },
@@ -243,6 +245,9 @@
       "name": "cannon1_dm"
     },
     "part": {
+      "name": "cannon2_dm"
+    },
+    "part": {
       "name": "cover1_dm"
     },
     "part": {
@@ -250,9 +255,6 @@
     },
     "part": {
       "name": "cover3_dm"
-    },
-    "part": {
-      "name": "cover4_dm"
     },
     "part": {
       "name": "elevator0_dm",
@@ -2199,7 +2201,7 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/us_an_alr_67.blk"
+      "blk": "gameData/sensors/uk_ari_23333.blk"
     },
     "sensor": {
       "blk": "gameData/sensors/LaserDesignatorSensor.blk"
@@ -2210,21 +2212,13 @@
     }
   },
   "nightVision": {
-    "sightThermal": {
-      "resolution": [
-        1080,
-        720
-],
-      "noiseFactor": 0.05,
-      "index": 2
-    },
     "sightTPodThermal": {
       "resolution": [
         500,
         300
 ],
       "noiseFactor": 0.05,
-      "index": 1
+      "index": 2
     }
   },
   "gunnerOpticFps": {
@@ -2244,7 +2238,7 @@
       ],
       "opticType": "",
       "turretNo": 0,
-      "nvIndex": 1
+      "nvIndex": 2
     },
     "TV": {
       "pos": [
@@ -2345,10 +2339,6 @@
     "preset": {
       "name": "av_8b_plus_agm_65d",
       "blk": "gameData/FlightModels/weaponPresets/av_8b_plus_agm_65d.blk"
-    },
-    "preset": {
-      "name": "av_8b_plus_mk77",
-      "blk": "gameData/FlightModels/weaponPresets/av_8b_plus_mk77.blk"
     }
   },
   "WeaponSlots": {
@@ -2368,10 +2358,6 @@
       "node": "uk_tiald_pod",
       "node": "uk_tiald_pod_head",
       "node": "tiald_pylon",
-      "node": "litening_2_pod",
-      "node": "optic3_turret",
-      "node": "optic3_gun",
-      "node": "bomb_pylon5",
       "node": "optic1_turret",
       "node": "us_lantirn_pod_anaaq14",
       "node": "optic3_turret",
@@ -2820,7 +2806,7 @@
         }
       },
       "WeaponPreset": {
-        "iconType": "guided_bomb_middle_laser_x3",
+        "iconType": "guided_bomb_middle_laser_x2",
         "name": "us_gbu_12_x3",
         "reqModification": "us_gbu_12",
         "Weapon": {
@@ -3039,10 +3025,10 @@
         "hasTargetingPod": true,
         "removeGunnerOpticFps": 0,
         "ShowNodes": {
-          "node": "litening_2_pod",
+          "node": "bomb_pylon5",
+          "node": "us_lantirn_pod_anaaq14",
           "node": "optic3_turret",
-          "node": "optic3_gun",
-          "node": "bomb_pylon5"
+          "node": "optic3_gun"
         },
         "Weapon": {
           "trigger": "targetingPod",
@@ -3085,7 +3071,7 @@
         "Weapon": {
           "trigger": "rockets",
           "blk": "gameData/Weapons/containers/ter_lau_3a_ffar_mighty_mouse.blk",
-          "emitter": "1000lb_gp_004",
+          "emitter": "1000lb_gp_003",
           "external": true,
           "machLimit": 1.01
         }
@@ -3103,7 +3089,7 @@
         }
       },
       "WeaponPreset": {
-        "iconType": "guided_bomb_middle_laser_x3",
+        "iconType": "guided_bomb_middle_laser_x2",
         "name": "us_gbu_12_x3",
         "reqModification": "us_gbu_12",
         "Weapon": {
@@ -3272,7 +3258,7 @@
         "Weapon": {
           "trigger": "rockets",
           "blk": "gameData/Weapons/containers/ter_lau_3a_ffar_mighty_mouse_right_wing_x2.blk",
-          "emitter": "1000lb_gp_002",
+          "emitter": "1000lb_gp_001",
           "external": true,
           "machLimit": 1.01
         }
@@ -3651,16 +3637,16 @@
       "tier": 4
     },
     "f_4c_CdMin_Fuse": {
-      "tier": 1,
-      "modClass": "lth"
+      "tier": 1
     },
     "structure_str": {
-      "tier": 2,
-      "modClass": "lth"
+      "tier": 2
+    },
+    "f_4c_g_suit": {
+      "tier": 3
     },
     "new_cover": {
-      "tier": 3,
-      "modClass": "lth"
+      "tier": 4
     },
     "gau_12_ground_targets": {    },
     "gau_12_air_targets": {    },
@@ -3671,6 +3657,12 @@
     "gau_12_new_gun": {
       "reqModification": "gau_12_belt_pack",
       "tier": 3
+    },
+    "air_extinguisher": {
+      "prevModification": "gau_12_new_gun",
+      "tier": 4,
+      "modClass": "weapon",
+      "invertEnableLogic": false
     },
     "us_mk_77": {
       "tier": 1,
@@ -3720,7 +3712,7 @@
       "modClass": "weapon"
     },
     "us_aim_9m": {
-      "reqModification": "us_aim_9l",
+      "prevModification": "us_aim_9l",
       "tier": 4,
       "modClass": "weapon"
     },
@@ -3729,20 +3721,14 @@
     "countermeasures_launcher_chaff_priority": {    },
     "countermeasures_launcher_flare_priority": {    },
     "countermeasures_belt_pack": {
-      "modClass": "armor",
+      "modClass": "weapon",
       "turn_it_off": false,
       "invertEnableLogic": false,
       "group": "countermeasures",
       "tier": 1
     },
-    "f_4c_g_suit": {
-      "tier": 2,
-      "modClass": "armor",
-      "prevModification": "countermeasures_belt_pack"
-    },
     "heli_night_vision_system": {
-      "modClass": "armor",
-      "tier": 3,
+      "tier": 4,
       "prevModification": "countermeasures_belt_pack",
       "effects": {
         "nightVision": {
@@ -3766,8 +3752,8 @@
           },
           "sightThermal": {
             "resolution": [
-              1080,
-              720
+              500,
+              300
 ],
             "noiseFactor": 0.05,
             "index": 2
@@ -3778,16 +3764,10 @@
               300
 ],
             "noiseFactor": 0.05,
-            "index": 1
+            "index": 2
           }
         }
       }
-    },
-    "air_extinguisher": {
-      "prevModification": "heli_night_vision_system",
-      "tier": 4,
-      "modClass": "armor",
-      "invertEnableLogic": false
     }
   },
   "user_skin": {
@@ -3798,30 +3778,6 @@
     "replace_tex": {
       "from": "av_8b_plus_n*"
     }
-  },
-  "bailout": {
-    "buttonHoldTime": 1.0,
-    "wreckSpeed": 10.0,
-    "wreckDir": [
-      -5.0,
-      5.0,
-      0.0
-    ],
-    "seatEjectDelay": 0.5,
-    "ejectInterval": 0.7,
-    "seatVel": [
-      -10.0,
-      20.0,
-      0.0
-    ],
-    "minHeight": 0.0,
-    "minSpeed": 0.0,
-    "hasSafeExit": true,
-    "wreck": "blister2",
-    "seat": "seat_01",
-    "seat": "blister2",
-    "fxEmitter": "blister2",
-    "fxType": "catapult_expl_ejection"
   },
   "cutting": {
     "_emtr_break_wing0_l_from": [
@@ -3837,22 +3793,22 @@
     "emtr_break_wing1_l_from": [
       -0.14813,
       0.450516,
-      1.53764
+      1.68764
     ],
     "emtr_break_wing1_l_to": [
       -0.14813,
       0.450516,
-      1.69963
+      2.09963
     ],
     "emtr_break_wing2_l_from": [
       -0.14813,
       0.450516,
-      2.85761
+      2.71761
     ],
     "emtr_break_wing2_l_to": [
       -0.14813,
       0.450516,
-      3.14739
+      3.44739
     ],
     "_emtr_break_wing0_r_from": [
       -0.14813,
@@ -3867,22 +3823,22 @@
     "emtr_break_wing1_r_from": [
       -0.14813,
       0.450516,
-      -1.53764
+      -1.68764
     ],
     "emtr_break_wing1_r_to": [
       -0.14813,
       0.450516,
-      -1.69963
+      -2.09963
     ],
     "emtr_break_wing2_r_from": [
       -0.14813,
       0.450516,
-      -2.85761
+      -2.71761
     ],
     "emtr_break_wing2_r_to": [
       -0.14813,
       0.450516,
-      -3.14739
+      -3.44739
     ],
     "emtr_break_wing_tail": [
       -4.14847,

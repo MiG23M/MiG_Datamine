@@ -61,6 +61,9 @@
   "smokeScreenDmPart": "engine_dm",
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_no_therm_small",
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "formatVersion": 2,
     "armorClass": "RHA_tank_modern",
@@ -138,12 +141,10 @@
       "ex_armor_turret_l_02_dm": {      },
       "ex_armor_turret_l_03_dm": {      },
       "ex_armor_turret_l_04_dm": {      },
-      "ex_armor_turret_l_05_dm": {      },
       "ex_armor_turret_r_01_dm": {      },
       "ex_armor_turret_r_02_dm": {      },
       "ex_armor_turret_r_03_dm": {      },
       "ex_armor_turret_r_04_dm": {      },
-      "ex_armor_turret_r_05_dm": {      },
       "ex_armor_07_dm": {      },
       "ex_armor_08_dm": {      },
       "ex_armor_body_l_07_dm": {      },
@@ -2255,8 +2256,8 @@
       },
       "limits": {
         "yaw": [
-          -70.0,
-          70.0
+          -180.0,
+          180.0
         ],
         "pitch": [
           -4.0,
@@ -3705,18 +3706,14 @@
     "125mm_ussr_ATGM_ammo_pack": {
       "tier": 3
     },
-    "tank_bulldozer_blade_bhishma": {
-      "modClass": "protection",
+    "t_90s_twmp": {
       "tier": 1,
+      "invertEnableLogic": false,
       "turn_it_off": false,
-      "group": "t90_equip",
       "effects": {
-        "rcostAddParam": 0.99,
-        "diggingAvailable": true,
-        "diggingActivateTime": 3.0,
-        "diggingLevel": 0.25,
-        "digMaxSpeed": 7.0,
-        "digMaxRevSpeed": -12.0,
+        "rcostAddParam": 0.98
+      },
+      "disableModEffects": {
         "hideNodes": {
           "node": "body_01",
           "node": "turret_06_front",
@@ -3959,8 +3956,8 @@
             },
             "limits": {
               "yaw": [
-                -70.0,
-                70.0
+                -180.0,
+                180.0
               ],
               "pitch": [
                 -4.0,
@@ -4081,7 +4078,7 @@
     "night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
       "animation": "video/unitModifications/night_vision_system_thermal.ivf",
-      "tier": 4,
+      "tier": 2,
       "modClass": "protection",
       "effects": {
         "nightVision": {

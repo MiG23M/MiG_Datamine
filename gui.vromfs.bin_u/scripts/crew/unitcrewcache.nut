@@ -3,7 +3,6 @@ from "%scripts/dagui_library.nut" import *
 
 
 let { add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
-let { convertBlk } = require("%sqstd/datablock.nut")
 
 //
 // Unit crew data cache.
@@ -30,7 +29,7 @@ let { convertBlk } = require("%sqstd/datablock.nut")
     this.lastUnitCrewId = crewId
     this.lastUnitName = unitName
     let unitCrewBlk = ::get_aircraft_crew_blk(this.lastUnitCrewId, this.lastUnitName)
-    this.lastUnitCrewData = convertBlk(unitCrewBlk)
+    this.lastUnitCrewData = ::buildTableFromBlk(unitCrewBlk)
   }
   return this.lastUnitCrewData
 }

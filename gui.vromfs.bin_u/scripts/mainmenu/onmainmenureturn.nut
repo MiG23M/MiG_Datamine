@@ -126,7 +126,6 @@ local function onMainMenuReturn(handler, isAfterLogin) {
     handler.doWhenActive(steamCheckNewItems)
     handler.doWhenActive(checkShowPersonalOffers)
     handler.doWhenActive(@() claimRegionalUnlockRewards())
-    handler.doWhenActiveOnce("checkShowDynamicLutSuggestion")
   }
 
   if (!isAfterLogin && isAllowPopups) {

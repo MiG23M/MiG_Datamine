@@ -2,8 +2,9 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
+
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
+
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { checkAndShowMultiplayerPrivilegeWarning, checkAndShowCrossplayWarning,
@@ -87,12 +88,12 @@ gui_handlers.InvitesWnd <- class extends gui_handlers.BaseGuiHandlerWT {
             return
 
           if (!invite.isAvailableByCrossPlay()) {
-            checkAndShowCrossplayWarning(@() showInfoMsgBox(invite.getRestrictionText()))
+            checkAndShowCrossplayWarning(@() ::showInfoMsgBox(invite.getRestrictionText()))
             return
           }
         }
         else
-          showInfoMsgBox(invite.getRestrictionText())
+          ::showInfoMsgBox(invite.getRestrictionText())
 
         return
       }
@@ -112,7 +113,7 @@ gui_handlers.InvitesWnd <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function initAutoClose() {
-    this.isAutoClose = loadLocalByAccount("wnd/invites_auto_close", true)
+    this.isAutoClose = ::loadLocalByAccount("wnd/invites_auto_close", true)
     this.scene.findObject("auto_close").setValue(this.isAutoClose)
   }
 
@@ -124,7 +125,7 @@ gui_handlers.InvitesWnd <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     this.isAutoClose = value
-    saveLocalByAccount("wnd/invites_auto_close", this.isAutoClose)
+    ::saveLocalByAccount("wnd/invites_auto_close", this.isAutoClose)
   }
 
   function onInviterInfo(obj) {

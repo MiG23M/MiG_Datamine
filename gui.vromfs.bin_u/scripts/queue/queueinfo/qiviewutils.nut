@@ -6,7 +6,6 @@ let SecondsUpdater = require("%sqDagui/timer/secondsUpdater.nut")
 let time = require("%scripts/time.nut")
 let { shopCountriesList } = require("%scripts/shop/shopCountriesList.nut")
 let { USEROPT_COUNTRY } = require("%scripts/options/optionsExtNames.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::g_qi_view_utils <- {
   function getQueueInfo(queue, txt = null) {
@@ -44,7 +43,7 @@ let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
   //fillheader
   foreach (_i, countryName in shopCountriesList)
     headerColumns.append({
-      image = getCountryIcon(countryName, false, !::events.isCountryAvailable(event, countryName))
+      image = ::get_country_icon(countryName, false, !::events.isCountryAvailable(event, countryName))
     })
 
   //fillrank rows
@@ -61,7 +60,7 @@ let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
     for (local rank = 1; rank <= ::max_country_rank; ++rank) {
       let row = {
         rowParam = "queueTableRow"
-        columns = [{ text = get_roman_numeral(rank) }]
+        columns = [{ text = ::get_roman_numeral(rank) }]
         isEven = rank % 2 == 0
       }
 
@@ -117,12 +116,12 @@ let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 ::g_qi_view_utils.updateShortQueueInfo <- function updateShortQueueInfo(timerObj, textObj, iconObj, txt = null) {
   if (!checkObj(timerObj))
     return
-  SecondsUpdater(timerObj,  function(_obj, _p) {
+  SecondsUpdater(timerObj, (@(textObj, iconObj) function(_obj, _p) {
     let queue = ::queues.findQueue({}) //first active queue
     if (checkObj(textObj))
       textObj.setValue(::g_qi_view_utils.getQueueInfo(queue, txt))
     if (checkObj(iconObj))
       iconObj.show(!!queue)
     return !queue
-  })
+  })(textObj, iconObj))
 }

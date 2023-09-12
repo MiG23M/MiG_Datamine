@@ -1,4 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
 
 let u = require("%sqStdLibs/helpers/u.nut")
 let elemViewType = require("%sqDagui/elemUpdater/elemViewType.nut")
@@ -11,7 +10,7 @@ local assertOnce = function(_uniqId, errorText) { throw(errorText) }
 
 let BhvUpdater = class {
   eventMask    = EV_ON_CMD
-  valuePID     = dagui_propid_add_name_id("value")
+  valuePID     = ::dagui_propid.add_name_id("value")
 
   function onAttach(obj) {
     if (obj?.value) {
@@ -69,7 +68,7 @@ let BhvUpdater = class {
   }
 }
 
-replace_script_gui_behaviour("bhvUpdater", BhvUpdater)
+::replace_script_gui_behaviour("bhvUpdater", BhvUpdater)
 
 return {
   setAssertFunction = @(func) assertOnce = func  //void func(uniqId, assertText)

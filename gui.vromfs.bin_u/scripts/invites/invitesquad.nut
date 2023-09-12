@@ -9,10 +9,8 @@ let { needProceedSquadInvitesAccept,
 let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
 let { add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
-let { registerInviteClass } = require("%scripts/invites/invitesClasses.nut")
-let BaseInvite = require("%scripts/invites/inviteBase.nut")
 
-let Squad = class extends BaseInvite {
+::g_invites_classes.Squad <- class extends ::BaseInvite {
   //custom class params, not exist in base invite
   squadId = 0
   leaderId = 0
@@ -210,5 +208,3 @@ let Squad = class extends BaseInvite {
     return true
   }
 }
-
-registerInviteClass("Squad", Squad)

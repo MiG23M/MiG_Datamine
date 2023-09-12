@@ -45,6 +45,9 @@
   "rearmTimeOnField": 120.0,
   "rearmSmokeTimeOnField": 60.0,
   "canReloadNonGuns": true,
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "ikGunner": {
     "model": "us_gunner_char",
     "maxHeadHorAngle": 60.0,
@@ -459,6 +462,7 @@
       "turret_bottom_dm": {      },
       "turret_side_dm": {      },
       "turret_back_dm": {      },
+      "turret_top_dm": {      },
       "turret_01_back_dm": {      },
       "turret_03_back_dm": {      },
       "turret_04_back_dm": {
@@ -497,11 +501,6 @@
       "turret_05_bottom_dm": {      },
       "turret_02_side_dm": {      },
       "turret_02_back_dm": {      }
-    },
-    "glass": {
-      "armorClass": "armored_glass",
-      "armorThickness": 40.0,
-      "turret_top_dm": {      }
     },
     "optics": {
       "armorClass": "optics_tank",
@@ -1737,10 +1736,6 @@
       "role": "commander"
     }
   },
-  "attachables": {
-    "ex_decor_03_dm": true,
-    "ex_armor_01_dm": true
-  },
   "MetaParts": {
     "open_fightning_compartment": {
       "part": "driver_dm",
@@ -2014,14 +2009,14 @@
       "emittersHierarchy": true,
       "ammoDpGenFmt": "ammo_turret_%02d_dm",
       "recoilMultiplier": 0.0,
-      "staticElevation": 17.0,
+      "staticElevation": 0.0,
       "createGunEffects": true,
       "barrelDP": "gun_barrel_dm",
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
       "allowableDelta": 20.0,
-      "speedYaw": 90.0,
-      "speedPitch": 60.0,
+      "speedYaw": 50.0,
+      "speedPitch": 50.0,
       "bullets": 12,
       "salvoAmount": 100.0,
       "ChainfireTime": 0.0,
@@ -2064,13 +2059,6 @@
     "preset": {
       "name": "us_mim_72_chaparral_default",
       "blk": "gameData/units/tankModels/weaponPresets/us_mim_72_chaparral_default.blk"
-    }
-  },
-  "sensors": {
-    "sensor": {
-      "blk": "gameData/sensors/us_chaparral_track.blk",
-      "turretIndex": 0,
-      "dmPart": "optic_gun_dm"
     }
   },
   "VehiclePhys": {
@@ -3091,8 +3079,8 @@
       -8.0
     ],
     "headPosOnShooting": [
-      -1.6,
-      4.0,
+      -0.6,
+      3.4,
       0.0
     ],
     "zoomOutFov": 12.3,

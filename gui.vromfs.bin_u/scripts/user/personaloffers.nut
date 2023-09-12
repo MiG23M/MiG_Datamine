@@ -22,7 +22,6 @@ let { stashBhvValueConfig } = require("%sqDagui/guiBhv/guiBhvValueConfig.nut")
 let prizesRewardWnd = require("%scripts/items/prizesRewardWnd.nut")
 let { performPromoAction } = require("%scripts/promo/promo.nut")
 let { getUnlockCost } = require("%scripts/unlocks/unlocksModule.nut")
-let { convertBlk } = require("%sqstd/datablock.nut")
 
 let offerTypes = {
   unit = "shop/section/premium"
@@ -149,7 +148,7 @@ let class PersonalOfferHandler extends gui_handlers.BaseGuiHandlerWT {
         let typeText = getFullUnitRoleText(unit)
         itemData.unitType <- colorize(::getUnitClassColor(unit), $"{typeText} {fonticon}")
         itemData.br <- format("%.1f", unit.getBattleRating(::get_current_ediff()))
-        itemData.unitRank <- "".concat(loc("shop/age"), loc("ui/colon"), get_roman_numeral(unit.rank))
+        itemData.unitRank <- "".concat(loc("shop/age"), loc("ui/colon"), ::get_roman_numeral(unit.rank))
         itemData.btnTooltip <- button[0].tooltip
         itemData.funcName <- button[0].funcName
         itemData.actionParamsMarkup <- button[0].actionParamsMarkup
@@ -212,7 +211,7 @@ let class PersonalOfferHandler extends gui_handlers.BaseGuiHandlerWT {
     let cb = Callback(function() {
       clearOfferCache()
       this.goBack()
-      prizesRewardWnd({ configsArray = (this.offerBlk % "i").map(@(v) convertBlk(v)) })
+      prizesRewardWnd({ configsArray = (this.offerBlk % "i").map(@(v) ::buildTableFromBlk(v)) })
     }, this)
     ::g_tasker.addTask(taskId, { showProgressBox = true }, cb)
   }

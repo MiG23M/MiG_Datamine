@@ -194,14 +194,14 @@ let Promo = class {
     let objScene = obj.getScene()
     objScene.performDelayed(
       this,
-      function() {
+      (@(owner, obj, widgetsTable) function() { //-ident-hides-ident
         if (!checkObj(obj))
           return
 
-        if (!performPromoAction(this.owner, obj))
+        if (!performPromoAction(owner, obj))
           if (checkObj(obj))
-            setSimpleWidgetData(this.widgetsTable, obj.id)
-      }
+            setSimpleWidgetData(widgetsTable, obj.id)
+      })(this.owner, obj, this.widgetsTable)
     )
   }
 

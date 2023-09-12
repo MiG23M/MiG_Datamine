@@ -5,7 +5,7 @@ let { IlsColor, IlsLineScale, TargetPosValid, TargetPos, RocketMode, BombCCIPMod
 let { Roll, ClimbSpeed, Tangage, Speed, Altitude, CompassValue } = require("%rGui/planeState/planeFlyState.nut")
 let string = require("string")
 let { compassWrap } = require("ilsCompasses.nut")
-let { CurWeaponName, ShellCnt, SelectedTrigger, SelectedWeapSlot } = require("%rGui/planeState/planeWeaponState.nut")
+let { CurWeaponName, ShellCnt, SelectedTrigger } = require("%rGui/planeState/planeWeaponState.nut")
 let { IsHighRateOfFire, RocketsSalvo, BombsSalvo, IsAgmLaunchZoneVisible,
  IlsAtgmLaunchEdge1X, IlsAtgmLaunchEdge1Y, IlsAtgmLaunchEdge2X, IlsAtgmLaunchEdge2Y,
  IlsAtgmLaunchEdge3X, IlsAtgmLaunchEdge3Y, IlsAtgmLaunchEdge4X, IlsAtgmLaunchEdge4Y,
@@ -301,7 +301,6 @@ let compass = function(width, height) {
 let GunMode = Computed(@() !RocketMode.value && !BombCCIPMode.value && !AtgmMode.value && !isAAMMode.value)
 let DistValue = Computed(@() string.format("%.1f", (AtgmMode.value || (GunMode.value && AimLockValid.value) ? AimLockDist.value : DistToTarget.value) / 1000.0))
 let GunHasShell = Computed(@() GunMode.value && ShellCnt.value > 0)
-let SpiMode = Computed(@() GunMode.value && AimLockValid.value)
 let reticle = @() {
   size = flex()
   watch = [TargetPosValid, AimLockValid, AtgmMode, isAAMMode, GunMode]
@@ -317,7 +316,8 @@ let reticle = @() {
         [VECTOR_LINE, 0, 0, 0, 0]
       ]
       children = [
-        {
+        @(){
+          watch = GunHasShell
           size = SIZE_TO_CONTENT
           pos = [pw(130), ph(-90)]
           rendObj = ROBJ_TEXT
@@ -325,10 +325,6 @@ let reticle = @() {
           fontSize = 40
           font = Fonts.ils31
           text = GunHasShell.value ? "ПР" : ""
-          behavior = Behaviors.RtPropUpdate
-          update = @(){
-            text = GunHasShell.value && (!SpiMode.value || AimLockPos[0] > IlsPosSize[2] * 0.35 ) ? "ПР" : ""
-          }
         }
         @(){
           watch = DistValue
@@ -352,31 +348,16 @@ let reticle = @() {
   ] : null
 }
 
-let spiLimits = @(){
-  watch = SpiMode
-  size = flex()
-  children = SpiMode.value ? [
-    {
-      size = flex()
-      rendObj = ROBJ_VECTOR_CANVAS
-      color = IlsColor.value
-      lineWidth = baseLineWidth * IlsLineScale.value * 0.5
-      commands = [
-        [VECTOR_LINE, 35, 0, 35, 100]
-      ]
-    }
-  ] : null
-}
 
 let shellName = @(){
-  watch = [IlsColor, CurWeaponName, GunMode, SpiMode]
+  watch = [IlsColor, CurWeaponName, GunMode]
   size = SIZE_TO_CONTENT
   rendObj = ROBJ_TEXT
   pos = [pw(70), ph(82)]
   color = IlsColor.value
   fontSize = 35
   font = Fonts.ils31
-  text = SpiMode.value ? "ППУ" : GunMode.value ? "НПУ" : loc(string.format("%s/ils_28", CurWeaponName.value))
+  text = GunMode.value ? "НПУ" : loc(string.format("%s/ils_28", CurWeaponName.value))
 }
 
 let shellCnt = @() {
@@ -446,16 +427,15 @@ let burstLength = @(){
   text = burstLenStr.value
 }
 
-let IsInnerSlot = Computed(@() SelectedWeapSlot.value == 3 || SelectedWeapSlot.value == 4)
 let selectedStation = @(){
-  watch = [RocketMode, AtgmMode, isAAMMode, CurWeaponName, GunMode, SelectedWeapSlot]
+  watch = [RocketMode, AtgmMode, isAAMMode, CurWeaponName, GunMode]
   size = SIZE_TO_CONTENT
   rendObj = ROBJ_TEXT
   pos = [pw(75), ph(85)]
   color = IlsColor.value
   fontSize = 35
   font = Fonts.ils31
-  text = AtgmMode.value ? loc(string.format("%s/ils_28_st", CurWeaponName.value)) : isAAMMode.value ? "ППС" : RocketMode.value || BombCCIPMode.value ? (IsInnerSlot.value ? "ВНУТР" : "ВНЕШ") : ""
+  text = AtgmMode.value ? loc(string.format("%s/ils_28_st", CurWeaponName.value)) : isAAMMode.value ? "ППС" : RocketMode.value || BombCCIPMode.value ? "ВНЕТШ" : ""
 }
 
 let function agmLaunchZone(width, height) {
@@ -478,7 +458,7 @@ let function agmLaunchZone(width, height) {
 }
 
 let atgmLaunchPermitted = @() {
-  watch = [AtgmMode, IsInsideLaunchZoneYawPitch, IsInsideLaunchZoneDist, RocketMode, SpiMode]
+  watch = [AtgmMode, IsInsideLaunchZoneYawPitch, IsInsideLaunchZoneDist, RocketMode]
   size = flex()
   children = (AtgmMode.value && IsInsideLaunchZoneYawPitch.value && IsInsideLaunchZoneDist.value) ||
     (RocketMode.value && !AtgmMode.value && ShellCnt.value > 0) ?
@@ -681,7 +661,6 @@ let function Ils28K(width, height) {
       TAMark
       maneuverOrientation
       aimLockPosMark
-      spiLimits
     ]
   }
 }

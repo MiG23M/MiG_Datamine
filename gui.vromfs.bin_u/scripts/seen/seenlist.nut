@@ -8,8 +8,6 @@ let time = require("%scripts/time.nut")
 let seenListEvents = require("%scripts/seen/seenListEvents.nut")
 let { register_command } = require("console")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 let activeSeenLists = {}
 
@@ -121,7 +119,7 @@ local SeenList = class {
     this.isInited = true
 
     this.entitiesData.clear()
-    let blk = loadLocalAccountSettings(this.getSaveId())
+    let blk = ::load_local_account_settings(this.getSaveId())
     if (u.isDataBlock(blk))
       for (local i = 0; i < blk.paramCount(); i++)
         this.entitiesData[blk.getParamName(i)] <- blk.getParamValue(i)
@@ -170,7 +168,7 @@ local SeenList = class {
       foreach (name, day in this.entitiesData)
         saveBlk[name] = day
     }
-    saveLocalAccountSettings(this.getSaveId(), saveBlk)
+    ::save_local_account_settings(this.getSaveId(), saveBlk)
   }
 
   function setSeen(entityOrList, shouldSeen) {

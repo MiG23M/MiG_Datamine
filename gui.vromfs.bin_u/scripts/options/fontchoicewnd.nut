@@ -1,8 +1,7 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
 
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
+
 let FONT_CHOICE_SAVE_ID = "tutor/fontChange"
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
@@ -24,11 +23,11 @@ gui_handlers.FontChoiceWnd <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   static function isSeen() {
-    return loadLocalAccountSettings(FONT_CHOICE_SAVE_ID, false)
+    return ::load_local_account_settings(FONT_CHOICE_SAVE_ID, false)
   }
 
   static function markSeen(isMarkSeen = true) {
-    return saveLocalAccountSettings(FONT_CHOICE_SAVE_ID, isMarkSeen)
+    return ::save_local_account_settings(FONT_CHOICE_SAVE_ID, isMarkSeen)
   }
 
   function getSceneTplView() {

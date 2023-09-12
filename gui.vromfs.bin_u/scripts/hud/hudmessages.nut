@@ -17,9 +17,8 @@ let { getHudUnitType } = require("hudState")
 let { HUD_UNIT_TYPE } = require("%scripts/hud/hudUnitType.nut")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_HUD_VISIBLE_KILLLOG, USEROPT_HUD_VISIBLE_REWARDS_MSG
 } = require("%scripts/options/optionsExtNames.nut")
-let { create_ObjMoveToOBj } = require("%sqDagui/guiBhv/bhvAnim.nut")
 
-local heightPID = dagui_propid_add_name_id("height")
+local heightPID = ::dagui_propid.add_name_id("height")
 
 ::g_hud_messages <- {
   types = []
@@ -54,7 +53,7 @@ local heightPID = dagui_propid_add_name_id("height")
   }
 
   findMessageById = function(id) {
-    return u.search(this.stack,  function(m) { return getTblValue("id", m.messageData, -1) == id })
+    return u.search(this.stack, (@(id) function(m) { return getTblValue("id", m.messageData, -1) == id })(id))
   }
 
   subscribeHudEvents = function() {
@@ -449,7 +448,7 @@ enums.addTypesByGlobalName("g_hud_messages", {
     rewardClearTimer = null
     curRewardPriority = REWARD_PRIORITY.noPriority
 
-    _animTimerPid = dagui_propid_add_name_id("_transp-timer")
+    _animTimerPid = ::dagui_propid.add_name_id("_transp-timer")
 
     reinit = function (inScene, inTimers) {
       this.setScene(inScene, inTimers)
@@ -702,7 +701,7 @@ enums.addTypesByGlobalName("g_hud_messages", {
 
       if (this.stack.useMoveOut && this.nest.isVisible()) { //no need animation when scene invisible
         let objStart = this.scene.findObject("mission_result_box_start")
-        create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = 0.5, bhvFunc = "elasticSmall" })
+        ::create_ObjMoveToOBj(this.scene, objStart, objTarget, { time = 0.5, bhvFunc = "elasticSmall" })
       }
     }
 

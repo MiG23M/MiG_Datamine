@@ -8,8 +8,6 @@ let { matchingApiFunc } = require("%scripts/matching/api.nut")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_QUEUE_EVENT_CUSTOM_MODE, USEROPT_QUEUE_JIP,
   USEROPT_DISPLAY_MY_REAL_NICK, USEROPT_AUTO_SQUAD
 } = require("%scripts/options/optionsExtNames.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 ::queue_classes.Event <- class extends ::queue_classes.Base {
   shouldQueueCustomMode = false
@@ -74,10 +72,10 @@ let { saveLocalAccountSettings, loadLocalAccountSettings
 
   static function getCustomModeSaveId(eventName) { return "queue/customEvent/" + eventName }
   static function getShouldQueueCustomMode(eventName) {
-    return loadLocalAccountSettings(::queue_classes.Event.getCustomModeSaveId(eventName), false)
+    return ::load_local_account_settings(::queue_classes.Event.getCustomModeSaveId(eventName), false)
   }
   static function setShouldQueueCustomMode(eventName, shouldSave) {
-    return saveLocalAccountSettings(::queue_classes.Event.getCustomModeSaveId(eventName), shouldSave)
+    return ::save_local_account_settings(::queue_classes.Event.getCustomModeSaveId(eventName), shouldSave)
   }
 
   static function getCustomMgm(eventName) {

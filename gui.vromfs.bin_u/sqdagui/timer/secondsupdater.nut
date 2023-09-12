@@ -1,4 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
 
 let u = require("%sqStdLibs/helpers/u.nut")
 let { check_obj } = require("%sqDagui/daguiUtil.nut")

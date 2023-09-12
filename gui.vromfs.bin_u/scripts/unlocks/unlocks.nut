@@ -23,7 +23,6 @@ let { getDifficultyTypeByTask } = require("%scripts/unlocks/battleTaskDifficulty
 let { isBattleTask, isBattleTaskDone, isBattleTaskExpired, getBattleTaskById, getBattleTaskNameById
 } = require("%scripts/unlocks/battleTasks.nut")
 let { get_charserver_time_sec } = require("chard")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 let getEmptyConditionsConfig = @() {
   id = ""
@@ -708,7 +707,7 @@ let function setRewardIconCfg(cfg, blk, unlocked) {
     case UNLOCKABLE_DYNCAMPAIGN:
     case UNLOCKABLE_YEAR:
       if (unlockBlk?.mode.country)
-        res.image = getCountryIcon(unlockBlk.mode.country)
+        res.image = ::get_country_icon(unlockBlk.mode.country)
       break
 
     case UNLOCKABLE_SKILLPOINTS:
@@ -720,7 +719,7 @@ let function setRewardIconCfg(cfg, blk, unlocked) {
       let skillPointsStr = ::getCrewSpText(skillPoints)
 
       if (::checkCountry(country, "userlog EULT_*_CREW"))
-        res.image2 = getCountryIcon(country)
+        res.image2 = ::get_country_icon(country)
 
       res.desc = crewName + loc("unlocks/skillpoints/desc") + skillPointsStr
       res.image = "#ui/gameuiskin#log_crew"
@@ -738,7 +737,7 @@ let function setRewardIconCfg(cfg, blk, unlocked) {
       break
 
     case UNLOCKABLE_INVENTORY:
-      let item = ::ItemsManager.isItemdefId(id) ? ::ItemsManager.getItemOrRecipeBundleById(to_integer_safe(id)) : null
+      let item = ::ItemsManager.isItemdefId(id) ? ::ItemsManager.getItemOrRecipeBundleById(::to_integer_safe(id)) : null
       if (item) {
         res.title = getUnlockTypeText(uType, realId)
         res.name = item.getName()
@@ -830,7 +829,7 @@ let function setRewardIconCfg(cfg, blk, unlocked) {
         if (curStage == stage) {
           rBlock = sBlock
           if (unlockCfg.needToAddCurStageToName)
-            res.name = $"{res.name} {get_roman_numeral(stage + 1)}"
+            res.name = $"{res.name} {::get_roman_numeral(stage + 1)}"
           res.stage <- stage
           res.unlocked <- true
           res.iconStyle <- "default_unlocked"

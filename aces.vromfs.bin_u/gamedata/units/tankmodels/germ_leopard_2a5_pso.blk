@@ -50,6 +50,9 @@
   "rearmSmokeTimeOnField": 60.0,
   "canReloadNonGuns": true,
   "arcadePowerMult": 1.5,
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "formatVersion": 2,
     "armorClass": "RHA_tank_modern",
@@ -172,9 +175,6 @@
       "ex_armor_body_02_dm": {
         "armorThickness": 30.0,
         "armorClass": "tank_structural_steel"
-      },
-      "turret_10_back_dm": {
-        "armorThickness": 20.0
       }
     },
     "turret": {
@@ -202,9 +202,6 @@
       },
       "turret_08_top_dm": {
         "armorThickness": 40.0
-      },
-      "turret_10_top_dm": {
-        "armorThickness": 10.0
       },
       "turret_08_front_dm": {
         "armorThickness": 13.0
@@ -313,12 +310,6 @@
       "turret_10_side_dm": {
         "armorThickness": 10.0,
         "createSecondaryShatters": false
-      },
-      "turret_11_front_dm": {
-        "armorThickness": 10.0
-      },
-      "turret_11_side_dm": {
-        "armorThickness": 10.0
       }
     },
     "inner_armor": {
@@ -597,7 +588,8 @@
       "ex_decor_l_01_dm": {      },
       "ex_decor_l_11_dm": {      },
       "ex_decor_r_06_dm": {      },
-      "ex_decor_l_06_dm": {      }
+      "ex_decor_l_06_dm": {      },
+      "turret_10_top_dm": {      }
     },
     "optics": {
       "armorClass": "optics_tank",
@@ -2361,42 +2353,18 @@
       "limitsTable": {
         "lim1": [
           -180.0,
-          -135.0,
+          -140.0,
           3.0,
           3.0
         ],
         "lim2": [
-          -135.0,
-          -130.0,
+          -140.0,
+          140.0,
           -9.0,
           -9.0
         ],
         "lim3": [
-          -130.0,
-          -110.0,
-          0.0,
-          0.0
-        ],
-        "lim4": [
-          -110.0,
-          110.0,
-          -9.0,
-          -9.0
-        ],
-        "lim5": [
-          110.0,
-          130.0,
-          0.0,
-          0.0
-        ],
-        "lim6": [
-          130.0,
-          135.0,
-          -9.0,
-          -9.0
-        ],
-        "lim7": [
-          135.0,
+          140.0,
           180.0,
           3.0,
           3.0
@@ -2476,7 +2444,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "machinegun",
-      "blk": "gameData/Weapons/groundModels_weapons/12_7mm_sMG_50_user_machinegun.blk",
+      "blk": "gameData/Weapons/groundModels_weapons/12_7mm_M2_HB_user_machinegun.blk",
       "emitter": "bone_mg_aa_v_01",
       "flash": "emtr_mg_flame_04",
       "useEmitter": true,
@@ -2484,8 +2452,8 @@
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
       "parkInDeadzone": false,
-      "speedYaw": 60.0,
-      "speedPitch": 30.0,
+      "speedYaw": 90.0,
+      "speedPitch": 90.0,
       "bullets": 800,
       "isBulletBelt": true,
       "fireConeAngle": 5.0,
@@ -2504,8 +2472,8 @@
       "turret": {
         "head": "bone_mg_aa_h_01",
         "gun": "bone_mg_aa_v_01",
-        "gunnerDm": "commander_dm",
-        "hasNightVision": true
+        "gunnerDm": "loader_dm",
+        "hasNightVision": false
       },
       "limits": {
         "yaw": [
@@ -2514,7 +2482,7 @@
         ],
         "pitch": [
           -10.0,
-          70.0
+          75.0
         ]
       },
       "limitsTable": {
@@ -2526,24 +2494,24 @@
         ],
         "lim2": [
           -20.0,
-          45.0,
+          15.0,
           -10.0,
           -10.0
         ],
         "lim3": [
-          45.0,
-          60.0,
-          10.0,
-          10.0
+          15.0,
+          35.0,
+          -10.0,
+          -10.0
         ],
         "lim4": [
-          60.0,
-          80.0,
-          10.0,
-          10.0
+          35.0,
+          50.0,
+          -10.0,
+          -10.0
         ],
         "lim5": [
-          80.0,
+          50.0,
           130.0,
           -10.0,
           -10.0
@@ -2560,38 +2528,6 @@
           -10.0,
           -10.0
         ]
-      },
-      "gunStabilizer": {
-        "hasVerticalGunFreeMode": false,
-        "hasHorizontal": true,
-        "horizontalOmegaMult": 1.0,
-        "horizontalSpeedLimitKPH": 75.0,
-        "hasVertical": true,
-        "verticalOmegaMult": 1.0,
-        "verticalSpeedLimitKPH": 75.0,
-        "speedFromVehicleVerticalMult": -1.0,
-        "errorKPHToDegrees": {
-          "row": [
-            5.0,
-            0.0
-          ],
-          "row": [
-            25.0,
-            0.015
-          ],
-          "row": [
-            35.0,
-            0.02
-          ],
-          "row": [
-            45.0,
-            0.1
-          ],
-          "row": [
-            50.0,
-            0.3
-          ]
-        }
       }
     },
     "Weapon": {
@@ -2703,41 +2639,31 @@
       "cls_body": "convex_hull"
     },
     "engine": {
-      "horsePowers": 1630.0,
-      "maxRPM": 3000.0,
-      "minRPM": 800.0,
-      "manufacturer": "mtu",
-      "model": "mt_883_ka_501"
+      "horsePowers": 1650.0,
+      "maxRPM": 2600.0,
+      "minRPM": 800.0
     },
     "mechanics": {
       "steerType": "clutch_braking",
       "maxBrakeForce": 300000.0,
       "driveGearRadius": 0.312,
-      "mainGearRatio": 4.21,
+      "mainGearRatio": 4.47,
       "sideGearRatio": 1.0,
       "neutralGearRatio": 9.0,
       "gearRatios": {
-        "ratio": -1.23,
-        "ratio": -1.5,
-        "ratio": -1.83,
-        "ratio": -2.15,
-        "ratio": -2.55,
-        "ratio": -3.0,
-        "ratio": -3.72,
-        "ratio": -5.0,
-        "ratio": -7.45,
-        "ratio": -14.0,
+        "ratio": -2.209,
+        "ratio": -3.3565,
+        "ratio": -4.504,
+        "ratio": -9.008,
         "ratio": 0.0,
-        "ratio": 14.0,
-        "ratio": 7.45,
-        "ratio": 5.0,
-        "ratio": 3.72,
-        "ratio": 3.0,
-        "ratio": 2.55,
-        "ratio": 2.15,
-        "ratio": 1.83,
-        "ratio": 1.5,
-        "ratio": 1.23
+        "ratio": 9.008,
+        "ratio": 4.504,
+        "ratio": 3.3565,
+        "ratio": 2.209,
+        "ratio": 1.866,
+        "ratio": 1.523,
+        "ratio": 1.263,
+        "ratio": 1.003
       }
     },
     "suspension": {
@@ -3499,154 +3425,6 @@
     ],
     "detectionHeight": 2.48
   },
-  "ammoStowages": {
-    "ammo1": {
-      "weaponTrigger": "gunner0",
-      "removeLoadedAmmo": true,
-      "replenishmentTime": 13.0,
-      "replenishmentDelay": 4.0,
-      "shells": {
-        "fireParamsPreset": "turret_bustle",
-        "fatalFire": false,
-        "fatalExplosion": false,
-        "firstStage": true,
-        "ammo_turret_01_dm": {
-          "count": 1
-        },
-        "ammo_turret_02_dm": {
-          "count": 1
-        },
-        "ammo_turret_03_dm": {
-          "count": 1
-        },
-        "ammo_turret_04_dm": {
-          "count": 1
-        },
-        "ammo_turret_05_dm": {
-          "count": 1
-        },
-        "ammo_turret_06_dm": {
-          "count": 1
-        },
-        "ammo_turret_07_dm": {
-          "count": 1
-        },
-        "ammo_turret_08_dm": {
-          "count": 1
-        },
-        "ammo_turret_09_dm": {
-          "count": 1
-        },
-        "ammo_turret_10_dm": {
-          "count": 1
-        },
-        "ammo_turret_11_dm": {
-          "count": 1
-        },
-        "ammo_turret_12_dm": {
-          "count": 1
-        },
-        "ammo_turret_13_dm": {
-          "count": 1
-        },
-        "ammo_turret_14_dm": {
-          "count": 1
-        },
-        "ammo_turret_15_dm": {
-          "count": 1
-        }
-      },
-      "shells": {
-        "fatalFire": true,
-        "fatalExplosion": true,
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
-        "reloadTimeMult": 4.0,
-        "ammo_body_01_dm": {
-          "count": 1
-        },
-        "ammo_body_02_dm": {
-          "count": 1
-        },
-        "ammo_body_03_dm": {
-          "count": 1
-        },
-        "ammo_body_04_dm": {
-          "count": 1
-        },
-        "ammo_body_05_dm": {
-          "count": 1
-        },
-        "ammo_body_06_dm": {
-          "count": 1
-        },
-        "ammo_body_07_dm": {
-          "count": 1
-        },
-        "ammo_body_08_dm": {
-          "count": 1
-        },
-        "ammo_body_09_dm": {
-          "count": 1
-        },
-        "ammo_body_10_dm": {
-          "count": 1
-        },
-        "ammo_body_11_dm": {
-          "count": 1
-        },
-        "ammo_body_12_dm": {
-          "count": 1
-        },
-        "ammo_body_13_dm": {
-          "count": 1
-        },
-        "ammo_body_14_dm": {
-          "count": 1
-        },
-        "ammo_body_15_dm": {
-          "count": 1
-        },
-        "ammo_body_16_dm": {
-          "count": 1
-        },
-        "ammo_body_17_dm": {
-          "count": 1
-        },
-        "ammo_body_18_dm": {
-          "count": 1
-        },
-        "ammo_body_19_dm": {
-          "count": 1
-        },
-        "ammo_body_20_dm": {
-          "count": 1
-        },
-        "ammo_body_21_dm": {
-          "count": 1
-        },
-        "ammo_body_22_dm": {
-          "count": 1
-        },
-        "ammo_body_23_dm": {
-          "count": 1
-        },
-        "ammo_body_24_dm": {
-          "count": 1
-        },
-        "ammo_body_25_dm": {
-          "count": 1
-        },
-        "ammo_body_26_dm": {
-          "count": 1
-        },
-        "ammo_body_27_dm": {
-          "count": 1
-        }
-      }
-    }
-  },
   "modifications": {
     "new_tank_tracks": {    },
     "new_tank_suspension": {    },
@@ -3678,11 +3456,6 @@
         "diggingLevel": 0.25,
         "digMaxSpeed": 7.0,
         "digMaxRevSpeed": -12.0,
-        "collisionProps": {
-          "cls_body_01": "convex_hull",
-          "cls_body": "convex_hull",
-          "cls_turret": "convex_hull"
-        },
         "hideNodes": {        }
       },
       "disableModEffects": {
@@ -3775,42 +3548,18 @@
             "limitsTable": {
               "lim1": [
                 -180.0,
-                -135.0,
+                -140.0,
                 3.0,
                 3.0
               ],
               "lim2": [
-                -135.0,
-                -130.0,
+                -140.0,
+                140.0,
                 -9.0,
                 -9.0
               ],
               "lim3": [
-                -130.0,
-                -110.0,
-                0.0,
-                0.0
-              ],
-              "lim4": [
-                -110.0,
-                110.0,
-                -9.0,
-                -9.0
-              ],
-              "lim5": [
-                110.0,
-                130.0,
-                0.0,
-                0.0
-              ],
-              "lim6": [
-                130.0,
-                135.0,
-                -9.0,
-                -9.0
-              ],
-              "lim7": [
-                135.0,
+                140.0,
                 180.0,
                 3.0,
                 3.0
@@ -3890,7 +3639,7 @@
           "Weapon": {
             "trigger": "gunner2",
             "triggerGroup": "machinegun",
-            "blk": "gameData/Weapons/groundModels_weapons/12_7mm_sMG_50_user_machinegun.blk",
+            "blk": "gameData/Weapons/groundModels_weapons/12_7mm_M2_HB_user_machinegun.blk",
             "emitter": "bone_mg_aa_v_01",
             "flash": "emtr_mg_flame_04",
             "useEmitter": true,
@@ -3898,8 +3647,8 @@
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
             "parkInDeadzone": false,
-            "speedYaw": 60.0,
-            "speedPitch": 30.0,
+            "speedYaw": 90.0,
+            "speedPitch": 90.0,
             "bullets": 800,
             "isBulletBelt": true,
             "fireConeAngle": 5.0,
@@ -3918,8 +3667,8 @@
             "turret": {
               "head": "bone_mg_aa_h_01",
               "gun": "bone_mg_aa_v_01",
-              "gunnerDm": "commander_dm",
-              "hasNightVision": true
+              "gunnerDm": "loader_dm",
+              "hasNightVision": false
             },
             "limits": {
               "yaw": [
@@ -3928,7 +3677,7 @@
               ],
               "pitch": [
                 -10.0,
-                70.0
+                75.0
               ]
             },
             "limitsTable": {
@@ -3940,24 +3689,24 @@
               ],
               "lim2": [
                 -20.0,
-                45.0,
+                15.0,
                 -10.0,
                 -10.0
               ],
               "lim3": [
-                45.0,
-                60.0,
-                10.0,
-                10.0
+                15.0,
+                35.0,
+                -10.0,
+                -10.0
               ],
               "lim4": [
-                60.0,
-                80.0,
-                10.0,
-                10.0
+                35.0,
+                50.0,
+                -10.0,
+                -10.0
               ],
               "lim5": [
-                80.0,
+                50.0,
                 130.0,
                 -10.0,
                 -10.0
@@ -3974,38 +3723,6 @@
                 -10.0,
                 -10.0
               ]
-            },
-            "gunStabilizer": {
-              "hasVerticalGunFreeMode": false,
-              "hasHorizontal": true,
-              "horizontalOmegaMult": 1.0,
-              "horizontalSpeedLimitKPH": 75.0,
-              "hasVertical": true,
-              "verticalOmegaMult": 1.0,
-              "verticalSpeedLimitKPH": 75.0,
-              "speedFromVehicleVerticalMult": -1.0,
-              "errorKPHToDegrees": {
-                "row": [
-                  5.0,
-                  0.0
-                ],
-                "row": [
-                  25.0,
-                  0.015
-                ],
-                "row": [
-                  35.0,
-                  0.02
-                ],
-                "row": [
-                  45.0,
-                  0.1
-                ],
-                "row": [
-                  50.0,
-                  0.3
-                ]
-              }
             }
           },
           "Weapon": {

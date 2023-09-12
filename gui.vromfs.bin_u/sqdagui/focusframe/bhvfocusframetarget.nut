@@ -1,4 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
 
 local onSetTarget = null    //onSetTarget(oDaguiObject)
 local onUnsetTarget = null  //onUnsetTarget(DaguiObject)
@@ -49,7 +48,7 @@ let function setCallbacks(onSetTargetCb, onUnsetTargetCb) {
 }
 
 
-replace_script_gui_behaviour("focusFrameTarget", bhvFocusFrameTarget)
+::replace_script_gui_behaviour("focusFrameTarget", bhvFocusFrameTarget)
 
 return {
   setCallbacks

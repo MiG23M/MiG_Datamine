@@ -5,10 +5,8 @@ let { AMMO,
         getAmmoAmount,
         getAmmoMaxAmount } = require("%scripts/weaponry/ammoInfo.nut")
 
-let { shopIsModificationAvailable, shopIsModificationPurchased } = require("chardResearch")
-
 let isReqModificationsUnlocked = @(unit, mod) mod?.reqModification.findvalue(
-  @(req) !shopIsModificationPurchased(unit.name, req)) == null
+  @(req) !::shop_is_modification_purchased(unit.name, req)) == null
 
 let function canBuyMod(unit, mod) {
   if (!isReqModificationsUnlocked(unit, mod))
@@ -63,7 +61,7 @@ let function isModMounted(unitName, modName) {
 }
 
 let function isModAvailableOrFree(unitName, modName) {
-  return (shopIsModificationAvailable(unitName, modName, true)
+  return (::shop_is_modification_available(unitName, modName, true)
           || (!::wp_get_modification_cost(unitName, modName) && !::wp_get_modification_cost_gold(unitName, modName)))
 }
 

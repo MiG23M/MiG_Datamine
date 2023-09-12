@@ -11,12 +11,10 @@ let { checkAndShowMultiplayerPrivilegeWarning,
   isMultiplayerPrivilegeAvailable } = require("%scripts/user/xboxFeatures.nut")
 let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
 let { get_charserver_time_sec } = require("chard")
-let { registerInviteClass } = require("%scripts/invites/invitesClasses.nut")
-let BaseInvite = require("%scripts/invites/inviteBase.nut")
 
 let knownTournamentInvites = []
 
-let TournamentBattle = class extends BaseInvite {
+::g_invites_classes.TournamentBattle <- class extends ::BaseInvite {
   //custom class params, not exist in base invite
   battleId = ""
   inviteTime = -1
@@ -40,7 +38,7 @@ let TournamentBattle = class extends BaseInvite {
   }
 
   function getTournamentBattleLink() {
-    return $"{BaseInvite.chatLinkPrefix}TB_{this.battleId}"
+    return $"{::BaseInvite.chatLinkPrefix}TB_{this.battleId}"
   }
 
   function getChatInviteText() {
@@ -166,4 +164,3 @@ let TournamentBattle = class extends BaseInvite {
   return true
 })
 
-registerInviteClass("TournamentBattle", TournamentBattle)

@@ -1,5 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
-
 let gui_handlers = {}
 let function register_gui_handler(key, handler){
   gui_handlers[key] <- handler

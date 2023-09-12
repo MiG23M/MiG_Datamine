@@ -17,7 +17,6 @@ let bhvUnseen = require("%scripts/seen/bhvUnseen.nut")
 let seenList = require("%scripts/seen/seenList.nut")
 let { needMarkSeenResource, disableMarkSeenResource } = require("%scripts/seen/markSeenResources.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
-let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 let class DecorMenuHandler extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.CUSTOM
@@ -184,7 +183,7 @@ let class DecorMenuHandler extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function getSavedPath() {
-    return loadLocalByAccount(this.curDecorType.currentOpenedCategoryLocalSafePath, "").split("/")
+    return ::loadLocalByAccount(this.curDecorType.currentOpenedCategoryLocalSafePath, "").split("/")
   }
 
   function show(isShown) {
@@ -274,7 +273,7 @@ let class DecorMenuHandler extends gui_handlers.BaseGuiHandlerWT {
 
   function savePath(categoryId, groupId = "") {
     let localPath = this.curDecorType.currentOpenedCategoryLocalSafePath
-    saveLocalByAccount(localPath, "/".join([categoryId, groupId], true))
+    ::saveLocalByAccount(localPath, "/".join([categoryId, groupId], true))
   }
 
   function getDecorButtonsView(decors) {
@@ -363,7 +362,6 @@ let class DecorMenuHandler extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onBtnCloseDecalsMenu() {
-    broadcastEvent("DecalsMenuClosed")
     this.show(false)
   }
 
@@ -420,7 +418,7 @@ let class DecorMenuHandler extends gui_handlers.BaseGuiHandlerWT {
   function onDecorItemNextHeader(listObj) {
     let parentList = listObj.getParent().getParent()
     if (!this.moveMouseOnDecalsHeader(parentList, 1))
-      set_dirpad_event_processed(false)
+      ::set_dirpad_event_processed(false)
   }
 
   function onFilterCancel(filterObj) {

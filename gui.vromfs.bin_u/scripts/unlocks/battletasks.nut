@@ -27,7 +27,6 @@ let { updateTimeParamsFromBlk, getDifficultyTypeByName, getDifficultyTypeByTask,
   EASY_TASK, MEDIUM_TASK, HARD_TASK, UNKNOWN_TASK
 } = require("%scripts/unlocks/battleTaskDifficulty.nut")
 let { Timer } = require("%sqDagui/timer/timer.nut")
-let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 const TASKS_OUT_OF_DATE_DAYS = 15
 const SEEN_SAVE_ID = "seen/battletasks"
@@ -293,7 +292,7 @@ let function loadSeenTasksData(forceLoad = false) {
     return true
 
   seenTasks.clear()
-  let blk = loadLocalByAccount(SEEN_SAVE_ID)
+  let blk = ::loadLocalByAccount(SEEN_SAVE_ID)
   if (isDataBlock(blk))
     for (local i = 0; i < blk.paramCount(); ++i) {
       let id = blk.getParamName(i)
@@ -346,7 +345,7 @@ let function saveSeenBattleTasksData() {
     blk[generationId] = day
   }
 
-  saveLocalByAccount(SEEN_SAVE_ID, blk)
+  ::saveLocalByAccount(SEEN_SAVE_ID, blk)
 }
 
 let function updatedProposedTasks() {
@@ -779,7 +778,7 @@ let function getRewardMarkUpConfig(task, config) {
   let rewardMarkUp = {}
   let itemId = getTblValue("userLogId", task)
   if (itemId) {
-    let item = ::ItemsManager.findItemById(to_integer_safe(itemId, itemId, false))
+    let item = ::ItemsManager.findItemById(::to_integer_safe(itemId, itemId, false))
     if (item)
       rewardMarkUp.itemMarkUp <- item.getNameMarkup(getTblValue("amount_trophies", task))
   }

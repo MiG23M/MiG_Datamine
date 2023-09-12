@@ -49,8 +49,6 @@ let { getLocIdsArray } = require("%scripts/langUtils/localization.nut")
 let { getGiftSparesCount, getGiftSparesCost } = require("%scripts/shop/giftSpares.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
-let { shopIsModificationEnabled } = require("chardResearch")
-let { getCountryFlagForUnitTooltip, getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 const MODIFICATORS_REQUEST_TIMEOUT_MSEC = 20000
 
@@ -134,7 +132,7 @@ let function fillProgressBar(obj, curExp, newExp, maxExp, isPaused = false) {
 }
 
 ::get_unit_country_icon <- function get_unit_country_icon(unit, needOperatorCountry = false) {
-  return getCountryIcon(needOperatorCountry ? unit.getOperatorCountry() : unit.shopCountry)
+  return ::get_country_icon(needOperatorCountry ? unit.getOperatorCountry() : unit.shopCountry)
 }
 
 ::isUnitGroup <- function isUnitGroup(unit) {
@@ -306,8 +304,8 @@ let isEventUnit = @(unit) unit.event != null
 
   local additionalCheckBox = null
 
-  scene_msg_box("need_money", null, msgText,
-                  [["yes", function() { ::impl_buyUnit(unit) } ],
+  ::scene_msg_box("need_money", null, msgText,
+                  [["yes", (@(unit) function() { ::impl_buyUnit(unit) })(unit) ],
                    ["no", function() {} ]],
                   "yes", { cancel_fn = function() {}, data_below_text = additionalCheckBox })
   return true
@@ -337,9 +335,9 @@ let isEventUnit = @(unit) unit.event != null
   else
     taskId = ::shop_purchase_aircraft(unitName)
 
-  let progressBox = scene_msg_box("char_connecting", null, loc("charServer/purchase"), null, null)
+  let progressBox = ::scene_msg_box("char_connecting", null, loc("charServer/purchase"), null, null)
   ::add_bg_task_cb(taskId, function() {
-    destroyMsgBox(progressBox)
+    ::destroyMsgBox(progressBox)
     broadcastEvent("UnitBought", { unitName = unit.name })
   })
   return true
@@ -359,7 +357,7 @@ let isEventUnit = @(unit) unit.event != null
   if (u.isEmpty(reason))
     return true
 
-  scene_msg_box("need_buy_prev", null, reason, [["ok", function () {}]], "ok")
+  ::scene_msg_box("need_buy_prev", null, reason, [["ok", function () {}]], "ok")
   return false
 }
 
@@ -387,7 +385,7 @@ let isEventUnit = @(unit) unit.event != null
 
   if (!::isUnitSpecial(unit) && !::isUnitGift(unit)
     && !isSquadronVehicle && !::isUnitsEraUnlocked(unit)) {
-    showInfoMsgBox(::getCantBuyUnitReason(unit), "need_unlock_rank")
+    ::showInfoMsgBox(::getCantBuyUnitReason(unit), "need_unlock_rank")
     return false
   }
 
@@ -413,7 +411,7 @@ let isEventUnit = @(unit) unit.event != null
       }
       button.append(["cancel", function() {}])
 
-      scene_msg_box("cant_research_squadron_vehicle", null, "\n".join(msg, true),
+      ::scene_msg_box("cant_research_squadron_vehicle", null, "\n".join(msg, true),
         button, defButton)
 
       return false
@@ -449,11 +447,11 @@ let isEventUnit = @(unit) unit.event != null
       let unitsLeft = max(0, unitsNeed - unitsCount)
 
       if (unitsLeft > 0) {
-        return loc("shop/unlockTier/locked", { rank = get_roman_numeral(rank) })
-          + "\n" + loc("shop/unlockTier/reqBoughtUnitsPrevRank", { prevRank = get_roman_numeral(prevRank), amount = unitsLeft })
+        return loc("shop/unlockTier/locked", { rank = ::get_roman_numeral(rank) })
+          + "\n" + loc("shop/unlockTier/reqBoughtUnitsPrevRank", { prevRank = ::get_roman_numeral(prevRank), amount = unitsLeft })
       }
     }
-    return loc("shop/unlockTier/locked", { rank = get_roman_numeral(rank) })
+    return loc("shop/unlockTier/locked", { rank = ::get_roman_numeral(rank) })
   }
   else if (!::isPrevUnitResearched(unit)) {
     if (isShopTooltip)
@@ -536,7 +534,7 @@ let isEventUnit = @(unit) unit.event != null
 
   if (air.isShipOrBoat()) {
     air.modificatorsRequestTime = get_time_msec()
-    ::calculate_ship_parameters_async(air.name, this,  function(effect, ...) {
+    ::calculate_ship_parameters_async(air.name, this, (@(air, callBack) function(effect, ...) {
       air.modificatorsRequestTime = -1
       if (effect) {
         air.modificators = {
@@ -555,13 +553,13 @@ let isEventUnit = @(unit) unit.event != null
       }
 
       afterUpdateAirModificators(air, callBack)
-    })
+    })(air, callBack))
     return false
   }
 
   if (air.isTank()) {
     air.modificatorsRequestTime = get_time_msec()
-    ::calculate_tank_parameters_async(air.name, this,  function(effect, ...) {
+    ::calculate_tank_parameters_async(air.name, this, (@(air, callBack) function(effect, ...) {
       air.modificatorsRequestTime = -1
       if (effect) {
         air.modificators = {
@@ -579,12 +577,12 @@ let isEventUnit = @(unit) unit.event != null
           air.modificatorsBase = air.modificators
       }
       afterUpdateAirModificators(air, callBack)
-    })
+    })(air, callBack))
     return false
   }
 
   air.modificatorsRequestTime = get_time_msec()
-  ::calculate_min_and_max_parameters(air.name, this,  function(effect, ...) {
+  ::calculate_min_and_max_parameters(air.name, this, (@(air, callBack) function(effect, ...) {
     air.modificatorsRequestTime = -1
     if (effect) {
       air.modificators = {
@@ -599,7 +597,7 @@ let isEventUnit = @(unit) unit.event != null
         air.modificators = effect.max
     }
     afterUpdateAirModificators(air, callBack)
-  })
+  })(air, callBack))
   return false
 }
 
@@ -1021,11 +1019,9 @@ let function fillAirCharProgress(progressObj, vMin, vMax, cur) {
   }
 
   if (hasFeature("UnitTooltipImage")) {
-    obj = holderObj.findObject("aircraft-image-nest")
-    if (obj?.isValid() ?? false) {
-      obj.findObject("aircraft-image")["background-image"] = getUnitTooltipImage(air)
-      obj.findObject("country-image")["background-image"] = getCountryFlagForUnitTooltip(air.getOperatorCountry())
-    }
+    obj = holderObj.findObject("aircraft-image")
+    if (checkObj(obj))
+      obj["background-image"] = getUnitTooltipImage(air)
   }
 
   if (showShortestUnitInfo)
@@ -1041,7 +1037,7 @@ let function fillAirCharProgress(progressObj, vMin, vMax, cur) {
       nameObj.setValue(loc("shop/age") + loc("ui/colon"))
     let yearsObj = ageObj.findObject("age_years")
     if (checkObj(yearsObj))
-      yearsObj.setValue(get_roman_numeral(air.rank))
+      yearsObj.setValue(::get_roman_numeral(air.rank))
   }
 
   //count unit ratings
@@ -1376,7 +1372,7 @@ let function fillAirCharProgress(progressObj, vMin, vMax, cur) {
   let wpTimedRewardObj = showObjById("aircraft-reward_wp_timed-tr", showRewardsInfo, holderObj)
   if (showRewardsInfo && (rpRewardObj != null || wpRewardObj != null || wpTimedRewardObj != null)) {
     let hasPremium  = havePremium.value
-    let hasTalisman = special || shopIsModificationEnabled(air.name, "premExpMul")
+    let hasTalisman = special || ::shop_is_modification_enabled(air.name, "premExpMul")
     let boosterEffects = params?.boosterEffects ?? getBoostersEffects(getActiveBoostersArray())
 
     let wpMuls = air.getWpRewardMulList(difficulty)
@@ -1782,8 +1778,8 @@ let function fillAirCharProgress(progressObj, vMin, vMax, cur) {
   if (obj != null) {
     let minAge = ::getMinBestLevelingRank(air)
     let maxAge = ::getMaxBestLevelingRank(air)
-    let rangeText = (minAge == maxAge) ? (get_roman_numeral(minAge) + ::nbsp + loc("shop/age")) :
-        (get_roman_numeral(minAge) + ::nbsp + loc("ui/mdash") + ::nbsp + get_roman_numeral(maxAge) + ::nbsp + loc("mainmenu/ranks"))
+    let rangeText = (minAge == maxAge) ? (::get_roman_numeral(minAge) + ::nbsp + loc("shop/age")) :
+        (::get_roman_numeral(minAge) + ::nbsp + loc("ui/mdash") + ::nbsp + ::get_roman_numeral(maxAge) + ::nbsp + loc("mainmenu/ranks"))
     obj.findObject("aircraft-research-efficiency").setValue(rangeText)
   }
 

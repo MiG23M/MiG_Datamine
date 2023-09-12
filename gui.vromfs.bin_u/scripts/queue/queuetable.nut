@@ -4,17 +4,18 @@ from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
+
 let { format } = require("string")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
+
 let time = require("%scripts/time.nut")
 let crossplayModule = require("%scripts/social/crossplay.nut")
 let { topMenuShopActive } = require("%scripts/mainmenu/topMenuStates.nut")
 let QUEUE_TYPE_BIT = require("%scripts/queue/queueTypeBit.nut")
 let { getQueueWaitIconImageMarkup } = require("%scripts/queue/waitIconImage.nut")
 let { getCurEsUnitTypesMask } = require("%scripts/queue/curEsUnitTypesMask.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
-dagui_propid_add_name_id("_queueTableGenCode")
+::dagui_propid.add_name_id("_queueTableGenCode")
 
 local WAIT_TO_SHOW_CROSSPLAY_TIP_SEC_F = 120.0
 
@@ -154,7 +155,7 @@ gui_handlers.QueueTable <- class extends gui_handlers.BaseGuiHandlerWT {
                                               foreach (country in countriesList)
                                                 res.append({
                                                   countryName = country
-                                                  countryIcon = getCountryIcon(country)
+                                                  countryIcon = ::get_country_icon(country)
                                                 })
                                               return res
                                             }
@@ -396,7 +397,7 @@ gui_handlers.QueueTable <- class extends gui_handlers.BaseGuiHandlerWT {
     let headerData = []
     for (local i = 0; i <= ::max_country_rank; i++) {
       headerData.append({
-        text = get_roman_numeral(i)
+        text = ::get_roman_numeral(i)
         tdalign = "center"
       })
     }

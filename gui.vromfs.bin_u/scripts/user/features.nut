@@ -282,7 +282,6 @@ let defaults = Watched({  //def value when feature not found in game_settings.bl
 
   ResearchHelicopterOnGroundVehicle = false
   CaptchaAllowed = false
-  DevShopMode = false
 })
 
 let override = Watched({})

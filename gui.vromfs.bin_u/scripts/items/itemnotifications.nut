@@ -4,8 +4,6 @@ from "%scripts/dagui_library.nut" import *
 let workshop = require("%scripts/items/workshop/workshop.nut")
 let DataBlock  = require("DataBlock")
 let { add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 let ITEMS_FOR_OFFER_BUY_SAVE_ID = "itemsListForOfferBuy"
 
@@ -17,7 +15,7 @@ let addItemsInOfferBuyList = function() {
     return
 
   local hasChanges = false
-  let needOfferBuyItemsList = loadLocalAccountSettings(ITEMS_FOR_OFFER_BUY_SAVE_ID, DataBlock())
+  let needOfferBuyItemsList = ::load_local_account_settings(ITEMS_FOR_OFFER_BUY_SAVE_ID, DataBlock())
   foreach (item in itemsList) {
     let idString = (item.id).tostring()
     if (needOfferBuyItemsList?[idString])
@@ -28,7 +26,7 @@ let addItemsInOfferBuyList = function() {
   }
 
   if (hasChanges)
-    saveLocalAccountSettings(ITEMS_FOR_OFFER_BUY_SAVE_ID, needOfferBuyItemsList)
+    ::save_local_account_settings(ITEMS_FOR_OFFER_BUY_SAVE_ID, needOfferBuyItemsList)
 }
 
 let checkOfferToBuyAtExpiration = function() {
@@ -37,13 +35,13 @@ let checkOfferToBuyAtExpiration = function() {
 
   if (!::g_login.isProfileReceived())
     return
-  local needOfferBuyItemsList = loadLocalAccountSettings(ITEMS_FOR_OFFER_BUY_SAVE_ID)
+  local needOfferBuyItemsList = ::load_local_account_settings(ITEMS_FOR_OFFER_BUY_SAVE_ID)
   if (!needOfferBuyItemsList)
     return
 
   local hasChanges = false
   foreach (itemId, _value in needOfferBuyItemsList) {
-    let id = to_integer_safe(itemId, itemId, false)
+    let id = ::to_integer_safe(itemId, itemId, false)
     let inventoryItem = ::ItemsManager.getInventoryItemById(id)
     let shopItem = ::ItemsManager.findItemById(id)
     if (inventoryItem && !inventoryItem.isExpired())
@@ -62,7 +60,7 @@ let checkOfferToBuyAtExpiration = function() {
       continue
     }
 
-    scene_msg_box("offer_buy_item", null,
+    ::scene_msg_box("offer_buy_item", null,
       loc("msgBox/offerToBuyAtExpiration", { itemName = shopItem.getName() }),
         [
           ["yes", @() ::gui_start_items_list(itemsTab.WORKSHOP,
@@ -81,7 +79,7 @@ let checkOfferToBuyAtExpiration = function() {
   if (hasChanges) {
     if (needOfferBuyItemsList.paramCount() == 0)
       needOfferBuyItemsList = null
-    saveLocalAccountSettings(ITEMS_FOR_OFFER_BUY_SAVE_ID, needOfferBuyItemsList)
+    ::save_local_account_settings(ITEMS_FOR_OFFER_BUY_SAVE_ID, needOfferBuyItemsList)
   }
 }
 

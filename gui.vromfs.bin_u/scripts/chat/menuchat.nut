@@ -21,8 +21,7 @@ let { topMenuBorders } = require("%scripts/mainmenu/topMenuStates.nut")
 let { isChatEnabled, isChatEnableWithPlayer, hasMenuChat,
   isCrossNetworkMessageAllowed, chatStatesCanUseVoice } = require("%scripts/chat/chatStates.nut")
 let { updateContactsStatusByContacts } = require("%scripts/contacts/updateContactsStatus.nut")
-let { hasMenuGeneralChats, hasMenuChatPrivate, hasMenuChatSquad, hasMenuChatClan, hasMenuChatMPlobby
-} = require("%scripts/user/matchingFeature.nut")
+let { hasMenuGeneralChats, hasMenuChatPrivate, hasMenuChatSquad, hasMenuChatClan, hasMenuChatMPlobby } = require("%scripts/user/matchingFeature.nut")
 let { add_user, remove_user, is_muted } = require("%scripts/chat/xboxVoice.nut")
 let { send } = require("eventbus")
 let { get_option_voicechat, set_gchat_event_cb,
@@ -33,9 +32,6 @@ let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { USEROPT_VOICE_CHAT, USEROPT_SHOW_SOCIAL_NOTIFICATIONS, OPTIONS_MODE_GAMEPLAY,
   USEROPT_ONLY_FRIENDLIST_CONTACT } = require("%scripts/options/optionsExtNames.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings, loadLocalByScreenSize, saveLocalByScreenSize
-} = require("%scripts/clientState/localProfile.nut")
-let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 const CHAT_ROOMS_LIST_SAVE_ID = "chatRooms"
 const VOICE_CHAT_SHOW_COUNT_SAVE_ID = "voiceChatShowCount"
@@ -653,7 +649,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
       if (inMySquad) {
         let memberData = ::g_squad_manager.getMemberData(contact.uid)
         if (memberData && ::checkCountry(memberData.country, "squad member data ( uid = " + contact.uid + ")", true))
-          img2 = getCountryIcon(memberData.country)
+          img2 = ::get_country_icon(memberData.country)
       }
       obj.findObject("tooltip").uid = (inMySquad && contact) ? contact.uid : ""
       if (get_option_voicechat()
@@ -826,7 +822,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
         this.addRoom(roomId, null, null, idx == 0)
 
     if (isChatEnabled()) {
-      let chatRooms = loadLocalAccountSettings(CHAT_ROOMS_LIST_SAVE_ID)
+      let chatRooms = ::load_local_account_settings(CHAT_ROOMS_LIST_SAVE_ID)
       local roomIdx = 0
       if (chatRooms != null) {
         let storedRooms = []
@@ -860,7 +856,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
           chatRoomsBlk["params" + saveIdx] = room.joinParams
         saveIdx++
       }
-    saveLocalAccountSettings(CHAT_ROOMS_LIST_SAVE_ID, chatRoomsBlk)
+    ::save_local_account_settings(CHAT_ROOMS_LIST_SAVE_ID, chatRoomsBlk)
   }
 
   function goBack() {
@@ -879,7 +875,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
       if (obj.isVisible())
         ::menu_chat_sizes.searchSize <- obj.getSize()
 
-      saveLocalByScreenSize("menu_chat_sizes", ::save_to_json(::menu_chat_sizes))
+      ::saveLocalByScreenSize("menu_chat_sizes", ::save_to_json(::menu_chat_sizes))
     }
   }
 
@@ -889,7 +885,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
 
   function setSavedSizes() {
     if (!::menu_chat_sizes) {
-      let data = loadLocalByScreenSize("menu_chat_sizes")
+      let data = ::loadLocalByScreenSize("menu_chat_sizes")
       if (data) {
         ::menu_chat_sizes = parse_json(data)
         if (!("pos" in ::menu_chat_sizes) || !("size" in ::menu_chat_sizes) || !("usersSize" in ::menu_chat_sizes))
@@ -1637,7 +1633,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
     this.shouldCheckVoiceChatSuggestion = false
 
     let VCdata = ::get_option(USEROPT_VOICE_CHAT)
-    let voiceChatShowCount = loadLocalAccountSettings(VOICE_CHAT_SHOW_COUNT_SAVE_ID, 0)
+    let voiceChatShowCount = ::load_local_account_settings(VOICE_CHAT_SHOW_COUNT_SAVE_ID, 0)
     if (this.isFirstAskForSession && voiceChatShowCount < ::g_chat.MAX_MSG_VC_SHOW_TIMES && !VCdata.value) {
       this.msgBox("join_voiceChat", loc("msg/enableVoiceChat"),
               [
@@ -1645,7 +1641,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
                 ["no", function() {} ]
               ], "no",
               { cancel_fn = function() {} })
-      saveLocalAccountSettings(VOICE_CHAT_SHOW_COUNT_SAVE_ID, voiceChatShowCount + 1)
+      ::save_local_account_settings(VOICE_CHAT_SHOW_COUNT_SAVE_ID, voiceChatShowCount + 1)
     }
     this.isFirstAskForSession = false
   }
@@ -1696,7 +1692,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
       let msg = format(loc("chat/ask/leaveRoom"), roomData.getRoomName())
       this.msgBox("leave_squad", msg,
         [
-          ["yes",  function() { this.closeRoom(roomIdx) }],
+          ["yes", (@(roomIdx) function() { this.closeRoom(roomIdx) })(roomIdx)],
           ["no", function() {} ]
         ], "yes",
         { cancel_fn = function() {} })
@@ -1773,7 +1769,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
               return null;
             }
 
-            this.onPresenceDetectionCheckIn(to_integer_safe(msg.slice(cmd.len() + 2), -1))
+            this.onPresenceDetectionCheckIn(::to_integer_safe(msg.slice(cmd.len() + 2), -1))
             return null;
           }
           else if (cmd == "join" || cmd == "part") {
@@ -2648,7 +2644,7 @@ let sendEventUpdateChatFeatures = @() broadcastEvent("UpdateChatFeatures")
 
 ::initEmptyMenuChat <- function initEmptyMenuChat() {
   if (!::menu_chat_handler) {
-    ::menu_chat_handler = ::MenuChatHandler(get_gui_scene())
+    ::menu_chat_handler = ::MenuChatHandler(::get_gui_scene())
     ::menu_chat_handler.initChat(null)
   }
 }
@@ -2689,7 +2685,7 @@ if (::g_login.isLoggedIn())
 
 ::openChatScene <- function openChatScene(ownerHandler = null) {
   if (!::gchat_is_enabled() || !hasMenuChat.value) {
-    showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+    ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
     return false
   }
 
@@ -2742,7 +2738,7 @@ if (::g_login.isLoggedIn())
 ::getChatDiv <- function getChatDiv(scene) {
   if (!checkObj(scene))
     scene = null
-  let guiScene = get_gui_scene()
+  let guiScene = ::get_gui_scene()
   local chatObj = scene ? scene.findObject("menuChat_scene") : guiScene["menuChat_scene"]
   if (!chatObj) {
     guiScene.appendWithBlk(scene ? scene : "", "tdiv { id:t='menuChat_scene' }")

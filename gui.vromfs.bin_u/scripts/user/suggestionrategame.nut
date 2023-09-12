@@ -12,13 +12,12 @@ let { is_running } = require("steam")
 let { request_review } = require("%xboxLib/impl/store.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { get_charserver_time_sec } = require("chard")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
-let steamOpenReviewWnd = require("%scripts/user/steamRateGameWnd.nut")
-local openReviewWnd = isPlatformXboxOne ? @(...) request_review(null)
-  : is_running() ? steamOpenReviewWnd.open
-  : @(...) null
+local openReviewWnd = @(...) null
+if (isPlatformXboxOne)
+  openReviewWnd = @(...) request_review(null)
+else if (is_running())
+  openReviewWnd = require("steamRateGameWnd.nut").open
 
 let logP = log_with_prefix("[ShowRate] ")
 
@@ -62,15 +61,15 @@ let function setNeedShowRate(debriefingResult, myPlace) {
   if ((!isPlatformXboxOne && !is_running()) || debriefingResult == null)
     return
 
-  if (loadLocalAccountSettings(RATE_WND_TIME_SAVE_ID, 0)) {
+  if (::load_local_account_settings(RATE_WND_TIME_SAVE_ID, 0)) {
     logP("Already seen by time")
     return
   }
 
-  if (loadLocalAccountSettings(RATE_WND_SAVE_ID, false)) {
+  if (::load_local_account_settings(RATE_WND_SAVE_ID, false)) {
     //Save for already seen window too
     //It must not be rewritten, because of check by time before
-    saveLocalAccountSettings(RATE_WND_TIME_SAVE_ID, get_charserver_time_sec())
+    ::save_local_account_settings(RATE_WND_TIME_SAVE_ID, get_charserver_time_sec())
     logP("Already seen")
     return
   }
@@ -138,19 +137,19 @@ let function tryOpenXboxRateReviewWnd() {
     return
 
   openReviewWnd()
-  saveLocalAccountSettings(RATE_WND_TIME_SAVE_ID, get_charserver_time_sec())
+  ::save_local_account_settings(RATE_WND_TIME_SAVE_ID, get_charserver_time_sec())
   sendBqEvent("CLIENT_POPUP_1", "rate", { from = "xbox" })
 }
 
-let function tryOpenSteamRateReview() {
-  if (!is_running() || !hasFeature("SteamRateGame"))
+let function tryOpenSteamRateReview(forceShow = false) {
+  if (!forceShow && (!is_running() || !hasFeature("SteamRateGame")))
     return
 
-  if (cfg.hideSteamRateLanguagesArray.contains(::g_language.getLanguageName()))
+  if (!forceShow && cfg.hideSteamRateLanguagesArray.contains(::g_language.getLanguageName()))
     return
 
   //On Steam we already know that there will be no errors on displaying to player web page
-  saveLocalAccountSettings(RATE_WND_TIME_SAVE_ID, get_charserver_time_sec())
+  ::save_local_account_settings(RATE_WND_TIME_SAVE_ID, get_charserver_time_sec())
   sendBqEvent("CLIENT_POPUP_1", "rate", { from = "steam" })
 
   //Send additional data if player accepted opening web page
@@ -159,12 +158,10 @@ let function tryOpenSteamRateReview() {
   )
 }
 
-let forceOpenSteamRateReviewWnd = @() steamOpenReviewWnd.open(@(...) null)
-
 let function checkShowRateWnd() {
   if (!needShowRateWnd.value
-    || loadLocalAccountSettings(RATE_WND_SAVE_ID, false)
-    || loadLocalAccountSettings(RATE_WND_TIME_SAVE_ID, 0) > 0)
+    || ::load_local_account_settings(RATE_WND_SAVE_ID, false)
+    || ::load_local_account_settings(RATE_WND_TIME_SAVE_ID, 0) > 0)
     return
 
   tryOpenXboxRateReviewWnd()
@@ -190,8 +187,8 @@ addListenersWithoutEnv({
   }
 })
 
-register_command(forceOpenSteamRateReviewWnd, "debug.show_steam_rate_wnd")
-register_command(tryOpenXboxRateReviewWnd, "debug.show_xbox_rate_wnd")
+register_command(@() tryOpenSteamRateReview(true), "debug.show_steam_rate_wnd")
+register_command(@() tryOpenXboxRateReviewWnd(), "debug.show_xbox_rate_wnd")
 
 return {
   setNeedShowRate

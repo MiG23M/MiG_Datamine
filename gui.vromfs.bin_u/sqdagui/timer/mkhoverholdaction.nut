@@ -1,4 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
 
 let DaguiSceneTimers = require("daguiSceneTimers.nut")
 

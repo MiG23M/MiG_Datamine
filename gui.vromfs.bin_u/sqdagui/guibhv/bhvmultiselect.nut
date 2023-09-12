@@ -1,12 +1,10 @@
-from "%sqDagui/daguiNativeApi.nut" import *
-let { posNavigator } = require("bhvPosNavigator.nut")
 
-let MultiSelect = class extends posNavigator {
+::gui_bhv.MultiSelect <- class extends ::gui_bhv.posNavigator {
   bhvId = "MultiSelect"
-  valuePID = dagui_propid_add_name_id("bitValue")  //values by bits   chosen:yes;
-  selectedPID = dagui_propid_add_name_id("_selected")    //only 1     selected:yes;
+  valuePID = ::dagui_propid.add_name_id("bitValue")  //values by bits   chosen:yes;
+  selectedPID = ::dagui_propid.add_name_id("_selected")    //only 1     selected:yes;
 
-  chosenPID = dagui_propid_add_name_id("chosen")    //only to init property if it not used in css.
+  chosenPID = ::dagui_propid.add_name_id("chosen")    //only to init property if it not used in css.
   canChooseByMClick = true
 
   function getValue(obj) {
@@ -64,7 +62,7 @@ let MultiSelect = class extends posNavigator {
     if (is_down) {
       if (value < 0)
         return RETCODE_NOTHING
-      set_script_gui_behaviour_events(this.bhvId, obj, EV_MOUSE_HOVER_CHANGE)
+      ::set_script_gui_behaviour_events(this.bhvId, obj, EV_MOUSE_HOVER_CHANGE)
       this.onActivatePushed(obj, value)
       return RETCODE_HALT
     }
@@ -81,4 +79,3 @@ let MultiSelect = class extends posNavigator {
 
   isOnlyHover = @(_obj) false
 }
-return {MultiSelect}

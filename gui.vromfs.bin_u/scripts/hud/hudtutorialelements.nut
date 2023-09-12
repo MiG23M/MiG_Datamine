@@ -99,8 +99,6 @@ let { get_current_mission_desc } = require("guiMission")
     return
 
   this.initNestObjects()
-  if (!(this.scene?.isValid() ?? false))
-    return
   this.refreshObjects()
 }
 
@@ -146,11 +144,11 @@ let { get_current_mission_desc } = require("guiMission")
   if (!checkObj(this.timersNest))
     return
 
-  this.timers[objId] <- Timer(this.timersNest, timeLeft, function () {
+  this.timers[objId] <- Timer(this.timersNest, timeLeft, (@(objId) function () {
     this.updateVisibleObject(objId, false)
     if (objId in this.timers)
       delete this.timers[objId]
-  }, this)
+  })(objId), this)
 }
 
 ::g_hud_tutorial_elements.onElementToggle <- function onElementToggle(data) {

@@ -5,7 +5,6 @@ from "%scripts/dagui_library.nut" import *
 let DataBlock  = require("DataBlock")
 let { frnd } = require("dagor.random")
 let u = require("%sqStdLibs/helpers/u.nut")
-let { convertBlk } = require("%sqstd/datablock.nut")
 let subscriptions = require("%sqStdLibs/helpers/subscriptions.nut")
 let Set = require("workshopSet.nut")
 let inventoryClient = require("%scripts/inventory/inventoryClient.nut")
@@ -61,7 +60,7 @@ let function initOnce() {
     foreach (itemBlk in (wBlk.additionalRecipes % "item")) {
       let item = DataBlock()
       item.setFrom(itemBlk)
-      let itemId = to_integer_safe(item.id)
+      let itemId = ::to_integer_safe(item.id)
       if (!additionalRecipes?[itemId])
         additionalRecipes[itemId] <- []
       additionalRecipes[itemId].append(item)
@@ -69,17 +68,10 @@ let function initOnce() {
         inventoryClient.requestItemdefsByIds(itemBlk % paramName)
     }
 
-  let itemMarkingPresets = wBlk?.itemMarkingPresets
-  markingPresetsList = u.isDataBlock(itemMarkingPresets) ? convertBlk(itemMarkingPresets) : {}
-  let _customLocalizationPresets = wBlk?.customLocalizationPresets
-  customLocalizationPresets = u.isDataBlock(_customLocalizationPresets)
-    ? convertBlk(_customLocalizationPresets) : {}
-  let _effectOnStartCraftPresets = wBlk?.effectOnStartCraftPresets
-  effectOnStartCraftPresets = u.isDataBlock(_effectOnStartCraftPresets)
-    ? convertBlk(_effectOnStartCraftPresets) : {}
-  let _effectOnOpenChestPresets = wBlk?.effectOnOpenChestPresets
-  effectOnOpenChestPresets = u.isDataBlock(_effectOnOpenChestPresets)
-    ? convertBlk(_effectOnOpenChestPresets) : {}
+  markingPresetsList = ::buildTableFromBlk(wBlk?.itemMarkingPresets)
+  customLocalizationPresets = ::buildTableFromBlk(wBlk?.customLocalizationPresets)
+  effectOnStartCraftPresets = ::buildTableFromBlk(wBlk?.effectOnStartCraftPresets)
+  effectOnOpenChestPresets = ::buildTableFromBlk(wBlk?.effectOnOpenChestPresets)
 
   checkBlkDuplicates(customLocalizationPresets, "customLocalizationPresets")
 }
@@ -133,7 +125,7 @@ let function invalidateItemsCache() {
 
 let function canSeenIdBeNew(seenId) {
   if (!(seenId in seenIdCanBeNew)) {
-    let id = to_integer_safe(seenId, seenId, false) //ext inventory items id need to convert to integer.
+    let id = ::to_integer_safe(seenId, seenId, false) //ext inventory items id need to convert to integer.
     let item = ::ItemsManager.findItemById(id)
     seenIdCanBeNew[seenId] <- item && !shouldDisguiseItem(item)
   }

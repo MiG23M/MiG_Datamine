@@ -19,8 +19,6 @@ let { getReserveAircraftName } = require("%scripts/tutorials.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { OPTIONS_MODE_GAMEPLAY } = require("%scripts/options/optionsExtNames.nut")
-let { getCountryFlagImg } = require("%scripts/options/countryFlagsPreset.nut")
-let { isVietnameseVersion } = require("%scripts/langUtils/language.nut")
 
 local MIN_ITEMS_IN_ROW = 3
 
@@ -251,9 +249,9 @@ gui_handlers.CountryChoiceHandler <- class extends gui_handlers.BaseGuiHandlerWT
         let res = []
         let curArmyName = this.selectedUnitType ? this.selectedUnitType.armyId  : unitTypes.AIRCRAFT.armyId
         foreach (country in this.countries) {
-          local image = getCountryFlagImg($"first_choice_{country}_{curArmyName}")
+          local image = ::get_country_flag_img($"first_choice_{country}_{curArmyName}")
           if (image == "")
-            image = getCountryFlagImg($"first_choice_{country}_{unitTypes.AIRCRAFT.armyId}")
+            image = ::get_country_flag_img($"first_choice_{country}_{unitTypes.AIRCRAFT.armyId}")
 
           let cData = {
             countryName = loc(country)
@@ -283,7 +281,7 @@ gui_handlers.CountryChoiceHandler <- class extends gui_handlers.BaseGuiHandlerWT
     }
     else if (!isInArray(this.selectedCountry, availCountries)) {
       local rndC = rnd() % availCountries.len()
-      if (isVietnameseVersion())
+      if (::is_vietnamese_version())
         rndC = find_in_array(availCountries, "country_ussr", rndC)
       this.selectedCountry = availCountries[rndC]
     }

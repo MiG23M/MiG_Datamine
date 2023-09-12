@@ -1,9 +1,8 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings,
-  loadLocalByAccount, saveLocalByAccount
-} = require("%scripts/clientState/localProfile.nut")
+
+
 let seenTitles = require("%scripts/seen/seenList.nut").get(SEEN.TITLES)
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let DataBlock = require("DataBlock")
@@ -175,7 +174,7 @@ local summaryNameArray = [
     if (!::g_login.isProfileReceived())
       return
 
-    let newbieEndByArmyId = loadLocalAccountSettings("myStats/newbieEndedByArmyId", null)
+    let newbieEndByArmyId = ::load_local_account_settings("myStats/newbieEndedByArmyId", null)
     if (!newbieEndByArmyId)
       return
 
@@ -201,7 +200,7 @@ local summaryNameArray = [
     this._needRecountNewbie = false
 
     let newbieEndByArmyId = ::g_login.isProfileReceived()
-      ? loadLocalAccountSettings("myStats/newbieEndedByArmyId", {})
+      ? ::load_local_account_settings("myStats/newbieEndedByArmyId", {})
       : null
 
     this.newbieByUnitType.clear()
@@ -229,7 +228,7 @@ local summaryNameArray = [
     }
 
     if (newbieEndByArmyId)
-      saveLocalAccountSettings("myStats/newbieEndedByArmyId", newbieEndByArmyId)
+      ::save_local_account_settings("myStats/newbieEndedByArmyId", newbieEndByArmyId)
 
     this.newbie = this.__isNewbie()
 
@@ -297,7 +296,7 @@ local summaryNameArray = [
       this._maxUnitsUsedRank = this.calculateMaxUnitsUsedRanks()
 
     this._maxUnitsUsedRank[unitType.tostring()] = unitRank
-    saveLocalByAccount("tutor/newbieBattles/unitsRank", this._maxUnitsUsedRank)
+    ::saveLocalByAccount("tutor/newbieBattles/unitsRank", this._maxUnitsUsedRank)
     this._needRecountNewbie = true
   }
 
@@ -463,7 +462,7 @@ local summaryNameArray = [
 
   function calculateMaxUnitsUsedRanks() {
     local needRecalculate = false
-    let loadedBlk = loadLocalByAccount("tutor/newbieBattles/unitsRank", DataBlock())
+    let loadedBlk = ::loadLocalByAccount("tutor/newbieBattles/unitsRank", DataBlock())
     foreach (unitType in unitTypes.types)
       if (unitType.isAvailable()
         && (loadedBlk?[unitType.esUnitType.tostring()] ?? 0) < ::max_country_rank) {
@@ -488,7 +487,7 @@ local summaryNameArray = [
       }
 
     if (!u.isEqual(saveBlk, loadedBlk))
-      saveLocalByAccount("tutor/newbieBattles/unitsRank", saveBlk)
+      ::saveLocalByAccount("tutor/newbieBattles/unitsRank", saveBlk)
 
     return saveBlk
   }

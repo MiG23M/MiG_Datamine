@@ -1,4 +1,3 @@
-from "%sqDagui/daguiNativeApi.nut" import *
 
 let stdSubscriptions = require("%sqStdLibs/helpers/subscriptions.nut")
 let function isArray(v) { return type(v) == "array" }

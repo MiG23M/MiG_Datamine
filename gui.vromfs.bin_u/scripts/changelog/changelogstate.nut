@@ -9,8 +9,6 @@ let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { targetPlatform } = require("%scripts/clientState/platform.nut")
 let { mkVersionFromString, versionToInt } = require("%sqstd/version.nut")
 let { isInBattleState } = require("%scripts/clientState/clientStates.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 let eventbus = require("eventbus")
 let http = require("dagor.http")
 let { send_counter } = require("statsd")
@@ -45,8 +43,8 @@ let function loadSavedVersionInfoNum() {
   if (!::g_login.isProfileReceived())
     return
 
-  lastSeenVersionInfoNum(loadLocalAccountSettings(SAVE_SEEN_ID, 0))
-  lastLoadedVersionInfoNum(loadLocalAccountSettings(SAVE_LOADED_ID, 0))
+  lastSeenVersionInfoNum(::load_local_account_settings(SAVE_SEEN_ID, 0))
+  lastLoadedVersionInfoNum(::load_local_account_settings(SAVE_LOADED_ID, 0))
 }
 
 let platformMap = {
@@ -204,7 +202,7 @@ let function afterGetRequestedPatchnote(result) {
   if (v == null || v.iVersion <= lastSeenVersionInfoNum.value)
     return
 
-  saveLocalAccountSettings(SAVE_SEEN_ID, v.iVersion)
+  ::save_local_account_settings(SAVE_SEEN_ID, v.iVersion)
   lastSeenVersionInfoNum(v.iVersion)
 }
 
@@ -267,7 +265,7 @@ let function openChangelog() {
   local curr = curPatchnote.value
   if (haveNewVersions.value) {
     curr = versions.value[0]
-    saveLocalAccountSettings(SAVE_LOADED_ID, curr.iVersion)
+    ::save_local_account_settings(SAVE_LOADED_ID, curr.iVersion)
     lastLoadedVersionInfoNum(curr.iVersion)
   }
   choosePatchnote(curr)

@@ -1,9 +1,10 @@
 //-file:plus-string
-//checked for explicitness
 
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
+//checked for explicitness
+
 let statsd = require("statsd")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { animBgLoad } = require("%scripts/loading/animBg.nut")
@@ -24,10 +25,8 @@ let { isPhrasePassing } = require("%scripts/dirtyWordsFilter.nut")
 let { validateEmail } = require("%sqstd/string.nut")
 let { subscribe } = require("eventbus")
 let { isPlatformShieldTv } = require("%scripts/clientState/platform.nut")
-let { saveLocalSharedSettings, loadLocalSharedSettings
-} = require("%scripts/clientState/localProfile.nut")
+let { saveLocalSharedSettings } = require("%scripts/clientState/localProfile.nut")
 let { OPTIONS_MODE_GAMEPLAY } = require("%scripts/options/optionsExtNames.nut")
-let { isVietnameseVersion, canSwitchGameLocalization } = require("%scripts/langUtils/language.nut")
 
 const MAX_GET_2STEP_CODE_ATTEMPTS = 10
 const GUEST_LOGIN_SAVE_ID = "guestLoginId"
@@ -90,7 +89,7 @@ gui_handlers.LoginWndHandler <- class extends ::BaseGuiHandler {
       bugDiscObj.show(platformId == "linux64" && ::is_steam_big_picture()) //STEAM_OS
 
     let lp = ::get_login_pass()
-    let isVietnamese = isVietnameseVersion()
+    let isVietnamese = ::is_vietnamese_version()
     if (isVietnamese)
       lp.autoSave = lp.autoSave & AUTO_SAVE_FLG_LOGIN
 
@@ -248,7 +247,7 @@ gui_handlers.LoginWndHandler <- class extends ::BaseGuiHandler {
     this.setDisableSslCertBox(disableCertObj.getValue())
 
     saveLoginObj.enable(!isRemoteComp)
-    savePassObj.enable(!isRemoteComp && isAutosaveLogin && !isVietnameseVersion())
+    savePassObj.enable(!isRemoteComp && isAutosaveLogin && !::is_vietnamese_version())
     autoLoginObj.enable(!isRemoteComp && isAutosaveLogin && isAutosavePass)
 
     if (isRemoteComp)
@@ -260,7 +259,7 @@ gui_handlers.LoginWndHandler <- class extends ::BaseGuiHandler {
   }
 
   function initLanguageSwitch() {
-    let canSwitchLang = canSwitchGameLocalization()
+    let canSwitchLang = ::canSwitchGameLocalization()
     this.showSceneBtn("language_selector", canSwitchLang)
     if (!canSwitchLang)
       return
@@ -543,7 +542,7 @@ gui_handlers.LoginWndHandler <- class extends ::BaseGuiHandler {
         break
 
       case YU2_DOI_INCOMPLETE:
-        showInfoMsgBox(loc("yn1/login/DOI_INCOMPLETE"), "verification_email_to_complete")
+        ::showInfoMsgBox(loc("yn1/login/DOI_INCOMPLETE"), "verification_email_to_complete")
         break
 
       case YU2_NOT_FOUND:
@@ -659,7 +658,7 @@ gui_handlers.LoginWndHandler <- class extends ::BaseGuiHandler {
 
   function onGuestAuthorization() {
     let guestLoginId = getGuestLoginId()
-    if (guestLoginId == loadLocalSharedSettings(GUEST_LOGIN_SAVE_ID)) {
+    if (guestLoginId == ::load_local_shared_settings(GUEST_LOGIN_SAVE_ID)) {
       this.guestProceedAuthorization(guestLoginId, "", true)
       return
     }
@@ -675,7 +674,7 @@ gui_handlers.LoginWndHandler <- class extends ::BaseGuiHandler {
       owner = this
       function okFunc(nick) {
         if (!isPhrasePassing(nick)) {
-          showInfoMsgBox(loc("invalid_nickname"), "guest_login_invalid_nickname")
+          ::showInfoMsgBox(loc("invalid_nickname"), "guest_login_invalid_nickname")
           return
         }
         this.guestProceedAuthorization(guestLoginId, nick)

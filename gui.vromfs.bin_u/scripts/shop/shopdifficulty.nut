@@ -2,8 +2,6 @@
 from "%scripts/dagui_library.nut" import *
 
 let { broadcastEvent, addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 local shopDiffMode = null
 
@@ -14,7 +12,7 @@ let function getShopDiffMode() {
   if (!::g_login.isProfileReceived())
     return null
 
-  shopDiffMode = loadLocalAccountSettings("shopShowMode", -1)
+  shopDiffMode = ::load_local_account_settings("shopShowMode", -1)
   return shopDiffMode
 }
 
@@ -25,7 +23,7 @@ let function storeShopDiffMode(value) {
   shopDiffMode = value
 
   if (::g_login.isProfileReceived())
-    saveLocalAccountSettings("shopShowMode", shopDiffMode)
+    ::save_local_account_settings("shopShowMode", shopDiffMode)
 
   broadcastEvent("ShopDiffCodeChanged")
 }

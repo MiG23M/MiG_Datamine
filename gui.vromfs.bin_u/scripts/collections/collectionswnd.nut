@@ -12,8 +12,6 @@ let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { askPurchaseDecorator, askConsumeDecoratorCoupon,
   findDecoratorCouponOnMarketplace } = require("%scripts/customization/decoratorAcquire.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
-let { saveLocalAccountSettings, loadLocalAccountSettings
-} = require("%scripts/clientState/localProfile.nut")
 
 const MAX_COLLECTION_ITEMS = 10
 const IS_ONLY_UNCOMPLETED_SAVE_ID = "collections/isOnlyUncompleted"
@@ -33,7 +31,7 @@ local collectionsWnd = class extends gui_handlers.BaseGuiHandlerWT {
   selectedDecoratorId = null
 
   function initScreen() {
-    this.isOnlyUncompleted = loadLocalAccountSettings(IS_ONLY_UNCOMPLETED_SAVE_ID, false)
+    this.isOnlyUncompleted = ::load_local_account_settings(IS_ONLY_UNCOMPLETED_SAVE_ID, false)
       && (this.selectedDecoratorId == null || !this.isCollectionCompleted(this.selectedDecoratorId))
     this.collectionsList = this.filterCollectionsList()
     this.collectionsListObj = this.scene.findObject("collections_list")
@@ -135,7 +133,7 @@ local collectionsWnd = class extends gui_handlers.BaseGuiHandlerWT {
         isPrize = false
       }
 
-    let collectionIdx = to_integer_safe(curDecoratorParams[0])
+    let collectionIdx = ::to_integer_safe(curDecoratorParams[0])
     let collectionDecorator = this.collectionsList?[collectionIdx].findDecoratorById(curDecoratorParams[1])
     return {
       collectionIdx = collectionIdx
@@ -283,7 +281,7 @@ local collectionsWnd = class extends gui_handlers.BaseGuiHandlerWT {
     this.collectionsList = this.filterCollectionsList()
     this.curPage = 0
     this.fillPage()
-    saveLocalAccountSettings(IS_ONLY_UNCOMPLETED_SAVE_ID, this.isOnlyUncompleted)
+    ::save_local_account_settings(IS_ONLY_UNCOMPLETED_SAVE_ID, this.isOnlyUncompleted)
   }
 }
 

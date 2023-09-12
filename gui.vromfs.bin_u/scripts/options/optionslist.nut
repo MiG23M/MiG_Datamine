@@ -15,7 +15,6 @@ let { isPlatformSony, isPlatformXboxOne } = require("%scripts/clientState/platfo
 let { getPlayerCurUnit } = require("%scripts/slotbar/playerCurUnit.nut")
 let { havePremium } = require("%scripts/user/premium.nut")
 let { get_mission_difficulty_int, get_mission_difficulty } = require("guiMission")
-let { canSwitchGameLocalization } = require("%scripts/langUtils/language.nut")
 
 let getSystemOptions = @() {
   name = "graphicsParameters"
@@ -61,7 +60,7 @@ let getMainOptions = function() {
     isSearchAvaliable = true
     options = [
       ["options/mainParameters"],
-      [USEROPT_LANGUAGE, "spinner", ! ::is_in_flight() && canSwitchGameLocalization()],
+      [USEROPT_LANGUAGE, "spinner", ! ::is_in_flight() && ::canSwitchGameLocalization()],
       [USEROPT_PS4_CROSSPLAY, "spinner", isPlatformSony && hasFeature("PS4CrossNetwork") && !::is_in_flight()],
       [USEROPT_PS4_ONLY_LEADERBOARD, "spinner", isPlatformSony && hasFeature("ConsoleSeparateLeaderboards")],
       [USEROPT_CLUSTER, "spinner", ! ::is_in_flight() && isPlatformSony],
@@ -295,12 +294,10 @@ let getSoundOptions = @() overrideSoundOptionsFn?() ?? {
     [USEROPT_VOLUME_RADIO, "slider"],
     [USEROPT_VOLUME_DIALOGS, "slider"],
     [USEROPT_VOLUME_VWS, "slider"],
-    [USEROPT_VOLUME_RWR, "slider"],
     [USEROPT_VOLUME_TINNITUS, "slider"],
     [USEROPT_HANGAR_SOUND, "spinner"],
     [USEROPT_PLAY_INACTIVE_WINDOW_SOUND, "spinner", is_platform_pc],
     [USEROPT_ENABLE_SOUND_SPEED, "spinner", (! ::is_in_flight()) || (get_mission_difficulty_int() != DIFFICULTY_HARDCORE) ],
-    [USEROPT_VWS_ONLY_IN_COCKPIT, "button"],
     [USEROPT_SOUND_RESET_VOLUMES, "button"]
   ]
 }

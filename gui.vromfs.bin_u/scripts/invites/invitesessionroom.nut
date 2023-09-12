@@ -12,10 +12,8 @@ let { checkAndShowMultiplayerPrivilegeWarning,
   isMultiplayerPrivilegeAvailable } = require("%scripts/user/xboxFeatures.nut")
 let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
 let { add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
-let { registerInviteClass } = require("%scripts/invites/invitesClasses.nut")
-let BaseInvite = require("%scripts/invites/inviteBase.nut")
 
-let SessionRoom = class extends BaseInvite {
+::g_invites_classes.SessionRoom <- class extends ::BaseInvite {
   //custom class params, not exist in base invite
   roomId = ""
   password = ""
@@ -183,5 +181,3 @@ let SessionRoom = class extends BaseInvite {
       ::SessionLobby.joinRoom(this.roomId, this.inviterUid, this.password)
   }
 }
-
-registerInviteClass("SessionRoom", SessionRoom)

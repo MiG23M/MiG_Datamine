@@ -2,7 +2,8 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
+
+
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { abs, floor } = require("math")
 let { Point2 } = require("dagor.math")
@@ -565,14 +566,14 @@ const MAX_BATTLE_WAIT_TIME_MIN_DEFAULT = 30
   function tryToJoin(side) {
     let cantJoinReasonData = this.getCantJoinReasonData(side, true)
     if (!cantJoinReasonData.canJoin) {
-      showInfoMsgBox(cantJoinReasonData.reasonText)
+      ::showInfoMsgBox(cantJoinReasonData.reasonText)
       return
     }
 
     let joinCb = Callback(@() this.join(side), this)
     let warningReasonData = this.getWarningReasonData(side)
     if (warningReasonData.needMsgBox &&
-        !loadLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, false)) {
+        !::loadLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, false)) {
       ::gui_start_modal_wnd(gui_handlers.SkipableMsgBox,
         {
           parentHandler = this
@@ -580,7 +581,7 @@ const MAX_BATTLE_WAIT_TIME_MIN_DEFAULT = 30
             ? warningReasonData.warningText
             : warningReasonData.fullWarningText
           onStartPressed = joinCb
-          skipFunc = @(value) saveLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, value)
+          skipFunc = @(value) ::saveLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, value)
         })
       return
     }
@@ -725,9 +726,9 @@ const MAX_BATTLE_WAIT_TIME_MIN_DEFAULT = 30
 
   function getTeamBySide(side) {
     return u.search(this.teams,
-                       function (team) {
+                      (@(side) function (team) {
                         return team.side == side
-                      }
+                      })(side)
                      )
   }
 

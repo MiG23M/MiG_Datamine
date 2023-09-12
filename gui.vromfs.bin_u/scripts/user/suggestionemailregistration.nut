@@ -11,9 +11,6 @@ let { TIME_DAY_IN_SECONDS } = require("%scripts/time.nut")
 let { validateEmail } = require("%sqstd/string.nut")
 let { subscribe } = require("eventbus")
 let { get_charserver_time_sec } = require("chard")
-let { saveLocalAccountSettings, loadLocalAccountSettings,
-  loadLocalByAccount, saveLocalByAccount
-} = require("%scripts/clientState/localProfile.nut")
 
 let needShowGuestEmailRegistration = @() isPlatformPC && havePlayerTag("guestlogin")
 
@@ -45,9 +42,9 @@ let function checkShowGuestEmailRegistrationAfterLogin() {
   if (!needShowGuestEmailRegistration())
     return
 
-  let firstCheckTime = loadLocalAccountSettings("GuestEmailRegistrationCheckTime")
+  let firstCheckTime = ::load_local_account_settings("GuestEmailRegistrationCheckTime")
   if (firstCheckTime == null) {
-    saveLocalAccountSettings("GuestEmailRegistrationCheckTime", get_charserver_time_sec())
+    ::save_local_account_settings("GuestEmailRegistrationCheckTime", get_charserver_time_sec())
     return
   }
 
@@ -81,10 +78,10 @@ let function checkShowSteamEmailRegistration() {
     return
 
   if (::g_language.getLanguageName() != "Japanese") {
-    if (loadLocalByAccount("SteamEmailRegistrationShowed", false))
+    if (::loadLocalByAccount("SteamEmailRegistrationShowed", false))
       return
 
-    saveLocalByAccount("SteamEmailRegistrationShowed", true)
+    ::saveLocalByAccount("SteamEmailRegistrationShowed", true)
   }
 
   ::showUnlockWnd({
@@ -103,10 +100,10 @@ let function checkShowPS4EmailRegistration() {
   if (!canEmailRegistration())
     return
 
-  if (loadLocalByAccount("PS4EmailRegistrationShowed", false))
+  if (::loadLocalByAccount("PS4EmailRegistrationShowed", false))
     return
 
-  saveLocalByAccount("PS4EmailRegistrationShowed", true)
+  ::saveLocalByAccount("PS4EmailRegistrationShowed", true)
 
   ::showUnlockWnd({
     name = loc("mainmenu/PS4EmailRegistration")
@@ -155,10 +152,10 @@ let function checkShowXboxEmailRegistration() {
   if (!canEmailRegistration())
     return
 
-  if (loadLocalByAccount("XboxEmailRegistrationShowed", false))
+  if (::loadLocalByAccount("XboxEmailRegistrationShowed", false))
     return
 
-  saveLocalByAccount("XboxEmailRegistrationShowed", true)
+  ::saveLocalByAccount("XboxEmailRegistrationShowed", true)
 
   forceLauncheXboxSuggestionEmailRegistration()
 }

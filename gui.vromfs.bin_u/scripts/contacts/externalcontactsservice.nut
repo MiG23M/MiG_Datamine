@@ -3,7 +3,6 @@ from "%scripts/dagui_library.nut" import *
 
 const MAX_UNKNOWN_IDS_PEER_REQUEST = 100
 let DataBlock = require("DataBlock")
-let { convertBlk } = require("%sqstd/datablock.nut")
 
 local requestUnknownXboxIds = function(_playersList, _knownUsers, _cb) {} //forward declaration
 requestUnknownXboxIds = function(playersList, knownUsers, cb) {
@@ -27,7 +26,7 @@ requestUnknownXboxIds = function(playersList, knownUsers, cb) {
       local blk = DataBlock()
       blk = ::xbox_find_friends_result()
 
-      let table = convertBlk(blk)
+      let table = ::buildTableFromBlk(blk)
       table.__update(knownUsers)
 
       requestUnknownXboxIds(leftList, table, cb)
@@ -51,7 +50,7 @@ let function requestUnknownPSNIds(playersList, knownUsers, cb) {
     local blk = DataBlock()
     blk = ::ps4_find_friends_result()
 
-    let table = convertBlk(blk)
+    let table = ::buildTableFromBlk(blk)
     table.__update(knownUsers)
 
     self(leftList, table, cb)

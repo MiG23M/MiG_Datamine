@@ -40,6 +40,9 @@
     5.2,
     -3.2
   ],
+  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
+  "customImage": "!#ui/unitskin#image_in_progress",
+  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "hideNodesInDmg": {
     "node": "flag"
   },
@@ -6304,10 +6307,10 @@
       "armorThrough": 500.0,
       "explosionDamageMult": 1.5,
       "transmission_01_dm": {
-        "hp": 6600.0
+        "hp": 5100.0
       },
       "transmission_02_dm": {
-        "hp": 6600.0
+        "hp": 5100.0
       }
     },
     "shafts": {
@@ -6347,12 +6350,6 @@
       "radar_02_dm": {
         "hp": 350.0
       },
-      "radar_03_dm": {
-        "hp": 350.0
-      },
-      "radar_04_dm": {
-        "hp": 350.0
-      },
       "antenna_target_location_01_dm": {
         "hp": 350.0
       },
@@ -6360,6 +6357,12 @@
         "hp": 350.0
       },
       "antenna_target_tagging_02_dm": {
+        "hp": 350.0
+      },
+      "antenna_target_tagging_03_dm": {
+        "hp": 350.0
+      },
+      "antenna_target_tagging_04_dm": {
         "hp": 350.0
       }
     },
@@ -6408,31 +6411,31 @@
       "genericDamageMult": 0.1,
       "shatterDamageMult": 0.1,
       "cover_01_dm": {
-        "hp": 7600.0
+        "hp": 14400.0
       },
       "cover_02_dm": {
-        "hp": 7600.0
+        "hp": 14400.0
       },
       "cover_03_dm": {
-        "hp": 9104.0
+        "hp": 16907.0
       },
       "cover_04_dm": {
-        "hp": 7600.0
+        "hp": 14400.0
       },
       "cover_05_dm": {
-        "hp": 9900.0
+        "hp": 18700.0
       },
       "cover_06_dm": {
-        "hp": 7600.0
+        "hp": 14400.0
       },
       "cover_07_dm": {
-        "hp": 7600.0
+        "hp": 14400.0
       },
       "cover_08_dm": {
-        "hp": 9554.0
+        "hp": 17744.0
       },
       "cover_09_dm": {
-        "hp": 7600.0
+        "hp": 14400.0
       }
     },
     "superstructures": {
@@ -6541,22 +6544,22 @@
       },
       "armor_cit_10_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 22.225,
+        "armorThickness": 22.23,
         "hp": 10000.0
       },
       "armor_cit_11_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 31.75,
+        "armorThickness": 44.45,
         "hp": 10000.0
       },
       "armor_cit_07_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 44.45,
+        "armorThickness": 88.9,
         "hp": 10000.0
       },
       "armor_cit_26_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 69.85,
+        "armorThickness": 44.45,
         "hp": 10000.0
       },
       "armor_cit_12_dm": {
@@ -6567,11 +6570,6 @@
       "armor_cit_15_dm": {
         "armorClass": "ship_RHA",
         "armorThickness": 25.4,
-        "hp": 10000.0
-      },
-      "armor_cit_27_dm": {
-        "armorClass": "ship_RHA",
-        "armorThickness": 62.23,
         "hp": 10000.0
       },
       "armor_cit_21_dm": {
@@ -6586,7 +6584,7 @@
       },
       "armor_cit_14_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 76.2,
+        "armorThickness": 63.5,
         "hp": 10000.0
       },
       "armor_cit_16_dm": {
@@ -7034,11 +7032,11 @@
         "hp": 8500.0
       },
       "armor_belt_l_35_dm": {
-        "armorThickness": 152.4,
+        "armorThickness": 177.8,
         "hp": 8500.0
       },
       "armor_belt_r_35_dm": {
-        "armorThickness": 152.4,
+        "armorThickness": 177.8,
         "hp": 8500.0
       },
       "armor_belt_l_36_dm": {
@@ -7069,7 +7067,7 @@
       },
       "turret_01_top_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 146.05,
+        "armorThickness": 146.5,
         "hp": 10000.0
       },
       "turret_01_side_dm": {
@@ -7121,7 +7119,7 @@
       },
       "turret_03_top_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 146.05,
+        "armorThickness": 146.5,
         "hp": 10000.0
       },
       "turret_03_side_dm": {
@@ -7147,7 +7145,7 @@
       },
       "turret_04_top_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 146.05,
+        "armorThickness": 146.5,
         "hp": 10000.0
       },
       "turret_04_side_dm": {
@@ -7173,7 +7171,7 @@
       },
       "turret_05_top_dm": {
         "armorClass": "ship_RHA",
-        "armorThickness": 146.05,
+        "armorThickness": 146.5,
         "hp": 10000.0
       },
       "turret_05_side_dm": {
@@ -7430,92 +7428,73 @@
       "armorClass": "ship_structural_steel",
       "armorThickness": 56.4,
       "fireDamageMult": 0.1,
+      "ex_armor_01_dm": {
+        "hp": 1000.0
+      },
+      "ex_armor_02_dm": {
+        "hp": 1000.0
+      },
+      "ex_armor_03_dm": {
+        "hp": 1000.0
+      },
       "ex_armor_l_01_dm": {
         "hp": 500.0
+      },
+      "ex_armor_l_02_dm": {
+        "hp": 723.0
+      },
+      "ex_armor_l_03_dm": {
+        "hp": 799.0
+      },
+      "ex_armor_l_04_dm": {
+        "hp": 1000.0
       },
       "ex_armor_l_05_dm": {
         "hp": 1000.0
       },
+      "ex_armor_l_06_dm": {
+        "hp": 1000.0
+      },
+      "ex_armor_l_07_dm": {
+        "hp": 1000.0
+      },
+      "ex_armor_l_08_dm": {
+        "hp": 720.0
+      },
+      "ex_armor_l_09_dm": {
+        "hp": 880.0
+      },
+      "ex_armor_l_10_dm": {
+        "hp": 733.0
+      },
       "ex_armor_r_01_dm": {
         "hp": 500.0
+      },
+      "ex_armor_r_02_dm": {
+        "hp": 723.0
+      },
+      "ex_armor_r_03_dm": {
+        "hp": 799.0
+      },
+      "ex_armor_r_04_dm": {
+        "hp": 1000.0
       },
       "ex_armor_r_05_dm": {
         "hp": 1000.0
       },
-      "ex_armor_01_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
-      "ex_armor_02_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
-      "ex_armor_03_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
-      "ex_armor_l_02_dm": {
-        "armorThickness": 15.875,
-        "hp": 723.0
-      },
-      "ex_armor_l_03_dm": {
-        "armorThickness": 15.875,
-        "hp": 799.0
-      },
-      "ex_armor_l_04_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
-      "ex_armor_l_06_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
-      "ex_armor_l_07_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
-      "ex_armor_l_08_dm": {
-        "armorThickness": 15.875,
-        "hp": 720.0
-      },
-      "ex_armor_l_09_dm": {
-        "armorThickness": 15.875,
-        "hp": 880.0
-      },
-      "ex_armor_l_10_dm": {
-        "armorThickness": 15.875,
-        "hp": 733.0
-      },
-      "ex_armor_r_02_dm": {
-        "armorThickness": 15.875,
-        "hp": 723.0
-      },
-      "ex_armor_r_03_dm": {
-        "armorThickness": 15.875,
-        "hp": 799.0
-      },
-      "ex_armor_r_04_dm": {
-        "armorThickness": 15.875,
-        "hp": 1000.0
-      },
       "ex_armor_r_06_dm": {
-        "armorThickness": 15.875,
         "hp": 1000.0
       },
       "ex_armor_r_07_dm": {
-        "armorThickness": 15.875,
         "hp": 1000.0
       },
       "ex_armor_r_08_dm": {
-        "armorThickness": 15.875,
         "hp": 720.0
       },
       "ex_armor_r_09_dm": {
-        "armorThickness": 15.875,
         "hp": 884.0
       },
       "ex_armor_r_10_dm": {
-        "armorThickness": 15.875,
         "hp": 732.0
       }
     },
@@ -7661,7 +7640,7 @@
     "sailor3": {
       "dmPart": "compartment_01_dm",
       "role": "sailor",
-      "crew": 120
+      "crew": 119
     },
     "sailor4": {
       "dmPart": "compartment_02_dm",
@@ -7796,7 +7775,7 @@
     "sailor30": {
       "dmPart": "ammunition_storage_shells_02_dm",
       "role": "sailor",
-      "crew": 30
+      "crew": 31
     },
     "sailor31": {
       "dmPart": "ammunition_storage_shells_03_dm",
@@ -8476,9 +8455,9 @@
     "mass": {
       "Empty": 29000000.0,
       "momentOfInertia": [
-        98.0,
-        2050.0,
-        1300.0
+        96.0,
+        2000.0,
+        1250.0
       ],
       "CenterOfGravity": [
         0.8,
@@ -8612,12 +8591,20 @@
       "dmPart": "antenna_target_location_01_dm"
     },
     "sensor": {
-      "blk": "gameData/sensors/naval/us_mk19_radar.blk",
+      "blk": "gameData/sensors/naval/us_fc_radar.blk",
       "dmPart": "antenna_target_tagging_01_dm"
     },
     "sensor": {
-      "blk": "gameData/sensors/naval/us_mk19_radar.blk",
+      "blk": "gameData/sensors/naval/us_fc_radar.blk",
       "dmPart": "antenna_target_tagging_02_dm"
+    },
+    "sensor": {
+      "blk": "gameData/sensors/naval/us_mk19_radar.blk",
+      "dmPart": "antenna_target_tagging_03_dm"
+    },
+    "sensor": {
+      "blk": "gameData/sensors/naval/us_mk19_radar.blk",
+      "dmPart": "antenna_target_tagging_04_dm"
     },
     "fireDirecting": {
       "dmPartMain": "fire_control_room_01_dm",
@@ -8689,7 +8676,7 @@
     "Weapon": {
       "trigger": "gunner0",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_01",
       "flash": "emtr_gun_flame_01",
       "useEmitter": true,
@@ -8728,8 +8715,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -8803,7 +8790,7 @@
     "Weapon": {
       "trigger": "gunner0",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_02",
       "flash": "emtr_gun_flame_02",
       "useEmitter": true,
@@ -8842,8 +8829,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -8917,7 +8904,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_03",
       "flash": "emtr_gun_flame_03",
       "useEmitter": true,
@@ -8956,8 +8943,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9019,7 +9006,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_04",
       "flash": "emtr_gun_flame_04",
       "useEmitter": true,
@@ -9058,8 +9045,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9121,7 +9108,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_05",
       "flash": "emtr_gun_flame_05",
       "useEmitter": true,
@@ -9160,8 +9147,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9221,7 +9208,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_06",
       "flash": "emtr_gun_flame_06",
       "useEmitter": true,
@@ -9260,8 +9247,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9321,7 +9308,7 @@
     "Weapon": {
       "trigger": "gunner3",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_07",
       "flash": "emtr_gun_flame_07",
       "useEmitter": true,
@@ -9360,8 +9347,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9423,7 +9410,7 @@
     "Weapon": {
       "trigger": "gunner3",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_08",
       "flash": "emtr_gun_flame_08",
       "useEmitter": true,
@@ -9462,8 +9449,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9525,7 +9512,7 @@
     "Weapon": {
       "trigger": "gunner4",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_09",
       "flash": "emtr_gun_flame_09",
       "useEmitter": true,
@@ -9564,8 +9551,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -9615,7 +9602,7 @@
     "Weapon": {
       "trigger": "gunner4",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk12_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/356mm_45_14inch_mk8_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_10",
       "flash": "emtr_gun_flame_10",
       "useEmitter": true,
@@ -9654,8 +9641,8 @@
       },
       "limits": {
         "yaw": [
-          -150.0,
-          150.0
+          -145.0,
+          145.0
         ],
         "pitch": [
           -5.0,
@@ -21455,12 +21442,7 @@
   "defaultShipFlag": {
     "name": "default",
     "modelFlagTexture": "flag_c*",
-    "defaultShipFlag": "ship_flag_usa_02",
-    "hangarFlagCam": [
-      197.68,
-      -3.32,
-      0.5
-    ]
+    "defaultShipFlag": "ship_flag_usa_02"
   },
   "availableShipFlags": {
     "ship_flag_germany_01": {
@@ -21548,7 +21530,7 @@
       "texture": "flag_poland_01_c*"
     },
     "ship_flag_south_vietnam_01": {
-      "category": "naval",
+      "category": "national",
       "unlockId": "ship_flag_south_vietnam_01",
       "nameLocId": "ship_flag_south_vietnam_01/name",
       "texture": "flag_south_vietnam_01_c*"
@@ -21659,7 +21641,7 @@
       "category": "national",
       "unlockId": "ship_flag_antigua_and_barbuda_01",
       "nameLocId": "ship_flag_antigua_and_barbuda_01/name",
-      "texture": "flag_antigua_and_barbuda_01_c*"
+      "texture": "flag_angola_01_c*"
     },
     "ship_flag_argentina_01": {
       "category": "national",
@@ -22759,29 +22741,19 @@
       "nameLocId": "ship_flag_northern_ireland_01/name",
       "texture": "flag_northern_ireland_01_c*"
     },
-    "ship_flag_cardsuit_01": {
+    "ship_flag_arkansas_01": {
       "category": "other",
-      "unlockId": "ship_flag_cardsuit_01",
-      "nameLocId": "ship_flag_cardsuit_01/name",
-      "texture": "flag_cardsuit_01_c*"
+      "unlockId": "ship_flag_arkansas_01",
+      "nameLocId": "ship_flag_arkansas_01/name",
+      "descLocId": "ship_flag_arkansas_01/desc",
+      "texture": "flag_arkansas_01_c*"
     },
-    "ship_flag_cardsuit_02": {
+    "ship_flag_petropavlovsk_01": {
       "category": "other",
-      "unlockId": "ship_flag_cardsuit_02",
-      "nameLocId": "ship_flag_cardsuit_02/name",
-      "texture": "flag_cardsuit_02_c*"
-    },
-    "ship_flag_cardsuit_03": {
-      "category": "other",
-      "unlockId": "ship_flag_cardsuit_03",
-      "nameLocId": "ship_flag_cardsuit_03/name",
-      "texture": "flag_cardsuit_03_c*"
-    },
-    "ship_flag_cardsuit_04": {
-      "category": "other",
-      "unlockId": "ship_flag_cardsuit_04",
-      "nameLocId": "ship_flag_cardsuit_04/name",
-      "texture": "flag_cardsuit_04_c*"
+      "unlockId": "ship_flag_petropavlovsk_01",
+      "nameLocId": "ship_flag_petropavlovsk_01/name",
+      "descLocId": "ship_flag_petropavlovsk_01/desc",
+      "texture": "flag_petropavlovsk_01_c*"
     },
     "ship_flag_pirate_01": {
       "category": "other",
@@ -22860,20 +22832,6 @@
       "unlockId": "ship_flag_racing_01",
       "nameLocId": "ship_flag_racing_01/name",
       "texture": "flag_racing_01_c*"
-    },
-    "ship_flag_arkansas_01": {
-      "category": "other",
-      "unlockId": "ship_flag_arkansas_01",
-      "nameLocId": "ship_flag_arkansas_01/name",
-      "descLocId": "ship_flag_arkansas_01/desc",
-      "texture": "flag_arkansas_01_c*"
-    },
-    "ship_flag_petropavlovsk_01": {
-      "category": "other",
-      "unlockId": "ship_flag_petropavlovsk_01",
-      "nameLocId": "ship_flag_petropavlovsk_01/name",
-      "descLocId": "ship_flag_petropavlovsk_01/desc",
-      "texture": "flag_petropavlovsk_01_c*"
     }
   }
 }

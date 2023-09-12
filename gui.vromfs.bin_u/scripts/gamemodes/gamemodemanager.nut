@@ -1,10 +1,10 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 let u = require("%sqStdLibs/helpers/u.nut")
-
-
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 let RB_GM_TYPE = require("%scripts/gameModes/rbGmTypes.nut")
-let { subscribe_handler, broadcastEvent, add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
+let { subscribe_handler, broadcastEvent, add_event_listener
+} = require("%sqStdLibs/helpers/subscriptions.nut")
 let DataBlock = require("DataBlock")
 let QUEUE_TYPE_BIT = require("%scripts/queue/queueTypeBit.nut")
 let unitTypes = require("%scripts/unit/unitTypesList.nut")
@@ -55,7 +55,7 @@ let { isShowGoldBalanceWarning, hasMultiplayerRestritionByBalance
       else if (!isMultiplayerPrivilegeAvailable.value)
         checkAndShowMultiplayerPrivilegeWarning()
       else if (!isShowGoldBalanceWarning())
-        checkAndShowCrossplayWarning(@() ::showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
+        checkAndShowCrossplayWarning(@() showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
     }
     isWide = false
     image = @() "#ui/images/game_modes_tiles/tss_" + (this.isWide ? "wide" : "thin") + "?P1"
@@ -482,7 +482,7 @@ let { isShowGoldBalanceWarning, hasMultiplayerRestritionByBalance
     local unitType = ES_UNIT_TYPE_INVALID
     if (!ignoreLocalProfile && ::g_login.isProfileReceived()) {
       // Step 1. Attempting to retrieve current game mode id from account.
-      idFromAccount = ::loadLocalByAccount("selected_random_battle", null)
+      idFromAccount = loadLocalByAccount("selected_random_battle", null)
       if (idFromAccount in this._gameModeById)
         return idFromAccount
 
@@ -571,7 +571,7 @@ let { isShowGoldBalanceWarning, hasMultiplayerRestritionByBalance
     this._currentGameModeId = id
 
     if (save)
-      ::saveLocalByAccount("selected_random_battle", this._currentGameModeId)
+      saveLocalByAccount("selected_random_battle", this._currentGameModeId)
 
     broadcastEvent("CurrentGameModeIdChanged", { isUserSelected = isUserSelected })
   }
@@ -802,7 +802,7 @@ let { isShowGoldBalanceWarning, hasMultiplayerRestritionByBalance
     if (!::g_login.isLoggedIn())
       return false
 
-    let blk = ::loadLocalByAccount(this.SEEN_MODES_SAVE_PATH, DataBlock())
+    let blk = loadLocalByAccount(this.SEEN_MODES_SAVE_PATH, DataBlock())
     for (local i = 0; i < blk.paramCount(); i++) {
       let id = blk.getParamName(i)
       this.isSeenByGameModeId[id] <- blk.getParamValue(i)
@@ -859,7 +859,7 @@ let { isShowGoldBalanceWarning, hasMultiplayerRestritionByBalance
         blk[id] = this.isSeenByGameModeId[id]
     }
 
-    ::saveLocalByAccount(this.SEEN_MODES_SAVE_PATH, blk)
+    saveLocalByAccount(this.SEEN_MODES_SAVE_PATH, blk)
   }
 
   function getAllVisibleGameModes() {

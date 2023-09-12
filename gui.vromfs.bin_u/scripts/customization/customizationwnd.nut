@@ -22,7 +22,7 @@ let { get_last_skin, mirror_current_decal, get_mirror_current_decal,
   get_tank_camo_scale_result_value, set_tank_skin_condition, set_tank_camo_rotation,
   show_model_damaged, get_loaded_model_damage_state, can_save_current_skin_template,
   save_current_skin_template, MDS_UNDAMAGED, MDS_DAMAGED, MDS_ORIGINAL,
-  get_ship_flag_in_slot, get_avail_ship_flags_blk, apply_ship_flag, get_default_ship_flag
+  get_ship_flag_in_slot, apply_ship_flag, get_default_ship_flag
 } = require("unitCustomization")
 let decorLayoutPresets = require("%scripts/customization/decorLayoutPresetsWnd.nut")
 let unitActions = require("%scripts/unit/unitActions.nut")
@@ -55,10 +55,12 @@ let { reqUnlockByClient, canDoUnlock } = require("%scripts/unlocks/unlocksModule
 let { set_option, create_option_switchbox } = require("%scripts/options/optionsExt.nut")
 let { createSlotInfoPanel } = require("%scripts/slotInfoPanel.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { USEROPT_USER_SKIN, USEROPT_TANK_CAMO_SCALE, USEROPT_TANK_CAMO_ROTATION,
   USEROPT_TANK_SKIN_CONDITION } = require("%scripts/options/optionsExtNames.nut")
 
-::dagui_propid.add_name_id("gamercardSkipNavigation")
+dagui_propid_add_name_id("gamercardSkipNavigation")
 
 enum decoratorEditState {
   NONE     = 0x0001
@@ -111,7 +113,7 @@ enum decalTwoSidedMode {
 ::delayed_download_enabled_msg <- function delayed_download_enabled_msg() {
   if (!::g_login.isProfileReceived())
     return
-  let skip = ::load_local_account_settings("skipped_msg/delayedDownloadContent", false)
+  let skip = loadLocalAccountSettings("skipped_msg/delayedDownloadContent", false)
   if (!skip) {
     ::gui_start_modal_wnd(gui_handlers.SkipableMsgBox,
     {
@@ -121,19 +123,19 @@ enum decalTwoSidedMode {
       defaultBtnId = "btn_select"
       onStartPressed = function() {
         ::set_option_delayed_download_content(true)
-        ::save_local_account_settings("delayDownloadContent", true)
+        saveLocalAccountSettings("delayDownloadContent", true)
       }
       cancelFunc = function() {
         ::set_option_delayed_download_content(false)
-        ::save_local_account_settings("delayDownloadContent", false)
+        saveLocalAccountSettings("delayDownloadContent", false)
       }
       skipFunc = function(value) {
-        ::save_local_account_settings("skipped_msg/delayedDownloadContent", value)
+        saveLocalAccountSettings("skipped_msg/delayedDownloadContent", value)
       }
     })
   }
   else {
-    local choosenDDC = ::load_local_account_settings("delayDownloadContent", true)
+    local choosenDDC = loadLocalAccountSettings("delayDownloadContent", true)
     ::set_option_delayed_download_content(choosenDDC)
   }
 }
@@ -188,7 +190,6 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
   decorMenu = null
   defaultFlag = ""
-  flagsBlk = null
 
   function initScreen() {
     this.owner = this
@@ -197,8 +198,6 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       return this.goBack()
     ::cur_aircraft_name = this.unit.name
 
-    this.defaultFlag = get_default_ship_flag()
-    this.flagsBlk = get_avail_ship_flags_blk()
     this.access_WikiOnline = hasFeature("WikiUnitInfo")
     this.access_UserSkins = isPlatformPC && hasFeature("UserSkins")
     this.access_SkinsUnrestrictedPreview = hasFeature("SkinsPreviewOnUnboughtUnits")
@@ -288,6 +287,8 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function updateMainGuiElements() {
+    if (this.access_Flags)
+      this.defaultFlag = get_default_ship_flag() ?? "default"
     this.updateSlotsBlockByType()
     this.updateSkinList()
     this.updateFlagName()
@@ -493,20 +494,17 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function isDefaultFlag(currentFlag) {
-    return currentFlag == this.defaultFlag
+    return currentFlag == this.defaultFlag || currentFlag == "default"
   }
 
   function updateFlagName() {
     if (!this.access_Flags)
       return
 
-    local currentFlag = get_ship_flag_in_slot(this.unit.name, this.getSelectedBuiltinSkinId())
-    if(currentFlag == "default")
-      currentFlag = this.defaultFlag
-
-    this.scene.findObject("flag_name").setValue(this.isDefaultFlag(currentFlag) ?
-      loc("flags/defaultFlag") :
-      loc(this.flagsBlk?[currentFlag].nameLocId ?? ""))
+    let currentFlag = get_ship_flag_in_slot(this.unit.name, this.getSelectedBuiltinSkinId())
+    this.scene.findObject("flag_name").setValue(this.isDefaultFlag(currentFlag)
+      ? loc("flags/defaultFlag")
+      : ::g_decorator_type.FLAGS.getLocName(currentFlag))
   }
 
   function renewDropright(nestObjId, listObjId, items, index, cb) {
@@ -723,7 +721,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       view.buttons.append(button)
     }
 
-    let dObj = this.scene.findObject("flag_div")
+    let dObj = this.scene.findObject("flagslots_div")
     if (!checkObj(dObj))
       return
 
@@ -879,7 +877,6 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
           skins_div = !isInEditMode && !this.decorMenu?.isOpened && this.access_Skins
           user_skins_block = !this.previewMode && this.access_UserSkins
-          user_flags_block = !this.previewMode && this.access_UserSkins
           tank_skin_settings = !this.previewMode && (this.isUnitTank || this.isUnitShipOrBoat)
 
           previewed_decorator_div  = !isInEditMode && this.decoratorPreview
@@ -916,7 +913,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
           decalslots_div     = isHangarLoaded
           slots_list         = isHangarLoaded
           skins_navigator    = isHangarLoaded
-          flags_navigator    = isHangarLoaded
+          slots_flag_list    = isHangarLoaded
           tank_skin_settings = isHangarLoaded
     })
 
@@ -953,8 +950,9 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function updateDecoratorActions(show, decoratorType) {
-    let hintsObj = this.showSceneBtn("decals_hint", show)
-    if (show && checkObj(hintsObj)) {
+    let hasHints = decoratorType.canResize() || decoratorType.canRotate()
+    let hintsObj = this.showSceneBtn("decals_hint", hasHints && show)
+    if (hasHints && show && checkObj(hintsObj)) {
       showObjectsByTable(hintsObj, {
         decals_hint_rotate = decoratorType.canRotate()
         decals_hint_resize = decoratorType.canResize()
@@ -1003,7 +1001,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     showObjectsByTable(this.scene, {
       decalslots_div = showDecalsSlotDiv
       attachable_div = showAttachableSlotsDiv
-      flags_navigator = showFlagsSlotDiv
+      flagslots_div = showFlagsSlotDiv
     })
   }
 
@@ -1397,6 +1395,10 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     this.stopDecalEdition(true)
   }
 
+  function onEventDecalsMenuClosed(_obj) {
+    this.onBtnBack()
+  }
+
   function onBtnBack() {
     if (this.currentState & decoratorEditState.NONE)
       return this.goBack()
@@ -1424,12 +1426,12 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
     decorator.decoratorType.save(this.unit.name, false)
 
-    let afterSuccessFunc = Callback((@(decorator, afterPurchDo) function() {
+    let afterSuccessFunc = Callback( function() {
       ::update_gamercards()
       this.decorMenu?.updateSelectedCategory(decorator)
       if (afterPurchDo)
         afterPurchDo()
-    })(decorator, afterPurchDo), this)
+    }, this)
 
     decorator.decoratorType.buyFunc(this.unit.name, decorator.id, cost, afterSuccessFunc)
     return true
@@ -1497,7 +1499,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function askBuyDecoratorOnExitEditMode(decorator) {
     if (!this.currentType.exitEditMode(true, false,
-              Callback((@(decorator) function() {
+              Callback( function() {
                           this.askBuyDecorator(decorator, function() {
                               save_current_attachables()
                               if(decorator.decoratorType == ::g_decorator_type.FLAGS ) {
@@ -1505,7 +1507,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
                                 this.updateFlagName()
                               }
                             })
-                        })(decorator), this)))
+                        }, this)))
       this.showFailedInstallPopup(decorator)
   }
 
@@ -1523,14 +1525,14 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
           cost = cost.getTextAccordingToBalance() }),
       decorator.getCost())
     this.msgBox("buy_decorator_on_preview", msgText,
-      [["ok", (@(decorator, afterPurchDo) function() {
+      [["ok",  function() {
           this.currentState = decoratorEditState.PURCHASE
           if (!this.buyDecorator(decorator, cost, afterPurchDo))
             return this.forceResetInstalledDecorators()
 
           ::dmViewer.update()
           this.onFinishInstallDecoratorOnUnit(true)
-        })(decorator, afterPurchDo)],
+        }],
       ["cancel", this.onMsgBoxCancel]
       ], "ok", { cancel_fn = this.onMsgBoxCancel })
   }
@@ -1608,7 +1610,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     if (hasFeature("EnableGoldPurchase"))
       this.startOnlineShop("eagles", this.afterReplenishCurrency, "customization")
     else
-      ::showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
+      showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
   }
 
   function onOnlineShopLions() {
@@ -1774,11 +1776,11 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function buySkin(skinName, cost) {
-    let afterSuccessFunc = Callback((@(skinName) function() {
+    let afterSuccessFunc = Callback( function() {
         ::update_gamercards()
         this.applySkin(skinName)
         this.updateMainGuiElements()
-      })(skinName), this)
+      }, this)
 
     ::g_decorator_type.SKINS.buyFunc(this.unit.name, skinName, cost, afterSuccessFunc)
   }
@@ -1821,10 +1823,8 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     if (decalId == "" && isValid && decoratorType != null) {
       let liveryName = this.getSelectedBuiltinSkinId()
       decalId = decoratorType.getDecoratorNameInSlot(slotId, this.unit.name, liveryName, false) ?? ""
-      if(decalId == "default" && decoratorType == ::g_decorator_type.FLAGS && this.unit.isShipOrBoat()) {
-        decalId = get_default_ship_flag()
-        apply_ship_flag(decalId, true)
-      }
+      if(this.access_Flags && decalId == "default" && decoratorType == ::g_decorator_type.FLAGS)
+        decalId = this.defaultFlag
       isValid = isValid && slotId < decoratorType.getMaxSlots()
     }
 
@@ -1882,9 +1882,6 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     item.openLink()
   }
 
-  function onEventUnitBought(_params) {
-    this.initMainParams()
-  }
 
   function onEventUnitRented(_params) {
     this.initMainParams()
@@ -2000,7 +1997,7 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     if (hasFeature("WikiUnitInfo"))
       openUrl(format(loc("url/wiki_objects"), this.unit.name), false, false, "customization_wnd")
     else
-      ::showInfoMsgBox(colorize("activeTextColor", ::getUnitName(this.unit, false)) + "\n" + loc("profile/wiki_link"))
+      showInfoMsgBox(colorize("activeTextColor", ::getUnitName(this.unit, false)) + "\n" + loc("profile/wiki_link"))
   }
 
   function clearCurrentDecalSlotAndShow() {
@@ -2035,6 +2032,9 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onScreenClick() {
+    if(this.currentType.unlockedItemType == UNLOCKABLE_SHIP_FLAG)
+      return
+
     if (this.currentState == decoratorEditState.NONE)
       return
 
@@ -2185,6 +2185,19 @@ gui_handlers.DecalMenuHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   function onEventActiveHandlersChanged(_p) {
     if (!this.isSceneActiveNoModals())
       this.setDmgSkinMode(false)
+  }
+
+  function onEventUnitBought(params) {
+    this.initMainParams()
+    let unitName = params?.unitName
+    let boughtUnit = unitName ? getAircraftByName(unitName) : null
+    if (!boughtUnit)
+      return
+
+    if (!this.isSceneActive())
+      return
+
+    this.onTake(boughtUnit, { isNewUnit = true })
   }
 
   function preSelectSlotAndDecorator(decorator, slotIdx) {

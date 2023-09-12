@@ -166,7 +166,7 @@ enums.addTypesByGlobalName("g_decorator_type", {
     getImage = @(decorator) decorator ? $"@!{decorator.blk.texture}" : ""
     getRatio = @(decorator) decorator?.aspect_ratio ?? 0.8
     getImageSize = @(decorator) format("256@sf/@pf, %d@sf/@pf", floor(256.0 / this.getRatio(decorator) + 0.5))
-    getLocName = @(decoratorName, ...) loc(getDecorator(decoratorName, this)?.blk.nameLocId)
+    getLocName = @(decoratorName, ...) loc(getDecorator(decoratorName, this)?.blk.nameLocId ?? "")
     getLocDesc = @(decoratorName) loc(getDecorator(decoratorName, this)?.blk.descLocId ?? "")
     getTypeDesc = @(_decorator) ""
     getCost = @(decorator) Cost().setGold(decorator?.unlockBlk.costGold ?? 0)
@@ -177,7 +177,13 @@ enums.addTypesByGlobalName("g_decorator_type", {
     isAvailable = @(unit, checkUnitUsable = true) !!unit && (!checkUnitUsable || unit.isUsable())
     isPlayerHaveDecorator = @(id) isUnlockOpened(id) || id == get_default_ship_flag()
     isVisible = @(_block, _decorator) true
-    getBlk = @() get_avail_ship_flags_blk()
+    function getBlk() {
+      let resBlk = DataBlock()
+      let flagsBlk = get_avail_ship_flags_blk()
+      if (flagsBlk != null)
+        resBlk.setFrom(flagsBlk)
+      return resBlk
+    }
 
     enterEditMode = function(flagName) {
       let enterResult = enter_ship_flags_mode()

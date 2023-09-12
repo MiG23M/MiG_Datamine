@@ -1,11 +1,9 @@
 //-file:plus-string
-
-
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { LayersIcon } = require("%scripts/viewUtils/layeredIcon.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
+let { convertBlk } = require("%sqstd/datablock.nut")
 let { Timer } = require("%sqDagui/timer/timer.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let DataBlock  = require("DataBlock")
@@ -18,6 +16,7 @@ let { GUI } = require("%scripts/utils/configs.nut")
 let { register_command } = require("console")
 let { initItemsRoulette, skipItemsRouletteAnimation } = require("%scripts/items/roulette/itemsRoulette.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
+let { isChineseHarmonized } = require("%scripts/langUtils/language.nut")
 
 let class EveryDayLoginAward extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.MODAL
@@ -85,7 +84,7 @@ let class EveryDayLoginAward extends gui_handlers.BaseGuiHandlerWT {
       return
     local imageSectionName = "image"
     let imageSectionNameAlt = "tencent_image"
-    if (::is_chinese_harmonized() && u.isDataBlock(data[imageSectionNameAlt]))
+    if (isChineseHarmonized() && u.isDataBlock(data[imageSectionNameAlt]))
       imageSectionName = imageSectionNameAlt
 
     this.savePeriodAwardData(data)
@@ -133,8 +132,8 @@ let class EveryDayLoginAward extends gui_handlers.BaseGuiHandlerWT {
     if (blockLen <= 0)
       return
 
-    let loopLen = ::to_integer_safe(getTblValue("loopLenght", this.userlog.body, 1))
-    let progress = ::to_integer_safe(getTblValue("progress", this.userlog.body, 1)) - 1
+    let loopLen = to_integer_safe(getTblValue("loopLenght", this.userlog.body, 1))
+    let progress = to_integer_safe(getTblValue("progress", this.userlog.body, 1)) - 1
     let weeksInARow = progress / loopLen
 
     let week = weeksInARow % blockLen
@@ -220,7 +219,7 @@ let class EveryDayLoginAward extends gui_handlers.BaseGuiHandlerWT {
         || !getTblValue("everyDayLoginAward", blk.body, false))
         continue
 
-      userlogConfig.append(::buildTableFromBlk(blk.body))
+      userlogConfig.append(convertBlk(blk.body))
     }
 
     return userlogConfig
@@ -346,7 +345,7 @@ let class EveryDayLoginAward extends gui_handlers.BaseGuiHandlerWT {
       animObj.animation = "show"
       if (this.useSingleAnimation) {
         this.guiScene.playSound("chest_open")
-        let delay = ::to_integer_safe(animObj?.chestReplaceDelay, 0)
+        let delay = to_integer_safe(animObj?.chestReplaceDelay, 0)
         Timer(animObj, 0.001 * delay, this.fillOpenedChest, this)
       }
     }
@@ -574,7 +573,7 @@ let class EveryDayLoginAward extends gui_handlers.BaseGuiHandlerWT {
 
     let singleDayLength = blockObj.getSize()[0] * (1.0 / maxVal)
 
-    let filledBoxWidth = ::to_integer_safe(singleDayLength * value)
+    let filledBoxWidth = to_integer_safe(singleDayLength * value)
     textNestObj.width = filledBoxWidth
     this.guiScene.setUpdatesEnabled(true, true)
 

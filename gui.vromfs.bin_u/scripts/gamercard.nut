@@ -14,6 +14,7 @@ let { boosterEffectType, haveActiveBonusesByEffectType } = require("%scripts/ite
 let globalCallbacks = require("%sqDagui/globalCallbacks/globalCallbacks.nut")
 let { decimalFormat } = require("%scripts/langUtils/textFormat.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::fill_gamer_card <- function fill_gamer_card(cfg = null, prefix = "gc_", scene = null, save_scene = true) {
   if (!checkObj(scene)) {
@@ -47,7 +48,7 @@ let { getPlayerName } = require("%scripts/user/remapNick.nut")
     if (checkObj(obj))
       switch (name) {
         case "country":
-          obj["background-image"] = ::get_country_icon(val)
+          obj["background-image"] = getCountryIcon(val)
           break
         case "rankProgress":
           let value = val.tointeger()

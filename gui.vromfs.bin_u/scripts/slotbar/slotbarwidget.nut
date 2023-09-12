@@ -29,6 +29,7 @@ let { switchProfileCountry, profileCountrySq } = require("%scripts/user/playerCo
 let { startsWith } = require("%sqstd/string.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 const SLOT_NEST_TAG = "unitItemContainer { {0} }"
 
@@ -409,7 +410,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
 
     if (!::g_crews_list.get().len()) {
       if (::g_login.isLoggedIn() && (::isProductionCircuit() || ::get_cur_circuit_name() == "nightly"))
-        ::scene_msg_box("no_connection", null, loc("char/no_connection"), [["ok", startLogout ]], "ok")
+        scene_msg_box("no_connection", null, loc("char/no_connection"), [["ok", startLogout ]], "ok")
       return
     }
 
@@ -455,7 +456,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
         countryIdx = countryData.id
         country = this.customViewCountryData?[country].locId ?? country
         tooltipText = tooltipText
-        countryIcon = ::get_country_icon(
+        countryIcon = getCountryIcon(
           this.customViewCountryData?[country].icon ?? country, false, !cUnlocked || !cEnabled)
         bonusData = bonusData
         isEnabled = cEnabled && cUnlocked
@@ -605,7 +606,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
     let prefix = "td_slot_" + countryId + "_"
     if (!startsWith(slotObjId, prefix))
       return -1
-    return ::to_integer_safe(slotObjId.slice(prefix.len()), -1)
+    return to_integer_safe(slotObjId.slice(prefix.len()), -1)
   }
 
   function getSelSlotDataByObj(obj) {
@@ -640,16 +641,16 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
     }
     else
       this.checkedAirChange(
-        (@(obj) function() {
+         function() {
           if (checkObj(obj))
             this.onSlotbarSelectImpl(obj)
-        })(obj),
-        (@(obj) function() {
+        },
+         function() {
           if (checkObj(obj)) {
             this.skipCheckAirSelect = true
             this.selectTblAircraft(obj, ::selected_crews[this.curSlotCountryId])
           }
-        })(obj)
+        }
       )
   }
 
@@ -784,7 +785,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
         continue
       }
 
-      if (::to_integer_safe(id) == slotIdInCountry)
+      if (to_integer_safe(id) == slotIdInCountry)
         return i
     }
 
@@ -802,15 +803,15 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
 
   function checkSelectCountryByIdx(obj) {
     let idx = obj.getValue()
-    let countryIdx = ::to_integer_safe(
+    let countryIdx = to_integer_safe(
       ::getObjIdByPrefix(obj.getChild(idx), "header_country"), this.curSlotCountryId)
     if (this.curSlotCountryId >= 0 && this.curSlotCountryId != countryIdx && countryIdx in ::g_crews_list.get()
         && !::isCountryAvailable(::g_crews_list.get()[countryIdx].country) && ::unlocked_countries.len()) {
       this.msgBox("notAvailableCountry", loc("mainmenu/countryLocked/tooltip"),
-             [["ok", (@(obj) function() {
+             [["ok",  function() {
                if (checkObj(obj))
                  obj.setValue(this.curSlotCountryId)
-             })(obj) ]], "ok")
+             } ]], "ok")
       return false
     }
     return true
@@ -836,7 +837,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
       countryIdx = countryData.idx
       needSkipAnim = countriesCount == 0
       alwaysShowBorder = this.alwaysShowBorder
-      countryImage = ::get_country_icon(this.customViewCountryData?[country].icon ?? country, false)
+      countryImage = getCountryIcon(this.customViewCountryData?[country].icon ?? country, false)
       slotbarBehavior = this.slotbarBehavior
     })
     this.guiScene.appendWithBlk(this.crewsObj, blk, this)
@@ -854,7 +855,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
     if (lockedCountryData != null
       && !isInArray(countryData.country, lockedCountryData.availableCountries)) {
       this.setCountry(profileCountrySq.value)
-      ::showInfoMsgBox(lockedCountryData.reasonText)
+      showInfoMsgBox(lockedCountryData.reasonText)
     }
     else {
       this.switchSlotbarCountry(this.headerObj, countryData)
@@ -914,7 +915,7 @@ gui_handlers.SlotbarWidget <- class extends gui_handlers.BaseGuiHandlerWT {
     if (obj.childrenCount() <= curValue)
       return null
 
-    let countryIdx = ::to_integer_safe(
+    let countryIdx = to_integer_safe(
       ::getObjIdByPrefix(obj.getChild(curValue), "header_country"), this.curSlotCountryId)
     let country = ::g_crews_list.get()[countryIdx].country
 

@@ -29,7 +29,7 @@ enums.addTypes(lbDataType, {
   NUM = {
     function getFullTextByValue(value, allowNegative = false) {
       if (type(value) == "string")
-        value = ::to_integer_safe(value)
+        value = to_integer_safe(value)
 
       return (!allowNegative && value < 0)
         ? loc("leaderboards/notAvailable")
@@ -38,7 +38,7 @@ enums.addTypes(lbDataType, {
 
     function getShortTextByValue(value, allowNegative = false) {
       if (type(value) == "string")
-        value = ::to_integer_safe(value)
+        value = to_integer_safe(value)
 
       return (!allowNegative && value < 0)
         ? loc("leaderboards/notAvailable")
@@ -47,14 +47,14 @@ enums.addTypes(lbDataType, {
 
     function getPrimaryTooltipText(value, allowNegative = false) {
       if (type(value) == "string")
-        value = ::to_integer_safe(value)
+        value = to_integer_safe(value)
 
       return (allowNegative || value >= 0) ? getStandartTooltip(this, value) : ""
     }
 
     function getAdditionalTooltipPartValueText(value, hideIfZero) {
       if (type(value) == "string")
-        value = ::to_integer_safe(value)
+        value = to_integer_safe(value)
 
       return hideIfZero
         ? (value >  0) ? value.tostring () : ""
@@ -65,7 +65,7 @@ enums.addTypes(lbDataType, {
   FLOAT = {
     function getFullTextByValue(value, allowNegative = false) {
       if (type(value) == "string")
-        value = ::to_float_safe(value)
+        value = to_float_safe(value)
 
       return (!allowNegative && value < 0)
         ? loc("leaderboards/notAvailable")
@@ -127,7 +127,7 @@ enums.addTypes(lbDataType, {
   PLACE = {
     function getFullTextByValue(value, allowNegative = false) {
       if (type(value) == "string")
-        value = ::to_integer_safe(value)
+        value = to_integer_safe(value)
 
       return (!allowNegative && value < 0)
         ? loc("leaderboards/notAvailable")
@@ -136,7 +136,7 @@ enums.addTypes(lbDataType, {
 
     function getPrimaryTooltipText(value, allowNegative = false) {
       if (type(value) == "string")
-        value = ::to_integer_safe(value)
+        value = to_integer_safe(value)
 
       return (!allowNegative && value < 0)
         ? loc("leaderboards/not_in_leaderboard")

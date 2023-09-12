@@ -11,6 +11,8 @@ let { getXboxChatEnableStatus } = require("%scripts/chat/chatStates.nut")
 let { startLogout } = require("%scripts/login/logout.nut")
 let { recentBR, getBRDataByMrankDiff } = require("%scripts/battleRating.nut")
 let { getMyStateData } = require("%scripts/user/userUtils.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 const MEMBER_STATUS_LOC_TAG_PREFIX = "#msl"
 
@@ -51,7 +53,7 @@ systemMsg.registerLocTags(locTags)
     @(member) { crafts_info = member?.craftsInfoByUnitsGroups })
 
   canShowMembersBRDiffMsg = @() ::g_login.isProfileReceived()
-    && !::load_local_account_settings("skipped_msg/membersBRDiff", false)
+    && !loadLocalAccountSettings("skipped_msg/membersBRDiff", false)
 
   checkMembersMrankDiff = function(handler, okFunc) {
     if (!::g_squad_manager.isSquadLeader())
@@ -76,7 +78,7 @@ systemMsg.registerLocTags(locTags)
       startBtnText = loc("msgbox/btn_yes")
       onStartPressed = okFunc
       skipFunc = function(value) {
-        ::save_local_account_settings("skipped_msg/membersBRDiff", value)
+        saveLocalAccountSettings("skipped_msg/membersBRDiff", value)
       }
     })
   }
@@ -103,7 +105,7 @@ systemMsg.registerLocTags(locTags)
 
   let maxSize = getTblValue("maxSquadSize", options, 0)
   if (maxSize > 0 && ::g_squad_manager.getOnlineMembersCount() > maxSize) {
-    ::showInfoMsgBox(loc("gamemode/squad_is_too_big",
+    showInfoMsgBox(loc("gamemode/squad_is_too_big",
       {
         squadSize = colorize("userlogColoredText", ::g_squad_manager.getOnlineMembersCount())
         maxTeamSize = colorize("userlogColoredText", maxSize)
@@ -137,7 +139,7 @@ systemMsg.registerLocTags(locTags)
 
   let locId = "squad/sameCrossPlayConditionAsLeader/" + (members[0].crossplay ? "disabled" : "enabled")
   let membersNamesArray = members.map(@(member) colorize("warningTextColor", getPlayerName(member.name)))
-  ::showInfoMsgBox(
+  showInfoMsgBox(
     loc(locId,
       { names = ",".join(membersNamesArray, true) }
     ), "members_not_all_crossplay_condition")
@@ -172,7 +174,7 @@ systemMsg.registerLocTags(locTags)
 }
 
 ::showCantJoinSquadMsgBox <- function showCantJoinSquadMsgBox(id, msg, buttons, defBtn, options) {
-  ::scene_msg_box(id, null, msg, buttons, defBtn, options)
+  scene_msg_box(id, null, msg, buttons, defBtn, options)
 }
 
 ::g_squad_utils.checkSquadUnreadyAndDo <- function checkSquadUnreadyAndDo(func, cancelFunc = null,
@@ -199,7 +201,7 @@ systemMsg.registerLocTags(locTags)
       cancelFunc()
   }
 
-  ::scene_msg_box("msg_need_unready", null, messageText,
+  scene_msg_box("msg_need_unready", null, messageText,
     [
       ["ok", onOkFunc],
       ["no", onCancelFunc]
@@ -392,7 +394,7 @@ systemMsg.registerLocTags(locTags)
     return
 
   local message = loc("squad/need_reload")
-  ::scene_msg_box("need_update_squad_version", null, message,
+  scene_msg_box("need_update_squad_version", null, message,
                   [["relogin", function() {
                      ::save_short_token()
                      startLogout()
@@ -472,7 +474,7 @@ systemMsg.registerLocTags(locTags)
     true
   )
   let msg = loc("msg/members_no_access_to_mode", {  members = mText  })
-  ::showInfoMsgBox(msg, "members_req_new_content")
+  showInfoMsgBox(msg, "members_req_new_content")
   return res
 }
 

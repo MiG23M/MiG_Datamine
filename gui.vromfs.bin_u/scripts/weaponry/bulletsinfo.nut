@@ -24,6 +24,7 @@ let { set_last_bullets } = require("unitCustomization")
 let { startsWith, slice } = require("%sqstd/string.nut")
 let { OPTIONS_MODE_TRAINING, USEROPT_BULLETS0
 } = require("%scripts/options/optionsExtNames.nut")
+let { shopIsModificationPurchased } = require("chardResearch")
 
 let BULLET_TYPE = {
   ROCKET_AIR          = "rocket_aircraft"
@@ -823,7 +824,7 @@ local function getBulletsList(airName, groupIdx, params = BULLETS_LIST_PARAMS) {
       continue
 
     let enabled = !params.isOnlyBought ||
-      ::shop_is_modification_purchased(airName, modifName) != 0
+      shopIsModificationPurchased(airName, modifName) != 0
     let amountText = params.needCheckUnitPurchase && ::is_game_mode_with_spendable_weapons()
       ? getAmmoAmountData(air, modifName, AMMO.MODIFICATION).text : ""
 
@@ -1002,7 +1003,7 @@ let function getFakeBulletsModByName(unit, modName) {
   if (isFakeBullet(modName)) {
     let groupIdxStr = slice(
       modName, ::fakeBullets_prefix.len(), ::fakeBullets_prefix.len() + 1)
-    let groupIdx = ::to_integer_safe(groupIdxStr, -1)
+    let groupIdx = to_integer_safe(groupIdxStr, -1)
     if (groupIdx < 0)
       return null
     return {

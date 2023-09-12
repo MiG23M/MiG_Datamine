@@ -8,6 +8,8 @@ let { addListenersWithoutEnv, broadcastEvent, CONFIG_VALIDATION
 let { eachBlock } = require("%sqstd/datablock.nut")
 let DataBlock = require("DataBlock")
 let { getUnlockById } = require("%scripts/unlocks/unlocksCache.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 const FAVORITE_UNLOCKS_LIST_SAVE_ID = "favorite_unlocks"
 const FAVORITE_UNLOCKS_LIMIT = 20
@@ -32,7 +34,7 @@ let function loadFavorites() {
 
   isFavUnlockCacheValid = true
 
-  let ids = ::load_local_account_settings(FAVORITE_UNLOCKS_LIST_SAVE_ID)
+  let ids = loadLocalAccountSettings(FAVORITE_UNLOCKS_LIST_SAVE_ID)
   if (!ids)
     return
 
@@ -75,7 +77,7 @@ let function saveFavorites() {
       saveBlk[unlockId] = true
   })
 
-  ::save_local_account_settings(FAVORITE_UNLOCKS_LIST_SAVE_ID, saveBlk)
+  saveLocalAccountSettings(FAVORITE_UNLOCKS_LIST_SAVE_ID, saveBlk)
 }
 
 let function addUnlockToFavorites(unlockId) {
@@ -110,7 +112,7 @@ let function toggleUnlockFav(unlockId) {
   if (!canAddFavorite()) {
     let num = FAVORITE_UNLOCKS_LIMIT
     let msg = loc("mainmenu/unlockAchievements/limitReached", { num })
-    ::showInfoMsgBox(msg)
+    showInfoMsgBox(msg)
     return
   }
 

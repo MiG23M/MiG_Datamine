@@ -115,9 +115,9 @@ let function isUnlockVisibleByTime(id, hasIncludTimeBefore = true, resWhenNoTime
   if (!unlock)
     return false
 
-  let hasRangeProp = ::is_numeric(unlock?.visibleDays)
-    || ::is_numeric(unlock?.visibleDaysBefore)
-    || ::is_numeric(unlock?.visibleDaysAfter)
+  let hasRangeProp = is_numeric(unlock?.visibleDays)
+    || is_numeric(unlock?.visibleDaysBefore)
+    || is_numeric(unlock?.visibleDaysAfter)
   if (!hasRangeProp)
     return resWhenNoTimeLimit
 
@@ -206,9 +206,9 @@ let function debugLogVisibleByTimeInfo(id) {
   if (!unlock)
     return
 
-  let hasRangeProp = ::is_numeric(unlock?.visibleDays)
-    || ::is_numeric(unlock?.visibleDaysBefore)
-    || ::is_numeric(unlock?.visibleDaysAfter)
+  let hasRangeProp = is_numeric(unlock?.visibleDays)
+    || is_numeric(unlock?.visibleDaysBefore)
+    || is_numeric(unlock?.visibleDaysAfter)
   if (!hasRangeProp)
     return
 

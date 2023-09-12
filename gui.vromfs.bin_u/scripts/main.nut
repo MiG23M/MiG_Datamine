@@ -372,7 +372,6 @@ foreach (fn in [
   "%sqStdLibs/helpers/datablockUtils.nut"
   "%sqDagui/timer/timer.nut"
 
-  "%scripts/clientState/localProfile.nut"
   "%scripts/options/optionsExtNames.nut"
   "%scripts/options/fonts.nut"
   "%scripts/options/consoleMode.nut"
@@ -434,10 +433,10 @@ foreach (fn in [
 
 if (isInReloading())
   foreach (bhvName, bhvClass in ::gui_bhv)
-    ::replace_script_gui_behaviour(bhvName, bhvClass)
+    replace_script_gui_behaviour(bhvName, bhvClass)
 
 foreach (bhvName, bhvClass in ::gui_bhv_deprecated)
-  ::add_script_gui_behaviour(bhvName, bhvClass)
+  add_script_gui_behaviour(bhvName, bhvClass)
 
 u.registerClass(
   "DaGuiObject",
@@ -452,6 +451,7 @@ require("%sqDagui/elemUpdater/bhvUpdater.nut").setAssertFunction(script_net_asse
 require("%scripts/clientState/elems/dlDataStatElem.nut")
 require("%scripts/clientState/elems/copyrightText.nut")
 require("%sqDagui/framework/progressMsg.nut").setTextLocIdDefault("charServer/purchase0")
+require("%scripts/options/bhvHarmonizedImage.nut")
 
   //debug scripts
 require("%scripts/debugTools/dbgAvatarsList.nut")

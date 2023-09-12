@@ -25,6 +25,8 @@ let { searchContactsResults, searchContacts, addContact, removeContact
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { loadLocalByScreenSize, saveLocalByScreenSize
+} = require("%scripts/clientState/localProfile.nut")
 
 ::contacts_prev_scenes <- [] //{ scene, show }
 ::last_contacts_scene_show <- false
@@ -197,13 +199,13 @@ groupBottom {
     if (this.isContactsWindowActive()) {
       let obj = this.scene.findObject("contacts_wnd")
       contactsWndSizes({ pos = obj.getPosRC(), size = obj.getSize() })
-      ::saveLocalByScreenSize("contacts_sizes", ::save_to_json(contactsWndSizes.value))
+      saveLocalByScreenSize("contacts_sizes", ::save_to_json(contactsWndSizes.value))
     }
   }
 
   function setSavedSizes() {
     if (contactsWndSizes.value == null) {
-      let data = ::loadLocalByScreenSize("contacts_sizes")
+      let data = loadLocalByScreenSize("contacts_sizes")
       if (data) {
         let sizeData = parse_json(data)
         if (("pos" in sizeData) && ("size" in sizeData))

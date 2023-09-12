@@ -240,8 +240,8 @@ let DataBlock  = require("DataBlock")
       return []
 
     let updateFunc = ::g_ww_objective_type.getTimerUpdateFuncByParam(t, timerParam)
-    let update = Callback(function(nestObj, dataBlk) {
-      return updateFunc(nestObj, dataBlk, statusBlk, t, updateParam, side)
+    let update = Callback(function(nestObj, dBlk) {
+      return updateFunc(nestObj, dBlk, statusBlk, t, updateParam, side)
     }, handler)
 
     return [SecondsUpdater(obj, update, false, dataBlk)]

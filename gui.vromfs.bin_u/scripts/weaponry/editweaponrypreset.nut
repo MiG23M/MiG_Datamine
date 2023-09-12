@@ -246,7 +246,7 @@ gui_handlers.EditWeaponryPresetsModal <- class extends gui_handlers.BaseGuiHandl
   function savePreset() {
     let restrictionsText = getPresetWeightRestrictionText(this.preset, this.unitBlk)
     if (restrictionsText != "") {
-      ::showInfoMsgBox($"{loc("msg/can_not_save_preset")}\n{restrictionsText}", "can_not_save_disbalanced_preset")
+      showInfoMsgBox($"{loc("msg/can_not_save_preset")}\n{restrictionsText}", "can_not_save_disbalanced_preset")
       return
     }
 

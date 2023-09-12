@@ -19,6 +19,7 @@ let { profileCountrySq } = require("%scripts/user/playerCountry.nut")
 let { decimalFormat } = require("%scripts/langUtils/textFormat.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 enum windowState {
   research,
@@ -139,7 +140,7 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       view.items.append({
         id = countryItem
         disabled = !::isCountryAvailable(countryItem)
-        image = ::get_country_icon(countryItem)
+        image = getCountryIcon(countryItem)
         tooltip = "#" + countryItem
         discountNotification = true
       })
@@ -344,10 +345,8 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     let sliderTextObj = this.scene.findObject("convert_slider_text")
     let strGrantedExp = Cost().setRp(this.unitExpGranted).tostring()
     let expToBuy = this.getCurExpValue()
-    let strWantToBuyExp = expToBuy > 0
-                            ? format("<color=@activeTextColor> +%s</color>", Cost().setFrp(expToBuy).tostring())
-                            : ""
-    let strRequiredExp = decimalFormat(::getUnitReqExp(this.unit))
+    let strWantToBuyExp = format("<color=@activeTextColor> +%s</color>", Cost().setFrp(expToBuy).toStringWithParams({ isFrpAlwaysShown = true }))
+    let strRequiredExp = Cost().setRp(::getUnitReqExp(this.unit)).tostring()
     let sliderText = format("<color=@commonTextColor>%s%s%s%s</color>", strGrantedExp, strWantToBuyExp, loc("ui/slash"), strRequiredExp)
     sliderTextObj.setValue(sliderText)
   }
@@ -519,10 +518,10 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
     let curGold = this.curGoldValue - this.minGoldValue
     if (curGold == 0)
-      return ::showInfoMsgBox(loc("exp/convert/noGold"), "no_exp_msgbox")
+      return showInfoMsgBox(loc("exp/convert/noGold"), "no_exp_msgbox")
 
     if (this.availableExp < this.expPerGold)
-      return ::showInfoMsgBox(loc("msgbox/no_rp"), "no_rp_msgbox")
+      return showInfoMsgBox(loc("msgbox/no_rp"), "no_rp_msgbox")
 
     let curExp = this.getCurExpValue()
     let cost = Cost(0, curGold)

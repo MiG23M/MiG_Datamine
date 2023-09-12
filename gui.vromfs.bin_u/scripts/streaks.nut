@@ -87,7 +87,7 @@ let function updateAnimTimer() {
   if (checkObj(this.scene))
     return this.scene
 
-  let guiScene = ::get_gui_scene()
+  let guiScene = get_gui_scene()
   if (!guiScene)
     return null
   let obj = guiScene["hud_streaks"]
@@ -151,7 +151,7 @@ let function updateAnimTimer() {
   if (!obj || !newHeight)
     return
 
-  let curHeight = ::to_integer_safe(obj?["height-end"], 1)
+  let curHeight = to_integer_safe(obj?["height-end"], 1)
   if (curHeight == newHeight)
     return
 
@@ -166,7 +166,7 @@ let function updateAnimTimer() {
     return
 
   if (unlockBlk?.isAfterFlight)
-    ::get_cur_gui_scene()?.playSound("streak_mission_complete")
+    get_cur_gui_scene()?.playSound("streak_mission_complete")
   else if (unlockBlk?.sound)
     loading_play_voice(unlockBlk.sound, true)
 }

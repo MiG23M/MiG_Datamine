@@ -55,7 +55,6 @@ let ilsSetting = Computed(function() {
     isMarconi = false
     isTornado = false
     isElbit = false
-    hasPointDesignator = false
   }
   if (BlkFileName.value == "")
     return res
@@ -89,7 +88,6 @@ let ilsSetting = Computed(function() {
     isMarconi = blk.getBool("ilsMarconiAvionics", false)
     isTornado = blk.getBool("ilsTornado", false)
     isElbit = blk.getBool("ilsElbit967", false)
-    hasPointDesignator = blk.getBool("havePointOfInterestDesignator", false)
   }
 })
 
@@ -100,7 +98,7 @@ let planeIls = @(width, height) function() {
   let { isAVQ7, haveAVQ7Bombing, haveAVQ7CCIP, isASP17, isBuccaneerIls,
     is410SUM1Ils, isLCOSS, isASP23, haveJ7ERadar, isEP12, isEP08, isShimadzu, isIPP2_53,
     isTCSF196, isJ8HK, isKaiserA10, isF14, isMig17pf, isTcsfVe130, isSu145, isIls31,
-    isMarconi, isTornado, isElbit, isIls28K, hasPointDesignator } = ilsSetting.value
+    isMarconi, isTornado, isElbit, isIls28K } = ilsSetting.value
   let isStockHeli = !(isASP17 || isAVQ7 || isBuccaneerIls || is410SUM1Ils || isLCOSS ||
       isASP23 || isEP12 || isEP08 || isShimadzu || isIPP2_53 || isTCSF196 || isJ8HK ||
       isKaiserA10 || isF14 || isMig17pf || isTcsfVe130 || isSu145 || isIls31 || isMarconi ||
@@ -113,7 +111,7 @@ let planeIls = @(width, height) function() {
       (haveAVQ7CCIP && CCIPMode.value ? AVQ7CCIPMode(width, height) : null),
       (isAVQ7 && (!BombingMode.value || !haveAVQ7Bombing) &&
        (!CCIPMode.value || !haveAVQ7CCIP) ? compassWrap(width, height, 0.1, generateCompassMark) : null),
-      (isASP17 ? ASP17(width, height, hasPointDesignator) : null),
+      (isASP17 ? ASP17(width, height) : null),
       (isBuccaneerIls ? buccaneerHUD(width, height) : null),
       (is410SUM1Ils ? basic410SUM(width, height) : null),
       (is410SUM1Ils && CCIPMode.value ? SUMCCIPMode(width, height) : null),

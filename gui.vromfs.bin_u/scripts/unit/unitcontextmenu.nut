@@ -289,7 +289,7 @@ let getActions = kwarg(function getActions(unitObj, unit, actionsNames, crew = n
         if (hasFeature("WikiUnitInfo"))
           openUrl(format(loc("url/wiki_objects"), unit.name), false, false, "unit_actions")
         else
-          ::showInfoMsgBox(colorize("activeTextColor", ::getUnitName(unit, false)) + "\n" + loc("profile/wiki_link"))
+          showInfoMsgBox(colorize("activeTextColor", ::getUnitName(unit, false)) + "\n" + loc("profile/wiki_link"))
       }
     }
     else if (action == "find_in_market") {

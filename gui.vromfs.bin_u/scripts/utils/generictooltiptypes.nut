@@ -287,7 +287,7 @@ let exportTypes = addTooltipTypes({
         return true
 
       contentObj.height = "1@rh - 2@framePadding"
-      let unitImgObj = contentObj.findObject("aircraft-image")
+      let unitImgObj = contentObj.findObject("aircraft-image-nest")
       if (unitImgObj?.isValid())
         unitImgObj.height = "fh"
       return true
@@ -409,7 +409,7 @@ let exportTypes = addTooltipTypes({
       return this._buildId(crewId, { unitName = unitName, specTypeCode = specTypeCode })
     }
     getTooltipContent = function(crewIdStr, params) {
-      let crew = ::get_crew_by_id(::to_integer_safe(crewIdStr, -1))
+      let crew = ::get_crew_by_id(to_integer_safe(crewIdStr, -1))
       let unit = getAircraftByName(getTblValue("unitName", params, ""))
       if (!unit)
         return ""
@@ -429,7 +429,7 @@ let exportTypes = addTooltipTypes({
       return this._buildId(crewId, { unitName = unitName, specTypeCode = specTypeCode })
     }
     getTooltipContent = function(crewIdStr, params) {
-      let crew = ::get_crew_by_id(::to_integer_safe(crewIdStr, -1))
+      let crew = ::get_crew_by_id(to_integer_safe(crewIdStr, -1))
       let unit = getAircraftByName(getTblValue("unitName", params, ""))
       if (!unit)
         return ""

@@ -92,7 +92,7 @@ interop.updateLwsTarget <- function(index, x, y, _age0, age, enemy, _track, _lau
     enemy = enemy,
     sector = sector
   }
-  warningSystemState.lwsTargetsAgeMin.update(warningSystemState.lwsTargetsAgeMin.value, age)
+  warningSystemState.lwsTargetsAgeMin.update(min(warningSystemState.lwsTargetsAgeMin.value, age))
   warningSystemState.lwsTargetsTriggers.trigger()
 }
 

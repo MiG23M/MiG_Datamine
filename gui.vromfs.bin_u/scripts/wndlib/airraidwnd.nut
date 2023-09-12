@@ -84,7 +84,7 @@ local class airRaidWndScene extends gui_handlers.BaseGuiHandlerWT {
     if (activeTime <= TIME_TO_EXPLOSION + TIME_TO_EXIT_AFTER_EXPLOSION)
       return
 
-    ::scene_msg_box("show_message_from_matching",
+    scene_msg_box("show_message_from_matching",
       null,
       "\n".join([colorize("warningTextColor",
         loc("NEW_CLIENT/EXIT_TITLE")),

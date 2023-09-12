@@ -4,7 +4,7 @@ from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
-
+let { saveLocalAccountSettings } = require("%scripts/clientState/localProfile.nut")
 let { format } = require("string")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -558,7 +558,7 @@ gui_handlers.Options <- class extends gui_handlers.GenericOptionsModal {
   }
 
   function onRevealNotifications() {
-    ::scene_msg_box("ask_reveal_notifications",
+    scene_msg_box("ask_reveal_notifications",
       null,
       loc("mainmenu/btnRevealNotifications/askPlayer"),
       [
@@ -574,7 +574,7 @@ gui_handlers.Options <- class extends gui_handlers.GenericOptionsModal {
                     ])
       set_gui_option(opt, false)
 
-    ::save_local_account_settings("skipped_msg", null)
+    saveLocalAccountSettings("skipped_msg", null)
     resetTutorialSkip()
     broadcastEvent("ResetSkipedNotifications")
 

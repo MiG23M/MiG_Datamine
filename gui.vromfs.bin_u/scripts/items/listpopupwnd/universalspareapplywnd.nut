@@ -19,7 +19,7 @@ gui_handlers.UniversalSpareApplyWnd <- class extends gui_handlers.ItemsListWndBa
     local list = ::ItemsManager.getInventoryList(itemType.UNIVERSAL_SPARE)
     list = list.filter(@(item) item.canActivateOnUnit(unitToActivate))
     if (!list.len()) {
-      ::showInfoMsgBox(loc("msg/noUniversalSpareForUnit"))
+      showInfoMsgBox(loc("msg/noUniversalSpareForUnit"))
       return
     }
     handlersManager.loadHandler(gui_handlers.UniversalSpareApplyWnd,
@@ -121,7 +121,7 @@ gui_handlers.UniversalSpareApplyWnd <- class extends gui_handlers.ItemsListWndBa
     let item = this.curItem
     let amount = this.curAmount
     let onOk = @() item.activateOnUnit(aUnit, amount, goBackSaved)
-    ::scene_msg_box("activate_wager_message_box", null, text, [["yes", onOk], ["no"]], "yes", { cancel_fn = @()null })
+    scene_msg_box("activate_wager_message_box", null, text, [["yes", onOk], ["no"]], "yes", { cancel_fn = @()null })
   }
 
   function onButtonMax() {

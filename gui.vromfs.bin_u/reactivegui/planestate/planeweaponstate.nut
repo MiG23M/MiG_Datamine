@@ -27,6 +27,7 @@ let BulletImpactPoints2 = Watched([])
 let BulletImpactLineEnable = Watched(false)
 let WeaponSlots = Watched([])
 let WeaponSlotActive = Watched([])
+let SelectedWeapSlot = Watched(-1)
 let SelectedTrigger = Watched(-1)
 let HasOperatedShell = Watched(false)
 
@@ -56,7 +57,8 @@ let planeState = {
   WeaponSlots,
   WeaponSlotActive,
   SelectedTrigger,
-  HasOperatedShell
+  HasOperatedShell,
+  SelectedWeapSlot
 }
 
 interop.updateLaserPoint <- function(x, y) {

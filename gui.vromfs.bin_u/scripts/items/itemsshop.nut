@@ -41,7 +41,7 @@ let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
   local handlerParams = { curTab = curTab }
   if (params != null)
     handlerParams = ::inherit_table(handlerParams, params)
-  ::get_cur_gui_scene().performDelayed({},
+  get_cur_gui_scene().performDelayed({},
     @() handlersManager.loadHandler(gui_handlers.ItemsList, handlerParams))
 }
 
@@ -677,7 +677,7 @@ gui_handlers.ItemsList <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onItemAction(buttonObj) {
-    let id = ::to_integer_safe(buttonObj?.holderId, -1)
+    let id = to_integer_safe(buttonObj?.holderId, -1)
     let item = this.itemsList?[id]
     let obj = this.scene.findObject("shop_item_" + id)
 
@@ -991,7 +991,7 @@ let function openItemsWndFromPromo(_owner, params = []) {
   if (tab >= itemsTab.TOTAL)
     tab = itemsTab.INVENTORY
 
-  itemId = ::to_integer_safe(itemId, itemId, false)
+  itemId = to_integer_safe(itemId, itemId, false)
   let curItem = ::ItemsManager.findItemById(itemId)
 
   ::gui_start_items_list(tab, { curSheet, initSubsetId, curItem, shouldSetPageByItem = curItem != null })

@@ -31,15 +31,17 @@ let { havePremium } = require("%scripts/user/premium.nut")
 let { decimalFormat } = require("%scripts/langUtils/textFormat.nut")
 let { get_game_mode, get_game_type } = require("mission")
 let { quit_to_debriefing, interrupt_multiplayer } = require("guiMission")
-let { stripTags, cutPrefix, isStringFloat } = require("%sqstd/string.nut")
+let { stripTags, cutPrefix } = require("%sqstd/string.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
-let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_GAMEPLAY, OPTIONS_MODE_CAMPAIGN, OPTIONS_MODE_TRAINING,
   OPTIONS_MODE_SINGLE_MISSION, OPTIONS_MODE_DYNAMIC, OPTIONS_MODE_MP_DOMINATION,
   OPTIONS_MODE_MP_SKIRMISH
 } = require("%scripts/options/optionsExtNames.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
+let { add_msg_box, remove_scene_box, update_msg_boxes, reset_msg_box_check_anim_time, need_new_msg_box_anim
+} = require("%sqDagui/framework/msgBox.nut")
 
 ::usageRating_amount <- [0.0003, 0.0005, 0.001, 0.002]
 let allowingMultCountry = [1.5, 2, 2.5, 3, 4, 5]
@@ -66,7 +68,7 @@ registerPersistentData("util", getroottable(),
 
 ::nbsp <- " " // Non-breaking space character
 
-::dagui_propid.add_name_id("tooltipId")
+dagui_propid_add_name_id("tooltipId")
 
 ::cssColorsMapDark <- {
   ["commonTextColor"] = "black",
@@ -127,14 +129,14 @@ let function get_gamepad_specific_localization(locId) {
     log("wait screen already exist, remove old one.")
     ::current_wait_screen.getScene().destroyElement(::current_wait_screen)
     ::current_wait_screen = null
-    ::reset_msg_box_check_anim_time()
+    reset_msg_box_check_anim_time()
   }
 
-  let guiScene = ::get_main_gui_scene()
+  let guiScene = get_main_gui_scene()
   if (guiScene == null)
     return log("guiScene == null")
 
-  let needAnim = ::need_new_msg_box_anim()
+  let needAnim = need_new_msg_box_anim()
   ::current_wait_screen = guiScene.loadModal("", "%gui/waitBox.blk", needAnim ? "massTransp" : "div", null)
   if (!checkObj(::current_wait_screen))
     return log("Error: failed to create wait screen")
@@ -156,14 +158,14 @@ let function get_gamepad_specific_localization(locId) {
   let guiScene = ::current_wait_screen.getScene()
   guiScene.destroyElement(::current_wait_screen)
   ::current_wait_screen = null
-  ::reset_msg_box_check_anim_time()
+  reset_msg_box_check_anim_time()
   broadcastEvent("ModalWndDestroy")
 
-  guiScene.performDelayed(getroottable(), ::update_msg_boxes)
+  guiScene.performDelayed(getroottable(), update_msg_boxes)
 }
 
 ::on_cannot_create_session <- function on_cannot_create_session() {
-  ::add_msg_box("cannot_session", loc("NET_CANNOT_CREATE_SESSION"), [["ok", function() {}]], "ok")
+  add_msg_box("cannot_session", loc("NET_CANNOT_CREATE_SESSION"), [["ok", function() {}]], "ok")
 }
 
 ::in_on_lost_psn <- false
@@ -171,18 +173,18 @@ let function get_gamepad_specific_localization(locId) {
 // left for future ps3/ps4 realisation
 let function on_lost_psn() {
   log("on_lost_psn")
-  let guiScene = ::get_gui_scene()
+  let guiScene = get_gui_scene()
   let handler = ::current_base_gui_handler
   if (handler == null)
     return
 
-  ::remove_scene_box("connection_failed")
+  remove_scene_box("connection_failed")
 
   if (guiScene["list_no_sessions_create"] != null) {
-    ::remove_scene_box("list_no_sessions_create")
+    remove_scene_box("list_no_sessions_create")
   }
   if (guiScene["psn_room_create_error"] != null) {
-    ::remove_scene_box("psn_room_create_error")
+    remove_scene_box("psn_room_create_error")
   }
 
   if (!::isInMenu()) {
@@ -193,7 +195,7 @@ let function on_lost_psn() {
   }
   else {
     ::in_on_lost_psn = true
-    ::add_msg_box("lost_live", loc("yn1/disconnection/psn"), [["ok",
+    add_msg_box("lost_live", loc("yn1/disconnection/psn"), [["ok",
         function() {
           ::in_on_lost_psn = false
           ::destroy_session_scripted("after 'on lost psn' message")
@@ -298,9 +300,9 @@ let function on_lost_psn() {
 }
 
 ::add_bg_task_cb <- function add_bg_task_cb(taskId, actionFunc, handler = null) {
-  let taskCallback = Callback((@(actionFunc, handler) function(_result = YU2_OK) {
+  let taskCallback = Callback( function(_result = YU2_OK) {
     ::call_for_handler(handler, actionFunc)
-  })(actionFunc, handler), handler)
+  }, handler)
   ::g_tasker.addTask(taskId, null, taskCallback, taskCallback)
 }
 
@@ -397,7 +399,7 @@ local last_update_entitlements_time = get_time_msec()
 
   let cancelBtnText = ::isInMenu() ? "cancel" : "ok"
   local defButton = cancelBtnText
-  let buttons = [[cancelBtnText, (@(afterCheck) function() { if (afterCheck) afterCheck (); })(afterCheck) ]]
+  let buttons = [[cancelBtnText,  function() { if (afterCheck) afterCheck (); } ]]
   local shopType = ""
   if (isGoldNotEnough && hasFeature("EnableGoldPurchase"))
     shopType = "eagles"
@@ -410,7 +412,7 @@ local last_update_entitlements_time = get_time_msec()
     buttons.insert(0, [purchaseBtn, @() ::OnlineShopModel.launchOnlineShop(null, shopType, afterCheck, "buy_gold_msg")])
   }
 
-  ::scene_msg_box("no_money", null, text, buttons, defButton)
+  scene_msg_box("no_money", null, text, buttons, defButton)
   return false
 }
 
@@ -436,13 +438,13 @@ let function getPriceText(wp, gold = 0, colored = true, showWp = false, showGold
 }
 
 //need to remove
-::getRpPriceText <- function getRpPriceText(rp, colored = false) {
+::getRpPriceText <- function getRpPriceText(rp, colored = false) { // -return-different-types
   if (rp == 0)
     return ""
   return rp.tostring() + loc("currency/researchPoints/sign" + (colored ? "/colored" : ""))
 }
 
-::get_crew_sp_text <- function get_crew_sp_text(sp, showEmpty = true) {
+::get_crew_sp_text <- function get_crew_sp_text(sp, showEmpty = true) { // -return-different-types
   if (!showEmpty && sp == 0)
     return ""
   return decimalFormat(sp) + loc("currency/skillPoints/sign/colored")
@@ -456,7 +458,7 @@ let function getPriceText(wp, gold = 0, colored = true, showWp = false, showGold
   return format(loc("mainmenu/availableFreeExpForNewResearch"), coloredPriceText)
 }
 
-::getCrewSpText <- function getCrewSpText(sp, colored = true) {
+::getCrewSpText <- function getCrewSpText(sp, colored = true) { // -return-different-types
   if (sp == 0)
     return ""
   return decimalFormat(sp)
@@ -502,20 +504,6 @@ let function getPriceText(wp, gold = 0, colored = true, showWp = false, showGold
   return blk
 }
 
-::buildTableFromBlk <- function buildTableFromBlk(blk) {
-  if (!blk)
-    return {}
-  let res = {}
-  for (local i = 0; i < blk.paramCount(); i++)
-    ::buildTableFromBlk_AddElement(res, blk.getParamName(i) || "", blk.getParamValue(i))
-  for (local i = 0; i < blk.blockCount(); i++) {
-    let block = blk.getBlock(i)
-    let blockTable = ::buildTableFromBlk(block)
-    ::buildTableFromBlk_AddElement(res, block.getBlockName() || "", blockTable)
-  }
-  return res
-}
-
 ::build_blk_from_container <- function build_blk_from_container(container, arrayKey = "array") {
   let blk = DataBlock()
   let isContainerArray = u.isArray(container)
@@ -546,19 +534,6 @@ let function getPriceText(wp, gold = 0, colored = true, showWp = false, showGold
 
 ::assign_value_to_blk <- function assign_value_to_blk(blk, index, value) {
   blk[index] = value
-}
-
-/**
- * Adds value to table that may already
- * have some value with the same key.
- */
-::buildTableFromBlk_AddElement <- function buildTableFromBlk_AddElement(table, elementKey, elementValue) {
-  if (!(elementKey in table))
-    table[elementKey] <- elementValue
-  else if (type(table[elementKey]) == "array")
-    table[elementKey].append(elementValue)
-  else
-    table[elementKey] <- [table[elementKey], elementValue]
 }
 
 ::buildTableRow <- function buildTableRow(rowName, rowData, even = null, trParams = "", _tablePad = "@tblPad") {
@@ -746,38 +721,7 @@ let function find_max_lower_value(val, list) {
 ::roman_numerals <- ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
                          "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"]
 
-let get_roman_numeral_lookup = [
-  "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX",
-  "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
-  "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
-]
 const MAX_ROMAN_DIGIT = 3
-
-//Function from http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
-::get_roman_numeral <- function get_roman_numeral(num) {
-  if (!::is_numeric(num) || num < 0) {
-    script_net_assert_once("get_roman_numeral", "get_roman_numeral(" + num + ")")
-    return ""
-  }
-
-  num = num.tointeger()
-  if (num >= 4000)
-    return num.tostring()
-
-  local thousands = ""
-  for (local n = 0; n < num / 1000; n++)
-    thousands += "M"
-
-  local roman = ""
-  local i = -1
-  while (num > 0 && i++ < MAX_ROMAN_DIGIT) {
-    let digit = num % 10
-    num = num / 10
-    roman = getTblValue(digit + (i * 10), get_roman_numeral_lookup, "") + roman
-  }
-  return thousands + roman
-}
-
 
 ::increment_parameter <- function increment_parameter(object, parameter) {
   if (!(parameter in object))
@@ -968,14 +912,14 @@ let function startCreateWndByGamemode(_handler, _obj) {
   if (!::check_gamemode_pkg(gm))
     return
 
-  handler.checkedNewFlight((@(handler, gm) function() {
+  handler.checkedNewFlight( function() {
     let tbl = ::build_check_table(null, gm)
     tbl.silent <- false
     if (::checkAllowed.bindenv(handler)(tbl)) {
       ::match_search_gm = gm
       startCreateWndByGamemode(handler, null)
     }
-  })(handler, gm))
+  })
 }
 
 ::flushExcessExpToUnit <- function flushExcessExpToUnit(unit) {
@@ -1048,21 +992,6 @@ let function startCreateWndByGamemode(_handler, _obj) {
   return func()
 }
 
-::is_chinese_harmonized <- function is_chinese_harmonized() {
-  return ::get_current_language() == "HChinese" //we need to check language too early when get_language from profile not work
-}
-
-::is_vietnamese_version <- function is_vietnamese_version() {
-  return ::get_current_language() == "Vietnamese" //we need to check language too early when get_language from profile not work
-}
-
-::is_chinese_version <- function is_chinese_version() {
-  let language = ::get_current_language()
-  return language == "Chinese"
-    || language == "TChinese"
-    || language == "Korean"
-}
-
 ::is_worldwar_enabled <- function is_worldwar_enabled() {
   return hasFeature("WorldWar")
     && ("g_world_war" in getroottable())
@@ -1072,7 +1001,7 @@ let function startCreateWndByGamemode(_handler, _obj) {
 ::check_tanks_available <- function check_tanks_available(silent = false) {
   if (is_platform_pc && "is_tanks_allowed" in getroottable() && !::is_tanks_allowed()) {
     if (!silent)
-      ::showInfoMsgBox(loc("mainmenu/graphics_card_does_not_support_tank"), "graphics_card_does_not_support_tanks")
+      showInfoMsgBox(loc("mainmenu/graphics_card_does_not_support_tank"), "graphics_card_does_not_support_tanks")
     return false
   }
   return true
@@ -1104,15 +1033,15 @@ let function startCreateWndByGamemode(_handler, _obj) {
   let premAccName = ::shop_get_premium_account_ent_name()
   let expire = ::entitlement_expires_in(premAccName)
   if (expire > 0)
-    ::saveLocalByAccount("premium/lastDayHavePremium", currDays)
+    saveLocalByAccount("premium/lastDayHavePremium", currDays)
   if (expire >= NOTIFY_EXPIRE_PREMIUM_ACCOUNT)
     return
 
-  let lastDaysReminder = ::loadLocalByAccount("premium/lastDayBuyPremiumReminder", 0)
+  let lastDaysReminder = loadLocalByAccount("premium/lastDayBuyPremiumReminder", 0)
   if (lastDaysReminder == currDays)
     return
 
-  let lastDaysHavePremium = ::loadLocalByAccount("premium/lastDayHavePremium", 0)
+  let lastDaysHavePremium = loadLocalByAccount("premium/lastDayHavePremium", 0)
   local msgText = ""
   if (expire > 0)
     msgText = loc("msgbox/ending_premium_account")
@@ -1126,8 +1055,8 @@ let function startCreateWndByGamemode(_handler, _obj) {
   }
 
   if (msgText != "") {
-    ::saveLocalByAccount("premium/lastDayBuyPremiumReminder", currDays)
-    ::scene_msg_box("no_premium", null,  msgText,
+    saveLocalByAccount("premium/lastDayBuyPremiumReminder", currDays)
+    scene_msg_box("no_premium", null,  msgText,
           [
             ["ok", @() ::OnlineShopModel.launchOnlineShop(null, "premium")],
             ["cancel", @() null ]
@@ -1144,7 +1073,7 @@ local informTexQualityRestrictedDone = false
     name =  colorize("userlogColoredText", loc("options/texQuality"))
     value = colorize("userlogColoredText", loc("options/quality_medium"))
   })
-  ::showInfoMsgBox(message, "sysopt_tex_quality_restricted")
+  showInfoMsgBox(message, "sysopt_tex_quality_restricted")
   informTexQualityRestrictedDone = true
 }
 
@@ -1210,11 +1139,6 @@ local server_message_end_time = 0
   return text != ""
 }
 
-::is_numeric <- function is_numeric(value) {
-  local t = type(value)
-  return t == "integer" || t == "float" || t == "int64"
-}
-
 ::getArrayFromInt <- function getArrayFromInt(intNum) {
   let arr = []
   do {
@@ -1225,25 +1149,6 @@ local server_message_end_time = 0
 
   arr.reverse()
   return arr
-}
-
-::to_integer_safe <- function to_integer_safe(value, defValue = 0, needAssert = true) {
-  if (!::is_numeric(value) && (!u.isString(value) || !isStringFloat(value))) {
-    if (needAssert)
-      script_net_assert_once("to_int_safe", $"can't convert '{value}' to integer")
-    return defValue
-  }
-  return value.tointeger()
-}
-
-::to_float_safe <- function to_float_safe(value, defValue = 0, needAssert = true) {
-  if (!::is_numeric(value)
-    && (!u.isString(value) || !isStringFloat(value))) {
-    if (needAssert)
-      script_net_assert_once("to_float_safe", "can't convert '" + value + "' to float")
-    return defValue
-  }
-  return value.tofloat()
 }
 
 const PASSWORD_SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -1317,7 +1222,7 @@ const PASSWORD_SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR
 }
 
 ::show_not_available_msg_box <- function show_not_available_msg_box() {
-  ::showInfoMsgBox(loc("msgbox/notAvailbleYet"), "not_available", true)
+  showInfoMsgBox(loc("msgbox/notAvailbleYet"), "not_available", true)
 }
 
 ::is_hangar_blur_available <- function is_hangar_blur_available() {

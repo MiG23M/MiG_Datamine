@@ -15,6 +15,7 @@ let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_DYNAMIC, USEROPT_YEAR, USEROPT_MP_TEAM_COUNTRY,
   USEROPT_DYN_FL_ADVANTAGE, USEROPT_DYN_WINS_TO_COMPLETE, USEROPT_DIFFICULTY
 } = require("%scripts/options/optionsExtNames.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::dynamic_req_country_rank <- 1
 
@@ -187,7 +188,7 @@ gui_handlers.DynamicLayouts <- class extends gui_handlers.CampaignChapter {
       foreach (_idx, country in missionBlock.countries) {
         let countryUnlocked = this.checkCountry(country) && missionBlock.unlocks.country[missionBlock.id + "_" + country]
         config.countries += format("optionImg{ background-image:t='%s'; enable:t='%s' } ",
-                             ::get_country_icon("country_" + country, true), countryUnlocked ? "yes" : "no")
+          getCountryIcon($"country_{country}", true), countryUnlocked ? "yes" : "no")
 
         isAnyCountryUnlocked = isAnyCountryUnlocked || countryUnlocked
       }

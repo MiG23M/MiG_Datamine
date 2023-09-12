@@ -1,3 +1,5 @@
+from "%scripts/dagui_library.nut" import *
+
 let { hangar_enable_controls } = require("hangar")
 
 // Hangar controls enable by mouse move over the tracking object if it exist in the scene.
@@ -38,4 +40,4 @@ let class HangarControlTracking {
   }
 }
 
-::replace_script_gui_behaviour("hangarControlTracking", HangarControlTracking)
+replace_script_gui_behaviour("hangarControlTracking", HangarControlTracking)

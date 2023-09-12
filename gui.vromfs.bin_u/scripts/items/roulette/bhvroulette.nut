@@ -7,7 +7,7 @@ let rouletteAnim = require("rouletteAnim.nut")
 
 let BhvRoulette = class {
   eventMask    = EV_ON_CMD | EV_TIMER
-  valuePID     = ::dagui_propid.add_name_id("value")
+  valuePID     = dagui_propid_add_name_id("value")
 
   function onAttach(obj) {
     if (obj?.value) {
@@ -52,6 +52,6 @@ let BhvRoulette = class {
   }
 }
 
-::replace_script_gui_behaviour("bhvRoulette", BhvRoulette)
+replace_script_gui_behaviour("bhvRoulette", BhvRoulette)
 
 return {}

@@ -3,7 +3,7 @@ from "%scripts/dagui_library.nut" import *
 
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { Cost } = require("%scripts/money.nut")
-
+let { shouldShowDynamicLutPopUpMessage, setIsUsingDynamicLut } = require("postFxSettings")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { format } = require("string")
@@ -47,6 +47,8 @@ let tryOpenCaptchaHandler = require("%scripts/captcha/captchaHandler.nut")
 let { isPlatformShieldTv } = require("%scripts/clientState/platform.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { OPTIONS_MODE_MP_DOMINATION, USEROPT_COUNTRY } = require("%scripts/options/optionsExtNames.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 gui_handlers.InstantDomination <- class extends gui_handlers.BaseGuiHandlerWT {
   static keepLoaded = true
@@ -488,7 +490,7 @@ gui_handlers.InstantDomination <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     if (!this.isCrossPlayEventAvailable(event)) {
-      checkAndShowCrossplayWarning(@() ::showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
+      checkAndShowCrossplayWarning(@() showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
       return
     }
 
@@ -1065,22 +1067,22 @@ gui_handlers.InstantDomination <- class extends gui_handlers.BaseGuiHandlerWT {
         let reminderPeriod = gmBlk?.viralAcquisitionReminderPeriodDays ?? 10
         let today = time.getUtcDays()
         let never = 0
-        let lastLoginDay = ::load_local_account_settings("viralAcquisition/lastLoginDay", today)
-        local lastShowTime = ::load_local_account_settings("viralAcquisition/lastShowTime", never)
+        let lastLoginDay = loadLocalAccountSettings("viralAcquisition/lastLoginDay", today)
+        local lastShowTime = loadLocalAccountSettings("viralAcquisition/lastShowTime", never)
 
         // Game designers can force reset lastShowTime of all users by increasing this value in cfg:
         if (gmBlk?.resetViralAcquisitionDaysCounter) {
           let newResetVer = gmBlk.resetViralAcquisitionDaysCounter
-          let knownResetVer = ::load_local_account_settings("viralAcquisition/resetDays", 0)
+          let knownResetVer = loadLocalAccountSettings("viralAcquisition/resetDays", 0)
           if (newResetVer > knownResetVer) {
-            ::save_local_account_settings("viralAcquisition/resetDays", newResetVer)
+            saveLocalAccountSettings("viralAcquisition/resetDays", newResetVer)
             lastShowTime = never
           }
         }
 
-        ::save_local_account_settings("viralAcquisition/lastLoginDay", today)
+        saveLocalAccountSettings("viralAcquisition/lastLoginDay", today)
         if ((lastLoginDay - lastShowTime) > reminderPeriod) {
-          ::save_local_account_settings("viralAcquisition/lastShowTime", today)
+          saveLocalAccountSettings("viralAcquisition/lastShowTime", today)
           showViralAcquisitionWnd()
         }
       }
@@ -1092,6 +1094,18 @@ gui_handlers.InstantDomination <- class extends gui_handlers.BaseGuiHandlerWT {
       if (needShowChangelog() && ::get_cur_base_gui_handler().isSceneActiveNoModals())
         handlersManager.animatedSwitchScene(openChangelog())
     })
+  }
+
+  function checkShowDynamicLutSuggestion() {
+    let isShown = loadLocalAccountSettings("isDynamicLutSuggestionShown", false)
+    if (isShown || !shouldShowDynamicLutPopUpMessage())
+      return
+
+    this.msgBox("dynamic_lut_suggestion", loc("msgBox/dynamic_lut_suggestion/desc"), [
+      ["ok", @() setIsUsingDynamicLut(true)],
+      ["cancel"]], "ok")
+
+    saveLocalAccountSettings("isDynamicLutSuggestionShown", true)
   }
 
   function checkNewUnitTypeToBattleTutor() {
@@ -1149,7 +1163,7 @@ gui_handlers.InstantDomination <- class extends gui_handlers.BaseGuiHandlerWT {
       return
     }
 
-    ::scene_msg_box("new_unit_type_to_battle_tutorial_msgbox", null,
+    scene_msg_box("new_unit_type_to_battle_tutorial_msgbox", null,
       loc("msgBox/start_new_unit_type_to_battle_tutorial", { gameModeName = gameModeForTutorial.text }),
       [
         ["yes", function() {

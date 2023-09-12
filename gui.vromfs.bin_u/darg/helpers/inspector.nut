@@ -3,7 +3,7 @@ from "%darg/ui_imports.nut" import *
 //let {locate_element_source, sh, ph} = require("daRg")
 let {format} = require("string")
 let utf8 = require_optional("utf8")
-let {set_clipboard_text} = require("daRg.clipboard")
+let {set_clipboard_text} = require("dagor.clipboard")
 let fieldsMap = require("inspectorViews.nut")
 let cursors = require("simpleCursors.nut")
 

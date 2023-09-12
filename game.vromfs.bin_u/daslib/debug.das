@@ -1681,20 +1681,15 @@ class private DAServer: Server
 
                     var result = debug_eval(vars, ini.expression)
                     var resStr = ""
-                    let hasError = !empty(result.error)
-                    if hasError
+                    if !empty(result.error)
                         resStr = result.error
                     elif result.data != null
                         resStr = sprint_data(result.data, unsafe(addr(result.tinfo)), print_flags_debug)
                     else
                         resStr = sprint_data(result.value, unsafe(addr(result.tinfo)), print_flags_debug)
-                    var _type = ""
-                    if !hasError
-                        _type = describe(result.tinfo)
-                        resStr = "({_type}) {resStr}"
                     var inscope res = [[EvaluateResponse
                         result=resStr,
-                        _type=_type,
+                        _type=!empty(result.error) ? describe(result.tinfo) : "",
                         indexedVariables=0lf,
                         variablesReference=0lf]]
                     self->sendSuccessResponseStr(seq, command, sprint_json(res, false))

@@ -84,7 +84,7 @@ let function getBulletsIconView(bulletsSet, tooltipId = null, tooltipDelayed = f
     return view
 
   initBulletIcons()
-  view.bullets <- (@(bulletsSet, tooltipId, tooltipDelayed) function () {
+  view.bullets <- function() {
       let res = []
 
       let length = bulletsSet.bullets.len()
@@ -126,7 +126,7 @@ let function getBulletsIconView(bulletsSet, tooltipId = null, tooltipDelayed = f
       }
 
       return res
-    })(bulletsSet, tooltipId, tooltipDelayed)
+    }
 
   let bIconParam = bulletsSet?.bIconParam
   let isBelt = bulletsSet?.isBulletBelt ?? true

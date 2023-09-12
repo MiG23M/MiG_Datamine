@@ -14,6 +14,7 @@ let { registerPersistentDataFromRoot, PERSISTENT_DATA_PARAMS
 let { startsWith } = require("%sqstd/string.nut")
 let { get_charserver_time_sec } = require("chard")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 enum POPUP_VIEW_TYPES {
   NEVER = "never"
@@ -97,7 +98,7 @@ let function getTimeIntByString(stringDate, defaultValue = 0) {
       return null
 
     let viewType = blk?.viewType ?? POPUP_VIEW_TYPES.NEVER
-    let viewDay = ::loadLocalByAccount("popup/" + (blk?.saveId ?? popupId), 0)
+    let viewDay = loadLocalByAccount("popup/" + (blk?.saveId ?? popupId), 0)
     let canShow = (viewType == POPUP_VIEW_TYPES.EVERY_SESSION)
                     || (viewType == POPUP_VIEW_TYPES.ONCE && !viewDay)
                     || (viewType == POPUP_VIEW_TYPES.EVERY_DAY && viewDay < this.days)
@@ -166,7 +167,7 @@ let function getTimeIntByString(stringDate, defaultValue = 0) {
       this.passedPopups[popupId] <- true
       popupConfig["type"] <- "regionalPromoPopup"
       ::showUnlockWnd(popupConfig)
-      ::saveLocalByAccount("popup/" + (popupBlk?.saveId ?? popupId), this.days)
+      saveLocalByAccount("popup/" + (popupBlk?.saveId ?? popupId), this.days)
       result = true
     }
   }

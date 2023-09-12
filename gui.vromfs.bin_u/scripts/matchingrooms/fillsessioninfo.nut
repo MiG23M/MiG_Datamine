@@ -8,6 +8,7 @@ let { USEROPT_TIME_LIMIT, USEROPT_LIMITED_FUEL, USEROPT_LIMITED_AMMO,
   USEROPT_CONTENT_ALLOWED_PRESET
 } = require("%scripts/options/optionsExtNames.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
 
 let function clearInfo(scene) {
   foreach (name in ["session_creator", "session_mapName", "session_hasPassword",
@@ -112,7 +113,7 @@ return function(scene, sessionInfo) {
   let envObj = scene.findObject("session_environment")
   let envTexts = []
   if ("weather" in missionInfo)
-    envTexts.append(loc("options/weather" + missionInfo.weather))
+    envTexts.append(getWeatherLocName(missionInfo.weather))
   if ("environment" in missionInfo)
     envTexts.append(::get_mission_time_text(missionInfo.environment))
   setTextToObj(envObj, loc("sm_conditions") + loc("ui/colon"), ", ".join(envTexts, true))

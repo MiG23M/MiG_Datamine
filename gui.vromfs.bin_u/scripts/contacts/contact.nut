@@ -207,7 +207,7 @@ subscribe("playerProfileDialogClosed", function(r) {
     if (this.psnId == "")
       return
 
-    if (::to_integer_safe(this.psnId, -1, false) == -1)
+    if (to_integer_safe(this.psnId, -1, false) == -1)
       this.psnId = "-1"
   }
 

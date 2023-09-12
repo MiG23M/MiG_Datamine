@@ -25,6 +25,8 @@ let { shopPromoteUnits } = require("%scripts/shop/shopUnitsInfo.nut")
 let { get_skins_for_unit } = require("unitCustomization")
 let { getDecorator } = require("%scripts/customization/decorCache.nut")
 let { get_charserver_time_sec } = require("chard")
+let { shopIsModificationEnabled } = require("chardResearch")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 let MOD_TIERS_COUNT = 4
 
@@ -204,11 +206,15 @@ local Unit = class {
     let errorsTextArray = initUnitModifications(this.modifications,
       uWpCost?.modifications ?? ::get_full_unit_blk(this.name)?.modifications, this.esUnitType)
     if (uWpCost?.spare != null) {
+      let spareBlk = ::get_modifications_blk()?.modifications.spare
+
       this.spare = {
         name = "spare"
         type = ::g_weaponry_types.SPARE.type
         cost = uWpCost?.spare.value || 0
-        image = ::get_weapon_image(this.esUnitType, ::get_modifications_blk()?.modifications.spare, uWpCost?.spare)
+        image = ::get_weapon_image(this.esUnitType, spareBlk, uWpCost?.spare)
+        animation = spareBlk && (spareBlk % "animationByUnit")
+          .findvalue((@(anim) anim.unitType == this.esUnitType).bindenv(this))?.src
       }
       if (uWpCost?.spare.costGold != null)
         this.spare.costGold <- uWpCost.spare.costGold
@@ -323,7 +329,7 @@ local Unit = class {
     if (this._operatorCountry)
       return this._operatorCountry
     local res = ::get_unittags_blk()?[this.name].operatorCountry ?? ""
-    this._operatorCountry = res != "" && ::get_country_icon(res) != "" ? res : this.shopCountry
+    this._operatorCountry = res != "" && getCountryIcon(res) != "" ? res : this.shopCountry
     return this._operatorCountry
   }
 
@@ -458,7 +464,7 @@ local Unit = class {
       contentPreview.showUnitSkin(this.name)
   }
 
-  isDepthChargeAvailable = @() this.hasDepthCharge || ::shop_is_modification_enabled(this.name, "ship_depth_charge")
+  isDepthChargeAvailable = @() this.hasDepthCharge || shopIsModificationEnabled(this.name, "ship_depth_charge")
 
   function getNVDSights(modName) {
     if (!this.isTank())

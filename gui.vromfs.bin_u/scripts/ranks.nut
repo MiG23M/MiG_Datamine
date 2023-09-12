@@ -305,14 +305,14 @@ let function haveCountryRankAir(country, rank) {
   if ("silentFeature" in tbl)
     if (!hasFeature(tbl.silentFeature)) {
       if (!silent)
-        ::showInfoMsgBox(loc("msgbox/notAvailbleInDemo"), "in_demo_only_feature")
+        showInfoMsgBox(loc("msgbox/notAvailbleInDemo"), "in_demo_only_feature")
       return false
     }
 
   if ("minLevel" in tbl)
     if (::get_profile_info().rank < tbl.minLevel) {
       if (!silent)
-        ::showInfoMsgBox(format(loc("charServer/needRankFmt"), tbl.minLevel), "in_demo_only_minlevel")
+        showInfoMsgBox(format(loc("charServer/needRankFmt"), tbl.minLevel), "in_demo_only_minlevel")
       return false
     }
 
@@ -320,7 +320,7 @@ let function haveCountryRankAir(country, rank) {
     let country = $"country_{tbl.rankCountry}"
     if (!haveCountryRankAir(country, tbl.minRank)) {
       if (!silent) {
-        ::showInfoMsgBox(
+        showInfoMsgBox(
           loc("charServer/needAirRankFmt", {
               tier = tbl.minRank,
               country = loc(country)
@@ -335,7 +335,7 @@ let function haveCountryRankAir(country, rank) {
     if (!isUnlockOpened(tbl.unlock, UNLOCKABLE_SINGLEMISSION) && !::is_debug_mode_enabled) {
       if (!silent) {
         let msg = loc("charServer/needUnlock") + "\n\n" + getFullUnlockDescByName(tbl.unlock, 1)
-        ::showInfoMsgBox(msg, "in_demo_only_singlemission_unlock")
+        showInfoMsgBox(msg, "in_demo_only_singlemission_unlock")
       }
       return false
     }
@@ -345,7 +345,7 @@ let function haveCountryRankAir(country, rank) {
     if (::has_entitlement(tbl.entitlement))
       return true
     else if (!silent && (tbl.entitlement == ::shop_get_premium_account_ent_name())) {
-      let guiScene = ::get_gui_scene()
+      let guiScene = get_gui_scene()
       local handler = this
       if (!handler || handler == getroottable())
         handler = ::get_cur_base_gui_handler()
@@ -361,7 +361,7 @@ let function haveCountryRankAir(country, rank) {
           ], "yes")
         }
         else
-          ::scene_msg_box("premium_not_available", null, loc("charServer/notAvailableYet"),
+          scene_msg_box("premium_not_available", null, loc("charServer/notAvailableYet"),
             [["cancel"]], "cancel")
       }
 

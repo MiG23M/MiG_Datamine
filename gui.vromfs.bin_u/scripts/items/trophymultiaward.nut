@@ -197,12 +197,12 @@ let class TrophyMultiAward {
       if (!isIPoint2(val))
         return ""
 
-      let res = colorize(this.condColor, ::get_roman_numeral(val.x))
+      let res = colorize(this.condColor, get_roman_numeral(val.x))
       if (val.x == val.y)
         return res
 
       let div = (val.y - val.x == 1) ? ", " : "-"
-      return res + div + colorize(this.condColor, ::get_roman_numeral(val.y))
+      return res + div + colorize(this.condColor, get_roman_numeral(val.y))
     }.bindenv(this))
 
     text += ", ".join(ranks, true)

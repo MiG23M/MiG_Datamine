@@ -2,8 +2,8 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 gui_handlers.QiHandlerByCountries <- class extends gui_handlers.QiHandlerBase {
   sceneBlkName   = "%gui/events/eventQueueByCountries.blk"
@@ -57,7 +57,7 @@ gui_handlers.QiHandlerByCountries <- class extends gui_handlers.QiHandlerBase {
         foreach (idx, team in teams)
           if (idx in cSet.countries) {
             res[team.name] <- {
-              countries = cSet.countries[idx].map(@(c) { countryIcon = ::get_country_icon(c) })
+              countries = cSet.countries[idx].map(@(c) { countryIcon = getCountryIcon(c) })
             }
           }
 

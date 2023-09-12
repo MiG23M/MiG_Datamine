@@ -128,7 +128,7 @@ gui_handlers.UnlockRewardWnd <- class extends gui_handlers.BaseGuiHandlerWT {
     if (checkObj(animObj)) {
       animObj.animation = "show"
       this.guiScene.playSound("chest_open")
-      let delay = ::to_integer_safe(animObj?.chestReplaceDelay, 0)
+      let delay = to_integer_safe(animObj?.chestReplaceDelay, 0)
       Timer(animObj, 0.001 * delay, this.openChest, this)
       Timer(animObj, 1.0, this.onOpenAnimFinish, this)
     }

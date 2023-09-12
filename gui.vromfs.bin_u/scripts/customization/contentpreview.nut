@@ -199,7 +199,7 @@ let function showResource(resource, resourceType, onSkinReadyToShowCb = null) {
     : null
 
   if (guidParser.isGuid(resource)) {
-    downloadProgressBox = ::scene_msg_box("live_resource_requested", null, loc("msgbox/please_wait"),
+    downloadProgressBox = scene_msg_box("live_resource_requested", null, loc("msgbox/please_wait"),
       [["cancel"]], "cancel", { waitAnim = true, delayedButtons = downloadTimeoutSec })
     ::live_preview_resource_by_guid(resource, resourceType)
   }
@@ -232,7 +232,7 @@ let function liveSkinPreview(params) {
 
 let function onSkinDownloaded(unitId, skinId, result) {
   if (downloadProgressBox)
-    ::destroyMsgBox(downloadProgressBox)
+    destroyMsgBox(downloadProgressBox)
 
   if (onSkinReadyToShowCallback) {
     onSkinReadyToShowCallback(unitId, skinId, result)
@@ -245,12 +245,12 @@ let function onSkinDownloaded(unitId, skinId, result) {
 }
 
 let function marketViewItem(params) {
-  if (::to_integer_safe(params?.appId, 0, false) != APP_ID)
+  if (to_integer_safe(params?.appId, 0, false) != APP_ID)
     return
   let assets = (params?.assetClass ?? []).filter(@(asset) asset?.name == "__itemdefid")
   if (!assets.len())
     return
-  let itemDefId = ::to_integer_safe(assets?[0]?.value)
+  let itemDefId = to_integer_safe(assets?[0]?.value)
   let item = ::ItemsManager.findItemById(itemDefId)
   if (!item) {
     waitingItemDefId = itemDefId
@@ -379,7 +379,7 @@ let function useDecorator(decorator, decoratorUnit, decoratorSlot) {
   })
 }
 
-let doDelayed = @(action) ::get_gui_scene().performDelayed({}, action)
+let doDelayed = @(action) get_gui_scene().performDelayed({}, action)
 
 globalCallbacks.addTypes({
   ITEM_PREVIEW = {

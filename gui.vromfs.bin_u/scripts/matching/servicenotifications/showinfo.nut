@@ -20,7 +20,7 @@ let function showMessageBox(params) {
     ? exitGame
     : @() null
 
-  ::scene_msg_box("show_message_from_matching", null,
+  scene_msg_box("show_message_from_matching", null,
     "\n".join([colorize("activeTextColor", title), message], true),
     [["ok", @() closeFunction() ]], "ok", { cancel_fn = @() closeFunction() })
 

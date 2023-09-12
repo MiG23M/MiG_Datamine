@@ -99,9 +99,9 @@ enum UNIT_STATS {
   }
 
   function getTeamBySide(side) {
-    return u.search(this.battleRes.teams, (@(side) function (team) {
+    return u.search(this.battleRes.teams,  function (team) {
       return team.side == side
-    })(side))
+    })
   }
 
   function getTeamStats(teamInfo, unitTypesBattle, unitTypesInactive) {
@@ -205,7 +205,7 @@ enum UNIT_STATS {
 
     let row = []
     foreach (valueIds in columnsMap) {
-      let values = valueIds.map((@(stats) function(id) { return stats[id] })(stats))
+      let values = valueIds.map( function(id) { return stats[id] })
       let valuesSum = values.reduce(@(sum, v) sum + v, 0)
 
       let val = isShowInactiveCount ? " + ".join(values, true) : valuesSum.tostring()

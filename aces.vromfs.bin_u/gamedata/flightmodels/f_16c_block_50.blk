@@ -11,11 +11,13 @@
   "haveCCIPForGun": true,
   "haveCCRPForBombs": true,
   "haveCCRPForGun": true,
-  "ilsMarconiAvionics": true,
+  "ilsElbit967": true,
+  "hasPointOfInterestMemory": true,
   "hmdShelZoom": true,
   "hasMissileCommandLine": false,
   "havePointOfInterestDesignator": true,
   "isBwOpticSight": true,
+  "needTpsNightVision": true,
   "jetEnginePowerFullScale": true,
   "standardExhaustFxType": "jet_exhaust",
   "afterburnerExhaustFxType": "jet_afterburner_exhaust",
@@ -75,9 +77,6 @@
   "autopilotImpl": "FBW",
   "laserDesignator": true,
   "paratrooper": "usa_irvin_5000_ejection_para",
-  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
-  "customImage": "!#ui/unitskin#image_in_progress",
-  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -1838,13 +1837,14 @@
     }
   },
   "cockpit": {
-    "sightInFov": 50.5,
-    "sightOutFov": 40.5,
-    "sightFov": 1.0,
     "targetingPodFov": [
       12.0,
       3.2
     ],
+    "sightInFov": 12.299,
+    "sightOutFov": 12.299,
+    "sightFov": 1.0,
+    "isDoubleBulletImpactLine": true,
     "headPos": [
       4.25,
       0.85,
@@ -2061,7 +2061,7 @@
       ],
       "rpm": [
         0.0,
-        14000.0
+        16520.0
       ],
       "oil_pressure": [
         0.0,
@@ -2075,9 +2075,17 @@
         0.0,
         15.0
       ],
+      "fuel_consume_hour": [
+        0.0,
+        1000.0
+      ],
+      "fuel_consume_min": [
+        0.0,
+        100.0
+      ],
       "fuel_consume": [
         0.0,
-        800.0
+        10.0
       ],
       "fuel": [
         0.0,
@@ -2121,7 +2129,20 @@
           0.45,
           0.4
         ],
-        "cameraFromShell": true,
+        "page": {
+          "type": "radar",
+          "radarScale": 0.81,
+          "hideRadarBackground": true
+        }
+      },
+      "display": {
+        "textureArea": [
+          0.5,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "cameraFromTargetingPod": true,
         "page": {
           "type": "thermal",
           "turretIdx": 0
@@ -2131,9 +2152,7 @@
           "turretIdx": 0
         },
         "page": {
-          "type": "radar",
-          "radarScale": 0.81,
-          "hideRadarBackground": true
+          "type": "map"
         }
       },
       "display": {
@@ -2145,7 +2164,7 @@
         ],
         "page": {
           "type": "rwr",
-          "radarScale": 1.0
+          "radarScale": 1.3
         }
       },
       "display": {
@@ -2158,8 +2177,8 @@
         "page": {
           "type": "plane_ils",
           "ilsSize": [
-            0.2,
-            0.2
+            0.25,
+            0.25
           ],
           "ilsOffsetForce": 0.0,
           "brightnessMult": 3.5,
@@ -2224,9 +2243,9 @@
     },
     "Target": {
       "pos": [
-        0.0,
-        -0.5,
-        0.2
+        -0.62,
+        -0.65,
+        0.5
       ],
       "head": "optic1_turret",
       "crosshairPreset": "test_crosshair",

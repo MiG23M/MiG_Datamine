@@ -53,19 +53,19 @@ let function debug_fonts_list(isActiveColor = true, needBorder = true) {
     function onColorChange(obj) {
       isActiveColor = obj.getValue()
       let color = this.guiScene.getConstantValue(getColor())
-      this.updateAllObjs(function(obj) { obj.color = color })
+      this.updateAllObjs(function(o) { o.color = color })
     }
 
     function onBorderChange(obj) {
       needBorder = obj.getValue()
       let borderText = needBorder ? "yes" : "no"
-      this.updateAllObjs(function(obj) { obj.border = borderText })
+      this.updateAllObjs(function(o) { o.border = borderText })
     }
 
     function onTextChange(obj) {
       let text = obj.getValue()
       fontsAdditionalText = text.len() ? "\n" + text : ""
-      this.updateAllObjs(function(obj) { obj.setValue(obj.id + fontsAdditionalText) })
+      this.updateAllObjs(function(o) { o.setValue(o.id + fontsAdditionalText) })
     }
   }
 

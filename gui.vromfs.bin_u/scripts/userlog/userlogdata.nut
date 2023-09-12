@@ -2,7 +2,8 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
+let { convertBlk } = require("%sqstd/datablock.nut")
+let { loadLocalAccountSettings } = require("%scripts/clientState/localProfile.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { registerPersistentData } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
 let DataBlock = require("DataBlock")
@@ -396,7 +397,7 @@ local logNameByType = {
       let isUserstatRewards = userstatItemRewardData != null
       if (item != null && (!item?.shouldAutoConsume || isUserstatRewards) &&
         (item?.needShowRewardWnd?() || blk?.body?.id == "@external_inventory_trophy")) {
-        let trophyRewardTable = ::buildTableFromBlk(blk.body)
+        let trophyRewardTable = convertBlk(blk.body)
         if (isUserstatRewards) {
           trophyRewardTable.__update({
             rewardTitle = loc(userstatRewardTitleLocId)
@@ -418,7 +419,7 @@ local logNameByType = {
         (blk.body?.fromInventory && blk.body?.trophy == null)
         || blk?.body?.id == "@external_inventory_trophy")
       ) {
-        local blkBody = ::buildTableFromBlk(blk.body)
+        local blkBody = convertBlk(blk.body)
         let itemDefId = inventoryRewards[itemId]
         inventoryRewards.cache[itemDefId].markSeenIds.append(blk.id)
         inventoryRewards.cache[itemDefId].rewardsCount--
@@ -556,7 +557,7 @@ local logNameByType = {
              && ::my_stats.isNewbieInited() && !::my_stats.isMeNewbie()) {
       let needChoseResearch = (getAircraftByName(blk.body.unit)?.isResearched() ?? false)
         && needChooseClanUnitResearch()
-      if (!needChoseResearch && ::load_local_account_settings(SKIP_CLAN_FLUSH_EXP_INFO_SAVE_ID, false))
+      if (!needChoseResearch && loadLocalAccountSettings(SKIP_CLAN_FLUSH_EXP_INFO_SAVE_ID, false))
         markDisabled = true
       else
         handler.doWhenActive(function() {
@@ -732,7 +733,7 @@ let haveHiddenItem = @(itemDefId) ::ItemsManager.findItemById(itemDefId)?.isHidd
           logObj[name].append({ name = block.getParamName(k), value = block.getParamValue(k) })
       }
       else if (name == "rewardTS") {
-        let reward = ::buildTableFromBlk(block)
+        let reward = convertBlk(block)
         if (!grabStatickReward(reward, logObj)) {
           if (!(name in logObj))
             logObj[name] <- []
@@ -743,7 +744,7 @@ let haveHiddenItem = @(itemDefId) ::ItemsManager.findItemById(itemDefId)?.isHidd
         if (haveHiddenItem(block?.itemDefId))
           continue
         hasVisibleItem = hasVisibleItem || block?.itemDefId != null
-        logObj[name] <- ::buildTableFromBlk(block)
+        logObj[name] <- convertBlk(block)
       }
     }
 

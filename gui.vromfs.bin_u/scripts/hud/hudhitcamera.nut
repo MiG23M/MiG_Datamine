@@ -12,8 +12,8 @@ let { getDaguiObjAabb } = require("%sqDagui/daguiUtil.nut")
 const TIME_TITLE_SHOW_SEC = 3
 const TIME_TO_SUM_CREW_LOST_SEC = 1 //To sum up the number of crew losses from multiple bullets in a single salvo
 
-let animTimerPid = ::dagui_propid.add_name_id("_transp-timer")
-let animSizeTimerPid = ::dagui_propid.add_name_id("_size-timer")
+let animTimerPid = dagui_propid_add_name_id("_transp-timer")
+let animSizeTimerPid = dagui_propid_add_name_id("_size-timer")
 
 let styles = {
   [DM_HIT_RESULT_NONE]      = "none",
@@ -242,7 +242,7 @@ let function showCrewCount() {
 
   let data = "".concat("hitCameraLostCrewText { text:t='",
     colorize("warningTextColor", crewLostCount), "' }")
-  ::get_cur_gui_scene().prependWithBlk(
+  get_cur_gui_scene().prependWithBlk(
     crewNestObj.findObject("lost_crew_count"), data, this)
 
   let crewColor = crewCount <= minAliveCrewCount ? "warningTextColor" : "activeTextColor"

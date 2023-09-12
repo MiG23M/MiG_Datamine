@@ -34,6 +34,8 @@ let { reqUnlockByClient } = require("%scripts/unlocks/unlocksModule.nut")
 let { removeTextareaTags } = require("%sqDagui/daguiUtil.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
+let { shopIsModificationEnabled } = require("chardResearch")
 
 /*
 if need - put commented in array above
@@ -256,7 +258,7 @@ registerPersistentData("SlotbarGlobals", getroottable(), ["selected_crews", "unl
       unitRankText        = ::get_unit_rank_text(air, crew, showBR, curEdiff)
       bottomLineText      = params?.bottomLineText
       isItemLocked        = isLocalState && !isUsable && !special && !isSquadronVehicle && !isMarketableVehicle && !::isUnitsEraUnlocked(air)
-      hasTalismanIcon     = isLocalState && (special || ::shop_is_modification_enabled(air.name, "premExpMul"))
+      hasTalismanIcon     = isLocalState && (special || shopIsModificationEnabled(air.name, "premExpMul"))
       itemButtons         = handyman.renderCached("%gui/slotbar/slotbarItemButtons.tpl", itemButtonsView)
       tooltipId           = ::g_tooltip.getIdUnit(air.name, params?.tooltipParams)
       isTooltipByHold     = showConsoleButtons.value
@@ -347,7 +349,7 @@ registerPersistentData("SlotbarGlobals", getroottable(), ["selected_crews", "unl
       isPkgDev = isPkgDev || a.isPkgDev
       isRecentlyReleased = isRecentlyReleased || a.isRecentlyReleased()
 
-      let hasTalisman = special || ::shop_is_modification_enabled(a.name, "premExpMul")
+      let hasTalisman = special || shopIsModificationEnabled(a.name, "premExpMul")
       hasTalismanIcon = hasTalismanIcon || hasTalisman
       talismanIncomplete = talismanIncomplete || !hasTalisman
 
@@ -805,13 +807,13 @@ registerPersistentData("SlotbarGlobals", getroottable(), ["selected_crews", "unl
     }
     return isReserve ? reserveText :
       showBR  ? (minBR != maxBR ? format("%.1f-%.1f", minBR, maxBR) : format("%.1f", minBR)) :
-      ::get_roman_numeral(rank)
+      get_roman_numeral(rank)
   }
 
   if (unit?.isFakeUnit)
     return unit?.isReqForFakeUnit || unit?.rank == null
       ? ""
-      : format(loc("events/rank"), ::get_roman_numeral(unit.rank))
+      : format(loc("events/rank"), get_roman_numeral(unit.rank))
 
   let isReserve = ::isUnitDefault(unit)
   let isSpare = crew && isInFlight ? ::is_spare_aircraft_in_slot(crew.idInCountry) : false
@@ -821,7 +823,7 @@ registerPersistentData("SlotbarGlobals", getroottable(), ["selected_crews", "unl
 
   return isReserve ?
            isSpare ? "" : reserveToShowStr :
-           showBR ? battleRatingStr : ::get_roman_numeral(unit.rank)
+           showBR ? battleRatingStr : get_roman_numeral(unit.rank)
 }
 
 ::is_crew_locked_by_prev_battle <- function is_crew_locked_by_prev_battle(crew) {
@@ -915,14 +917,14 @@ registerPersistentData("SlotbarGlobals", getroottable(), ["selected_crews", "unl
   let blk = DataBlock()
   foreach (cIdx, country in ::g_crews_list.get())
     blk[country.country] = getTblValue(cIdx, ::selected_crews, 0)
-  ::saveLocalByAccount("selected_crews", blk)
+  saveLocalByAccount("selected_crews", blk)
 }
 
 ::init_selected_crews <- function init_selected_crews(forceReload = false) {
   if (!forceReload && (!::g_crews_list.get().len() || ::selected_crews.len() == ::g_crews_list.get().len()))
     return
 
-  let selCrewsBlk = ::loadLocalByAccount("selected_crews", null)
+  let selCrewsBlk = loadLocalByAccount("selected_crews", null)
   local needSave = false
 
   ::selected_crews = array(::g_crews_list.get().len(), 0)

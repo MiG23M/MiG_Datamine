@@ -28,8 +28,8 @@ let defaultSlotbarActions = [
   "autorefill", "aircraft", "sec_weapons", "weapons", "showroom",
   "testflight", "crew", "goto_unlock", "info", "repair"
 ]
-let timerPID = ::dagui_propid.add_name_id("_size-timer")
-let forceTimePID = ::dagui_propid.add_name_id("force-time")
+let timerPID = dagui_propid_add_name_id("_size-timer")
+let forceTimePID = dagui_propid_add_name_id("force-time")
 
 let function moveToFirstEnabled(obj) {
   let total = obj.childrenCount()
@@ -267,7 +267,7 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
   }
 
   function goForwardCheckEntitlement(start_func, entitlement) {
-    this.guiScene = ::get_cur_gui_scene()
+    this.guiScene = get_cur_gui_scene()
 
     this.startFunc = start_func
 
@@ -307,9 +307,9 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
       return
     }
 
-    let successCb = Callback((@(start_func, start_without_forward) function() {
+    let successCb = Callback( function() {
       this.goForwardOrJustStart(start_func, start_without_forward)
-    })(start_func, start_without_forward), this)
+    }, this)
     let errorCb = skippable ? successCb : null
 
     checkShowMatchingConnect(successCb, errorCb)
@@ -359,7 +359,7 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
     if (hasFeature("EnableGoldPurchase"))
       this.startOnlineShop("eagles", null, "gamercard")
     else
-      ::showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
+      showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
   }
 
   function onItemsShop() { ::gui_start_itemsShop() }
@@ -586,10 +586,10 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
 
       handler.msgBox("char_connecting_error", text,
       [
-        ["ok", (@(result) function() {
+        ["ok",  function() {
             if (this.afterSlotOpError != null)
               this.afterSlotOpError(result)
-          })(result) ]
+          } ]
       ], "ok")
       return
     }
@@ -643,8 +643,8 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
 
   function onQueuesTooltipOpen(obj) {
     this.guiScene.replaceContent(obj, "%gui/queue/queueInfoTooltip.blk", this)
-    SecondsUpdater(obj.findObject("queue_tooltip_root"), function(obj, _params) {
-      obj.findObject("text").setValue(::queues.getQueuesInfoText())
+    SecondsUpdater(obj.findObject("queue_tooltip_root"), function(obj_, _params) {
+      obj_.findObject("text").setValue(::queues.getQueuesInfoText())
     })
   }
 

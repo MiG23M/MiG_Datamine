@@ -10,6 +10,7 @@ let { chatStatesCanUseVoice } = require("%scripts/chat/chatStates.nut")
 let { getSquadLeaderOperation } = require("%scripts/squads/leaderWwOperationStates.nut")
 let { get_option_voicechat } = require("chat")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 const SQUAD_MEMBERS_TO_HIDE_TITLE = 3
 
@@ -96,7 +97,7 @@ gui_handlers.SquadWidgetCustomHandler <- class extends gui_handlers.BaseGuiHandl
       let contact = ::getContact(member.uid)
       local countryIcon = ""
       if (::checkCountry(member.country, "squad member data ( uid = " + member.uid + ")", true))
-        countryIcon = ::get_country_icon(member.country)
+        countryIcon = getCountryIcon(member.country)
 
       let status = ::g_squad_manager.getPlayerStatusInMySquad(member.uid)
       memberObj["status"] = getTblValue(status, this.squadStateToString, "")

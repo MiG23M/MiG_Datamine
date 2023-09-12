@@ -16,6 +16,7 @@ let { is_benchmark_game_mode } = require("mission")
 let { startsWith, endsWith } = require("%sqstd/string.nut")
 let { reqUnlockByClient } = require("%scripts/unlocks/unlocksModule.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
 
 const REPLAY_SESSION_ID_MIN_LENGTH = 16
 
@@ -135,7 +136,7 @@ gui_handlers.ReplayScreen <- class extends gui_handlers.BaseGuiHandlerWT {
   curPage = 0
   replaysPerPage = 20
 
-  listIdxPID = ::dagui_propid.add_name_id("listIdx")
+  listIdxPID = dagui_propid_add_name_id("listIdx")
   hoveredIdx = -1
   isMouseMode = true
 
@@ -319,7 +320,7 @@ gui_handlers.ReplayScreen <- class extends gui_handlers.BaseGuiHandlerWT {
         headerText += ::get_mission_name(replayInfo.missionName, replayInfo)
       }
       text += loc("options/time") + loc("ui/colon") + ::get_mission_time_text(replayInfo.environment) + "\n"
-      text += loc("options/weather") + loc("ui/colon") + loc("options/weather" + replayInfo.weather) + "\n"
+      text += loc("options/weather") + loc("ui/colon") + getWeatherLocName(replayInfo.weather) + "\n"
       text += loc("options/difficulty") + loc("ui/colon") + loc("difficulty" + replayInfo.difficulty) + "\n"
 
 /*      local limits = ""

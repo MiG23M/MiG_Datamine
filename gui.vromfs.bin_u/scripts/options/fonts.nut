@@ -1,7 +1,9 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
+let { saveLocalAccountSettings, loadLocalAccountSettings, loadLocalByScreenSize,
+  clearLocalByScreenSize
+} = require("%scripts/clientState/localProfile.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let enums = require("%sqStdLibs/helpers/enums.nut")
 let { round } = require("math")
@@ -51,7 +53,7 @@ local appliedFontsSh = 0
 local appliedFontsScale = 0
 
 let function update_font_heights(font) {
-  let fontsSh = getFontsSh(::screen_width(), ::screen_height())
+  let fontsSh = getFontsSh(screen_width(), screen_height())
   if (appliedFontsSh == fontsSh && appliedFontsScale == font.sizeMultiplier)
     return font;
   log("update_font_heights: screenHt={0} fontSzMul={1}".subst(fontsSh, font.sizeMultiplier))
@@ -82,16 +84,16 @@ let function update_font_heights(font) {
   getFontSizePx = @(sWidth, sHeight) round(this.sizeMultiplier * getFontsSh(sWidth, sHeight)).tointeger()
   getPixelToPixelFontSizeOutdatedPx = @(_sWidth, _sHeight) 800 //!!TODO: remove this together with old fonts
   isLowWidthScreen = function() {
-    let sWidth = ::screen_width()
-    let sHeight = ::screen_height()
+    let sWidth = screen_width()
+    let sHeight = screen_height()
     let mainScreenSize = screenInfo.getMainScreenSizePx(sWidth, sHeight)
     let sf = this.getFontSizePx(sWidth, sHeight)
     return 10.0 / 16 * mainScreenSize[0] / sf < 0.99
   }
 
   genCssString = function() {
-    let sWidth = ::screen_width()
-    let sHeight = ::screen_height()
+    let sWidth = screen_width()
+    let sHeight = screen_height()
     let scrnTgt = this.getFontSizePx(sWidth, sHeight)
     setScrnTgt(scrnTgt)
     let config = {
@@ -173,21 +175,21 @@ null,
 
 let function getAvailableFontBySaveId(saveId) {
   let res = enums.getCachedType("saveId", saveId, ::g_font.cache.bySaveId, ::g_font, null)
-  if (res && res.isAvailable(::screen_width(), ::screen_height()))
+  if (res && res.isAvailable(screen_width(), screen_height()))
     return res
 
   foreach (font in ::g_font.types)
     if (font.saveIdCompatibility
       && isInArray(saveId, font.saveIdCompatibility)
-      && font.isAvailable(::screen_width(), ::screen_height()))
+      && font.isAvailable(screen_width(), screen_height()))
       return font
 
   return null
 }
 
 ::g_font.getAvailableFonts <- function getAvailableFonts() {
-  let sWidth = ::screen_width()
-  let sHeight = ::screen_height()
+  let sWidth = screen_width()
+  let sHeight = screen_height()
   return this.types.filter(@(f) f.isAvailable(sWidth, sHeight))
 }
 
@@ -224,8 +226,8 @@ let function getDefault() {
     return MEDIUM
 
   let displayScale = ::display_scale()
-  let sWidth = ::screen_width()
-  let sHeight = ::screen_height()
+  let sWidth = screen_width()
+  let sHeight = screen_height()
   if (displayScale <= 1.2 && COMPACT.isAvailable(sWidth, sHeight))
     return COMPACT
   if (displayScale <= 1.4 && MEDIUM.isAvailable(sWidth, sHeight))
@@ -243,15 +245,15 @@ let function getDefault() {
       || getDefault())
   }
 
-  local fontSaveId = ::load_local_account_settings(FONTS_SAVE_PATH)
+  local fontSaveId = loadLocalAccountSettings(FONTS_SAVE_PATH)
   local res = getAvailableFontBySaveId(fontSaveId)
   if (!res) { //compatibility with 1.77.0.X
-    fontSaveId = ::loadLocalByScreenSize(FONTS_SAVE_PATH)
+    fontSaveId = loadLocalByScreenSize(FONTS_SAVE_PATH)
     if (fontSaveId) {
       res = getAvailableFontBySaveId(fontSaveId)
       if (res)
-        ::save_local_account_settings(FONTS_SAVE_PATH, fontSaveId)
-      ::clear_local_by_screen_size(FONTS_SAVE_PATH)
+        saveLocalAccountSettings(FONTS_SAVE_PATH, fontSaveId)
+      clearLocalByScreenSize(FONTS_SAVE_PATH)
     }
   }
   return update_font_heights(res || getDefault())
@@ -267,10 +269,10 @@ let function saveFontToConfig(font) {
   if (!canChange())
     return false
 
-  let fontSaveId = ::load_local_account_settings(FONTS_SAVE_PATH)
+  let fontSaveId = loadLocalAccountSettings(FONTS_SAVE_PATH)
   let isChanged = font.saveId != fontSaveId
   if (isChanged)
-    ::save_local_account_settings(FONTS_SAVE_PATH, font.saveId)
+    saveLocalAccountSettings(FONTS_SAVE_PATH, font.saveId)
 
   saveFontToConfig(font)
   update_font_heights(font)

@@ -32,7 +32,7 @@ gui_handlers.ControlsBackupManager <- class extends gui_handlers.SaveDataDialog 
   function onBackupSaved(params) {
     this.showWaitAnimation(false)
     if (!params.success)
-      ::showInfoMsgBox(loc("msgbox/errorSavingPreset"))
+      showInfoMsgBox(loc("msgbox/errorSavingPreset"))
     this.goBack()
   }
 
@@ -55,7 +55,7 @@ gui_handlers.ControlsBackupManager <- class extends gui_handlers.SaveDataDialog 
       broadcastEvent("ControlsPresetChanged")
     }
     else
-      ::showInfoMsgBox(loc("msgbox/errorSavingPreset"))
+      showInfoMsgBox(loc("msgbox/errorSavingPreset"))
     this.goBack()
   }
 

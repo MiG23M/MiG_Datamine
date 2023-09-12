@@ -734,11 +734,11 @@ let function debriefingJoinRowsIntoRow(exp, destRowId, srcRowIdsArray) {
         if (!(keyTo in tbl))
           tbl[keyTo] <- isTable ? (clone val) : val
         else {
-          if (::is_numeric(val))
+          if (is_numeric(val))
             tbl[keyTo] += val
           else if (isTable)
             foreach (i, v in val)
-              if (::is_numeric(v))
+              if (is_numeric(v))
               tbl[keyTo][i] += v
         }
       }

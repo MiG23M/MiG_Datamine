@@ -1,12 +1,10 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
-
-
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { format } = require("string")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
-
 let { updatePlayerRankByCountry } = require("%scripts/ranks.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 let delayedRankUpWnd = []
 
@@ -31,7 +29,7 @@ gui_handlers.RankUpModal <- class extends gui_handlers.BaseGuiHandlerWT {
       let bgImage = this.scene.findObject("background_country");
       if (bgImage)
         bgImage["background-image"] = "#ui/images/new_rank_" + this.country.slice(8) + "?P1"
-      this.scene.findObject("country_icon")["background-image"] = ::get_country_icon(this.country)
+      this.scene.findObject("country_icon")["background-image"] = getCountryIcon(this.country)
     }
 
     let blk = ::get_shop_blk();
@@ -72,7 +70,7 @@ gui_handlers.RankUpModal <- class extends gui_handlers.BaseGuiHandlerWT {
       if (topRank < r)
         topRank = r;
 
-    let topRankStr = ::get_roman_numeral(topRank)
+    let topRankStr = get_roman_numeral(topRank)
     local headerText = format(loc("userlog/new_rank/country"), topRankStr)
     local rankText = loc("shop/age") + colorize("userlogColoredText", topRankStr)
     if (showAsUnlock) {

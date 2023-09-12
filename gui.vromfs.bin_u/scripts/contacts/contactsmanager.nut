@@ -7,6 +7,10 @@ let { request_nick_by_uid_batch } = require("%scripts/matching/requests.nut")
 let { isPlatformSony, isPlatformXboxOne } = require("%scripts/clientState/platform.nut")
 let { get_charserver_time_sec } = require("chard")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
+let { isDataBlock } = require("%sqStdLibs/helpers/u.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 let contactsWndSizes = Watched(null)
 
@@ -91,8 +95,8 @@ recentGroup.subscribe(updateRecentGroup)
 let function loadRecentGroupOnce() {
   if (recentGroup.value != null)
     return
-  local group = ::load_local_account_settings($"contacts/{EPL_RECENT_SQUAD}")
-  group = group != null ? ::buildTableFromBlk(group) : {}
+  local group = loadLocalAccountSettings($"contacts/{EPL_RECENT_SQUAD}")
+  group = isDataBlock(group) ? convertBlk(group) : {}
   recentGroup(group)
   if (group.len() == 0)
     return
@@ -139,7 +143,7 @@ let function addRecentContacts(contacts) {
       uidsToSave.rawdelete(resArray[i].uid)
   }
 
-  ::save_local_account_settings($"contacts/{EPL_RECENT_SQUAD}", uidsToSave)
+  saveLocalAccountSettings($"contacts/{EPL_RECENT_SQUAD}", uidsToSave)
   recentGroup(uidsToSave)
 }
 

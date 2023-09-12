@@ -246,7 +246,7 @@ let function tableLen(t){
 }
 
 local table_types = ["table","class","instance"]
-local function tostring_r(input, params=defTostringParams) {
+local function tostring_r(inp, params=defTostringParams) {
   local newline = params?.newline ?? defTostringParams.newline
   local maxdeeplevel = params?.maxdeeplevel ?? defTostringParams.maxdeeplevel
   local separator = params?.separator ?? defTostringParams.separator
@@ -315,7 +315,7 @@ local function tostring_r(input, params=defTostringParams) {
     newline = " "
     indentOnNewline = ""
   }
-  local function sub_tostring_r(input, indent, curdeeplevel, arrayElem = false, sep = newline, arrInd=null) {
+  let function sub_tostring_r(input, indent, curdeeplevel, arrayElem = false, sep = newline, arrInd=null) {
     if (arrInd==null)
       arrInd=indent
     local out = []
@@ -370,7 +370,7 @@ local function tostring_r(input, params=defTostringParams) {
     }
     return "".join(out)
   }
-  return sub_tostring_r([input], "", 0,true)
+  return sub_tostring_r([inp], "", 0,true)
 }
 
 
@@ -870,7 +870,7 @@ local function validateEmail(no_dump_email) {
   if (quotes == null && locpart.indexof("@")!=null)
     return false //no @ without quotes
 
-  if (dompart.indexof(".") == null || dompart.indexof(".") > dompart.len() - 3) // warning disable: -func-can-return-null
+  if (dompart.indexof(".") == null || dompart.indexof(".") > dompart.len() - 3) // warning disable: -func-can-return-null -potentially-nulled-ops
     return false  //too short first level domain or no periods
 
   return true

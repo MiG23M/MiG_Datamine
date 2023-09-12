@@ -2,9 +2,7 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
 let { Timer } = require("%sqDagui/timer/timer.nut")
 let wwQueuesData = require("%scripts/worldWar/operations/model/wwQueuesData.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
@@ -22,6 +20,7 @@ let getLockedCountryData = require("%scripts/worldWar/inOperation/wwGetSlotbarLo
 let { switchProfileCountry, profileCountrySq } = require("%scripts/user/playerCountry.nut")
 let { setMapPreview } = require("%scripts/missions/mapPreview.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
+let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
 
 // Temporary image. Has to be changed after receiving correct art
 const WW_OPERATION_DEFAULT_BG_IMAGE = "#ui/bkg/login_layer_h1_0?P1"
@@ -847,18 +846,18 @@ gui_handlers.WwBattleDescription <- class extends gui_handlers.BaseGuiHandlerWT 
               this.tryToJoin(side)
             else {
               if (!this.canGatherAllSquadMembersForBattle(cantJoinReasonData))
-                ::showInfoMsgBox(cantJoinReasonData.fullReasonText)
+                showInfoMsgBox(cantJoinReasonData.fullReasonText)
               else if (this.canPrerareSquadForBattle(cantJoinReasonData))
-                ::showInfoMsgBox(cantJoinReasonData.reasonText)
+                showInfoMsgBox(cantJoinReasonData.reasonText)
               else
                 ::g_squad_manager.startWWBattlePrepare(this.operationBattle.id)
             }
           }
           else {
             if (!this.canGatherAllSquadMembersForBattle(cantJoinReasonData))
-              ::showInfoMsgBox(cantJoinReasonData.fullReasonText)
+              showInfoMsgBox(cantJoinReasonData.fullReasonText)
             else
-              ::showInfoMsgBox(loc("squad/not_all_in_operation"))
+              showInfoMsgBox(loc("squad/not_all_in_operation"))
           }
         }
         else
@@ -872,7 +871,7 @@ gui_handlers.WwBattleDescription <- class extends gui_handlers.BaseGuiHandlerWT 
           if (cantJoinReasonData.canJoin)
             this.tryToSetCrewsReadyFlag()
           else
-            ::showInfoMsgBox(cantJoinReasonData.reasonText)
+            showInfoMsgBox(cantJoinReasonData.reasonText)
         }
         break
     }
@@ -885,7 +884,7 @@ gui_handlers.WwBattleDescription <- class extends gui_handlers.BaseGuiHandlerWT 
 
   function tryToSetCrewsReadyFlag() {
     let warningData = this.operationBattle.getWarningReasonData(this.getPlayerSide())
-    if (warningData.needMsgBox && !::loadLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, false)) {
+    if (warningData.needMsgBox && !loadLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, false)) {
       ::gui_start_modal_wnd(gui_handlers.SkipableMsgBox,
         {
           parentHandler = this
@@ -893,7 +892,7 @@ gui_handlers.WwBattleDescription <- class extends gui_handlers.BaseGuiHandlerWT 
             ? warningData.warningText
             : warningData.fullWarningText
           onStartPressed = this.setCrewsReadyFlag
-          skipFunc = @(value) ::saveLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, value)
+          skipFunc = @(value) saveLocalByAccount(WW_SKIP_BATTLE_WARNINGS_SAVE_ID, value)
         })
       return
     }
@@ -1134,7 +1133,7 @@ gui_handlers.WwBattleDescription <- class extends gui_handlers.BaseGuiHandlerWT 
       return
 
     if (!::isCountryAllCrewsUnlockedInHangar(country)) {
-      ::showInfoMsgBox(loc("charServer/updateError/52"), "slotbar_presets_forbidden")
+      showInfoMsgBox(loc("charServer/updateError/52"), "slotbar_presets_forbidden")
       return
     }
 

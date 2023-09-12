@@ -25,6 +25,7 @@ let { getSavedWeapon, getSavedBullets } = require("%scripts/weaponry/savedWeapon
 let { lastIndexOf, INVALID_INDEX, endsWith } = require("%sqstd/string.nut")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { USEROPT_WEAPONS } = require("%scripts/options/optionsExtNames.nut")
+let { shopIsModificationEnabled, shopIsModificationPurchased } = require("chardResearch")
 
 const KGF_TO_NEWTON = 9.807
 
@@ -129,7 +130,7 @@ let function isWeaponEnabled(unit, weapon) {
 let getWeaponDisabledMods = @(unit, weapon)
   ::shop_is_weapon_available(unit.name, weapon.name, true, false)
     ? []
-    : (weapon?.reqModification.filter(@(n) !::shop_is_modification_enabled(unit.name, n)) ?? [])
+    : (weapon?.reqModification.filter(@(n) !shopIsModificationEnabled(unit.name, n)) ?? [])
 
 let isDefaultTorpedoes = @(weapon) weapon?.reqModification.contains("ship_torpedoes") ?? false
 
@@ -677,7 +678,7 @@ local function getWeaponExtendedInfo(weapon, weaponType, unit, ediff, newLine) {
   }
   else if (weaponType == "torpedoes") {
     let torpedoMod = "torpedoes_movement_mode"
-    if (::shop_is_modification_enabled(unit.name, torpedoMod)) {
+    if (shopIsModificationEnabled(unit.name, torpedoMod)) {
       let mod = getModificationByName(unit, torpedoMod)
       let diffId = ::get_difficulty_by_ediff(ediff ?? ::get_current_ediff()).crewSkillName
       let effects = mod?.effects?[diffId]
@@ -773,7 +774,7 @@ let function getPrimaryWeaponsList(unit) {
 let function getLastPrimaryWeapon(unit) {
   let primaryList = getPrimaryWeaponsList(unit)
   foreach (modName in primaryList)
-    if (modName != "" && ::shop_is_modification_enabled(unit.name, modName))
+    if (modName != "" && shopIsModificationEnabled(unit.name, modName))
       return modName
   return ""
 }
@@ -834,7 +835,7 @@ local function getUnitWeaponry(unit, p = WEAPON_TEXT_PARAMS) {
 
   if (!p.isPrimary) {
     let weapon = unit.getWeapons()?[weaponPresetIdx]
-    let curPreset = weapon != null ? getUnitPresets(unitBlk).findvalue(@(p) p.name == weapon.name) : null
+    let curPreset = weapon != null ? getUnitPresets(unitBlk).findvalue(@(v) v.name == weapon.name) : null
     weapons = addWeaponsFromBlk(weapons, getPresetWeapons(unitBlk, weapon),
       unit, p.weaponsFilterFunc, curPreset?.weaponConfig)
   }
@@ -876,7 +877,7 @@ let function isWeaponUnlocked(unit, weapon) {
         foreach (req in weapon[rp])
           if (rp == "reqWeapon" && !::shop_is_weapon_purchased(unit.name, req))
             return false
-          else if (rp == "reqModification" && !::shop_is_modification_purchased(unit.name, req))
+          else if (rp == "reqModification" && !shopIsModificationPurchased(unit.name, req))
             return false
   return true
 }
@@ -920,7 +921,7 @@ let function checkUnitBullets(unit, isCheckAll = false, bulletSet = null) {
     if (modifName == "")
       continue
 
-    if ((!isCheckAll && ::shop_is_modification_enabled(unit.name, modifName)) //Current mod
+    if ((!isCheckAll && shopIsModificationEnabled(unit.name, modifName)) //Current mod
       || (isCheckAll && isWeaponUnlocked(unit, getModificationByName(unit, modifName)))) { //All unlocked mods
       let res = checkAmmoAmount(unit, modifName, AMMO.MODIFICATION)
       if (res != UNIT_WEAPONS_READY)

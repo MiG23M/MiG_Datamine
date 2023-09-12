@@ -5,6 +5,7 @@
   "MetaPartsBlk": "gameData/FlightModels/dm/metaparts/jet_fighter_metaparts.blk",
   "haveCCIPForBombs": true,
   "haveCCIPForRocket": true,
+  "haveCCRPForBombs": true,
   "ilsTCSFVE130": true,
   "gearSinkRangeLR": 0.126,
   "gearSinkRangeC": 0.112,
@@ -29,9 +30,6 @@
   "damagePartsToVisualEffectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_visual_effects_map.blk",
   "damagePartsExcludeFromHoleBlk": "gameData/FlightModels/DM/dm_parts_exclude_from_hole.blk",
   "paratrooper": "usa_irvin_5000_ejection_para",
-  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
-  "customImage": "!#ui/unitskin#image_in_progress",
-  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -74,11 +72,11 @@
       },
       "elevator0_dm": {
         "genericDamageMult": 0.3,
-        "hp": 15.1
+        "hp": 30.5
       },
       "elevator1_dm": {
         "genericDamageMult": 0.3,
-        "hp": 15.1
+        "hp": 30.5
       },
       "fin_dm": {
         "hp": 30.5
@@ -92,12 +90,6 @@
       "rudder_dm": {
         "genericDamageMult": 0.3,
         "hp": 21.8
-      },
-      "stab1_dm": {
-        "hp": 19.4
-      },
-      "stab2_dm": {
-        "hp": 19.4
       }
     },
     "c_dural7": {
@@ -209,23 +201,47 @@
       }
     },
     "steel_tank_armor": {
-      "tank1_dm": {
+      "tank10_dm": {
         "hp": 39.5
       },
-      "tank2_dm": {
+      "tank11_dm": {
+        "hp": 39.5
+      },
+      "tank12_dm": {
         "hp": 120.5
+      },
+      "tank13_dm": {
+        "hp": 120.5
+      },
+      "tank14_dm": {
+        "hp": 92.4
+      },
+      "tank1_dm": {
+        "hp": 41.9
+      },
+      "tank2_dm": {
+        "hp": 39.5
       },
       "tank3_dm": {
         "hp": 39.5
       },
       "tank4_dm": {
-        "hp": 39.5
+        "hp": 55.5
       },
       "tank5_dm": {
-        "hp": 120.5
+        "hp": 55.5
       },
       "tank6_dm": {
-        "hp": 120.5
+        "hp": 41.3
+      },
+      "tank7_dm": {
+        "hp": 41.3
+      },
+      "tank8_dm": {
+        "hp": 39.5
+      },
+      "tank9_dm": {
+        "hp": 39.5
       }
     }
   },
@@ -918,58 +934,6 @@
       }
     },
     "part": {
-      "name": "stab1_dm",
-      "onHit": {
-        "damage": 30.0,
-        "cut": 0.6
-      },
-      "onHit": {
-        "damage": 60.0,
-        "cut": 1.0
-      },
-      "onKill": {
-        "damage": 10.0,
-        "cut": 1.0,
-        "nothing": 10.0
-      },
-      "onKill": {
-        "damage": 30.0,
-        "cut": 2.0,
-        "nothing": 5.0
-      },
-      "onKill": {
-        "damage": 50.0,
-        "cut": 1.0,
-        "nothing": 0.0
-      }
-    },
-    "part": {
-      "name": "stab2_dm",
-      "onHit": {
-        "damage": 30.0,
-        "cut": 0.6
-      },
-      "onHit": {
-        "damage": 60.0,
-        "cut": 1.0
-      },
-      "onKill": {
-        "damage": 10.0,
-        "cut": 1.0,
-        "nothing": 10.0
-      },
-      "onKill": {
-        "damage": 30.0,
-        "cut": 2.0,
-        "nothing": 5.0
-      },
-      "onKill": {
-        "damage": 50.0,
-        "cut": 1.0,
-        "nothing": 0.0
-      }
-    },
-    "part": {
       "name": "tail_dm",
       "onHit": {
         "flame": 0.2,
@@ -987,6 +951,191 @@
     },
     "part": {
       "name": "tailcontrol_dm"
+    },
+    "part": {
+      "name": "tank10_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank11_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank12_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank13_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank14_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
     },
     "part": {
       "name": "tank1_dm",
@@ -1175,6 +1324,117 @@
     },
     "part": {
       "name": "tank6_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank7_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank8_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank9_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3
@@ -2340,7 +2600,12 @@
       "node": "pylon_rocket_as30_1",
       "node": "pylon_rocket_as30_2",
       "node": "pylon_rocket2_aim9",
-      "node": "pylon_rocket1_aim9"
+      "node": "pylon_rocket1_aim9",
+      "node": "clb2_pylon_1",
+      "node": "alkan_lc_3_pylon1",
+      "node": "alkan_lc_3_pod1",
+      "node": "alkan_lc_3_pylon2",
+      "node": "alkan_lc_3_pod2"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2826,12 +3091,16 @@
       "WeaponPreset": {
         "iconType": "ltc",
         "name": "ltc_pod",
+        "ShowNodes": {
+          "node": "alkan_lc_3_pylon1",
+          "node": "alkan_lc_3_pod1"
+        },
         "Weapon": {
           "trigger": "countermeasures",
           "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
-          "emitter": "emtr_shellrejection1",
-          "bullets": 126,
+          "emitter": "emtr_flare1",
+          "bullets": 90,
           "external": true,
           "separate": true
         }
@@ -2863,6 +3132,9 @@
         "iconType": "bombs_small_group_x2",
         "name": "us_250lb_x2",
         "reqModification": "fr_250kg_type_25c",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/us_250lb_mk_81_ldgp.blk",
@@ -2886,6 +3158,9 @@
         "iconType": "bombs_small_high_drag_group_x2",
         "name": "us_250lb_snakeye_x2",
         "reqModification": "fr_250kg_type_25c",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/us_250lb_mk_81_ldgp_snakeye.blk",
@@ -2909,6 +3184,9 @@
         "iconType": "bombs_middle_group_x2",
         "name": "us_500lb_mk_82_ldgp_x2",
         "reqModification": "fr_250kg_type_25c",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/us_500lb_mk_82_ldgp.blk",
@@ -2932,6 +3210,9 @@
         "iconType": "bombs_middle_high_drag_group_x2",
         "name": "us_500lb_mk_82_ldgp_snakeye_x2",
         "reqModification": "fr_250kg_type_25c",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/us_500lb_mk_82_ldgp_snakeye.blk",
@@ -2955,6 +3236,9 @@
         "iconType": "bombs_middle_group_x2",
         "name": "250kg_x2",
         "reqModification": "fr_250kg_type_25c",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
@@ -2978,6 +3262,9 @@
         "iconType": "bombs_middle_high_drag_group_x2",
         "name": "fr_250_samp_type_25_200_x2",
         "reqModification": "fr_250kg_type_25c",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
@@ -3001,6 +3288,9 @@
         "iconType": "bombs_large_group_x2",
         "name": "fr_400_samp_type_21_x2",
         "reqModification": "fr_400kg_type_21b",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/fr_400_samp_type_21.blk",
@@ -3024,6 +3314,9 @@
         "iconType": "bombs_large_high_drag_group_x2",
         "name": "fr_400_samp_type_21_200_x2",
         "reqModification": "fr_400kg_type_21b",
+        "ShowNodes": {
+          "node": "clb2_pylon_1"
+        },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/fr_400_samp_type_21_200.blk",
@@ -3051,12 +3344,16 @@
       "WeaponPreset": {
         "iconType": "ltc",
         "name": "ltc_pod",
+        "ShowNodes": {
+          "node": "alkan_lc_3_pylon2",
+          "node": "alkan_lc_3_pod2"
+        },
         "Weapon": {
           "trigger": "countermeasures",
           "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
-          "emitter": "emtr_shellrejection2",
-          "bullets": 126,
+          "emitter": "emtr_flare2",
+          "bullets": 90,
           "external": true,
           "separate": true
         }
@@ -3504,7 +3801,7 @@
       "node": "optic1_gun"
     },
     "sensor": {
-      "blk": "gameData/sensors/us_an_apr_25.blk"
+      "blk": "gameData/sensors/fr_sherloc.blk"
     }
   },
   "turbulence": {

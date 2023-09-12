@@ -17,7 +17,7 @@ let { MODIFICATION, WEAPON, SPARE, PRIMARY_WEAPON } = require("%scripts/weaponry
 let { debug_dump_stack } = require("dagor.debug")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 
-::dagui_propid.add_name_id("_iconBulletName")
+dagui_propid_add_name_id("_iconBulletName")
 
 let function getBulletsCountText(curVal, maxVal, unallocated, guns) {
   local restText = ""

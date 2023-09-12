@@ -43,8 +43,9 @@ let { getSavedBullets } = require("%scripts/weaponry/savedWeaponry.nut")
 let { promptReqModInstall, needReqModInstall } = require("%scripts/weaponry/checkInstallMods.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { shopIsModificationEnabled } = require("chardResearch")
 
-local timerPID = ::dagui_propid.add_name_id("_size-timer")
+local timerPID = dagui_propid_add_name_id("_size-timer")
 ::header_len_per_cell <- 16
 ::tooltip_display_delay <- 2
 ::max_spare_amount <- 100
@@ -67,7 +68,7 @@ local timerPID = ::dagui_propid.add_name_id("_size-timer")
 
   let air = getAircraftByName(unitName)
   foreach (mod in air.modifications)
-    db[unitName][mod.name] <- ::shop_is_modification_enabled(unitName, mod.name)
+    db[unitName][mod.name] <- shopIsModificationEnabled(unitName, mod.name)
 
   return ::shop_enable_modifications(db)
 }
@@ -710,7 +711,7 @@ gui_handlers.WeaponsModalHandler <- class extends gui_handlers.BaseGuiHandlerWT 
       if (needTierArrows) {
         row.id <- blockIdPrefix + i
         row.needTierArrow <- i > 1
-        row.tierText <- ::get_roman_numeral(i)
+        row.tierText <- get_roman_numeral(i)
       }
 
       view.rows.append(row)
@@ -801,7 +802,7 @@ gui_handlers.WeaponsModalHandler <- class extends gui_handlers.BaseGuiHandlerWT 
           let req = reqMods - countMods
 
           let tooltipText = loc("weaponry/unlockTier/tooltip",
-            { amount = req, tier = ::get_roman_numeral(i + 1) })
+            { amount = req, tier = get_roman_numeral(i + 1) })
           jObj.tooltip = tooltipText
           modsCountObj.tooltip = loc("weaponry/unlockTier/countsBlock/startText") + "\n" + tooltipText
         }
@@ -1207,7 +1208,7 @@ gui_handlers.WeaponsModalHandler <- class extends gui_handlers.BaseGuiHandlerWT 
 
   function checkResearchOperation(item) {
     if (canResearchItem(this.air, item, this.availableFlushExp <= 0 && this.setResearchManually)) {
-      let afterFuncDone = (@(item) function() {
+      let afterFuncDone =  function() {
         this.setModificatonOnResearch(item, function() {
           this.updateAllItems()
           this.selectResearchModule()
@@ -1216,7 +1217,7 @@ gui_handlers.WeaponsModalHandler <- class extends gui_handlers.BaseGuiHandlerWT 
               this.sendModResearchedStatistic(this.air, item.name)
           }
         })
-      })(item)
+      }
 
       this.flushItemExp(item.name, afterFuncDone)
       return true
@@ -1225,10 +1226,10 @@ gui_handlers.WeaponsModalHandler <- class extends gui_handlers.BaseGuiHandlerWT 
   }
 
   function setModificatonOnResearch(item, afterDoneFunc = null) {
-    let executeAfterDoneFunc = (@(afterDoneFunc) function() {
+    let executeAfterDoneFunc =  function() {
         if (afterDoneFunc)
           afterDoneFunc()
-      })(afterDoneFunc)
+      }
 
     if (!item || isModResearched(this.air, item)) {
       executeAfterDoneFunc()
@@ -1373,7 +1374,7 @@ gui_handlers.WeaponsModalHandler <- class extends gui_handlers.BaseGuiHandlerWT 
   }
 
   function switchMod(item, checkCanDisable = true) {
-    let equipped = ::shop_is_modification_enabled(this.airName, item.name)
+    let equipped = shopIsModificationEnabled(this.airName, item.name)
     if (checkCanDisable && equipped && !isCanBeDisabled(item))
       return
 

@@ -392,7 +392,7 @@ gui_handlers.UserLogHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     if (value < 0 || value >= obj.childrenCount())
       return
 
-    let idx = ::to_integer_safe(::getObjIdByPrefix(obj.getChild(value), "page_"), -1)
+    let idx = to_integer_safe(::getObjIdByPrefix(obj.getChild(value), "page_"), -1)
     let newPage = getTblValue(idx, ::userlog_pages)
     if (!newPage || newPage == this.curPage)
       return

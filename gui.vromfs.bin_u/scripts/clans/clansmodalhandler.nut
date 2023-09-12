@@ -16,6 +16,9 @@ let time = require("%scripts/time.nut")
 let clanContextMenu = require("%scripts/clans/clanContextMenu.nut")
 let { floor } = require("%sqstd/math.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
+let { convertBlk } = require("%sqstd/datablock.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 // how many top places rewards are displayed in clans list window
 let CLAN_SEASONS_TOP_PLACES_REWARD_PREVIEW = 3
@@ -304,7 +307,7 @@ gui_handlers.ClansModalHandler <- class extends gui_handlers.clanPageModal {
       this.myClanLbData = null
     if (updateMyClanRow && ::clan_get_my_clan_id() != "-1") {
       let requestPage = this.curPage
-      let cbSuccess = Callback((@(seasonOrdinalNumber) function(myClanRowBlk) {
+      let cbSuccess = Callback( function(myClanRowBlk) {
                                       if (requestPage != this.curPage)
                                         return
 
@@ -312,15 +315,15 @@ gui_handlers.ClansModalHandler <- class extends gui_handlers.clanPageModal {
                                       local found = false
                                       foreach (row in myClanRowBlk % "clan")
                                         if (row?._id == myClanId) {
-                                          this.myClanLbData = ::buildTableFromBlk(row)
-                                          this.myClanLbData.astat <- ::buildTableFromBlk(row?.astat)
+                                          this.myClanLbData = convertBlk(row)
+                                          this.myClanLbData.astat <- convertBlk(row?.astat)
                                           found = true
                                           break
                                         }
                                       if (!found)
                                         this.myClanLbData = null
                                       this.requestLbData(seasonOrdinalNumber)
-                                    })(seasonOrdinalNumber), this)
+                                    }, this)
 
       this.requestClanLBPosition(this.getClansLbFieldName(), seasonOrdinalNumber, cbSuccess)
     }
@@ -606,7 +609,7 @@ gui_handlers.ClansModalHandler <- class extends gui_handlers.clanPageModal {
       return
 
     let isHover = obj.isHovered()
-    let dataIdx = ::to_integer_safe(cutPrefix(obj.id, "row_", ""), -1, false)
+    let dataIdx = to_integer_safe(cutPrefix(obj.id, "row_", ""), -1, false)
     if (isHover == (dataIdx == this.lastHoveredDataIdx))
      return
 
@@ -888,14 +891,14 @@ gui_handlers.ClansModalHandler <- class extends gui_handlers.clanPageModal {
   }
 
   function loadLeaderboardFilter() {
-    this.filterMask = ::load_local_account_settings(CLAN_LEADERBOARD_FILTER_ID,
+    this.filterMask = loadLocalAccountSettings(CLAN_LEADERBOARD_FILTER_ID,
       (1 << leaderboardFilterArray.len()) - 1)
   }
 
   function onChangeLeaderboardFilter(obj) {
     let newFilterMask = obj.getValue()
     this.filterMask = newFilterMask
-    ::save_local_account_settings(CLAN_LEADERBOARD_FILTER_ID, this.filterMask)
+    saveLocalAccountSettings(CLAN_LEADERBOARD_FILTER_ID, this.filterMask)
 
     this.curClanLbPage = 0
     this.requestClansLbData()

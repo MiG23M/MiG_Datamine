@@ -626,9 +626,9 @@ let function lwsTargetsComponent(colorWatched, isForTank = false) {
 }
 
 let function rwrTargetsState(colorWatched) {
+  let rwrTargetsLaunch = Computed(@() rwrLaunchingTargetAgeMin.value * RwrSignalHoldTimeInv.value < 1.0 )
   let rwrTargetsStateOpacity = Computed(@() max(0.0, 1.0 - min(rwrTrackingTargetAgeMin.value, rwrLaunchingTargetAgeMin.value) * RwrSignalHoldTimeInv.value) *
-    (rwrLaunchingTargetAgeMin.value < rwrTrackingTargetAgeMin.value && ((CurrentTime.value * 4.0).tointeger() % 2) == 0 ? 0.0 : 1.0) )
-  let rwrTargetsLaunch = Computed(@() rwrLaunchingTargetAgeMin.value < rwrTrackingTargetAgeMin.value )
+    (rwrTargetsLaunch.value && ((CurrentTime.value * 4.0).tointeger() % 2) == 0 ? 0.0 : 1.0) )
   local targetsState = @()
     styleText.__merge({
       watch = [rwrTargetsLaunch, colorWatched]

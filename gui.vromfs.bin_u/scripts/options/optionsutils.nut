@@ -119,7 +119,7 @@ let function fillHueSaturationBrightnessOption(descr, id, defHue = null, defSat 
   let hueStep = 22.5
   if (curHue == null)
     curHue = get_gui_option(descr.type)
-  if (!::is_numeric(curHue))
+  if (!is_numeric(curHue))
     curHue = -1
 
   descr.id = id
@@ -153,7 +153,7 @@ let function fillHueOption(descr, id, curHue = null, defHue = null, defSat = nul
   let hueStep = 22.5
   if (curHue == null)
     curHue = get_gui_option(descr.type)
-  if (!::is_numeric(curHue))
+  if (!is_numeric(curHue))
     curHue = -1
 
   descr.id = id

@@ -108,7 +108,7 @@ gui_handlers.RightClickMenu <- class extends ::BaseGuiHandler {
     this.guiScene.setUpdatesEnabled(true, true)
 
     let rootSize = this.guiScene.getRoot().getSize()
-    let cursorPos = this.position ? this.position : ::get_dagui_mouse_cursor_pos_RC()
+    let cursorPos = this.position ? this.position : get_dagui_mouse_cursor_pos_RC()
     let menuSize = listObj.getSize()
     let menuPos =  [cursorPos[0], cursorPos[1]]
     for (local i = 0; i < 2; i++)

@@ -23,9 +23,11 @@ let { isBattleTaskActive, isBattleTasksAvailable, isBattleTaskDone, isBattleTask
   requestBattleTaskReward, setBattleTasksUpdateTimer, getBattleTaskDifficultyImage,
   getBattleTaskView
 } = require("%scripts/unlocks/battleTasks.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
-::dagui_propid.add_name_id("task_id")
-::dagui_propid.add_name_id("difficultyGroup")
+dagui_propid_add_name_id("task_id")
+dagui_propid_add_name_id("difficultyGroup")
 
 gui_handlers.BattleTasksPromoHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.CUSTOM
@@ -55,7 +57,7 @@ gui_handlers.BattleTasksPromoHandler <- class extends gui_handlers.BaseGuiHandle
     let currentGameModeId = ::game_mode_manager.getCurrentGameModeId()
     // 2) Search for task by selected gameMode
     if (!reqTask && currentGameModeId) {
-      local curDifficultyGroup = ::load_local_account_settings(this.savePathBattleTasksDiff,
+      local curDifficultyGroup = loadLocalAccountSettings(this.savePathBattleTasksDiff,
         getDefaultDifficultyGroup())
       let activeTasks = filterBattleTasksByGameModeId(tasksArray, currentGameModeId).filter(
           @(task) !isBattleTaskDone(task) && isBattleTaskActive(task)
@@ -150,7 +152,7 @@ gui_handlers.BattleTasksPromoHandler <- class extends gui_handlers.BaseGuiHandle
     if (!difficultyGroup)
       return
 
-    ::save_local_account_settings(this.savePathBattleTasksDiff, difficultyGroup)
+    saveLocalAccountSettings(this.savePathBattleTasksDiff, difficultyGroup)
 
     this.guiScene.performDelayed(this, function() {
       this.updateHandler()

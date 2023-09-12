@@ -15,7 +15,7 @@ let waitIconMarkup = "holdWaitPlace { id:t='{0}'; holdWaitIconBg {} holdWaitIcon
   .subst(WAIT_ICON_ID)
 let tooltipObjMarkup = "tooltipObj { id:t='{0}'; position:t='root'; order-popup:t='yes' }"
   .subst(TOOLTIP_ID)
-let needActionAfterHoldPID = ::dagui_propid.add_name_id("need-action-after-hold")
+let needActionAfterHoldPID = dagui_propid_add_name_id("need-action-after-hold")
 
 local waitPlace = null
 local tooltipData = null // warning disable: -declared-never-used //used to store the subscription context

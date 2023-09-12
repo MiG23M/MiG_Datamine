@@ -12,7 +12,7 @@ let tutorAction = require("%scripts/tutorials/tutorialActions.nut")
 let { KWARG_NON_STRICT } = require("%sqstd/functools.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 
-::dagui_propid.add_name_id("itemId")
+dagui_propid_add_name_id("itemId")
 
 let branchIdPrefix = "branch_"
 let getBranchId = @(idx) "".concat(branchIdPrefix, idx)

@@ -18,10 +18,10 @@ let { get_meta_mission_info_by_name } = require("guiMission")
 
 const POPUP_PREFIX_LOC_ID = "maps/preferences/notice/"
 
-::dagui_propid.add_name_id("hasPremium")
-::dagui_propid.add_name_id("hasMaxBanned")
-::dagui_propid.add_name_id("hasMaxDisliked")
-::dagui_propid.add_name_id("hasMaxLiked")
+dagui_propid_add_name_id("hasPremium")
+dagui_propid_add_name_id("hasMaxBanned")
+dagui_propid_add_name_id("hasMaxDisliked")
+dagui_propid_add_name_id("hasMaxLiked")
 
 gui_handlers.mapPreferencesModal <- class extends gui_handlers.BaseGuiHandlerWT {
   wndType             = handlerType.MODAL
@@ -221,7 +221,7 @@ gui_handlers.mapPreferencesModal <- class extends gui_handlers.BaseGuiHandlerWT 
     if (value && (count.curCounter > count.maxCounter || isDislikeBannedMap)) {
       let needPremium  = objType == "banned" && !havePremium.value
       if (needPremium)
-        ::scene_msg_box("need_money", null, loc("mainmenu/onlyWithPremium"),
+        scene_msg_box("need_money", null, loc("mainmenu/onlyWithPremium"),
           [ ["purchase", Callback(@() this.onOnlineShopPremium(), this)],
             ["cancel", null]
           ], "purchase")
@@ -330,7 +330,7 @@ gui_handlers.mapPreferencesModal <- class extends gui_handlers.BaseGuiHandlerWT 
     let params = this.counters.filter(@(c) c.curCounter > c.maxCounter).keys()
     if (params.len() > 0) {
       this.resetCounters(params)
-      ::scene_msg_box("reset_preferences", null, loc(POPUP_PREFIX_LOC_ID + "resetPreferences"),
+      scene_msg_box("reset_preferences", null, loc(POPUP_PREFIX_LOC_ID + "resetPreferences"),
         [["ok", this.updateScreen.bindenv(this)]], "ok")
     }
   }
@@ -364,7 +364,7 @@ gui_handlers.mapPreferencesModal <- class extends gui_handlers.BaseGuiHandlerWT 
   }
 
   function onResetPreferencess(_obj) {
-    ::scene_msg_box("reset_preferences", null, loc("maps/preferences/notice/request_reset"),
+    scene_msg_box("reset_preferences", null, loc("maps/preferences/notice/request_reset"),
       [["ok", function() {
             this.resetCounters(this.counters.keys())
             this.updateScreen()

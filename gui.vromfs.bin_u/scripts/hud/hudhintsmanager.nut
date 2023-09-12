@@ -126,12 +126,11 @@ let function isHintDisabledByUnitTags(hint) {
     if (!(common_priority_hints?.isValid() ?? false))
       return
 
-    let {pos = [0, 0], size = [0, 0]} = value
-
-    local dmgPanelRightSide = size[0] + pos[0]// its global coords
-    let hintContainerScreenBorder = to_pixels($"1/6@rwHud + 1@bwHud - 0.015@shHud")
+    let hintContainerScreenBorder = to_pixels($"1/6@rwHud + 1@bwHud")
     let screenWidth = to_pixels($"sw")
 
+    let {pos = [0, 0], size = [0, 0]} = value
+    local dmgPanelRightSide = size[0] + pos[0]// its global coords
     if(dmgPanelRightSide == 0)
       dmgPanelRightSide = hintContainerScreenBorder
 
@@ -142,8 +141,8 @@ let function isHintDisabledByUnitTags(hint) {
 
     let maxOffset = max(leftOffset, rightOffset)
 
-    common_priority_hints["left"] = $"{maxOffset} - {hintContainerScreenBorder}"
-    common_priority_hints["width"] = $"sw - {maxOffset}*2"
+    common_priority_hints["left"] = $"{maxOffset} - {hintContainerScreenBorder} + 0.05@shHud"
+    common_priority_hints["width"] = $"sw - {maxOffset}*2 - 0.1@shHud"
   }
 
   function changeMissionHintsPosition(value) {
@@ -366,7 +365,7 @@ let function isHintDisabledByUnitTags(hint) {
     if (!checkObj(hintObj))
       return
 
-    hintData.secondsUpdater <- SecondsUpdater(hintObj, (@(hintData) function (obj, _params) {
+    hintData.secondsUpdater <- SecondsUpdater(hintObj, function (obj, _params) {
       let textObj = obj.findObject("time_text")
       if (!checkObj(textObj))
         return false
@@ -380,7 +379,7 @@ let function isHintDisabledByUnitTags(hint) {
 
       textObj.setValue(timeLeft.tostring())
       return false
-    })(hintData))
+    })
   }
 
   function hideHint(hintData, isInstant) {

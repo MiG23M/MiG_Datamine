@@ -30,7 +30,7 @@ let { setTimeout, clearTimer } = require("dagor.workcycle")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_SHOW_ACTION_BAR
 } = require("%scripts/options/optionsExtNames.nut")
 
-local sectorAngle1PID = ::dagui_propid.add_name_id("sector-angle-1")
+local sectorAngle1PID = dagui_propid_add_name_id("sector-angle-1")
 
 let notAvailableColdownParams = { degree = 0, incFactor = 0 }
 

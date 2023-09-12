@@ -163,7 +163,7 @@ gui_handlers.TrophyGroupShopWnd <- class extends gui_handlers.BaseGuiHandlerWT {
   onSelectedItemAction = @() this.doAction(this.getItemsListObj().getValue())
 
   function doAction(index) {
-    this.trophy.doMainAction(Callback((@(index) function(_params) { this.afterSuccessBoughtItemAction(index) })(index), this),
+    this.trophy.doMainAction(Callback( function(_params) { this.afterSuccessBoughtItemAction(index) }, this),
                         this,
                         { index = index })
   }

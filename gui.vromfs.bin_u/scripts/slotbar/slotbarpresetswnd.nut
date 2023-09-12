@@ -26,7 +26,7 @@ gui_handlers.ChooseSlotbarPreset <- class extends gui_handlers.BaseGuiHandlerWT 
   activePreset = null
   chosenValue = -1
 
-  listIdxPID = ::dagui_propid.add_name_id("listIdx")
+  listIdxPID = dagui_propid_add_name_id("listIdx")
   hoveredValue = -1
 
   function initScreen() {
@@ -207,7 +207,7 @@ gui_handlers.ChooseSlotbarPreset <- class extends gui_handlers.BaseGuiHandlerWT 
       ? loc("shop/slotbarPresetsReserve",
         { tier = ::roman_numerals[::slotbarPresets.eraIdForBonus], unitTypes = ::slotbarPresets.getPresetsReseveTypesText() })
       : loc("shop/slotbarPresetsMax")
-    ::showInfoMsgBox(format(loc("weaponry/action_not_allowed"), reason))
+    showInfoMsgBox(format(loc("weaponry/action_not_allowed"), reason))
   }
 
   function onBtnPresetAdd(_obj) {

@@ -1497,7 +1497,7 @@ gui_handlers.controlsWizardModalHandler <- class extends gui_handlers.BaseGuiHan
 
   function startManualSetup() {
     this.showSceneBtn("nav-help", true)
-    ::scene_msg_box("ask_unit_type", null, loc("mainmenu/askWizardForUnitType"),
+    scene_msg_box("ask_unit_type", null, loc("mainmenu/askWizardForUnitType"),
       [
         [ "aviation", (@() this.startManualSetupForUnitType(ES_UNIT_TYPE_AIRCRAFT)).bindenv(this) ],
         [ "army", (@() this.startManualSetupForUnitType(ES_UNIT_TYPE_TANK)).bindenv(this) ]

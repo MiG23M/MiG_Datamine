@@ -224,7 +224,7 @@ gui_handlers.DbgAvatars <- class extends ::BaseGuiHandler {
 
   function getMousePosPart() {
     let obj = this.scene.findObject("sel_big_icon")
-    let coords = ::get_dagui_mouse_cursor_pos()
+    let coords = get_dagui_mouse_cursor_pos()
     let objPos = obj.getPosRC()
     let objSize = obj.getSize()
     return Point2(roundVal((coords[0] - objPos[0]).tofloat() / (objSize[0] || 1)),

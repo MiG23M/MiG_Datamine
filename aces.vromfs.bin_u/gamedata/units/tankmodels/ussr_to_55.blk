@@ -55,9 +55,6 @@
   "smokeScreenDmPart": "engine_dm",
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_no_therm_small",
-  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
-  "customImage": "!#ui/unitskin#image_in_progress",
-  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "DamageParts": {
     "formatVersion": 2,
     "armorClass": "RHA_tank",
@@ -1694,6 +1691,7 @@
       "emitter": "bone_gun_barrel",
       "flash": "emtr_gun_flame",
       "shotFreq": 0.1334,
+      "recoilMultiplier": 0.5,
       "maxAdditionalPitch": 0.0,
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
@@ -1810,7 +1808,7 @@
     },
     "Weapon": {
       "trigger": "gunner1",
-      "triggerGroup": "coaxial",
+      "triggerGroup": "special",
       "blk": "gameData/Weapons/groundModels_weapons/ato_200_flamethrower.blk",
       "emitter": "bone_gun_barrel_01",
       "flash": "emtr_mg_flame_01",
@@ -1850,8 +1848,8 @@
           0.0
         ],
         "pitch": [
-          -5.0,
-          30.0
+          -3.0,
+          16.0
         ]
       }
     },
@@ -3055,9 +3053,9 @@
       0.07
     ],
     "glowOffset": [
-      0.1,
-      0.0,
-      0.3
+      0.2,
+      0.2,
+      0.05
     ]
   },
   "modifications": {
@@ -3225,24 +3223,6 @@
     }
   },
   "skin": {
-    "name": "winter",
-    "nameLocId": "skin/winter",
-    "descLocId": "skin/winter/desc",
-    "replace_tex": {
-      "from": "ussr_camo_green*",
-      "to": "ussr_camo_winter*"
-    }
-  },
-  "skin": {
-    "name": "forest",
-    "nameLocId": "skin/ussr_camo_forest_01",
-    "descLocId": "skin/ussr_camo_forest_01/desc",
-    "replace_tex": {
-      "from": "ussr_camo_green*",
-      "to": "ussr_camo_forest_01*"
-    }
-  },
-  "skin": {
     "name": "ussr_camo_czechoslovak_yellow_green",
     "nameLocId": "skin/ussr_camo_czechoslovak_yellow_green",
     "descLocId": "skin/ussr_camo_czechoslovak_yellow_green/desc",
@@ -3270,12 +3250,39 @@
     }
   },
   "skin": {
-    "name": "ussr_camo_winter_lines",
-    "nameLocId": "skin/ussr_camo_winter_lines",
-    "descLocId": "skin/ussr_camo_winter_lines/desc",
+    "name": "modern_desert",
+    "nameLocId": "skin/ussr_modern_desert",
+    "descLocId": "skin/ussr_modern_desert/desc",
     "replace_tex": {
       "from": "ussr_camo_green*",
-      "to": "ussr_camo_winter_lines*"
+      "to": "ussr_modern_desert*"
+    }
+  },
+  "skin": {
+    "name": "modern_forest",
+    "nameLocId": "skin/ussr_modern_forest",
+    "descLocId": "skin/ussr_modern_forest/desc",
+    "replace_tex": {
+      "from": "ussr_camo_green*",
+      "to": "ussr_modern_forest*"
+    }
+  },
+  "skin": {
+    "name": "modern_winter",
+    "nameLocId": "skin/ussr_modern_winter",
+    "descLocId": "skin/ussr_modern_winter/desc",
+    "replace_tex": {
+      "from": "ussr_camo_green*",
+      "to": "ussr_modern_winter*"
+    }
+  },
+  "skin": {
+    "name": "ussr_camo_finland_polygonal_threecolor",
+    "nameLocId": "skin/fin_camo_black_green_dark",
+    "descLocId": "skin/fin_camo_black_green_dark/desc",
+    "replace_tex": {
+      "from": "ussr_camo_green*",
+      "to": "fin_camo_black_green_dark*"
     }
   },
   "smokeScreenExhaustEmitters": {

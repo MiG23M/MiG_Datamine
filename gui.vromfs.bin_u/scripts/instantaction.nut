@@ -3,16 +3,13 @@ from "%scripts/dagui_library.nut" import *
 
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { Cost } = require("%scripts/money.nut")
-
-
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { format } = require("string")
 let time = require("%scripts/time.nut")
 let unitStatus = require("%scripts/unit/unitStatus.nut")
 let { getLastWeapon } = require("%scripts/weaponry/weaponryInfo.nut")
-let { AMMO,
-        getAmmoCost,
-        getUnitNotReadyAmmoList } = require("%scripts/weaponry/ammoInfo.nut")
+let { AMMO, getAmmoCost, getUnitNotReadyAmmoList } = require("%scripts/weaponry/ammoInfo.nut")
 let { getToBattleLocId } = require("%scripts/viewUtils/interfaceCustomization.nut")
 let { getSelSlotsData } = require("%scripts/slotbar/slotbarState.nut")
 let { get_gui_option } = require("guiOptions")
@@ -183,7 +180,7 @@ let { USEROPT_SKIP_WEAPON_WARNING } = require("%scripts/options/optionsExtNames.
   else if (repairInfo.broken_countries.len() > 0) {
     local msgText = repairInfo.randomCountry ? loc("msgbox/some_repared_aircrafts_random") : loc("msgbox/some_repared_aircrafts")
     msgText = format(msgText, Cost(repairInfo.repairCost).tostring())
-    ::scene_msg_box("no_aircrafts", null, msgText,
+    scene_msg_box("no_aircrafts", null, msgText,
        [
          ["ContinueWithoutRepair", function() { startFunc.call(handler) }],
          ["RepairAll", repairAll],
@@ -192,7 +189,7 @@ let { USEROPT_SKIP_WEAPON_WARNING } = require("%scripts/options/optionsExtNames.
     return
   }
   else if (repairInfo.shipsWithoutPurshasedTorpedoes.len() > 0
-    && !::load_local_account_settings("skipped_msg/shipsWithoutPurshasedTorpedoes", false))
+    && !loadLocalAccountSettings("skipped_msg/shipsWithoutPurshasedTorpedoes", false))
     ::gui_start_modal_wnd(gui_handlers.SkipableMsgBox,
       {
         parentHandler = handler
@@ -207,7 +204,7 @@ let { USEROPT_SKIP_WEAPON_WARNING } = require("%scripts/options/optionsExtNames.
         startBtnText = loc(getToBattleLocId())
         showCheckBoxBullets = false
         skipFunc = function(value) {
-          ::save_local_account_settings("skipped_msg/shipsWithoutPurshasedTorpedoes", value)
+          saveLocalAccountSettings("skipped_msg/shipsWithoutPurshasedTorpedoes", value)
         }
         onStartPressed = function() {
           startFunc.call(handler)
@@ -251,9 +248,9 @@ let { USEROPT_SKIP_WEAPON_WARNING } = require("%scripts/options/optionsExtNames.
     broken_countries.remove(0)
 
   if (taskId >= 0) {
-    let progressBox = ::scene_msg_box("char_connecting", null, loc("charServer/purchase0"), null, null)
+    let progressBox = scene_msg_box("char_connecting", null, loc("charServer/purchase0"), null, null)
     ::add_bg_task_cb(taskId, function() {
-      ::destroyMsgBox(progressBox)
+      destroyMsgBox(progressBox)
       ::repairAllAirsAndApply(handler, broken_countries, afterDoneFunc, onCancelFunc, canRepairWholeCountry)
     })
   }
@@ -281,9 +278,9 @@ let { USEROPT_SKIP_WEAPON_WARNING } = require("%scripts/options/optionsExtNames.
   unreadyAmmoList.remove(0)
 
   if (taskId >= 0) {
-    let progressBox = ::scene_msg_box("char_connecting", null, loc("charServer/purchase0"), null, null)
+    let progressBox = scene_msg_box("char_connecting", null, loc("charServer/purchase0"), null, null)
     ::add_bg_task_cb(taskId,function() {
-      ::destroyMsgBox(progressBox)
+      destroyMsgBox(progressBox)
       ::buyAllAmmoAndApply(handler, unreadyAmmoList, afterDoneFunc)
     })
   }

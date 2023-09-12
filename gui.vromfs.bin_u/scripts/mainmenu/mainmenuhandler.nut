@@ -19,6 +19,7 @@ let { placePriceTextToButton } = require("%scripts/viewUtils/objectTextUpdate.nu
 let { getSuggestedSkin } = require("%scripts/customization/suggestedSkins.nut")
 let { startShipTrainingMission, canStartShipTrainingMission } = require("%scripts/missions/shipTrainingMission.nut")
 let { create_promo_blocks } = require("%scripts/promo/promoHandler.nut")
+let { isVietnameseVersion } = require("%scripts/langUtils/language.nut")
 
 gui_handlers.MainMenu <- class extends gui_handlers.InstantDomination {
   rootHandlerClass = topMenuHandlerClass.getHandler()
@@ -65,7 +66,7 @@ gui_handlers.MainMenu <- class extends gui_handlers.InstantDomination {
   }
 
   function showOnlineInfo() {
-    if (::is_vietnamese_version() || topMenuHandler.value == null)
+    if (isVietnameseVersion() || topMenuHandler.value == null)
       return
 
     let text = loc("mainmenu/online_info", {
@@ -102,7 +103,7 @@ gui_handlers.MainMenu <- class extends gui_handlers.InstantDomination {
 
   function onLoadModels() {
     if (isPlatformSony || isPlatformXboxOne)
-      ::showInfoMsgBox(contentStateModule.getClientDownloadProgressText())
+      showInfoMsgBox(contentStateModule.getClientDownloadProgressText())
     else
       ::check_package_and_ask_download("pkg_main", loc("msgbox/ask_package_download"))
   }

@@ -168,7 +168,7 @@ const AUTO_ACTIVATE_TIME = 60
 
 ::g_orders.openOrdersInventory <- function openOrdersInventory() {
   if (!::g_orders.orderCanBeActivated())
-    return ::showInfoMsgBox(::g_orders.getWarningText(), "orders_cant_be_activated")
+    return showInfoMsgBox(::g_orders.getWarningText(), "orders_cant_be_activated")
 
   ::gui_start_order_activation_window()
 }
@@ -739,7 +739,7 @@ const AUTO_ACTIVATE_TIME = 60
   this.debugPrint("g_orders::onOrderAccepted: Activation complete. Result: "
     + toString(useResult))
   if (!isSilent)
-    ::scene_msg_box("order_use_result", null, useResult.createResultMessage(true),
+    scene_msg_box("order_use_result", null, useResult.createResultMessage(true),
       [["ok", function() {
         broadcastEvent("OrderUseResultMsgBoxClosed")
       } ]], "ok")

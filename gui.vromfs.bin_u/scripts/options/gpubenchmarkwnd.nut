@@ -3,7 +3,8 @@ from "%scripts/dagui_library.nut" import *
 
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { initGraphicsAutodetect, getGpuBenchmarkDuration, startGpuBenchmark,
@@ -37,7 +38,7 @@ local class GpuBenchmarkWnd extends gui_handlers.BaseGuiHandlerWT {
   selectedPresetName = ""
 
   function initScreen() {
-    ::save_local_account_settings("gpuBenchmark/seen", true)
+    saveLocalAccountSettings("gpuBenchmark/seen", true)
     initGraphicsAutodetect()
     this.showSceneBtn("btnApply", false)
   }
@@ -122,7 +123,7 @@ local class GpuBenchmarkWnd extends gui_handlers.BaseGuiHandlerWT {
       return
     }
 
-    ::scene_msg_box("msg_sysopt_compatibility", null,
+    scene_msg_box("msg_sysopt_compatibility", null,
       loc("msgbox/compatibilityMode"),
       [
         ["yes", Callback(@() this.presetApplyImpl(this.selectedPresetName), this)],
@@ -143,7 +144,7 @@ let function checkShowGpuBenchmarkWnd() {
   if (!canShowGpuBenchmark())
     return
 
-  if (::load_local_account_settings("gpuBenchmark/seen", false))
+  if (loadLocalAccountSettings("gpuBenchmark/seen", false))
     return
 
   handlersManager.loadHandler(GpuBenchmarkWnd)

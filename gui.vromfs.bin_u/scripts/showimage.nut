@@ -160,7 +160,7 @@ gui_handlers.ShowImageSimple <- class extends gui_handlers.BaseGuiHandlerWT {
     else if (u.isInteger(this.maxSize))
       this.maxSize = [ this.maxSize, this.maxSize ]
 
-    let height = ::screen_height() / 1.5
+    let height = screen_height() / 1.5
     local size = [ this.ratio * height, height ]
 
     if (size[0] > this.maxSize[0] || size[1] > this.maxSize[1]) {

@@ -52,5 +52,5 @@ local dbgStartCheck = 0
   ::gui_start_mainmenu()
 }
 
-::cross_call_api.startMainmenu <- @() ::get_cur_gui_scene().performDelayed({},
+::cross_call_api.startMainmenu <- @() get_cur_gui_scene().performDelayed({},
   @() ::switch_gui_scene(::gui_start_mainmenu))

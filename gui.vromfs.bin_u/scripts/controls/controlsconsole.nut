@@ -44,7 +44,7 @@ gui_handlers.ControlsConsole <- class extends gui_handlers.GenericOptionsModal {
       [USEROPT_HEADTRACK_SCALE_Y, "slider", ::ps4_headtrack_is_attached()]
     ]
 
-    let guiScene = ::get_gui_scene()
+    let guiScene = get_gui_scene()
     let container = ::create_options_container("controls", this.options, true)
     guiScene.replaceContentFromText(this.scene.findObject("optionslist"), container.tbl, container.tbl.len(), this)
     this.optionsContainers = [container.descr]

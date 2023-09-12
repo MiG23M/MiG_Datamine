@@ -110,11 +110,11 @@ let CrewTakeUnitProcess = class {
               { unitName = colorize("userlogColoredText", ::getUnitName(this.unit)) })
           else
             msg = loc("msg/needAtLeastOneAvailableUnit")
-          ::showInfoMsgBox(msg)
+          showInfoMsgBox(msg)
           return this.remove()
         }
         if (!hasRequiredUnit) {
-          ::showInfoMsgBox(loc("msg/needAtLeastOneRequiredUnit"))
+          showInfoMsgBox(loc("msg/needAtLeastOneRequiredUnit"))
           return this.remove()
         }
       }
@@ -131,7 +131,7 @@ let CrewTakeUnitProcess = class {
         locId = this.unit ? "shop/needMoneyQuestion_hireAndTrainCrew"
                      : "shop/needMoneyQuestion_purchaseCrew"
       let msgText = ::warningIfGold(format(loc(locId), this.cost.getTextAccordingToBalance()), this.cost)
-      ::scene_msg_box("need_money", null, msgText,
+      scene_msg_box("need_money", null, msgText,
         [ ["ok", this.nextStepCb],
           ["cancel", this.removeCb ]
         ], "ok")

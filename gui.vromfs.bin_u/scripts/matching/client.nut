@@ -41,7 +41,7 @@ requestOptions:
   if ("LAST_SESSION_DEBUG_INFO" in getroottable())
     options["debug_string"] <- ::LAST_SESSION_DEBUG_INFO
 
-  ::scene_msg_box(id, null, text, [["ok", function() {} ]], "ok", options)
+  scene_msg_box(id, null, text, [["ok", function() {} ]], "ok", options)
   return false
 }
 

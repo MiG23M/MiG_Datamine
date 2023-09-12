@@ -92,7 +92,7 @@ gui_handlers.VehicleRequireFeatureWindow <- class extends gui_handlers.BaseGuiHa
 
   function onRowBuy(obj) {
     if (! ::OnlineShopModel.getPurchaseData(obj.entitlementId).openBrowser())
-      ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+      showInfoMsgBox(loc("msgbox/notAvailbleYet"))
   }
 
   function createEntitlementsView(purchasesList) {

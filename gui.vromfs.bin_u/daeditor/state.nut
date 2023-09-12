@@ -103,12 +103,15 @@ let function callPointActionCallback(action) {
   funcPointAction?(action)
 }
 let function resetPointActionMode() {
+  local funcFinish = funcPointAction
   if (getEditMode() == DE4_MODE_POINT_ACTION)
     setEditMode(DE4_MODE_SELECT)
   setPointActionPreview("", 0.0)
   typePointAction("")
   namePointAction("")
   funcPointAction = null
+  if (funcFinish != null)
+    funcFinish({ op = "finish" })
 }
 
 let funcsEntityCreated = []

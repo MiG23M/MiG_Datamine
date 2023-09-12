@@ -62,7 +62,7 @@ local MP_CHAT_PARAMS = {
 
   scenes = [] //{ idx, scene, handler, transparency, selfHideInput, selfHideLog }
   last_scene_idx = 0
-  sceneIdxPID = ::dagui_propid.add_name_id("sceneIdx")
+  sceneIdxPID = dagui_propid_add_name_id("sceneIdx")
 
   isMouseCursorVisible = false
   isActive = false // While it is true, in-game unit control shortcuts are disabled in client.
@@ -771,7 +771,7 @@ local MP_CHAT_PARAMS = {
 
 ::add_text_to_editbox <- function add_text_to_editbox(obj, text) {
   let value = obj.getValue()
-  let pos = obj.getIntProp(::dagui_propid.get_name_id(":behaviour_edit_position_pos"), -1)
+  let pos = obj.getIntProp(dagui_propid_get_name_id(":behaviour_edit_position_pos"), -1)
   if (pos > 0 && pos < value.len()) // warning disable: -range-check
     obj.setValue(value.slice(0, pos) + text + value.slice(pos))
   else

@@ -369,7 +369,7 @@ let function localize(optionId, valueId) {
 let function parseResolution(resolution) {
   let sides = resolution == "auto"
     ? [ 0, 0 ] // To be sorted first.
-    : resolution.split("x").apply(@(v) ::to_integer_safe(strip(v), 0, false))
+    : resolution.split("x").apply(@(v) to_integer_safe(strip(v), 0, false))
   return {
     resolution = resolution
     w = sides?[0] ?? 0
@@ -503,7 +503,7 @@ mShared = {
         mShared.graphicsQualityClick()
         updateGuiNavbar(true)
       }
-      ::scene_msg_box("msg_sysopt_compatibility", null,
+      scene_msg_box("msg_sysopt_compatibility", null,
         loc("msgbox/compatibilityMode"),
         [
           ["yes", ok_func],
@@ -599,7 +599,7 @@ mShared = {
         mShared.presetCheck()
         updateGuiNavbar(true)
       }
-      ::scene_msg_box("msg_sysopt_ssaa", null, loc("msgbox/ssaa_warning"),
+      scene_msg_box("msg_sysopt_ssaa", null, loc("msgbox/ssaa_warning"),
         [
           ["ok", okFunc],
           ["cancel", cancelFunc],
@@ -620,7 +620,7 @@ mShared = {
         mShared.presetCheck()
         updateGuiNavbar(true)
       }
-      ::scene_msg_box("msg_sysopt_fxres", null,
+      scene_msg_box("msg_sysopt_fxres", null,
         loc("msgbox/fxres_warning"),
         [
           ["ok", okFunc],
@@ -644,7 +644,7 @@ mShared = {
         mShared.presetCheck()
         updateGuiNavbar(true)
       }
-      ::scene_msg_box("msg_sysopt_compatibility", null,
+      scene_msg_box("msg_sysopt_compatibility", null,
         loc("msgbox/compatibilityMode"),
         [
           ["yes", ok_func],
@@ -711,7 +711,7 @@ mShared = {
     if (value == "auto")
       return value
 
-    let screen = format("%d x %d", ::screen_width(), ::screen_height())
+    let screen = format("%d x %d", screen_width(), screen_height())
     return screen // Value damaged by user. Screen size can be wrong, but anyway, i guess user understands why it's broken.
 
     /*
@@ -1328,14 +1328,14 @@ let function hotReloadOrRestart() {
 
     if (canRestartClient()) {
       let message = loc("msgbox/client_restart_required") + "\n" + loc("msgbox/restart_now")
-      ::scene_msg_box("sysopt_apply", null, message, [
+      scene_msg_box("sysopt_apply", null, message, [
           ["restart", func_restart],
           ["no"],
         ], "restart", { cancel_fn = @() null })
     }
     else {
       let message = loc("msgbox/client_restart_required")
-      ::scene_msg_box("sysopt_apply", null, message, [
+      scene_msg_box("sysopt_apply", null, message, [
           ["ok"],
         ], "ok", { cancel_fn = @() null })
     }

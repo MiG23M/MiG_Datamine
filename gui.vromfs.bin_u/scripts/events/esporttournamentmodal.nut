@@ -20,6 +20,7 @@ let { setModalBreadcrumbGoBackParams } = require("%scripts/breadcrumb.nut")
 let { get_meta_mission_info_by_name } = require("guiMission")
 let { trim, utf8ToUpper } = require("%sqstd/string.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
+let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 
 let function getActiveTicketTxt(event) {
   if (!event)
@@ -117,7 +118,7 @@ local ESportTournament = class extends gui_handlers.BaseGuiHandlerWT {
       local items = []
       local dayCountries = []
       foreach (country, units in countries) {
-        dayCountries.append({ icon = ::get_country_icon($"{trim(country)}_round") })
+        dayCountries.append({ icon = getCountryIcon($"{trim(country)}_round") })
         foreach (name, _v in units)
           items.append({
             text = ::getUnitName(getAircraftByName(name))
@@ -418,7 +419,7 @@ local ESportTournament = class extends gui_handlers.BaseGuiHandlerWT {
       return
     }
 
-    ::scene_msg_box("requeue_question", null, loc("msg/cancel_queue_question"),
+    scene_msg_box("requeue_question", null, loc("msg/cancel_queue_question"),
       [["ok", Callback(function() {
           this.onLeaveEvent()
           this.goBackImpl()

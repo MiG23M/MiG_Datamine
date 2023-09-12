@@ -165,7 +165,7 @@ local updateGiftUnitsDiscountTask = -1
 
   this.updateDiscountData()
   //push event after current event completely finished
-  ::get_gui_scene().performDelayed(this, this.pushDiscountsUpdateEvent)
+  get_gui_scene().performDelayed(this, this.pushDiscountsUpdateEvent)
 }
 
 ::g_discount.updateDiscountData <- function updateDiscountData(isSilentUpdate = false) {
@@ -281,7 +281,7 @@ local updateGiftUnitsDiscountTask = -1
 ::g_discount.updateDiscountNotifications <- function updateDiscountNotifications(scene = null) {
   foreach (name in ["topmenu_research", "changeExp"]) {
     let id = this.getDiscountIconId(name)
-    let obj = checkObj(scene) ? scene.findObject(id) : ::get_cur_gui_scene()[id]
+    let obj = checkObj(scene) ? scene.findObject(id) : get_cur_gui_scene()[id]
     if (!(obj?.isValid() ?? false))
       continue
 
@@ -294,7 +294,7 @@ local updateGiftUnitsDiscountTask = -1
 
   let section = ::g_top_menu_right_side_sections.getSectionByName("shop")
   let sectionId = section.getTopMenuButtonDivId()
-  let shopObj = checkObj(scene) ? scene.findObject(sectionId) : ::get_cur_gui_scene()[sectionId]
+  let shopObj = checkObj(scene) ? scene.findObject(sectionId) : get_cur_gui_scene()[sectionId]
   if (!checkObj(shopObj))
     return
 

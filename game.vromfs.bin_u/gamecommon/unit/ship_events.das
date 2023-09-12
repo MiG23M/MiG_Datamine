@@ -72,8 +72,6 @@ struct EventShipRequestNetSync
 
 [event(unicast, routing=ROUTING_SERVER_TO_CLIENT, filter=target_entity_conn)]
 struct EventShipWaterNetSync
-  waterLeftSide : float
-  waterRightSide : float
   coverPartsWaterAndBalance : FloatList const?
 
 [event(unicast, routing=ROUTING_SERVER_TO_CLIENT, filter=target_entity_conn)]

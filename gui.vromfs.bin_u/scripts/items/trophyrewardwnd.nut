@@ -228,7 +228,7 @@ gui_handlers.trophyRewardWnd <- class extends gui_handlers.BaseGuiHandlerWT {
       animObj.animation = this.rewardImage == null ? "show" : "hide"
       if (this.useSingleAnimation) {
         this.guiScene.playSound(this.singleAnimationGuiSound ?? "chest_open")
-        let delay = ::to_integer_safe(animObj?.chestReplaceDelay, 0)
+        let delay = to_integer_safe(animObj?.chestReplaceDelay, 0)
         Timer(animObj, 0.001 * delay, this.openChest, this)
         Timer(animObj, 1.0, this.onOpenAnimFinish, this) //!!FIX ME: Some times animation finish not apply css, and we miss onOpenAnimFinish
       }

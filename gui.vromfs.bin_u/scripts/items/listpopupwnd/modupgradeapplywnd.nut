@@ -15,7 +15,7 @@ gui_handlers.ModUpgradeApplyWnd <- class extends gui_handlers.ItemsListWndBase {
     local list = ::ItemsManager.getInventoryList(itemType.MOD_UPGRADE)
     list = list.filter(@(item) item.canActivateOnMod(unitToActivate, modToActivate))
     if (!list.len()) {
-      ::showInfoMsgBox(loc("msg/noUpgradeItemsForMod"))
+      showInfoMsgBox(loc("msg/noUpgradeItemsForMod"))
       return
     }
     handlersManager.loadHandler(gui_handlers.ModUpgradeApplyWnd,

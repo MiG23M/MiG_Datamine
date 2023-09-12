@@ -4426,7 +4426,11 @@
       "maxRank": 29,
       "specialPrice": true,
       "valueMul": 1.0,
-      "costGold": true
+      "costGold": true,
+      "animationByUnit": {
+        "unitType": 1,
+        "src": "video/unitModifications/backup_vehicle.ivf"
+      }
     },
     "hydravlic_power": {
       "image": "#ui/gameuiskin#booster",
@@ -20517,7 +20521,7 @@
       "requiresModelReload": true,
       "tier": 4,
       "modClass": "protection",
-      "animation": "video/unitModifications/additional_era_packege.ivf",
+      "animation": "video/unitModifications/protection_improvement_East.ivf",
       "effects": {
         "fakeParam": 1.01
       }
@@ -20634,9 +20638,26 @@
         "fakeParam": 1.01
       }
     },
+    "tank_bulldozer_blade_bhishma": {
+      "image": "#ui/gameuiskin#dozer_blade",
+      "tier": 1,
+      "modClass": "protection",
+      "invertEnableLogic": false,
+      "requiresModelReload": true,
+      "animation": "video/unitModifications/tank_bulldozer_blade.ivf",
+      "effects": {
+        "rcostAddParam": 0.99,
+        "diggingAvailable": true,
+        "diggingActivateTime": 3.0,
+        "diggingLevel": 0.25,
+        "digMaxSpeed": 7.0,
+        "digMaxRevSpeed": -12.0
+      }
+    },
     "t_90s_twmp": {
       "image": "#ui/gameuiskin#tank_additional_armor",
       "requiresModelReload": true,
+      "reqModification": "tank_bulldozer_blade_bhishma",
       "tier": 4,
       "modClass": "protection",
       "effects": {

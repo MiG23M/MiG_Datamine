@@ -83,7 +83,7 @@ gui_handlers.RecentItemsHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onItemAction(obj) {
-    let itemIndex = ::to_integer_safe(getTblValue("holderId", obj), -1)
+    let itemIndex = to_integer_safe(getTblValue("holderId", obj), -1)
     if (itemIndex == -1 || !(itemIndex in this.recentItems))
       return
 

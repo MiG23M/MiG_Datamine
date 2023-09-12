@@ -1,7 +1,5 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
-
-
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { format } = require("string")
 let DataBlock = require("DataBlock")
@@ -13,6 +11,7 @@ let { isDynamicWonByPlayer } = require("dynamicMission")
 let { get_game_mode, get_game_type } = require("mission")
 let { add_won_mission } = require("guiMission")
 let { setSummaryPreview } = require("%scripts/missions/mapPreview.nut")
+let { getCountryFlagImg } = require("%scripts/options/countryFlagsPreset.nut")
 
 ::gui_start_dynamic_summary <- function gui_start_dynamic_summary() {
   handlersManager.loadHandler(gui_handlers.CampaignPreview, { isFinal = false })
@@ -109,7 +108,7 @@ gui_handlers.CampaignPreview <- class extends gui_handlers.BaseGuiHandlerWT {
     //wtf??
     log("2 country = " + country)
     if (country != "")
-      this.guiScene["briefing-flag"]["background-image"] = ::get_country_flag_img("bgflag_country_" + country)
+      this.guiScene["briefing-flag"]["background-image"] = getCountryFlagImg($"bgflag_country_{country}")
 
     if (this.isFinal) {
       showObjById("btn_back", false, this.scene)

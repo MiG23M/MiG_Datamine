@@ -2,8 +2,8 @@
 from "%scripts/dagui_library.nut" import *
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
-
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let DataBlock = require("DataBlock")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -92,7 +92,7 @@ local ESportList = class extends gui_handlers.BaseGuiHandlerWT {
 
     this.tournamentList = this.currSeason.tournamentList
     if (::g_login.isProfileReceived()) {
-      let myFilters = ::load_local_account_settings(MY_FILTERS, DataBlock())
+      let myFilters = loadLocalAccountSettings(MY_FILTERS, DataBlock())
       this.filter.__update({
         tourStates = myFilters?.tourStates ? myFilters.tourStates % "array" : []
         unitStates = myFilters?.unitStates ? myFilters.unitStates % "array" : []
@@ -282,7 +282,7 @@ local ESportList = class extends gui_handlers.BaseGuiHandlerWT {
     }
 
     this.updateAllEventsByFilters()
-    ::save_local_account_settings(MY_FILTERS, ::build_blk_from_container(this.filter))
+    saveLocalAccountSettings(MY_FILTERS, ::build_blk_from_container(this.filter))
   }
 
   function onEvent(obj) {

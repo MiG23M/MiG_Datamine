@@ -157,7 +157,7 @@ gui_handlers.QiHandlerByTeams <- class extends gui_handlers.QiHandlerBase {
     let headerData = []
     for (local i = 0; i <= ::max_country_rank; i++) {
       headerData.append({
-        text = ::get_roman_numeral(i)
+        text = get_roman_numeral(i)
         tdalign = "center"
       })
     }

@@ -1,7 +1,8 @@
 //checked for plus_string
 from "%scripts/dagui_library.nut" import *
 
-
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let time = require("%scripts/time.nut")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
@@ -52,13 +53,13 @@ gui_handlers.WwHelpSlotbarGroupsModal <- class extends gui_handlers.BaseGuiHandl
 local lastSeen = null
 
 let function isUnseen() {
-  lastSeen = lastSeen ?? ::load_local_account_settings(LAST_SEEN_SAVE_ID, 0)
+  lastSeen = lastSeen ?? loadLocalAccountSettings(LAST_SEEN_SAVE_ID, 0)
   return lastSeen < get_charserver_time_sec() - (4 * time.TIME_WEEK_IN_SECONDS)
 }
 
 let function open() {
   lastSeen = get_charserver_time_sec()
-  ::save_local_account_settings(LAST_SEEN_SAVE_ID, lastSeen)
+  saveLocalAccountSettings(LAST_SEEN_SAVE_ID, lastSeen)
   handlersManager.loadHandler(gui_handlers.WwHelpSlotbarGroupsModal)
 }
 

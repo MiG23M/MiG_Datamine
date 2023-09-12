@@ -53,7 +53,7 @@ let { showGuestEmailRegistration, needShowGuestEmailRegistration
 /*API methods*/
 ::OnlineShopModel.showUnitGoods <- function showUnitGoods(unitName, requestOrigin) {
   if (!hasFeature("OnlineShopPacks"))
-    return ::showInfoMsgBox(loc("msgbox/notAvailbleYet"))
+    return showInfoMsgBox(loc("msgbox/notAvailbleYet"))
 
   let customUrl = loc("url/custom_purchase/unit", { unitName }, "")
   if (customUrl.len())
@@ -328,7 +328,7 @@ let function getEntitlementsByFeature(name) {
     : " ".concat("auto_local", "auto_login", get_url_for_purchase(guid))
 
   if (url == "") {
-    ::showInfoMsgBox(loc("browser/purchase_url_not_found"), "errorMessageBox")
+    showInfoMsgBox(loc("browser/purchase_url_not_found"), "errorMessageBox")
     log("get_url_for_purchase have returned empty url for guid/" + dbgGoodsName)
     return
   }
@@ -389,7 +389,7 @@ let function getEntitlementsByFeature(name) {
   if (!needMsgBox)
     this.openShopUrl(customUrl)
   else
-    ::scene_msg_box("onlineShop_buy_" + chapter, null,
+    scene_msg_box("onlineShop_buy_" + chapter, null,
       loc("charServer/web_recharge"),
       [["ok", @() ::OnlineShopModel.openShopUrl(customUrl) ],
        ["cancel", function() {} ]
@@ -405,7 +405,7 @@ let function getEntitlementsByFeature(name) {
   let menu = [
     {
       text = loc("charServer/btn/web_recharge")
-      action = (@(customUrl) function() { this.openShopUrl(customUrl) })(customUrl)
+      action =  function() { this.openShopUrl(customUrl) }
     }
     {
       text = ""
@@ -465,9 +465,9 @@ let function getEntitlementsByFeature(name) {
   let taskId = ::update_entitlements_limited(true)
   //taskId = -1 doesn't mean that we must not perform afterCloseFunc
   if (taskId >= 0) {
-    let progressBox = ::scene_msg_box("char_connecting", null, loc("charServer/checking"), null, null)
+    let progressBox = scene_msg_box("char_connecting", null, loc("charServer/checking"), null, null)
     ::add_bg_task_cb(taskId, function() {
-      ::destroyMsgBox(progressBox)
+      destroyMsgBox(progressBox)
       ::gui_start_mainmenu_reload()
       if (afterCloseFunc)
         afterCloseFunc()

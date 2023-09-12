@@ -13,6 +13,7 @@ let { DeviceType, register_for_devices_change } = require("%xboxLib/impl/input.n
 let { CONTROL_TYPE } = require("%scripts/controls/controlsConsts.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { USEROPT_MOUSE_USAGE, USEROPT_MOUSE_USAGE_NO_AIM } = require("%scripts/options/optionsExtNames.nut")
+let { add_msg_box } = require("%sqDagui/framework/msgBox.nut")
 
 const CLASSIC_PRESET = "classic"
 const SHOOTER_PRESET = "shooter"
@@ -170,7 +171,7 @@ let function getControlsPresetBySelectedType(cType) {
 
 local function onJoystickDisconnected() {
   updateExtWatched({ haveXinputDevice = hasXInputDevice() })
-  ::add_msg_box("cannot_session", loc("pl1/lostController"), [["ok", function() {}]], "ok")
+  add_msg_box("cannot_session", loc("pl1/lostController"), [["ok", function() {}]], "ok")
 }
 
 subscribe("controls.joystickDisconnected", @(_) onJoystickDisconnected())
@@ -187,7 +188,7 @@ register_for_devices_change(function(device_type, count) {
   let shouldNotify = xboxInputDevicesData.gamepads == 0 && xboxInputDevicesData.keyboards == 0
   if (shouldNotify && !xboxInputDevicesData.user_notified) {
     xboxInputDevicesData.user_notified = true
-    ::add_msg_box("no_input_devices", loc("pl1/lostController"),
+    add_msg_box("no_input_devices", loc("pl1/lostController"),
       [
         ["ok", @() xboxInputDevicesData.user_notified = false]
       ], "ok")

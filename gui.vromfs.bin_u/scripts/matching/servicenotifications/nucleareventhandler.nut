@@ -9,6 +9,8 @@ let { broadcastEvent, addListenersWithoutEnv } = require("%sqStdLibs/helpers/sub
 let { Version } = require("%sqstd/version.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 let { web_rpc } = require("%scripts/webRPC.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
 
 let newClientVersionEvent = persist("newClientVersionEvent ", @() {
   hasMessage = false
@@ -55,7 +57,7 @@ let function bigQuerryForNuclearEvent() {
   if (!::g_login.isProfileReceived())
     return
 
-  let needSendStatistic = ::load_local_account_settings("sendNuclearStatistic", true)
+  let needSendStatistic = loadLocalAccountSettings("sendNuclearStatistic", true)
   if (!needSendStatistic)
     return
 
@@ -64,7 +66,7 @@ let function bigQuerryForNuclearEvent() {
     seenInOldClient = is_seen_nuclear_event(),
     seenInNewClient = is_seen_main_nuclear_event()
   })
-  ::save_local_account_settings("sendNuclearStatistic", false)
+  saveLocalAccountSettings("sendNuclearStatistic", false)
 }
 
 addListenersWithoutEnv({

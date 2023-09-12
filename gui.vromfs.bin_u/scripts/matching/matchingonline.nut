@@ -25,7 +25,7 @@ local onConnectCb = null
 local onDisconnectCb = null
 
 let function onMatchingConnect() {
-  ::destroyMsgBox(progressBox)
+  destroyMsgBox(progressBox)
   progressBox = null
 
   onConnectCb?()
@@ -44,7 +44,7 @@ let function onMatchingDisconnect() {
 }
 
 let function onFailToReconnect() {
-  ::destroyMsgBox(progressBox)
+  destroyMsgBox(progressBox)
   progressBox = null
 
   onDisconnectCb?()
@@ -56,11 +56,11 @@ let function showConnectProgress() {
   if (checkObj(progressBox))
     return
 
-  let cancelFunc = @() ::scene_msg_box("no_online_warning", null,
+  let cancelFunc = @() scene_msg_box("no_online_warning", null,
     loc("mainmenu/noOnlineWarning"),
     [["ok", onMatchingDisconnect]], "ok")
 
-  progressBox = ::scene_msg_box("matching_connect_progressbox", null,
+  progressBox = scene_msg_box("matching_connect_progressbox", null,
     loc("yn1/connecting_msg"),
     [["cancel", cancelFunc]], "cancel",
     {

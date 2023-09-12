@@ -41,7 +41,7 @@ let function update_purchases() {
 
 let function on_logout_callback(updated) {
   if (updated && ::g_login.isLoggedIn()) {
-    ::get_cur_gui_scene().performDelayed(getroottable(), function() {
+    get_cur_gui_scene().performDelayed(getroottable(), function() {
       startLogout()
     })
   }

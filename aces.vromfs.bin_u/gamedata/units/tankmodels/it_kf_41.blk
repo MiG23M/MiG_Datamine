@@ -1790,10 +1790,10 @@
       "blk": "gameData/Weapons/groundModels_weapons/110mm_Spike_kf_41_rocket_launchr_user_cannon.blk",
       "flash": "emtr_gun_flame_01",
       "useEmitter": true,
-      "emitter": "bone_rocket_01",
+      "emitter": "bone_rocket_37",
       "emitterGenRange": [
-        1,
-        2
+        37,
+        38
 ],
       "emitterGenFmt": "bone_rocket_%02d",
       "ammoDpGenFmt": "ammo_turret_%02d_dm",
@@ -1828,7 +1828,7 @@
       "errExplTime": 0.0,
       "turret": {
         "head": "bone_grenade",
-        "gun": "bone_rocket_01",
+        "gun": "bone_rocket_37",
         "gunnerDm": "gunner_dm",
         "secondGunnerDm": "commander_dm",
         "rotatedTurret": "bone_turret"
@@ -1853,7 +1853,7 @@
       "useEmitter": true,
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
-      "barrelDP": "gun_barrel_02_dm",
+      "barrelDP": "gun_barrel_01_dm",
       "isBulletBelt": true,
       "speedYaw": 90.0,
       "speedPitch": 90.0,
@@ -1924,7 +1924,7 @@
       "flash": "emtr_mg_flame_02",
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
-      "barrelDP": "gun_barrel_01_dm",
+      "barrelDP": "gun_barrel_02_dm",
       "parkInDeadzone": false,
       "speedYaw": 18.0,
       "speedPitch": 4.0,
@@ -2860,17 +2860,28 @@
       "removeLoadedAmmo": false,
       "fatalFire": true,
       "fatalExplosion": true,
+      "replenishmentDelay": 15.0,
+      "replenishmentTime": 0.5,
       "shells": {
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
-        "ammo_body_01_dm": {
-          "count": 116
-        },
+        "fireParamsPreset": "turret_bustle_small",
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "firstStage": true,
         "ammo_turret_02_dm": {
           "count": 116
         },
         "ammo_turret_01_dm": {
+          "count": 116
+        }
+      },
+      "shells": {
+        "fatalFire": true,
+        "fatalExplosion": true,
+        "fireEvent": "ammo_fire",
+        "explosionEvent": "ammo_explosion",
+        "wreckedPartId": 0,
+        "reloadTimeMult": 30.0,
+        "ammo_body_01_dm": {
           "count": 116
         }
       }
@@ -3096,10 +3107,10 @@
             "blk": "gameData/Weapons/groundModels_weapons/110mm_Spike_kf_41_rocket_launchr_user_cannon.blk",
             "flash": "emtr_gun_flame_01",
             "useEmitter": true,
-            "emitter": "bone_rocket_01",
+            "emitter": "bone_rocket_37",
             "emitterGenRange": [
-              1,
-              2
+              37,
+              38
 ],
             "emitterGenFmt": "bone_rocket_%02d",
             "ammoDpGenFmt": "ammo_turret_%02d_dm",
@@ -3134,7 +3145,7 @@
             "errExplTime": 0.0,
             "turret": {
               "head": "bone_grenade",
-              "gun": "bone_rocket_01",
+              "gun": "bone_rocket_37",
               "gunnerDm": "gunner_dm",
               "secondGunnerDm": "commander_dm",
               "rotatedTurret": "bone_turret"
@@ -3159,7 +3170,7 @@
             "useEmitter": true,
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
-            "barrelDP": "gun_barrel_02_dm",
+            "barrelDP": "gun_barrel_01_dm",
             "isBulletBelt": true,
             "speedYaw": 90.0,
             "speedPitch": 90.0,
@@ -3230,7 +3241,7 @@
             "flash": "emtr_mg_flame_02",
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
-            "barrelDP": "gun_barrel_01_dm",
+            "barrelDP": "gun_barrel_02_dm",
             "parkInDeadzone": false,
             "speedYaw": 18.0,
             "speedPitch": 4.0,

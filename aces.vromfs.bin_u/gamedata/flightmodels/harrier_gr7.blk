@@ -2146,7 +2146,7 @@
         ],
         "page": {
           "type": "rwr",
-          "radarScale": 1.35
+          "scale": 1.35
         },
         "page": {
           "type": "map"
@@ -2412,14 +2412,13 @@
       "order": 1,
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air",
-        "name": "aim9l",
-        "reqModification": "us_aim_9l",
+        "name": "aim9l_default",
         "ShowNodes": {
           "node": "lau7_l"
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
           "emitter": "aim_9_001",
           "bullets": 1,
           "external": true,
@@ -2445,15 +2444,15 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air_ltc_pod",
-        "name": "aim9l_bol",
-        "reqModification": "us_aim_9l",
+        "name": "aim9l_default_bol",
+        "reqModification": "uk_ltc_bol",
         "ShowNodes": {
           "node": "bol_304_container001"
         },
         "Weapon": {
           "trigger": "countermeasures",
           "startFx": "",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet_bol_pod.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_inversion_l",
           "bullets": 160,
           "external": true,
@@ -2461,7 +2460,7 @@
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_bol_pod.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default_bol_pod.blk",
           "emitter": "aim_9_001",
           "bullets": 1,
           "external": true,
@@ -2488,6 +2487,7 @@
         "iconType": "missile_type_f_air_to_air_ltc_pod",
         "name": "aim9m_bol",
         "reqModification": "us_aim_9m",
+        "reqModification": "uk_ltc_bol",
         "ShowNodes": {
           "node": "bol_304_container001"
         },
@@ -2674,13 +2674,14 @@
       "order": 5,
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air",
-        "name": "aim9l_default",
+        "name": "aim9l",
+        "reqModification": "us_aim_9l",
         "ShowNodes": {
           "node": "lau7_l1"
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder.blk",
           "emitter": "aim_9_003",
           "bullets": 1,
           "external": true,
@@ -2706,15 +2707,16 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air_ltc_pod",
-        "name": "aim9l_bol_aim_default",
+        "name": "aim9l_bol",
         "reqModification": "uk_ltc_bol",
+        "reqModification": "us_aim_9l",
         "ShowNodes": {
           "node": "bol_304_container003"
         },
         "Weapon": {
           "trigger": "countermeasures",
           "startFx": "",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet_bol_pod.blk",
           "emitter": "jet_flame",
           "bullets": 160,
           "external": true,
@@ -2722,7 +2724,7 @@
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_bol_pod.blk",
           "emitter": "aim_9_003",
           "bullets": 1,
           "external": true,
@@ -2749,6 +2751,7 @@
         "iconType": "missile_type_f_air_to_air_ltc_pod",
         "name": "aim9m_bol",
         "reqModification": "us_aim_9m",
+        "reqModification": "uk_ltc_bol",
         "ShowNodes": {
           "node": "bol_304_container003"
         },
@@ -3148,13 +3151,14 @@
       "order": 6,
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air",
-        "name": "aim9l_default",
+        "name": "aim9l",
+        "reqModification": "us_aim_9l",
         "ShowNodes": {
           "node": "lau7_r1"
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder.blk",
           "emitter": "aim_9_004",
           "bullets": 1,
           "external": true,
@@ -3180,15 +3184,16 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air_ltc_pod",
-        "name": "aim9l_bol_aim_default",
+        "name": "aim9l_bol",
         "reqModification": "uk_ltc_bol",
+        "reqModification": "us_aim_9l",
         "ShowNodes": {
           "node": "bol_304_container004"
         },
         "Weapon": {
           "trigger": "countermeasures",
           "startFx": "",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet_bol_pod.blk",
           "emitter": "jet_flame1",
           "bullets": 160,
           "external": true,
@@ -3196,7 +3201,7 @@
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_bol_pod.blk",
           "emitter": "aim_9_004",
           "bullets": 1,
           "external": true,
@@ -3223,6 +3228,7 @@
         "iconType": "missile_type_f_air_to_air_ltc_pod",
         "name": "aim9m_bol",
         "reqModification": "us_aim_9m",
+        "reqModification": "uk_ltc_bol",
         "ShowNodes": {
           "node": "bol_304_container004"
         },
@@ -3356,14 +3362,13 @@
       "order": 2,
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air",
-        "name": "aim9l",
-        "reqModification": "us_aim_9l",
+        "name": "aim9l_default",
         "ShowNodes": {
           "node": "lau7_r"
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default.blk",
           "emitter": "aim_9_002",
           "bullets": 1,
           "external": true,
@@ -3389,15 +3394,15 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_b_air_to_air_ltc_pod",
-        "name": "aim9l_bol",
-        "reqModification": "us_aim_9l",
+        "name": "aim9l_default_bol",
+        "reqModification": "uk_ltc_bol",
         "ShowNodes": {
           "node": "bol_304_container002"
         },
         "Weapon": {
           "trigger": "countermeasures",
           "startFx": "",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet_bol_pod.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_inversion_r",
           "bullets": 160,
           "external": true,
@@ -3405,7 +3410,7 @@
         },
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_bol_pod.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim9l_sidewinder_default_bol_pod.blk",
           "emitter": "aim_9_002",
           "bullets": 1,
           "external": true,
@@ -3432,6 +3437,7 @@
         "iconType": "missile_type_f_air_to_air_ltc_pod",
         "name": "aim9m_bol",
         "reqModification": "us_aim_9m",
+        "reqModification": "uk_ltc_bol",
         "ShowNodes": {
           "node": "bol_304_container002"
         },

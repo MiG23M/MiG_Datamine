@@ -188,6 +188,15 @@
       "part": {
         "name": "body",
         "onHit": {
+          "shellState": "inFlight",
+          "expl": 1.0
+        },
+        "onKill": {
+          "shellState": "inFlight",
+          "destruction": 1.0
+        },
+        "onHit": {
+          "shellState": "onUnit",
           "damageType": "generic",
           "expl": 0.2,
           "break": 0.8,
@@ -195,6 +204,7 @@
           "fHitCritical": true
         },
         "onHit": {
+          "shellState": "onUnit",
           "damageType": "generic",
           "expl": 0.5,
           "break": 0.5,
@@ -202,6 +212,7 @@
           "fHitCritical": true
         },
         "onHit": {
+          "shellState": "onUnit",
           "damageType": "explosion",
           "expl": 0.8,
           "break": 0.2,
@@ -209,12 +220,14 @@
           "fHitCritical": true
         },
         "onHit": {
+          "shellState": "onUnit",
           "damageType": "cumulative",
           "expl": 1.0,
           "damage": 100.0,
           "fHitCritical": true
         },
         "onKill": {
+          "shellState": "onUnit",
           "expl": 1.0,
           "fHitCritical": true
         }

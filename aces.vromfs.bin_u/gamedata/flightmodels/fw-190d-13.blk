@@ -2329,54 +2329,274 @@
     }
   },
   "commonWeapons": {
-    "hideDmParts": {
-      "node": "armor7_dm",
-      "node": "armor8_dm",
-      "node": "cannon1_dm"
-    },
     "Weapon": {
-      "trigger": "cannon",
-      "blk": "gameData/Weapons/cannonMG15120.blk",
-      "emitter": "flare1",
-      "flash": "flare1",
-      "shell": "emtr_shellrejection1",
-      "dm": "cannon4_dm",
-      "bullets": 250,
-      "spread": 1.0,
-      "counterIndex": 1
-    },
-    "Weapon": {
-      "trigger": "cannon",
-      "blk": "gameData/Weapons/cannonMG15120.blk",
-      "emitter": "flare2",
-      "flash": "flare2",
-      "shell": "emtr_shellrejection2",
-      "dm": "cannon2_dm",
-      "isWingLPositioned": false,
-      "isWingRPositioned": false,
-      "bullets": 250,
-      "spread": 1.1,
-      "traceOffset": 1,
-      "counterIndex": 2
-    },
-    "Weapon": {
-      "trigger": "cannon",
-      "blk": "gameData/Weapons/cannonMG15120.blk",
-      "emitter": "flare3",
-      "flash": "flare3",
-      "shell": "emtr_shellrejection3",
-      "dm": "cannon3_dm",
-      "isWingLPositioned": false,
-      "isWingRPositioned": false,
-      "bullets": 250,
-      "spread": 1.1,
-      "counterIndex": 3
+      "slot": 0,
+      "preset": "default_common"
     }
   },
   "weapon_presets": {
     "preset": {
       "name": "fw-190d-12_default",
       "blk": "gameData/FlightModels/weaponPresets/fw-190d-12_default.blk"
+    },
+    "preset": {
+      "name": "fw_190d_4xsc50",
+      "blk": "gameData/FlightModels/weaponPresets/fw_190d_4xsc50.blk"
+    },
+    "preset": {
+      "name": "fw_190d_8xsc50",
+      "blk": "gameData/FlightModels/weaponPresets/fw_190d_8xsc50.blk",
+      "reqModification": "Fw-190D-12_8xSC50"
+    },
+    "preset": {
+      "name": "fw_190d_sc250",
+      "blk": "gameData/FlightModels/weaponPresets/fw_190d_sc250.blk"
+    },
+    "preset": {
+      "name": "fw_190d_sc500",
+      "blk": "gameData/FlightModels/weaponPresets/fw_190d_sc500.blk"
+    },
+    "preset": {
+      "name": "fw_190d_flamm_250",
+      "blk": "gameData/FlightModels/weaponPresets/fw_190d_flamm_250.blk"
+    },
+    "preset": {
+      "name": "fw_190d_flamm_500",
+      "blk": "gameData/FlightModels/weaponPresets/fw_190d_flamm_500.blk"
+    }
+  },
+  "WeaponSlots": {
+    "maxloadMass": 710.0,
+    "maxloadMassLeftConsoles": 355.0,
+    "maxloadMassRightConsoles": 355.0,
+    "maxDisbalance": 200.0,
+    "HideNodes": {
+      "node": "pylon_bomb5",
+      "node": "pylon_bomb6",
+      "node": "pylon_bomb4",
+      "node": "pylon_bomb3",
+      "node": "pylon_bomb1",
+      "node": "pylon_bomb2"
+    },
+    "HideDmParts": {
+      "node": "armor7_dm",
+      "node": "armor8_dm",
+      "node": "cannon4_dm"
+    },
+    "WeaponSlot": {
+      "index": 0,
+      "WeaponPreset": {
+        "name": "default_common",
+        "Weapon": {
+          "trigger": "cannon",
+          "blk": "gameData/Weapons/cannonMG15120.blk",
+          "emitter": "flare1",
+          "flash": "flare1",
+          "shell": "emtr_shellrejection1",
+          "dm": "cannon4_dm",
+          "bullets": 250,
+          "spread": 1.0,
+          "counterIndex": 1
+        },
+        "Weapon": {
+          "trigger": "cannon",
+          "blk": "gameData/Weapons/cannonMG15120.blk",
+          "emitter": "flare2",
+          "flash": "flare2",
+          "shell": "emtr_shellrejection2",
+          "dm": "cannon2_dm",
+          "isWingLPositioned": false,
+          "isWingRPositioned": false,
+          "bullets": 250,
+          "spread": 1.1,
+          "traceOffset": 1,
+          "counterIndex": 2
+        },
+        "Weapon": {
+          "trigger": "cannon",
+          "blk": "gameData/Weapons/cannonMG15120.blk",
+          "emitter": "flare3",
+          "flash": "flare3",
+          "shell": "emtr_shellrejection3",
+          "dm": "cannon3_dm",
+          "isWingLPositioned": false,
+          "isWingRPositioned": false,
+          "bullets": 250,
+          "spread": 1.1,
+          "counterIndex": 3
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 1,
+      "tier": 7,
+      "order": 1,
+      "WeaponPreset": {
+        "iconType": "bombs_small_group_x2",
+        "name": "50kg_x2",
+        "reqModification": "Fw-190D-12_4xSC50",
+        "ShowNodes": {
+          "node": "pylon_bomb3",
+          "node": "pylon_bomb4"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50_default.blk",
+          "emitter": "bomb6",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50_default.blk",
+          "emitter": "bomb7",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 2,
+      "tier": 6,
+      "order": 3,
+      "notUseforDisbalanceCalculation": true,
+      "WeaponPreset": {
+        "iconType": "bombs_small_group_x4",
+        "name": "50kg_x4",
+        "reqModification": "Fw-190D-12_8xSC50",
+        "ShowNodes": {
+          "node": "pylon_bomb2",
+          "node": "pylon_bomb1"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50.blk",
+          "emitter": "bomb4",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50.blk",
+          "emitter": "bomb5",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50.blk",
+          "emitter": "bomb2",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50.blk",
+          "emitter": "bomb3",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "bombs_middle",
+        "name": "250kg",
+        "reqModification": "Fw-190D-12_SC250",
+        "ShowNodes": {
+          "node": "pylon_bomb1"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc250.blk",
+          "emitter": "bomb1",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "bombs_large",
+        "name": "500kg",
+        "reqModification": "Fw-190D-12_SC500",
+        "ShowNodes": {
+          "node": "pylon_bomb1"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc500.blk",
+          "emitter": "bomb1",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "napalm_middle",
+        "name": "flam_250kg",
+        "reqModification": "flamm_250",
+        "ShowNodes": {
+          "node": "pylon_bomb1"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_flam_250.blk",
+          "emitter": "bomb1",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "napalm_large",
+        "name": "flam_500kg",
+        "reqModification": "flamm_500",
+        "ShowNodes": {
+          "node": "pylon_bomb1"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_flam_500.blk",
+          "emitter": "bomb1",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 3,
+      "tier": 5,
+      "order": 2,
+      "WeaponPreset": {
+        "iconType": "bombs_small_group_x2",
+        "name": "50kg_x2",
+        "reqModification": "Fw-190D-12_4xSC50",
+        "ShowNodes": {
+          "node": "pylon_bomb6",
+          "node": "pylon_bomb5"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50_default.blk",
+          "emitter": "bomb9",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/de_sc50_default.blk",
+          "emitter": "bomb8",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      }
     }
   },
   "modifications": {
@@ -2430,39 +2650,23 @@
       "reqModification": "mg15120_belt_pack"
     },
     "Fw-190D-12_4xSC50": {
-      "reqModLevel": 1.0,
       "modClass": "weapon",
       "tier": 1
     },
     "Fw-190D-12_8xSC50": {
-      "reqModLevel": 3.0,
-      "reqModification": "Fw-190D-12_4xSC50",
       "modClass": "weapon",
-      "tier": 2
+      "tier": 2,
+      "reqModification": "Fw-190D-12_4xSC50"
     },
     "Fw-190D-12_SC250": {
-      "reqModLevel": 5.0,
-      "reqModification": "Fw-190D-12_8xSC50",
       "modClass": "weapon",
-      "tier": 3
-    },
-    "Fw-190D-12_SC250_4xSC50": {
-      "reqModLevel": 6.0,
-      "reqModification": "Fw-190D-12_SC250",
-      "modClass": "weapon",
-      "tier": 3
+      "tier": 3,
+      "reqModification": "Fw-190D-12_8xSC50"
     },
     "Fw-190D-12_SC500": {
-      "reqModLevel": 7.0,
-      "reqModification": "Fw-190D-12_SC250",
       "modClass": "weapon",
-      "tier": 4
-    },
-    "Fw-190D-12_SC500_4xSC50": {
-      "reqModLevel": 8.0,
-      "reqModification": "Fw-190D-12_SC500",
-      "modClass": "weapon",
-      "tier": 4
+      "tier": 4,
+      "reqModification": "Fw-190D-12_SC250"
     },
     "flamm_250": {
       "modClass": "weapon",

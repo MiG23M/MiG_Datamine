@@ -237,7 +237,7 @@
         "comments": "",
         "props": {
           "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
+          "conditionsType": "ANY",
           "enableAfterComplete": true
         },
         "events": {
@@ -248,6 +248,10 @@
         "conditions": {
           "unitWhenHitOtherUnit": {
             "target": "t2_quest_units_squad",
+            "offender": "t1_players_squad"
+          },
+          "unitWhenHitOtherUnit": {
+            "target": "t2_all_aaa_squad",
             "offender": "t1_players_squad"
           }
         },
@@ -283,6 +287,10 @@
         "conditions": {
           "unitWhenHitOtherUnit": {
             "target": "t1_quest_units_squad",
+            "offender": "t2_players_squad"
+          },
+          "unitWhenHitOtherUnit": {
+            "target": "t1_all_aaa_squad",
             "offender": "t2_players_squad"
           }
         },

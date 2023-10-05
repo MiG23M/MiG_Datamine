@@ -262,7 +262,8 @@ local BattlePassShopWnd = class extends gui_handlers.BaseGuiHandlerWT {
       this.onBuy(value)
   }
 
-  function onEventModalWndDestroy(_params) {
+  function onEventModalWndDestroy(params) {
+    base.onEventModalWndDestroy(params)
     if (this.isSceneActiveNoModals())
       ::move_mouse_on_child_by_value(this.getObj("items_list"))
   }
@@ -296,7 +297,7 @@ local BattlePassShopWnd = class extends gui_handlers.BaseGuiHandlerWT {
         isBought = isBought && !additionalTrophyItem.canBuyTrophyByLimit() //trophy of improved battle pass is already buy
       if (battlePassUnlock != null)
         cost = cost + getUnlockCost(battlePassUnlock.id)
-      seenRowName = $"{passExchangeItem?.id ?? battlePassUnlock.id}_{additionalTrophyItems?[0].id ?? ""}"
+      seenRowName = $"{passExchangeItem?.id ?? battlePassUnlock?.id ?? ""}_{additionalTrophyItems?[0].id ?? ""}"
     }
     if (isImprovedBattlePass)
       this.hasBuyImprovedBattlePass = isBought

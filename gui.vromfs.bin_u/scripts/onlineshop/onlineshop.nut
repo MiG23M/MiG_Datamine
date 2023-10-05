@@ -452,7 +452,8 @@ gui_handlers.OnlineShopHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     broadcastEvent("OnlineShopPurchaseSuccessful", { purchData = this.goods?[this.task] ?? {} })
   }
 
-  function onEventModalWndDestroy(_params) {
+  function onEventModalWndDestroy(params) {
+    base.onEventModalWndDestroy(params)
     if (this.isSceneActiveNoModals())
       ::move_mouse_on_child_by_value(this.getObj("items_list"))
   }
@@ -541,7 +542,7 @@ gui_handlers.OnlineShopRowHandler <- class extends gui_handlers.OnlineShopHandle
     base.reinitScreen(params)
     foreach (productId, product in this.goods) {
       this.updateProductInfo(product, productId) //for rows visual the same description for all items
-      break
+      break //warning disable: -unconditional-terminated-loop
     }
   }
 }

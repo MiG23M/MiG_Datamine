@@ -2,6 +2,7 @@ root {
   bgrStyle:t='fullScreenWnd'
   blur {}
   blur_foreground {}
+  background-color:t='@fullScreenBgrColor'
 
   img {
     position:t='absolute'
@@ -18,19 +19,6 @@ root {
         background-image:t='@!ui/images/steam_logo.svg'
         background-svg-size:t='1@steamButtonWidth, 0.33@steamButtonWidth'
         background-repeat:t='aspect-ratio'
-      }
-      tdiv {
-        width:t='fw'
-        pos:t='0, 50%ph-50%h'
-        position:t='relative'
-
-        textarea {
-          pos:t='pw-w, 0'
-          position:t='relative'
-          text:t='War Thunder'
-          bigBoldFont:t='yes'
-          overlayTextColor:t='active'
-        }
       }
     }
   }
@@ -53,6 +41,7 @@ root {
     flow:t='vertical'
 
     titleTextArea {
+      id:t='rate_text'
       pos:t='50%pw-50%w, 50%ph-50%h'
       position:t='absolute'
       width:t='pw'

@@ -337,9 +337,13 @@
       "css-hier-invalidate": "yes",
       "behavior": "Timer",
       "tdiv": {
+        "id": "ship_obstacle_rf",
+        "size": "pw, 0.04@shHud"
+      },
+      "tdiv": {
         "width": "pw",
-        "position": "absolute",
-        "pos": "pw/2 - w/2, -h",
+        "position": "relative",
+        "pos": "pw/2 - w/2, 0",
         "flow": "vertical",
         "tdiv": {
           "id": "common_priority_hints_holder",
@@ -351,10 +355,6 @@
             "pos": "0, ph-h",
             "flow": "vertical"
           }
-        },
-        "tdiv": {
-          "id": "ship_obstacle_rf",
-          "size": "pw, 0.04@shHud"
         },
         "tdiv": {
           "width": "pw",
@@ -385,27 +385,23 @@
         "input-transparent": "yes"
       },
       "tdiv": {
-        "height": "0.08@shHud",
         "position": "relative",
         "left": "pw/2 - w/2",
         "div": {
-          "id": "iconed_hints",
-          "height": "ph"
+          "id": "iconed_hints"
         },
         "div": {
-          "id": "display_timers",
-          "height": "ph"
+          "id": "display_timers"
         }
       },
       "tdiv": {
         "id": "actionbar_hints_nest",
         "width": "1@shHud",
-        "height": "0.065@shHud",
         "left": "0.5pw-0.5w",
         "position": "relative",
         "tdiv": {
           "width": "pw",
-          "position": "absolute",
+          "position": "relative",
           "pos": "0, ph-h",
           "flow": "vertical",
           "tdiv": {

@@ -31,7 +31,11 @@ let { getGlobalStatusData } = require("%scripts/worldWar/operations/model/wwGlob
 let { get_current_mission_desc } = require("guiMission")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { get_game_settings_blk } = require("blkGetters")
+let { isInFlight } = require("gameplayBinding")
 let { WwArmyGroup } = require("%scripts/worldWar/inOperation/model/wwArmyGroup.nut")
+let { userIdInt64 } = require("%scripts/user/myUser.nut")
+let { wwGetOperationId, wwGetPlayerSide, wwIsOperationLoaded, wwGetOperationWinner,
+  wwGetOperationTimeMillisec } = require("worldwar")
 
 const WW_CUR_OPERATION_SAVE_ID = "worldWar/curOperation"
 const WW_CUR_OPERATION_COUNTRY_SAVE_ID = "worldWar/curOperationCountry"
@@ -151,7 +155,7 @@ local LAST_VISIBLE_AVAILABLE_MAP_IN_PROMO_PATH = "worldWar/lastVisibleAvailableM
   isWWSeasonActive = @() hasAvailableMapToBattle()
 
   function updateCurOperationStatusInGlobalStatus() {
-    let operationId = ::ww_get_operation_id()
+    let operationId = wwGetOperationId()
     if (operationId == -1)
       return
 
@@ -160,13 +164,13 @@ local LAST_VISIBLE_AVAILABLE_MAP_IN_PROMO_PATH = "worldWar/lastVisibleAvailableM
   }
 
   function isWwOperationInviteEnable() {
-    let wwOperationId = ::ww_get_operation_id()
+    let wwOperationId = wwGetOperationId()
     return wwOperationId > -1 && ::g_clans.hasRightsToQueueWWar()
       && getOperationById(wwOperationId)?.isMyClanParticipate()
   }
 
   function inviteToWwOperation(uid) {
-    let operationId = ::ww_get_operation_id()
+    let operationId = wwGetOperationId()
     if (operationId < 0 || !this.canJoinWorldwarBattle())
       return
 
@@ -244,12 +248,12 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.openWarMap <- function openWarMap() {
-  let operationId = ::ww_get_operation_id()
+  let operationId = wwGetOperationId()
   subscribeOperationNotifyOnce(
     operationId,
     null,
     function(_responce) {
-      if (::ww_get_operation_id() != operationId)
+      if (wwGetOperationId() != operationId)
         return
       ::g_world_war.stopWar()
       showInfoMsgBox(loc("worldwar/cantUpdateOperation"))
@@ -349,7 +353,7 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.onEventLoadingStateChange <- function onEventLoadingStateChange(_p) {
-  if (!::is_in_flight())
+  if (!isInFlight())
     return
 
   ::g_squad_manager.cancelWwBattlePrepare()
@@ -360,7 +364,7 @@ registerPersistentDataFromRoot("g_world_war")
     return
 
   subscribeOperationNotifyOnce(operationId)
-  if (operationId != ::ww_get_operation_id())
+  if (operationId != wwGetOperationId())
     this.updateOperationPreviewAndDo(operationId, null)   //need set operation preview if in WW battle for load operation config
 }
 
@@ -374,7 +378,7 @@ registerPersistentDataFromRoot("g_world_war")
 
   ::g_tooltip.removeAll()
   ::g_ww_logs.clear()
-  if (!::ww_is_operation_loaded())
+  if (!wwIsOperationLoaded())
     return
 
   this.updateCurOperationStatusInGlobalStatus()
@@ -647,7 +651,7 @@ registerPersistentDataFromRoot("g_world_war")
 ::g_world_war.getMyArmyGroup <- function getMyArmyGroup() {
   return u.search(this.getArmyGroups(),
       function(group) {
-        return isInArray(::my_user_id_int64, group.observerUids)
+        return isInArray(userIdInt64.value, group.observerUids)
       }
     )
 }
@@ -796,10 +800,10 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.isCurrentOperationFinished <- function isCurrentOperationFinished() {
-  if (!::ww_is_operation_loaded())
+  if (!wwIsOperationLoaded())
     return false
 
-  return ::ww_get_operation_winner() != SIDE_NONE
+  return wwGetOperationWinner() != SIDE_NONE
 }
 
 ::g_world_war.getReinforcementsInfo <- function getReinforcementsInfo() {
@@ -828,7 +832,7 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.getMyReinforcementsArray <- function getMyReinforcementsArray() {
-  return this.getReinforcementsArrayBySide(::ww_get_player_side()).filter(@(reinf) reinf.hasManageAccess())
+  return this.getReinforcementsArrayBySide(wwGetPlayerSide()).filter(@(reinf) reinf.hasManageAccess())
 }
 
 ::g_world_war.getMyReadyReinforcementsArray <- function getMyReadyReinforcementsArray() {
@@ -1099,7 +1103,7 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.getOperationTimeSec <- function getOperationTimeSec() {
-  return time.millisecondsToSecondsInt(::ww_get_operation_time_millisec())
+  return time.millisecondsToSecondsInt(wwGetOperationTimeMillisec())
 }
 
 ::g_world_war.requestLogs <- function requestLogs(loadAmount, useLogMark, cb, errorCb) {
@@ -1116,7 +1120,7 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.getSidesOrder <- function getSidesOrder() {
-  local playerSide = ::ww_get_player_side()
+  local playerSide = wwGetPlayerSide()
   if (playerSide == SIDE_NONE)
     playerSide = SIDE_1
 
@@ -1164,7 +1168,7 @@ registerPersistentDataFromRoot("g_world_war")
 }
 
 ::g_world_war.getSaveOperationLogId <- function getSaveOperationLogId() {
-  return WW_LAST_OPERATION_LOG_SAVE_ID + ::ww_get_operation_id()
+  return WW_LAST_OPERATION_LOG_SAVE_ID + wwGetOperationId()
 }
 
 ::g_world_war.updateUserlogsAccess <- function updateUserlogsAccess() {

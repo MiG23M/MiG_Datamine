@@ -22,6 +22,7 @@ let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 let { getEsUnitType, canResearchUnit } = require("%scripts/unit/unitInfo.nut")
 let { get_balance, get_gui_balance } = require("%scripts/user/balance.nut")
+let purchaseConfirmation = require("%scripts/purchase/purchaseConfirmationHandler.nut")
 
 enum windowState {
   research,
@@ -50,7 +51,6 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
 
   availableExp    = 0
   playersGold     = 0
-
   unit            = null
   unitExpGranted  = 0
   unitReqExp      = 0
@@ -64,6 +64,7 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   currentState    = windowState.noUnit
 
   isRefreshingAfterConvert = false
+  isInProgressChooseResearch = false
 
   function initScreen() {
     if (!this.scene)
@@ -275,7 +276,7 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       this.maxGoldForAir = this.minGoldValue + maxGoldDiff
 
       let goldLimitByExp  = (this.availableExp >= diffExp) ? maxGoldDiff : (this.availableExp.tofloat() / this.expPerGold).tointeger()
-      this.maxGoldValue = this.minGoldValue + min(goldLimitByExp, this.playersGold)
+      this.maxGoldValue = this.minGoldValue + goldLimitByExp
       this.curGoldValue = this.maxGoldValue
 
       sliderObj.max     = this.maxGoldForAir
@@ -287,14 +288,16 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     }
   }
 
+
   function fillUnitResearchedContent() {
     let noExpObj = this.scene.findObject("buy_unit_cost")
     if (!checkObj(noExpObj))
       return
 
     let unitCost = ::wp_get_cost(this.unit.name)
-    noExpObj.setValue(::getPriceAccordingToPlayersCurrency(unitCost, 0, true))
+    noExpObj.setValue(Cost(unitCost).getTextAccordingToBalance())
   }
+
 
   function updateSlider() {
     let sliderObj = this.scene.findObject("convert_slider")
@@ -305,6 +308,7 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     this.updateSliderText()
     this.updateExpTextPosition()
   }
+
 
   function fillContent() {
     this.scene.findObject("exp_slider_nest").show(this.currentState == windowState.research)
@@ -362,9 +366,20 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     let isMinSet = this.curGoldValue == this.minGoldValue
     let isMaxSet = this.curGoldValue == this.maxGoldValue
 
-    this.showSceneBtn("btn_apply", this.currentState == windowState.research)
-    this.showSceneBtn("btn_buy_unit", this.currentState == windowState.canBuy)
-    this.scene.findObject("btn_apply").inactiveColor = this.curGoldValue != this.minGoldValue ? "no" : "yes"
+    let btnApply = this.showSceneBtn("btn_apply", this.currentState == windowState.research && this.curGoldValue <= this.playersGold)
+    btnApply.inactiveColor = (this.curGoldValue != this.minGoldValue) ? "no" : "yes"
+    this.showSceneBtn("btn_buy_unit", this.currentState == windowState.canBuy )
+
+    let curGold = this.curGoldValue - this.minGoldValue
+    let isVisibleBuyGoldBtn = this.currentState == windowState.research &&
+      curGold > this.playersGold && curGold > 0
+
+    this.showSceneBtn("not_enought_gold_holder", isVisibleBuyGoldBtn)
+    if (isVisibleBuyGoldBtn) {
+      let loctext = loc("exp/convert/notEnoughGold")
+      let goldText = Cost(0, curGold - this.playersGold).getTextAccordingToBalance()
+      this.scene.findObject("not_enought_gold").setValue($"{loctext}{loc("ui/colon")}{goldText}")
+    }
 
     this.scene.findObject("buttonDec").enable(!isMinSet)
     this.scene.findObject("buttonInc").enable(!isMaxSet)
@@ -445,6 +460,8 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
   }
 
   function onUnitSelect(obj) {
+    if (this.isInProgressChooseResearch)
+      return
     let newUnit = this.unitList[obj.getValue()]
     let isNewUnitInResearch = ::isUnitInResearch(newUnit)
     let isNewUnitResearched = ::isUnitResearched(newUnit)
@@ -456,8 +473,10 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       obj.setValue(this.unitList.indexof(this.unit))
       return
     }
+    this.isInProgressChooseResearch = true
 
     let cb = function() {
+      this.isInProgressChooseResearch = false
       this.unit = newUnit
       this.updateWindow()
     }
@@ -509,6 +528,13 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     this.updateObjects()
   }
 
+  function onOnlineShopEagles() {
+    if (hasFeature("EnableGoldPurchase"))
+      this.startOnlineShop("eagles", null, "exp")
+    else
+      showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
+  }
+
   function onMax() {
     this.curGoldValue = this.maxGoldValue
     this.updateObjects()
@@ -530,14 +556,11 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
     let msgText = ::warningIfGold(loc("exp/convert/needMoneyQuestion",
         { exp = Cost().setFrp(curExp).tostring(), cost = cost.getTextAccordingToBalance() }),
       cost)
-    this.msgBox("need_money", msgText,
-      [
-        ["yes", function() {
-            if (::check_balance_msgBox(cost))
-              this.buyExp(curExp)
-          }],
-        ["no", function() {} ]
-      ], "yes", { cancel_fn = function() {} })
+      let callbackYes = Callback(function() {
+        if (::check_balance_msgBox(cost))
+          this.buyExp(curExp)
+      }, this)
+      purchaseConfirmation("need_money", msgText, callbackYes)
   }
 
   function buyExp(amount) {
@@ -570,6 +593,10 @@ gui_handlers.ConvertExpHandler <- class extends gui_handlers.BaseGuiHandlerWT {
       return
 
     this.unit = newUnit
+    this.updateWindow()
+  }
+
+  function onEventProfileUpdated(_p) {
     this.updateWindow()
   }
 

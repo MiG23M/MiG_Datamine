@@ -7,6 +7,8 @@ let DataBlock  = require("DataBlock")
 let { matchingRpcSubscribe } = require("%scripts/matching/api.nut")
 let { web_rpc } = require("%scripts/webRPC.nut")
 let { get_current_mission_desc } = require("guiMission")
+let { isInFlight } = require("gameplayBinding")
+let { wwGetOperationId } = require("worldwar")
 
 matchingRpcSubscribe("worldwar.on_join_to_battle", function(params) {
   let operationId = params?.operationId ?? ""
@@ -51,11 +53,11 @@ matchingRpcSubscribe("worldwar.notify", function(params) {
     return
   }
 
-  if (!::is_in_flight())
+  if (!isInFlight())
     return
 
   let operationId = params?.operationId
-  if (!operationId || operationId != ::ww_get_operation_id())
+  if (!operationId || operationId != wwGetOperationId())
     return
 
   let isOwnSide = (::get_local_player_country() == params?.activeSideCountry)

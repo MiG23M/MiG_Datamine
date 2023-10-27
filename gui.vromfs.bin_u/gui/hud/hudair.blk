@@ -108,9 +108,12 @@
   "hudActionBar": {
     "id": "hud_action_bar",
     "position": "root",
-    "pos": "sw/2 - w/2, @actionBarBottomPos - h",
-    "tdiv": {
-      "id": "actions_nest"
+    "pos": "sw/2-w/2, @actionBarBottomPos-h",
+    "height": "@hudActionBarItemSize",
+    "actionBarNest": {
+      "id": "actions_nest",
+      "_transp-timer": "1",
+      "_pos-timer": "0"
     }
   },
   "tdiv": {
@@ -433,7 +436,6 @@
   },
   "tdiv": {
     "id": "hintBlock",
-    "behaviour": "bhvUpdateByWatched",
     "pos": "0.5pw - 0.5w, ph - h",
     "position": "absolute",
     "tdiv": {

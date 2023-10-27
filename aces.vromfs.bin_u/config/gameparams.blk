@@ -24,6 +24,22 @@
     0.6,
     1.0
   ],
+  "shipFuelLeakFxName": "fire_burning_fuel_water_smoke",
+  "shipFuelLeakStayFxName": "fire_burning_fuel_water",
+  "shipFuelLeakFxTimeout": [
+    0.2,
+    0.8
+  ],
+  "shipFuelLeakLifetime": [
+    20.0,
+    4.0,
+    7.0
+  ],
+  "shipFuelLeakSpeed": [
+    8.0,
+    0.5,
+    2.5
+  ],
   "grassAlphaSuffix": "_a",
   "enableRiExplosionDamage": true,
   "simpleSinking": false,
@@ -335,6 +351,7 @@
   "depthChargeMaxDepth": 1.0,
   "torpedoDestroyParent": false,
   "shipTorpedoAutoDepthTraceDist": 150.0,
+  "torpedoLaunchMaxDepth": 20.0,
   "timeBlinkingOfDeadIcon": 2.5,
   "opacityOfDeadIcon": 70,
   "timeIconForDeadOnMap": 12.0,
@@ -407,6 +424,7 @@
   "gyroSightBulletDrag": false,
   "gyroSightBulletGravity": true,
   "secondaryWeaponSwitchOnOutOfAmmoTimeOut": 1.0,
+  "enableOverheatDecals": false,
   "enableBotTorpedoShooting": true,
   "torpedoShootByBotMaxDistance": 7500.0,
   "preventBotsLeavingBattleArea": true,
@@ -415,7 +433,7 @@
     7.0,
     3.0
   ],
-  "arrestorHookTouchAirfieldFx": "sparks_ground_track_friction",
+  "arrestorHookTouchAirfieldFx": "sparks_deck_hook",
   "enableFlightModelDamageTexture": false,
   "maxDistanceForUpdateWithShipPhys": 800.0,
   "maxDistanceForDetailedUpdateShipPhys": 400.0,
@@ -7089,8 +7107,8 @@
     }
   },
   "ambientWindParams": {
-    "maxWindNoiseSpeed": 1.197,
-    "minWindNoiseSpeed": 0.95,
+    "maxWindNoiseSpeed": 2.332,
+    "minWindNoiseSpeed": 1.95,
     "maxWindNoiseScale": 15.709,
     "minWindNoiseScale": 15.423,
     "minWindNoiseStrength": 3.528,
@@ -7112,7 +7130,10 @@
       2048.0,
       2048.0
     ],
-    "windFlowTextureName": ""
+    "windFlowTextureName": "",
+    "treeWindBlendScale": 1.0,
+    "treeWindBlendOutStart": 0.3,
+    "treeWindBlendOutLength": 0.2
   },
   "commonScenes": {
     "scene": "gameData/scenes/common_scene.blk"
@@ -16042,6 +16063,102 @@
       "p": {
         "name": "wheel_l_04_",
         "modelNames": "btr_80a_hungary"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "zis_152d"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "zis_152d"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "zis_152d"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "zis_152d"
+      },
+      "p": {
+        "name": "wheel_r_03_",
+        "modelNames": "zis_152d"
+      },
+      "p": {
+        "name": "wheel_l_03_",
+        "modelNames": "zis_152d"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "vickers_mk_11"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "vickers_mk_11"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "vickers_mk_11"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "vickers_mk_11"
+      },
+      "p": {
+        "name": "wheel_r_03_",
+        "modelNames": "vickers_mk_11"
+      },
+      "p": {
+        "name": "wheel_l_03_",
+        "modelNames": "vickers_mk_11"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "type_81_tansam"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "type_81_tansam"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "type_81_tansam"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "type_81_tansam"
+      },
+      "p": {
+        "name": "wheel_r_03_",
+        "modelNames": "type_81_tansam"
+      },
+      "p": {
+        "name": "wheel_l_03_",
+        "modelNames": "type_81_tansam"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "breda_52_autocannone"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "breda_52_autocannone"
+      },
+      "p": {
+        "name": "wheel_l_03_",
+        "modelNames": "breda_52_autocannone"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "breda_52_autocannone"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "breda_52_autocannone"
+      },
+      "p": {
+        "name": "wheel_r_03_",
+        "modelNames": "breda_52_autocannone"
       }
     },
     "crew": {
@@ -16958,14 +17075,6 @@
     "minBoundRadForMode0": 3.0,
     "minBoundRadForMode2": 3.0,
     "hideForMode2re": {
-      "incRE": "berlin_reichstag_back_center",
-      "incRE": "berlin_reichstag_back_left",
-      "incRE": "berlin_reichstag_back_right",
-      "incRE": "berlin_reichstag_corner",
-      "incRE": "berlin_reichstag_front_center",
-      "incRE": "berlin_reichstag_front_left",
-      "incRE": "berlin_reichstag_front_right",
-      "incRE": "berlin_reichstag_side_right_center",
       "incRE": "backyard_fence_a_w1500",
       "incRE": "backyard_fence_b",
       "incRE": "american_lamp_post_high_a_dmg",
@@ -17072,14 +17181,6 @@
       "excRE": "wood_fence_k"
     },
     "hideForMode0re": {
-      "incRE": "berlin_reichstag_back_center",
-      "incRE": "berlin_reichstag_back_left",
-      "incRE": "berlin_reichstag_back_right",
-      "incRE": "berlin_reichstag_corner",
-      "incRE": "berlin_reichstag_front_center",
-      "incRE": "berlin_reichstag_front_left",
-      "incRE": "berlin_reichstag_front_right",
-      "incRE": "berlin_reichstag_side_right_center",
       "incRE": "backyard_fence_a_w1500",
       "incRE": "backyard_fence_b",
       "incRE": "american_lamp_post_high_a_dmg",

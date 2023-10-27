@@ -123,6 +123,18 @@
     },
     "device": {
       "type": "steeringWheel",
+      "turnSpeed": 0.2,
+      "node": "bone_roll_driver_l_03",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": 0.2,
+      "node": "bone_roll_driver_l_04",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
       "turnSpeed": -0.5,
       "node": "bone_roll_driver_r_01",
       "absoluteValue": true
@@ -131,6 +143,18 @@
       "type": "steeringWheel",
       "turnSpeed": -0.2,
       "node": "bone_roll_driver_r_02",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": 0.2,
+      "node": "bone_roll_driver_r_03",
+      "absoluteValue": true
+    },
+    "device": {
+      "type": "steeringWheel",
+      "turnSpeed": 0.2,
+      "node": "bone_roll_driver_r_04",
       "absoluteValue": true
     }
   },
@@ -2535,6 +2559,7 @@
     }
   },
   "commonWeapons": {
+    "updateAnimBonesAlways": true,
     "Weapon": {
       "trigger": "gunner0",
       "blk": "gameData/Weapons/groundModels_weapons/14_5mm_KPVT_BTR_152_user_machinegun.blk",
@@ -2654,6 +2679,9 @@
           89.0
         ]
       }
+    },
+    "animatedBones": {
+      "node": "bone_gun_mask_01"
     }
   },
   "weapon_presets": {
@@ -2956,9 +2984,9 @@
       }
     },
     "group": {
-      "find": "^bone_suspension_c_back_02",
+      "find": "^bone_suspension_(\w)_back_(\d+)$",
       "points": {
-        "lever_02": {
+        "lever": {
           "limitMin": [
             0.0,
             -1.0,
@@ -2969,9 +2997,9 @@
             1.0,
             0.0
           ],
-          "name": "bone_suspension_c_back_02"
+          "name": "bone_suspension_c_back_$2"
         },
-        "wheel_r_02": {
+        "wheel_r_01": {
           "searchChildren": {
             "occurence": 1,
             "limitMin": [
@@ -2984,13 +3012,13 @@
               1.0,
               0.0
             ],
-            "parent": "lever_02",
-            "find": "bone_wheel_r_back_02"
+            "parent": "lever",
+            "find": "bone_wheel_"
           }
         },
-        "wheel_l_02": {
+        "wheel_l_01": {
           "searchChildren": {
-            "occurence": 1,
+            "occurence": 2,
             "limitMin": [
               -1.0,
               -1.0,
@@ -3001,169 +3029,28 @@
               1.0,
               0.0
             ],
-            "parent": "lever_02",
-            "find": "bone_wheel_l_back_02"
+            "parent": "lever",
+            "find": "bone_wheel_"
           }
-        },
-        "suspension_back_r_02": {
-          "limitMin": [
-            -1.0,
-            0.0,
-            0.0
-          ],
-          "limitMax": [
-            1.0,
-            0.0,
-            0.0
-          ],
-          "name": "bone_suspension_r_back_02_01"
-        },
-        "suspension_back_l_02": {
-          "limitMin": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "limitMax": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "name": "bone_suspension_l_back_02_01"
         }
       },
       "constraints": {
         "edge": {
-          "to": "wheel_r_02",
-          "from": "lever_02"
+          "to": "wheel_r_01",
+          "from": "lever"
         },
         "edge": {
-          "from": "lever_02",
-          "to": "wheel_l_02"
-        },
-        "edge": {
-          "to": "wheel_r_02",
-          "from": "suspension_back_r_02"
-        },
-        "edge": {
-          "to": "wheel_l_02",
-          "from": "suspension_back_l_02"
+          "from": "lever",
+          "to": "wheel_l_01"
         },
         "slider": {
           "moveNodes": true,
           "rotateSecond": false,
           "moveSecond": true,
           "moveOnly": false,
-          "point": "lever_02",
-          "from": "wheel_l_02",
-          "to": "wheel_r_02"
-        }
-      }
-    },
-    "group": {
-      "find": "^bone_suspension_c_back_03",
-      "points": {
-        "lever_03": {
-          "limitMin": [
-            0.0,
-            -1.0,
-            0.0
-          ],
-          "limitMax": [
-            0.0,
-            1.0,
-            0.0
-          ],
-          "name": "bone_suspension_c_back_03"
-        },
-        "wheel_r_03": {
-          "searchChildren": {
-            "occurence": 1,
-            "limitMin": [
-              -1.0,
-              -1.0,
-              0.0
-            ],
-            "limitMax": [
-              1.0,
-              1.0,
-              0.0
-            ],
-            "parent": "lever_03",
-            "find": "bone_wheel_r_back_03"
-          }
-        },
-        "wheel_l_03": {
-          "searchChildren": {
-            "occurence": 1,
-            "limitMin": [
-              -1.0,
-              -1.0,
-              0.0
-            ],
-            "limitMax": [
-              1.0,
-              1.0,
-              0.0
-            ],
-            "parent": "lever_03",
-            "find": "bone_wheel_l_back_03"
-          }
-        },
-        "suspension_back_r_02": {
-          "limitMin": [
-            -1.0,
-            -1.0,
-            0.0
-          ],
-          "limitMax": [
-            1.0,
-            1.0,
-            0.0
-          ],
-          "name": "bone_suspension_r_back_02_01"
-        },
-        "suspension_back_l_02": {
-          "limitMin": [
-            -1.0,
-            -1.0,
-            0.0
-          ],
-          "limitMax": [
-            1.0,
-            1.0,
-            0.0
-          ],
-          "name": "bone_suspension_l_back_02_01"
-        }
-      },
-      "constraints": {
-        "edge": {
-          "to": "wheel_r_03",
-          "from": "lever_03"
-        },
-        "edge": {
-          "from": "lever_03",
-          "to": "wheel_l_03"
-        },
-        "edge": {
-          "rotateSecond": true,
-          "to": "suspension_back_r_02",
-          "from": "wheel_r_03"
-        },
-        "edge": {
-          "rotateSecond": true,
-          "from": "wheel_l_03",
-          "to": "suspension_back_l_02"
-        },
-        "slider": {
-          "moveNodes": true,
-          "rotateSecond": false,
-          "moveSecond": true,
-          "moveOnly": false,
-          "point": "lever_03",
-          "from": "wheel_l_03",
-          "to": "wheel_r_03"
+          "point": "lever",
+          "from": "wheel_l_01",
+          "to": "wheel_r_01"
         }
       }
     }

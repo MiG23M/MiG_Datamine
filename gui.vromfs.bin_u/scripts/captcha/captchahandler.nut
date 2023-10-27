@@ -11,6 +11,7 @@ let { register_command } = require("console")
 let getAllUnits = require("%scripts/unit/allUnits.nut")
 let { get_charserver_time_sec } = require("chard")
 let { isPlatformSteamDeck } = require("%scripts/clientState/platform.nut")
+let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
 
 let Rectangle = class {
   x = 0
@@ -49,6 +50,10 @@ let captchaImages = [
   "ger_finishedresearch"
 ]
 
+const CAPTCHA_MAX_TRIES = 3
+
+local lastShowReason = "Captcha: there were no shows"
+
 local CaptchaHandler = class extends gui_handlers.BaseGuiHandlerWT {
   wndType = handlerType.MODAL
   sceneBlkName = "%gui/captcha/captcha.blk"
@@ -57,7 +62,7 @@ local CaptchaHandler = class extends gui_handlers.BaseGuiHandlerWT {
   captchaImage = null
   gap = 10
   maxDifference = 10
-  maxTries = 3
+  maxTries = CAPTCHA_MAX_TRIES
 
   captchaData = Rectangle()
   holeData = Rectangle()
@@ -70,6 +75,7 @@ local CaptchaHandler = class extends gui_handlers.BaseGuiHandlerWT {
     this.gap = sfpf(this.gap)
     this.maxDifference = sfpf(this.maxDifference)
     this.initCaptcha()
+    sendBqEvent("CLIENT_POPUP_1", "captcha.open", { reason = lastShowReason })
   }
 
   function initCaptcha() {
@@ -150,6 +156,16 @@ local CaptchaHandler = class extends gui_handlers.BaseGuiHandlerWT {
 
     if(isError) {
       this.maxTries--
+
+      let cache = getCaptchaCache()
+      cache.failsPerSession++
+      cache.failsInRow++
+
+      sendBqEvent("CLIENT_POPUP_1", "captcha.fail", {
+        failsPerSession = cache.failsPerSession
+        failsInRow = cache.failsInRow
+      })
+
       if(this.maxTries == 0)
         return this.invokeCloseCallback()
 
@@ -172,7 +188,9 @@ local CaptchaHandler = class extends gui_handlers.BaseGuiHandlerWT {
 
   function invokeSuccessCallback() {
     let cache = getCaptchaCache()
+    sendBqEvent("CLIENT_POPUP_1", "captcha.success", { attemptNumber = CAPTCHA_MAX_TRIES - this.maxTries + 1 })
     cache.hasSuccessfullyTry = true
+    cache.failsInRow = 0
     cache.countTries = 0
     cache.lastTryTime = get_charserver_time_sec()
     if(this.callbackSuccess != null)
@@ -203,6 +221,7 @@ let function tryOpenCaptchaHandler(callbackSuccess = null, callbackClose = null)
   if(cache.hasSuccessfullyTry) {
     if (get_charserver_time_sec() - cache.lastTryTime >= maxTimeBetweenShowCaptcha) {
       handlersManager.loadHandler(CaptchaHandler, { callbackSuccess, callbackClose })
+      lastShowReason = $"Captcha: time between show captcha > {maxTimeBetweenShowCaptcha} c"
       return
     }
     callbackSuccess?()
@@ -211,17 +230,20 @@ let function tryOpenCaptchaHandler(callbackSuccess = null, callbackClose = null)
 
   if(cache.countTries > 6) {
     handlersManager.loadHandler(CaptchaHandler, { callbackSuccess, callbackClose })
+    lastShowReason = "Captcha: number of unsuccessful attempts > 6"
     return
   }
 
   let countComplaints = ::get_player_complaint_counts()?.complaint_count_other["BOT"] ?? 0
   if(countComplaints >= minComplaintsCountForShowCaptcha) {
     handlersManager.loadHandler(CaptchaHandler, { callbackSuccess, callbackClose })
+    lastShowReason = $"Captcha: number of complaints about the use of bots > {minComplaintsCountForShowCaptcha}"
     return
   }
 
   if(frnd() > 0.5) {
     handlersManager.loadHandler(CaptchaHandler, { callbackSuccess, callbackClose })
+    lastShowReason = "Captcha: mandatory random showing"
     return
   }
 
@@ -237,5 +259,9 @@ register_command(function() {
 register_command(function() {
   handlersManager.loadHandler(CaptchaHandler, {})
 }, "captcha.open")
+
+register_command(function() {
+  dlog(lastShowReason) // warning disable: -file:forbidden-function
+}, "captcha.lastShowReason")
 
 return tryOpenCaptchaHandler

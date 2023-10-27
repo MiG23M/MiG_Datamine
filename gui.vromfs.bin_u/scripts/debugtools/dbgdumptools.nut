@@ -31,7 +31,9 @@ let { get_mission_difficulty, stat_get_benchmark,
 let { get_charserver_time_sec } = require("chard")
 let { getEsUnitType, getUnitCountry } = require("%scripts/unit/unitInfo.nut")
 let { get_current_mission_info_cached } = require("blkGetters")
-
+let { userIdInt64 } = require("%scripts/user/myUser.nut")
+let { wwGetOperationId, wwGetPlayerSide, wwIsOperationLoaded,
+  wwGetOperationWinner } = require("worldwar")
 //==================================================================================================
 let get_fake_userlogs = memoize(@() getroottable()?["_fake_userlogs"] ?? {})
 let get_fake_mplayers_list = memoize(@() getroottable()?["_fake_mplayers_list"] ?? {})
@@ -71,10 +73,10 @@ let function debug_dump_debriefing_save(filename) {
     "get_premium_reward_wp"
     "get_premium_reward_xp"
     "is_worldwar_enabled"
-    "ww_is_operation_loaded"
-    "ww_get_operation_id"
-    "ww_get_operation_winner"
-    "ww_get_player_side"
+    { id = "wwIsOperationLoaded", value = wwIsOperationLoaded() }
+    { id = "wwGetOperationId", value = wwGetOperationId() }
+    { id = "wwGetOperationWinner", value = wwGetOperationWinner() }
+    { id = "wwGetPlayerSide", value = wwGetPlayerSide() }
     { id = "havePremium", value = havePremium.value }
     "shop_get_countries_list_with_autoset_units"
     "shop_get_units_list_with_autoset_modules"
@@ -170,11 +172,8 @@ let function debug_dump_debriefing_load(filename, onUnloadFunc = null) {
   ::HudBattleLog.battleLog = get_fake_battlelog()
   initListLabelsSquad()
 
-  let _is_in_flight = ::is_in_flight
-  ::is_in_flight = function() { return true }
   ::g_mis_custom_state.isCurRulesValid = false
-  ::g_mis_custom_state.getCurMissionRules()
-  ::is_in_flight = _is_in_flight
+  ::g_mis_custom_state.getCurMissionRules(true)
 
   gatherDebriefingResult()
   ::gui_start_debriefingFull()
@@ -261,7 +260,7 @@ let function debug_dump_respawn_save(filename) {
     { id = "_fake_mplayers_list", value = get_mplayers_list(GET_MPLAYERS_LIST, true) }
     { id = "_fake_get_current_mission_desc", value = function() { let b = DataBlock();
       get_current_mission_desc(b); return b } }
-    { id = "get_user_custom_state", args = [ ::my_user_id_int64, false ] }
+    { id = "get_user_custom_state", args = [ userIdInt64.value, false ] }
     { id = "_fake_mpchat_log", value = require("%scripts/chat/mpChatModel.nut").getLog() }
     "LAST_SESSION_DEBUG_INFO"
     "get_current_mission_info_cached"

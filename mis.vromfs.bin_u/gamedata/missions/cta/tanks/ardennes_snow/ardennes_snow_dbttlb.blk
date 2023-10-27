@@ -122,7 +122,7 @@
           "icon": {
             "icontype": "basezone_A",
             "side": "enemy",
-            "target": "briefing_dbttl_t2_capture_area"
+            "target": "dbttl_t2_capture_area"
           },
           "icon": {
             "icontype": "tank",
@@ -157,7 +157,7 @@
             "lookAt": "t1_briefing_airspawn"
           },
           "battleArea": {
-            "target": "briefing_battle_area"
+            "target": "dbttl_battle_area"
           }
         }
       }
@@ -179,7 +179,7 @@
       "excludes": {      }
     },
     "import_record": {
-      "file": "gameData/missions/cta/tanks/ardennes/template_ardennes_air_spawn.blk",
+      "file": "gameData/missions/cta/tanks/ardennes/spawnareas/template_ardennes_air_spawns.blk",
       "importAreas": true,
       "importUnits": true,
       "importTriggers": true,
@@ -207,7 +207,7 @@
       "excludes": {      }
     },
     "import_record": {
-      "file": "gameData/missions/cta/tanks/ardennes/mainareas/template_ardennes_Dbttl.blk",
+      "file": "gameData/missions/cta/tanks/ardennes/spawnareas/template_ardennes_Dbttl.blk",
       "importAreas": true,
       "importUnits": true,
       "importTriggers": true,
@@ -247,6 +247,20 @@
       "showMissionObjectives": true,
       "showWayPoints": true,
       "excludes": {      }
+    },
+    "import_record": {
+      "file": "gameData/missions/cta/tanks/ardennes/spawnareas/template_ardennes_defence_spawns.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
     }
   },
   "triggers": {
@@ -264,6 +278,204 @@
   "airfields": {  },
   "effects": {  },
   "units": {
+    "area_squad": {
+      "name": "dbttl_t1_spawn_01",
+      "tm": [
+    -0.531458,
+    0.0,
+    -0.847085,
+    0.0,
+    1.0,
+    0.0,
+    0.847085,
+    0.0,
+    -0.531458,
+    2943.31,
+    271.508,
+    2333.73,
+],
+      "props": {
+        "squad_members": "dbttl_t1_spawn_01_01",
+        "squad_members": "dbttl_t1_spawn_01_02",
+        "squad_members": "dbttl_t1_spawn_01_03",
+        "squad_members": "dbttl_t1_spawn_01_04",
+        "squad_members": "dbttl_t1_spawn_01_05",
+        "squad_members": "dbttl_t1_spawn_01_06",
+        "squad_members": "dbttl_t1_spawn_01_07",
+        "squad_members": "dbttl_t1_spawn_01_08",
+        "squad_members": "dbttl_t1_spawn_01_09",
+        "squad_members": "dbttl_t1_spawn_01_10",
+        "squad_members": "dbttl_t1_spawn_01_11",
+        "squad_members": "dbttl_t1_spawn_01_12",
+        "squad_members": "dbttl_t1_spawn_01_13",
+        "squad_members": "dbttl_t1_spawn_01_14",
+        "squad_members": "dbttl_t1_spawn_01_15",
+        "squad_members": "dbttl_t1_spawn_01_16",
+        "squad_members": "dbttl_t1_spawn_01_17",
+        "squad_members": "dbttl_t1_spawn_01_18",
+        "squad_members": "dbttl_t1_spawn_01_19",
+        "squad_members": "dbttl_t1_spawn_01_20"
+      }
+    },
+    "area_squad": {
+      "name": "dbttl_t1_spawn_02",
+      "tm": [
+    0.794104,
+    0.0,
+    -0.60778,
+    0.0,
+    1.0,
+    0.0,
+    0.60778,
+    0.0,
+    0.794104,
+    2939.92,
+    277.16,
+    2063.38,
+],
+      "props": {
+        "squad_members": "dbttl_t1_spawn_02_01",
+        "squad_members": "dbttl_t1_spawn_02_02",
+        "squad_members": "dbttl_t1_spawn_02_03",
+        "squad_members": "dbttl_t1_spawn_02_04",
+        "squad_members": "dbttl_t1_spawn_02_05",
+        "squad_members": "dbttl_t1_spawn_02_06",
+        "squad_members": "dbttl_t1_spawn_02_07",
+        "squad_members": "dbttl_t1_spawn_02_08",
+        "squad_members": "dbttl_t1_spawn_02_09",
+        "squad_members": "dbttl_t1_spawn_02_10",
+        "squad_members": "dbttl_t1_spawn_02_11",
+        "squad_members": "dbttl_t1_spawn_02_12",
+        "squad_members": "dbttl_t1_spawn_02_13",
+        "squad_members": "dbttl_t1_spawn_02_14",
+        "squad_members": "dbttl_t1_spawn_02_15",
+        "squad_members": "dbttl_t1_spawn_02_16",
+        "squad_members": "dbttl_t1_spawn_02_17",
+        "squad_members": "dbttl_t1_spawn_02_18",
+        "squad_members": "dbttl_t1_spawn_02_19",
+        "squad_members": "dbttl_t1_spawn_02_20"
+      }
+    },
+    "area_squad": {
+      "name": "dbttl_t2_spawn_01",
+      "tm": [
+    0.383769,
+    0.0,
+    0.923429,
+    0.0,
+    1.0,
+    0.0,
+    -0.923429,
+    0.0,
+    0.383769,
+    1171.11,
+    290.611,
+    2773.77,
+],
+      "props": {
+        "squad_members": "dbttl_t2_spawn_01_01",
+        "squad_members": "dbttl_t2_spawn_01_02",
+        "squad_members": "dbttl_t2_spawn_01_03",
+        "squad_members": "dbttl_t2_spawn_01_04",
+        "squad_members": "dbttl_t2_spawn_01_05",
+        "squad_members": "dbttl_t2_spawn_01_06",
+        "squad_members": "dbttl_t2_spawn_01_07",
+        "squad_members": "dbttl_t2_spawn_01_08",
+        "squad_members": "dbttl_t2_spawn_01_09",
+        "squad_members": "dbttl_t2_spawn_01_10",
+        "squad_members": "dbttl_t2_spawn_01_11",
+        "squad_members": "dbttl_t2_spawn_01_12",
+        "squad_members": "dbttl_t2_spawn_01_13",
+        "squad_members": "dbttl_t2_spawn_01_14",
+        "squad_members": "dbttl_t2_spawn_01_15",
+        "squad_members": "dbttl_t2_spawn_01_16",
+        "squad_members": "dbttl_t2_spawn_01_17",
+        "squad_members": "dbttl_t2_spawn_01_18",
+        "squad_members": "dbttl_t2_spawn_01_19",
+        "squad_members": "dbttl_t2_spawn_01_20"
+      }
+    },
+    "area_squad": {
+      "name": "dbttl_t2_spawn_02",
+      "tm": [
+    0.5561,
+    0.0,
+    -0.831116,
+    0.0,
+    1.0,
+    0.0,
+    0.831116,
+    0.0,
+    0.5561,
+    982.635,
+    299.756,
+    2270.42,
+],
+      "props": {
+        "squad_members": "dbttl_t2_spawn_02_01",
+        "squad_members": "dbttl_t2_spawn_02_02",
+        "squad_members": "dbttl_t2_spawn_02_03",
+        "squad_members": "dbttl_t2_spawn_02_04",
+        "squad_members": "dbttl_t2_spawn_02_05",
+        "squad_members": "dbttl_t2_spawn_02_06",
+        "squad_members": "dbttl_t2_spawn_02_07",
+        "squad_members": "dbttl_t2_spawn_02_08",
+        "squad_members": "dbttl_t2_spawn_02_09",
+        "squad_members": "dbttl_t2_spawn_02_10",
+        "squad_members": "dbttl_t2_spawn_02_11",
+        "squad_members": "dbttl_t2_spawn_02_12",
+        "squad_members": "dbttl_t2_spawn_02_13",
+        "squad_members": "dbttl_t2_spawn_02_14",
+        "squad_members": "dbttl_t2_spawn_02_15",
+        "squad_members": "dbttl_t2_spawn_02_16",
+        "squad_members": "dbttl_t2_spawn_02_17",
+        "squad_members": "dbttl_t2_spawn_02_18",
+        "squad_members": "dbttl_t2_spawn_02_19",
+        "squad_members": "dbttl_t2_spawn_02_20"
+      }
+    },
+    "area_squad": {
+      "name": "t1_killarea",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    3358.82,
+    4.87476,
+    2800.79,
+],
+      "props": {
+        "squad_members": "t1_killarea_01",
+        "squad_members": "t1_killarea_02"
+      }
+    },
+    "area_squad": {
+      "name": "t2_killarea",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    865.522,
+    17.9268,
+    3208.74,
+],
+      "props": {
+        "squad_members": "t2_killarea_01",
+        "squad_members": "t2_killarea_02"
+      }
+    },
     "area_squad": {
       "name": "remove_rendinst_area",
       "tm": [
@@ -288,7 +500,7 @@
     }
   },
   "areas": {
-    "briefing_battle_area": {
+    "dbttl_battle_area": {
       "type": "Box",
       "tm": [
     2400.0,
@@ -307,8 +519,8 @@
       "objLayer": 4,
       "props": {      }
     },
-    "briefing_dbttl_t2_capture_area": {
-      "type": "Point",
+    "dbttl_t2_capture_area": {
+      "type": "Cylinder",
       "tm": [
     32.696,
     0.0,
@@ -319,9 +531,9 @@
     25.0885,
     0.0,
     32.696,
-    1290.15,
-    299.3,
-    2570.75,
+    1289.76,
+    298.5,
+    2570.73,
 ],
       "objLayer": 0,
       "props": {      }

@@ -1,0 +1,178 @@
+{
+  "type": "rwr",
+  "name": "AN/ALR-45",
+  "power": 250.0,
+  "txAngle": [
+    5.0,
+    15.0
+  ],
+  "txSidelobes": -30.0,
+  "rxAngle": [
+    180.0,
+    90.0
+  ],
+  "range": 50000.0,
+  "signalSfxName": "alarm_radar",
+  "band4": true,
+  "band6": true,
+  "band8": true,
+  "detectTracking": false,
+  "detectLaunch": false,
+  "targetTracking": false,
+  "mandatoryRecognition": true,
+  "band5": true,
+  "band7": true,
+  "band9": true,
+  "detectTracking": true,
+  "receivers": {
+    "receiver": {
+      "azimuth": 0.0,
+      "elevation": 0.0,
+      "azimuthWidth": 180.0,
+      "elevationWidth": 90.0,
+      "angleFinder": true
+    },
+    "receiver": {
+      "azimuth": -180.0,
+      "elevation": 0.0,
+      "azimuthWidth": 180.0,
+      "elevationWidth": 90.0,
+      "angleFinder": true
+    }
+  },
+  "groups": {
+    "group": {
+      "name": "SAM LOW",
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "AAA LOW"
+    },
+    "group": {
+      "name": "SAM MID",
+      "detectLaunch": true,
+      "type": "4R-90-Yatagan"
+    },
+    "group": {
+      "name": "AI/AAA MID",
+      "detectLaunch": true,
+      "type": "AN/APS-6",
+      "type": "AN/APS-19",
+      "type": "AN/APS-21",
+      "type": "AN/APS-67",
+      "type": "NASARR",
+      "type": "US R21G M1",
+      "type": "AN/APQ-72",
+      "type": "AN/APQ-100",
+      "type": "AN/APQ-104",
+      "type": "AN/APQ-120",
+      "type": "AN/APQ-126",
+      "type": "AN/APQ-159",
+      "type": "AN/APQ-50",
+      "type": "AN/APQ-51",
+      "type": "AN/APQ-94",
+      "type": "AN/APG-26",
+      "type": "AN/APG-33",
+      "type": "Thorium",
+      "type": "RP-1 TA",
+      "type": "RP-1 TT",
+      "type": "RP-5 TA",
+      "type": "RP-5 TT",
+      "type": "CD-30",
+      "type": "Cyrano Ibis",
+      "type": "Cyrano II",
+      "type": "Cyrano-IV",
+      "type": "Cyrano-IVMR",
+      "type": "DRAC-25A",
+      "type": "DRAC-32A",
+      "type": "DRAA 3D AIDA",
+      "type": "AI Mk.23",
+      "type": "AI Mk.18",
+      "type": "PS-03",
+      "type": "PS-011A 71H IR",
+      "type": "PS-42 TA",
+      "type": "PS-42 TT",
+      "type": "Type 1492",
+      "type": "Type 208A",
+      "type": "AN/APG-30",
+      "type": "AN/ASG-14",
+      "type": "AN/ASG-19",
+      "type": "SRD-1",
+      "type": "SRD-5",
+      "type": "AIDA 2",
+      "type": "ARI.5820",
+      "type": "ARI.5857",
+      "type": "Marconi Type 226",
+      "type": "ELTA EL/M-2001B",
+      "type": "1RL34",
+      "type": "Marconi S-400",
+      "type": "MR-102-Baklan",
+      "type": "MR-104-Rys",
+      "type": "MR-105",
+      "type": "4R-90-Yatagan",
+      "type": "Yakor-M",
+      "type": "Type-275",
+      "type": "Type 903",
+      "type": "AN-SPG-48",
+      "type": "MK25-radar",
+      "type": "WM-27",
+      "type": "SGR-108"
+    },
+    "group": {
+      "name": "SAM HIGH",
+      "detectLaunch": true
+    },
+    "group": {
+      "name": "AI HIGH",
+      "detectLaunch": true,
+      "type": "Sapphire-21",
+      "type": "Sapphire-23d_tp_23",
+      "type": "Sapphire-23ml_tp_23m",
+      "type": "Sapphire-23mla_tp_23m",
+      "type": "Sapphire-23mla-2_tp_23m"
+    }
+  },
+  "targetsDirectionGroups": {
+    "targetsDirectionGroup": {
+      "text": "LO",
+      "group": "SAM LOW",
+      "group": "AAA LOW"
+    },
+    "targetsDirectionGroup": {
+      "text": "MID",
+      "group": "SAM MID",
+      "group": "AI/AAA MID"
+    },
+    "targetsDirectionGroup": {
+      "text": "HI",
+      "group": "SAM HIGH",
+      "group": "AI HIGH"
+    }
+  },
+  "targetsPresenceGroups": {
+    "targetsPresenceGroup": {
+      "text": "hud/rwr_threat_sam_low",
+      "group": "SAM LOW"
+    },
+    "targetsPresenceGroup": {
+      "text": "hud/rwr_threat_sam_mid",
+      "group": "SAM MID"
+    },
+    "targetsPresenceGroup": {
+      "text": "hud/rwr_threat_sam_high",
+      "group": "SAM HIGH"
+    },
+    "targetsPresenceGroup": {
+      "text": "hud/rwr_threat_aaa_low",
+      "group": "AAA LOW"
+    },
+    "targetsPresenceGroup": {
+      "text": "hud/rwr_threat_aaa_ai_mid",
+      "group": "AI/AAA MID"
+    },
+    "targetsPresenceGroup": {
+      "text": "hud/rwr_threat_ai_high",
+      "group": "AI HIGH"
+    }
+  }
+}

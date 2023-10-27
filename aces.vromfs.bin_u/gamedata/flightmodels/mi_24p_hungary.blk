@@ -49,6 +49,42 @@
       },
       "cannon5_dm": {
         "hp": 15.0
+      },
+      "mgun10_dm": {
+        "hp": 15.0
+      },
+      "mgun11_dm": {
+        "hp": 15.0
+      },
+      "mgun12_dm": {
+        "hp": 15.0
+      },
+      "mgun1_dm": {
+        "hp": 15.0
+      },
+      "mgun2_dm": {
+        "hp": 15.0
+      },
+      "mgun3_dm": {
+        "hp": 15.0
+      },
+      "mgun4_dm": {
+        "hp": 15.0
+      },
+      "mgun5_dm": {
+        "hp": 15.0
+      },
+      "mgun6_dm": {
+        "hp": 15.0
+      },
+      "mgun7_dm": {
+        "hp": 15.0
+      },
+      "mgun8_dm": {
+        "hp": 15.0
+      },
+      "mgun9_dm": {
+        "hp": 15.0
       }
     },
     "armor4": {
@@ -111,6 +147,15 @@
       }
     },
     "dural": {
+      "cover10_dm": {
+        "hp": 19.5
+      },
+      "cover11_dm": {
+        "hp": 19.5
+      },
+      "cover12_dm": {
+        "hp": 19.5
+      },
       "cover5_dm": {
         "hp": 19.5
       },
@@ -121,6 +166,9 @@
         "hp": 19.5
       },
       "cover8_dm": {
+        "hp": 19.5
+      },
+      "cover9_dm": {
         "hp": 19.5
       }
     },
@@ -221,6 +269,15 @@
       "name": "cannon5_dm"
     },
     "part": {
+      "name": "cover10_dm"
+    },
+    "part": {
+      "name": "cover11_dm"
+    },
+    "part": {
+      "name": "cover12_dm"
+    },
+    "part": {
       "name": "cover5_dm"
     },
     "part": {
@@ -231,6 +288,9 @@
     },
     "part": {
       "name": "cover8_dm"
+    },
+    "part": {
+      "name": "cover9_dm"
     },
     "part": {
       "name": "elevator0_dm",
@@ -473,6 +533,14 @@
         "smoke": 0.2
       },
       "onHit": {
+        "damage": 20.0,
+        "tail_dm": 0.2
+      },
+      "onHit": {
+        "damage": 30.0,
+        "tail_dm": 0.4
+      },
+      "onHit": {
         "damage": 50.0,
         "tail_dm": 0.6
       },
@@ -482,7 +550,16 @@
       },
       "onHit": {
         "damage": 100.0,
+        "tail_dm": 0.9
+      },
+      "onHit": {
+        "damage": 200.0,
         "tail_dm": 1.0
+      },
+      "onHit": {
+        "damage": 300.0,
+        "tail_dm": 1.0,
+        "expl": 1.0
       },
       "onKill": {
         "tail_dm": 1.0,
@@ -511,21 +588,32 @@
       "onKill": {
         "damage": 30.0,
         "tail_dm": 1.0,
-        "nothing": 5.0
+        "expl": 0.3
       },
       "onKill": {
         "damage": 50.0,
         "tail_dm": 1.0,
-        "nothing": 4.0
+        "expl": 0.4
       },
       "onKill": {
         "damage": 70.0,
         "tail_dm": 1.0,
-        "nothing": 3.0
+        "expl": 0.5
       },
       "onKill": {
         "damage": 100.0,
-        "tail_dm": 1.0
+        "tail_dm": 1.0,
+        "expl": 0.5
+      },
+      "onKill": {
+        "damage": 200.0,
+        "tail_dm": 1.0,
+        "expl": 0.5
+      },
+      "onKill": {
+        "damage": 300.0,
+        "tail_dm": 1.0,
+        "expl": 1.0
       }
     },
     "part": {
@@ -596,6 +684,42 @@
     },
     "part": {
       "name": "gunner1_dm"
+    },
+    "part": {
+      "name": "mgun10_dm"
+    },
+    "part": {
+      "name": "mgun11_dm"
+    },
+    "part": {
+      "name": "mgun12_dm"
+    },
+    "part": {
+      "name": "mgun1_dm"
+    },
+    "part": {
+      "name": "mgun2_dm"
+    },
+    "part": {
+      "name": "mgun3_dm"
+    },
+    "part": {
+      "name": "mgun4_dm"
+    },
+    "part": {
+      "name": "mgun5_dm"
+    },
+    "part": {
+      "name": "mgun6_dm"
+    },
+    "part": {
+      "name": "mgun7_dm"
+    },
+    "part": {
+      "name": "mgun8_dm"
+    },
+    "part": {
+      "name": "mgun9_dm"
     },
     "part": {
       "name": "oil1_dm",
@@ -1670,6 +1794,10 @@
     "preset": {
       "name": "mi_24p_upk_23_250",
       "blk": "gameData/flightModels/weaponPresets/mi_24p_upk_23_250.blk"
+    },
+    "preset": {
+      "name": "mi_24p_guv_8700",
+      "blk": "gameData/flightModels/weaponPresets/mi_24p_guv_8700.blk"
     }
   },
   "WeaponSlots": {
@@ -1704,7 +1832,23 @@
       "node": "lipa_off",
       "node": "ub_57_16_b001",
       "node": "ub_57_16_b002",
-      "node": "fuse4"
+      "node": "fuse4",
+      "node": "guv_8700_gunpod_001",
+      "node": "guv_8700_gunpod_001_mgun1",
+      "node": "guv_8700_gunpod_001_mgun2",
+      "node": "guv_8700_gunpod_001_mgun3",
+      "node": "guv_8700_gunpod_002",
+      "node": "guv_8700_gunpod_002_mgun1",
+      "node": "guv_8700_gunpod_002_mgun2",
+      "node": "guv_8700_gunpod_002_mgun3",
+      "node": "guv_8700_gunpod_003",
+      "node": "guv_8700_gunpod_003_mgun1",
+      "node": "guv_8700_gunpod_003_mgun2",
+      "node": "guv_8700_gunpod_003_mgun3",
+      "node": "guv_8700_gunpod_004",
+      "node": "guv_8700_gunpod_004_mgun1",
+      "node": "guv_8700_gunpod_004_mgun2",
+      "node": "guv_8700_gunpod_004_mgun3"
     },
     "HideDmParts": {
       "node": "cover5_dm",
@@ -1714,7 +1858,23 @@
       "node": "cannon2_dm",
       "node": "cannon3_dm",
       "node": "cannon4_dm",
-      "node": "cannon5_dm"
+      "node": "cannon5_dm",
+      "node": "cover9_dm",
+      "node": "mgun1_dm",
+      "node": "mgun2_dm",
+      "node": "mgun3_dm",
+      "node": "cover10_dm",
+      "node": "mgun4_dm",
+      "node": "mgun5_dm",
+      "node": "mgun6_dm",
+      "node": "cover11_dm",
+      "node": "mgun7_dm",
+      "node": "mgun8_dm",
+      "node": "mgun9_dm",
+      "node": "cover12_dm",
+      "node": "mgun10_dm",
+      "node": "mgun11_dm",
+      "node": "mgun12_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2095,6 +2255,77 @@
           "external": true,
           "dm": "cannon2_dm"
         }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "guv_8700_slot2",
+        "reqModification": "su_guv_8700",
+        "ShowNodes": {
+          "node": "guv_8700_gunpod_001",
+          "node": "guv_8700_gunpod_001_mgun1",
+          "node": "guv_8700_gunpod_001_mgun2",
+          "node": "guv_8700_gunpod_001_mgun3"
+        },
+        "ShowDmParts": {
+          "node": "cover9_dm",
+          "node": "mgun1_dm",
+          "node": "mgun2_dm",
+          "node": "mgun3_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare11",
+          "flash": "flare11",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun1_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunYaK_B_guv.blk",
+          "emitter": "flare12",
+          "flash": "flare12",
+          "bullets": 750,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun2_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare13",
+          "flash": "flare13",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun3_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "guv_8700_slot5"
+        },
+        "BannedWeaponPreset": {
+          "slot": 3,
+          "preset": "guv_8700_slot3"
+        },
+        "BannedWeaponPreset": {
+          "slot": 4,
+          "preset": "guv_8700_slot4"
+        }
       }
     },
     "WeaponSlot": {
@@ -2183,6 +2414,77 @@
           "external": true,
           "dm": "cannon3_dm"
         }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "guv_8700_slot3",
+        "reqModification": "su_guv_8700",
+        "ShowNodes": {
+          "node": "guv_8700_gunpod_002",
+          "node": "guv_8700_gunpod_002_mgun1",
+          "node": "guv_8700_gunpod_002_mgun2",
+          "node": "guv_8700_gunpod_002_mgun3"
+        },
+        "ShowDmParts": {
+          "node": "cover10_dm",
+          "node": "mgun4_dm",
+          "node": "mgun5_dm",
+          "node": "mgun6_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare14",
+          "flash": "flare14",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun6_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunYaK_B_guv.blk",
+          "emitter": "flare15",
+          "flash": "flare15",
+          "bullets": 750,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun5_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare16",
+          "flash": "flare16",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun4_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "DependentWeaponPreset": {
+          "slot": 4,
+          "preset": "guv_8700_slot4"
+        },
+        "BannedWeaponPreset": {
+          "slot": 2,
+          "preset": "guv_8700_slot2"
+        },
+        "BannedWeaponPreset": {
+          "slot": 5,
+          "preset": "guv_8700_slot5"
+        }
       }
     },
     "WeaponSlot": {
@@ -2270,6 +2572,77 @@
           "counterIndex": 1,
           "external": true,
           "dm": "cannon4_dm"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "guv_8700_slot4",
+        "reqModification": "su_guv_8700",
+        "ShowNodes": {
+          "node": "guv_8700_gunpod_003",
+          "node": "guv_8700_gunpod_003_mgun1",
+          "node": "guv_8700_gunpod_003_mgun2",
+          "node": "guv_8700_gunpod_003_mgun3"
+        },
+        "ShowDmParts": {
+          "node": "cover11_dm",
+          "node": "mgun7_dm",
+          "node": "mgun8_dm",
+          "node": "mgun9_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare19",
+          "flash": "flare19",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun9_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunYaK_B_guv.blk",
+          "emitter": "flare18",
+          "flash": "flare18",
+          "bullets": 750,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun8_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare17",
+          "flash": "flare17",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun7_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "DependentWeaponPreset": {
+          "slot": 3,
+          "preset": "guv_8700_slot3"
+        },
+        "BannedWeaponPreset": {
+          "slot": 2,
+          "preset": "guv_8700_slot2"
+        },
+        "BannedWeaponPreset": {
+          "slot": 5,
+          "preset": "guv_8700_slot5"
         }
       }
     },
@@ -2435,6 +2808,77 @@
           "counterIndex": 1,
           "external": true,
           "dm": "cannon5_dm"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "guv_8700_slot5",
+        "reqModification": "su_guv_8700",
+        "ShowNodes": {
+          "node": "guv_8700_gunpod_004",
+          "node": "guv_8700_gunpod_004_mgun1",
+          "node": "guv_8700_gunpod_004_mgun2",
+          "node": "guv_8700_gunpod_004_mgun3"
+        },
+        "ShowDmParts": {
+          "node": "cover12_dm",
+          "node": "mgun10_dm",
+          "node": "mgun11_dm",
+          "node": "mgun12_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare22",
+          "flash": "flare22",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun12_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunYaK_B_guv.blk",
+          "emitter": "flare21",
+          "flash": "flare21",
+          "bullets": 750,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun11_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunGShG_guv.blk",
+          "emitter": "flare20",
+          "flash": "flare20",
+          "bullets": 1800,
+          "spread": 1.5,
+          "traceOffset": 1,
+          "counterIndex": 1,
+          "external": true,
+          "dm": "mgun10_dm",
+          "rotationAnimScale": "gun_rotate_01:CRS",
+          "shell": "emtr_shellrejection2"
+        },
+        "DependentWeaponPreset": {
+          "slot": 2,
+          "preset": "guv_8700_slot2"
+        },
+        "BannedWeaponPreset": {
+          "slot": 3,
+          "preset": "guv_8700_slot3"
+        },
+        "BannedWeaponPreset": {
+          "slot": 4,
+          "preset": "guv_8700_slot4"
         }
       }
     },
@@ -3608,6 +4052,14 @@
       "modClass": "weapon",
       "reqModification": "mi_24_fab_250",
       "tier": 2
+    },
+    "su_guv_8700": {
+      "prevModification": "mi_24_fab_500",
+      "tier": 3
+    },
+    "gunGShG_new_gun": {
+      "prevModification": "su_guv_8700",
+      "tier": 4
     },
     "mi_24_r_60": {
       "deactivationIsAllowed": false,

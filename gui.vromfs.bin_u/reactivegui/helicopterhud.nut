@@ -17,6 +17,7 @@ let {
 let { radarElement, twsElement } = require("airHudComponents.nut")
 let leftPanel = require("airHudLeftPanel.nut")
 let missileSalvoTimer = require("missileSalvoTimer.nut")
+let actionBarTopPanel = require("hud/actionBarTopPanel.nut")
 
 let compassSize = [hdpx(420), hdpx(40)]
 
@@ -63,7 +64,7 @@ let function helicopterMainHud() {
       vertSpeed(sh(4.0), sh(15), sw(50) + hdpx(315), sh(42.5), HudColor.value)
       horSpeed(HudColor.value)
       helicopterParamsTable(HudColor)
-      taTarget(sw(25), sh(25))
+      taTarget(sw(25), sh(25), false)
     ]
     : null
   }
@@ -170,6 +171,7 @@ let helicopterRoot = {
   size = [sw(100), sh(100)]
   children = [
     leftPanel
+    actionBarTopPanel
     indicatorsCtor
   ]
 

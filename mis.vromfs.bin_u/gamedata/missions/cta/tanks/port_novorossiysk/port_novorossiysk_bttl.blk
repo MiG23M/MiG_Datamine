@@ -80,7 +80,7 @@
       "optionalTakeOff": false,
       "environment": "Day",
       "weather": "clear",
-      "locName": "missions/_Bttl;port_novorossiysk/name",
+      "locName": "missions/_Bttl1;port_novorossiysk/name",
       "locDesc": "port_novorossiysk/desc;missions/_Bttl/desc",
       "scoreLimit": 18000,
       "timeLimit": 25,
@@ -150,15 +150,15 @@
           "icon": {
             "icontype": "basezone_A",
             "side": "ally",
-            "target": "briefing_bttl_t1_capture_area"
+            "target": "bttl_t1_capture_area_arcade"
           },
           "icon": {
             "icontype": "basezone_B",
             "side": "enemy",
-            "target": "briefing_bttl_t2_capture_area"
+            "target": "bttl_t2_capture_area_arcade"
           },
           "battleArea": {
-            "target": "briefing_battlearea"
+            "target": "bttl_battle_area_arcade"
           }
         }
       }
@@ -166,7 +166,7 @@
   },
   "imports": {
     "import_record": {
-      "file": "gameData/missions/cta/tanks/port_novorossiysk/template_port_novorossiysk_air_spawn.blk",
+      "file": "gameData/missions/cta/tanks/port_novorossiysk/spawnareas/template_port_novorossiysk_air_spawns.blk",
       "importAreas": true,
       "importUnits": true,
       "importTriggers": true,
@@ -194,7 +194,7 @@
       "excludes": {      }
     },
     "import_record": {
-      "file": "gameData/missions/cta/tanks/port_novorossiysk/battleareas/template_port_novorossiysk_Bttl_battleareas.blk",
+      "file": "gameData/missions/cta/tanks/port_novorossiysk/spawnareas/template_port_novorossiysk_Bttl.blk",
       "importAreas": true,
       "importUnits": true,
       "importTriggers": true,
@@ -222,7 +222,7 @@
       "excludes": {      }
     },
     "import_record": {
-      "file": "gameData/missions/cta/tanks/port_novorossiysk/battleareas/template_port_novorossiysk_exclude_battleareas.blk",
+      "file": "gameData/missions/cta/tanks/port_novorossiysk/spawnareas/template_port_novorossiysk_exclude_battleareas.blk",
       "importAreas": true,
       "importUnits": true,
       "importTriggers": true,
@@ -300,47 +300,79 @@
         }
       },
       "way": {      }
+    },
+    "area_squad": {
+      "name": "bttl_t2_spawn_01_arcade",
+      "tm": [
+    0.173648,
+    0.0,
+    0.984808,
+    0.0,
+    1.0,
+    0.0,
+    -0.984808,
+    0.0,
+    0.173648,
+    710.0,
+    8.29834,
+    1700.8,
+],
+      "props": {
+        "squad_members": "bttl_t2_spawn_01_01",
+        "squad_members": "bttl_t2_spawn_01_02",
+        "squad_members": "bttl_t2_spawn_01_03",
+        "squad_members": "bttl_t2_spawn_01_04",
+        "squad_members": "bttl_t2_spawn_01_05",
+        "squad_members": "bttl_t2_spawn_01_06",
+        "squad_members": "bttl_t2_spawn_01_07",
+        "squad_members": "bttl_t2_spawn_01_08",
+        "squad_members": "bttl_t2_spawn_01_09",
+        "squad_members": "bttl_t2_spawn_01_10",
+        "squad_members": "bttl_t2_spawn_01_11",
+        "squad_members": "bttl_t2_spawn_01_12",
+        "squad_members": "bttl_t2_spawn_01_13",
+        "squad_members": "bttl_t2_spawn_01_14",
+        "squad_members": "bttl_t2_spawn_01_15",
+        "squad_members": "bttl_t2_spawn_01_16"
+      }
+    },
+    "area_squad": {
+      "name": "bttl_t1_spawn_01_arcade",
+      "tm": [
+    0.173648,
+    0.0,
+    0.984808,
+    0.0,
+    1.0,
+    0.0,
+    -0.984808,
+    0.0,
+    0.173648,
+    1781.0,
+    5.4,
+    238.55,
+],
+      "props": {
+        "squad_members": "bttl_t1_spawn_01_01",
+        "squad_members": "bttl_t1_spawn_01_02",
+        "squad_members": "bttl_t1_spawn_01_03",
+        "squad_members": "bttl_t1_spawn_01_04",
+        "squad_members": "bttl_t1_spawn_01_05",
+        "squad_members": "bttl_t1_spawn_01_06",
+        "squad_members": "bttl_t1_spawn_01_07",
+        "squad_members": "bttl_t1_spawn_01_08",
+        "squad_members": "bttl_t1_spawn_01_09",
+        "squad_members": "bttl_t1_spawn_01_10",
+        "squad_members": "bttl_t1_spawn_01_11",
+        "squad_members": "bttl_t1_spawn_01_12",
+        "squad_members": "bttl_t1_spawn_01_13",
+        "squad_members": "bttl_t1_spawn_01_14",
+        "squad_members": "bttl_t1_spawn_01_15",
+        "squad_members": "bttl_t1_spawn_01_16"
+      }
     }
   },
   "areas": {
-    "briefing_bttl_t1_capture_area": {
-      "type": "Point",
-      "tm": [
-    -41.1732,
-    0.0,
-    -1.79765,
-    0.0,
-    75.0,
-    0.0,
-    1.79765,
-    0.0,
-    -41.1732,
-    1192.62,
-    0.00389957,
-    666.08,
-],
-      "objLayer": 0,
-      "props": {      }
-    },
-    "briefing_bttl_t2_capture_area": {
-      "type": "Point",
-      "tm": [
-    -41.1732,
-    0.0,
-    -1.79765,
-    0.0,
-    75.0,
-    0.0,
-    1.79765,
-    0.0,
-    -41.1732,
-    866.469,
-    0.00389957,
-    1011.99,
-],
-      "objLayer": 0,
-      "props": {      }
-    },
     "briefing_bttl_t1_spawn_01": {
       "type": "Point",
       "tm": [
@@ -379,7 +411,7 @@
       "objLayer": 0,
       "props": {      }
     },
-    "briefing_battlearea": {
+    "bttl_battle_area_arcade": {
       "type": "Box",
       "tm": [
     -1700.0,
@@ -392,10 +424,48 @@
     0.0,
     -1700.0,
     1046.85,
-    63.5845,
+    0.0,
     918.65,
 ],
       "objLayer": 4,
+      "props": {      }
+    },
+    "bttl_t1_capture_area_arcade": {
+      "type": "Cylinder",
+      "tm": [
+    -41.1732,
+    0.0,
+    -1.79765,
+    0.0,
+    75.0,
+    0.0,
+    1.79765,
+    0.0,
+    -41.1732,
+    1192.62,
+    0.00372314,
+    666.08,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "bttl_t2_capture_area_arcade": {
+      "type": "Cylinder",
+      "tm": [
+    -41.1732,
+    0.0,
+    -1.79765,
+    0.0,
+    75.0,
+    0.0,
+    1.79765,
+    0.0,
+    -41.1732,
+    866.469,
+    0.00389099,
+    1011.99,
+],
+      "objLayer": 0,
       "props": {      }
     }
   },

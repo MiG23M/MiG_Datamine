@@ -1,8 +1,8 @@
 {
   "maxChannels": 128,
   "maxSoftwareChannels": 128,
-  "maxVorbisCodecs": 64,
-  "maxFADPCMCodecs": 64,
+  "maxVorbisCodecs": 128,
+  "maxFADPCMCodecs": 128,
   "vol0virtualvol": 0.001,
   "sampleRate": 48000,
   "fmodEnableSpatialSound": false,
@@ -209,6 +209,14 @@
           "preload": false
         },
         "tanks_effects.assets": {
+          "async": true,
+          "preload": false
+        },
+        "tanks_effects_radio": {
+          "async": true,
+          "preload": false
+        },
+        "tanks_effects_radio.assets": {
           "async": true,
           "preload": false
         },
@@ -517,14 +525,11 @@
     "sfx": {
       "name": "sfx",
       "name": "gui",
-      "name": "sounds/fx/ambient",
       "name": "sounds/fx/cutscenes",
       "name": "sounds/fx/everywhere",
       "name": "sounds/fx/miscellaneous_inside",
       "name": "sounds/fx/taken_hits_inside",
-      "name": "sounds/fx/underwater",
       "name": "sounds/fx/unit_destroy",
-      "name": "sounds/fx/water_surface",
       "name": "sounds/outside/fx/ai_hits",
       "name": "sounds/outside/fx/ambient",
       "name": "sounds/outside/fx/bomb_whistle",
@@ -631,6 +636,7 @@
     "pathAITanks": "ground/effects/ai",
     "pathShips": "naval/effects",
     "pathAIShips": "naval/effects/ai",
+    "pathEvents": "event",
     "pathWalkers": "naval/effects",
     "eventBulletHitGround": "bullethit_ground",
     "eventBulletHitGroundDist": 200.0,

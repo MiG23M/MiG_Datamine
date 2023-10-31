@@ -2,10 +2,10 @@
 
 let DataBlock = require("DataBlock")
 let { file_exists } = require("dagor.fs")
-let { pow, floor } = require("math")
+let math = require("math")
 let { format } = require("string")
 let { blkFromPath } = require("%sqStdLibs/helpers/datablockUtils.nut")
-let { interpolateArray } = require("%sqstd/math.nut")
+let { interpolateArray, round_by_value } = require("%sqstd/math.nut")
 let { get_selected_mission, get_mission_type } = require("mission")
 let { get_current_mission_info_cached, get_wpcost_blk,
 get_ranks_blk, get_warpoints_blk, get_unittags_blk  } = require("blkGetters")
@@ -43,7 +43,7 @@ let ds_unit_type_names = {
   exp_helicopter = ::DS_UT_AIRCRAFT
 }
 
-global enum EDifficulties {
+enum EDifficulties {
   ARCADE = 0,
   REALISTIC = 1,
   HARDCORE = 2,
@@ -57,7 +57,7 @@ global enum EDifficulties {
   TOTAL = 9
 }
 
-global const EDIFF_SHIFT = 3
+const EDIFF_SHIFT = 3
 
 ::EDifficultiesStr <- {
   [EDifficulties.ARCADE] = "Arcade",
@@ -148,17 +148,6 @@ global const EDIFF_SHIFT = 3
 
 ::get_unit_type_by_unit_name <- function get_unit_type_by_unit_name(unitId) {
   return ::mapWpUnitClassToWpUnitType?[::getWpcostUnitClass(unitId)] ?? ::DS_UT_INVALID
-}
-let function round(value, digits = 0) {
-  let mul = pow(10, digits)
-  return floor(0.5 + value.tofloat() * mul) / mul
-}
-::calc_battle_rating_from_rank <- function calc_battle_rating_from_rank(economicRank) {
-  return round(economicRank / 3.0 + 1, 1)
-}
-
-::get_battle_rating_string_from_rank <- function get_battle_rating_string_from_rank(economicRank) {
-  return format("%.1f", ::calc_battle_rating_from_rank(economicRank))
 }
 
 ::get_unit_blk_economic_rank_by_mode <- function get_unit_blk_economic_rank_by_mode(unitBlk, ediff) {
@@ -278,13 +267,13 @@ let function getSpawnScoreWeaponMulByParams(unitName, unitClass, totalBombRocket
   if (totalNapalmBombMass > 0) {
     let napalmBombWeaponBlk = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "NapalmBombWeapon")
     if (napalmBombWeaponBlk?.mass != null) {
-      weaponMul = max(weaponMul, interpolateArray((napalmBombWeaponBlk % "mass"), totalNapalmBombMass))
+      weaponMul = math.max(weaponMul, interpolateArray((napalmBombWeaponBlk % "mass"), totalNapalmBombMass))
     }
   }
   if (atgmParams.visibilityTypeArr.len() > 0) {
     let atgmVisibilityTypeMulBlk = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "AtgmVisibilityTypeMul")
     foreach (atgmVisibilityType in atgmParams.visibilityTypeArr) {
-      weaponMul = max(weaponMul, atgmVisibilityTypeMulBlk?[atgmVisibilityType] ?? 0.0)
+      weaponMul = math.max(weaponMul, atgmVisibilityTypeMulBlk?[atgmVisibilityType] ?? 0.0)
     }
     let maxDistance = atgmParams.maxDistance
     if (maxDistance > 0) {
@@ -304,7 +293,7 @@ let function getSpawnScoreWeaponMulByParams(unitName, unitClass, totalBombRocket
     let largeRocketMass = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "largeRocketMass")
     let largeRocketMul = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "largeRocketMul")
     if (largeRocketMass != null && largeRocketMul != null && maxRocketMass >= largeRocketMass) {
-      weaponMul = max(weaponMul, largeRocketMul)
+      weaponMul = math.max(weaponMul, largeRocketMul)
     }
   }
   return weaponMul
@@ -335,11 +324,11 @@ let function getCustomWeaponPresetParams(unitname, weaponTable) {
     if (atgmVisibilityType != "" && resTable.atgmParams.visibilityTypeArr.indexof(atgmVisibilityType) == null) {
       resTable.atgmParams.visibilityTypeArr.append(atgmVisibilityType)
     }
-    resTable.atgmParams.maxDistance = max(atgmMaxDistance, resTable.atgmParams.maxDistance)
+    resTable.atgmParams.maxDistance = math.max(atgmMaxDistance, resTable.atgmParams.maxDistance)
     if (atgmHasProximityFuse) {
       resTable.atgmParams.hasProximityFuse = true
     }
-    resTable.maxRocketMass = max(maxRocketMass, resTable.maxRocketMass)
+    resTable.maxRocketMass = math.max(maxRocketMass, resTable.maxRocketMass)
   }
 
   return resTable
@@ -581,10 +570,11 @@ let function getMaxEconomicRank() {
   return maxEconomicRank ?? 29
 }
 
-::round <- round //disable: -ident-hides-ident
+let calcBattleRatingFromRank = @(economicRank) round_by_value(economicRank / 3.0 + 1, 0.1)
 
 return {
   getMaxEconomicRank
   EDifficulties
   EDIFF_SHIFT
+  calcBattleRatingFromRank
 }

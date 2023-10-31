@@ -45,6 +45,7 @@
   "fireFx": "ground_model_fire",
   "destroysRendInstances": true,
   "destroysTrees": true,
+  "radarCanLockTargetFromTPV": false,
   "type": "typeLightTank",
   "cruiseVelocity": 5.0,
   "rearmSmokeTimeOnField": 60.0,
@@ -1980,7 +1981,6 @@
   "sensors": {
     "sensor": {
       "blk": "gameData/sensors/su_bmp_auto_target_tracker.blk",
-      "autoTargetTracker": true,
       "turretIndex": 0,
       "designationTurretIndex": 0,
       "dmPart": "optic_gun_dm"
@@ -3098,7 +3098,6 @@
         "sensors": {
           "sensor": {
             "blk": "gameData/sensors/su_bmp_auto_target_tracker.blk",
-            "autoTargetTracker": true,
             "turretIndex": 0,
             "designationTurretIndex": 0,
             "dmPart": "optic_gun_dm"
@@ -3708,7 +3707,17 @@
       "fatalExplosion": true,
       "replenishmentDelay": 0.1,
       "replenishmentTime": 0.1,
-      "removeLoadedAmmo": false,
+      "shells": {
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "ammo_turret_01_dm": {
+          "count": 1
+        },
+        "ammo_turret_02_dm": {
+          "count": 1
+        }
+      },
       "shells": {
         "ammo_turret_03_dm": {
           "count": 1
@@ -3738,12 +3747,6 @@
           "count": 1
         },
         "ammo_turret_12_dm": {
-          "count": 1
-        },
-        "ammo_turret_01_dm": {
-          "count": 1
-        },
-        "ammo_turret_02_dm": {
           "count": 1
         }
       }

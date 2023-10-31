@@ -36,6 +36,30 @@
       },
       "cannon2_dm": {
         "hp": 15.0
+      },
+      "mgun1_dm": {
+        "hp": 15.0
+      },
+      "mgun2_dm": {
+        "hp": 15.0
+      },
+      "mgun3_dm": {
+        "hp": 15.0
+      },
+      "mgun4_dm": {
+        "hp": 15.0
+      },
+      "mgun5_dm": {
+        "hp": 15.0
+      },
+      "mgun6_dm": {
+        "hp": 15.0
+      },
+      "mgun7_dm": {
+        "hp": 15.0
+      },
+      "mgun8_dm": {
+        "hp": 15.0
       }
     },
     "armor_jet_engine": {
@@ -125,6 +149,18 @@
         "hp": 19.5
       },
       "cover1_dm": {
+        "hp": 19.5
+      },
+      "cover2_dm": {
+        "hp": 19.5
+      },
+      "cover3_dm": {
+        "hp": 19.5
+      },
+      "cover4_dm": {
+        "hp": 19.5
+      },
+      "cover5_dm": {
         "hp": 19.5
       }
     },
@@ -309,6 +345,18 @@
     },
     "part": {
       "name": "cover1_dm"
+    },
+    "part": {
+      "name": "cover2_dm"
+    },
+    "part": {
+      "name": "cover3_dm"
+    },
+    "part": {
+      "name": "cover4_dm"
+    },
+    "part": {
+      "name": "cover5_dm"
     },
     "part": {
       "name": "elevator0_dm",
@@ -739,6 +787,30 @@
       "onKill": {
         "cut": 1.0
       }
+    },
+    "part": {
+      "name": "mgun1_dm"
+    },
+    "part": {
+      "name": "mgun2_dm"
+    },
+    "part": {
+      "name": "mgun3_dm"
+    },
+    "part": {
+      "name": "mgun4_dm"
+    },
+    "part": {
+      "name": "mgun5_dm"
+    },
+    "part": {
+      "name": "mgun6_dm"
+    },
+    "part": {
+      "name": "mgun7_dm"
+    },
+    "part": {
+      "name": "mgun8_dm"
     },
     "part": {
       "name": "oil1_dm",
@@ -1991,49 +2063,49 @@
     "mirrorNode": "blister4",
     "mirrorNode": "blister5",
     "lightPos": [
-      7.499,
-      0.705,
-      -0.004
+      1.87,
+      0.39,
+      0.19
     ],
     "lightColor": [
-      0.7,
-      0.01,
-      0.0
+      0.0,
+      0.61,
+      0.05
     ],
-    "lightRadius": 0.33,
+    "lightRadius": 0.45,
     "lightPos1": [
-      7.504,
-      0.438,
-      0.278
+      1.87,
+      0.39,
+      -0.19
     ],
     "lightColor1": [
-      0.7,
-      0.01,
-      0.0
+      0.0,
+      0.61,
+      0.05
     ],
-    "lightRadius1": 0.3,
+    "lightRadius1": 0.45,
     "lightPos2": [
-      7.504,
-      0.438,
-      -0.278
+      1.89,
+      0.57,
+      0.0
     ],
     "lightColor2": [
-      0.7,
-      0.01,
-      0.0
+      0.0,
+      0.61,
+      0.05
     ],
-    "lightRadius2": 0.3,
+    "lightRadius2": 0.26,
     "lightPos3": [
-      7.482,
-      0.744,
-      -0.005
+      1.9,
+      0.45,
+      0.15
     ],
     "lightColor3": [
-      0.7,
-      0.01,
-      0.0
+      0.81,
+      0.81,
+      0.05
     ],
-    "lightRadius3": 0.25,
+    "lightRadius3": 0.5,
     "devices": {
       "stick_ailerons": [
         -1.0,
@@ -2307,18 +2379,40 @@
     "preset": {
       "name": "strikemaster_mk88_mk77",
       "blk": "gameData/FlightModels/weaponPresets/strikemaster_mk88_mk77.blk"
+    },
+    "preset": {
+      "name": "strikemaster_mk88_mag_pod",
+      "blk": "gameData/FlightModels/weaponPresets/strikemaster_mk88_mag_pod.blk"
     }
   },
   "WeaponSlots": {
-    "maxloadMass": 1360.0,
-    "maxloadMassLeftConsoles": 680.0,
-    "maxloadMassRightConsoles": 680.0,
+    "maxloadMass": 1380.0,
+    "maxloadMassLeftConsoles": 690.0,
+    "maxloadMassRightConsoles": 690.0,
     "maxDisbalance": 420.0,
     "HideNodes": {
       "node": "bomb_pylon1",
       "node": "bomb_pylon2",
       "node": "bomb_pylon3",
-      "node": "bomb_pylon4"
+      "node": "bomb_pylon4",
+      "node": "7_62mm_rae_twin_mgp_001",
+      "node": "7_62mm_rae_twin_mgp_002",
+      "node": "7_62mm_rae_twin_mgp_003",
+      "node": "7_62mm_rae_twin_mgp_004"
+    },
+    "HideDmParts": {
+      "node": "cover2_dm",
+      "node": "cover3_dm",
+      "node": "cover4_dm",
+      "node": "cover5_dm",
+      "node": "mgun1_dm",
+      "node": "mgun2_dm",
+      "node": "mgun3_dm",
+      "node": "mgun4_dm",
+      "node": "mgun5_dm",
+      "node": "mgun6_dm",
+      "node": "mgun7_dm",
+      "node": "mgun8_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2491,7 +2585,7 @@
         "name": "mk77",
         "reqModification": "us_mk_77",
         "ShowNodes": {
-          "node": "pylon_l"
+          "node": "bomb_pylon1"
         },
         "Weapon": {
           "trigger": "bombs",
@@ -2501,6 +2595,44 @@
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "mgp",
+        "reqModification": "uk_mgp",
+        "ShowNodes": {
+          "node": "bomb_pylon1",
+          "node": "7_62mm_rae_twin_mgp_001"
+        },
+        "ShowDmParts": {
+          "node": "mgun1_dm",
+          "node": "mgun2_dm",
+          "node": "cover2_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare3",
+          "flash": "flare3",
+          "dm": "mgun1_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare4",
+          "flash": "flare4",
+          "dm": "mgun2_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
         }
       }
     },
@@ -2651,7 +2783,7 @@
         "name": "mk77",
         "reqModification": "us_mk_77",
         "ShowNodes": {
-          "node": "pylon_l"
+          "node": "bomb_pylon2"
         },
         "Weapon": {
           "trigger": "bombs",
@@ -2661,6 +2793,44 @@
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "mgp",
+        "reqModification": "uk_mgp",
+        "ShowNodes": {
+          "node": "bomb_pylon2",
+          "node": "7_62mm_rae_twin_mgp_002"
+        },
+        "ShowDmParts": {
+          "node": "mgun3_dm",
+          "node": "mgun4_dm",
+          "node": "cover3_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare5",
+          "flash": "flare5",
+          "dm": "mgun3_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare6",
+          "flash": "flare6",
+          "dm": "mgun4_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
         }
       }
     },
@@ -2780,7 +2950,7 @@
         "name": "mk77",
         "reqModification": "us_mk_77",
         "ShowNodes": {
-          "node": "pylon_l"
+          "node": "bomb_pylon3"
         },
         "Weapon": {
           "trigger": "bombs",
@@ -2790,6 +2960,44 @@
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "mgp",
+        "reqModification": "uk_mgp",
+        "ShowNodes": {
+          "node": "bomb_pylon3",
+          "node": "7_62mm_rae_twin_mgp_003"
+        },
+        "ShowDmParts": {
+          "node": "mgun5_dm",
+          "node": "mgun6_dm",
+          "node": "cover4_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare7",
+          "flash": "flare7",
+          "dm": "mgun5_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare8",
+          "flash": "flare8",
+          "dm": "mgun6_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
         }
       }
     },
@@ -2940,16 +3148,54 @@
         "name": "mk77",
         "reqModification": "us_mk_77",
         "ShowNodes": {
-          "node": "pylon_l"
+          "node": "bomb_pylon4"
         },
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/us_750lb_mk77_mod0.blk",
-          "emitter": "us_500lb_mk_82_snakeye_001",
+          "emitter": "us_500lb_mk_82_snakeye_004",
           "bullets": 1,
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "doublebarreled_box",
+        "name": "mgp",
+        "reqModification": "uk_mgp",
+        "ShowNodes": {
+          "node": "bomb_pylon4",
+          "node": "7_62mm_rae_twin_mgp_004"
+        },
+        "ShowDmParts": {
+          "node": "mgun7_dm",
+          "node": "mgun8_dm",
+          "node": "cover5_dm"
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare9",
+          "flash": "flare9",
+          "dm": "mgun7_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
+        },
+        "Weapon": {
+          "trigger": "additional gun",
+          "blk": "gameData/Weapons/gunfn_60_30_mgp.blk",
+          "emitter": "flare10",
+          "flash": "flare10",
+          "dm": "mgun8_dm",
+          "bullets": 475,
+          "spread": 1.0,
+          "traceOffset": 1,
+          "counterIndex": 2,
+          "mass": 86.2
         }
       }
     },
@@ -3240,6 +3486,11 @@
       "modClass": "weapon",
       "tier": 2
     },
+    "uk_mgp": {
+      "modClass": "weapon",
+      "tier": 3,
+      "prevModification": "fn_60_30_new_gun"
+    },
     "us_mk_77": {
       "modClass": "weapon",
       "tier": 1
@@ -3309,6 +3560,7 @@
     "minSpeed": 0.0,
     "hasSafeExit": true,
     "wreck": "blister2",
+    "hide": "blister2",
     "seat": "seat_01",
     "seat": "seat_02",
     "fxEmitter": "blister2",

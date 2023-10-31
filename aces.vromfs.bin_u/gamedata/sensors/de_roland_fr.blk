@@ -421,7 +421,7 @@
         "init": {
           "stateFrom": "init",
           "event": "init",
-          "stateTo": "radarParked",
+          "stateTo": "radarStandby",
           "actions": {
             "init": {            },
             "setRadarStandbyMode": {            },
@@ -675,45 +675,6 @@
               "transmitter": "rc"
             }
           }
-        },
-        "switchRadarOn": {
-          "stateFrom": "radarParked",
-          "command": "switch",
-          "event": "enable",
-          "stateTo": "radarStandby",
-          "actions": {
-            "setRadarTrackMode": {            }
-          }
-        },
-        "switchRadarOff": {
-          "stateFrom": "radarStandby",
-          "stateFrom": "radarLosLock",
-          "stateFrom": "radarVisualLock",
-          "stateFrom": "radarTrack",
-          "command": "switch",
-          "event": "disable",
-          "stateTo": "radarParked",
-          "actions": {
-            "setRadarStandbyMode": {            }
-          }
-        },
-        "switchIrstOn": {
-          "stateFrom": "irstParked",
-          "command": "switch",
-          "event": "enable",
-          "stateTo": "irstStandby"
-        },
-        "switchIrstOff": {
-          "stateFrom": "irstStandby",
-          "stateFrom": "irstLosLock",
-          "stateFrom": "irstVisualLock",
-          "stateFrom": "irstTrack",
-          "command": "switch",
-          "event": "disable",
-          "stateTo": "irstParked",
-          "actions": {
-            "setIrstStandbyMode": {            }
-          }
         }
       }
     },
@@ -748,15 +709,24 @@
           "actions": {
             "updateActiveTargetOfInterest": {
               "dirFilter": {
-                "rateLim": 0.35,
+                "rateLim": [
+                  0.78,
+                  0.35
+                ],
                 "limTimeOut": 1.0
               },
               "distFilter": {
-                "accelLim": 100.0,
+                "accelLim": [
+                  100.0,
+                  35.0
+                ],
                 "limTimeOut": 1.0
               },
               "dopplerSpeedFilter": {
-                "rateLim": 100.0,
+                "rateLim": [
+                  100.0,
+                  50.0
+                ],
                 "limTimeOut": 1.0
               }
             },

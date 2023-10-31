@@ -30,6 +30,23 @@
   "explosionFx": "explosion_ship_large",
   "decorCutProps": "battleship",
   "propSplashEffects": "propSplashEffects_underwater",
+  "shipFuelLeakFxName": "fire_burning_fuel_oil_large",
+  "shipFuelLeakStayFxName": "fire_burning_fuel_oil_large",
+  "shipFuelLeakFxTimeout": [
+    1.0,
+    5.0
+  ],
+  "shipFuelLeakLifetime": [
+    30.0,
+    10.0,
+    8.0
+  ],
+  "shipFuelLeakSpeed": [
+    8.0,
+    5.0,
+    3.5
+  ],
+  "fuelLeakTimeAfterExtinguish": 30.0,
   "shipsDisableDeadCoverParts": true,
   "isStackRearm": true,
   "supportsCombinedPriSecTriggers": true,
@@ -41,9 +58,6 @@
     5.51,
     -3.2
   ],
-  "customClassIco": "!#ui/gameuiskin#image_in_progress_ico.svg",
-  "customImage": "!#ui/unitskin#image_in_progress",
-  "customTooltipImage": "ui/aircrafts/image_in_progress",
   "hideNodesInDmg": {
     "node": "flag"
   },
@@ -2579,7 +2593,7 @@
         "hp": 5900.0
       },
       "ammunition_storage_charges_03_dm": {
-        "hp": 5900.0
+        "hp": 5179.0
       },
       "ammunition_storage_charges_04_dm": {
         "hp": 5900.0
@@ -2593,10 +2607,10 @@
       "fireProtectionHp": 15.0,
       "armorThrough": 100.0,
       "ammunition_storage_aux_01_dm": {
-        "hp": 1109.0
+        "hp": 1300.0
       },
       "ammunition_storage_aux_02_dm": {
-        "hp": 1300.0
+        "hp": 1214.0
       },
       "ammunition_storage_aux_03_dm": {
         "hp": 1300.0
@@ -3065,17 +3079,11 @@
       "rangefinder_11_dm": {
         "hp": 100.0
       },
-      "rangefinder_12_dm": {
-        "hp": 50.0
-      },
       "rangefinder_13_dm": {
         "hp": 62.0
       },
       "rangefinder_14_dm": {
         "hp": 62.0
-      },
-      "rangefinder_15_dm": {
-        "hp": 50.0
       }
     },
     "aircrafts": {
@@ -3201,10 +3209,12 @@
         "hp": 10000.0
       },
       "armor_cit_44_dm": {
+        "hidableInViewer": true,
         "armorThickness": 48.0,
         "hp": 10000.0
       },
       "armor_cit_45_dm": {
+        "hidableInViewer": true,
         "armorThickness": 40.0,
         "hp": 10000.0
       },
@@ -3262,10 +3272,12 @@
         "hp": 10000.0
       },
       "armor_cit_08_dm": {
+        "hidableInViewer": true,
         "armorThickness": 100.0,
         "hp": 10000.0
       },
       "armor_cit_38_dm": {
+        "hidableInViewer": true,
         "armorThickness": 50.0,
         "hp": 10000.0
       },
@@ -3274,26 +3286,32 @@
         "hp": 10000.0
       },
       "armor_cit_50_dm": {
+        "hidableInViewer": true,
         "armorThickness": 30.0,
         "hp": 10000.0
       },
       "armor_cit_12_dm": {
+        "hidableInViewer": true,
         "armorThickness": 42.0,
         "hp": 10000.0
       },
       "armor_cit_13_dm": {
+        "hidableInViewer": true,
         "armorThickness": 44.0,
         "hp": 10000.0
       },
       "armor_cit_10_dm": {
+        "hidableInViewer": true,
         "armorThickness": 45.0,
         "hp": 10000.0
       },
       "armor_cit_11_dm": {
+        "hidableInViewer": true,
         "armorThickness": 43.0,
         "hp": 10000.0
       },
       "armor_cit_14_dm": {
+        "hidableInViewer": true,
         "armorThickness": 13.0,
         "hp": 10000.0
       },
@@ -3303,6 +3321,7 @@
         "hp": 10000.0
       },
       "armor_cit_16_dm": {
+        "hidableInViewer": true,
         "armorThickness": 15.0,
         "hp": 10000.0
       },
@@ -3317,10 +3336,12 @@
         "hp": 10000.0
       },
       "armor_cit_26_dm": {
+        "hidableInViewer": true,
         "armorThickness": 42.0,
         "hp": 10000.0
       },
       "armor_cit_32_dm": {
+        "hidableInViewer": true,
         "armorThickness": 26.0,
         "hp": 10000.0
       },
@@ -4215,7 +4236,7 @@
       },
       "turret_03_top_dm": {
         "armorClass": "ship_RGA",
-        "armorThickness": 140.0,
+        "armorThickness": 120.0,
         "hp": 10000.0
       },
       "turret_03_side_dm": {
@@ -4553,7 +4574,7 @@
         "hp": 10000.0
       },
       "fuel_tank_03_dm": {
-        "hp": 7258.0
+        "hp": 10000.0
       },
       "fuel_tank_04_dm": {
         "hp": 10000.0
@@ -4563,6 +4584,21 @@
       },
       "fuel_tank_06_dm": {
         "hp": 10000.0
+      },
+      "fuel_tank_07_dm": {
+        "hp": 10000.0
+      },
+      "fuel_tank_08_dm": {
+        "hp": 10000.0
+      },
+      "fuel_tank_09_dm": {
+        "hp": 10000.0
+      },
+      "fuel_tank_10_dm": {
+        "hp": 10000.0
+      },
+      "fuel_tank_11_dm": {
+        "hp": 7258.0
       }
     },
     "coal_bunkers": {
@@ -4807,7 +4843,7 @@
     "sailor28": {
       "dmPart": "engine_room_03_dm",
       "role": "sailor",
-      "crew": 81
+      "crew": 84
     },
     "sailor29": {
       "dmPart": "engine_room_04_dm",
@@ -4867,12 +4903,12 @@
     "sailor40": {
       "dmPart": "ammunition_storage_aux_01_dm",
       "role": "sailor",
-      "crew": 12
+      "crew": 14
     },
     "sailor41": {
       "dmPart": "ammunition_storage_aux_02_dm",
       "role": "sailor",
-      "crew": 14
+      "crew": 13
     },
     "sailor42": {
       "dmPart": "ammunition_storage_aux_03_dm",
@@ -4897,7 +4933,7 @@
     "sailor46": {
       "dmPart": "compartment_01_dm",
       "role": "sailor",
-      "crew": 55
+      "crew": 54
     },
     "sailor47": {
       "dmPart": "compartment_02_dm",
@@ -4907,17 +4943,17 @@
     "sailor48": {
       "dmPart": "compartment_03_dm",
       "role": "sailor",
-      "crew": 55
+      "crew": 54
     },
     "sailor49": {
       "dmPart": "compartment_04_dm",
       "role": "sailor",
-      "crew": 55
+      "crew": 54
     },
     "sailor50": {
       "dmPart": "compartment_05_dm",
       "role": "sailor",
-      "crew": 55
+      "crew": 54
     },
     "sailor51": {
       "dmPart": "compartment_06_dm",
@@ -5713,10 +5749,8 @@
     },
     "fireDirecting": {
       "dmPartMain": "fire_control_room_01_dm",
-      "dmPart": "rangefinder_12_dm",
       "dmPart": "rangefinder_13_dm",
       "dmPart": "rangefinder_14_dm",
-      "dmPart": "rangefinder_15_dm",
       "measureAccuracy": 0.85,
       "targetLockTime": 24.0,
       "calcTime": 14.0,
@@ -5755,7 +5789,7 @@
     "Weapon": {
       "trigger": "gunner0",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_01",
       "flash": "emtr_gun_flame_01",
       "useEmitter": true,
@@ -5799,7 +5833,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -5857,7 +5891,7 @@
     "Weapon": {
       "trigger": "gunner0",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_02",
       "flash": "emtr_gun_flame_02",
       "useEmitter": true,
@@ -5901,7 +5935,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -5959,7 +5993,7 @@
     "Weapon": {
       "trigger": "gunner0",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_03",
       "flash": "emtr_gun_flame_03",
       "useEmitter": true,
@@ -6003,7 +6037,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6061,7 +6095,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_04",
       "flash": "emtr_gun_flame_04",
       "useEmitter": true,
@@ -6105,7 +6139,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6151,7 +6185,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_05",
       "flash": "emtr_gun_flame_05",
       "useEmitter": true,
@@ -6195,7 +6229,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6241,7 +6275,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_06",
       "flash": "emtr_gun_flame_06",
       "useEmitter": true,
@@ -6285,7 +6319,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6331,7 +6365,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_07",
       "flash": "emtr_gun_flame_07",
       "useEmitter": true,
@@ -6375,7 +6409,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6421,7 +6455,7 @@
     "Weapon": {
       "trigger": "gunner3",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_08",
       "flash": "emtr_gun_flame_08",
       "useEmitter": true,
@@ -6465,7 +6499,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6511,7 +6545,7 @@
     "Weapon": {
       "trigger": "gunner3",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_09",
       "flash": "emtr_gun_flame_09",
       "useEmitter": true,
@@ -6555,7 +6589,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -6601,7 +6635,7 @@
     "Weapon": {
       "trigger": "gunner3",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_mod_1936_naval_user_cannon.blk",
+      "blk": "gameData/Weapons/navalModels_weapons/320mm_40_oto_mod_1934_naval_user_cannon.blk",
       "emitter": "emtr_gun_flame_10",
       "flash": "emtr_gun_flame_10",
       "useEmitter": true,
@@ -6645,7 +6679,7 @@
         ],
         "pitch": [
           -5.0,
-          30.0
+          25.0
         ]
       },
       "limitsTable": {
@@ -7864,7 +7898,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -7991,7 +8025,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8118,7 +8152,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8227,7 +8261,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8336,7 +8370,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8433,7 +8467,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8530,7 +8564,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8627,7 +8661,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8724,7 +8758,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8827,7 +8861,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -8930,7 +8964,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {
@@ -9021,7 +9055,7 @@
         ],
         "pitch": [
           -9.0,
-          75.0
+          80.0
         ]
       },
       "limitsTable": {

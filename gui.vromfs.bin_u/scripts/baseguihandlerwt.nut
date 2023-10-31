@@ -22,6 +22,8 @@ let { getManualUnlocks } = require("%scripts/unlocks/personalUnlocks.nut")
 let { checkShowMatchingConnect } = require("%scripts/matching/matchingOnline.nut")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { switchContactsObj, isContactsWindowActive } = require("%scripts/contacts/contactsHandlerState.nut")
+let { addTask, charCallback, restoreCharCallback } = require("%scripts/tasker.nut")
+let { checkSquadUnreadyAndDo } = require("%scripts/squads/squadUtils.nut")
 
 local stickedDropDown = null
 let defaultSlotbarActions = [
@@ -290,7 +292,7 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
           if (::checkAllowed.bindenv(this)(this.task))
             this.goForward(this.startFunc)
         }, this)
-      ::g_tasker.addTask(this.taskId, taskOptions, taskSuccessCallback)
+      addTask(this.taskId, taskOptions, taskSuccessCallback)
     }
   }
 
@@ -468,7 +470,7 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
     if (value == ::get_auto_refill(mode))
       return
     ::set_auto_refill(mode, value)
-    ::save_online_single_job(SAVE_ONLINE_JOB_DIGIT)
+    addTask(::save_online_single_job(SAVE_WEAPON_JOB_DIGIT), { showProgressBox = true })
     broadcastEvent("AutorefillChanged", { id = obj.id, value })
   }
 
@@ -562,10 +564,10 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
   function slotOpCb(id, tType, result) {
     if (id != this.taskId) {
       log("wrong ID in char server cb, ignoring");
-      ::g_tasker.charCallback(id, tType, result)
+      charCallback(id, tType, result)
       return
     }
-    ::g_tasker.restoreCharCallback()
+    restoreCharCallback()
     this.destroyProgressBox()
 
     penalties.showBannedStatusMsgBox(true)
@@ -835,7 +837,7 @@ let BaseGuiHandlerWT = class extends ::BaseGuiHandler {
     //change air in slot
     this.checkAndStart(
       function() {
-        ::g_squad_utils.checkSquadUnreadyAndDo(callback.make(func, this),
+        checkSquadUnreadyAndDo(callback.make(func, this),
           callback.make(cancelFunc, this), this.shouldCheckCrewsReady)
       },
       cancelFunc, "isCanModifyCrew")

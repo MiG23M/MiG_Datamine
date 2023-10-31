@@ -13,12 +13,12 @@
     "replication": {    }
   },
   "msg_sink": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_singleton": true,
     "msg_sink": {    }
   },
   "server_load_stat": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_replicated": "server_load_stat__load",
     "_tracked": "server_load_stat__load",
     "server_load_stat__frameCnt": 0,
@@ -117,7 +117,7 @@
     "missionObject:tag": {    }
   },
   "backmodel_spawn_point": {
-    "_extends": "spawn_point",
+    "_use": "spawn_point",
     "forPremiumVehicle": false
   },
   "route": {
@@ -160,7 +160,7 @@
     "delayed_action__timer": 0.0
   },
   "delayed_unit_shot": {
-    "_extends": "delayed_action",
+    "_use": "delayed_action",
     "delayed_unit_shot__unitName": "",
     "delayed_unit_shot__triggerGroup": 0
   },
@@ -184,12 +184,12 @@
     "action_by_date__onlyFirstEnter": false
   },
   "unit_shot_by_date": {
-    "_extends": "action_by_date",
+    "_use": "action_by_date",
     "unit_shot_by_date__unitName": "",
     "unit_shot_by_date__triggerGroup": 0
   },
   "ri_gpu_object": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_group": {
       "_track": true,
       "ri_gpu_object__name": "ammunition_box_n",
@@ -254,7 +254,7 @@
     }
   },
   "light": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "light__max_radius": 0.0,
     "light__offset": [
       0.0,
@@ -281,7 +281,7 @@
     "_replicate": true
   },
   "omni_light": {
-    "_extends": "light",
+    "_use": "light",
     "light__nightly": true,
     "_group": {
       "_track": true,
@@ -316,8 +316,8 @@
     "destroyable_with_rendinst:tag": {    }
   },
   "spot_light": {
-    "_extends": "light",
-    "_extends": "replicating",
+    "_use": "light",
+    "_use": "replicating",
     "light__nightly": true,
     "_group": {
       "_track": true,
@@ -342,15 +342,15 @@
     "destroyable_with_rendinst:tag": {    }
   },
   "spot_light_large": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "_replicate": true,
     "light__max_radius": 50.0,
     "light__brightness": 200.0
   },
   "spot_light_large_noshadows": {
-    "_extends": "spot_light_large",
-    "_extends": "replicating",
+    "_use": "spot_light_large",
+    "_use": "replicating",
     "_replicate": true,
     "_group": {
       "_tags": "render",
@@ -359,8 +359,8 @@
     }
   },
   "spot_light_small": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "_group": {
       "_replicate": true,
       "light__max_radius": 5.0,
@@ -373,8 +373,8 @@
     }
   },
   "spot_light_huge": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 25000.0,
     "light__brightness": 250000.0,
     "_group": {
@@ -384,8 +384,8 @@
     }
   },
   "field_light_huge": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 35000.0,
     "light__max_radius": 10000.0,
     "light__color": [255, 255, 255, 255],
@@ -393,8 +393,8 @@
     "light__nightly": true
   },
   "field_light_orange_largest": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 20000.0,
     "light__max_radius": 10000.0,
     "light__color": [120, 185, 255, 255],
@@ -402,8 +402,8 @@
     "light__nightly": true
   },
   "field_light_blue_huge": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 15000.0,
     "light__max_radius": 400.0,
     "light__color": [50, 100, 50, 255],
@@ -411,8 +411,8 @@
     "light__nightly": true
   },
   "field_light_large": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 20.0,
     "light__max_radius": 30.0,
     "light__color": [255, 255, 255, 255],
@@ -420,8 +420,8 @@
     "light__nightly": true
   },
   "field_light_medium": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 30.0,
     "light__max_radius": 30.0,
     "light__color": [255, 255, 255, 255],
@@ -429,8 +429,8 @@
     "light__nightly": true
   },
   "field_light_orange": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 2.0,
     "light__max_radius": 2.0,
     "light__color": [10, 100, 255, 255],
@@ -438,146 +438,146 @@
     "light__nightly": true
   },
   "field_light_orange_large": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 3.0,
     "light__max_radius": 2.0,
     "light__contact_shadows": false
   },
   "field_light_orange_extralarge": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 50.0,
     "light__max_radius": 200.0,
     "light__contact_shadows": false
   },
   "field_light_orange_huge": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 10000.0,
     "light__max_radius": 400.0,
     "light__contact_shadows": false
   },
   "field_light_orange_medium": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 10.0,
     "light__max_radius": 15.0,
     "light__contact_shadows": false
   },
   "field_light_orange_medium_a": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 30.0,
     "light__max_radius": 20.0,
     "light__contact_shadows": false,
     "light__color": [20, 100, 200, 255]
   },
   "field_light_orange_medium_b": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 30.0,
     "light__max_radius": 20.0,
     "light__contact_shadows": true,
     "light__color": [20, 100, 200, 255]
   },
   "field_light_orange_small": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 1.0,
     "light__max_radius": 1.0,
     "light__contact_shadows": false
   },
   "field_light_orange_smallest": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 0.3,
     "light__max_radius": 1.0,
     "light__contact_shadows": false
   },
   "field_light_blue": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__color": [255, 100, 100, 255],
     "light__contact_shadows": false
   },
   "field_light_blue_large": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 300.0,
     "light__max_radius": 1000.0,
     "light__color": [255, 245, 10, 255],
     "light__contact_shadows": false
   },
   "field_light_blue_extralarge": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 10.0,
     "light__max_radius": 100.0,
     "light__color": [255, 50, 50, 255],
     "light__contact_shadows": false
   },
   "field_light_red": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__color": [50, 80, 240, 255]
   },
   "field_light_red_extralarge": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 10.0,
     "light__max_radius": 100.0,
     "light__color": [50, 80, 240, 255],
     "light__contact_shadows": false
   },
   "field_light_green_extralarge": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 10.0,
     "light__max_radius": 100.0,
     "light__color": [30, 150, 10, 255],
     "light__contact_shadows": false
   },
   "field_light_green_small": {
-    "_extends": "field_light_orange",
-    "_extends": "replicating",
+    "_use": "field_light_orange",
+    "_use": "replicating",
     "light__brightness": 5.0,
     "light__max_radius": 100.0,
     "light__color": [20, 200, 60, 155],
     "light__contact_shadows": false
   },
   "aircraft_warning_light_red": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__brightness": 200.0,
     "light__max_radius": 15.0,
     "light__color": [0, 0, 255, 255],
     "light__nightly": true
   },
   "spot_light_red_large": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 75.0,
     "light__brightness": 200.0,
     "light__color": [10, 10, 255, 255]
   },
   "spot_light_magenta_large": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 75.0,
     "light__brightness": 200.0,
     "light__color": [255, 10, 186, 255]
   },
   "spot_light_orange_large": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 75.0,
     "light__brightness": 200.0,
     "light__color": [10, 100, 255, 255]
   },
   "spot_light_orange_medium": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 50.0,
     "light__brightness": 500.0,
     "light__color": [10, 100, 255, 255],
@@ -588,57 +588,57 @@
     }
   },
   "spot_light_blue_large": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 75.0,
     "light__brightness": 200.0,
     "light__color": [255, 245, 10, 255]
   },
   "spot_light_green_large": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 75.0,
     "light__brightness": 200.0,
     "light__color": [10, 255, 50, 255]
   },
   "spot_light_orange_extralarge": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 300.0,
     "light__brightness": 1200.0,
     "light__color": [10, 100, 255, 255]
   },
   "spot_light_red_extralarge": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 250.0,
     "light__brightness": 1200.0,
     "light__color": [10, 10, 255, 255]
   },
   "spot_light_magenta_extralarge": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 250.0,
     "light__brightness": 1200.0,
     "light__color": [255, 10, 186, 255]
   },
   "spot_light_green_extralarge": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 250.0,
     "light__brightness": 1200.0,
     "light__color": [10, 255, 50, 255]
   },
   "spot_light_blue_extralarge": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 200.0,
     "light__brightness": 55.0,
     "light__color": [255, 245, 10, 255]
   },
   "lamppost_a": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 14.0,
     "light__brightness": 60.0,
     "light__color": [160, 220, 255, 255],
@@ -650,8 +650,8 @@
     "destroyable_with_rendinst:tag": {    }
   },
   "lamppost_b": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 9.0,
     "light__brightness": 15.0,
     "light__color": [180, 250, 255, 255],
@@ -663,8 +663,8 @@
     "destroyable_with_rendinst:tag": {    }
   },
   "lamppost_c": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 19.0,
     "light__brightness": 150.0,
     "light__color": [180, 250, 255, 255],
@@ -676,8 +676,8 @@
     "destroyable_with_rendinst:tag": {    }
   },
   "spot_light_footbal_field": {
-    "_extends": "spot_light",
-    "_extends": "replicating",
+    "_use": "spot_light",
+    "_use": "replicating",
     "light__max_radius": 55.0,
     "light__brightness": 250.0,
     "light__color": [180, 250, 255, 255],
@@ -687,8 +687,8 @@
     }
   },
   "tunnel_a_light_orange": {
-    "_extends": "omni_light",
-    "_extends": "replicating",
+    "_use": "omni_light",
+    "_use": "replicating",
     "light__max_radius": 22.0,
     "light__brightness": 90.0,
     "light__color": [108, 166, 255, 255],
@@ -836,8 +836,8 @@
     "daeditor__selected:tag": {    }
   },
   "simple_unit": {
-    "_extends": "root",
-    "_extends": "replicating",
+    "_use": "root",
+    "_use": "replicating",
     "uid": 4294967295,
     "className": "",
     "playerNo": 4294967295,
@@ -846,19 +846,18 @@
     "unitType": 4294967295,
     "canChangeUnit": false,
     "missionUnitName": "",
-    "restricted_area_timer": -1.0,
     "_replicated": "uid",
     "_tracked": "playerNo"
   },
   "unit": {
-    "_extends": "simple_unit"
+    "_use": "simple_unit"
   },
   "simple_ground_unit": {
-    "_extends": "unit",
+    "_use": "unit",
     "aim_component": {    }
   },
   "expendable_mod": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "mod__enabled_without_mod": false,
     "mod__count_effects_mod": false,
     "mod__send_economic_spend": true,
@@ -870,44 +869,44 @@
     }
   },
   "toolkit_ecs": {
-    "_extends": "expendable_mod",
+    "_use": "expendable_mod",
     "mod__name": "tank_tool_kit_expendable",
     "mod__type_name": "toolkit"
   },
   "ship_toolkit_ecs": {
-    "_extends": "expendable_mod",
+    "_use": "expendable_mod",
     "mod__name": "ship_tool_kit",
     "mod__type_name": "toolkit",
     "mod__send_economic_spend": false
   },
   "extinguisher_ecs": {
-    "_extends": "expendable_mod",
+    "_use": "expendable_mod",
     "mod__name": "manual_extinguisher_expendable",
     "mod__type_name": "extinguisher",
     "mod__enabled_without_mod": true,
     "mod__count_effects_mod": true
   },
   "ship_extinguisher_ecs": {
-    "_extends": "extinguisher_ecs",
+    "_use": "extinguisher_ecs",
     "mod__enabled_without_mod": false
   },
   "medicalkit_ecs": {
-    "_extends": "expendable_mod",
+    "_use": "expendable_mod",
     "mod__name": "tank_medical_kit_expendable",
     "mod__type_name": "medicalkit",
     "mod__count_effects_mod": true
   },
   "smokescreen_ecs": {
-    "_extends": "expendable_mod",
+    "_use": "expendable_mod",
     "mod__type_name": "smokeScreen",
     "mod__send_economic_spend": false
   },
   "tank_smokescreen_ecs": {
-    "_extends": "smokescreen_ecs",
+    "_use": "smokescreen_ecs",
     "mod__name": "tank_engine_smoke_screen_system"
   },
   "ship_smokescreen_ecs": {
-    "_extends": "smokescreen_ecs",
+    "_use": "smokescreen_ecs",
     "mod__name": "ship_smoke_screen_system_mod"
   },
   "unit_repair": {
@@ -1030,7 +1029,7 @@
     "ammo_slots__node": {    }
   },
   "tank_engine": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_group": {
       "_replicate": true,
       "tank_engine__overheat": false
@@ -1049,14 +1048,14 @@
     }
   },
   "ground_unit": {
-    "_extends": "simple_ground_unit",
+    "_use": "simple_ground_unit",
     "move_sys__maxDecel": 0.0,
-    "_extends": "unit_repair",
-    "_extends": "unit_fire_and_extinguish",
-    "_extends": "unit_fire_damage",
-    "_extends": "unit_fire_fx",
-    "_extends": "tank_engine",
-    "_extends": "unit_ammo_stowage",
+    "_use": "unit_repair",
+    "_use": "unit_fire_and_extinguish",
+    "_use": "unit_fire_damage",
+    "_use": "unit_fire_fx",
+    "_use": "tank_engine",
+    "_use": "unit_ammo_stowage",
     "unit_crew": {    },
     "unit_fx": {    },
     "fuel_tanks": {    },
@@ -1065,28 +1064,28 @@
     }
   },
   "light_vehicle": {
-    "_extends": "simple_ground_unit"
+    "_use": "simple_ground_unit"
   },
   "fortification": {
-    "_extends": "simple_ground_unit"
+    "_use": "simple_ground_unit"
   },
   "simple_tank": {
-    "_extends": "simple_ground_unit"
+    "_use": "simple_ground_unit"
   },
   "trailer": {
-    "_extends": "simple_ground_unit",
+    "_use": "simple_ground_unit",
     "track_sound": {
       "_tags": "sound"
     }
   },
   "simple_trailer": {
-    "_extends": "simple_ground_unit",
+    "_use": "simple_ground_unit",
     "track_sound": {
       "_tags": "sound"
     }
   },
   "tank": {
-    "_extends": "ground_unit",
+    "_use": "ground_unit",
     "mods:list<t>": {
       "mod": "toolkit_ecs",
       "mod": "extinguisher_ecs",
@@ -1108,7 +1107,7 @@
     }
   },
   "simple_ship": {
-    "_extends": "simple_ground_unit"
+    "_use": "simple_ground_unit"
   },
   "ship_cover_parts": {
     "ship_cover_parts__disableDeadParts": true,
@@ -1171,11 +1170,11 @@
     "ship__pumpsPartId:list<i>": {    }
   },
   "ship_damage_control": {
-    "_extends": "ship_cover_parts",
-    "_extends": "ship_breaches",
-    "_extends": "ship_phys_proxy",
-    "_extends": "ship_repair",
-    "_extends": "ship_unwatering",
+    "_use": "ship_cover_parts",
+    "_use": "ship_breaches",
+    "_use": "ship_phys_proxy",
+    "_use": "ship_repair",
+    "_use": "ship_unwatering",
     "ship__modernDamageControl": false,
     "ship_damage_control__cooldownTime": 0.0,
     "ship_damage_control__cooldownEndTime": 0.0,
@@ -1191,8 +1190,8 @@
     "ship_damage_control__presets:u32": {    }
   },
   "ship": {
-    "_extends": "ground_unit",
-    "_extends": "ship_damage_control",
+    "_use": "ground_unit",
+    "_use": "ship_damage_control",
     "mods:list<t>": {
       "mod": "ship_toolkit_ecs",
       "mod": "ship_extinguisher_ecs",
@@ -1222,34 +1221,35 @@
     "renderDebug:tag": {    }
   },
   "walker": {
-    "_extends": "ground_unit"
+    "_use": "ground_unit"
   },
   "barrage_ballon": {
-    "_extends": "unit"
+    "_use": "unit"
   },
   "infantry_troop": {
-    "_extends": "simple_ground_unit"
+    "_use": "simple_ground_unit"
   },
   "human": {
-    "_extends": "simple_ground_unit"
+    "_use": "simple_ground_unit",
+    "restricted_area_timer": -1.0
   },
   "aircraft": {
-    "_extends": "unit"
+    "_use": "unit"
   },
   "weapon": {
-    "_extends": "root"
+    "_use": "root"
   },
   "gun": {
-    "_extends": "weapon"
+    "_use": "weapon"
   },
   "bomb_gun": {
-    "_extends": "weapon"
+    "_use": "weapon"
   },
   "rocket_gun": {
-    "_extends": "weapon"
+    "_use": "weapon"
   },
   "torpedo_gun": {
-    "_extends": "weapon"
+    "_use": "weapon"
   },
   "player": {
     "player_id": 4294967295,
@@ -1288,7 +1288,7 @@
     "background_model__spawnEid:eid": {    }
   },
   "destructed_model": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "destructed_model__fx": "fire_tank_destructed",
     "_group": {
       "_replicate": true,
@@ -1373,7 +1373,7 @@
     }
   },
   "smoke": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "smoke__activate_time": 0.0,
     "smoke__time": 0.0,
     "smoke__fx_time": 0.0,
@@ -1395,7 +1395,7 @@
     }
   },
   "ecs_fx": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_replicate": true,
     "transform": [
     1.0,
@@ -1430,7 +1430,7 @@
     }
   },
   "camera_fx": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_replicate": true,
     "transform": [
     1.0,
@@ -1466,8 +1466,8 @@
     "sand_unit__deathAnimTime": -1.0
   },
   "sand_worm": {
-    "_extends": "root",
-    "_extends": "replicating",
+    "_use": "root",
+    "_use": "replicating",
     "sand_worm__position": [
       0.0,
       0.0
@@ -1570,8 +1570,8 @@
     }
   },
   "sky_laser": {
-    "_extends": "root",
-    "_extends": "replicating",
+    "_use": "root",
+    "_use": "replicating",
     "sky_laser__weaponIdx": 4294967295,
     "sky_laser__uid": 4294967295,
     "sky_laser__lastShootAt": -1.0,
@@ -1585,8 +1585,8 @@
     "sky_laser__timings:list<r>": {    }
   },
   "sand_worm_render": {
-    "_extends": "root",
-    "_extends": "replicating",
+    "_use": "root",
+    "_use": "replicating",
     "sand_worm__victimUid": 4294967295,
     "transform": [
     1.0,
@@ -1625,8 +1625,8 @@
     }
   },
   "damage_area": {
-    "_extends": "root",
-    "_extends": "replicating",
+    "_use": "root",
+    "_use": "replicating",
     "damage_area__fallVel": [
       0.0,
       0.0,
@@ -1724,7 +1724,7 @@
     "music__operatorCountryId": 4294967295
   },
   "base_area": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "transform": [
     1.0,
     0.0,
@@ -1742,19 +1742,19 @@
     "area_name": ""
   },
   "base_restricted_area": {
-    "_extends": "base_area",
+    "_use": "base_area",
     "restricted_area__away_time": 0.0
   },
   "box_restricted_area": {
-    "_extends": "base_restricted_area",
+    "_use": "base_restricted_area",
     "box_area:tag": {    }
   },
   "sphere_restricted_area": {
-    "_extends": "base_restricted_area",
+    "_use": "base_restricted_area",
     "sphere_area:tag": {    }
   },
   "destroy_ri_sphere_area": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_replicate": true,
     "destroy_ri_sphere_area__pos": [
       0.0,
@@ -1764,7 +1764,7 @@
     "destroy_ri_sphere_area__radius": 0.0
   },
   "destroy_ri_box_area": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "_replicate": true,
     "destroy_ri_box_area__bbox__bmin": [
       0.0,
@@ -1792,11 +1792,11 @@
 ]
   },
   "projectile": {
-    "_extends": "ecs_no_debug",
+    "_use": "ecs_no_debug",
     "active": false
   },
   "bullet": {
-    "_extends": "projectile",
+    "_use": "projectile",
     "bullet_trace_handle": 4294967295,
     "bullet_component": {    }
   },
@@ -1806,36 +1806,36 @@
     }
   },
   "arh_shell": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "arh_shell:tag": {    }
   },
   "shell": {
-    "_extends": "projectile",
-    "_extends": "replicating",
+    "_use": "projectile",
+    "_use": "replicating",
     "shell_ref": {    }
   },
   "rocket": {
-    "_extends": "shell",
+    "_use": "shell",
     "rocket_component": {    }
   },
   "bomb": {
-    "_extends": "shell",
+    "_use": "shell",
     "bomb_component": {    }
   },
   "torpedo": {
-    "_extends": "shell",
+    "_use": "shell",
     "torpedo_component": {    }
   },
   "payload": {
-    "_extends": "shell",
+    "_use": "shell",
     "payload_component": {    }
   },
   "jettisoned": {
-    "_extends": "shell",
+    "_use": "shell",
     "jettisoned_component": {    }
   },
   "sound_point": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "transform": [
     1.0,
     0.0,
@@ -1859,16 +1859,16 @@
     "destroyable_with_rendinst:tag": {    }
   },
   "sound_point_constant": {
-    "_extends": "sound_point",
+    "_use": "sound_point",
     "sound_point__timeline_pos": 0.0,
     "sound_point__length": 0.0
   },
   "sound_point_one_shot": {
-    "_extends": "sound_point",
+    "_use": "sound_point",
     "sound_point_one_shot_played": false
   },
   "sound_area": {
-    "_extends": "replicating",
+    "_use": "replicating",
     "sound_area__grid_step": 15.0,
     "sound_area__grid_stride": 0,
     "sound_area__bounds": [
@@ -1879,19 +1879,19 @@
     ],
     "sound_area__event_name": "",
     "sound_area__area_names:list<t>": {    },
-    "sound_area__grid:list<r>": {    },
+    "sound_area__bgrid:list<b>": {    },
     "sound_area__event:SoundEvent": {
       "_tags": "sound"
     }
   },
   "asset_manager": {
     "_tags": "render",
-    "_extends": "base_asset_manager",
+    "_use": "base_asset_manager",
     "asset__applicationBlkPath": "assetsImport/application_wt.blk"
   },
   "burav": {
-    "_extends": "root",
-    "_extends": "replicating",
+    "_use": "root",
+    "_use": "replicating",
     "burav__position": [
       0.0,
       0.0
@@ -1951,8 +1951,8 @@
     "can_control_burav:tag": {    }
   },
   "ussr_atomic_hedgie": {
-    "_extends": "human",
-    "_extends": "unit_repair",
+    "_use": "human",
+    "_use": "unit_repair",
     "mods:list<t>": {
       "mod": "toolkit_ecs"
     },

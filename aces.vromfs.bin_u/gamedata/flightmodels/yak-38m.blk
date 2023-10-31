@@ -2170,26 +2170,22 @@
     "maxloadMassRightConsoles": 730.0,
     "maxDisbalance": 450.0,
     "HideNodes": {
-      "node": "pylon_l1",
       "node": "s24_pylon_l1",
       "node": "apu_68um3_l",
       "node": "upk_23_250_l1",
       "node": "apu_60m_l",
-      "node": "pylon_l",
       "node": "s24_pylon_l1",
       "node": "apu_68um3_l",
       "node": "upk_23_250_l",
       "node": "delta_ng_l",
       "node": "s24_pylon_l",
       "node": "apu_60m_l1",
-      "node": "pylon_r",
       "node": "s24_pylon_r",
       "node": "apu_68um3_r",
       "node": "upk_23_250_r",
       "node": "apu_60m_r1",
       "node": "s24_pylon_r",
       "node": "apu_60m_r1",
-      "node": "pylon_r1",
       "node": "s24_pylon_r1",
       "node": "apu_68um3_r",
       "node": "upk_23_250_r1",
@@ -2273,7 +2269,12 @@
           "blk": "gameData/Weapons/containers/ub_16_57_su_s5kp.blk",
           "emitter": "ub_57_16_b003",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2289,7 +2290,12 @@
           "blk": "gameData/Weapons/containers/ub_32a_24_su_s5kp.blk",
           "emitter": "su_ub_32a_24_b001",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2305,7 +2311,12 @@
           "blk": "gameData/Weapons/containers/b8m_s8ko.blk",
           "emitter": "b_8m_l",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2322,7 +2333,12 @@
           "blk": "gameData/Weapons/rocketGuns/su_s_24b_rocket.blk",
           "emitter": "su_s_24_rocket_003",
           "bullets": 1,
-          "separate": true
+          "separate": true,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2347,18 +2363,17 @@
         }
       },
       "WeaponPreset": {
-        "iconType": "bombs_small_group_x4",
-        "name": "ofab100_x4",
+        "iconType": "bombs_small_group",
+        "name": "ofab100_x3_left",
         "reqModification": "mi_24_fab_250",
         "ShowNodes": {
           "node": "pylon_l1"
         },
         "Weapon": {
           "trigger": "bombs",
-          "blk": "gameData/Weapons/containers/mbd2_67u_su_ofab_100_120_x4.blk",
+          "blk": "gameData/Weapons/containers/mbd2_67u_su_ofab_100_120_x3_left.blk",
           "emitter": "mbd2_67u_l",
-          "external": true,
-          "separate": true
+          "external": true
         }
       },
       "WeaponPreset": {
@@ -2374,7 +2389,6 @@
           "emitter": "su_ofab250_l1",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2391,7 +2405,6 @@
           "emitter": "su_fab500_m54_l",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2408,7 +2421,6 @@
           "emitter": "su_fab500_m54_l",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2470,7 +2482,12 @@
           "blk": "gameData/Weapons/containers/ub_16_57_su_s5kp.blk",
           "emitter": "ub_57_16_b001",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2487,7 +2504,12 @@
           "blk": "gameData/Weapons/rocketGuns/su_s_24b_rocket.blk",
           "emitter": "su_s_24_rocket_001",
           "bullets": 1,
-          "separate": true
+          "separate": true,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2516,8 +2538,7 @@
           "blk": "gameData/Weapons/BombGuns/su_ofab100_120.blk",
           "emitter": "su_ofab100_9",
           "bullets": 1,
-          "external": true,
-          "separate": true
+          "external": true
         }
       },
       "WeaponPreset": {
@@ -2533,7 +2554,6 @@
           "emitter": "su_ofab250_l",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2596,7 +2616,12 @@
           "blk": "gameData/Weapons/containers/ub_16_57_su_s5kp.blk",
           "emitter": "ub_57_16_b002",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2613,7 +2638,12 @@
           "blk": "gameData/Weapons/rocketGuns/su_s_24b_rocket.blk",
           "emitter": "su_s_24_rocket_002",
           "bullets": 1,
-          "separate": true
+          "separate": true,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2627,8 +2657,7 @@
           "blk": "gameData/Weapons/BombGuns/su_ofab100_120.blk",
           "emitter": "su_ofab100_10",
           "bullets": 1,
-          "external": true,
-          "separate": true
+          "external": true
         }
       },
       "WeaponPreset": {
@@ -2644,7 +2673,6 @@
           "emitter": "su_ofab250_r",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2706,7 +2734,12 @@
           "blk": "gameData/Weapons/containers/ub_16_57_su_s5kp.blk",
           "emitter": "ub_57_16_b004",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2722,7 +2755,12 @@
           "blk": "gameData/Weapons/containers/ub_32a_24_su_s5kp.blk",
           "emitter": "su_ub_32a_24_b002",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2738,7 +2776,12 @@
           "blk": "gameData/Weapons/containers/b8m_s8ko.blk",
           "emitter": "b_8m_r",
           "mass": 0.01,
-          "dragCx": 0.01
+          "dragCx": 0.01,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2755,7 +2798,12 @@
           "blk": "gameData/Weapons/rocketGuns/su_s_24b_rocket.blk",
           "emitter": "su_s_24_rocket_004",
           "bullets": 1,
-          "separate": true
+          "separate": true,
+          "gearLimit": [
+            0.0,
+            0.1
+          ],
+          "gearName": "gear_c"
         }
       },
       "WeaponPreset": {
@@ -2780,18 +2828,17 @@
         }
       },
       "WeaponPreset": {
-        "iconType": "bombs_small_group_x4",
-        "name": "ofab100_x4",
+        "iconType": "bombs_small_group",
+        "name": "ofab100_x3_right",
         "reqModification": "mi_24_fab_250",
         "ShowNodes": {
           "node": "pylon_r1"
         },
         "Weapon": {
           "trigger": "bombs",
-          "blk": "gameData/Weapons/containers/mbd2_67u_su_ofab_100_120_x4.blk",
+          "blk": "gameData/Weapons/containers/mbd2_67u_su_ofab_100_120_x3_right.blk",
           "emitter": "mbd2_67u_r",
-          "external": true,
-          "separate": true
+          "external": true
         }
       },
       "WeaponPreset": {
@@ -2807,7 +2854,6 @@
           "emitter": "su_ofab250_r1",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2824,7 +2870,6 @@
           "emitter": "su_fab500_m54_r",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },
@@ -2841,7 +2886,6 @@
           "emitter": "su_fab500_m54_r",
           "bullets": 1,
           "external": true,
-          "separate": true,
           "machLimit": 1.01
         }
       },

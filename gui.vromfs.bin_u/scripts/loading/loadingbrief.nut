@@ -20,15 +20,14 @@ let { GUI } = require("%scripts/utils/configs.nut")
 let { hasMenuChat } = require("%scripts/chat/chatStates.nut")
 let { getTip } = require("%scripts/loading/loadingTips.nut")
 let { add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
-let { getUrlOrFileMissionMetaInfo, locCurrentMissionName } = require("%scripts/missions/missionsUtils.nut")
+let { getUrlOrFileMissionMetaInfo, locCurrentMissionName, getMissionTimeText, getWeatherLocName
+} = require("%scripts/missions/missionsUtils.nut")
 let { get_current_mission_desc } = require("guiMission")
 let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { USEROPT_WEAPONS } = require("%scripts/options/optionsExtNames.nut")
 let { loadLocalByAccount, saveLocalByAccount } = require("%scripts/clientState/localProfile.nut")
-let { getWeatherLocName } = require("%scripts/options/optionsView.nut")
 let { getCountryFlagsPresetName, getCountryFlagImg } = require("%scripts/options/countryFlagsPreset.nut")
 let { getUnitName } = require("%scripts/unit/unitInfo.nut")
-let { getMissionTimeText } = require("%scripts/options/optionsUtils.nut")
 
 const MIN_SLIDE_TIME = 2.0
 
@@ -186,15 +185,21 @@ gui_handlers.LoadingBrief <- class extends gui_handlers.BaseGuiHandlerWT {
 
     if (this.gt & GT_VERSUS) {
       let missionHelpPath = ::g_mission_type.getHelpPathForCurrentMission()
-      let haveHelp = hasFeature("ControlsHelp") && missionHelpPath != null
+      let controlHelpName = ::g_mission_type.getControlHelpName()
+      let haveHelp = hasFeature("ControlsHelp")
+        && (missionHelpPath != null || controlHelpName != null)
 
       let helpBtnObj = this.showSceneBtn("btn_help", haveHelp)
       if (helpBtnObj && !showConsoleButtons.value)
         helpBtnObj.setValue(loc("flightmenu/btnControlsHelp") + loc("ui/parentheses/space", { text = "F1" }))
 
       if (haveHelp) {
-        let parts = split_by_chars(missionHelpPath, "/.")
-        let helpId = parts.len() >= 2 ? parts[parts.len() - 2] : ""
+        let parts = missionHelpPath != null
+          ? split_by_chars(missionHelpPath, "/.")
+          : null
+        let helpId = parts != null
+          ? parts.len() >= 2 ? parts[parts.len() - 2] : ""
+          : controlHelpName
         let cfgPath = "seen/help_mission_type/" + helpId
         let isSeen = loadLocalByAccount(cfgPath, 0)
         if (!isSeen) {

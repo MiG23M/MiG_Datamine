@@ -18,7 +18,7 @@ let { EII_SMOKE_GRENADE, EII_SMOKE_SCREEN, EII_ARTILLERY_TARGET, EII_SPECIAL_UNI
   EII_SUPPORT_PLANE_CHANGE, EII_SUPPORT_PLANE_GROUP_ATTACK, EII_STEALTH, EII_LOCK, EII_NIGHT_VISION,
   EII_SIGHT_STABILIZATION, EII_SUPPORT_PLANE_ORBITING, EII_UGV, EII_UNLIMITED_CONTROL,
   EII_GUIDANCE_MODE, EII_DESIGNATE_TARGET, EII_ROCKET_AIR, EII_AGM_AIR, EII_AAM_AIR, EII_BOMB_AIR,
-  EII_GUIDED_BOMB_AIR
+  EII_GUIDED_BOMB_AIR, EII_PERISCOPE, EII_EMERGENCY_SURFACING
 } = require("hudActionBarConst")
 let { HUD_UNIT_TYPE } = require("%scripts/hud/hudUnitType.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
@@ -103,14 +103,14 @@ let cfgMenuShip = [
 
 let cfgMenuSubmarine = [
   // Page #1
-    null,
-    EII_SMOKE_SCREEN,
-    null,
-    EII_SUBMARINE_SONAR,
     EII_TORPEDO_SENSOR,
+    EII_SMOKE_SCREEN,
+    EII_SUBMARINE_SONAR,
+    EII_EXTINGUISHER,
+    EII_TOOLKIT,
     EII_REPAIR_BREACHES,
-    null,
-    null,
+    EII_PERISCOPE,
+    EII_EMERGENCY_SURFACING,
 ]
 
 let cfgMenuAircraft = [
@@ -166,13 +166,23 @@ let function isActionMatch(cfgItem, action) {
 }
 
 let function arrangeStreakWheelActions(unitId, hudUnitType, actions) {
-  let res = getCfgByUnit(unitId, hudUnitType).map(@(c) c != null ? actions.findvalue(@(a) isActionMatch(c, a)) : null)
-  local filledLen = res.reduce(@(lastIdx, a, idx) a != null ? idx : lastIdx, -1) + 1
-  let pagesCount = (filledLen + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE
-  res.resize(pagesCount * ITEMS_PER_PAGE, null)
+  local res = getCfgByUnit(unitId, hudUnitType).map(@(c) c != null ? actions.findvalue(@(a) isActionMatch(c, a)) : null)
+  let actionsByPage = []
+  foreach (idx, action in res) {
+    let pageIdx = idx / ITEMS_PER_PAGE
+    if (pageIdx not in actionsByPage)
+      actionsByPage.append([])
+    actionsByPage[pageIdx].append(action)
+  }
+  for (local idx = actionsByPage.len() - 1; idx >= 0; idx--)
+    if (actionsByPage[idx].findvalue(@(action) action != null) == null)
+      actionsByPage.remove(idx)
+  res = actionsByPage.reduce(@(resActions, page) resActions.extend(page), [])
   foreach (a in actions)
     if (res.indexof(a) == null)
       script_net_assert_once("action not mapped", $"Actionbar action type {a?.type} not mapped in wheelmenu")
+
+  res.resize(actionsByPage.len() * ITEMS_PER_PAGE, null)
   return res
 }
 

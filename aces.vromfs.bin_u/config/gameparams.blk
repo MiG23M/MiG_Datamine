@@ -92,6 +92,7 @@
   "replace_attachments_with_ik_pilot": true,
   "replay_key_reducing_enabled": false,
   "debug_rend_inst_loading_delay_on_pc_ms": 0,
+  "debugRiTexture": "camo_test_checker",
   "collimatorSize": 0.14,
   "gunnerChangeTime": 3.0,
   "tracer_limit_enabled": true,
@@ -450,7 +451,7 @@
     0.0
   ],
   "forceTraceRendInstSecondLayer": true,
-  "traceRendInstSecondLayerMinHeight": 1.0,
+  "traceRendInstSecondLayerMinHeight": 0.5,
   "tracers": {
     "headFadeTime": 4.0,
     "headSpeedScale": [
@@ -12677,6 +12678,62 @@
     "armor_belt_r_50": {
       "my": "ship_armor_belt_r",
       "enemy": "ship_armor_belt_r"
+    },
+    "air_tank_01_dm": {
+      "my": "air_tank",
+      "enemy": "air_tank"
+    },
+    "air_tank_02_dm": {
+      "my": "air_tank",
+      "enemy": "air_tank"
+    },
+    "air_tank_03_dm": {
+      "my": "air_tank",
+      "enemy": "air_tank"
+    },
+    "air_tank_04_dm": {
+      "my": "air_tank",
+      "enemy": "air_tank"
+    },
+    "ballast_tank_01_dm": {
+      "my": "ballast_tank",
+      "enemy": "ballast_tank"
+    },
+    "ballast_tank_02_dm": {
+      "my": "ballast_tank",
+      "enemy": "ballast_tank"
+    },
+    "ballast_tank_03_dm": {
+      "my": "ballast_tank",
+      "enemy": "ballast_tank"
+    },
+    "ballast_tank_04_dm": {
+      "my": "ballast_tank",
+      "enemy": "ballast_tank"
+    },
+    "ballast_tank_05_dm": {
+      "my": "ballast_tank",
+      "enemy": "ballast_tank"
+    },
+    "battery_01_dm": {
+      "my": "battery",
+      "enemy": "battery"
+    },
+    "battery_02_dm": {
+      "my": "battery",
+      "enemy": "battery"
+    },
+    "battery_03_dm": {
+      "my": "battery",
+      "enemy": "battery"
+    },
+    "battery_04_dm": {
+      "my": "battery",
+      "enemy": "battery"
+    },
+    "periscope_dm": {
+      "my": "periscope",
+      "enemy": "periscope"
     }
   },
   "wodParams": {
@@ -13432,6 +13489,26 @@
         "name": "elevator_",
         "unit": "ship",
         "xrayColor": [230, 200, 160, 255]
+      },
+      "p": {
+        "name": "air_tank_",
+        "unit": "ship",
+        "xrayColor": [204, 204, 204, 255]
+      },
+      "p": {
+        "name": "ballast_tank_",
+        "unit": "ship",
+        "xrayColor": [190, 115, 0, 255]
+      },
+      "p": {
+        "name": "battery_",
+        "unit": "ship",
+        "xrayColor": [189, 206, 222, 255]
+      },
+      "p": {
+        "name": "periscope",
+        "unit": "ship",
+        "xrayColor": [189, 206, 222, 255]
       }
     },
     "body": {
@@ -16212,6 +16289,10 @@
       "p": "countermeasure_",
       "p": "aps_sensor_",
       "p": "aps_launcher_",
+      "p": "ballast_tank_",
+      "p": "air_tank_",
+      "p": "battery_",
+      "p": "periscope",
       "p": {
         "name": "optic_"
       },

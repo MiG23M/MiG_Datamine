@@ -1846,7 +1846,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
       return
 
     this.setSceneTitle(status ? "" : ::getCurMpTitle(), this.scene, "respawn_title")
-
+    this.setSceneMissionEnviroment()
     this.scene.findObject("spectator_mode_title").show(status)
     this.scene.findObject("flight_menu_bgd").show(!status)
     this.scene.findObject("spectator_controls").show(status)
@@ -2181,7 +2181,7 @@ gui_handlers.RespawnHandler <- class extends gui_handlers.MPStatistics {
   if (!crews)
     return false
 
-  log($"Looking for country {country} in team {team}")
+  log($"Looking for country {country} in team {team} slots:{crews.len()}")
 
   let missionRules = ::g_mis_custom_state.getCurMissionRules()
   let leftRespawns = missionRules.getLeftRespawns()

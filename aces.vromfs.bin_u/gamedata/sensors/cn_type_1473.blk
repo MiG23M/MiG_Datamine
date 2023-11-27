@@ -945,18 +945,7 @@
             }
           }
         },
-        "acmStandbyToLock": {
-          "stateFrom": "standby",
-          "command": "acmSwitch",
-          "stateTo": "acmLock",
-          "actions": {
-            "doCustomActionTemplate": {
-              "fsm": "main",
-              "name": "setAcmLockMode"
-            }
-          }
-        },
-        "hmdStandbyToLock": {
+        "standbyToHmdStandby": {
           "stateFrom": "standby",
           "command": "selectTarget",
           "stateTo": "hmdLock",
@@ -964,6 +953,17 @@
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setHmdLockMode"
+            }
+          }
+        },
+        "standbyToAcmLock": {
+          "stateFrom": "standby",
+          "command": "acmSwitch",
+          "stateTo": "acmLock",
+          "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "setAcmLockMode"
             }
           }
         },

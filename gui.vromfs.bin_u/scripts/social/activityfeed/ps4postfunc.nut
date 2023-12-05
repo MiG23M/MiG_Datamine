@@ -1,7 +1,7 @@
-//-file:plus-string
 from "%scripts/dagui_library.nut" import *
-let u = require("%sqStdLibs/helpers/u.nut")
+from "%scripts/social/psConsts.nut" import ps4_activity_feed
 
+let u = require("%sqStdLibs/helpers/u.nut")
 let { format, split_by_chars } = require("string")
 let { rnd } = require("dagor.random")
 let psn = require("%sonyLib/webApi.nut")
@@ -34,7 +34,7 @@ let function getActivityFeedImageByParam(feed, imagesConfig) {
     return "".concat(imagesConfig.mainPart, config.name, feed.imgSuffix, variations)
   }
 
-  log("getActivityFeedImagesByParam: no image name in '" + feed.blkParamName)
+  log("getActivityFeedImagesByParam: no image name in '", feed.blkParamName)
   debugTableData(config)
   return ""
 }
@@ -65,7 +65,7 @@ let function getActivityFeedImages(feed) {
   let feedUrl = imagesConfig?.mainPart
   let imgExt = imagesConfig?.fileExtension
   if (!feedUrl || !imgExt) {
-    log("getActivityFeedImages: invalid feed config, url base '" + feedUrl + "', image extension '" + imgExt)
+    log("getActivityFeedImages: invalid feed config, url base '", feedUrl, "', image extension '", imgExt)
     debugTableData(imagesConfig)
     return null
   }
@@ -81,8 +81,8 @@ let function getActivityFeedImages(feed) {
 
   if (!u.isEmpty(url))
     return {
-      small = url + (feed?.shouldForceLogo ? logo : "") + ext
-      large = url + big + ext
+      small = "".concat(url, (feed?.shouldForceLogo ? logo : ""), ext)
+      large = "".concat(url, big, ext)
     }
 
   log("getActivityFeedImages: could not select method to build image URLs from gui.blk and feed config")
@@ -92,7 +92,7 @@ let function getActivityFeedImages(feed) {
 
 return function(config, customFeedParams) {
   let sendStat = function(tags) {
-    let qualifiedNameParts = split_by_chars(getEnumValName("ps4_activity_feed", config.subType, true), ".")
+    let qualifiedNameParts = split_by_chars(getEnumValName("ps4_activity_feed", ps4_activity_feed, config.subType, true), ".")
     tags["type"] <- qualifiedNameParts[1]
     statsd.send_counter("sq.activityfeed", 1, tags)
   }
@@ -132,8 +132,8 @@ return function(config, customFeedParams) {
   let smallImage = customFeedParams?.images?.small || images?.small
 
   let body = {
-    captions = customFeedParams?.captions || getFilledFeedTextByLang("activityFeed/" + locId)
-    condensedCaptions = customFeedParams?.condensedCaptions || getFilledFeedTextByLang("activityFeed/" + locId + "/condensed")
+    captions = customFeedParams?.captions ?? getFilledFeedTextByLang($"activityFeed/{locId}")
+    condensedCaptions = customFeedParams?.condensedCaptions ?? getFilledFeedTextByLang($"activityFeed/{locId}/condensed")
     storyType = "IN_GAME_POST"
     subType = config?.subType || 0
     targets = [{ accountId = ::ps4_get_account_id(), type = "ONLINE_ID" }]

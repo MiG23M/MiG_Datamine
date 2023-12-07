@@ -52,6 +52,12 @@
       "superstructure_top_dm": {
         "armorThickness": 40.0
       },
+      "turret_02_side_dm": {
+        "armorThickness": 40.0
+      },
+      "turret_02_front_dm": {
+        "armorThickness": 40.0
+      },
       "body_front_dm": {
         "armorThickness": 150.0
       },
@@ -70,9 +76,6 @@
       "superstructure_front_dm": {
         "armorThickness": 200.0
       },
-      "superstructure_side_dm": {
-        "armorThickness": 40.0
-      },
       "superstructure_back_dm": {
         "armorThickness": 150.0
       },
@@ -83,7 +86,7 @@
         "armorThickness": 300.0
       },
       "turret_02_bottom_dm": {
-        "armorThickness": 60.0
+        "armorThickness": 40.0
       },
       "turret_01_top_dm": {
         "armorThickness": 120.0
@@ -93,6 +96,19 @@
       },
       "turret_03_top_dm": {
         "armorThickness": 10.0
+      }
+    },
+    "inner_armor": {
+      "armorClass": "RHA_tank_modern",
+      "hidableInXrayViewer": true,
+      "composite_armor_hull_01_dm": {
+        "armorThickness": 8.0
+      },
+      "composite_armor_hull_02_dm": {
+        "armorThickness": 35.0
+      },
+      "composite_armor_hull_03_dm": {
+        "armorThickness": 20.0
       }
     },
     "hull_shield": {
@@ -139,7 +155,7 @@
         "armorThickness": 205.0
       },
       "turret_01_side_dm": {
-        "armorThickness": 15.0
+        "armorThickness": 55.0
       },
       "turret_01_back_dm": {
         "armorThickness": 205.0
@@ -679,6 +695,35 @@
       "track_l_dm": {      },
       "track_r_01_dm": {      },
       "track_l_01_dm": {      }
+    }
+  },
+  "xray_viewer_data": {
+    "armorArrayHullFront": {
+      "xrayDmPart": "composite_armor_hull_01_dm",
+      "titleLoc": "RHA_tank_modern",
+      "armorArrayText": {
+        "layer": {
+          "dmPart": "composite_armor_hull_01_dm"
+        }
+      }
+    },
+    "armorArrayHullFront": {
+      "xrayDmPart": "composite_armor_hull_02_dm",
+      "titleLoc": "RHA_tank_modern",
+      "armorArrayText": {
+        "layer": {
+          "dmPart": "composite_armor_hull_02_dm"
+        }
+      }
+    },
+    "armorArrayHullFront": {
+      "xrayDmPart": "composite_armor_hull_03_dm",
+      "titleLoc": "RHA_tank_modern",
+      "armorArrayText": {
+        "layer": {
+          "dmPart": "composite_armor_hull_03_dm"
+        }
+      }
     }
   },
   "tank_crew": {
@@ -2189,74 +2234,6 @@
       "name": "total_fire",
       "lifetime": 60.0,
       "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_dmg"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_01"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_02"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_03"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_04"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_05"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_06"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_07"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_08"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_09"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_10"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_11"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_12"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_13"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_14"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_15"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_16"
-      },
-      "fx": {
         "name": "tank_fire_big",
         "emitter": "emtr_fire_dmg"
       },
@@ -2328,74 +2305,6 @@
     "event": {
       "name": "attached_fire",
       "lifetime": 15.0,
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_dmg"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_01"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_02"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_03"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_04"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_05"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_06"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_07"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_08"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_09"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_10"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_11"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_12"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_13"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_14"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_15"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_16"
-      },
       "fx": {
         "name": "fire_tank_napalm_smal",
         "emitter": "emtr_fire_dmg"
@@ -2492,6 +2401,10 @@
         "name": "tank_explosion",
         "emitter": "emtr_explosion_center"
       },
+      "fx": {
+        "extraFx": "fuelLeakFx",
+        "emitter": "emtr_explosion_center"
+      },
       "wreckages": {
         "count": 8,
         "speed": 20.0,
@@ -2504,6 +2417,10 @@
       "lifetime": 10.0,
       "fx": {
         "name": "tank_explosion",
+        "emitter": "emtr_explosion_center"
+      },
+      "fx": {
+        "extraFx": "fuelLeakFx",
         "emitter": "emtr_explosion_center"
       },
       "wreckages": {
@@ -2534,6 +2451,10 @@
         "name": "tank_explosion_ammo",
         "emitter": "emtr_explosion_center"
       },
+      "fx": {
+        "extraFx": "fuelLeakFx",
+        "emitter": "emtr_explosion_center"
+      },
       "wreckages": {
         "count": 12,
         "speed": 25.0,
@@ -2546,6 +2467,10 @@
       "lifetime": 10.0,
       "fx": {
         "name": "tank_explosion_ammo_small",
+        "emitter": "emtr_explosion_center"
+      },
+      "fx": {
+        "extraFx": "fuelLeakFx",
         "emitter": "emtr_explosion_center"
       },
       "wreckages": {

@@ -10,7 +10,7 @@
   "damagePartsToCollisionObjectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_objects.blk",
   "damagePartsToFmPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_fm_parts_map.blk",
   "damagePartsToHudPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_hud_parts_map.blk",
-  "damagePartsDependencyMapBlk": "gameData/FlightModels/DM/dm_parts_dependency_map.blk",
+  "damagePartsDependencyMapBlk": "gameData/FlightModels/DM/dm_parts_additional_dependency_map.blk",
   "damagePartsToCollisionPointsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_points_map.blk",
   "damagePartsToWeaponsMapBlk": "gameData/FlightModels/DM/dm_parts_to_weapons_map.blk",
   "damagePartsToVisualEffectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_visual_effects_map.blk",
@@ -2056,6 +2056,10 @@
     "preset": {
       "name": "il_2_1942_2x_fab250",
       "blk": "gameData/FlightModels/weaponPresets/il_2_1942_2x_fab250.blk"
+    },
+    "preset": {
+      "name": "il_2_1942_2x_brab220",
+      "blk": "gameData/FlightModels/weaponPresets/il_2_1942_2x_brab220.blk"
     }
   },
   "WeaponSlots": {
@@ -2259,6 +2263,22 @@
           "external": true,
           "separate": true
         }
+      },
+      "WeaponPreset": {
+        "iconType": "bombs_large_high_drag",
+        "name": "brab220",
+        "reqModification": "der_21",
+        "ShowNodes": {
+          "node": "pylon_bomb1"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/su_brab_220_1930_ap.blk",
+          "emitter": "bomb1",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
       }
     },
     "WeaponSlot": {
@@ -2390,6 +2410,22 @@
         "Weapon": {
           "trigger": "bombs",
           "blk": "gameData/Weapons/BombGuns/su_fab250.blk",
+          "emitter": "bomb2",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "bombs_large_high_drag",
+        "name": "brab220",
+        "reqModification": "der_21",
+        "ShowNodes": {
+          "node": "pylon_bomb2"
+        },
+        "Weapon": {
+          "trigger": "bombs",
+          "blk": "gameData/Weapons/BombGuns/su_brab_220_1930_ap.blk",
           "emitter": "bomb2",
           "bullets": 1,
           "external": true,

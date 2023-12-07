@@ -25,6 +25,12 @@
   "matchSector": 12.0,
   "targetSuperResolution": false,
   "trackedTargetsMax": 12,
+  "targetRangeFinder": true,
+  "targetRange": [
+    5000.0,
+    50000.0
+  ],
+  "friendFoeId": true,
   "signalHoldTime": 5.0,
   "targetHoldTime": 5.0,
   "newTargetHoldTime": 5.0,
@@ -140,6 +146,28 @@
       "type": "N010M Zhuk-M"
     },
     "group": {
+      "name": "MiG-29",
+      "search": true,
+      "track": true,
+      "launch": false,
+      "detectLaunch": true,
+      "type": "N019_S31",
+      "type": "N010 Zhuk",
+      "type": "N010M Zhuk-M",
+      "type": "N001"
+    },
+    "group": {
+      "name": "MiG-29 CW",
+      "search": false,
+      "track": false,
+      "launch": true,
+      "detectLaunch": true,
+      "type": "N019_S31",
+      "type": "N010 Zhuk",
+      "type": "N010M Zhuk-M",
+      "type": "N001"
+    },
+    "group": {
       "name": "F-3",
       "detectLaunch": true,
       "search": true,
@@ -248,6 +276,22 @@
       "type": "AN/APG-66(V)1",
       "type": "AN/APG-66(V)3",
       "type": "AN/APG-66J"
+    },
+    "group": {
+      "name": "F-15",
+      "search": true,
+      "track": true,
+      "launch": false,
+      "detectLaunch": true,
+      "type": "AN/APG-63"
+    },
+    "group": {
+      "name": "F-15 CW",
+      "search": false,
+      "track": false,
+      "launch": true,
+      "detectLaunch": true,
+      "type": "AN/APG-63"
     },
     "group": {
       "name": "F-18",
@@ -518,6 +562,11 @@
       "text": "F14",
       "group": "F-14",
       "group": "F-14 CW"
+    },
+    "targetsDirectionGroup": {
+      "text": "F15",
+      "group": "F-15",
+      "group": "F-15 CW"
     },
     "targetsDirectionGroup": {
       "text": "F16",

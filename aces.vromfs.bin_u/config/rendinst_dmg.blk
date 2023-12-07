@@ -9530,30 +9530,26 @@
     "destroyedModelName": "mesh_netting_fence_a_destr_phobj",
     "destructionImpulse": 7000.0,
     "fx": "ad_metal_fence_grid",
-    "material": "transparentBeton",
-    "stopsBullets": false
+    "material": "transparentBeton"
   },
   "dmg": {
     "name": "mesh_netting_fence_b",
     "destroyedModelName": "mesh_netting_fence_b_destr_phobj",
     "destructionImpulse": 7000.0,
-    "fx": "ad_metal_fence_grid",
-    "stopsBullets": false
+    "fx": "ad_metal_fence_grid"
   },
   "dmg": {
     "name": "mesh_netting_fence_c_column",
     "destroyedModelName": "mesh_netting_fence_c_column_destr_phobj",
     "destructionImpulse": 7000.0,
     "fx": "ad_metal_fence_grid",
-    "stopsBullets": true,
     "isParent": true
   },
   "dmg": {
     "name": "mesh_netting_fence_c_section",
     "destroyedModelName": "mesh_netting_fence_c_section_destr_phobj",
     "destructionImpulse": 7000.0,
-    "fx": "ad_metal_fence_grid",
-    "stopsBullets": false
+    "fx": "ad_metal_fence_grid"
   },
   "dmg": {
     "name": "box_a",
@@ -14903,7 +14899,6 @@
     "destructionImpulse": 10000.0,
     "fx": "ad_wood_small",
     "fxScale": 1.0,
-    "stopsBullets": false,
     "material": "transparentBeton"
   },
   "dmg": {
@@ -14912,7 +14907,6 @@
     "destructionImpulse": 10000.0,
     "fx": "ad_wood_small",
     "fxScale": 1.0,
-    "stopsBullets": false,
     "material": "transparentBeton"
   },
   "dmg": {
@@ -14921,7 +14915,6 @@
     "destructionImpulse": 10000.0,
     "fx": "ad_wood_small",
     "fxScale": 1.0,
-    "stopsBullets": false,
     "material": "transparentBeton"
   },
   "dmg": {
@@ -14930,7 +14923,6 @@
     "destructionImpulse": 10000.0,
     "fx": "ad_metal_small",
     "fxScale": 1.0,
-    "stopsBullets": false,
     "material": "transparentBeton"
   },
   "dmg": {
@@ -14939,7 +14931,6 @@
     "destructionImpulse": 10000.0,
     "fx": "ad_wood_small",
     "fxScale": 1.0,
-    "stopsBullets": false,
     "material": "transparentBeton"
   },
   "dmg": {
@@ -14948,7 +14939,6 @@
     "destructionImpulse": 10000.0,
     "fx": "ad_wood_small",
     "fxScale": 1.0,
-    "stopsBullets": false,
     "material": "transparentBeton"
   },
   "dmg": {
@@ -17804,7 +17794,8 @@
     "fx": "ad_metal",
     "fxScale": 1.0,
     "stopsBullets": false,
-    "material": "metal"
+    "material": "metal",
+    "isParent": false
   },
   "dmg": {
     "name": "soviet_payphone_a",
@@ -18927,16 +18918,14 @@
     "dural_props": {
       "riArmorClass": "dural",
       "allowRicochet": false,
-      "armorThickness": 0.5,
-      "restrainDamage": 0.0001,
-      "armorThrough": 0.5,
-      "explosionDamageMult": 0.001,
-      "genericDamageMult": 0.001,
-      "cumulativeDamageMult": 0.001,
-      "shatterDamageMult": 0.01,
-      "dontTriggerExplodeOnRendinst": true,
-      "maxTracedWidth": 0.01,
       "armorQuality": 0.01,
+      "armorThickness": 0.5,
+      "restrainDamage": 0.85,
+      "armorThrough": 0.5,
+      "explosionDamageMult": 0.85,
+      "shatterDamageMult": 0.85,
+      "cumulativeDamageMult": 1.0,
+      "maxTracedWidth": 0.005,
       "clampTracedWidth": [
         0.01,
         0.05
@@ -18950,7 +18939,13 @@
       "explosionDamageMult": 0.5,
       "genericDamageMult": 0.3,
       "cumulativeDamageMult": 0.3,
-      "shatterDamageMult": 0.01
+      "shatterDamageMult": 0.01,
+      "defaultTracedWidth": 0.01,
+      "maxTracedWidth": 0.01,
+      "clampTracedWidth": [
+        0.0,
+        0.05
+      ]
     },
     "tanks": {
       "riArmorClass": "RHA_tank",
@@ -28111,7 +28106,7 @@
   },
   "dmg": {
     "name": "bush_desert_dead_a",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28120,7 +28115,7 @@
   },
   "dmg": {
     "name": "bush_desert_dead_b",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28129,7 +28124,7 @@
   },
   "dmg": {
     "name": "bush_desert_dead_c",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28138,7 +28133,7 @@
   },
   "dmg": {
     "name": "bush_desert_a",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 2.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28147,7 +28142,7 @@
   },
   "dmg": {
     "name": "bush_desert_b",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 2.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28191,7 +28186,7 @@
   },
   "dmg": {
     "name": "dracena_bush_b",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 4.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28199,7 +28194,7 @@
   },
   "dmg": {
     "name": "dracena_bush_c",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 4.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28207,7 +28202,7 @@
   },
   "dmg": {
     "name": "dracena_bush_small_a",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 4.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28215,7 +28210,7 @@
   },
   "dmg": {
     "name": "dracena_bush_small_b",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 4.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28223,7 +28218,7 @@
   },
   "dmg": {
     "name": "haloxylon_bush_a",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28232,7 +28227,7 @@
   },
   "dmg": {
     "name": "haloxylon_bush_b",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28241,7 +28236,7 @@
   },
   "dmg": {
     "name": "haloxylon_bush_c",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28250,7 +28245,7 @@
   },
   "dmg": {
     "name": "haloxylon_bush_d",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "destrCollisionHeightScale": 1.0,
     "fx": "ad_bush_felling_leaves_green",
@@ -28367,7 +28362,7 @@
   },
   "dmg": {
     "name": "bush_flowers_a",
-    "destructionImpulse": 8000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -28380,7 +28375,7 @@
   },
   "dmg": {
     "name": "bush_flowers_b",
-    "destructionImpulse": 8000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.9,
     "canopyTopOffset": 0.1,
@@ -28393,7 +28388,7 @@
   },
   "dmg": {
     "name": "bush_flowers_c",
-    "destructionImpulse": 8000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.9,
     "canopyTopOffset": 0.1,
@@ -28406,7 +28401,7 @@
   },
   "dmg": {
     "name": "bush_olive_a",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.7,
     "canopyTopOffset": 0.1,
@@ -28420,7 +28415,7 @@
   },
   "dmg": {
     "name": "bush_olive_b",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.7,
     "canopyTopOffset": 0.1,
@@ -28434,7 +28429,7 @@
   },
   "dmg": {
     "name": "bush_olive_c",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.7,
     "canopyTopOffset": 0.1,
@@ -28448,7 +28443,7 @@
   },
   "dmg": {
     "name": "bush_olive_d",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.7,
     "canopyTopOffset": 0.1,
@@ -28462,7 +28457,7 @@
   },
   "dmg": {
     "name": "bush_olive_e",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.7,
     "canopyTopOffset": 0.1,
@@ -28476,7 +28471,7 @@
   },
   "dmg": {
     "name": "bush_olive_f",
-    "destructionImpulse": 5000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.7,
     "canopyTopOffset": 0.1,
@@ -31904,7 +31899,7 @@
   },
   "dmg": {
     "name": "tree_sea_bush_a",
-    "destructionImpulse": 40000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -31917,7 +31912,7 @@
   },
   "dmg": {
     "name": "tree_sea_bush_b",
-    "destructionImpulse": 40000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -31930,7 +31925,7 @@
   },
   "dmg": {
     "name": "tree_sea_bush_c",
-    "destructionImpulse": 40000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -31943,7 +31938,7 @@
   },
   "dmg": {
     "name": "tree_sea_bush_d",
-    "destructionImpulse": 40000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -31956,7 +31951,7 @@
   },
   "dmg": {
     "name": "tree_sea_bush_e",
-    "destructionImpulse": 40000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -31969,7 +31964,7 @@
   },
   "dmg": {
     "name": "tree_sea_bush_f",
-    "destructionImpulse": 40000.0,
+    "destructionImpulse": 3000.0,
     "bushBehaviour": true,
     "canopyTopPart": 0.8,
     "canopyTopOffset": 0.1,
@@ -40215,6 +40210,14 @@
       "isParent": true,
       "dmPreset": "wall_2_5_brick"
     },
+    "american_gas_station_sign": {
+      "nextRes": "american_gas_station_sign_dmg",
+      "physRes": "american_gas_station_sign_destr_phobj",
+      "hp": 30.0,
+      "impulseThreshold": 1.0,
+      "fx": "ad_metal",
+      "fxScale": 0.5
+    },
     "american_mall_dp_01": {
       "nextRes": "american_mall_dp_01_dmg",
       "hp": 100.0,
@@ -41882,6 +41885,116 @@
       "isParent": true,
       "dmPreset": "stone_house"
     },
+    "blocked_town_building_1_floor_a_dp_01": {
+      "nextRes": "blocked_town_building_1_floor_a_dp_01_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_1_floor_a_dp_02": {
+      "nextRes": "blocked_town_building_1_floor_a_dp_02_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_c_dp_01": {
+      "nextRes": "blocked_town_building_2_floors_c_dp_01_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_c_dp_02": {
+      "nextRes": "blocked_town_building_2_floors_c_dp_02_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_c_v2_dp_01": {
+      "nextRes": "blocked_town_building_2_floors_c_v2_dp_01_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_c_v2_dp_02": {
+      "nextRes": "blocked_town_building_2_floors_c_v2_dp_02_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_d_dp_01": {
+      "nextRes": "blocked_town_building_2_floors_d_dp_01_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_d_dp_02": {
+      "nextRes": "blocked_town_building_2_floors_d_dp_02_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_d_dp_03": {
+      "nextRes": "blocked_town_building_2_floors_d_dp_03_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_d_dp_04": {
+      "nextRes": "blocked_town_building_2_floors_d_dp_04_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house",
+      "physRes": "blocked_town_building_2_floors_d_dp_04_destr_phobj"
+    },
+    "blocked_town_building_2_floors_e_dp_01": {
+      "nextRes": "blocked_town_building_2_floors_e_dp_01_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_e_dp_02": {
+      "nextRes": "blocked_town_building_2_floors_e_dp_02_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_2_floors_e_dp_03": {
+      "nextRes": "blocked_town_building_2_floors_e_dp_03_dmg",
+      "hp": 100.0,
+      "fxScale": 1.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_3_floors_a_dp_01": {
+      "nextRes": "blocked_town_building_3_floors_a_dp_01_dmg",
+      "hp": 100.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_3_floors_a_dp_02": {
+      "nextRes": "blocked_town_building_3_floors_a_dp_02_dmg",
+      "hp": 100.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
+    "blocked_town_building_3_floors_a_dp_03": {
+      "nextRes": "blocked_town_building_3_floors_a_dp_03_dmg",
+      "hp": 100.0,
+      "isParent": true,
+      "dmPreset": "stone_house"
+    },
     "soviet_town_building_store_a_dp_01": {
       "nextRes": "soviet_town_building_store_a_dp_01_dmg",
       "hp": 700.0,
@@ -42420,53 +42533,67 @@
       "fxScale": 0.4,
       "material": "metal"
     },
+    "m198_155_mm": {
+      "nextRes": "m198_155mm_a_broken_a_base_a",
+      "physRes": "m198_155_mm_a_broken_a_destr_phobj",
+      "hp": 45.0,
+      "impulseThreshold": 0.0,
+      "dmPreset": "metal_light_explosive_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 0.4,
+      "material": "metal"
+    },
+    "m198_155mm_a_broken_a": {
+      "nextRes": "m198_155mm_a_broken_a_base_a",
+      "physRes": "m198_155_mm_a_broken_a_destr_phobj",
+      "hp": 45.0,
+      "impulseThreshold": 0.0,
+      "dmPreset": "metal_light_explosive_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 0.4,
+      "material": "metal"
+    },
     "sicily_village_fence_a_column_a": {
       "physRes": "sicily_village_fence_a_column_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 0.6,
-      "stopsBullets": false
+      "fxScale": 0.6
     },
     "sicily_village_fence_a_column_b": {
       "physRes": "sicily_village_fence_a_column_b_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 0.6,
-      "stopsBullets": false
+      "fxScale": 0.6
     },
     "sicily_village_fence_a_section_a": {
       "physRes": "sicily_village_fence_a_section_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_a_section_b": {
       "physRes": "sicily_village_fence_a_section_b_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_a_section_c": {
       "physRes": "sicily_village_fence_a_section_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_a_section_d": {
       "physRes": "sicily_village_fence_a_section_d_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_a_gate_a": {
       "physRes": "sicily_village_fence_a_gate_a_destr_phobj",
@@ -42474,7 +42601,6 @@
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
       "fxScale": 2.0,
-      "stopsBullets": false,
       "material": "transparentBeton"
     },
     "sicily_village_fence_b_gate_a": {
@@ -42482,96 +42608,84 @@
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_b_section_a": {
       "physRes": "sicily_village_fence_b_section_a_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_b_section_b": {
       "physRes": "sicily_village_fence_b_section_b_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_b_section_c": {
       "physRes": "sicily_village_fence_b_section_c_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_b_section_d": {
       "physRes": "sicily_village_fence_b_section_d_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_gate_a": {
       "physRes": "sicily_village_fence_c_gate_a_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_gate_b": {
       "physRes": "sicily_village_fence_c_gate_b_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_gate_c": {
       "physRes": "sicily_village_fence_c_gate_c_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_section_a": {
       "physRes": "sicily_village_fence_c_section_a_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_section_b": {
       "physRes": "sicily_village_fence_c_section_b_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_section_c": {
       "physRes": "sicily_village_fence_c_section_c_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_c_section_d": {
       "physRes": "sicily_village_fence_c_section_d_destr_phobj",
       "hp": 8.0,
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "sicily_village_fence_d_column_a": {
       "physRes": "sicily_village_fence_d_column_a_destr_phobj",
@@ -42579,8 +42693,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "sicily_village_fence_d_column_b": {
       "physRes": "sicily_village_fence_d_column_b_destr_phobj",
@@ -42588,8 +42701,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "sicily_village_fence_d_column_c": {
       "physRes": "sicily_village_fence_d_column_c_destr_phobj",
@@ -42597,40 +42709,35 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "sicily_village_fence_d_section_a": {
       "physRes": "sicily_village_fence_d_section_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_d_section_b": {
       "physRes": "sicily_village_fence_d_section_b_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_d_section_c": {
       "physRes": "sicily_village_fence_d_section_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_d_section_d": {
       "physRes": "sicily_village_fence_d_section_d_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "sicily_village_fence_d_gate_a": {
       "physRes": "sicily_village_fence_d_gate_a_destr_phobj",
@@ -42638,7 +42745,6 @@
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
       "fxScale": 2.0,
-      "stopsBullets": false,
       "material": "wood"
     },
     "sicily_village_fence_d_gate_b": {
@@ -42647,7 +42753,6 @@
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
       "fxScale": 2.0,
-      "stopsBullets": false,
       "material": "wood"
     },
     "sicily_village_fence_d_gate_c": {
@@ -42656,7 +42761,6 @@
       "impulseThreshold": 7.0,
       "fx": "ad_wood_small",
       "fxScale": 2.0,
-      "stopsBullets": false,
       "material": "wood"
     },
     "damaged_stone_fence_a": {
@@ -42665,8 +42769,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "damaged_stone_fence_a_snow": {
       "physRes": "damaged_stone_fence_a_destr_phobj",
@@ -42675,8 +42778,7 @@
       "fx": "ad_dust_snow",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "material": "stone_snow",
-      "stopsBullets": false
+      "material": "stone_snow"
     },
     "damaged_stone_fence_b": {
       "physRes": "damaged_stone_fence_b_destr_phobj",
@@ -42684,8 +42786,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "damaged_stone_fence_b_snow": {
       "physRes": "damaged_stone_fence_b_destr_phobj",
@@ -42694,8 +42795,7 @@
       "fx": "ad_dust_snow",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "material": "stone_snow",
-      "stopsBullets": false
+      "material": "stone_snow"
     },
     "damaged_stone_fence_c": {
       "physRes": "damaged_stone_fence_c_destr_phobj",
@@ -42703,8 +42803,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "damaged_stone_fence_c_snow": {
       "physRes": "damaged_stone_fence_c_destr_phobj",
@@ -42713,8 +42812,7 @@
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
       "apexDestructible": false,
-      "material": "stone_snow",
-      "stopsBullets": false
+      "material": "stone_snow"
     },
     "stone_fence_a": {
       "physRes": "stone_fence_a_destr_phobj",
@@ -42722,8 +42820,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "stone_fence_a_snow": {
       "physRes": "stone_fence_a_destr_phobj",
@@ -42732,40 +42829,35 @@
       "fx": "ad_dust_snow",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "material": "stone_snow",
-      "stopsBullets": false
+      "material": "stone_snow"
     },
     "damaged_small_hurtgen_stone_fence_a": {
       "physRes": "damaged_small_hurtgen_stone_fence_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "damaged_small_hurtgen_stone_fence_b": {
       "physRes": "damaged_small_hurtgen_stone_fence_b_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "damaged_small_hurtgen_stone_fence_c": {
       "physRes": "damaged_small_hurtgen_stone_fence_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "small_hurtgen_stone_fence_a": {
       "physRes": "small_hurtgen_stone_fence_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "concrete_fence_a_column": {
       "physRes": "concrete_fence_a_column_destr_phobj",
@@ -42773,8 +42865,15 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
+    },
+    "concrete_fence_b": {
+      "physRes": "concrete_fence_b_destr_phobj",
+      "hp": 12.0,
+      "impulseThreshold": 8.0,
+      "fx": "ad_dust_stucco",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "concrete_fence_b_column": {
       "physRes": "concrete_fence_b_column_destr_phobj",
@@ -42782,8 +42881,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_c_column": {
       "physRes": "concrete_fence_c_column_destr_phobj",
@@ -42791,8 +42889,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_d_column": {
       "physRes": "concrete_fence_d_column_destr_phobj",
@@ -42800,8 +42897,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_d_column_sand": {
       "physRes": "concrete_fence_d_column_destr_phobj",
@@ -42809,16 +42905,14 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_c": {
       "physRes": "concrete_fence_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_big_fence",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "concrete_fence_d_column_snow": {
       "physRes": "concrete_fence_d_column_snow_destr_phobj",
@@ -42826,8 +42920,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_snow",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_e_column": {
       "physRes": "concrete_fence_e_column_destr_phobj",
@@ -42835,16 +42928,14 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_f_column": {
       "physRes": "concrete_fence_f_column_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "concrete_fence_f_column_snow": {
       "physRes": "concrete_fence_f_column_destr_phobj",
@@ -42852,8 +42943,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_snow",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "concrete_fence_g_column": {
       "physRes": "concrete_fence_g_column_destr_phobj",
@@ -42862,56 +42952,49 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "european_advertising_column_a": {
       "physRes": "european_advertising_column_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "european_advertising_column_b": {
       "physRes": "european_advertising_column_b_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "european_advertising_column_c": {
       "physRes": "european_advertising_column_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "european_advertising_column_d": {
       "physRes": "european_advertising_column_d_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "european_advertising_column_e": {
       "physRes": "european_advertising_column_e_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "european_advertising_column_f": {
       "physRes": "european_advertising_column_f_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "road_column_b": {
       "physRes": "road_column_b_destr_phobj",
@@ -42920,15 +43003,14 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "road_column_c": {
       "physRes": "road_column_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "road_column_d": {
       "physRes": "road_column_d_destr_phobj",
@@ -42936,7 +43018,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "ussr_fence_concrete_po2_4000_a": {
       "physRes": "ussr_fence_concrete_po2_4000_a_destr_phobj",
@@ -42946,13 +43028,13 @@
       "fxScale": 1.5,
       "stopsBullets": false
     },
-    "concrete_fence_b": {
-      "physRes": "concrete_fence_b_destr_phobj",
+    "ussr_column_concrete_po2_a": {
+      "physRes": "ussr_column_concrete_po2_a_destr_phobj",
+      "nextRes": "ussr_column_concrete_po2_a_dmg",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "isParent": true,
+      "fxScale": 1.5,
       "stopsBullets": false
     },
     "parking_column_a": {
@@ -42962,7 +43044,7 @@
       "impulseThreshold": 1.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "stopsBullets": false
+      "dmPreset": "conex_box"
     },
     "sicily_fence_house_a": {
       "physRes": "sicily_fence_house_a_destr_phobj",
@@ -42972,7 +43054,7 @@
       "fxScale": 1.0,
       "material": "transparentBeton",
       "isParent": true,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "sicily_fence_house_a_column": {
       "physRes": "sicily_fence_house_a_column_destr_phobj",
@@ -42982,7 +43064,7 @@
       "fxScale": 1.0,
       "material": "transparentBeton",
       "isParent": true,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "sicily_fence_house_b": {
       "physRes": "sicily_fence_house_b_destr_phobj",
@@ -42992,7 +43074,7 @@
       "fxScale": 1.0,
       "material": "transparentBeton",
       "isParent": true,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "sicily_fence_house_b_column": {
       "physRes": "sicily_fence_house_b_column_destr_phobj",
@@ -43002,7 +43084,7 @@
       "fxScale": 1.0,
       "material": "transparentBeton",
       "isParent": true,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "sicily_fence_villa_a": {
       "physRes": "sicily_fence_villa_a_destr_phobj",
@@ -43012,7 +43094,7 @@
       "fxScale": 1.0,
       "material": "transparentBeton",
       "isParent": true,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "sicily_fence_villa_a_column": {
       "physRes": "sicily_fence_villa_a_column_destr_phobj",
@@ -43022,7 +43104,7 @@
       "fxScale": 1.0,
       "material": "transparentBeton",
       "isParent": true,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "brick_fence_k": {
       "physRes": "brick_fence_k_destr_phobj",
@@ -43031,7 +43113,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "brick_fence_k_pillar": {
       "physRes": "brick_fence_k_pillar_destr_phobj",
@@ -43039,8 +43121,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "brick_fence_k_section": {
       "physRes": "brick_fence_k_section_destr_phobj",
@@ -43048,8 +43129,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "brick_fence_a": {
       "physRes": "brick_fence_a_destr_phobj",
@@ -43057,8 +43137,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "brick_fence_a_snow": {
       "physRes": "brick_fence_a_snow_destr_phobj",
@@ -43066,8 +43145,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "brick_fence_b": {
       "physRes": "brick_fence_b_destr_phobj",
@@ -43076,8 +43154,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_b_snow": {
       "physRes": "brick_fence_b_snow_destr_phobj",
@@ -43086,8 +43163,7 @@
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_c_snow": {
       "physRes": "brick_fence_c_destr_phobj",
@@ -43095,8 +43171,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "brick_fence_d": {
       "physRes": "brick_fence_d_destr_phobj",
@@ -43104,8 +43179,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "brick_fence_d_snow": {
       "physRes": "brick_fence_d_destr_phobj",
@@ -43113,8 +43187,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "brick_fence_e": {
       "physRes": "brick_fence_e_destr_phobj",
@@ -43122,8 +43195,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "brick_fence_e_dmg": {
       "physRes": "brick_fence_e_dmg_destr_phobj",
@@ -43131,8 +43203,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "stone_fence_b": {
       "physRes": "stone_fence_b_destr_phobj",
@@ -43140,8 +43211,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "stone_fence_b_snow": {
       "physRes": "stone_fence_b_snow_destr_phobj",
@@ -43149,16 +43219,14 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_snow",
       "fxScale": 1.0,
-      "material": "transparentBeton",
-      "stopsBullets": false
+      "material": "transparentBeton"
     },
     "stone_fence_d": {
       "physRes": "stone_fence_d_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 2.0,
-      "stopsBullets": false
+      "fxScale": 2.0
     },
     "brick_fence_g": {
       "physRes": "brick_fence_g_destr_phobj",
@@ -43167,8 +43235,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
       "apexDestructible": false,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_g_column": {
       "physRes": "brick_fence_g_column_destr_phobj",
@@ -43177,8 +43244,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
       "apexDestructible": false,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_h": {
       "physRes": "brick_fence_h_destr_phobj",
@@ -43186,8 +43252,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "brick_fence_h_column": {
       "physRes": "brick_fence_h_column_destr_phobj",
@@ -43196,8 +43261,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_i": {
       "physRes": "brick_fence_i_destr_phobj",
@@ -43205,8 +43269,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "brick_fence_i_column": {
       "physRes": "brick_fence_i_column_destr_phobj",
@@ -43215,8 +43278,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_i_grey": {
       "physRes": "brick_fence_i_grey_destr_phobj",
@@ -43224,8 +43286,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.5,
-      "apexDestructible": false,
-      "stopsBullets": false
+      "apexDestructible": false
     },
     "brick_fence_i_grey_column": {
       "physRes": "brick_fence_i_grey_column_destr_phobj",
@@ -43234,24 +43295,21 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "apexDestructible": false,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_j": {
       "physRes": "brick_fence_j_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "brick_fence_j_dmg": {
       "physRes": "brick_fence_j_dmg_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 0.5,
-      "stopsBullets": false
+      "fxScale": 0.5
     },
     "brick_fence_j_column": {
       "physRes": "brick_fence_j_column_destr_phobj",
@@ -43259,8 +43317,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 0.8,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_column_a": {
       "physRes": "brick_fence_column_a_destr_phobj",
@@ -43269,8 +43326,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_column_a_snow": {
       "physRes": "brick_fence_column_a_destr_phobj",
@@ -43279,8 +43335,7 @@
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_column_b": {
       "physRes": "brick_fence_column_b_destr_phobj",
@@ -43289,8 +43344,7 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_column_b_snow": {
       "physRes": "brick_fence_column_b_destr_phobj",
@@ -43299,8 +43353,7 @@
       "fx": "ad_dust_snow",
       "fxScale": 0.8,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "brick_fence_column_c": {
       "physRes": "brick_fence_column_c_destr_phobj",
@@ -43309,24 +43362,21 @@
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
       "material": "transparentBeton",
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "modern_simple_brick_fence": {
       "physRes": "modern_simple_brick_fence_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_red_bricks",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "modern_simple_brick_fence_b": {
       "physRes": "modern_simple_brick_fence_b_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_red_bricks",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "modern_simple_brick_fence_column": {
       "physRes": "modern_simple_brick_fence_column_destr_phobj",
@@ -43334,8 +43384,7 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_red_bricks",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "modern_simple_brick_fence_column_b": {
       "physRes": "modern_simple_brick_fence_column_b_destr_phobj",
@@ -43343,32 +43392,28 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_red_bricks",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "syrian_concrete_fence_i": {
       "physRes": "syrian_concrete_fence_i_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 0.7,
-      "stopsBullets": false
+      "fxScale": 0.7
     },
     "concrete_block_a": {
       "physRes": "concrete_block_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 0.7,
-      "stopsBullets": false
+      "fxScale": 0.7
     },
     "abandoned_concrete_fence_a": {
       "physRes": "abandoned_concrete_fence_a_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 0.7,
-      "stopsBullets": false
+      "fxScale": 0.7
     },
     "vietnam_fence_a_column": {
       "physRes": "vietnam_fence_a_column_destr_phobj",
@@ -43376,16 +43421,14 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "vietnam_fence_a_section": {
       "physRes": "vietnam_fence_a_section_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "vietnam_fence_b_column": {
       "physRes": "vietnam_fence_b_column_destr_phobj",
@@ -43393,16 +43436,14 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "vietnam_fence_b_section": {
       "physRes": "vietnam_fence_b_section_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "vietnam_fence_c_column": {
       "physRes": "vietnam_fence_c_column_destr_phobj",
@@ -43410,24 +43451,21 @@
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
       "fxScale": 1.0,
-      "isParent": true,
-      "stopsBullets": false
+      "isParent": true
     },
     "vietnam_fence_c_section": {
       "physRes": "vietnam_fence_c_section_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "brick_fence_c": {
       "physRes": "brick_fence_c_destr_phobj",
       "hp": 12.0,
       "impulseThreshold": 8.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "brick_fence_column_d": {
       "nextRes": "brick_fence_column_d_dmg",
@@ -43436,8 +43474,7 @@
       "impulseThreshold": 8.0,
       "impulseThreshold": 1.5,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "brick_fence_f": {
       "nextRes": "brick_fence_f_dmg",
@@ -43445,8 +43482,7 @@
       "hp": 10.0,
       "impulseThreshold": 1.5,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "fence_barbedwire_a_column": {
       "nextRes": "fence_barbedwire_a_column_dmg",
@@ -43455,8 +43491,7 @@
       "impulseThreshold": 0.5,
       "isParent": true,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "metal_netting_barbed_fence_a": {
       "nextRes": "metal_netting_barbed_fence_a_dmg",
@@ -43465,8 +43500,7 @@
       "impulseThreshold": 0.0,
       "material": "transparentBeton",
       "fx": "ad_dust_bollard",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "stone_fence_e": {
       "nextRes": "stone_fence_e_column",
@@ -43474,16 +43508,14 @@
       "hp": 10.0,
       "impulseThreshold": 0.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "stone_fence_e_column": {
       "physRes": "stone_fence_e_column_destr_phobj",
       "hp": 10.0,
       "impulseThreshold": 0.0,
       "fx": "ad_dust_stucco",
-      "fxScale": 1.0,
-      "stopsBullets": false
+      "fxScale": 1.0
     },
     "wood_fence_l": {
       "nextRes": "wood_fence_l_column",
@@ -43491,16 +43523,14 @@
       "hp": 3.0,
       "impulseThreshold": 0.0,
       "fx": "ad_fence_wood_small",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "wood_fence_l_column": {
       "physRes": "wood_fence_l_column_destr_phobj",
       "hp": 2.0,
       "impulseThreshold": 0.0,
       "fx": "ad_fence_wood_small",
-      "fxScale": 1.5,
-      "stopsBullets": false
+      "fxScale": 1.5
     },
     "wood_vine_fence_a": {
       "physRes": "wood_vine_fence_a_destr_phobj",
@@ -43508,8 +43538,7 @@
       "impulseThreshold": 1.0,
       "fx": "ad_wood_small",
       "fxScale": 1.0,
-      "material": "wood",
-      "stopsBullets": false
+      "material": "wood"
     },
     "metal_fence_b": {
       "nextRes": "metal_fence_b_dmg",
@@ -43517,8 +43546,7 @@
       "impulseThreshold": 19.0,
       "fx": "ad_metal",
       "fxScale": 3.0,
-      "physRes": "metal_fence_b_destr_phobj",
-      "stopsBullets": false
+      "physRes": "metal_fence_b_destr_phobj"
     },
     "football_gate_wooden_a": {
       "physRes": "football_gate_wooden_a_destr_phobj",
@@ -43526,8 +43554,7 @@
       "impulseThreshold": 1.0,
       "fx": "ad_wood_small",
       "fxScale": 1.0,
-      "material": "wood",
-      "stopsBullets": false
+      "material": "wood"
     },
     "highway_road_sign_a": {
       "nextRes": "highway_road_sign_a_dmg",
@@ -43535,8 +43562,7 @@
       "impulseThreshold": 19.0,
       "fx": "ad_metal",
       "fxScale": 3.0,
-      "physRes": "highway_road_sign_a_destr_phobj",
-      "stopsBullets": false
+      "physRes": "highway_road_sign_a_destr_phobj"
     },
     "highway_road_sign_b": {
       "nextRes": "highway_road_sign_b_dmg",
@@ -43544,8 +43570,7 @@
       "impulseThreshold": 19.0,
       "fx": "ad_metal",
       "fxScale": 3.0,
-      "physRes": "highway_road_sign_b_destr_phobj",
-      "stopsBullets": false
+      "physRes": "highway_road_sign_b_destr_phobj"
     },
     "highway_road_sign_b_oposite": {
       "nextRes": "highway_road_sign_b_oposite_dmg",
@@ -43553,8 +43578,7 @@
       "impulseThreshold": 19.0,
       "fx": "ad_metal",
       "fxScale": 3.0,
-      "physRes": "highway_road_sign_b_oposite_destr_phobj",
-      "stopsBullets": false
+      "physRes": "highway_road_sign_b_oposite_destr_phobj"
     },
     "wood_container_b": {
       "physRes": "wood_container_b_destr_phobj",
@@ -43772,6 +43796,177 @@
       "isParent": true,
       "dmPreset": "dural_props"
     },
+    "us_zeppelin_whale_body_middle_damaged_01": {
+      "physRes": "us_zeppelin_whale_body_middle_damaged_01_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_middle_damaged_02": {
+      "physRes": "us_zeppelin_whale_body_middle_damaged_02_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_middle_damaged_03": {
+      "physRes": "us_zeppelin_whale_body_middle_damaged_03_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_middle_damaged_04": {
+      "physRes": "us_zeppelin_whale_body_middle_damaged_04_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_01": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_01_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_02": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_02_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_03": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_03_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_04": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_04_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_05": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_05_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_06": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_06_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_07": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_07_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_nose_damaged_08": {
+      "physRes": "us_zeppelin_whale_body_nose_damaged_08_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_01": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_01_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_02": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_02_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_03": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_03_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_04": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_04_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_05": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_05_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_06": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_06_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
+    "us_zeppelin_whale_body_tail_damaged_07": {
+      "physRes": "us_zeppelin_whale_body_tail_damaged_07_destr_phobj",
+      "fx": "ad_metal",
+      "fxScale": 1.0,
+      "hp": 40.0,
+      "impulseThreshold": 5.0,
+      "isParent": true,
+      "dmPreset": "dural_props"
+    },
     "hippodrome_tribune_a_corner_a_railings_a": {
       "nextRes": "hippodrome_tribune_a_corner_a_railings_a_dmg",
       "hp": 50.0,
@@ -43838,35 +44033,43 @@
     },
     "hippodrome_tribune_a_corner_a_railings_a_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_b_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_c_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_d_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_e_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_f_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_g_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_corner_a_railings_h_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_a": {
       "nextRes": "hippodrome_tribune_a_railings_a_dmg",
@@ -43958,47 +44161,58 @@
     },
     "hippodrome_tribune_a_railings_a_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_b_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_c_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_d_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_e_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_f_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_g_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_h_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_i_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_j_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "hippodrome_tribune_a_railings_k_dmg": {
       "immortal": true,
-      "dmPreset": "dural_props"
+      "dmPreset": "dural_props",
+      "stopsBullets": true
     },
     "lockheed_c_5_galaxy_damaged_a_turbine_c": {
       "physRes": "lockheed_c_5_galaxy_damaged_a_turbine_c_destr_phobj",
@@ -44190,560 +44404,835 @@
       "hp": 5.0,
       "stopsBullets": false
     },
-    "modern_mall_building_arch_metal_a": {
+    "modern_mall_building_advertisin_banner_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
-    "modern_mall_building_arch_metal_b": {
+    "modern_mall_building_advertisin_banner_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
-    "modern_mall_building_arch_metal_c": {
+    "modern_mall_building_advertisin_banner_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_advertisin_banner_d": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_advertisin_banner_e": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_advertisin_banner_f": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_advertisin_banner_g": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_advertisin_banner_h": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_automobile_platform_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_arch_metal_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_arch_metal_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_arch_metal_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_beam_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_beam_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_beam_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_canopy_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_canopy_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_canopy_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_canopy_d": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_canopy_e": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
-    "modern_mall_building_ceiling_window_a": {
+    "modern_mall_building_banner_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_explosion_glass",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
-    "modern_mall_building_ceiling_window_b": {
+    "modern_mall_building_banner_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_explosion_glass",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
-    "modern_mall_building_ceiling_window_c": {
+    "modern_mall_building_banner_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_explosion_glass",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
-    "modern_mall_building_ceiling_window_d": {
+    "modern_mall_building_cartpark_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_explosion_glass",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_decal_label_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_decal_label_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_decal_label_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_decal_lebel_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_decal_lebel_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_decal_lebel_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_decor_a": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_door_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_door_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_door_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_door_d": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_door_e": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_door_f": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_elevator_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_elevator_broken_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_elevator_broken_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_elevator_button": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_elevator_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_escalator_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_detail_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_detail_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_detail_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_wall_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_wall_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_wall_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a_wall_d": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_fountain_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_broken_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_broken_d": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_broken_e": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_d": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_huge_lamp_e": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_lamp_celling_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_lamp_celling_b_on": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_market_cart_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_market_cart_broken_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_market_shelf_wooden_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_market_shelf_wooden_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_market_shelf_wooden_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_payphone_booth": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_phone_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_phone_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_phone_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_a": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_b": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_c": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_d": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_e": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_f": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_g": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_h": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_i": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_j": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_k": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_l": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_m": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_n": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_o": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_p": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_q": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_r": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_s": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_t": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_u": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_v": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_w": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
-    },
-    "modern_mall_building_railing_x": {
-      "hp": 10.0,
-      "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_roller_shutter_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_roller_shutter_broken_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_roller_shutter_broken_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_roller_shutter_broken_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_roller_shutter_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_roller_shutter_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shelf_metal_aba": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shelf_metal_abc": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shelf_metal_ab": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shelf_metal_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shelf_metal_b": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shelf_metal_c": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shopping_basket_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_shopping_desk_a": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_showcase_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_showcase_ba": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_showcase_broken_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
+    },
+    "modern_mall_building_showcase_broken_ba": {
+      "hp": 10.0,
+      "impulseThreshold": 1.0,
+      "dmPreset": "metal_props",
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_showcase_broken_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_showcase_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_sign_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_sign_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_wall_plasterboard_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_wall_plasterboard_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
       "dmPreset": "metal_props",
-      "fx": "ad_metal",
-      "fxScale": 1.0
+      "fx": "ad_car_wreck",
+      "fxScale": 1.0,
+      "isParent": true
     },
     "modern_mall_building_window_a": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_b": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_c": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_d": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_e": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_f": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_g": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_h": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_i": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_k": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
     "modern_mall_building_window_l": {
       "hp": 10.0,
       "impulseThreshold": 1.0,
-      "dmPreset": "metal_props",
       "fx": "ad_explosion_glass",
+      "dmPreset": "metal_props",
       "fxScale": 1.0,
       "isParent": true
     },
@@ -49491,7 +49980,8 @@
       "impulseThreshold": 10.0,
       "fx": "ad_buildings_destructions_part",
       "fxScale": 1.0,
-      "stopsBullets": false
+      "stopsBullets": false,
+      "isParent": true
     },
     "soviet_courtyard_bench_a": {
       "physRes": "soviet_courtyard_bench_a_destr_phobj",
@@ -49557,10 +50047,9 @@
     "ussr_stationery_shop_a": {
       "nextRes": "ussr_stationery_shop_a_dmg",
       "physRes": "ussr_stationery_shop_a_destr_phobj",
-      "hp": 66.0,
-      "dmPreset": "metal_props",
+      "dmPreset": "conex_box",
+      "hp": 35.0,
       "impulseThreshold": 1.5,
-      "destructionImpulse": 30000.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49568,10 +50057,9 @@
     "ussr_stationery_shop_b": {
       "nextRes": "ussr_stationery_shop_a_dmg",
       "physRes": "ussr_stationery_shop_b_destr_phobj",
-      "hp": 66.0,
-      "dmPreset": "metal_props",
+      "dmPreset": "conex_box",
+      "hp": 35.0,
       "impulseThreshold": 1.5,
-      "destructionImpulse": 30000.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49579,10 +50067,9 @@
     "ussr_stationery_shop_c": {
       "nextRes": "ussr_stationery_shop_a_dmg",
       "physRes": "ussr_stationery_shop_c_destr_phobj",
-      "hp": 66.0,
-      "dmPreset": "metal_props",
+      "dmPreset": "conex_box",
+      "hp": 35.0,
       "impulseThreshold": 1.5,
-      "destructionImpulse": 30000.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49590,10 +50077,9 @@
     "ussr_stationery_shop_d": {
       "nextRes": "ussr_stationery_shop_a_dmg",
       "physRes": "ussr_stationery_shop_d_destr_phobj",
-      "hp": 66.0,
-      "dmPreset": "metal_props",
+      "dmPreset": "conex_box",
+      "hp": 35.0,
       "impulseThreshold": 1.5,
-      "destructionImpulse": 30000.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49605,8 +50091,7 @@
       "physRes": "soviet_newspapers_board_a_destr_phobj",
       "fx": "ad_metal",
       "fxScale": 1.0,
-      "dmPreset": "dural_props",
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "soviet_newspapers_board_b": {
       "hp": 17.0,
@@ -49615,8 +50100,7 @@
       "physRes": "soviet_newspapers_board_a_destr_phobj",
       "fx": "ad_metal",
       "fxScale": 1.0,
-      "dmPreset": "dural_props",
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "soviet_newspapers_board_c": {
       "hp": 17.0,
@@ -49625,8 +50109,7 @@
       "physRes": "soviet_newspapers_board_a_destr_phobj",
       "fx": "ad_metal",
       "fxScale": 1.0,
-      "dmPreset": "dural_props",
-      "stopsBullets": false
+      "dmPreset": "dural_props"
     },
     "soviet_soda_machine_a": {
       "hp": 25.0,
@@ -49635,14 +50118,13 @@
       "physRes": "soviet_soda_machine_a_destr_phobj",
       "fx": "ad_hydrant_destruction_faded",
       "fxScale": 0.5,
-      "dmPreset": "dural_props",
-      "stopsBullets": false
+      "dmPreset": "conex_box"
     },
     "soviet_garage_a_type_a": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_a_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "impulseThreshold": 1.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
@@ -49651,8 +50133,8 @@
     "soviet_garage_a_type_b": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_b_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "impulseThreshold": 1.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
@@ -49661,8 +50143,8 @@
     "soviet_garage_a_type_c": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_c_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "impulseThreshold": 1.0,
       "fx": "ad_metal",
       "fxScale": 0.1,
@@ -49671,8 +50153,8 @@
     "soviet_garage_a_type_d": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_d_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49680,8 +50162,8 @@
     "soviet_garage_a_type_e": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_e_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49689,8 +50171,8 @@
     "soviet_garage_a_type_f": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_f_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"
@@ -49698,8 +50180,8 @@
     "soviet_garage_a_type_g": {
       "nextRes": "soviet_garage_a_dmg",
       "physRes": "soviet_garage_a_type_g_destr_phobj",
-      "hp": 45.0,
-      "dmPreset": "metal_props",
+      "hp": 100.0,
+      "dmPreset": "conex_box",
       "fx": "ad_metal",
       "fxScale": 0.1,
       "material": "metal"

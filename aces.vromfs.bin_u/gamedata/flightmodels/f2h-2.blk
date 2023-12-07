@@ -15,7 +15,7 @@
   "damagePartsToCollisionObjectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_objects.blk",
   "damagePartsToFmPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_fm_parts_map.blk",
   "damagePartsToHudPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_hud_parts_map.blk",
-  "damagePartsDependencyMapBlk": "gameData/FlightModels/DM/dm_parts_dependency_map.blk",
+  "damagePartsDependencyMapBlk": "gameData/FlightModels/DM/dm_parts_additional_dependency_map.blk",
   "damagePartsToCollisionPointsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_points_map.blk",
   "damagePartsToWeaponsMapBlk": "gameData/FlightModels/DM/dm_parts_to_weapons_map.blk",
   "damagePartsToVisualEffectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_visual_effects_map.blk",
@@ -258,16 +258,16 @@
         "hp": 74.4
       },
       "tank4_dm": {
-        "hp": 95.4
+        "hp": 39.5
       },
       "tank5_dm": {
-        "hp": 95.9
+        "hp": 39.5
       },
       "tank6_dm": {
-        "hp": 39.5
+        "hp": 95.9
       },
       "tank7_dm": {
-        "hp": 39.5
+        "hp": 95.4
       }
     }
   },
@@ -2360,13 +2360,11 @@
     },
     "preset": {
       "name": "f2h_2_4x250lb_bombs",
-      "blk": "gameData/FlightModels/weaponPresets/f2h_2_4x250lb.blk",
-      "reqModification": "fsbc_mk5"
+      "blk": "gameData/FlightModels/weaponPresets/f2h_2_4x250lb.blk"
     },
     "preset": {
       "name": "f2h_2_2x500lb_bombs",
-      "blk": "gameData/FlightModels/weaponPresets/f2h_2_2x500lb.blk",
-      "reqModification": "fmbc_mk1"
+      "blk": "gameData/FlightModels/weaponPresets/f2h_2_2x500lb.blk"
     }
   },
   "WeaponSlots": {
@@ -2382,13 +2380,17 @@
       "node": "pylon3",
       "node": "pylon4",
       "node": "pylon5",
-      "node": "pylon6"
+      "node": "pylon6",
+      "node": "drop_tank_l",
+      "node": "drop_tank_r"
     },
     "HideDmParts": {
       "node": "armor5_dm",
       "node": "armor6_dm",
       "node": "armor7_dm",
-      "node": "armor8_dm"
+      "node": "armor8_dm",
+      "node": "tank6_dm",
+      "node": "tank7_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2440,8 +2442,36 @@
     },
     "WeaponSlot": {
       "index": 1,
-      "tier": 10,
+      "tier": 11,
       "order": 1,
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_left",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "drop_tank_l"
+        },
+        "ShowDmParts": {
+          "node": "tank6_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_200_gal_wing_f2h_2_left.blk",
+          "emitter": "drop_tank_l",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 10,
+          "preset": "ptb_right"
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 2,
+      "tier": 10,
+      "order": 3,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2460,9 +2490,9 @@
       }
     },
     "WeaponSlot": {
-      "index": 2,
+      "index": 3,
       "tier": 9,
-      "order": 3,
+      "order": 5,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2481,9 +2511,9 @@
       }
     },
     "WeaponSlot": {
-      "index": 3,
+      "index": 4,
       "tier": 8,
-      "order": 5,
+      "order": 7,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2518,9 +2548,9 @@
       }
     },
     "WeaponSlot": {
-      "index": 4,
+      "index": 5,
       "tier": 7,
-      "order": 7,
+      "order": 9,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2569,19 +2599,19 @@
           "separate": true
         },
         "BannedWeaponPreset": {
-          "slot": 3,
+          "slot": 4,
           "preset": "250lbs"
         },
         "BannedWeaponPreset": {
-          "slot": 3,
+          "slot": 4,
           "preset": "hvar"
         }
       }
     },
     "WeaponSlot": {
-      "index": 5,
+      "index": 6,
       "tier": 5,
-      "order": 8,
+      "order": 10,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2630,19 +2660,19 @@
           "separate": true
         },
         "BannedWeaponPreset": {
-          "slot": 6,
+          "slot": 7,
           "preset": "250lbs"
         },
         "BannedWeaponPreset": {
-          "slot": 6,
+          "slot": 7,
           "preset": "hvar"
         }
       }
     },
     "WeaponSlot": {
-      "index": 6,
+      "index": 7,
       "tier": 4,
-      "order": 6,
+      "order": 8,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2677,9 +2707,9 @@
       }
     },
     "WeaponSlot": {
-      "index": 7,
+      "index": 8,
       "tier": 3,
-      "order": 4,
+      "order": 6,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2698,9 +2728,9 @@
       }
     },
     "WeaponSlot": {
-      "index": 8,
+      "index": 9,
       "tier": 2,
-      "order": 2,
+      "order": 4,
       "WeaponPreset": {
         "iconType": "rockets_he_small",
         "name": "hvar",
@@ -2715,6 +2745,34 @@
           "blk": "gameData/Weapons/rocketGuns/us_5_in_hvar_a.blk",
           "emitter": "rocket8",
           "bullets": 1
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 10,
+      "tier": 1,
+      "order": 2,
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_right",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "drop_tank_r"
+        },
+        "ShowDmParts": {
+          "node": "tank7_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_200_gal_wing_f2h_2_right.blk",
+          "emitter": "drop_tank_r",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 1,
+          "preset": "ptb_left"
         }
       }
     }

@@ -28,7 +28,7 @@
   "damagePartsToCollisionObjectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_objects.blk",
   "damagePartsToFmPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_fm_parts_map.blk",
   "damagePartsToHudPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_hud_parts_map.blk",
-  "damagePartsDependencyMapBlk": "gameData/FlightModels/DM/dm_parts_dependency_map.blk",
+  "damagePartsDependencyMapBlk": "gameData/FlightModels/DM/dm_parts_additional_dependency_map.blk",
   "damagePartsToCollisionPointsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_points_map.blk",
   "damagePartsToWeaponsMapBlk": "gameData/FlightModels/DM/dm_parts_to_weapons_map.blk",
   "damagePartsToVisualEffectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_visual_effects_map.blk",
@@ -1811,7 +1811,65 @@
   },
   "Sound": {
     "Engine": "engine05_R11_N1_WEP",
-    "gun": "gun_default"
+    "voiceWarningSystem": "xiao906",
+    "gun": "gun_default",
+    "voiceWarningSystemOverride": {
+      "vws_right": {      },
+      "vws_left": {      },
+      "vws_ahead": {      },
+      "vws_behind": {      },
+      "vws_high": {      },
+      "vws_low": {      },
+      "vws_missile": {      },
+      "vws_counter": {      },
+      "vws_lock": {      },
+      "vws_chaff_flare": {      },
+      "vws_chaff_flare_low": {      },
+      "vws_out": {      },
+      "vws_jammer": {      },
+      "vws_critical_angle": {      },
+      "vws_over_g": {      },
+      "vws_critical_speed": {      },
+      "vws_dangerous_close": {      },
+      "vws_gear_down": {      },
+      "vws_check_gear": {      },
+      "vws_altitude": {      },
+      "vws_pull_up": {      },
+      "vws_roll_left": {      },
+      "vws_roll_right": {      },
+      "vws_fire": {      },
+      "vws_engine_fire": {      },
+      "vws_engine_fire_left": {      },
+      "vws_engine_fire_right": {      },
+      "vws_decrease_engine_rpm": {      },
+      "vws_decrease_left_engine_rpm": {      },
+      "vws_decrease_right_engine_rpm": {      },
+      "vws_critical_engine_vibration": {      },
+      "vws_critical_left_engine_vibration": {      },
+      "vws_critical_right_engine_vibration": {      },
+      "vws_caution": {      },
+      "vws_engine_overheat": {      },
+      "vws_left_engine_overheat": {      },
+      "vws_right_engine_overheat": {      },
+      "vws_engine_failure": {      },
+      "vws_left_engine_failure": {      },
+      "vws_right_engine_failure": {      },
+      "vws_warning": {      },
+      "vws_generator_failure": {      },
+      "vws_left_generator_failure": {      },
+      "vws_right_generator_failure": {      },
+      "vws_main_gearbox_failure": {      },
+      "vws_tailrotor_gearbox_failure": {      },
+      "vws_airbrake": {      },
+      "vws_bingo": {      },
+      "vws_check_fuel": {      },
+      "vws_fuel_low": {      },
+      "vws_lock_cockpit": {      },
+      "vws_hydrosystem_failure": {      },
+      "vws_eject": {      },
+      "vws_increase_engine_rpm": {      },
+      "vws_check_mech": {      }
+    }
   },
   "cockpit": {
     "targetingPodFov": [
@@ -2253,6 +2311,10 @@
       "blk": "gameData/FlightModels/weaponPresets/jh_7a_2x_pl5c_default.blk"
     },
     "preset": {
+      "name": "jh_7a_bomb250_gp_default",
+      "blk": "gameData/FlightModels/weaponPresets/jh_7a_bomb250_gp_default.blk"
+    },
+    "preset": {
       "name": "jh_7a_4x_pl5b",
       "blk": "gameData/FlightModels/weaponPresets/jh_7a_4x_pl5b.blk"
     },
@@ -2289,12 +2351,20 @@
       "blk": "gameData/FlightModels/weaponPresets/jh_7a_bomb500_4.blk"
     },
     "preset": {
+      "name": "jh_7a_sl_250j",
+      "blk": "gameData/FlightModels/weaponPresets/jh_7a_sl_250j.blk"
+    },
+    "preset": {
       "name": "jh_7a_sl_500j",
       "blk": "gameData/FlightModels/weaponPresets/jh_7a_sl_500j.blk"
     },
     "preset": {
       "name": "jh_7a_sl_1000j",
       "blk": "gameData/FlightModels/weaponPresets/jh_7a_sl_1000j.blk"
+    },
+    "preset": {
+      "name": "jh_7a_kh_29t",
+      "blk": "gameData/FlightModels/weaponPresets/jh_7a_kh_29t.blk"
     }
   },
   "WeaponSlots": {
@@ -2323,7 +2393,21 @@
       "node": "bomb_pylon_r1",
       "node": "rocket_pylon_r3",
       "node": "adapter_r3",
-      "node": "bomb_pylon_r2"
+      "node": "bomb_pylon_r2",
+      "node": "aku_58_b001",
+      "node": "aku_58_fin1_b001",
+      "node": "aku_58_fin2_b001",
+      "node": "aku_58_fin3_b001",
+      "node": "aku_58_fin4_b001",
+      "node": "aku_58_fin5_b001",
+      "node": "aku_58_fin6_b001",
+      "node": "aku_58_b002",
+      "node": "aku_58_fin1_b002",
+      "node": "aku_58_fin2_b002",
+      "node": "aku_58_fin3_b002",
+      "node": "aku_58_fin4_b002",
+      "node": "aku_58_fin5_b002",
+      "node": "aku_58_fin6_b002"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2525,6 +2609,27 @@
           "separate": true,
           "machLimit": 1.01
         }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_middle_laser",
+        "name": "ls250",
+        "reqModification": "cn_ts_250",
+        "ShowNodes": {
+          "node": "rocket_pylon_l1",
+          "node": "adapter_l1"
+        },
+        "Weapon": {
+          "trigger": "guided bombs",
+          "blk": "gameData/Weapons/BombGuns/cn_ts_250.blk",
+          "emitter": "china_gp_250_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "k_adc03a"
+        }
       }
     },
     "WeaponSlot": {
@@ -2629,6 +2734,28 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "guided_bomb_middle_laser",
+        "name": "ls250",
+        "reqModification": "cn_ts_250",
+        "ShowNodes": {
+          "node": "rocket_pylon_l2",
+          "node": "adapter_l2",
+          "node": "bomb_pylon_l1"
+        },
+        "Weapon": {
+          "trigger": "guided bombs",
+          "blk": "gameData/Weapons/BombGuns/cn_ts_250.blk",
+          "emitter": "ch_lgb_ls_500j_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "k_adc03a"
+        }
+      },
+      "WeaponPreset": {
         "iconType": "guided_bomb_large_laser",
         "name": "ls500",
         "reqModification": "cn_ls_500j",
@@ -2709,14 +2836,13 @@
       "WeaponPreset": {
         "iconType": "bombs_middle_group_x6",
         "name": "250_3_x6",
-        "reqModification": "cn_q5_type_250",
         "ShowNodes": {
           "node": "rocket_pylon_l3",
           "node": "adapter_l3"
         },
         "Weapon": {
           "trigger": "bombs",
-          "blk": "gameData/Weapons/containers/china_mer_bomb_pylon_250_3_x6.blk",
+          "blk": "gameData/Weapons/containers/china_mer_bomb_pylon_250_3_x6_default.blk",
           "emitter": "mer_pylon_l1",
           "external": true,
           "separate": true,
@@ -2775,6 +2901,28 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "guided_bomb_middle_laser",
+        "name": "ls250",
+        "reqModification": "cn_ts_250",
+        "ShowNodes": {
+          "node": "rocket_pylon_l3",
+          "node": "adapter_l3",
+          "node": "bomb_pylon_l2"
+        },
+        "Weapon": {
+          "trigger": "guided bombs",
+          "blk": "gameData/Weapons/BombGuns/cn_ts_250.blk",
+          "emitter": "ch_lgb_ls_500j_003",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "k_adc03a"
+        }
+      },
+      "WeaponPreset": {
         "iconType": "guided_bomb_large_laser",
         "name": "ls500",
         "reqModification": "cn_ls_500j",
@@ -2816,6 +2964,29 @@
         "DependentWeaponPreset": {
           "slot": 5,
           "preset": "k_adc03a"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_red",
+        "name": "kh_29t",
+        "reqModification": "mig_27_x29t",
+        "ShowNodes": {
+          "node": "rocket_pylon_l3",
+          "node": "aku_58_b001",
+          "node": "aku_58_fin1_b001",
+          "node": "aku_58_fin2_b001",
+          "node": "aku_58_fin3_b001",
+          "node": "aku_58_fin4_b001",
+          "node": "aku_58_fin5_b001",
+          "node": "aku_58_fin6_b001"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/su_kh_29t.blk",
+          "emitter": "aku_58_kh_29l_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true
         }
       }
     },
@@ -2878,14 +3049,13 @@
       "WeaponPreset": {
         "iconType": "bombs_middle_group_x6",
         "name": "250_3_x6",
-        "reqModification": "cn_q5_type_250",
         "ShowNodes": {
           "node": "rocket_pylon_r3",
           "node": "adapter_r3"
         },
         "Weapon": {
           "trigger": "bombs",
-          "blk": "gameData/Weapons/containers/china_mer_bomb_pylon_250_3_x6.blk",
+          "blk": "gameData/Weapons/containers/china_mer_bomb_pylon_250_3_x6_default.blk",
           "emitter": "mer_pylon_r1",
           "external": true,
           "separate": true,
@@ -2944,6 +3114,28 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "guided_bomb_middle_laser",
+        "name": "ls250",
+        "reqModification": "cn_ts_250",
+        "ShowNodes": {
+          "node": "rocket_pylon_r3",
+          "node": "adapter_r3",
+          "node": "bomb_pylon_r2"
+        },
+        "Weapon": {
+          "trigger": "guided bombs",
+          "blk": "gameData/Weapons/BombGuns/cn_ts_250.blk",
+          "emitter": "ch_lgb_ls_500j_004",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "k_adc03a"
+        }
+      },
+      "WeaponPreset": {
         "iconType": "guided_bomb_large_laser",
         "name": "ls500",
         "reqModification": "cn_ls_500j",
@@ -2985,6 +3177,29 @@
         "DependentWeaponPreset": {
           "slot": 5,
           "preset": "k_adc03a"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_red",
+        "name": "kh_29t",
+        "reqModification": "mig_27_x29t",
+        "ShowNodes": {
+          "node": "rocket_pylon_r3",
+          "node": "aku_58_b002",
+          "node": "aku_58_fin1_b002",
+          "node": "aku_58_fin2_b002",
+          "node": "aku_58_fin3_b002",
+          "node": "aku_58_fin4_b002",
+          "node": "aku_58_fin5_b002",
+          "node": "aku_58_fin6_b002"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/su_kh_29t.blk",
+          "emitter": "aku_58_kh_29l_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true
         }
       }
     },
@@ -3087,6 +3302,28 @@
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_middle_laser",
+        "name": "ls250",
+        "reqModification": "cn_ts_250",
+        "ShowNodes": {
+          "node": "rocket_pylon_r2",
+          "node": "adapter_r2",
+          "node": "bomb_pylon_r1"
+        },
+        "Weapon": {
+          "trigger": "guided bombs",
+          "blk": "gameData/Weapons/BombGuns/cn_ts_250.blk",
+          "emitter": "ch_lgb_ls_500j_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "k_adc03a"
         }
       },
       "WeaponPreset": {
@@ -3239,6 +3476,27 @@
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_middle_laser",
+        "name": "ls250",
+        "reqModification": "cn_ts_250",
+        "ShowNodes": {
+          "node": "rocket_pylon_r1",
+          "node": "adapter_r1"
+        },
+        "Weapon": {
+          "trigger": "guided bombs",
+          "blk": "gameData/Weapons/BombGuns/cn_ts_250.blk",
+          "emitter": "china_gp_250_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "k_adc03a"
         }
       }
     },
@@ -3551,6 +3809,11 @@
       "reqModification": "ns23_belt_pack",
       "tier": 3
     },
+    "mig_27_x29t": {
+      "modClass": "weapon",
+      "prevModification": "ns23_new_gun",
+      "tier": 4
+    },
     "cn_q5_hf6": {
       "modClass": "weapon",
       "tier": 1
@@ -3572,12 +3835,17 @@
     },
     "cn_k_adc03a": {
       "modClass": "weapon",
-      "tier": 2
+      "tier": 1
+    },
+    "cn_ts_250": {
+      "modClass": "weapon",
+      "tier": 2,
+      "reqModification": "cn_k_adc03a"
     },
     "cn_ls_500j": {
       "modClass": "weapon",
       "tier": 3,
-      "reqModification": "cn_k_adc03a"
+      "reqModification": "cn_ts_250"
     },
     "cn_ls_1000j": {
       "modClass": "weapon",
@@ -3614,7 +3882,7 @@
       1
 ],
     "emitterName": "emtr_chute",
-    "chuteModel": "chute_mig_19_char",
+    "chuteModel": "chute_ptk_char",
     "chuteAnimVarName": "chute_state_switch",
     "chuteFlapVarName": "fire_chute",
     "chuteTimeScaleParam": "chute_time_scale",

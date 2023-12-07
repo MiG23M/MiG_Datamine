@@ -269,6 +269,8 @@
       "genericArmorQuality": 0.3,
       "cumulativeArmorQuality": 8.9,
       "armorEffectiveThicknessMax": 300.0,
+      "kineticProtectionEquivalent": 30.0,
+      "cumulativeProtectionEquivalent": 300.0,
       "genericDamageMult": 3.0,
       "stopChanceOnDeadPart": 0.0,
       "hidableInViewer": true,
@@ -286,6 +288,8 @@
       "genericArmorQuality": 0.3,
       "cumulativeArmorQuality": 8.0,
       "armorEffectiveThicknessMax": 300.0,
+      "kineticProtectionEquivalent": 30.0,
+      "cumulativeProtectionEquivalent": 300.0,
       "genericDamageMult": 3.0,
       "stopChanceOnDeadPart": 0.0,
       "hidableInViewer": true,
@@ -299,6 +303,8 @@
       "genericArmorQuality": 0.3,
       "cumulativeArmorQuality": 8.9,
       "armorEffectiveThicknessMax": 300.0,
+      "kineticProtectionEquivalent": 30.0,
+      "cumulativeProtectionEquivalent": 300.0,
       "genericDamageMult": 3.0,
       "stopChanceOnDeadPart": 0.0,
       "hidableInViewer": true,
@@ -1613,9 +1619,13 @@
     }
   },
   "xray_viewer_data": {
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_hull_01_dm",
+    "armorArrayERA": {
+      "xrayDmPart": "ex_era_hull_%02d_dm",
       "titleLoc": "uk_era_romor_a",
+      "xrayDmPartRange": [
+        1,
+        10
+],
       "kineticProtectionEquivalent": 30.0,
       "cumulativeProtectionEquivalent": 300.0,
       "armorArrayText": {
@@ -1624,124 +1634,18 @@
         }
       }
     },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_hull_02_dm",
+    "armorArrayERA": {
+      "xrayDmPart": "ex_era_turret_%02d_dm",
       "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_02_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_hull_03_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_03_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_hull_04_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_hull_04_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_01_dm",
-      "titleLoc": "uk_era_romor_a",
+      "xrayDmPartRange": [
+        1,
+        10
+],
       "kineticProtectionEquivalent": 30.0,
       "cumulativeProtectionEquivalent": 300.0,
       "armorArrayText": {
         "layer": {
           "dmPart": "ex_era_turret_01_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_02_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_02_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_03_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_03_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_04_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_04_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_05_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_05_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_06_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_06_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_07_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_07_dm"
-        }
-      }
-    },
-    "armorArrayHullFront": {
-      "xrayDmPart": "ex_era_turret_08_dm",
-      "titleLoc": "uk_era_romor_a",
-      "kineticProtectionEquivalent": 30.0,
-      "cumulativeProtectionEquivalent": 300.0,
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "ex_era_turret_08_dm"
         }
       }
     }
@@ -2497,74 +2401,6 @@
       "name": "total_fire",
       "lifetime": 60.0,
       "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_dmg"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_01"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_02"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_03"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_04"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_05"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_06"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_07"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_08"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_09"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_10"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_11"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_12"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_13"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_14"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_15"
-      },
-      "fx": {
-        "name": "tank_smoke_small",
-        "emitter": "emtr_smoke_small_dmg_16"
-      },
-      "fx": {
         "name": "tank_fire_big",
         "emitter": "emtr_fire_dmg"
       },
@@ -2636,74 +2472,6 @@
     "event": {
       "name": "attached_fire",
       "lifetime": 15.0,
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_dmg"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_01"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_02"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_03"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_04"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_05"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_06"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_07"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_08"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_09"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_10"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_11"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_12"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_13"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_14"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_15"
-      },
-      "fx": {
-        "name": "fire_tank_napalm_smal",
-        "emitter": "emtr_smoke_small_dmg_16"
-      },
       "fx": {
         "name": "fire_tank_napalm_smal",
         "emitter": "emtr_fire_dmg"
@@ -2800,6 +2568,10 @@
         "name": "tank_explosion",
         "emitter": "emtr_explosion_center"
       },
+      "fx": {
+        "extraFx": "fuelLeakFx",
+        "emitter": "emtr_explosion_center"
+      },
       "wreckages": {
         "count": 8,
         "speed": 20.0,
@@ -2812,6 +2584,10 @@
       "lifetime": 10.0,
       "fx": {
         "name": "tank_explosion",
+        "emitter": "emtr_explosion_center"
+      },
+      "fx": {
+        "extraFx": "fuelLeakFx",
         "emitter": "emtr_explosion_center"
       },
       "wreckages": {
@@ -2842,6 +2618,10 @@
         "name": "tank_explosion_ammo",
         "emitter": "emtr_explosion_center"
       },
+      "fx": {
+        "extraFx": "fuelLeakFx",
+        "emitter": "emtr_explosion_center"
+      },
       "wreckages": {
         "count": 12,
         "speed": 25.0,
@@ -2854,6 +2634,10 @@
       "lifetime": 10.0,
       "fx": {
         "name": "tank_explosion_ammo_small",
+        "emitter": "emtr_explosion_center"
+      },
+      "fx": {
+        "extraFx": "fuelLeakFx",
         "emitter": "emtr_explosion_center"
       },
       "wreckages": {

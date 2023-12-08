@@ -1673,16 +1673,21 @@
       "removeLoadedAmmo": true,
       "fatalFire": true,
       "fatalExplosion": true,
+      "replenishmentDelay": 4.0,
+      "replenishmentTime": 15.0,
+      "fireEvent": "ammo_fire",
+      "explosionEvent": "ammo_explosion",
       "shells": {
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
+        "firstStage": true,
         "ammo_turret_01_dm": {
           "count": 1
         },
         "ammo_turret_02_dm": {
           "count": 1
-        },
+        }
+      },
+      "shells": {
+        "reloadTimeMult": 1.33,
         "ammo_body_01_dm": {
           "count": 1
         },

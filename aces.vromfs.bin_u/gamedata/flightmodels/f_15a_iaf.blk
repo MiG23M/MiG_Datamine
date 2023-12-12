@@ -1955,13 +1955,13 @@
   },
   "cockpit": {
     "headPos": [
-      4.915,
-      1.315,
+      5.945,
+      1.615,
       0.0
     ],
     "headPosOnShooting": [
-      5.015,
-      1.315,
+      6.045,
+      1.615,
       0.0
     ],
     "hasAirCannonIlsMode": true,
@@ -1971,18 +1971,18 @@
     "sightFov": 2.0,
     "mirror": true,
     "mirrorPos": [
-      5.415,
-      1.363,
+      6.39,
+      1.591,
       0.0
     ],
     "mirrorNorm": [
-      -0.998,
-      -0.07,
+      -1.0,
+      0.05,
       0.0
     ],
-    "mirrorNode": "blister4",
     "mirrorNode": "blister5",
     "mirrorNode": "blister6",
+    "mirrorNode": "blister7",
     "shadowSphereMultiplier": 2.0,
     "gunLightRadiusMul": 0.05,
     "lightPos": [
@@ -2038,10 +2038,6 @@
         -1.0,
         1.0
       ],
-      "pedals": [
-        -1.0,
-        1.0
-      ],
       "pedals1": [
         -1.0,
         1.0
@@ -2055,10 +2051,6 @@
         1.0
       ],
       "pedals4": [
-        -1.0,
-        1.0
-      ],
-      "pedals5": [
         -1.0,
         1.0
       ],
@@ -2094,14 +2086,14 @@
       "flaps_fixed": false,
       "speed": [
         0.0,
-        555.555
+        514.444
       ],
       "speed_01": [
         0.0,
-        555.555
+        514.444
       ],
       "mach": [
-        0.0,
+        0.6,
         3.0
       ],
       "compass": [
@@ -2113,12 +2105,12 @@
         360.0
       ],
       "vario": [
-        -200.0,
-        200.0
+        -30.48,
+        30.48
       ],
       "g_meter": [
-        -2.0,
-        11.0
+        -5.0,
+        10.0
       ],
       "altitude_10k": [
         0.0,
@@ -2136,20 +2128,32 @@
         0.0,
         100000.0
       ],
+      "altitude1_min": [
+        0.0,
+        1000.0
+      ],
       "altitude2_10k": [
         0.0,
         100000.0
+      ],
+      "altitude2_hour": [
+        0.0,
+        10000.0
+      ],
+      "altitude2_min": [
+        0.0,
+        1000.0
+      ],
+      "altitude3_min": [
+        0.0,
+        1000.0
       ],
       "radio_altitude": [
         0.0,
         1000.0
       ],
-      "altitude_koef": 1.0,
+      "altitude_koef": 3.28,
       "bank": [
-        -8.0,
-        8.0
-      ],
-      "bank1": [
         -8.0,
         8.0
       ],
@@ -2162,6 +2166,14 @@
         80.0
       ],
       "aviahorizon_roll": [
+        -180.0,
+        180.0
+      ],
+      "aviahorizon_pitch1": [
+        -80.0,
+        80.0
+      ],
+      "aviahorizon_roll1": [
         -180.0,
         180.0
       ],
@@ -2183,62 +2195,112 @@
       ],
       "rpm": [
         0.0,
-        9000.0
+        13200.0
+      ],
+      "rpm_hour": [
+        0.0,
+        13200.0
+      ],
+      "rpm_min": [
+        0.0,
+        1000.0
       ],
       "rpm1": [
         0.0,
-        9000.0
+        13200.0
+      ],
+      "rpm1_hour": [
+        0.0,
+        13200.0
+      ],
+      "rpm1_min": [
+        0.0,
+        1000.0
       ],
       "oil_pressure": [
         0.0,
         120.0
       ],
-      "oil_temperature": [
+      "oil_pressure1": [
         0.0,
-        150.0
+        120.0
       ],
       "water_temperature": [
-        0.0,
-        1100.0
+        200.0,
+        1400.0
       ],
       "water_temperature1": [
-        0.0,
-        1100.0
+        200.0,
+        1400.0
       ],
       "fuel_pressure": [
         0.0,
         15.0
       ],
+      "fuel_consume": [
+        0.0,
+        350.0
+      ],
+      "fuel_consume1": [
+        0.0,
+        350.0
+      ],
       "fuel": [
         0.0,
-        7500.0
-      ],
-      "fuel1": [
-        0.0,
-        7500.0
-      ],
-      "fuel2": [
-        0.0,
-        7500.0
+        5443.0
       ],
       "weapon_lock_lamp_flags1": 6,
-      "weapon_lock_lamp_flags2": 8
+      "weapon_lock_lamp_flags2": 8,
+      "ammo_counter1": [
+        0.0,
+        1000.0
+      ],
+      "ammo_counter2": [
+        0.0,
+        100.0
+      ],
+      "ammo_counter3": [
+        0.0,
+        10.0
+      ]
     },
     "multifunctionDisplays": {
       "display": {
         "textureArea": [
           0.0,
           0.0,
+          0.5,
+          0.5
+        ],
+        "monoDisplayColor": [
+          0.1,
+          0.25,
+          0.1
+        ],
+        "cameraFromShell": true,
+        "page": {
+          "type": "target_tracking",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "radar",
+          "radarScale": 0.4,
+          "hideRadarBackground": true
+        },
+        "page": {
+          "type": "ils_duplicate"
+        }
+      },
+      "display": {
+        "textureArea": [
+          0.5,
+          0.5,
           1.0,
           1.0
         ],
         "page": {
-          "type": "ils_duplicate"
-        },
-        "page": {
-          "type": "radar",
-          "radarScale": 0.8,
-          "hideRadarBackground": true
+          "type": "rwr",
+          "scale": 1.15
         }
       },
       "display": {
@@ -2251,8 +2313,8 @@
         "page": {
           "type": "plane_ils",
           "ilsSize": [
-            0.4,
-            0.4
+            0.22,
+            0.22
           ],
           "ilsOffsetForce": 0.0,
           "brightnessMult": 3.5,
@@ -2368,6 +2430,7 @@
       "node": "python_adater_001",
       "node": "python_lau_7_001",
       "node": "python_lau_7_002",
+      "node": "pylon_1_aim_9",
       "node": "pylon_c",
       "node": "pylon_2",
       "node": "lau_7_003",
@@ -2375,7 +2438,8 @@
       "node": "aim_9_adater_002",
       "node": "python_adater_002",
       "node": "python_lau_7_003",
-      "node": "python_lau_7_004"
+      "node": "python_lau_7_004",
+      "node": "pylon_2_aim_9"
     },
     "HideDmParts": {
       "node": "tank7_dm",
@@ -2424,7 +2488,10 @@
           "dm": "cannon1_dm",
           "rotationAnimScale": "gun_rotate_01:CRS",
           "bullets": 940,
-          "spread": 1.0
+          "spread": 1.0,
+          "counterIndex": 1,
+          "counterIndex": 2,
+          "counterIndex": 3
         },
         "Weapon": {
           "trigger": "countermeasures",
@@ -2456,7 +2523,7 @@
         "ShowNodes": {
           "node": "pylon_1",
           "node": "lau_7_001",
-          "node": "python_adater_001"
+          "node": "pylon_1_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -2469,7 +2536,7 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_c_air_to_air",
-        "name": "python3",
+        "name": "python3_slot1",
         "reqModification": "il_python_3",
         "ShowNodes": {
           "node": "pylon_1",
@@ -2483,6 +2550,10 @@
           "bullets": 1,
           "external": true,
           "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 3,
+          "preset": "python3_slot3"
         }
       },
       "WeaponPreset": {
@@ -2492,7 +2563,7 @@
         "ShowNodes": {
           "node": "pylon_1",
           "node": "lau_7_001",
-          "node": "python_adater_001"
+          "node": "pylon_1_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -2658,7 +2729,7 @@
         "ShowNodes": {
           "node": "pylon_1",
           "node": "lau_7_002",
-          "node": "python_adater_001"
+          "node": "pylon_1_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -2671,7 +2742,7 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_c_air_to_air",
-        "name": "python3",
+        "name": "python3_slot3",
         "reqModification": "il_python_3",
         "ShowNodes": {
           "node": "pylon_1",
@@ -2685,6 +2756,10 @@
           "bullets": 1,
           "external": true,
           "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 1,
+          "preset": "python3_slot1"
         }
       },
       "WeaponPreset": {
@@ -2694,7 +2769,7 @@
         "ShowNodes": {
           "node": "pylon_1",
           "node": "lau_7_002",
-          "node": "python_adater_001"
+          "node": "pylon_1_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -2933,7 +3008,7 @@
         "ShowNodes": {
           "node": "pylon_2",
           "node": "lau_7_003",
-          "node": "python_adater_002"
+          "node": "pylon_2_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -2946,7 +3021,7 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_c_air_to_air",
-        "name": "python3",
+        "name": "python3_slot9",
         "reqModification": "il_python_3",
         "ShowNodes": {
           "node": "pylon_2",
@@ -2960,6 +3035,10 @@
           "bullets": 1,
           "external": true,
           "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 11,
+          "preset": "python3_slot11"
         }
       },
       "WeaponPreset": {
@@ -2969,7 +3048,7 @@
         "ShowNodes": {
           "node": "pylon_2",
           "node": "lau_7_003",
-          "node": "python_adater_002"
+          "node": "pylon_2_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -3134,7 +3213,7 @@
         "ShowNodes": {
           "node": "pylon_2",
           "node": "lau_7_004",
-          "node": "python_adater_002"
+          "node": "pylon_2_aim_9"
         },
         "Weapon": {
           "trigger": "aam",
@@ -3147,7 +3226,7 @@
       },
       "WeaponPreset": {
         "iconType": "missile_type_c_air_to_air",
-        "name": "python3",
+        "name": "python3_slot11",
         "reqModification": "il_python_3",
         "ShowNodes": {
           "node": "pylon_2",
@@ -3161,6 +3240,10 @@
           "bullets": 1,
           "external": true,
           "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 9,
+          "preset": "python3_slot9"
         }
       },
       "WeaponPreset": {
@@ -3170,7 +3253,7 @@
         "ShowNodes": {
           "node": "pylon_2",
           "node": "lau_7_004",
-          "node": "python_adater_002"
+          "node": "pylon_2_aim_9"
         },
         "Weapon": {
           "trigger": "aam",

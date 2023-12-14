@@ -124,7 +124,8 @@
           "target": "bf109_02_add",
           "target": "bf109_03",
           "target": "bf109_03_add",
-          "target": "bf109_for_cannons"
+          "target": "bf109_for_cannons",
+          "target": "usa_tanks_squad"
         },
         "unitSetProperties": {
           "object": "germ_artillery",
@@ -422,23 +423,23 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "bf109_01",
+          "target": "bf109_01_add",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf109_01",
-          "target": "bf109_01_add"
+          "object_var_value": 0
         },
         "comment": {
           "value": ""
         },
         "unitSetIndication": {
           "set": true,
+          "target": "descent_bots",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "descent_bots"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "update_indicator_bots"
@@ -519,19 +520,15 @@
         }
       },
       "conditions": {
-        "unitDistanceBetween": {
-          "value": 70.0,
-          "math": "2D",
+        "unitWhenInArea": {
+          "math": "3D",
           "object_type": "isAlive",
-          "target_type": "isAlive",
-          "check_objects": "any",
-          "check_targets": "any",
           "object_marking": 0,
-          "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
+          "check_objects": "any",
           "object": "descent_bots",
-          "target": "descent_landing_point"
+          "target": "landing_area"
         }
       },
       "actions": {
@@ -548,12 +545,15 @@
           "useForTriggerFiltered": true,
           "speed": 0.0,
           "lockSpeed": true
+        },
+        "triggerEnable": {
+          "target": "landing_successful"
         }
       },
       "else_actions": {      }
     },
     "landing_successful": {
-      "is_enabled": true,
+      "is_enabled": false,
       "comments": "",
       "props": {
         "actionsType": "PERFORM_ONE_BY_ONE",
@@ -582,7 +582,19 @@
           "object_var_name": "",
           "object_marking": 0
         },
-        "unitMoveTo": {
+        "unitRespawn": {
+          "delay": 1.0,
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "object": "usa_tanks_squad",
+          "target": "spawn_area",
+          "randomSpawn": true,
+          "resetFormation": true
+        },
+        "__unitMoveTo": {
           "target": "tanks_spawn_point",
           "follow_target": false,
           "teleportHeightType": "relative",
@@ -625,17 +637,17 @@
         },
         "unitSetIndication": {
           "set": false,
-          "target_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
           "target": "bf109_01",
           "target": "bf109_01_add",
           "target": "bf109_02",
           "target": "bf109_02_add",
           "target": "bf109_03",
           "target": "bf109_03_add",
-          "target": "descent_bots"
+          "target": "descent_bots",
+          "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0
         },
         "missionSetTargetsIndicator": {
           "target_type": "isAlive",
@@ -689,11 +701,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_artillery",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_artillery"
+          "object_var_value": 0
         },
         "unitWakeUp": {
           "target": "bf109_for_cannons"
@@ -1056,12 +1068,12 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "bf109_02",
+          "target": "bf109_02_add",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf109_02",
-          "target": "bf109_02_add"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "bf109_02_attack_bots"
@@ -1242,12 +1254,12 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "bf109_03",
+          "target": "bf109_03_add",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf109_03",
-          "target": "bf109_03_add"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "bf109_03_attack_bots"
@@ -2209,7 +2221,7 @@
     -12167.6,
 ],
           "props": {
-            "speed": 30.0,
+            "speed": 50.0,
             "moveType": "MOVETO_STRAIGHT",
             "tas": false,
             "canUsePathFinder": false
@@ -2232,7 +2244,7 @@
     -16867.8,
 ],
           "props": {
-            "speed": 30.0,
+            "speed": 50.0,
             "moveType": "MOVETO_STRAIGHT",
             "tas": false,
             "canUsePathFinder": false
@@ -2255,7 +2267,7 @@
     -18488.5,
 ],
           "props": {
-            "speed": 30.0,
+            "speed": 50.0,
             "moveType": "MOVETO_STRAIGHT",
             "tas": false,
             "canUsePathFinder": false
@@ -7778,6 +7790,44 @@
     6.8,
     -18361.0,
 ],
+      "props": {      }
+    },
+    "landing_area": {
+      "type": "Box",
+      "tm": [
+    -380.111,
+    0.0,
+    0.0,
+    0.0,
+    107.708,
+    0.0,
+    0.0,
+    0.0,
+    -793.059,
+    23344.3,
+    -46.3757,
+    -18420.3,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "spawn_area": {
+      "type": "Box",
+      "tm": [
+    -181.057,
+    0.0,
+    0.0,
+    0.0,
+    107.708,
+    0.0,
+    0.0,
+    0.0,
+    -793.059,
+    23169.5,
+    -46.3757,
+    -18420.3,
+],
+      "objLayer": 0,
       "props": {      }
     }
   },

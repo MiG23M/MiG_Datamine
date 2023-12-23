@@ -158,12 +158,12 @@ def draw_radar_hud(var ctx : GuiContext&; rdata : ElemRenderData& const; rstate 
     let pos = get_radar_hud_is_c_scope_visible() ? rdata.pos - float2(0., rdata.size.y * 0.42) : rdata.pos
     let azimuthRange = max(0., get_radar_hud_azimuth_max() - get_radar_hud_azimuth_min())
     if mode == RadarViewMode B_SCOPE_ROUND
-      if azimuthRange > PI
+      if azimuthRange > PI + 0.035
         b_scope(ctx, rdata, data)
       else
         b_scope_half(ctx, rdata, data, pos)
     elif mode == RadarViewMode B_SCOPE_SQUARE
-      if azimuthRange > PI
+      if azimuthRange > PI + 0.035
         b_scope(ctx, rdata, data)
       else
         b_scope_square(ctx, rdata, data, pos)
@@ -254,7 +254,8 @@ def b_scope_sector(var ctx : GuiContext&; data : CanvasParams&; pos : float2; si
 
   var color = float4(Color4(data.color))//isColorOrWhite(color) ??
   color *= 0.2
-  ctx |> render_sector_aa(pos, size * 0.5, float2(angle - half_width, angle + half_width), 1.2, E3DCOLOR(Color4(color)), E3DCOLOR(Color4(color)))
+  ctx |> render_sector_aa(pos, size * 0.5 * get_radar_hud_target_distance(), float2(angle - half_width, angle + half_width), 1.2,
+   E3DCOLOR(Color4(color)), E3DCOLOR(Color4(color)))
 
 def b_scope_azimuth(var ctx : GuiContext&; data : CanvasParams&; pos : float2; size : float2; is_sector_view : bool;
                     value : float; half_width : float; dist : float; line_width : float)
@@ -368,7 +369,8 @@ def polar_radar_targets(var ctx : GuiContext&; data : CanvasParams&; origin : fl
       radialWidthRel = max(target.distanceWidthRel, 0.05)
 
     var color = float4(Color4(is_color_or_white(data.color)))
-    color *= (1. - target.ageRel)
+    let signalRel = target.signalRel < 0.01 ? 0. : cvt(target.signalRel, 0.05, 1., 0.3, 1.)
+    color *= (1. - target.ageRel) * signalRel
     let e3dColor = E3DCOLOR(Color4(color))
     var angle = -PI * 0.5
     var angularWidth = azimuthRange
@@ -740,7 +742,7 @@ def b_scope_square_bkg(var ctx : GuiContext&; data : CanvasParams&; pos : float2
 
 def b_scope_square_target_sector(var ctx : GuiContext&; data : CanvasParams&; pos : float2; size : float2)
   let azimuthRange = max(0., get_radar_hud_azimuth_max() - get_radar_hud_azimuth_min())
-  let isTank = azimuthRange > PI
+  let isTank = azimuthRange > PI + 0.035
 
   if isTank
     logerr("tank")
@@ -858,7 +860,8 @@ def square_radar_targets(var ctx : GuiContext&; data : CanvasParams&; pos : floa
       radialWidthRel = max(0.05, target.distanceWidthRel)
 
     var color = float4(Color4(is_color_or_white(data.color)))
-    color *= (1. - target.ageRel) * target.signalRel
+    let signalRel = target.signalRel < 0.01 ? 0. : cvt(target.signalRel, 0.05, 1., 0.3, 1.)
+    color *= (1. - target.ageRel) * signalRel
     let e3dColor = E3DCOLOR(Color4(color))
 
     let azimuthHalfWidth = get_radar_hud_is_visible2() ? get_radar_hud_azimuth_half_width2() : get_radar_hud_azimuth_half_width()

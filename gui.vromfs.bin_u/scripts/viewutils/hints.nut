@@ -78,7 +78,8 @@ let function getTextSlice(textsArray) {
             break
 
           //closing tag found, pop color from stack and continue
-          if ((openingColorTagStartIndex ?? -1) > (closingColorTagStartIndex ?? -1)) {
+          if (openingColorTagStartIndex == null ||
+            (openingColorTagStartIndex ?? -1) > (closingColorTagStartIndex ?? -1)) {
             if (unclosedTags > 0)
               unclosedTags--
             else {

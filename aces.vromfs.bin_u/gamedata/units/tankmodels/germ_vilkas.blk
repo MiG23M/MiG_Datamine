@@ -115,13 +115,13 @@
     },
     "device": {
       "type": "steeringWheel",
-      "turnSpeed": -0.5,
+      "turnSpeed": -0.2,
       "node": "bone_roll_driver_l_01",
       "absoluteValue": true
     },
     "device": {
       "type": "steeringWheel",
-      "turnSpeed": -0.2,
+      "turnSpeed": -0.09,
       "node": "bone_roll_driver_l_02",
       "absoluteValue": true
     },
@@ -139,13 +139,13 @@
     },
     "device": {
       "type": "steeringWheel",
-      "turnSpeed": -0.5,
+      "turnSpeed": -0.2,
       "node": "bone_roll_driver_r_01",
       "absoluteValue": true
     },
     "device": {
       "type": "steeringWheel",
-      "turnSpeed": -0.2,
+      "turnSpeed": -0.09,
       "node": "bone_roll_driver_r_02",
       "absoluteValue": true
     },
@@ -1906,7 +1906,7 @@
       "speedYaw": 25.0,
       "speedPitch": 25.0,
       "fireConeAngle": 1.0,
-      "bullets": 2,
+      "bullets": 4,
       "salvoAmount": 100.0,
       "ChainfireTime": 0.0,
       "DelayAfterShoot": 5.0,
@@ -2182,29 +2182,101 @@
     }
   },
   "PhysSys": {
-    "find": "^bone_suspension_(._\d\d)$",
-    "points": {
-      "suspension": {
-        "name": "bone_suspension_$1"
+    "group": {
+      "find": "^bone_suspension_(._\d\d)$",
+      "points": {
+        "lever": {
+          "limitMin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "limitMax": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "name": "bone_suspension_$1"
+        },
+        "suspension_01": {
+          "limitMin": [
+            -1.0,
+            -1.0,
+            0.0
+          ],
+          "limitMax": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "name": "bone_suspension_$1_01"
+        },
+        "wheel": {
+          "searchChildren": {
+            "occurence": 1,
+            "limitMin": [
+              -1.0,
+              -1.0,
+              0.0
+            ],
+            "limitMax": [
+              1.0,
+              1.0,
+              0.0
+            ],
+            "parent": "lever",
+            "find": "bone_wheel_"
+          }
+        }
       },
-      "wheel": {
-        "name": "bone_wheel_$1",
-        "limitMin": [
-          -1.0,
-          -1.0,
-          0.0
-        ],
-        "limitMax": [
-          1.0,
-          1.0,
-          0.0
-        ]
+      "constraints": {
+        "edge": {
+          "to": "wheel",
+          "from": "lever"
+        },
+        "edge": {
+          "point": "suspension_01",
+          "to": "wheel",
+          "from": "suspension_01",
+          "moveNodes": false
+        }
       }
     },
-    "constraints": {
-      "edge": {
-        "from": "suspension",
-        "to": "wheel"
+    "group": {
+      "find": "^bone_suspension_(\w)_back_(\d+)$",
+      "points": {
+        "lever": {
+          "limitMin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "limitMax": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "name": "bone_suspension_$1_back_$2"
+        },
+        "wheel": {
+          "limitMin": [
+            -1.0,
+            -1.0,
+            0.0
+          ],
+          "limitMax": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "name": "bone_wheel_$1_back_$2"
+        }
+      },
+      "constraints": {
+        "edge": {
+          "to": "wheel",
+          "from": "lever"
+        }
       }
     }
   },
@@ -3101,17 +3173,27 @@
     },
     "ammo2": {
       "weaponTrigger": "gunner1",
-      "removeLoadedAmmo": false,
-      "fatalFire": false,
-      "fatalExplosion": false,
+      "fatalFire": true,
+      "fatalExplosion": true,
+      "shells": {
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "wreckedPartId": 0,
+        "ammo_turret_01_dm": {
+          "count": 1
+        },
+        "ammo_turret_02_dm": {
+          "count": 1
+        }
+      },
       "shells": {
         "fireEvent": "ammo_fire",
         "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
-        "ammo_turret_02_dm": {
+        "ammo_turret_04_dm": {
           "count": 1
         },
-        "ammo_turret_01_dm": {
+        "ammo_turret_05_dm": {
           "count": 1
         }
       }
@@ -3363,7 +3445,7 @@
             "speedYaw": 25.0,
             "speedPitch": 25.0,
             "fireConeAngle": 1.0,
-            "bullets": 2,
+            "bullets": 4,
             "salvoAmount": 100.0,
             "ChainfireTime": 0.0,
             "DelayAfterShoot": 5.0,

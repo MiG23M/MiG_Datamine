@@ -15,22 +15,7 @@
       "weather": "hazy"
     }
   },
-  "imports": {
-    "import_record": {
-      "file": "gameData/missions/cta/tanks/sinai_sands/mainareas/sinai02_Conq1_arcade_template.blk",
-      "importAreas": true,
-      "importUnits": true,
-      "importTriggers": true,
-      "importMissionObjectives": true,
-      "importWayPoints": true,
-      "showAreas": true,
-      "showUnits": true,
-      "showTriggers": true,
-      "showMissionObjectives": true,
-      "showWayPoints": true,
-      "excludes": {      }
-    }
-  },
+  "imports": {  },
   "triggers": {
     "isCategory": true,
     "is_enabled": true
@@ -43,61 +28,64 @@
   "dialogs": {  },
   "airfields": {  },
   "effects": {  },
-  "units": {  },
+  "units": {
+    "area_squad": {
+      "name": "battlearea_exclude_squad",
+      "tm": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    3305.45,
+    -12.0,
+    2180.6,
+],
+      "props": {
+        "squad_members": "battlearea_exclude_01",
+        "squad_members": "battlearea_exclude_02"
+      }
+    }
+  },
   "areas": {
-    "conq_battle_area_arcade": {
+    "battlearea_exclude_01": {
       "type": "Box",
       "tm": [
-    1900.0,
+    788.951,
     0.0,
+    614.456,
     0.0,
+    100.0,
     0.0,
-    103.704,
+    -184.337,
     0.0,
-    0.0,
-    0.0,
-    1900.0,
-    1385.7,
-    628.3,
-    2387.85,
-],
-      "objLayer": 3,
-      "props": {      }
-    },
-    "t2_killarea": {
-      "type": "Cylinder",
-      "tm": [
-    150.0,
-    0.0,
-    0.0,
-    0.0,
-    64.1,
-    0.0,
-    0.0,
-    0.0,
-    150.0,
-    1426.15,
-    632.6,
-    1679.3,
+    236.685,
+    1404.21,
+    26.402,
+    3544.49,
 ],
       "objLayer": 0,
       "props": {      }
     },
-    "t1_killarea": {
+    "battlearea_exclude_02": {
       "type": "Cylinder",
       "tm": [
-    150.0,
+    194.537,
     0.0,
+    46.4259,
     0.0,
+    100.0,
     0.0,
-    64.1,
+    -46.4258,
     0.0,
-    0.0,
-    0.0,
-    150.0,
-    1557.5,
-    632.6,
-    3229.95,
+    194.537,
+    1496.75,
+    26.4,
+    3517.65,
 ],
       "objLayer": 0,
       "props": {      }
@@ -114,7 +102,7 @@
       "enabled": true
     },
     "layer": {
-      "enabled": false
+      "enabled": true
     }
   },
   "wayPoints": {  }

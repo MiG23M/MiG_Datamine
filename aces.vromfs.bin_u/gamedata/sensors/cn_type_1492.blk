@@ -256,6 +256,24 @@
         "width": 150.0
       }
     },
+    "mprfAcm": {
+      "groundClutter": false,
+      "aircraftAsTarget": true,
+      "mainBeamNotchWidth": 40.0,
+      "distance": {
+        "presents": true,
+        "minValue": 200.0,
+        "maxValue": 74000.0,
+        "width": 150.0
+      },
+      "dopplerSpeed": {
+        "presents": true,
+        "minValue": -1500.0,
+        "maxValue": 1500.0,
+        "signalWidthMin": 2.0,
+        "width": 20.0
+      }
+    },
     "mprfTrack": {
       "groundClutter": false,
       "aircraftAsTarget": true,
@@ -513,7 +531,7 @@
             "transiver": "mprf"
           },
           "setSignal": {
-            "signal": "mprfTrack"
+            "signal": "mprfSearch"
           },
           "setModeName": {
             "name": "PD acquisition"
@@ -540,7 +558,7 @@
             "transiver": "pulse"
           },
           "setSignal": {
-            "signal": "pulseTrack"
+            "signal": "pulseSearch"
           },
           "setModeName": {
             "name": "acquisition"
@@ -558,48 +576,54 @@
             "sensorIndex": 0
           }
         },
-        "setMprfTrackModeNameTrack": {
+        "setMprfTrackModeParamsTrack": {
+          "setSignal": {
+            "signal": "mprfTrack"
+          },
           "setModeName": {
             "name": "PD track"
           }
         },
-        "setPulseTrackModeNameTrack": {
+        "setPulseTrackModeParamsTrack": {
           "setModeName": {
             "name": "track"
           }
         },
-        "setMprfTrackModeNameLock": {
+        "setMprfTrackModeParamsLock": {
+          "setSignal": {
+            "signal": "mprfAcm"
+          },
           "setModeName": {
             "name": "PD ACM"
           }
         },
-        "setPulseTrackModeNameLock": {
+        "setPulseTrackModeParamsLock": {
           "setModeName": {
             "name": "ACM"
           }
         },
-        "setTrackModeNameTrack": {
+        "setTrackModeParamsTrack": {
           "setCustomActionTemplate": {
             "fsm": "main",
-            "name": "setMprfTrackModeName",
-            "actionTemplateName": "setMprfTrackModeNameTrack"
+            "name": "setMprfTrackModeParams",
+            "actionTemplateName": "setMprfTrackModeParamsTrack"
           },
           "setCustomActionTemplate": {
             "fsm": "main",
-            "name": "setPulseTrackModeName",
-            "actionTemplateName": "setPulseTrackModeNameTrack"
+            "name": "setPulseTrackModeParams",
+            "actionTemplateName": "setPulseTrackModeParamsTrack"
           }
         },
-        "setTrackModeNameLock": {
+        "setTrackModeParamsLock": {
           "setCustomActionTemplate": {
             "fsm": "main",
-            "name": "setMprfTrackModeName",
-            "actionTemplateName": "setMprfTrackModeNameLock"
+            "name": "setMprfTrackModeParams",
+            "actionTemplateName": "setMprfTrackModeParamsLock"
           },
           "setCustomActionTemplate": {
             "fsm": "main",
-            "name": "setPulseTrackModeName",
-            "actionTemplateName": "setPulseTrackModeNameLock"
+            "name": "setPulseTrackModeParams",
+            "actionTemplateName": "setPulseTrackModeParamsLock"
           }
         },
         "setAcmLockMode": {
@@ -635,7 +659,7 @@
           "setScopeRangeSet": {
             "scopeRangeSet": "acm"
           },
-          "setTrackModeNameLock": {          },
+          "setTrackModeParamsLock": {          },
           "enableTrackModes": {          },
           "setFsmActive": {
             "fsm": "illumination",
@@ -677,7 +701,7 @@
             "fsm": "track",
             "active": true
           },
-          "setTrackModeNameTrack": {          },
+          "setTrackModeParamsTrack": {          },
           "enableTrackModes": {          },
           "setFsmActive": {
             "fsm": "illumination",
@@ -695,12 +719,9 @@
           "setTransiver": {
             "transiver": "mprf"
           },
-          "setSignal": {
-            "signal": "mprfTrack"
-          },
           "doCustomActionTemplate": {
             "fsm": "main",
-            "name": "setMprfTrackModeName"
+            "name": "setMprfTrackModeParams"
           }
         },
         "setPulseTrackParams": {
@@ -712,29 +733,32 @@
           },
           "doCustomActionTemplate": {
             "fsm": "main",
-            "name": "setPulseTrackModeName"
+            "name": "setPulseTrackModeParams"
           }
         },
-        "setMprfTrackModeNameHmd": {
+        "setMprfTrackModeParamsHmd": {
+          "setSignal": {
+            "signal": "mprfAcm"
+          },
           "setModeName": {
             "name": "PD HMD"
           }
         },
-        "setPulseTrackModeNameHmd": {
+        "setPulseTrackModeParamsHmd": {
           "setModeName": {
             "name": "HMD"
           }
         },
-        "setTrackModeNameHmd": {
+        "setTrackModeParamsHmd": {
           "setCustomActionTemplate": {
             "fsm": "main",
-            "name": "setMprfTrackModeName",
-            "actionTemplateName": "setMprfTrackModeNameHmd"
+            "name": "setMprfTrackModeParams",
+            "actionTemplateName": "setMprfTrackModeParamsHmd"
           },
           "setCustomActionTemplate": {
             "fsm": "main",
-            "name": "setPulseTrackModeName",
-            "actionTemplateName": "setPulseTrackModeNameHmd"
+            "name": "setPulseTrackModeParams",
+            "actionTemplateName": "setPulseTrackModeParamsHmd"
           }
         },
         "setHmdStandbyMode": {
@@ -765,7 +789,7 @@
             "fsm": "helmetDesignation",
             "active": true
           },
-          "setTrackModeNameHmd": {          },
+          "setTrackModeParamsHmd": {          },
           "enableTrackModes": {          }
         },
         "resetHmdStandbyMode": {
@@ -807,7 +831,7 @@
             "fsm": "helmetDesignation",
             "active": true
           },
-          "setTrackModeNameHmd": {          },
+          "setTrackModeParamsHmd": {          },
           "enableTrackModes": {          }
         },
         "resetHmdLockMode": {
@@ -846,7 +870,7 @@
             "fsm": "track",
             "active": true
           },
-          "setTrackModeNameTrack": {          },
+          "setTrackModeParamsTrack": {          },
           "enableTrackModes": {          }
         }
       },

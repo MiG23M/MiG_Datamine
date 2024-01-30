@@ -12,8 +12,6 @@
     "mission": {
       "level": "levels/stalingrad.bin",
       "type": "testFlight",
-      "restoreType": "manual",
-      "optionalTakeOff": false,
       "environment": "Day",
       "weather": "good",
       "windDirection": [
@@ -21,7 +19,9 @@
         0.0,
         0.0
       ],
-      "locName": "missions/testFlight"
+      "locName": "missions/testFlight",
+      "restoreType": "manual",
+      "optionalTakeOff": false
     },
     "spectator_points": {    },
     "briefing": {
@@ -111,12 +111,16 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "structures_01",
+          "target": "structures_02",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "structures_01",
-          "target": "structures_02"
+          "object_var_value": 0
+        },
+        "missionSetWeatherParams": {
+          "waterWindStrengtMin": 2.0,
+          "waterWindStrengtMax": 2.3
         }
       },
       "else_actions": {      }
@@ -190,6 +194,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "free_distance": 70.0,
@@ -242,6 +248,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -291,6 +299,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 3,
@@ -326,8 +336,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -350,8 +360,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -374,8 +384,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -398,8 +408,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -422,8 +432,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -446,8 +456,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -470,8 +480,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -494,8 +504,8 @@
 ],
           "props": {
             "speed": 65.0,
-            "tas": false,
             "moveType": "MOVETO_STRAIGHT",
+            "tas": false,
             "shouldKeepFormation": false,
             "canUsePathFinder": false
           }
@@ -531,6 +541,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -580,6 +592,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -634,6 +648,8 @@
       "bulletsCount1": 0,
       "bulletsCount2": 0,
       "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 3,

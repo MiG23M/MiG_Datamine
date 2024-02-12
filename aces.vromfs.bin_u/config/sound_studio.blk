@@ -24,6 +24,8 @@
   "volMultiplierPS": 0.7,
   "canPatchEnginesForEnemies": true,
   "hitSoundCooldownTime": 0.1,
+  "heroGunMaxTimeForAmbient": 10.0,
+  "maxDistForGunSoundPlaying": 100.0,
   "controlStickLimits": [
     500.0,
     0.1
@@ -12822,6 +12824,68 @@
       }
     }
   },
+  "engine_bmd4": {
+    "effects": {
+      "path": "ground/engines/bmd4",
+      "wep": "",
+      "overheatOutside": "",
+      "overheatCockpit": "",
+      "dive": "engine_dive",
+      "timeFallingDown": 2.0,
+      "engineVolumeOnOverheat": 0.8,
+      "eventStart": "engine_start",
+      "eventStop": "engine_stop"
+    },
+    "outside": {
+      "path": "ground/engines/bmd4",
+      "eventFront": "",
+      "eventBack": "engine",
+      "eventSurround": "",
+      "eventLod1": "engine",
+      "offsetPos": [
+        -1.0,
+        1.0,
+        0.0
+      ],
+      "rpmSmooth": 1.0,
+      "loadScale": 6.0,
+      "loadSmooth": 0.05,
+      "distSmooth": 0.9,
+      "distScaleOnNotHero": 1.0,
+      "offsetPos": [
+        -1.0,
+        1.0,
+        0.0
+      ]
+    },
+    "cockpit": {
+      "path": "ground/engines/bmd4",
+      "event_cockpit_l": "engine_interior",
+      "event_start_cockpit_l": "engine_start_interior",
+      "event_stop_cockpit_l": "engine_stop_interior",
+      "leftPos": [
+        -1.0,
+        1.0,
+        0.0
+      ]
+    },
+    "ai": {
+      "effects": {
+        "path": "ground/engines/ai/bmd4",
+        "eventStart": "engine_start",
+        "eventStop": "engine_stop"
+      },
+      "outside": {
+        "path": "ground/engines/ai/bmd4",
+        "eventBack": "engine",
+        "rpmSmooth": 1.0,
+        "loadScale": 6.0,
+        "loadSmooth": 0.05,
+        "distSmooth": 0.9,
+        "distScaleOnNotHero": 1.0
+      }
+    }
+  },
   "engine_panzer4": {
     "effects": {
       "path": "ground/engines/panzer4",
@@ -19351,27 +19415,6 @@
           "playerRole": "driver",
           "player": 4294967295,
           "minSpeechInterval": 0.0
-        },
-        "moveFaster": {
-          "event": "02_movement_control/voice_message_commander_move_faster",
-          "playerRole": "commander",
-          "player": 4294967295,
-          "minSpeechInterval": 5.0
-        },
-        "moveRevvs": {
-          "event": "02_movement_control/voice_message_commander_move_revvs",
-          "playerRole": "commander",
-          "player": 4294967295
-        },
-        "moveStop": {
-          "event": "02_movement_control/voice_message_commander_move_stop",
-          "playerRole": "commander",
-          "player": 4294967295
-        },
-        "moveSlower": {
-          "event": "02_movement_control/voice_message_commander_move_slower",
-          "playerRole": "commander",
-          "player": 4294967295
         },
         "moveBackward": {
           "event": "02_movement_control/voice_message_commander_move_backward",

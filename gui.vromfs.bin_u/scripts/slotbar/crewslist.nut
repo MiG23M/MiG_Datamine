@@ -11,6 +11,7 @@ let { isInBattleState } = require("%scripts/clientState/clientStates.nut")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { isInFlight } = require("gameplayBinding")
 let { initSelectedCrews } = require("%scripts/slotbar/slotbarState.nut")
+let { isEqual } = require("%sqStdLibs/helpers/u.nut")
 
 let function getCrewInfo(isInBattle) {
   let crewInfo = get_crew_info()
@@ -22,6 +23,11 @@ let function getCrewInfo(isInBattle) {
   if (crewInfo.len() <= 1)
     return crewInfo
   let curCountry = get_profile_country()
+  if (curCountry == "country_0") {
+    if (!::should_disable_menu())
+      logerr("[CREW_LIST] Country not selected")
+    return crewInfo
+  }
   let res = crewInfo.filter(@(v) v.country == curCountry)
   if (res.len() == 1)
     return res.map(
@@ -61,12 +67,13 @@ let function getCrewInfo(isInBattle) {
 }
 
 ::g_crews_list.invalidate <- function invalidate(needForceInvalidate = false) {
-  if (needForceInvalidate || !isSlotbarOverrided()) {
-    this.crewsList = [] //do not broke previously received crewsList if someone use link on it
-    broadcastEvent("CrewsListInvalidate")
-    return true
-  }
-  return false
+  if (!needForceInvalidate && (isSlotbarOverrided()
+      || isEqual(this.crewsList, getCrewInfo(isInBattleState.value))))
+    return false
+
+  this.crewsList = [] //do not broke previously received crewsList if someone use link on it
+  broadcastEvent("CrewsListInvalidate")
+  return true
 }
 
 ::g_crews_list.refresh <- function refresh() {

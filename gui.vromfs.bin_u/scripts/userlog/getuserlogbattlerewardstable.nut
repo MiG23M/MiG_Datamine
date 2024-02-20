@@ -18,6 +18,10 @@ let visibleRewards = [
     locId = "expEventScore/assist"
   }
   {
+    id = "eventSevereDamage"
+    locId = "expEventScore/severeDamage"
+  }
+  {
     id = "eventCriticalHit"
     locId = "expEventScore/criticalHit"
   }

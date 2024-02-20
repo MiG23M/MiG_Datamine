@@ -17,7 +17,7 @@ let { doesLocTextExist } = require("dagor.localize")
 let { get_mplayer_by_id, get_local_mplayer } = require("mission")
 let { OPTIONS_MODE_GAMEPLAY, USEROPT_HUD_SHOW_NAMES_IN_KILLLOG
 } = require("%scripts/options/optionsExtNames.nut")
-let { userName, userIdInt64 } = require("%scripts/user/myUser.nut")
+let { userName, userIdInt64 } = require("%scripts/user/profileStates.nut")
 
 enum BATTLE_LOG_FILTER {
   HERO      = 0x0001
@@ -85,6 +85,13 @@ let supportedMsgTypes = {
       [ES_UNIT_TYPE_BOAT]       = "NET_PLAYER_GM_HAS_DESTROYED",
       [ES_UNIT_TYPE_SHIP]       = "NET_PLAYER_GM_HAS_DESTROYED",
       [ES_UNIT_TYPE_HELICOPTER] = "NET_PLAYER_HAS_CRASHED",
+    }
+    severe_damage = {
+      [ES_UNIT_TYPE_AIRCRAFT]   = "NET_UNIT_SEVERE_DAMAGE",
+      [ES_UNIT_TYPE_TANK]       = "NET_UNIT_SEVERE_DAMAGE",
+      [ES_UNIT_TYPE_BOAT]       = "NET_UNIT_SEVERE_DAMAGE",
+      [ES_UNIT_TYPE_SHIP]       = "NET_UNIT_SEVERE_DAMAGE",
+      [ES_UNIT_TYPE_HELICOPTER] = "NET_UNIT_SEVERE_DAMAGE",
     }
     crit = {
       [ES_UNIT_TYPE_AIRCRAFT]   = "NET_UNIT_CRITICAL_HIT",

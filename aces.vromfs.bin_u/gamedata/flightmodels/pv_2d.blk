@@ -39,6 +39,15 @@
       "gun4_dm": {
         "hp": 15.0
       },
+      "mgun10_dm": {
+        "hp": 15.0
+      },
+      "mgun11_dm": {
+        "hp": 15.0
+      },
+      "mgun12_dm": {
+        "hp": 15.0
+      },
       "mgun1_dm": {
         "hp": 15.0
       },
@@ -61,6 +70,9 @@
         "hp": 15.0
       },
       "mgun8_dm": {
+        "hp": 15.0
+      },
+      "mgun9_dm": {
         "hp": 15.0
       }
     },
@@ -182,6 +194,12 @@
         "hp": 19.5
       },
       "cover4_dm": {
+        "hp": 19.5
+      },
+      "cover5_dm": {
+        "hp": 19.5
+      },
+      "cover6_dm": {
         "hp": 19.5
       }
     },
@@ -405,6 +423,12 @@
     },
     "part": {
       "name": "cover4_dm"
+    },
+    "part": {
+      "name": "cover5_dm"
+    },
+    "part": {
+      "name": "cover6_dm"
     },
     "part": {
       "name": "elevator0_dm",
@@ -781,6 +805,15 @@
       "name": "gunner3_dm"
     },
     "part": {
+      "name": "mgun10_dm"
+    },
+    "part": {
+      "name": "mgun11_dm"
+    },
+    "part": {
+      "name": "mgun12_dm"
+    },
+    "part": {
       "name": "mgun1_dm"
     },
     "part": {
@@ -803,6 +836,9 @@
     },
     "part": {
       "name": "mgun8_dm"
+    },
+    "part": {
+      "name": "mgun9_dm"
     },
     "part": {
       "name": "oil1_dm",
@@ -2345,7 +2381,10 @@
     },
     "preset": {
       "name": "pv_2d_mine_mk13_mod0",
-      "blk": "gameData/FlightModels/weaponPresets/pv_2d_mine_mk13_mod0.blk"
+      "blk": "gameData/FlightModels/weaponPresets/pv_2d_mine_mk13_mod0.blk",
+      "weaponConfig": {
+        "presetType": "AIR_TO_SEA"
+      }
     },
     "preset": {
       "name": "pv_2d_1x_torp",
@@ -2374,6 +2413,14 @@
       "node": "pilon_r",
       "node": "dgp_1_l",
       "node": "dgp_1_r"
+    },
+    "HideDmParts": {
+      "node": "cover5_dm",
+      "node": "mgun9_dm",
+      "node": "mgun10_dm",
+      "node": "cover6_dm",
+      "node": "mgun11_dm",
+      "node": "mgun12_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2665,6 +2712,11 @@
         "iconType": "doublebarreled_box",
         "name": "gun_pod_slot2",
         "reqModification": "dgp-1_gunpod",
+        "ShowDmParts": {
+          "node": "cover5_dm",
+          "node": "mgun9_dm",
+          "node": "mgun10_dm"
+        },
         "ShowNodes": {
           "node": "pilon_l",
           "node": "dgp_1_l"
@@ -2675,6 +2727,7 @@
           "emitter": "flare13",
           "flash": "flare13",
           "bullets": 340,
+          "dm": "mgun9_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2686,6 +2739,7 @@
           "emitter": "flare14",
           "flash": "flare14",
           "bullets": 340,
+          "dm": "mgun10_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2933,6 +2987,11 @@
         "iconType": "doublebarreled_box",
         "name": "gun_pod_slot4",
         "reqModification": "dgp-1_gunpod",
+        "ShowDmParts": {
+          "node": "cover6_dm",
+          "node": "mgun11_dm",
+          "node": "mgun12_dm"
+        },
         "ShowNodes": {
           "node": "pilon_r",
           "node": "dgp_1_r"
@@ -2943,6 +3002,7 @@
           "emitter": "flare15",
           "flash": "flare15",
           "bullets": 340,
+          "dm": "mgun11_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2954,6 +3014,7 @@
           "emitter": "flare16",
           "flash": "flare16",
           "bullets": 340,
+          "dm": "mgun12_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,

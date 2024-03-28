@@ -192,7 +192,7 @@
       "turret_01_bottom_dm": {
         "armorThickness": 14.5
       },
-      "composite_armor_turret_04_dm": {
+      "firewall_armor_01_dm": {
         "armorThickness": 29.0,
         "hp": 150.0,
         "ignoreDeadWithSplash": true,
@@ -569,6 +569,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -909,11 +911,11 @@
       }
     },
     "armorArrayTurretInner": {
-      "xrayDmPart": "composite_armor_turret_04_dm",
+      "xrayDmPart": "firewall_armor_01_dm",
       "titleLoc": "RHA_tank_modern",
       "armorArrayText": {
         "layer": {
-          "dmPart": "composite_armor_turret_04_dm"
+          "dmPart": "firewall_armor_01_dm"
         }
       }
     },
@@ -2654,15 +2656,6 @@
             "noiseFactor": 0.2
           },
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600

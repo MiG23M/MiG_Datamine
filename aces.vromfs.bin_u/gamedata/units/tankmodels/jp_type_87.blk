@@ -793,12 +793,7 @@
     }
   },
   "attachables": {
-    "ex_decor_l_13_dm": true,
-    "ex_decor_r_08_dm": true,
-    "ex_decor_l_12_dm": true,
-    "ex_decor_r_16_dm": true,
-    "ex_decor_r_15_dm": true,
-    "ex_decor_l_08_dm": true
+    "ex_armor_01_dm": false
   },
   "sound": {
     "EngineName": "engine_type74",
@@ -1523,7 +1518,7 @@
       1400.0,
       100.0
     ],
-    "projectorPower": [
+    "power": [
       0.02,
       0.07
     ],
@@ -1579,6 +1574,12 @@
       "composite_armor_hull_01_dm": {
         "armorThickness": 5.0,
         "hidableInXrayViewer": true
+      },
+      "turret_02_back_dm": {
+        "armorThickness": 10.0
+      },
+      "turret_02_top_dm": {
+        "armorThickness": 10.0
       }
     },
     "turret": {
@@ -1666,9 +1667,7 @@
         "ex_armor_turret_r_01_dm": {        },
         "ex_armor_turret_r_02_dm": {        },
         "ex_armor_turret_l_01_dm": {        },
-        "ex_armor_turret_l_02_dm": {        },
-        "turret_02_back_dm": {        },
-        "turret_02_top_dm": {        }
+        "ex_armor_turret_l_02_dm": {        }
       }
     },
     "gun": {
@@ -1834,6 +1833,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -3131,7 +3132,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3200,15 +3200,6 @@
 ],
             "lightMult": 5.0,
             "ghosting": 0.7,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
             "noiseFactor": 0.2
           }
         }

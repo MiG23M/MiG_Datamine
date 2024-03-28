@@ -36,7 +36,7 @@
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_hydroplane",
   "smokeScreenOffset": [
-    -45.0,
+    -40.0,
     2.0,
     0.0
   ],
@@ -495,14 +495,8 @@
       "name": "compartment_10_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
@@ -517,8 +511,8 @@
       "name": "bridge_01_dm",
       "name": "bridge_02_dm",
       "onKill": {
-        "fire": 0.15,
-        "nothing": 0.85,
+        "fire": 0.1,
+        "nothing": 0.9,
         "fHitCritical": false
       }
     },
@@ -531,20 +525,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
+        "fire": 0.1,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.15,
-        "damage": 400.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "fire": 0.3,
-        "damage": 900.0,
+        "fire": 0.2,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -938,6 +926,7 @@
       "targetLockTime": 10.0,
       "calcTime": 5.0,
       "rotationSpeed": 24.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": true,
@@ -2124,6 +2113,15 @@
     "replace_tex": {
       "from": "camo_bluegray*",
       "to": "ussr_camo_northern_fleet*"
+    }
+  },
+  "skin": {
+    "name": "ussr_camo_green_stripes",
+    "nameLocId": "skin/ussr_camo_green_stripes",
+    "descLocId": "skin/ussr_camo_green_stripes/desc",
+    "replace_tex": {
+      "from": "camo_bluegray*",
+      "to": "ussr_camo_green_stripes*"
     }
   },
   "ikGunner": {
@@ -3794,7 +3792,7 @@
         "hp": 2400.0
       },
       "engine_room_02_dm": {
-        "hp": 2456.0
+        "hp": 2400.0
       },
       "engine_room_03_dm": {
         "hp": 2400.0
@@ -3996,10 +3994,10 @@
       "pressureDamageMult": 2.0,
       "napalmDamageMult": 1.0,
       "aa_turret_01_dm": {
-        "hp": 80.0
+        "hp": 83.0
       },
       "aa_turret_02_dm": {
-        "hp": 80.0
+        "hp": 83.0
       }
     },
     "gun_main_caliber": {
@@ -4063,16 +4061,16 @@
       "fireProtectionHp": 10.0,
       "armorThrough": 200.0,
       "ammunition_storage_shells_01_dm": {
-        "hp": 1440.0
+        "hp": 1381.0
       },
       "ammunition_storage_shells_02_dm": {
-        "hp": 1434.0
+        "hp": 1375.0
       },
       "ammunition_storage_shells_03_dm": {
         "hp": 1200.0
       },
       "ammunition_storage_shells_04_dm": {
-        "hp": 1312.0
+        "hp": 1259.0
       }
     },
     "ammo_storages_charges": {
@@ -4088,7 +4086,7 @@
       "fireProtectionHp": 10.0,
       "armorThrough": 150.0,
       "ammunition_storage_aux_01_dm": {
-        "hp": 853.0
+        "hp": 800.0
       }
     },
     "ammo_first_stage": {
@@ -4237,7 +4235,7 @@
     "sailor3": {
       "dmPart": "compartment_02_dm",
       "role": "sailor",
-      "crew": 14
+      "crew": 15
     },
     "sailor4": {
       "dmPart": "compartment_03_dm",
@@ -4307,7 +4305,7 @@
     "sailor17": {
       "dmPart": "engine_room_02_dm",
       "role": "sailor",
-      "crew": 18
+      "crew": 17
     },
     "sailor18": {
       "dmPart": "engine_room_03_dm",
@@ -5559,6 +5557,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

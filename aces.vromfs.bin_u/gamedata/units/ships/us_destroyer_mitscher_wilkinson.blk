@@ -36,7 +36,7 @@
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_hydroplane",
   "smokeScreenOffset": [
-    -45.0,
+    -40.0,
     2.0,
     0.0
   ],
@@ -498,14 +498,8 @@
       "name": "compartment_10_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
@@ -520,8 +514,8 @@
       "name": "bridge_01_dm",
       "name": "bridge_02_dm",
       "onKill": {
-        "fire": 0.15,
-        "nothing": 0.85,
+        "fire": 0.1,
+        "nothing": 0.9,
         "fHitCritical": false
       }
     },
@@ -534,20 +528,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
+        "fire": 0.1,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.15,
-        "damage": 400.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "fire": 0.3,
-        "damage": 900.0,
+        "fire": 0.2,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -3230,6 +3218,7 @@
       "targetLockTime": 6.0,
       "calcTime": 3.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": true,
@@ -3243,6 +3232,7 @@
       "targetLockTime": 6.0,
       "calcTime": 3.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": false,
         "secondary": true,
@@ -4264,7 +4254,7 @@
       },
       "charges": {
         "entityMunition": "charges",
-        "fatalFire": false,
+        "fatalFire": true,
         "damageEffect": "ammunition_storage_charges",
         "ammunition_storage_charges_01_dm": {
           "count": 350
@@ -4370,7 +4360,7 @@
       },
       "charges": {
         "entityMunition": "charges",
-        "fatalFire": false,
+        "fatalFire": true,
         "damageEffect": "ammunition_storage_charges",
         "ammunition_storage_charges_02_dm": {
           "count": 350
@@ -4910,6 +4900,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

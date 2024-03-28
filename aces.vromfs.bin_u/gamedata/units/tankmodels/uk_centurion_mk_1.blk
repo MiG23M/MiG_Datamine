@@ -1083,7 +1083,7 @@
       ]
     },
     "engine": {
-      "horsePowers": 635.0,
+      "horsePowers": 640.0,
       "maxRPM": 2550.0,
       "minRPM": 600.0
     },
@@ -1733,23 +1733,6 @@
       }
     }
   },
-  "cockpit": {
-    "zoomOutFov": 13.3,
-    "zoomInFov": 12.3,
-    "sightFov": 6.1,
-    "sightName": "no1_mk3",
-    "headPos": [
-      0.0,
-      4.2,
-      -8.0
-    ],
-    "headPosOnShooting": [
-      -0.3,
-      3.6,
-      0.4
-    ],
-    "detectionHeight": 2.94
-  },
   "DamageParts": {
     "formatVersion": 2,
     "armorClass": "RHA_tank",
@@ -2215,6 +2198,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2468,6 +2453,23 @@
         "hp": 100.0
       }
     }
+  },
+  "cockpit": {
+    "zoomOutFov": 24.8,
+    "zoomInFov": 12.3,
+    "sightFov": 11.1,
+    "sightName": "no1_mk3",
+    "headPos": [
+      0.0,
+      4.2,
+      -8.0
+    ],
+    "headPosOnShooting": [
+      -0.3,
+      3.6,
+      0.4
+    ],
+    "detectionHeight": 2.94
   },
   "commonWeapons": {
     "Weapon": {
@@ -2753,7 +2755,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_uk_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [

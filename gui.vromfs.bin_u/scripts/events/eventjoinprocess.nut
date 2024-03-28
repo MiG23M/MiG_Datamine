@@ -1,5 +1,6 @@
-//checked for plus_string
 from "%scripts/dagui_library.nut" import *
+let { getGlobalModule } = require("%scripts/global_modules.nut")
+let g_squad_manager = getGlobalModule("g_squad_manager")
 let { get_time_msec } = require("dagor.time")
 let stdMath = require("%sqstd/math.nut")
 let antiCheat = require("%scripts/penitentiary/antiCheat.nut")
@@ -9,6 +10,7 @@ let { showMsgboxIfSoundModsNotAllowed } = require("%scripts/penitentiary/soundMo
 let { profileCountrySq } = require("%scripts/user/playerCountry.nut")
 let tryOpenCaptchaHandler = require("%scripts/captcha/captchaHandler.nut")
 let { getEventEconomicName, checkEventFeaturePacks } = require("%scripts/events/eventInfo.nut")
+let { showMultiplayerLimitByAasMsg, hasMultiplayerLimitByAas } = require("%scripts/user/antiAddictSystem.nut")
 
 const PROCESS_TIME_OUT = 60000
 
@@ -17,14 +19,14 @@ let activeEventJoinProcess = []
 let hasAlredyActiveJoinProcess = @() activeEventJoinProcess.len() > 0
   && (get_time_msec() - activeEventJoinProcess[0].processStartTime) < PROCESS_TIME_OUT
 
-let function setSquadReadyFlag(event) {
+function setSquadReadyFlag(event) {
   //Don't allow to change ready status, leader don't know about members balance
   if (!::events.haveEventAccessByCost(event))
     showInfoMsgBox(loc("events/notEnoughMoney"))
   else if (::events.eventRequiresTicket(event) && ::events.getEventActiveTicket(event) == null)
     ::events.checkAndBuyTicket(event)
   else
-    ::g_squad_manager.setReadyFlag()
+    g_squad_manager.setReadyFlag()
 }
 
 ::EventJoinProcess <- class {
@@ -80,8 +82,8 @@ let function setSquadReadyFlag(event) {
   function joinStep1_squadMember() {
     this.processStepName = "joinStep1_squadMember"
 
-    if (::g_squad_manager.isSquadMember()) {
-      if (!::g_squad_manager.isMeReady()) {
+    if (g_squad_manager.isSquadMember()) {
+      if (!g_squad_manager.isMeReady()) {
         let handler = this
         tryOpenCaptchaHandler(@() setSquadReadyFlag(handler.event))
       }
@@ -93,6 +95,11 @@ let function setSquadReadyFlag(event) {
     if (!antiCheat.showMsgboxIfEacInactive(this.event) ||
         !showMsgboxIfSoundModsNotAllowed(this.event))
       return this.remove()
+
+    if (hasMultiplayerLimitByAas.get()) {
+      showMultiplayerLimitByAasMsg()
+      return this.remove()
+    }
 
     let handler = this
     tryOpenCaptchaHandler(
@@ -206,7 +213,7 @@ let function setSquadReadyFlag(event) {
   //
 
   function checkEventTeamSize(ev) {
-    let squadSize = ::g_squad_manager.getSquadSize()
+    let squadSize = g_squad_manager.getSquadSize()
     let maxTeamSize = ::events.getMaxTeamSize(ev)
     if (squadSize > maxTeamSize) {
       let locParams = {

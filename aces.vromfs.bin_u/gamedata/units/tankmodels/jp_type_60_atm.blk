@@ -122,6 +122,9 @@
       },
       "turret_04_bottom_dm": {
         "armorThickness": 12.0
+      },
+      "turret_05_front_dm": {
+        "armorThickness": 8.0
       }
     },
     "hull_turret_ex_shields": {
@@ -257,8 +260,7 @@
       "ex_decor_l_01_dm": {      },
       "ex_decor_r_01_dm": {      },
       "ex_decor_l_02_dm": {      },
-      "ex_decor_r_02_dm": {      },
-      "turret_05_front_dm": {      }
+      "ex_decor_r_02_dm": {      }
     },
     "chassis": {
       "armorClass": "tank_steel_wheels",
@@ -502,7 +504,9 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
-      "hp": 500.0,
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
+      "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
       "fireProtectionHp": 20.0,
@@ -999,8 +1003,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/groundModels_weapons/120mm_Type_64_MAT_rocket_launcher.blk",
-      "weaponType": "rockets",
+      "blk": "gameData/Weapons/groundModels_weapons/120mm_type_64_mat_launcher_user_cannon.blk",
       "flash": "emtr_gun_flame_01",
       "useEmitter": true,
       "emitter": "bone_rocket_01",
@@ -1055,8 +1058,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/groundModels_weapons/120mm_Type_64_MAT_rocket_launcher.blk",
-      "weaponType": "rockets",
+      "blk": "gameData/Weapons/groundModels_weapons/120mm_type_64_mat_launcher_user_cannon.blk",
       "flash": "emtr_gun_flame_02",
       "useEmitter": true,
       "emitter": "bone_rocket_02",
@@ -1883,29 +1885,16 @@
       "removeLoadedAmmo": false,
       "fatalFire": true,
       "fatalExplosion": true,
+      "replenishmentDelay": 0.1,
+      "replenishmentTime": 0.1,
       "shells": {
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
-        "ammo_turret_03_dm": {
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "ammo_turret_01_dm": {
           "count": 1
-        },
-        "ammo_turret_05_dm": {
-          "count": 1
-        },
-        "gun_barrel_05_dm": {
-          "count": 1,
-          "fatalFire": false,
-          "fatalExplosion": false,
-          "removeLoadedAmmo": false
         }
-      }
-    },
-    "ammo2": {
-      "weaponTrigger": "gunner2",
-      "removeLoadedAmmo": false,
-      "fatalFire": true,
-      "fatalExplosion": true,
+      },
       "shells": {
         "fireEvent": "ammo_fire",
         "explosionEvent": "ammo_explosion",
@@ -1915,12 +1904,33 @@
         },
         "ammo_turret_06_dm": {
           "count": 1
+        }
+      }
+    },
+    "ammo2": {
+      "weaponTrigger": "gunner2",
+      "removeLoadedAmmo": false,
+      "fatalFire": true,
+      "fatalExplosion": true,
+      "replenishmentDelay": 0.1,
+      "replenishmentTime": 0.1,
+      "shells": {
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "ammo_turret_02_dm": {
+          "count": 1
+        }
+      },
+      "shells": {
+        "fireEvent": "ammo_fire",
+        "explosionEvent": "ammo_explosion",
+        "wreckedPartId": 0,
+        "ammo_turret_03_dm": {
+          "count": 1
         },
-        "gun_barrel_06_dm": {
-          "count": 1,
-          "fatalFire": false,
-          "fatalExplosion": false,
-          "removeLoadedAmmo": false
+        "ammo_turret_05_dm": {
+          "count": 1
         }
       }
     }
@@ -1942,6 +1952,7 @@
     "tank_medical_kit_expendable": {
       "image": "#ui/gameuiskin#tank_reinforcement_jp"
     },
+    "120mm_mat_atgm": {    },
     "airstrike": {    },
     "improved_optics": {    }
   },

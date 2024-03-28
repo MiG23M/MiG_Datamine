@@ -55,7 +55,7 @@ let { floor } = require("math")
 let { getSkinId } = require("%scripts/customization/skinUtils.nut")
 let { getDecorator } = require("%scripts/customization/decorCache.nut")
 let { decoratorTypes } = require("%scripts/customization/types.nut")
-let { canDoUnlock } = require("%scripts/unlocks/unlocksModule.nut")
+let { canDoUnlock, isUnlockVisible } = require("%scripts/unlocks/unlocksModule.nut")
 let { defer } = require("dagor.workcycle")
 let { get_balance } = require("%scripts/user/balance.nut")
 let { addTask } = require("%scripts/tasker.nut")
@@ -69,6 +69,9 @@ let { needShowUnseenModTutorialForUnitMod, markSeenModTutorial,
   startModTutorialMission } = require("%scripts/missions/modificationTutorial.nut")
 let { buildUnitSlot, fillUnitSlotTimers } = require("%scripts/slotbar/slotbarView.nut")
 let { getCrewByAir, isUnitInSlotbar } = require("%scripts/slotbar/slotbarState.nut")
+let { getCurrentGameModeEdiff } = require("%scripts/gameModes/gameModeManagerState.nut")
+let { getTooltipType } = require("%scripts/utils/genericTooltipTypes.nut")
+let { getCrewUnit } = require("%scripts/crew/crew.nut")
 
 local timerPID = dagui_propid_add_name_id("_size-timer")
 ::header_len_per_cell <- 16
@@ -131,7 +134,9 @@ function getSkinMod(unit) {
 
     let unlockCfg = ::build_conditions_config(skinDecorator.unlockBlk)
     let progress = unlockCfg.getProgressBarData()
-    let canDoSkinUnlock = !skinDecorator.isUnlocked() && canDoUnlock(skinDecorator.unlockBlk)
+    let canDoSkinUnlock = isUnlockVisible(skinDecorator.unlockBlk)
+      && !skinDecorator.isUnlocked()
+      && canDoUnlock(skinDecorator.unlockBlk)
     if (canDoSkinUnlock) {
       if ((curSkinProgress == null) || (progress.maxVal < curSkinProgress.maxVal)) {
         curSkin = skinDecorator
@@ -203,7 +208,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
     this.setResearchManually = !this.researchMode
     this.mainModsObj = this.scene.findObject("main_modifications")
 
-    this.showSceneBtn("weaponry_close_btn", !this.researchMode)
+    showObjById("weaponry_close_btn", !this.researchMode, this.scene)
 
     this.unitSlotCellHeight = to_pixels("1@slot_height+2@slot_vert_pad")
     this.premiumModsHeight = this.unitSlotCellHeight
@@ -313,7 +318,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
 
   function onSlotbarSelect() {
     let newCrew = this.getCurCrew()
-    let newUnit = newCrew ? ::g_crew.getCrewUnit(newCrew) : null
+    let newUnit = newCrew ? getCrewUnit(newCrew) : null
     if (!newUnit || newUnit == this.air)
       return
 
@@ -384,7 +389,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
         let frameHeaderHeight = toPixels(this.guiScene, "@frameHeaderHeight")
         if (frameHeight - frameHeaderHeight < maxFrameHeight) {
           frameObj.isHeaderHidden = "yes"
-          this.showSceneBtn("close_alt_btn", !this.researchMode)
+          showObjById("close_alt_btn", !this.researchMode, this.scene)
           let researchModeImgObj = this.scene.findObject("researchMode_image_block")
           researchModeImgObj["pos"] = researchModeImgObj["posWithoutHeader"]
           this.scene.findObject("overflow-div")["top"] = "-1@frameHeaderHeight"
@@ -685,7 +690,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
     let btnId = "btn_buyAll"
     let cost = getAllModsCost(this.air, true)
     let show = !cost.isZero() && ::isUnitUsable(this.air) && hasFeature("BuyAllModifications")
-    this.showSceneBtn(btnId, show)
+    showObjById(btnId, show, this.scene)
     if (show)
       placePriceTextToButton(this.scene, btnId, loc("mainmenu/btnBuyAll"), cost)
   }
@@ -737,8 +742,8 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
 
   function updateButtons() {
     let isAnyModInResearch = this.isAnyModuleInResearch()
-    this.showSceneBtn("btn_exit", this.researchMode && (!isAnyModInResearch || this.availableFlushExp <= 0 || this.setResearchManually))
-    this.showSceneBtn("btn_spendExcessExp", this.researchMode && isAnyModInResearch && this.availableFlushExp > 0)
+    showObjById("btn_exit", this.researchMode && (!isAnyModInResearch || this.availableFlushExp <= 0 || this.setResearchManually), this.scene)
+    showObjById("btn_spendExcessExp", this.researchMode && isAnyModInResearch && this.availableFlushExp > 0, this.scene)
 
     let checkboxObj = this.scene.findObject("auto_purchase_mods")
     if (checkObj(checkboxObj)) {
@@ -747,7 +752,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
         checkboxObj.setValue(get_auto_buy_modifications())
     }
 
-    this.showSceneBtn("btn_damage_control", this.air.isShipOrBoat() && hasFeature("DamageControl") && isShipDamageControlEnabled(this.air));
+    showObjById("btn_damage_control", this.air.isShipOrBoat() && hasFeature("DamageControl") && isShipDamageControlEnabled(this.air), this.scene);
   }
 
   function updateUnitItem(item, itemObj) {
@@ -757,7 +762,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
     }
     let unitBlk = buildUnitSlot("unit_item", item.unit, params)
     this.guiScene.replaceContentFromText(itemObj, unitBlk, unitBlk.len(), this)
-    itemObj.tooltipId = ::g_tooltip.getIdUnit(item.unit.name, params)
+    itemObj.tooltipId = getTooltipType("UNIT").getTooltipId(item.unit.name, params)
     fillUnitSlotTimers(itemObj.findObject("unit_item"), item.unit)
   }
 
@@ -1488,6 +1493,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
       optionsConfig = {
         missionName = misInfo.name,
         gm = GM_TRAINING
+        forbiddenDifficulty = misInfo?.forbiddenDifficulty
       }
       applyAtClose = false
       wndOptionsMode = OPTIONS_MODE_TRAINING
@@ -1718,7 +1724,7 @@ gui_handlers.WeaponsModalHandler <- class (gui_handlers.BaseGuiHandlerWT) {
   }
 
   function getCurrentEdiff() {
-    return this.curEdiff == -1 ? ::get_current_ediff() : this.curEdiff
+    return this.curEdiff == -1 ? getCurrentGameModeEdiff() : this.curEdiff
   }
 
   function sendModResearchedStatistic(unit, modName) {

@@ -569,6 +569,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1798,7 +1800,7 @@
     "top": false
   },
   "sound": {
-    "EngineName": "engine_panther",
+    "EngineName": "engine_leo1",
     "TrackSoundPath": "tanks/engines_tanks",
     "TrackSoundPathStudio": "ground/engines",
     "TrackSoundName": "tracks_mbt",
@@ -2880,7 +2882,7 @@
       "parkInDeadzone": false,
       "speedYaw": 90.0,
       "speedPitch": 90.0,
-      "bullets": 1200,
+      "bullets": 400,
       "isBulletBelt": true,
       "fireConeAngle": 5.0,
       "ChainfireTime": 0.5,
@@ -3190,7 +3192,7 @@
             "parkInDeadzone": false,
             "speedYaw": 90.0,
             "speedPitch": 90.0,
-            "bullets": 1200,
+            "bullets": 400,
             "isBulletBelt": true,
             "fireConeAngle": 5.0,
             "ChainfireTime": 0.5,
@@ -3312,7 +3314,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3376,15 +3377,6 @@
             "noiseFactor": 0.2
           },
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600

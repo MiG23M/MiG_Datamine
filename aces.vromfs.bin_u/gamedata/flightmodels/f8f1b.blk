@@ -456,6 +456,18 @@
       },
       "cannon4_dm": {
         "hp": 15.0
+      },
+      "mgun1_dm": {
+        "hp": 15.0
+      },
+      "mgun2_dm": {
+        "hp": 15.0
+      },
+      "mgun3_dm": {
+        "hp": 15.0
+      },
+      "mgun4_dm": {
+        "hp": 15.0
       }
     },
     "armor8_5": {
@@ -558,6 +570,12 @@
         "hp": 19.5
       },
       "cover3_dm": {
+        "hp": 19.5
+      },
+      "cover4_dm": {
+        "hp": 19.5
+      },
+      "cover5_dm": {
         "hp": 19.5
       }
     },
@@ -738,6 +756,12 @@
     },
     "part": {
       "name": "cover3_dm"
+    },
+    "part": {
+      "name": "cover4_dm"
+    },
+    "part": {
+      "name": "cover5_dm"
     },
     "part": {
       "name": "elevator0_dm",
@@ -1148,6 +1172,18 @@
       "onKill": {
         "cut": 1.0
       }
+    },
+    "part": {
+      "name": "mgun1_dm"
+    },
+    "part": {
+      "name": "mgun2_dm"
+    },
+    "part": {
+      "name": "mgun3_dm"
+    },
+    "part": {
+      "name": "mgun4_dm"
     },
     "part": {
       "name": "oil1_dm",
@@ -1988,6 +2024,14 @@
       "node": "dgp_1_l",
       "node": "dgp_1_r"
     },
+    "HideDmParts": {
+      "node": "cover4_dm",
+      "node": "mgun1_dm",
+      "node": "mgun2_dm",
+      "node": "cover5_dm",
+      "node": "mgun3_dm",
+      "node": "mgun4_dm"
+    },
     "WeaponSlot": {
       "index": 0,
       "WeaponPreset": {
@@ -2125,12 +2169,18 @@
           "node": "dgp_1_l",
           "node": "pylon_dgp_1"
         },
+        "ShowDmParts": {
+          "node": "cover4_dm",
+          "node": "mgun1_dm",
+          "node": "mgun2_dm"
+        },
         "Weapon": {
           "trigger": "additional gun",
           "blk": "gameData/Weapons/gunBrowning50_M2_underwing.blk",
           "emitter": "flare13",
           "flash": "flare13",
           "bullets": 340,
+          "dm": "mgun1_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2142,6 +2192,7 @@
           "emitter": "flare14",
           "flash": "flare14",
           "bullets": 340,
+          "dm": "mgun2_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2255,12 +2306,18 @@
           "node": "dgp_1_r",
           "node": "pylon_dgp_2"
         },
+        "ShowDmParts": {
+          "node": "cover5_dm",
+          "node": "mgun3_dm",
+          "node": "mgun4_dm"
+        },
         "Weapon": {
           "trigger": "additional gun",
           "blk": "gameData/Weapons/gunBrowning50_M2_underwing.blk",
           "emitter": "flare15",
           "flash": "flare15",
           "bullets": 340,
+          "dm": "mgun3_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2272,6 +2329,7 @@
           "emitter": "flare16",
           "flash": "flare16",
           "bullets": 340,
+          "dm": "mgun4_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,

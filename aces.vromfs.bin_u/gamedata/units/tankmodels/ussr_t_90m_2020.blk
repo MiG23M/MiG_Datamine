@@ -90,11 +90,6 @@
         "createSecondaryShatters": true,
         "genericArmorQuality": 1.35
       },
-      "fake_part_rubber_dm": {
-        "armorThickness": 5.0,
-        "armorClass": "rubber_tank",
-        "genericArmorQuality": 0.45
-      },
       "turret_01_back_dm": {
         "armorThickness": 60.0,
         "createSecondaryShatters": true,
@@ -989,6 +984,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1210,6 +1207,7 @@
       "fireProtectionHp": 15.0,
       "fireParamsPreset": "fuel_exterior",
       "stopChanceOnDeadPart": 0.0,
+      "createSecondaryShatters": false,
       "fuel_tank_exterior_r_01_dm": {      },
       "fuel_tank_exterior_r_02_dm": {      },
       "fuel_tank_exterior_r_03_dm": {      },
@@ -1308,7 +1306,9 @@
           "dmPart": "superstructure_front_dm"
         },
         "layer": {
-          "dmPart": "fake_part_rubber_dm"
+          "dmPart": "superstructure_front_dm",
+          "xrayTextThickness": 5.0,
+          "xrayArmorClass": "rubber_tank"
         },
         "layer": {
           "dmPart": "superstructure_front_dm",
@@ -1323,7 +1323,9 @@
           "xrayTextThickness": 3.0
         },
         "layer": {
-          "dmPart": "fake_part_rubber_dm"
+          "dmPart": "superstructure_front_dm",
+          "xrayTextThickness": 5.0,
+          "xrayArmorClass": "rubber_tank"
         },
         "layer": {
           "dmPart": "turret_05_front_dm"
@@ -2568,7 +2570,7 @@
       "linkShellCasingToGun": true,
       "trigger": "gunner2",
       "triggerGroup": "machinegun",
-      "blk": "gameData/Weapons/groundModels_weapons/12_7mm_6P50_Kord_t_72_user_machinegun.blk",
+      "blk": "gameData/Weapons/groundModels_weapons/12_7mm_6P50_Kord_t_90m_2020_user_machinegun.blk",
       "emitter": "bone_mg_aa_v_01",
       "flash": "emtr_mg_flame_04",
       "barrelDP": "gun_barrel_01_dm",
@@ -2813,8 +2815,8 @@
       ],
       "dampeningRelaxationRatio": 0.4,
       "dampeningCompressionRatio": 0.15,
-      "wheel_r_drive": 0.31,
-      "wheel_l_drive": 0.31
+      "wheel_r_drive": 0.3,
+      "wheel_l_drive": 0.3
     }
   },
   "PhysSys": {
@@ -4042,7 +4044,7 @@
             "linkShellCasingToGun": true,
             "trigger": "gunner2",
             "triggerGroup": "machinegun",
-            "blk": "gameData/Weapons/groundModels_weapons/12_7mm_6P50_Kord_t_72_user_machinegun.blk",
+            "blk": "gameData/Weapons/groundModels_weapons/12_7mm_6P50_Kord_t_90m_2020_user_machinegun.blk",
             "emitter": "bone_mg_aa_v_01",
             "flash": "emtr_mg_flame_04",
             "barrelDP": "gun_barrel_01_dm",
@@ -4194,7 +4196,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -4273,15 +4274,6 @@
               800
 ],
             "lightMult": 7.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
             "ghosting": 0.6,
             "noiseFactor": 0.2
           }

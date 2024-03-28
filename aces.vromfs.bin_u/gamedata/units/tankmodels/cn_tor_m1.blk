@@ -195,7 +195,9 @@
       "superstructure_top_dm": {      },
       "turret_01_bottom_dm": {      },
       "turret_02_back_dm": {      },
-      "turret_02_bottom_dm": {      }
+      "turret_02_bottom_dm": {      },
+      "turret_02_front_dm": {      },
+      "turret_02_side_dm": {      }
     },
     "turret": {
       "armorClass": "RHA_tank_modern",
@@ -516,6 +518,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1817,13 +1821,21 @@
       "neutralGearRatio": 10.0,
       "gearRatios": {
         "ratio": -1.0,
+        "ratio": -1.3385,
         "ratio": -1.677,
+        "ratio": -2.427,
         "ratio": -3.177,
+        "ratio": -4.7085,
         "ratio": -6.24,
+        "ratio": -12.48,
         "ratio": 0.0,
-        "ratio": 10.0,
+        "ratio": 12.48,
+        "ratio": 6.24,
+        "ratio": 4.7085,
         "ratio": 3.177,
+        "ratio": 2.427,
         "ratio": 1.677,
+        "ratio": 1.3385,
         "ratio": 1.0
       }
     },
@@ -2506,15 +2518,6 @@
 ],
             "lightMult": 5.0,
             "ghosting": 0.7,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
             "noiseFactor": 0.2
           }
         }

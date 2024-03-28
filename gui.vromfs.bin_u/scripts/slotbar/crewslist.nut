@@ -1,8 +1,7 @@
-//checked for plus_string
 from "%scripts/dagui_natives.nut" import get_profile_country, disable_network, get_crew_info
 from "%scripts/dagui_library.nut" import *
 
-
+let g_listener_priority = require("%scripts/g_listener_priority.nut")
 let { registerPersistentData } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { getSlotbarOverrideData, isSlotbarOverrided } = require("%scripts/slotbar/slotbarOverride.nut")
@@ -12,8 +11,9 @@ let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { isInFlight } = require("gameplayBinding")
 let { initSelectedCrews } = require("%scripts/slotbar/slotbarState.nut")
 let { isEqual } = require("%sqStdLibs/helpers/u.nut")
+let { getMyCrewUnitsState, getBrokenUnits } = require("%scripts/slotbar/crewsListInfo.nut")
 
-let function getCrewInfo(isInBattle) {
+function getCrewInfo(isInBattle) {
   let crewInfo = get_crew_info()
   if (!isInBattle)
     return crewInfo
@@ -124,8 +124,19 @@ let function getCrewInfo(isInBattle) {
   if (p.transactionType == EATT_UPDATE_ENTITLEMENTS)
     updateShopCountriesList()
 
+  let brokenUnitsCached = getMyCrewUnitsState().brokenAirs
+  let brokenUnitsUpdated = getBrokenUnits()
+
+  local hasRepairedUnits = false
+  foreach (unit in brokenUnitsCached) {
+    if (unit not in brokenUnitsUpdated) {
+      hasRepairedUnits = true
+      break
+    }
+  }
+
   if (::g_login.isProfileReceived() && !isInArray(p.transactionType, this.ignoreTransactions)
-      && this.invalidate() && !disable_network())
+      && this.invalidate(hasRepairedUnits) && !disable_network())
     this.reinitSlotbars()
 }
 
@@ -162,5 +173,5 @@ let function getCrewInfo(isInBattle) {
 
 isInBattleState.subscribe(@(_v) ::g_crews_list.invalidate())
 
-subscribe_handler(::g_crews_list, ::g_listener_priority.DEFAULT_HANDLER)
+subscribe_handler(::g_crews_list, g_listener_priority.DEFAULT_HANDLER)
 registerPersistentData("g_crews_list", ::g_crews_list, [ "isCrewListOverrided" ])

@@ -1,13 +1,13 @@
-//checked for plus_string
 from "%scripts/dagui_natives.nut" import wp_get_repair_cost
 from "%scripts/dagui_library.nut" import *
 
+let g_listener_priority = require("%scripts/g_listener_priority.nut")
 let { addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { profileCountrySq } = require("%scripts/user/playerCountry.nut")
 
 local unitsStateCached = null
 
-local function getMyCrewUnitsState(country = null) {
+function getMyCrewUnitsState(country = null) {
   if (unitsStateCached != null)
     return unitsStateCached
 
@@ -40,13 +40,27 @@ local function getMyCrewUnitsState(country = null) {
   return unitsStateCached
 }
 
+function getBrokenUnits() {
+  let brokenUnits = {}
+  foreach (c in ::g_crews_list.get()) {
+    if (!("crews" in c))
+      continue
+    foreach (crew in c.crews)
+      if (("aircraft" in crew) && crew.aircraft != "" && crew.isLocked == 0
+        && getAircraftByName(crew.aircraft) && wp_get_repair_cost(crew.aircraft) > 0)
+        brokenUnits[crew.aircraft] <- true
+  }
+  return brokenUnits
+}
+
 addListenersWithoutEnv({
   CrewsListChanged = @(_p) unitsStateCached = null
   CrewsListInvalidate = @(_p) unitsStateCached = null
   UnitRepaired = @(_p) unitsStateCached = null
-}, ::g_listener_priority.CONFIG_VALIDATION)
+}, g_listener_priority.CONFIG_VALIDATION)
 
 return {
   getMyCrewUnitsState
+  getBrokenUnits
 }
 

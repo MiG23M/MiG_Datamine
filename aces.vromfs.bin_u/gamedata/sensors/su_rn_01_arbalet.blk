@@ -40,7 +40,7 @@
     },
     "MTI": {
       "sideLobesAttenuation": -20.0,
-      "power": 70000.0,
+      "power": 200.0,
       "band": 10,
       "rcs": 1.0,
       "range": 12000.0,
@@ -241,7 +241,7 @@
     }
   },
   "scopeRangeSets": {
-    "common": {
+    "search": {
       "range1": 12000.0,
       "range2": 6000.0
     }
@@ -249,11 +249,21 @@
   "fsms": {
     "main": {
       "stateInit": "init",
-      "stateInit": "init",
       "actionsTemplates": {
         "init": {
           "setEnabled": {
             "value": false
+          },
+          "setCenterAzimuth": {
+            "source": "constant",
+            "value": 0.0
+          },
+          "setCenterElevation": {
+            "source": "constant",
+            "value": 0.0
+          },
+          "setScopeRangeSet": {
+            "scopeRangeSet": "search"
           },
           "setTransiver": {
             "transiver": "GTM"
@@ -280,9 +290,6 @@
               12000.0
             ]
           },
-          "setScopeRangeSet": {
-            "scopeRangeSet": "common"
-          },
           "setFsmActive": {
             "fsm": "mode",
             "active": true
@@ -295,21 +302,16 @@
           "setEnabled": {
             "value": false
           },
-          "setCenterAzimuth": {
-            "source": "constant",
-            "value": 0.0
-          },
-          "clearTargets": {          },
           "setFsmActive": {
             "fsm": "mode",
             "active": false
           }
         },
+        "resetStandbyMode": {        },
         "setSearchMode": {
           "setEnabled": {
             "value": true
           },
-          "clearTargets": {          },
           "setFsmActive": {
             "fsm": "search",
             "active": true
@@ -324,6 +326,7 @@
           }
         },
         "resetSearchMode": {
+          "clearTargets": {          },
           "setFsmActive": {
             "fsm": "search",
             "active": false
@@ -437,7 +440,8 @@
         "setCueDist": {
           "command": "cueAxisY",
           "actions": {
-            "setCueDist": {            }
+            "setCueDist": {            },
+            "setCueDopplerSpeed": {            }
           }
         },
         "setCueElevation": {

@@ -621,6 +621,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2028,24 +2030,30 @@
       },
       "limits": {
         "yaw": [
-          -120.0,
-          120.0
+          -146.0,
+          146.0
         ],
         "pitch": [
-          -8.0,
-          20.0
+          -15.0,
+          76.0
         ]
       },
       "limitsTable": {
         "lim1": [
-          -120.0,
+          -146.0,
+          40.0,
+          -15.0,
+          -15.0
+        ],
+        "lim2": [
+          40.0,
           70.0,
           -8.0,
           -8.0
         ],
-        "lim2": [
+        "lim3": [
           70.0,
-          120.0,
+          146.0,
           -5.0,
           -5.0
         ]
@@ -3009,24 +3017,30 @@
             },
             "limits": {
               "yaw": [
-                -120.0,
-                120.0
+                -146.0,
+                146.0
               ],
               "pitch": [
-                -8.0,
-                20.0
+                -15.0,
+                76.0
               ]
             },
             "limitsTable": {
               "lim1": [
-                -120.0,
+                -146.0,
+                40.0,
+                -15.0,
+                -15.0
+              ],
+              "lim2": [
+                40.0,
                 70.0,
                 -8.0,
                 -8.0
               ],
-              "lim2": [
+              "lim3": [
                 70.0,
-                120.0,
+                146.0,
                 -5.0,
                 -5.0
               ]
@@ -3065,7 +3079,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3135,15 +3148,6 @@
 ],
             "lightMult": 8.0,
             "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
             "noiseFactor": 0.2
           },
           "driverIr": {

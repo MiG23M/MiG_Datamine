@@ -251,6 +251,15 @@
       "body_top_dm": {
         "armorThickness": 5.0,
         "hidableInViewer": true
+      },
+      "turret_01_top_dm": {
+        "armorThickness": 10.0
+      },
+      "turret_01_back_dm": {
+        "armorThickness": 10.0
+      },
+      "turret_01_bottom_dm": {
+        "armorThickness": 10.0
       }
     },
     "body_structural_steel_elements": {
@@ -524,6 +533,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -864,6 +875,26 @@
       "name": "ammo_body_48_dm",
       "name": "ammo_body_49_dm",
       "name": "ammo_body_50_dm",
+      "name": "ammo_body_51_dm",
+      "name": "ammo_body_52_dm",
+      "name": "ammo_body_53_dm",
+      "name": "ammo_body_54_dm",
+      "name": "ammo_body_55_dm",
+      "name": "ammo_body_56_dm",
+      "name": "ammo_body_57_dm",
+      "name": "ammo_body_58_dm",
+      "name": "ammo_body_59_dm",
+      "name": "ammo_body_60_dm",
+      "name": "ammo_body_61_dm",
+      "name": "ammo_body_62_dm",
+      "name": "ammo_body_63_dm",
+      "name": "ammo_body_64_dm",
+      "name": "ammo_body_65_dm",
+      "name": "ammo_body_66_dm",
+      "name": "ammo_body_67_dm",
+      "name": "ammo_body_68_dm",
+      "name": "ammo_body_69_dm",
+      "name": "ammo_body_70_dm",
       "name": "ammo_body_l_01_dm",
       "name": "ammo_body_l_02_dm",
       "name": "ammo_body_l_03_dm",
@@ -884,6 +915,10 @@
       "name": "ammo_body_l_18_dm",
       "name": "ammo_body_l_19_dm",
       "name": "ammo_body_l_20_dm",
+      "name": "ammo_body_l_21_dm",
+      "name": "ammo_body_l_22_dm",
+      "name": "ammo_body_l_23_dm",
+      "name": "ammo_body_l_24_dm",
       "name": "ammo_body_r_01_dm",
       "name": "ammo_body_r_02_dm",
       "name": "ammo_body_r_03_dm",
@@ -904,6 +939,10 @@
       "name": "ammo_body_r_18_dm",
       "name": "ammo_body_r_19_dm",
       "name": "ammo_body_r_20_dm",
+      "name": "ammo_body_r_21_dm",
+      "name": "ammo_body_r_22_dm",
+      "name": "ammo_body_r_23_dm",
+      "name": "ammo_body_r_24_dm",
       "name": "ammo_turret_dm",
       "name": "ammo_turret_01_dm",
       "name": "ammo_turret_02_dm",
@@ -960,6 +999,26 @@
       "name": "ammo_turret_53_dm",
       "name": "ammo_turret_54_dm",
       "name": "ammo_turret_55_dm",
+      "name": "ammo_turret_56_dm",
+      "name": "ammo_turret_57_dm",
+      "name": "ammo_turret_58_dm",
+      "name": "ammo_turret_59_dm",
+      "name": "ammo_turret_60_dm",
+      "name": "ammo_turret_61_dm",
+      "name": "ammo_turret_62_dm",
+      "name": "ammo_turret_63_dm",
+      "name": "ammo_turret_64_dm",
+      "name": "ammo_turret_65_dm",
+      "name": "ammo_turret_66_dm",
+      "name": "ammo_turret_67_dm",
+      "name": "ammo_turret_68_dm",
+      "name": "ammo_turret_69_dm",
+      "name": "ammo_turret_70_dm",
+      "name": "ammo_turret_71_dm",
+      "name": "ammo_turret_72_dm",
+      "name": "ammo_turret_73_dm",
+      "name": "ammo_turret_74_dm",
+      "name": "ammo_turret_75_dm",
       "onHit": {
         "damageType": "cumulative",
         "expl": 0.4,
@@ -969,8 +1028,8 @@
       },
       "onHit": {
         "damageType": "cumulative",
-        "expl": 0.5,
-        "fire": 0.5,
+        "expl": 0.6,
+        "fire": 0.4,
         "damage": 200.0,
         "fHitCritical": true
       },
@@ -1004,22 +1063,22 @@
       },
       "onHit": {
         "damageType": "generic",
-        "expl": 0.05,
-        "fire": 0.1,
+        "expl": 0.075,
+        "fire": 0.075,
         "damage": 70.0,
         "fHitCritical": true
       },
       "onHit": {
         "damageType": "generic",
-        "expl": 0.1,
-        "fire": 0.2,
+        "expl": 0.15,
+        "fire": 0.15,
         "damage": 200.0,
         "fHitCritical": true
       },
       "onHit": {
         "damageType": "generic",
-        "expl": 0.1,
-        "fire": 0.4,
+        "expl": 0.25,
+        "fire": 0.25,
         "damage": 300.0,
         "fHitCritical": true
       },
@@ -1044,29 +1103,32 @@
       "onHit": {
         "damageType": "fire",
         "fire": 0.01,
-        "expl": 0.01,
-        "full_expl": 0.01
+        "full_expl": 0.01,
+        "expl": 0.01
       },
       "onKill": {
         "damageType": "cumulative",
-        "expl": 0.125,
-        "full_expl": 0.125,
-        "fire": 0.25,
-        "nothing": 0.5
+        "expl": 0.4,
+        "full_expl": 0.1,
+        "fire": 0.5
       },
       "onKill": {
         "damageType": "explosion",
-        "expl": 0.125,
-        "full_expl": 0.125,
-        "fire": 0.25,
-        "nothing": 0.5
+        "expl": 0.4,
+        "full_expl": 0.1,
+        "fire": 0.5
+      },
+      "onKill": {
+        "damageType": "secondaryShatter",
+        "expl": 0.4,
+        "full_expl": 0.1,
+        "fire": 0.5
       },
       "onKill": {
         "damageType": "generic",
-        "expl": 0.125,
-        "full_expl": 0.125,
-        "fire": 0.25,
-        "nothing": 0.5
+        "expl": 0.5,
+        "full_expl": 0.1,
+        "fire": 0.4
       }
     },
     "part": {
@@ -2022,29 +2084,386 @@
     }
   },
   "PhysSys": {
-    "find": "^bone_suspension_(._\d\d)$",
-    "points": {
-      "suspension": {
-        "name": "bone_suspension_$1"
+    "group": {
+      "find": "^bone_suspension_(._\d\d)$",
+      "points": {
+        "lever": {
+          "limitMin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "limitMax": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "name": "bone_suspension_$1"
+        },
+        "wheel": {
+          "searchChildren": {
+            "occurence": 1,
+            "limitMin": [
+              -1.0,
+              -1.0,
+              0.0
+            ],
+            "limitMax": [
+              1.0,
+              1.0,
+              0.0
+            ],
+            "parent": "lever",
+            "find": "bone_wheel_"
+          }
+        }
       },
-      "wheel": {
-        "name": "bone_wheel_$1",
-        "limitMin": [
-          -1.0,
-          -1.0,
-          0.0
-        ],
-        "limitMax": [
-          1.0,
-          1.0,
-          0.0
-        ]
+      "constraints": {
+        "edge": {
+          "to": "wheel",
+          "from": "lever"
+        }
       }
     },
-    "constraints": {
-      "edge": {
-        "from": "suspension",
-        "to": "wheel"
+    "group": {
+      "find": "^bone_suspension_(\w)_cen_(\d+)$",
+      "points": {
+        "lever": {
+          "limitMin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "limitMax": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "name": "bone_suspension_$1_cen_$2"
+        },
+        "suspension_01": {
+          "limitMin": [
+            -1.0,
+            -1.0,
+            0.0
+          ],
+          "limitMax": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "name": "bone_suspension_$1_cen_01_01"
+        },
+        "wheel": {
+          "searchChildren": {
+            "occurence": 1,
+            "limitMin": [
+              -1.0,
+              -1.0,
+              0.0
+            ],
+            "limitMax": [
+              1.0,
+              1.0,
+              0.0
+            ],
+            "parent": "lever",
+            "find": "bone_wheel_"
+          }
+        }
+      },
+      "constraints": {
+        "edge": {
+          "to": "wheel",
+          "from": "lever"
+        },
+        "edge": {
+          "moveNodes": false,
+          "to": "wheel",
+          "from": "suspension_01"
+        }
+      }
+    }
+  },
+  "chainIK": {
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_01_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_01_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_02_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_02_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_03_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_03_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_04_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_04_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_05_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_05_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_06_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_06_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_07_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_07_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_08_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_08_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_09_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_09_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_10_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_10_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_11_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_11_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_12_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_12_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_13_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_13_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_14_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_14_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_15_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_15_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_16_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_16_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_17_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_17_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_18_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_18_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_19_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_19_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_20_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_20_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_21_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_21_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_22_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_22_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_23_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_23_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_24_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_24_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_25_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_25_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_26_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_26_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_27_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_27_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_28_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_28_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_29_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_29_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_30_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_30_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_31_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_31_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_32_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_32_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_33_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_33_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_34_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_34_02"
+      }
+    },
+    "points": {
+      "point": {
+        "nameTemplate": "bone_roll_35_01"
+      },
+      "point": {
+        "nameTemplate": "bone_roll_35_02"
       }
     }
   },
@@ -2607,15 +3026,6 @@
 ],
             "lightMult": 5.0,
             "ghosting": 0.7,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
             "noiseFactor": 0.2
           }
         }

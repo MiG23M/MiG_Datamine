@@ -60,7 +60,7 @@
         "armorThickness": 25.0
       },
       "superstructure_top_dm": {
-        "armorThickness": 15.0
+        "armorThickness": 20.0
       },
       "superstructure_back_dm": {
         "armorThickness": 15.0
@@ -74,7 +74,7 @@
     },
     "turret": {
       "turret_top_dm": {
-        "armorThickness": 15.0
+        "armorThickness": 20.0
       },
       "turret_side_dm": {
         "armorThickness": 35.0
@@ -352,6 +352,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1383,18 +1385,18 @@
   "tank_crew": {
     "changeTimeMult": 1.0,
     "gunner": {
-      "dmPart": "commander_dm",
+      "dmPart": "gunner_dm",
       "role": "tank_gunner",
-      "role": "commander",
-      "substitute": "loader"
+      "substitute": "commander"
     },
     "driver": {
       "dmPart": "driver_dm",
       "role": "driver",
-      "substitute": "loader"
+      "substitute": "commander"
     },
-    "loader": {
-      "dmPart": "loader_dm",
+    "commander": {
+      "dmPart": "commander_dm",
+      "role": "commander",
       "role": "loader"
     }
   },
@@ -1622,7 +1624,7 @@
         "head": "bone_turret",
         "gun": "bone_gun",
         "barrel": "bone_gun_barrel",
-        "gunnerDm": "commander_dm"
+        "gunnerDm": "gunner_dm"
       },
       "limits": {
         "yaw": [
@@ -1663,7 +1665,7 @@
       "turret": {
         "head": "bone_mg_gun_twin",
         "gun": "bone_mg_gun_twin",
-        "gunnerDm": "commander_dm"
+        "gunnerDm": "gunner_dm"
       },
       "limits": {
         "yaw": [
@@ -1730,14 +1732,14 @@
     },
     "engine": {
       "horsePowers": 170.0,
-      "maxRPM": 3400.0,
+      "maxRPM": 3600.0,
       "minRPM": 900.0
     },
     "mechanics": {
       "steerType": "clutch_braking",
       "maxBrakeForce": 40000.0,
       "driveGearRadius": 0.3025,
-      "mainGearRatio": 1.72,
+      "mainGearRatio": 1.7,
       "sideGearRatio": 5.357,
       "gearRatios": {
         "ratio": -7.64,

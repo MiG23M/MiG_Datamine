@@ -227,6 +227,10 @@
       "turret_10_back_dm": {
         "armorThickness": 10.0,
         "hidableInViewer": true
+      },
+      "turret_10_side_dm": {
+        "armorThickness": 5.0,
+        "hidableInViewer": true
       }
     },
     "turret": {
@@ -387,7 +391,6 @@
       "ex_armor_r_03_dm": {      },
       "ex_armor_03_dm": {      },
       "ex_armor_05_dm": {      },
-      "turret_10_side_dm": {      },
       "ex_armor_04_dm": {      }
     },
     "hull_side_add_armor": {
@@ -761,6 +764,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2368,7 +2373,6 @@
       "triggerGroup": "smoke",
       "blk": "gameData/Weapons/groundModels_weapons/60mm_smoke_mortar_launcher.blk",
       "weaponType": "rockets",
-      "startFx": "",
       "useEmitter": true,
       "emitter": "emtr_mortar_flame_13",
       "emitterGenRange": [
@@ -3864,7 +3868,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/60mm_smoke_mortar_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_13",
             "emitterGenRange": [
@@ -3944,7 +3947,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -4016,15 +4018,6 @@
 ],
             "lightMult": 8.0,
             "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
             "noiseFactor": 0.2
           },
           "driverIr": {

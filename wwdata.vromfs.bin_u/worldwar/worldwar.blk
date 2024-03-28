@@ -36,6 +36,7 @@
     "airfieldArrowFirstCircleRadius": 0.85,
     "airfieldArrowArmyColor": [86, 175, 84, 224],
     "airfieldArrowLastCircleColor": [81, 228, 255, 64],
+    "airfieldArrowArmySize": 1.15,
     "airfieldArrowArmyShowK": 2.6,
     "unloadCursorAlpha": 180,
     "unloadPossibleCursorOutlineColor": [0, 255, 0, 180],
@@ -157,6 +158,9 @@
     "armyDestroyedMsgTextSize": 0.6,
     "battleResultMsgFontSize": 15,
     "armyDestroyedMsgFontSize": 15,
+    "battleRemovalShowMs": 5000,
+    "battleResultMessageBackground": "ui/gameuiskin#ww_battle_result_bg",
+    "armyDestroyedMessageBackground": "ui/gameuiskin#ww_army_destroyed_bg",
     "utilsTexMessageBackground": "ui/gameuiskin#popup_menu_flat_bg",
     "utilsTexMessageBackgroundArrow": "ui/gameuiskin#popup_menu_flat_arrow",
     "fontArmyGroup": "hud",
@@ -215,7 +219,7 @@
     "hudNumQuads": 40000,
     "armyIconAir": {
       "iconName": "ui/gameuiskin#army_fighter.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "iconRotate": 30.0,
       "text": "worldwar/iconAir",
       "offset": [
@@ -226,7 +230,7 @@
     },
     "armyIconGround": {
       "iconName": "ui/gameuiskin#army_tank.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconGround",
       "offset": [
         0.0,
@@ -236,7 +240,7 @@
     },
     "armyIconWater": {
       "iconName": "ui/gameuiskin#army_boat.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconWater",
       "offset": [
         0.0,
@@ -246,7 +250,7 @@
     },
     "armyIconInfantry": {
       "iconName": "ui/gameuiskin#army_infantry.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconInfantry",
       "offset": [
         1.0,
@@ -257,7 +261,7 @@
     "armyIconArtillery": {
       "iconName": "ui/gameuiskin#army_artillery.svg",
       "iconNameReady": "ui/gameuiskin#army_artillery_ready.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconArtilleryFire",
       "textArtilleryReadyToFire": "worldwar/iconArtillery",
       "offset": [
@@ -269,7 +273,7 @@
     "armyIconCustom": {
       "name": "infantry",
       "iconName": "ui/gameuiskin#army_infantry.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconInfantry",
       "offset": [
         1.0,
@@ -280,7 +284,7 @@
     "armyIconCustom": {
       "name": "assault",
       "iconName": "ui/gameuiskin#army_assault.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconAssault",
       "offset": [
         0.0,
@@ -291,7 +295,7 @@
     "armyIconCustom": {
       "name": "bomber",
       "iconName": "ui/gameuiskin#army_bomber.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "iconRotate": 30.0,
       "text": "worldwar/iconBomber",
       "offset": [
@@ -304,7 +308,7 @@
       "name": "helicopter",
       "iconName": "ui/gameuiskin#army_helicopter.svg",
       "iconNameLoadedInfantry": "ui/gameuiskin#army_helicopter_with_infantry.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconHelicopter",
       "textLoadedInfantry": "worldwar/iconHelicopterInfantry",
       "offset": [
@@ -317,7 +321,7 @@
       "name": "coastalArtillery",
       "iconName": "ui/gameuiskin#army_coastal_artillery.svg",
       "iconNameReady": "ui/gameuiskin#army_coastal_artillery_ready.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconCoastalArtillery",
       "textArtilleryReadyToFire": "worldwar/iconCoastalArtilleryFire",
       "offset": [
@@ -329,7 +333,7 @@
     "armyIconCustom": {
       "name": "destroyer",
       "iconName": "ui/gameuiskin#army_destroyer.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconWaterDestroyer",
       "offset": [
         0.0,
@@ -341,7 +345,7 @@
       "name": "cruiser",
       "iconName": "ui/gameuiskin#army_cruiser.svg",
       "iconNameReady": "ui/gameuiskin#army_cruiser_ready.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconWaterCruiser",
       "textArtilleryReadyToFire": "worldwar/iconWaterCruiserFire",
       "offset": [
@@ -356,7 +360,7 @@
       "iconNameLoadedInfantry": "ui/gameuiskin#army_landing_boat_with_infantry.svg",
       "iconNameLoadedArtillery": "ui/gameuiskin#army_landing_boat_with_artillery.svg",
       "iconNameLoadedGround": "ui/gameuiskin#army_landing_boat_with_tank.svg",
-      "iconSize": 0.282,
+      "iconSize": 2.0,
       "text": "worldwar/iconLandingCraftEmpty",
       "textLoadedInfantry": "worldwar/iconLandingCraftInfantry",
       "textLoadedGround": "worldwar/iconLandingCraftTank",
@@ -388,11 +392,35 @@
         "airfieldTexHover": "ui/gameuiskin#map_helipad_hover.svg"
       }
     },
+    "entrenchIcon": {
+      "iconName": "ui/gameuiskin#ww_army_entrenched.svg",
+      "iconSize": 3.3,
+      "blinkPeriod": 1.0,
+      "spriteColor": [45, 45, 45, 180],
+      "blinkColor": [255, 255, 255, 0]
+    },
+    "artilleryStrike": {
+      "cursorTexture": "ui/gameuiskin#artillery_target_arc.svg",
+      "cursorActiveColor": [0, 255, 0, 255],
+      "cursorDisabledColor": [0, 0, 255, 255],
+      "cursorMinColor": [160, 160, 160, 128],
+      "circleColor": [0, 0, 255, 255],
+      "circleColor2": [0, 255, 255, 255],
+      "circleBlinkPeriod": 1.0,
+      "crossTexture": "ui/gameuiskin#chat_icon_attack.avif",
+      "crossColor": [0, 0, 255, 0],
+      "crossColor2": [0, 0, 255, 0],
+      "crossFireingColor": [0, 0, 255, 255],
+      "crossFireingColor2": [0, 255, 255, 255],
+      "crossBlinkPeriodMs": 1000,
+      "fireTexture": "ui/gameuiskin#ww_artillery_fire.avif",
+      "fireIconSize": 0.6
+    },
     "sectorSpritesSettings": {
       "sectorSpritesFont": "hud",
       "Reinforcement": {
         "iconName": "ui/gameuiskin#army_reinforcement.svg",
-        "iconSize": 0.25,
+        "iconSize": 1.8,
         "blinkPeriod": 1.0,
         "spriteColor": [255, 255, 255, 255],
         "blinkColor": [255, 255, 255, 0],
@@ -405,7 +433,7 @@
       },
       "Airfield": {
         "iconName": "ui/gameuiskin#army_fighter.svg",
-        "iconSize": 0.24,
+        "iconSize": 1.728,
         "iconRotate": 30.0,
         "blinkPeriod": 1.0,
         "spriteColor": [90, 90, 90, 255],
@@ -420,7 +448,7 @@
       },
       "Helipad": {
         "iconName": "ui/gameuiskin#army_helicopter.svg",
-        "iconSize": 0.32,
+        "iconSize": 2.304,
         "blinkPeriod": 1.0,
         "spriteColor": [90, 90, 90, 255],
         "blinkColor": [90, 90, 90, 0],

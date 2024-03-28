@@ -217,6 +217,9 @@
       },
       "tank8_dm": {
         "hp": 70.5
+      },
+      "tank9_dm": {
+        "hp": 80.5
       }
     }
   },
@@ -1116,6 +1119,44 @@
         "damage": 30.0,
         "fire": 15.0,
         "leak": 25.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
+      }
+    },
+    "part": {
+      "name": "tank9_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
       },
       "onKill": {
         "damage": 80.0,
@@ -2060,9 +2101,14 @@
       "node": "pylon_l",
       "node": "s24_pylon_l",
       "node": "apu_13_l",
+      "node": "drop_tank_pylon1",
       "node": "pylon_r",
       "node": "s24_pylon_r",
-      "node": "apu_13_r"
+      "node": "apu_13_r",
+      "node": "airbrake_l6"
+    },
+    "HideDmParts": {
+      "node": "tank9_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2083,9 +2129,9 @@
       }
     },
     "WeaponSlot": {
-      "index": 2,
+      "index": 1,
       "tier": 7,
-      "order": 2,
+      "order": 1,
       "WeaponPreset": {
         "iconType": "missile_air_to_air",
         "name": "r3s",
@@ -2180,9 +2226,38 @@
       }
     },
     "WeaponSlot": {
-      "index": 1,
+      "index": 2,
+      "tier": 6,
+      "order": 3,
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb",
+        "showInWeaponMenu": true,
+        "HideNodes": {
+          "node": "airbrake_l1",
+          "node": "airbrake_l5",
+          "node": "airbrake_l4"
+        },
+        "ShowNodes": {
+          "node": "drop_tank_pylon1",
+          "node": "airbrake_l6"
+        },
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/su_490l_mig_21.blk",
+          "emitter": "490l_drop_tank1",
+          "bullets": 1,
+          "external": true
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 3,
       "tier": 5,
-      "order": 1,
+      "order": 2,
       "WeaponPreset": {
         "iconType": "missile_air_to_air",
         "name": "r3s",

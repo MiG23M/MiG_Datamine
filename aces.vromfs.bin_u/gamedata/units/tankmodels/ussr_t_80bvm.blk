@@ -831,7 +831,8 @@
         "ex_armor_body_10_dm": {        },
         "ex_armor_body_11_dm": {        },
         "ex_armor_body_r_04_dm": {        },
-        "ex_armor_body_l_04_dm": {        }
+        "ex_armor_body_l_04_dm": {        },
+        "ex_armor_body_12_dm": {        }
       }
     },
     "gun": {
@@ -1001,6 +1002,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -3543,7 +3546,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -4126,7 +4129,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -4191,15 +4193,6 @@
             "noiseFactor": 0.04
           },
           "commanderViewIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               1600,
               1200

@@ -4,18 +4,18 @@ let u = require("%sqStdLibs/helpers/u.nut")
 let { blkOptFromPath } = require("%sqstd/datablock.nut")
 let regexp2 = require("regexp2")
 let { get_current_mission_name, get_game_mode } = require("mission")
-let enums = require("%sqStdLibs/helpers/enums.nut")
-let { MISSION_GROUP } = require("%scripts/missions/missionsFilterData.nut")
+let { enumsAddTypes } = require("%sqStdLibs/helpers/enums.nut")
+let { MISSION_GROUP, chapterToGroup, missionGroupToLocKey } = require("%scripts/missions/missionsFilterData.nut")
 let { MISSION_OBJECTIVE } = require("%scripts/missions/missionsUtilsModule.nut")
 let { getUrlOrFileMissionMetaInfo } = require("%scripts/missions/missionsUtils.nut")
 let { get_current_mission_info_cached } = require("blkGetters")
 
-::g_mission_type <- {
+let g_mission_type = {
   types = []
   _cacheByMissionName = {}
 }
 
-::g_mission_type.template <- {
+g_mission_type.template <- {
   _typeName = "" //filled by type name
   reMisName = regexp2(@"^$")
   objectives   = MISSION_OBJECTIVE.KILLS_AIR_OR_TANK
@@ -27,7 +27,7 @@ let { get_current_mission_info_cached } = require("blkGetters")
   }
 }
 
-enums.addTypesByGlobalName("g_mission_type", {
+enumsAddTypes(g_mission_type, {
   UNKNOWN = {
   }
 
@@ -41,7 +41,7 @@ enums.addTypesByGlobalName("g_mission_type", {
 
   A_AFD = {  // Air: Airfield Domination
     reMisName = regexp2(@"_AfD(n|to)?(_|$)")
-    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_GROUND_AI | MISSION_OBJECTIVE.KILLS_NAVAL_AI | MISSION_OBJECTIVE.ZONE_CAPTURE
+    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_CAPTURE
     objectivesWw = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_CAPTURE
     helpBlkPath = "%gui/help/missionAirfieldCapture.blk"
     filterGroup = MISSION_GROUP.DOMINATION
@@ -49,8 +49,7 @@ enums.addTypesByGlobalName("g_mission_type", {
 
   A_GS = {  // Air: Ground Strike
     reMisName = regexp2(@"_GS(n|to)?(_|$)")
-    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_GROUND_AI | MISSION_OBJECTIVE.KILLS_NAVAL_AI
-                 | MISSION_OBJECTIVE.ZONE_BOMBING
+    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_BOMBING
     objectivesWw = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_BOMBING
     helpBlkPath = "%gui/help/missionGroundStrikeComplete.blk"
     filterGroup = MISSION_GROUP.GROUND_STRIKE
@@ -58,10 +57,17 @@ enums.addTypesByGlobalName("g_mission_type", {
 
   A_BFD = {  // Air: Battlefront Domination
     reMisName = regexp2(@"_BfD(n|to)?(_|$)")
-    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_GROUND_AI | MISSION_OBJECTIVE.KILLS_NAVAL_AI
-                 | MISSION_OBJECTIVE.ZONE_BOMBING
+    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_BOMBING
     objectivesWw = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_BOMBING
     helpBlkPath = "%gui/help/missionGroundStrikeComplete.blk"
+    filterGroup = MISSION_GROUP.DOMINATION
+  }
+
+  A_ACONQ = {  // Air: Conquest
+    reMisName = regexp2(@"_aconq?(_|$)")
+    objectives = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_CAPTURE | MISSION_OBJECTIVE.ZONE_BOMBING
+    objectivesWw = MISSION_OBJECTIVE.KILLS_AIR | MISSION_OBJECTIVE.KILLS_TOTAL_AI | MISSION_OBJECTIVE.ZONE_CAPTURE | MISSION_OBJECTIVE.ZONE_BOMBING
+    helpBlkPath = "%gui/help/missionAirfieldCapture.blk"
     filterGroup = MISSION_GROUP.DOMINATION
   }
 
@@ -233,7 +239,7 @@ enums.addTypesByGlobalName("g_mission_type", {
   }
 }, null, "_typeName")
 
-::g_mission_type.getTypeByMissionName <- function getTypeByMissionName(misName, gm = null) {
+g_mission_type.getTypeByMissionName <- function getTypeByMissionName(misName, gm = null) {
   if (!misName)
     return this.UNKNOWN
   if (misName in this._cacheByMissionName)
@@ -252,21 +258,34 @@ enums.addTypesByGlobalName("g_mission_type", {
   return res
 }
 
-::g_mission_type.getCurrent <- function getCurrent() {
+g_mission_type.getCurrent <- function getCurrent() {
   return this.getTypeByMissionName(get_current_mission_name(), get_game_mode())
 }
 
-::g_mission_type.getCurrentObjectives <- function getCurrentObjectives() {
+g_mission_type.getCurrentObjectives <- function getCurrentObjectives() {
   return this.getCurrent().getObjectives(get_current_mission_info_cached())
 }
 
-::g_mission_type.getHelpPathForCurrentMission <- function getHelpPathForCurrentMission() {
+g_mission_type.getHelpPathForCurrentMission <- function getHelpPathForCurrentMission() {
   let path = this.getCurrent().helpBlkPath
   if (path != "" && !u.isEmpty(blkOptFromPath(path)))
     return path
   return null
 }
 
-::g_mission_type.getControlHelpName <- function getControlHelpName() {
+g_mission_type.getControlHelpName <- function getControlHelpName() {
   return this.getCurrent()?.useControlsHelp
 }
+
+let getMissionGroupByChapter = @(missionChapter) chapterToGroup?[missionChapter] ?? MISSION_GROUP.OTHER
+let getMissionGroupName = @(missionGroup) loc($"chapters/{missionGroupToLocKey[missionGroup]}")
+
+function getMissionGroup(mission) {
+  let group = getMissionGroupByChapter(mission.chapter)
+  if (group != MISSION_GROUP.OTHER)
+    return group
+
+  return g_mission_type.getTypeByMissionName(mission.id).filterGroup
+}
+
+return { g_mission_type, getMissionGroup, getMissionGroupName }

@@ -65,6 +65,7 @@
     "shellAnimation": "video/shells_animations/he_df.ivf",
     "bulletName": "76mm_o_361d",
     "dynamicKv": true,
+    "splashFallBySquare": true,
     "relativeVelArmorShift": [
       200.0,
       1000.0
@@ -100,16 +101,20 @@
     "pressureDamage": {
       "damageType": "pressure"
     },
+    "shatterDamage": {
+      "breachConeAngle": 30.0
+    },
     "damage": {
       "kinetic": {
         "damageType": "generic"
       },
       "shatter": {
         "useRealShatters": true,
-        "countPortion": 0.1,
+        "countPortion": 0.5,
+        "realShattersSplicing": 0.75,
         "segment": {
-          "radiusScale": 2.0,
-          "penetrationScale": 1.5,
+          "radiusScale": 1.0,
+          "penetrationScale": 1.0,
           "damageScale": 1.0,
           "angles": [
             0.0,
@@ -436,7 +441,7 @@
         "damageType": "pressure"
       },
       "shatterDamage": {
-        "breachConeAngle": 60.0
+        "breachConeAngle": 30.0
       },
       "damage": {
         "kinetic": {
@@ -444,34 +449,33 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 0.08,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
-            "radiusScale": 5.0,
-            "penetrationScale": 1.5,
-            "damageScale": 1.22,
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
             "angles": [
               0.0,
               30.0
             ],
             "countPortion": 0.15,
-            "onHitChanceMultFire": 15.0,
-            "aggregateDamage": true
+            "onHitChanceMultFire": 0.5
           },
           "segment": {
-            "radiusScale": 3.0,
+            "radiusScale": 1.0,
             "penetrationScale": 1.0,
-            "damageScale": 1.22,
+            "damageScale": 1.0,
             "angles": [
               30.0,
               90.0
             ],
-            "countPortion": 0.75,
-            "onHitChanceMultFire": 10.0
+            "countPortion": 0.75
           },
           "segment": {
-            "radiusScale": 3.0,
+            "radiusScale": 1.0,
             "penetrationScale": 1.0,
-            "damageScale": 1.22,
+            "damageScale": 1.0,
             "angles": [
               90.0,
               180.0
@@ -762,8 +766,10 @@
       "bulletName": "76mm_naval_br_361",
       "dynamicKv": true,
       "splashFallBySquare": true,
-      "fuseDelayDist": 1.6,
       "explodeTreshold": 4.0,
+      "fuseDelay": 0.01,
+      "hpThresholdForFuse": 1e-6,
+      "fuseOnWater": true,
       "relativeVelArmorShift": [
         200.0,
         1000.0
@@ -806,17 +812,38 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 0.02,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              30.0
+            ],
+            "countPortion": 0.15
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              30.0,
+              90.0
+            ],
+            "countPortion": 0.75,
+            "onHitChanceMultFire": 30.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              90.0,
               180.0
             ],
-            "countPortion": 1.0,
-            "onHitChanceMultFire": 30.0
+            "countPortion": 0.1
           }
         }
       },
@@ -1106,6 +1133,7 @@
       "shellAnimation": "video/shells_animations/he_df.ivf",
       "bulletName": "76mm_o_361d",
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "relativeVelArmorShift": [
         200.0,
         1000.0
@@ -1141,16 +1169,20 @@
       "pressureDamage": {
         "damageType": "pressure"
       },
+      "shatterDamage": {
+        "breachConeAngle": 30.0
+      },
       "damage": {
         "kinetic": {
           "damageType": "generic"
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 0.1,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
-            "radiusScale": 2.0,
-            "penetrationScale": 1.5,
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,

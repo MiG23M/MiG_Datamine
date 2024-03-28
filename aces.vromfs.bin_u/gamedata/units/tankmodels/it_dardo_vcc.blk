@@ -219,7 +219,8 @@
         "armorThickness": 22.0
       },
       "turret_03_top_dm": {
-        "armorThickness": 22.0
+        "armorThickness": 22.0,
+        "hidableInViewer": false
       },
       "turret_06_top_dm": {
         "armorThickness": 25.0
@@ -324,7 +325,9 @@
         "armorClass": "t_90_rubber_fabric_screens",
         "hidableInViewer": true
       },
-      "turret_09_top_dm": {      }
+      "turret_09_top_dm": {
+        "hidableInViewer": false
+      }
     },
     "chassis": {
       "armorClass": "tank_steel_wheels",
@@ -493,6 +496,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2808,7 +2813,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -2897,15 +2901,6 @@
               600
 ],
             "lightMult": 5.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
             "ghosting": 0.6,
             "noiseFactor": 0.2
           }

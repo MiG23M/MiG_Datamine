@@ -174,7 +174,8 @@
         "armorThickness": 50.0
       },
       "turret_04_top_dm": {
-        "armorThickness": 10.0
+        "armorThickness": 10.0,
+        "armorClass": "RHA_tank_modern"
       }
     },
     "turret_composite_armor": {
@@ -537,7 +538,7 @@
       "wheel_support_dm": {      },
       "submodule": {
         "armorClass": "tank_traks",
-        "armorThickness": 30.0,
+        "armorThickness": 20.0,
         "hp": 300.0,
         "ex_armor_body_02_dm": {        },
         "ex_armor_body_03_dm": {        },
@@ -713,6 +714,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2960,7 +2963,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -2990,7 +2993,7 @@
       1400.0,
       100.0
     ],
-    "projectorPower": [
+    "power": [
       0.02,
       0.07
     ]
@@ -3062,15 +3065,6 @@
             "ghosting": 0.6,
             "noiseFactor": 0.2
           },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
           "driverIr": {
             "resolution": [
               800,
@@ -3104,15 +3098,6 @@
 ],
             "lightMult": 8.0,
             "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
             "noiseFactor": 0.2
           },
           "driverIr": {
@@ -3389,7 +3374,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3711,7 +3695,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [

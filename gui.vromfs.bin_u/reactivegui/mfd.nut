@@ -2,8 +2,9 @@ from "%rGui/globals/ui_library.nut" import *
 
 let { IndicatorsVisible, MfdColor, MlwsLwsForMfd, RwrForMfd, IsMfdEnabled, RwrPosSize } = require("airState.nut")
 let tws = require("tws.nut")
-let { mkRadarForMfd } = require("radarComponent.nut")
 let mfdSightHud = require("planeMfdCamera.nut")
+let { MfdRadarColor, radarPosSize } = require("radarState.nut")
+let { radarMfd } = require("%rGui/radar.nut")
 
 
 let twsPosComputed = Computed(@() [RwrPosSize.value[0] + 0.17 * RwrPosSize.value[2],
@@ -21,14 +22,15 @@ let mkTws = @() {
       needDrawCentralIcon = true,
       needDrawBackground = true,
       fontSizeMult = 2.0,
-      needAdditionalLights = false
+      needAdditionalLights = false,
+      forMfd = true
     })
 }
 
-let function Root() {
+function Root() {
   let children = [
     mkTws
-    mkRadarForMfd(MfdColor)
+    radarMfd(radarPosSize, MfdRadarColor)
     mfdSightHud
   ]
 

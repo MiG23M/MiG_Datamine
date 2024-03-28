@@ -692,6 +692,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2127,7 +2129,7 @@
     },
     "mechanics": {
       "steerType": "clutch_braking",
-      "maxBrakeForce": 180000.0,
+      "maxBrakeForce": 200000.0,
       "driveGearRadius": 0.23,
       "mainGearRatio": 1.0,
       "sideGearRatio": 2.6,
@@ -3226,7 +3228,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3306,15 +3307,6 @@
               600
 ],
             "lightMult": 5.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
             "ghosting": 0.6,
             "noiseFactor": 0.2
           }

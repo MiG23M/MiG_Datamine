@@ -511,7 +511,14 @@
       "wheel_r_top_03_dm": {      },
       "wheel_r_top_04_dm": {      },
       "suspension_dm": {      },
-      "wheel_support_dm": {      }
+      "wheel_support_dm": {      },
+      "submodule": {
+        "armorClass": "tank_traks",
+        "armorThickness": 20.0,
+        "hp": 200.0,
+        "ex_armor_12_dm": {        },
+        "ex_armor_13_dm": {        }
+      }
     },
     "gun": {
       "armorClass": "tank_barrel",
@@ -680,6 +687,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -995,8 +1004,11 @@
     "ex_armor_10_dm": true,
     "ex_armor_11_dm": true,
     "ex_armor_12_dm": true,
+    "ex_armor_13_dm": true,
     "ex_armor_body_r_07_dm": true,
-    "ex_armor_body_l_07_dm": true
+    "ex_armor_body_l_07_dm": true,
+    "ex_decor_body_l_01_dm": true,
+    "ex_decor_body_r_01_dm": true
   },
   "sound": {
     "EngineName": "engine_ztz99",
@@ -3597,7 +3609,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_10",
             "emitterGenRange": [
@@ -3676,15 +3687,6 @@
               800
 ],
             "lightMult": 7.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
             "ghosting": 0.6,
             "noiseFactor": 0.2
           }

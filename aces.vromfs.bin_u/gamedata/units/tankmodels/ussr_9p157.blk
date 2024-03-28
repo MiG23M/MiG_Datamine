@@ -115,8 +115,7 @@
         "armorThickness": 18.0
       },
       "turret_03_top_dm": {
-        "armorThickness": 5.0,
-        "armorClass": "RHA_tank"
+        "armorThickness": 10.0
       },
       "turret_01_bottom_dm": {
         "armorThickness": 15.0
@@ -522,7 +521,9 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
-      "hp": 500.0,
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
+      "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
       "fireProtectionHp": 20.0,
@@ -931,11 +932,19 @@
   "ammoStowages": {
     "ammo1": {
       "weaponTrigger": "gunner1",
-      "removeLoadedAmmo": false,
       "fatalFire": true,
       "fatalExplosion": true,
-      "replenishmentDelay": 4.0,
-      "replenishmentTime": 15.0,
+      "shells": {
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "ammo_turret_01_dm": {
+          "count": 1
+        },
+        "ammo_turret_02_dm": {
+          "count": 1
+        }
+      },
       "shells": {
         "fireEvent": "ammo_fire",
         "explosionEvent": "ammo_explosion",
@@ -978,12 +987,6 @@
           "count": 1
         },
         "ammo_body_13_dm": {
-          "count": 2
-        },
-        "ammo_turret_01_dm": {
-          "count": 1
-        },
-        "ammo_turret_02_dm": {
           "count": 1
         }
       }
@@ -1375,8 +1378,19 @@
     },
     "tracks": {
       "animationMultiplier": -0.64,
-      "height": 0.008,
-      "width": 0.4
+      "height": 0.065,
+      "width": 0.38,
+      "tracksTensionK": [
+        8.0,
+        8.0,
+        4.0
+      ],
+      "trackMesh": "ussr_2s38_phys_track",
+      "trackLen": 0.15,
+      "trackCount": 88,
+      "trackFadeTime": 1.5,
+      "trackStartOffset": 0.0,
+      "trackMaxHeight": 1.17
     },
     "collisionProps": {
       "cls_body": "convex_hull"
@@ -1415,7 +1429,7 @@
         -0.07,
         0.05
       ],
-      "defaultGearRadius": 0.33,
+      "defaultGearRadius": 0.28,
       "topGearRadius": 0.125,
       "frontBackGearRadius": 0.324,
       "defaultDampeningForce": [
@@ -1423,7 +1437,11 @@
         110000.0
       ],
       "dampeningRelaxationRatio": 0.4,
-      "dampeningCompressionRatio": 0.15
+      "dampeningCompressionRatio": 0.15,
+      "wheel_r_front": 0.27,
+      "wheel_l_front": 0.27,
+      "wheel_r_drive": 0.31,
+      "wheel_l_drive": 0.31
     },
     "floats": {
       "volume": [
@@ -2232,15 +2250,6 @@
               600
 ],
             "lightMult": 5.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
             "ghosting": 0.6,
             "noiseFactor": 0.2
           }

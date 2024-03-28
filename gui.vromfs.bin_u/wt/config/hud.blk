@@ -47,6 +47,7 @@
     0.0
   ],
   "aircraftShowMachAboveValue": 0.75,
+  "showHitCameraOnTargetSelect": true,
   "skins": {
     "defSkin": "ui/gameuiskin"
   },
@@ -531,7 +532,7 @@
     "colorGMShellProjectionArmorChance": [0, 255, 255, 255],
     "colorGMShellProjectionArmorTooThick": [0, 0, 255, 255],
     "colorGMShellProjectionFriend": [255, 92, 20, 255],
-    "colorShipAimHairColor": [1, 1, 1, 255],
+    "colorShipAimHairColor": [25, 25, 15, 255],
     "colorShipHighlightColor": [255, 255, 255, 255],
     "colorShipHighlightOffset": 0,
     "colorShipHighlightScale": 32,
@@ -2636,6 +2637,12 @@
       },
       "radar_target_lock": {
         "shortcutIdx": 4294967295
+      },
+      "agm_release_locked_target": {
+        "shortcutIdx": 4294967295
+      },
+      "mission_support_plane": {
+        "shortcutIdx": 8
       }
     },
     "wheelActions": {
@@ -2770,7 +2777,7 @@
     "navy_binoculars": {
       "mask": "binocular",
       "glass": "white@@vs",
-      "color": [60, 60, 45, 255],
+      "color": [25, 25, 15, 255],
       "needScaleHairs": false,
       "orient": "lookDirection",
       "coordsMode": "2d",
@@ -2783,8 +2790,8 @@
         30.0
       ],
       "needHighlight": true,
-      "highlightScale": 1.9,
-      "highlightColor": [255, 255, 255, 100],
+      "highlightScale": 2.5,
+      "highlightColor": [255, 255, 255, 180],
       "thousandths": {
         "line": "mid_line",
         "direction": [

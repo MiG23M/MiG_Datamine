@@ -172,7 +172,7 @@
         "hp": 60.5
       },
       "wingcontrol_dm": {
-        "hp": 60.4
+        "hp": 60.5
       },
       "wingcontrol_l_dm": {
         "hp": 60.5
@@ -214,20 +214,26 @@
         "hp": 81.5
       },
       "tank4_dm": {
-        "hp": 92.3
+        "hp": 90.8
       },
       "tank5_dm": {
-        "hp": 41.7
+        "hp": 40.8
       },
       "tank6_dm": {
-        "hp": 41.7
+        "hp": 40.8
       },
       "tank7_dm": {
         "hp": 120.5
       }
     },
     "steel_tank_s": {
+      "tank10_dm": {
+        "hp": 80.5
+      },
       "tank8_dm": {
+        "hp": 80.5
+      },
+      "tank9_dm": {
         "hp": 80.5
       }
     }
@@ -801,6 +807,44 @@
       "name": "tailcontrol_dm"
     },
     "part": {
+      "name": "tank10_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
+      }
+    },
+    "part": {
       "name": "tank1_dm",
       "onHit": {
         "fire": 0.0001,
@@ -1061,6 +1105,44 @@
     },
     "part": {
       "name": "tank8_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
+      }
+    },
+    "part": {
+      "name": "tank9_dm",
       "onHit": {
         "fire": 0.05,
         "leak": 0.7
@@ -2131,7 +2213,7 @@
         },
         "page": {
           "type": "radar",
-          "scale": 0.81,
+          "scale": 0.92,
           "hideRadarBackground": true
         }
       },
@@ -2281,12 +2363,16 @@
       "node": "launcher_aim9_4",
       "node": "us_lau_117a_002",
       "node": "pylon8",
-      "node": "launcher_aim9_5"
+      "node": "launcher_aim9_5",
+      "node": "us_370gal_drop_tank_pylon_001",
+      "node": "us_370gal_drop_tank_pylon_002"
     },
     "HideDmParts": {
       "node": "cannon2_dm",
       "node": "cover2_dm",
-      "node": "tank8_dm"
+      "node": "tank8_dm",
+      "node": "tank9_dm",
+      "node": "tank10_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2335,21 +2421,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": false
         }
       }
     },
@@ -2521,7 +2605,8 @@
           "emitter": "us_lau_117a_agm_65a_001",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       },
       "WeaponPreset": {
@@ -2536,7 +2621,8 @@
           "blk": "gameData/Weapons/containers/lau_88a_agm_65b_x_3.blk",
           "emitter": "lau_88a_1",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       },
       "WeaponPreset": {
@@ -2726,6 +2812,50 @@
           "separate": true,
           "machLimit": 1.01
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot4",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "us_370gal_drop_tank_pylon_001"
+        },
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_370_gal_wing_f_16.blk",
+          "emitter": "us_370gal_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 6,
+          "preset": "ptb_slot6"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot4",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "us_370gal_drop_tank_pylon_001"
+        },
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_370_gal_wing_f_16.blk",
+          "emitter": "us_370gal_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 6,
+          "preset": "ptb_slot6"
+        }
       }
     },
     "WeaponSlot": {
@@ -2890,6 +3020,28 @@
           "separate": true,
           "machLimit": 1.01
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot6",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "us_370gal_drop_tank_pylon_002"
+        },
+        "ShowDmParts": {
+          "node": "tank10_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_370_gal_wing_f_16_1.blk",
+          "emitter": "us_370gal_drop_tank_002",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 4,
+          "preset": "ptb_slot4"
+        }
       }
     },
     "WeaponSlot": {
@@ -2961,7 +3113,8 @@
           "emitter": "us_lau_117a_agm_65a_002",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       },
       "WeaponPreset": {
@@ -2976,7 +3129,8 @@
           "blk": "gameData/Weapons/containers/lau_88a_agm_65b_x_3.blk",
           "emitter": "lau_88a_2",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       },
       "WeaponPreset": {

@@ -174,7 +174,7 @@
     "mask": {
       "armorClass": "CHA_tank",
       "gun_mask_dm": {
-        "armorThickness": 30.0
+        "armorThickness": 88.9
       },
       "gun_mask_01_dm": {
         "armorThickness": 25.4
@@ -421,6 +421,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1675,11 +1677,23 @@
         ],
         "lim2": [
           -135.0,
+          -40.0,
+          -8.0,
+          -8.0
+        ],
+        "lim3": [
+          -40.0,
+          -1.0,
+          -12.0,
+          -12.0
+        ],
+        "lim4": [
+          -1.0,
           135.0,
           -7.5,
           -7.5
         ],
-        "lim3": [
+        "lim5": [
           135.0,
           180.0,
           -1.0,
@@ -2553,11 +2567,23 @@
               ],
               "lim2": [
                 -135.0,
+                -40.0,
+                -8.0,
+                -8.0
+              ],
+              "lim3": [
+                -40.0,
+                -1.0,
+                -12.0,
+                -12.0
+              ],
+              "lim4": [
+                -1.0,
                 135.0,
                 -7.5,
                 -7.5
               ],
-              "lim3": [
+              "lim5": [
                 135.0,
                 180.0,
                 -1.0,
@@ -2636,7 +2662,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/50mm_uk_smoke_mortar_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [

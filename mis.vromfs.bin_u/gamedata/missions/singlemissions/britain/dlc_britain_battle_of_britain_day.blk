@@ -19,10 +19,6 @@
       "country_allies": "britain",
       "restoreType": "tactical control",
       "optionalTakeOff": false,
-      "windSpeed": [
-        4.0,
-        6.0
-      ],
       "windDirectionDeg": [
         175.0,
         195.0
@@ -89,6 +85,10 @@
       },
       "conditions": {      },
       "actions": {
+        "missionSetWeatherParams": {
+          "waterWindStrengtMin": 4.0,
+          "waterWindStrengtMax": 6.0
+        },
         "unitSetProperties": {
           "object": "bf_109_01",
           "effShootingRate": 1.0,
@@ -200,12 +200,12 @@
           "target": "update_timer_indicator"
         },
         "unitSetIndication": {
+          "set": true,
+          "target": "bf_109_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "set": true,
-          "target": "bf_109_01"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }
@@ -295,11 +295,11 @@
       "actions": {
         "unitSetIndication": {
           "set": true,
+          "target": "bf_109_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf_109_01"
+          "object_var_value": 0
         },
         "unitAttackTarget": {
           "playerAttracted": true,
@@ -388,11 +388,11 @@
         },
         "unitSetIndication": {
           "set": false,
+          "target": "bf_109_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf_109_01"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }
@@ -514,12 +514,12 @@
           "fightInArea": "battle_zone"
         },
         "unitSetIndication": {
+          "set": true,
+          "target": "bf_109_02",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "set": true,
-          "target": "bf_109_02"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }
@@ -570,11 +570,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "bf_109_02",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf_109_02"
+          "object_var_value": 0
         },
         "playHint": {
           "hintType": "custom",
@@ -676,11 +676,11 @@
         },
         "unitSetIndication": {
           "set": false,
+          "target": "bf_109_02",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf_109_02"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }
@@ -738,12 +738,12 @@
           "target": "bf_109_03_near_player"
         },
         "unitSetIndication": {
+          "set": true,
+          "target": "bf_109_03",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "set": true,
-          "target": "bf_109_03"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }
@@ -775,11 +775,11 @@
       "actions": {
         "unitSetIndication": {
           "set": true,
+          "target": "bf_109_03",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf_109_03"
+          "object_var_value": 0
         },
         "unitAttackTarget": {
           "playerAttracted": true,
@@ -903,11 +903,11 @@
         },
         "unitSetIndication": {
           "set": false,
+          "target": "bf_109_03",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "bf_109_03"
+          "object_var_value": 0
         }
       },
       "else_actions": {      }

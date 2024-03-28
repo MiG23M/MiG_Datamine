@@ -8,9 +8,11 @@ let { getUnlockCondsDescByCfg, getUnlockMultDescByCfg, buildUnlockDesc,
   getUnlockMainCondDescByCfg } = require("%scripts/unlocks/unlocksViewModule.nut")
 let { getUnlockById } = require("%scripts/unlocks/unlocksCache.nut")
 let { isDefaultSkin } = require("%scripts/customization/skinUtils.nut")
-let { decoratorTypes } = require("%scripts/customization/types.nut")
+let { decoratorTypes, getTypeByUnlockedItemType } = require("%scripts/customization/types.nut")
+let { addTooltipTypes } = require("%scripts/utils/genericTooltipTypes.nut")
+let { getDecorator } = require("%scripts/customization/decorCache.nut")
 
-let function updateDecoratorDescription(obj, handler, decoratorType, decorator, params = {}) {
+function updateDecoratorDescription(obj, handler, decoratorType, decorator, params = {}) {
   local config = null
   let unlockBlk = getUnlockById(decorator?.unlockId)
   if (unlockBlk) {
@@ -35,9 +37,12 @@ let function updateDecoratorDescription(obj, handler, decoratorType, decorator, 
       let imgSize = params?.imgSize ?? {}
       let imgRatio = decoratorType.getRatio(decorator)
       let imageContainerHeight = imgSize?[1] ?? format("%.2f@decalIconHeight", sqrt(4.0 / imgRatio))
+      let imageContainerWidth = imgSize?[0] ?? $"{imgRatio}*({imageContainerHeight})"
       iDivObj.height = imageContainerHeight
-      iDivObj.width  = imgSize?[0] ?? $"{imgRatio}h"
-      obj.findObject("text_container").top = imageContainerHeight
+      iDivObj.width  = imageContainerWidth
+      let textContainer = obj.findObject("text_container")
+      textContainer.top = imageContainerHeight
+      textContainer["min-width"] = imageContainerWidth
     } else {
       iDivObj.show(false)
     }
@@ -174,6 +179,36 @@ let function updateDecoratorDescription(obj, handler, decoratorType, decorator, 
     : "#ui/gameuiskin#locked.svg"
   cObj.findObject("state")["background-image"] = iconName
 }
+
+addTooltipTypes({
+  DECORATION = { //tooltip by decoration id and decoration type
+                 //@decorType = UNLOCKABLE_DECAL or UNLOCKABLE_SKIN
+                 //can be without exist unlock
+                 //for skins decorId is like skin unlock id   -  <unitName>"/"<skinName>
+    getTooltipId = function(decorId, decorType, params = null, _p3 = null) {
+      let p = params || {}
+      p.decorType <- decorType
+      return this._buildId(decorId, p)
+    }
+
+    isCustomTooltipFill = true
+    fillTooltip = function(obj, handler, id, params) {
+      let unlockType = getTblValue("decorType", params, -1)
+      let decoratorType = getTypeByUnlockedItemType(unlockType)
+      if (decoratorType == decoratorTypes.UNKNOWN)
+        return false
+
+      let decorator = getDecorator(id, decoratorType)
+      if (!decorator)
+        return false
+
+      obj.getScene().replaceContent(obj, "%gui/customization/decalTooltip.blk", handler)
+
+      updateDecoratorDescription(obj, handler, decoratorType, decorator, params)
+      return true
+    }
+  }
+})
 
 return {
   updateDecoratorDescription

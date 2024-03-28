@@ -185,12 +185,6 @@
         "armorThickness": 180.0,
         "variableThickness": true
       },
-      "composite_armor_turret_02_dm": {
-        "hidableInXrayViewer": true,
-        "armorThickness": 0.01,
-        "createSecondaryShatters": false,
-        "armorClass": "CHA_tank"
-      },
       "turret_04_bottom_dm": {
         "armorThickness": 30.0
       },
@@ -221,7 +215,7 @@
         "armorThickness": 50.0,
         "armorEffectiveThicknessMax": 50.0
       },
-      "turret_21_top_dm": {
+      "turret_05_bottom_dm": {
         "armorClass": "tank_structural_steel",
         "armorThickness": 3.0
       }
@@ -586,6 +580,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1978,8 +1974,8 @@
         "lim1": [
           -180.0,
           -150.0,
-          2.0,
-          2.0
+          -5.0,
+          -5.0
         ],
         "lim2": [
           -150.0,
@@ -2002,8 +1998,8 @@
         "lim5": [
           155.0,
           180.0,
-          0.0,
-          0.0
+          -5.0,
+          -5.0
         ]
       },
       "gunStabilizer": {
@@ -3019,8 +3015,8 @@
               "lim1": [
                 -180.0,
                 -150.0,
-                2.0,
-                2.0
+                -5.0,
+                -5.0
               ],
               "lim2": [
                 -150.0,
@@ -3043,8 +3039,8 @@
               "lim5": [
                 155.0,
                 180.0,
-                0.0,
-                0.0
+                -5.0,
+                -5.0
               ]
             },
             "gunStabilizer": {
@@ -3217,7 +3213,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_10",
             "emitterGenRange": [
@@ -3284,15 +3279,6 @@
             "noiseFactor": 0.05
           },
           "commanderViewIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               1600,
               1200

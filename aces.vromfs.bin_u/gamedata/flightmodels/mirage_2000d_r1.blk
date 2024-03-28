@@ -2152,7 +2152,7 @@
         ],
         "page": {
           "type": "radar",
-          "scale": 0.9
+          "scale": 0.95
         }
       },
       "display": {
@@ -2324,6 +2324,7 @@
       "node": "pylon_clb_503_001",
       "node": "pylon_clb_503_002",
       "node": "pylon_central",
+      "node": "pylon_central_fuel",
       "node": "gunpod_cc_630",
       "node": "pylon_eclair",
       "node": "pylon_eclair_m",
@@ -2383,21 +2384,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 8,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 8,
           "external": true,
-          "separate": true
+          "separate": false
         }
       },
       "WeaponPreset": {
@@ -2435,12 +2434,11 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 24,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
@@ -2449,12 +2447,11 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare5",
           "bullets": 24,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
@@ -2463,12 +2460,11 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 8,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
@@ -2477,21 +2473,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 8,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
           "emitter": "emtr_flare3",
           "bullets": 132,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
@@ -3020,7 +3014,8 @@
           "emitter": "bomb3",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         },
         "DependentWeaponPreset": {
           "slot": 6,
@@ -3032,7 +3027,7 @@
         "name": "ptb",
         "showInWeaponMenu": true,
         "ShowNodes": {
-          "node": "pylon_central"
+          "node": "pylon_central_fuel"
         },
         "ShowDmParts": {
           "node": "tank10_dm"

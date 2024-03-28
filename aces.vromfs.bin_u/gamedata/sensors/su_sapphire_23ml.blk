@@ -5,7 +5,7 @@
   "transivers": {
     "pulse": {
       "sideLobesAttenuation": -22.0,
-      "pulsePower": 60000.0,
+      "pulsePower": 70000.0,
       "pulseWidth": 4e-6,
       "prf": 1000.0,
       "band": 9,
@@ -20,7 +20,7 @@
     },
     "MTI": {
       "sideLobesAttenuation": -22.0,
-      "power": 70000.0,
+      "pulsePower": 70000.0,
       "pulseWidth": 4e-6,
       "prf": 1000.0,
       "band": 9,
@@ -48,7 +48,7 @@
     }
   },
   "illuminationTransmitter": {
-    "power": 200.0,
+    "power": 270.0,
     "antenna": {
       "angleHalfSens": 10.0,
       "sideLobesSensitivity": -30.0
@@ -575,7 +575,6 @@
             "source": "constant",
             "value": 0.0
           },
-          "clearTargets": {          },
           "clearTargetsOfInterest": {          },
           "setFsmActive": {
             "fsm": "illumination",
@@ -689,7 +688,6 @@
             "source": "constant",
             "value": 0.0
           },
-          "clearTargets": {          },
           "clearTargetsOfInterest": {          },
           "setCueEnabled": {
             "value": true
@@ -798,6 +796,7 @@
           }
         },
         "resetSearchMode": {
+          "clearTargets": {          },
           "setFsmActive": {
             "fsm": "search",
             "active": false
@@ -830,7 +829,6 @@
           },
           "setScanPatternSet": {          },
           "resetScanPhase": {          },
-          "clearTargets": {          },
           "setFsmActive": {
             "fsm": "lock",
             "active": true
@@ -1394,6 +1392,7 @@
           "command": "typeSwitch",
           "stateTo": "OLSFromLookDownSearch",
           "actions": {
+            "clearTargets": {            },
             "setOLSSearchMode": {            },
             "setOLSTargetDesignationRange": {            }
           }
@@ -1404,6 +1403,7 @@
           "command": "typeSwitch",
           "stateTo": "OLSFromLookUpSearch",
           "actions": {
+            "clearTargets": {            },
             "setOLSSearchMode": {            },
             "setOLSTargetDesignationRange": {            }
           }
@@ -1413,6 +1413,7 @@
           "command": "typeSwitch",
           "stateTo": "BSVSearch",
           "actions": {
+            "clearTargets": {            },
             "setBSVSearchMode": {            },
             "setRadarTargetDesignationRange": {            }
           }
@@ -1422,6 +1423,7 @@
           "command": "typeSwitch",
           "stateTo": "BSVdHSearch",
           "actions": {
+            "clearTargets": {            },
             "setBSVdHSearchMode": {            },
             "setRadarTargetDesignationRange": {            }
           }
@@ -2289,7 +2291,8 @@
         "setCueDist": {
           "command": "cueAxisY",
           "actions": {
-            "setCueDist": {            }
+            "setCueDist": {            },
+            "setCueDopplerSpeed": {            }
           }
         },
         "setCueElevation": {
@@ -2319,6 +2322,7 @@
           "event": "targetInSight",
           "actions": {
             "detectTarget": {
+              "ignoreOwnWeapon": true,
               "rangeMult": 1.0
             }
           }
@@ -2332,6 +2336,7 @@
           "event": "update",
           "actions": {
             "detectTarget": {
+              "ignoreOwnWeapon": true,
               "rangeMult": 1.0
             }
           }
@@ -2365,7 +2370,8 @@
           "actions": {
             "extrapolateTargetsOfInterest": {            },
             "clearTargetsOfInterest": {
-              "timeOut": 3.0
+              "timeOut": 3.0,
+              "dirRateLim": 1.0
             },
             "setCenterAzimuth": {
               "source": "activeTargetOfInterest"
@@ -2394,7 +2400,7 @@
           "actions": {
             "checkIlluminationTimeOut": {
               "transiver": true,
-              "pauseMax": 5.0
+              "pauseMax": 20.0
             }
           }
         },
@@ -2420,7 +2426,7 @@
           "actions": {
             "checkIlluminationTimeOut": {
               "transiver": true,
-              "pauseMax": 5.0
+              "pauseMax": 20.0
             }
           }
         }

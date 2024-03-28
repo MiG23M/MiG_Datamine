@@ -1,6 +1,8 @@
-//-file:plus-string
 from "%scripts/dagui_natives.nut" import is_online_available
+from "app" import is_dev_version
 from "%scripts/dagui_library.nut" import *
+
+let { checkMatchingError } = require("%scripts/matching/api.nut")
 let { appendOnce } = require("%sqStdLibs/helpers/u.nut")
 let { addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { startLogout } = require("%scripts/login/logout.nut")
@@ -25,7 +27,7 @@ local fetching = false
 local fetchingInfo = false
 local fetch_counter = 0
 
-let function notifyGmChanged() {
+function notifyGmChanged() {
   let gameEventsOldFormat = {}
   foreach (_gm_id, modeInfo in gameModes) {
     if (::events.isCustomGameMode(modeInfo))
@@ -37,7 +39,7 @@ let function notifyGmChanged() {
   ::events.updateEventsData(gameEventsOldFormat)
 }
 
-let function onGameModesUpdated(modes_list) {
+function onGameModesUpdated(modes_list) {
   foreach (modeInfo in modes_list) {
     let gameModeId = modeInfo.gameModeId
     log($"matching game mode fetched '{modeInfo.name}' [{gameModeId}]")
@@ -45,7 +47,7 @@ let function onGameModesUpdated(modes_list) {
   }
 }
 
-let function addGmListToQueue(gmList) {
+function addGmListToQueue(gmList) {
   if (queueGameModesForRequest.len() == 0) {
     queueGameModesForRequest = gmList
     return
@@ -54,13 +56,13 @@ let function addGmListToQueue(gmList) {
     appendOnce(mode, queueGameModesForRequest)
 }
 
-let function getGmListFromQueue() {
+function getGmListFromQueue() {
   let res = queueGameModesForRequest.slice(0, MAX_GAME_MODES_FOR_REQUEST_INFO)
   queueGameModesForRequest = queueGameModesForRequest.slice(MAX_GAME_MODES_FOR_REQUEST_INFO)
   return res
 }
 
-let function loadGameModesFromList(gm_list) {
+function loadGameModesFromList(gm_list) {
   if (fetchingInfo) {
     addGmListToQueue(gm_list)
     return
@@ -74,7 +76,7 @@ let function loadGameModesFromList(gm_list) {
   fetchGameModesInfo({ byId = gm_list, timeout = 60 },
     function (result) {
       fetchingInfo = false
-      if (!::checkMatchingError(result, false)) {
+      if (!checkMatchingError(result, false)) {
         queueGameModesForRequest.clear()
         return
       }
@@ -90,7 +92,7 @@ let function loadGameModesFromList(gm_list) {
     })
 }
 
-let function fetchGameModes() {
+function fetchGameModes() {
   if (fetching)
     return
 
@@ -102,14 +104,14 @@ let function fetchGameModes() {
     function (result) {
       fetching = false
       let canRetry = fetch_counter < MAX_FETCH_RETRIES
-      if (::checkMatchingError(result, false)) {
+      if (checkMatchingError(result, false)) {
         loadGameModesFromList(result?.modes ?? [])
         fetch_counter = 0
         return
       }
 
       if (!canRetry) {
-        if (!::is_dev_version)
+        if (!is_dev_version())
           startLogout()
       }
       else {
@@ -120,7 +122,7 @@ let function fetchGameModes() {
   )
 }
 
-let function forceUpdateGameModes() {
+function forceUpdateGameModes() {
   if (!is_online_available())
     return
 
@@ -129,11 +131,11 @@ let function forceUpdateGameModes() {
   fetchGameModes()
 }
 
-let function removeGameMode(game_mode_id) {
+function removeGameMode(game_mode_id) {
   gameModes?.$rawdelete(game_mode_id)
 }
 
-let function onGameModesChangedNotify(added_list, removed_list, changed_list) {
+function onGameModesChangedNotify(added_list, removed_list, changed_list) {
   local needNotify = false
   let needToFetchGmList = []
 
@@ -193,11 +195,11 @@ let function onGameModesChangedNotify(added_list, removed_list, changed_list) {
     notifyGmChanged()
 }
 
-let function getGameModesByEconomicName(economicName) {
+function getGameModesByEconomicName(economicName) {
   return gameModes.filter(@(g) getEventEconomicName(g) == economicName).values()
 }
 
-let function getGameModeIdsByEconomicName(economicName) {
+function getGameModeIdsByEconomicName(economicName) {
   let res = []
   foreach (id, gm in gameModes)
     if (getEventEconomicName(gm) == economicName)
@@ -205,7 +207,7 @@ let function getGameModeIdsByEconomicName(economicName) {
   return res
 }
 
-let function getGameModeIdsByEconomicNameWithoutNight(economicName) {
+function getGameModeIdsByEconomicNameWithoutNight(economicName) {
   let res = []
   foreach (id, gm in gameModes) {
     if (getEventEconomicName(gm) != economicName)
@@ -218,7 +220,7 @@ let function getGameModeIdsByEconomicNameWithoutNight(economicName) {
   return res
 }
 
-let function getModeById(gameModeId) {
+function getModeById(gameModeId) {
   return gameModes?[gameModeId]
 }
 

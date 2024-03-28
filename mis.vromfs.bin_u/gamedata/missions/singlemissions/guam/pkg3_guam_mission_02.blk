@@ -2,10 +2,6 @@
   "selected_tag": "",
   "bin_dump_file": "",
   "mission_settings": {
-    "atmosphere": {
-      "pressure": 760.0,
-      "temperature": 24.0
-    },
     "player": {
       "army": 1,
       "wing": "player_wing"
@@ -16,20 +12,19 @@
     "mission": {
       "level": "levels/guam.bin",
       "type": "singleMission",
-      "restoreType": "attempts",
-      "optionalTakeOff": false,
       "environment": "Day",
       "weather": "hazy",
-      "windSpeed": [
-        4.0,
-        6.0
-      ],
+      "restoreType": "attempts",
+      "optionalTakeOff": false,
       "stars": {
         "year": 1944,
         "month": 7,
-        "day": 26,
-        "time": 14.0
+        "day": 26
       }
+    },
+    "atmosphere": {
+      "pressure": 760.0,
+      "temperature": 24.0
     },
     "briefing": {
       "place_loc": "",
@@ -43,6 +38,7 @@
           "map": true,
           "minTime": 4,
           "picture": "",
+          "showAirMap": false,
           "arrow": {
             "width": 1,
             "side": "enemy",
@@ -103,6 +99,10 @@
       },
       "conditions": {      },
       "actions": {
+        "missionSetWeatherParams": {
+          "waterWindStrengtMin": 4.0,
+          "waterWindStrengtMax": 6.0
+        },
         "unitSetProperties": {
           "object": "usa_bombers_squad",
           "effShootingRate": 0.8,
@@ -182,7 +182,8 @@
         "moAddMissionObjective": {
           "target": "pkg3_guam_mission_02_takeoff"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_real": {
       "is_enabled": true,
@@ -207,6 +208,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_01",
           "randomTargetsCount": 2,
           "doExplosion": true
@@ -214,6 +230,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_02",
           "randomTargetsCount": 2,
           "doExplosion": true
@@ -221,11 +252,27 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_03",
           "randomTargetsCount": 2,
           "doExplosion": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_simul": {
       "is_enabled": true,
@@ -250,6 +297,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_01",
           "randomTargetsCount": 4,
           "doExplosion": true
@@ -257,6 +319,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_02",
           "randomTargetsCount": 4,
           "doExplosion": true
@@ -264,11 +341,27 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_03",
           "randomTargetsCount": 4,
           "doExplosion": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_1ppl": {
       "is_enabled": true,
@@ -289,6 +382,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 2,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "player_wing"
         }
       },
@@ -296,6 +391,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_01",
           "randomTargetsCount": 6,
           "doExplosion": true
@@ -303,6 +413,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_02",
           "randomTargetsCount": 6,
           "doExplosion": true
@@ -310,11 +435,27 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_03",
           "randomTargetsCount": 6,
           "doExplosion": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_2ppl": {
       "is_enabled": true,
@@ -335,6 +476,8 @@
           "object_marking": 0,
           "func": "equal",
           "value": 2,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "player_wing"
         }
       },
@@ -342,6 +485,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_01",
           "randomTargetsCount": 4,
           "doExplosion": true
@@ -349,6 +507,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_02",
           "randomTargetsCount": 4,
           "doExplosion": true
@@ -356,11 +529,27 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_03",
           "randomTargetsCount": 4,
           "doExplosion": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_3ppl": {
       "is_enabled": true,
@@ -381,6 +570,8 @@
           "object_marking": 0,
           "func": "equal",
           "value": 3,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "player_wing"
         }
       },
@@ -388,6 +579,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_01",
           "randomTargetsCount": 2,
           "doExplosion": true
@@ -395,6 +601,21 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_02",
           "randomTargetsCount": 2,
           "doExplosion": true
@@ -402,11 +623,27 @@
         "unitDamage": {
           "part": 1,
           "power": 1.0,
+          "useEffect": false,
+          "countEffects": 1,
+          "delay": [
+            1.0,
+            1.0
+          ],
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "radiusOffset": [
+            10.0,
+            15.0
+          ],
           "target": "usa_bombers_03",
           "randomTargetsCount": 2,
           "doExplosion": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "player_takeoff": {
       "is_enabled": true,
@@ -430,7 +667,10 @@
       "actions": {
         "moSetObjectiveStatus": {
           "target": "pkg3_guam_mission_02_takeoff",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "wait": {
           "time": 3.0
@@ -449,7 +689,8 @@
         "triggerEnable": {
           "target": "player_near_patrol_point"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "player_near_patrol_point": {
       "is_enabled": false,
@@ -478,7 +719,10 @@
       "actions": {
         "moSetObjectiveStatus": {
           "target": "pkg3_guam_mission_02_patrol",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "missionMarkAsWaypoint": {
           "visible": false,
@@ -508,7 +752,8 @@
           "target": "usa_bombers_01_appear",
           "target": "usa_bombers_destroyed"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "update_indicators": {
       "is_enabled": false,
@@ -532,6 +777,9 @@
           "icon": "cannon",
           "icon army": 1,
           "set": true,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "jpn_artillery_squad"
         },
         "missionSetTargetsIndicator": {
@@ -541,14 +789,18 @@
           "icon": "bomber",
           "icon army": 2,
           "set": true,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "usa_bombers_squad"
         },
         "varModify": {
-          "var": "timer",
           "operator": "add",
-          "value": 1.0
+          "value": 1.0,
+          "var": "timer"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "usa_bombers_01_appear": {
       "is_enabled": false,
@@ -576,6 +828,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_01",
           "speed": 220.0
         },
@@ -586,6 +851,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_fighters_01",
           "follow_offset": [
             -150.0,
@@ -604,7 +882,8 @@
           "target": "bombers_01_without_bombs",
           "target": "usa_bombers_02_appear"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "player_near_usa_bombers_01": {
       "is_enabled": false,
@@ -639,7 +918,8 @@
           "playerAttractedCount": 2,
           "playerAttractedEffRate": 0.8
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_01_partialy_detsroyed": {
       "is_enabled": false,
@@ -660,6 +940,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 4,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_01"
         }
       },
@@ -674,13 +956,27 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_01",
           "delayForObjects": [
             2.0,
             5.0
           ]
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_01_near_patrol_point": {
       "is_enabled": false,
@@ -705,6 +1001,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_01",
           "target": "patrol_point"
         }
@@ -721,7 +1019,8 @@
           ],
           "fireRandom": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_01_without_bombs": {
       "is_enabled": false,
@@ -742,6 +1041,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_01"
         }
       },
@@ -753,13 +1054,27 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_01",
           "delayForObjects": [
             2.0,
             5.0
           ]
         }
-      }
+      },
+      "else_actions": {      }
     },
     "usa_bombers_02_appear": {
       "is_enabled": false,
@@ -785,6 +1100,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 3,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_01"
         }
       },
@@ -800,6 +1117,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_02",
           "speed": 220.0
         },
@@ -810,6 +1140,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_fighters_02",
           "follow_offset": [
             -150.0,
@@ -828,7 +1171,8 @@
           "target": "usa_bombers_03_appear",
           "target": "bombers_02_without_bombs"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "player_near_usa_bombers_02": {
       "is_enabled": false,
@@ -863,7 +1207,8 @@
           "playerAttractedCount": 2,
           "playerAttractedEffRate": 0.8
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_02_partialy_detsroyed": {
       "is_enabled": false,
@@ -884,6 +1229,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 4,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_02"
         }
       },
@@ -898,13 +1245,27 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_02",
           "delayForObjects": [
             2.0,
             5.0
           ]
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_02_near_patrol_point": {
       "is_enabled": false,
@@ -929,6 +1290,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_02",
           "target": "patrol_point"
         }
@@ -945,7 +1308,8 @@
           ],
           "fireRandom": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_02_without_bombs": {
       "is_enabled": false,
@@ -966,6 +1330,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_02"
         }
       },
@@ -977,13 +1343,27 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_02",
           "delayForObjects": [
             2.0,
             5.0
           ]
         }
-      }
+      },
+      "else_actions": {      }
     },
     "usa_bombers_03_appear": {
       "is_enabled": false,
@@ -1009,6 +1389,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 3,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_02"
         }
       },
@@ -1024,6 +1406,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_03",
           "speed": 220.0
         },
@@ -1034,6 +1429,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_fighters_03",
           "follow_offset": [
             -150.0,
@@ -1051,7 +1459,8 @@
           "target": "bombers_03_near_patrol_point",
           "target": "bombers_03_without_bombs"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "player_near_usa_bombers_03": {
       "is_enabled": false,
@@ -1086,7 +1495,8 @@
           "playerAttractedCount": 2,
           "playerAttractedEffRate": 0.8
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_03_partialy_detsroyed": {
       "is_enabled": false,
@@ -1107,6 +1517,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 4,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_03"
         }
       },
@@ -1121,13 +1533,27 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_03",
           "delayForObjects": [
             2.0,
             5.0
           ]
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_03_near_patrol_point": {
       "is_enabled": false,
@@ -1152,6 +1578,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_03",
           "target": "patrol_point"
         }
@@ -1168,7 +1596,8 @@
           ],
           "fireRandom": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bombers_03_without_bombs": {
       "is_enabled": false,
@@ -1189,6 +1618,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_03"
         }
       },
@@ -1200,6 +1631,19 @@
           "useUnitHeightForTele": true,
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
+          "horizontalDirectionForTeleport": true,
           "object": "usa_bombers_03",
           "delayForObjects": [
             2.0,
@@ -1209,7 +1653,8 @@
         "triggerEnable": {
           "target": "check_for_complete"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "fail_mission": {
       "is_enabled": true,
@@ -1230,6 +1675,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 5,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "jpn_artillery_squad"
         }
       },
@@ -1239,13 +1686,17 @@
         },
         "moSetObjectiveStatus": {
           "target": "pkg3_guam_mission_02_defend",
-          "status": 3
+          "status": 3,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "wait": {
           "time": 3.0
         },
         "missionFailed": {        }
-      }
+      },
+      "else_actions": {      }
     },
     "check_for_complete": {
       "is_enabled": false,
@@ -1266,6 +1717,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_squad"
         },
         "unitWhenCountMatches": {
@@ -1273,6 +1726,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_squad"
         }
       },
@@ -1280,7 +1735,8 @@
         "triggerEnable": {
           "target": "complete_mission"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "complete_mission": {
       "is_enabled": false,
@@ -1299,13 +1755,17 @@
       "actions": {
         "moSetObjectiveStatus": {
           "target": "pkg3_guam_mission_02_defend",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "wait": {
           "time": 8.0
         },
         "missionCompleted": {        }
-      }
+      },
+      "else_actions": {      }
     },
     "usa_bombers_destroyed": {
       "is_enabled": false,
@@ -1326,6 +1786,8 @@
           "object_marking": 0,
           "func": "more",
           "value": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_squad"
         }
       },
@@ -1336,7 +1798,8 @@
         "triggerEnable": {
           "target": "check_for_kill_all"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_for_kill_all": {
       "is_enabled": false,
@@ -1357,15 +1820,21 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "usa_bombers_squad"
         }
       },
       "actions": {
         "moSetObjectiveStatus": {
           "target": "pkg3_guam_mission_02_kill_all",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         }
-      }
+      },
+      "else_actions": {      }
     }
   },
   "mission_objectives": {
@@ -1447,9 +1916,21 @@
     492.55,
     4378.9,
 ],
-      "closed_waypoints": false,
       "unit_class": "ki_61_1a_hei",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -1489,9 +1970,21 @@
     66.35,
     1341.25,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t90_sandfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 5,
@@ -1526,9 +2019,21 @@
     66.35,
     1897.45,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t90_sandfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 5,
@@ -1563,9 +2068,21 @@
     66.35,
     2421.05,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t90_sandfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 5,
@@ -1600,9 +2117,21 @@
     66.35,
     2745.25,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t90_sandfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 5,
@@ -1637,9 +2166,21 @@
     29.4,
     1197.2,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1676,9 +2217,21 @@
     29.4,
     1587.45,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1715,9 +2268,21 @@
     29.4,
     1674.9,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1754,9 +2319,21 @@
     29.4,
     1870.35,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1793,9 +2370,21 @@
     29.4,
     2205.15,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1832,9 +2421,21 @@
     29.4,
     2616.05,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1871,9 +2472,21 @@
     29.4,
     2622.35,
 ],
-      "closed_waypoints": false,
       "unit_class": "jpn_75mm_t88_coastfort",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1910,16 +2523,12 @@
     82.85,
     1623.4,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "jpn_artillery_01",
         "squad_members": "jpn_artillery_02",
         "squad_members": "jpn_artillery_03",
         "squad_members": "jpn_artillery_04"
-      },
-      "way": {      }
+      }
     },
     "squad": {
       "name": "jpn_aaa_squad",
@@ -1937,9 +2546,6 @@
     66.4,
     1800.25,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "jpn_aaa_01",
         "squad_members": "jpn_aaa_02",
@@ -1948,8 +2554,7 @@
         "squad_members": "jpn_aaa_05",
         "squad_members": "jpn_aaa_06",
         "squad_members": "jpn_aaa_07"
-      },
-      "way": {      }
+      }
     },
     "armada": {
       "name": "usa_bombers_01",
@@ -1967,9 +2572,21 @@
     387.35,
     14252.2,
 ],
-      "closed_waypoints": false,
       "unit_class": "sbd-3",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 16,
@@ -2009,9 +2626,21 @@
     1342.7,
     14252.2,
 ],
-      "closed_waypoints": false,
       "unit_class": "f4u-1c",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 6,
@@ -2051,9 +2680,21 @@
     387.35,
     10281.5,
 ],
-      "closed_waypoints": false,
       "unit_class": "sbd-3",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 16,
@@ -2093,9 +2734,21 @@
     1342.7,
     10761.2,
 ],
-      "closed_waypoints": false,
       "unit_class": "f4u-1c",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 6,
@@ -2135,9 +2788,21 @@
     387.35,
     -4537.4,
 ],
-      "closed_waypoints": false,
       "unit_class": "sbd-3",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 16,
@@ -2177,9 +2842,21 @@
     1342.7,
     -4033.8,
 ],
-      "closed_waypoints": false,
       "unit_class": "f4u-1c",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 6,
@@ -2219,9 +2896,21 @@
     0.0,
     11876.8,
 ],
-      "closed_waypoints": false,
       "unit_class": "uss_cv_enterprise",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -2256,9 +2945,21 @@
     0.0,
     12644.6,
 ],
-      "closed_waypoints": false,
       "unit_class": "uss_cv_immortal",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -2293,9 +2994,21 @@
     0.0,
     10722.5,
 ],
-      "closed_waypoints": false,
       "unit_class": "uss_dd_sims",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -2330,9 +3043,21 @@
     0.0,
     11451.7,
 ],
-      "closed_waypoints": false,
       "unit_class": "uss_dd_sims",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -2367,9 +3092,21 @@
     0.0,
     12167.5,
 ],
-      "closed_waypoints": false,
       "unit_class": "uss_dd_sims",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -2404,17 +3141,13 @@
     0.0,
     2701.2,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "usa_ship_01",
         "squad_members": "usa_ship_02",
         "squad_members": "usa_ship_03",
         "squad_members": "usa_ship_04",
         "squad_members": "usa_ship_05"
-      },
-      "way": {      }
+      }
     },
     "squad": {
       "name": "usa_bombers_squad",
@@ -2432,15 +3165,11 @@
     -12.75,
     5565.5,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "usa_bombers_01",
         "squad_members": "usa_bombers_02",
         "squad_members": "usa_bombers_03"
-      },
-      "way": {      }
+      }
     }
   },
   "areas": {
@@ -2588,5 +3317,20 @@
 ],
       "props": {      }
     }
-  }
+  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    }
+  },
+  "wayPoints": {  }
 }

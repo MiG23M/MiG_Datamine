@@ -101,14 +101,17 @@
       "ex_armor_02_dm": {
         "armorThickness": 9.0
       },
+      "ex_armor_03_dm": {
+        "armorThickness": 9.0
+      },
       "ex_decor_12_dm": {
-        "armorThickness": 5.0
+        "armorThickness": 10.0
       },
       "ex_decor_13_dm": {
-        "armorThickness": 5.0
+        "armorThickness": 10.0
       },
       "ex_decor_14_dm": {
-        "armorThickness": 5.0
+        "armorThickness": 10.0
       },
       "ex_armor_04_dm": {
         "armorThickness": 9.0
@@ -127,6 +130,46 @@
       "composite_armor_hull_03_dm": {
         "armorThickness": 5.0,
         "hidableInXrayViewer": true
+      },
+      "ex_decor_r_06_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_decor_r_07_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_decor_l_06_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_decor_l_07_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_decor_r_02_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_decor_l_02_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_armor_l_01_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_armor_r_01_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_armor_l_02_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
+      },
+      "ex_armor_r_02_dm": {
+        "armorClass": "tank_structural_steel",
+        "armorThickness": 5.0
       }
     },
     "turret": {
@@ -272,6 +315,21 @@
         "hp": 50.0
       }
     },
+    "body_side_screens": {
+      "armorClass": "t_90_rubber_fabric_screens",
+      "hp": 300.0,
+      "hidableInViewer": true,
+      "armorThickness": 8.0,
+      "createSecondaryShatters": false,
+      "ex_decor_l_05_dm": {      },
+      "ex_decor_r_05_dm": {      },
+      "ex_decor_l_01_dm": {      },
+      "ex_decor_r_01_dm": {      },
+      "ex_decor_l_03_dm": {      },
+      "ex_decor_l_04_dm": {      },
+      "ex_decor_r_03_dm": {      },
+      "ex_decor_r_04_dm": {      }
+    },
     "chassis": {
       "armorClass": "tank_steel_wheels",
       "hp": 300.0,
@@ -292,6 +350,12 @@
       "wheel_l_drive_dm": {      },
       "wheel_r_front_dm": {      },
       "wheel_l_front_dm": {      },
+      "wheel_l_top_01_dm": {      },
+      "wheel_l_top_02_dm": {      },
+      "wheel_l_top_03_dm": {      },
+      "wheel_r_top_01_dm": {      },
+      "wheel_r_top_02_dm": {      },
+      "wheel_r_top_03_dm": {      },
       "wheel_support_dm": {
         "armorThickness": 22.0
       }
@@ -395,10 +459,16 @@
         "restrainDamage": 0.5
       },
       "cannon_breech_01_dm": {
-        "armorThickness": 10.0
+        "armorThickness": 10.0,
+        "restrainDamage": 0.5,
+        "armorThrough": 150.0,
+        "armorThickness": 150.0
       },
       "cannon_breech_02_dm": {
-        "armorThickness": 10.0
+        "armorThickness": 10.0,
+        "restrainDamage": 0.5,
+        "armorThrough": 150.0,
+        "armorThickness": 150.0
       },
       "cannon_breech_03_dm": {
         "armorThickness": 10.0
@@ -421,6 +491,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2095,13 +2167,21 @@
       "neutralGearRatio": 10.0,
       "gearRatios": {
         "ratio": -1.0,
+        "ratio": -1.3385,
         "ratio": -1.677,
+        "ratio": -2.427,
         "ratio": -3.177,
+        "ratio": -4.7085,
         "ratio": -6.24,
+        "ratio": -12.48,
         "ratio": 0.0,
-        "ratio": 10.0,
+        "ratio": 12.48,
+        "ratio": 6.24,
+        "ratio": 4.7085,
         "ratio": 3.177,
+        "ratio": 2.427,
         "ratio": 1.677,
+        "ratio": 1.3385,
         "ratio": 1.0
       }
     },
@@ -2752,7 +2832,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -2807,15 +2887,6 @@
       "effects": {
         "nightVision": {
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600
@@ -3374,15 +3445,6 @@
             "noiseFactor": 0.04
           },
           "commanderViewIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               1600,
               1200

@@ -52,7 +52,7 @@
     "mass": 0.0596,
     "caliber": 0.0145,
     "speed": 1000.0,
-    "Cx": 0.15,
+    "Cx": 0.337,
     "maxDistance": 4000.0,
     "normalizationPreset": "default",
     "ricochetPreset": "default",
@@ -245,7 +245,7 @@
     "mass": 0.0635,
     "caliber": 0.0145,
     "speed": 1000.0,
-    "Cx": 0.15,
+    "Cx": 0.337,
     "maxDistance": 4000.0,
     "normalizationPreset": "default",
     "ricochetPreset": "default",
@@ -635,7 +635,7 @@
     "speed": 1000.0,
     "explosiveType": "tnt",
     "explosiveMass": 0.0015,
-    "Cx": 0.15,
+    "Cx": 0.337,
     "maxDistance": 4000.0,
     "normalizationPreset": "default",
     "ricochetPreset": "default",
@@ -650,6 +650,7 @@
     "bulletName": "14mm_mdz",
     "onHitChanceMultFire": 40.0,
     "dynamicKv": true,
+    "splashFallBySquare": true,
     "explodeTreshold": 0.1,
     "fuseDelay": 0.0,
     "fuseOnWater": true,
@@ -683,16 +684,28 @@
       },
       "shatter": {
         "useRealShatters": true,
-        "countPortion": 1.0,
+        "countPortion": 0.5,
+        "realShattersSplicing": 0.75,
         "segment": {
           "radiusScale": 1.0,
           "penetrationScale": 1.0,
           "damageScale": 1.0,
           "angles": [
             0.0,
+            60.0
+          ],
+          "countPortion": 1.0,
+          "onHitChanceMultFire": 75.0
+        },
+        "segment": {
+          "radiusScale": 1.0,
+          "penetrationScale": 1.0,
+          "damageScale": 1.0,
+          "angles": [
+            60.0,
             180.0
           ],
-          "countPortion": 1.0
+          "countPortion": 0.0
         }
       }
     },
@@ -865,7 +878,7 @@
       "mass": 0.0596,
       "caliber": 0.0145,
       "speed": 1000.0,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -1060,7 +1073,7 @@
       "speed": 1000.0,
       "explosiveType": "tnt",
       "explosiveMass": 0.0015,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -1075,6 +1088,7 @@
       "bulletName": "14mm_mdz",
       "onHitChanceMultFire": 40.0,
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "explodeTreshold": 0.1,
       "fuseDelay": 0.0,
       "fuseOnWater": true,
@@ -1108,16 +1122,28 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 1.0,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              60.0
+            ],
+            "countPortion": 1.0,
+            "onHitChanceMultFire": 75.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              60.0,
               180.0
             ],
-            "countPortion": 1.0
+            "countPortion": 0.0
           }
         }
       },
@@ -1289,7 +1315,7 @@
       "mass": 0.0635,
       "caliber": 0.0145,
       "speed": 1000.0,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -1483,7 +1509,7 @@
       "speed": 1000.0,
       "explosiveType": "tnt",
       "explosiveMass": 0.0015,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -1498,6 +1524,7 @@
       "bulletName": "14mm_mdz",
       "onHitChanceMultFire": 40.0,
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "explodeTreshold": 0.1,
       "fuseDelay": 0.0,
       "fuseOnWater": true,
@@ -1531,16 +1558,28 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 1.0,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              60.0
+            ],
+            "countPortion": 1.0,
+            "onHitChanceMultFire": 75.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              60.0,
               180.0
             ],
-            "countPortion": 1.0
+            "countPortion": 0.0
           }
         }
       },
@@ -1714,7 +1753,7 @@
       "mass": 0.0596,
       "caliber": 0.0145,
       "speed": 1000.0,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -1907,7 +1946,7 @@
       "mass": 0.0635,
       "caliber": 0.0145,
       "speed": 1000.0,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -2297,7 +2336,7 @@
       "speed": 1000.0,
       "explosiveType": "tnt",
       "explosiveMass": 0.0015,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -2312,6 +2351,7 @@
       "bulletName": "14mm_mdz",
       "onHitChanceMultFire": 40.0,
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "explodeTreshold": 0.1,
       "fuseDelay": 0.0,
       "fuseOnWater": true,
@@ -2345,16 +2385,28 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 1.0,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              60.0
+            ],
+            "countPortion": 1.0,
+            "onHitChanceMultFire": 75.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              60.0,
               180.0
             ],
-            "countPortion": 1.0
+            "countPortion": 0.0
           }
         }
       },
@@ -2530,7 +2582,7 @@
       "speed": 1000.0,
       "explosiveType": "tnt",
       "explosiveMass": 0.0015,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -2545,6 +2597,7 @@
       "bulletName": "14mm_mdz",
       "onHitChanceMultFire": 40.0,
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "explodeTreshold": 0.1,
       "fuseDelay": 0.0,
       "fuseOnWater": true,
@@ -2578,16 +2631,28 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 1.0,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              60.0
+            ],
+            "countPortion": 1.0,
+            "onHitChanceMultFire": 75.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              60.0,
               180.0
             ],
-            "countPortion": 1.0
+            "countPortion": 0.0
           }
         }
       },
@@ -2761,7 +2826,7 @@
       "speed": 1000.0,
       "explosiveType": "tnt",
       "explosiveMass": 0.0015,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -2776,6 +2841,7 @@
       "bulletName": "14mm_mdz",
       "onHitChanceMultFire": 40.0,
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "explodeTreshold": 0.1,
       "fuseDelay": 0.0,
       "fuseOnWater": true,
@@ -2809,16 +2875,28 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 1.0,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              60.0
+            ],
+            "countPortion": 1.0,
+            "onHitChanceMultFire": 75.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              60.0,
               180.0
             ],
-            "countPortion": 1.0
+            "countPortion": 0.0
           }
         }
       },
@@ -2992,7 +3070,7 @@
       "speed": 1000.0,
       "explosiveType": "tnt",
       "explosiveMass": 0.0015,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",
@@ -3007,6 +3085,7 @@
       "bulletName": "14mm_mdz",
       "onHitChanceMultFire": 40.0,
       "dynamicKv": true,
+      "splashFallBySquare": true,
       "explodeTreshold": 0.1,
       "fuseDelay": 0.0,
       "fuseOnWater": true,
@@ -3040,16 +3119,28 @@
         },
         "shatter": {
           "useRealShatters": true,
-          "countPortion": 1.0,
+          "countPortion": 0.5,
+          "realShattersSplicing": 0.75,
           "segment": {
             "radiusScale": 1.0,
             "penetrationScale": 1.0,
             "damageScale": 1.0,
             "angles": [
               0.0,
+              60.0
+            ],
+            "countPortion": 1.0,
+            "onHitChanceMultFire": 75.0
+          },
+          "segment": {
+            "radiusScale": 1.0,
+            "penetrationScale": 1.0,
+            "damageScale": 1.0,
+            "angles": [
+              60.0,
               180.0
             ],
-            "countPortion": 1.0
+            "countPortion": 0.0
           }
         }
       },
@@ -3221,7 +3312,7 @@
       "mass": 0.0596,
       "caliber": 0.0145,
       "speed": 1000.0,
-      "Cx": 0.15,
+      "Cx": 0.337,
       "maxDistance": 4000.0,
       "normalizationPreset": "default",
       "ricochetPreset": "default",

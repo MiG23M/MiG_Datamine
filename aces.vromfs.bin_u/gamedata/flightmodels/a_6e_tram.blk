@@ -24,7 +24,6 @@
   "ilsHaveAVQ7CCRP": true,
   "needTpsNightVision": true,
   "type": "typeFighter",
-  "paratrooper": "ally",
   "advancedInstructor": true,
   "overheatBlk": "gameData/FlightModels/dm/overheat.blk",
   "damagePartsToCollisionObjectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_objects.blk",
@@ -40,6 +39,7 @@
   "fightAiBehaviour": "assault",
   "laserDesignator": true,
   "autopilotImpl": "FBW",
+  "paratrooper": "usa_irvin_i_24_ejection_para",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -2419,19 +2419,6 @@
       },
       "display": {
         "textureArea": [
-          0.5,
-          0.5,
-          1.0,
-          1.0
-        ],
-        "page": {
-          "type": "radar",
-          "scale": 1.0,
-          "radarColor": [27, 115, 255, 255]
-        }
-      },
-      "display": {
-        "textureArea": [
           0.0,
           0.5,
           0.5,
@@ -2506,7 +2493,8 @@
       "blk": "gameData/sensors/us_an_alr_45v.blk"
     },
     "sensor": {
-      "blk": "gameData/sensors/LaserDesignatorSensor.blk"
+      "blk": "gameData/sensors/LaserDesignatorSensor.blk",
+      "node": "optic1_gun"
     }
   },
   "commonWeapons": {
@@ -2694,7 +2682,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
@@ -2703,7 +2690,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
@@ -2795,7 +2781,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_12_paveway_2_x2.blk",
           "emitter": "ter_001",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -2811,7 +2798,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_16_paveway_2.blk",
           "emitter": "ter_001",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -2828,7 +2816,8 @@
           "emitter": "bomb_2000lb_001",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3005,7 +2994,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare3",
           "bullets": 120,
@@ -3014,7 +3002,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 120,
@@ -3106,7 +3093,8 @@
           "blk": "gameData/Weapons/containers/mer_us_gbu_12_paveway_2_x2_left.blk",
           "emitter": "mer_002",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3122,7 +3110,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_16_paveway_2.blk",
           "emitter": "ter_002",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3139,7 +3128,8 @@
           "emitter": "bomb_2000lb_002",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3316,7 +3306,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare5",
           "bullets": 120,
@@ -3325,7 +3314,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare6",
           "bullets": 120,
@@ -3352,7 +3340,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_12_paveway_2.blk",
           "emitter": "ter_003",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3368,7 +3357,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_16_paveway_2.blk",
           "emitter": "ter_003",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3385,7 +3375,8 @@
           "emitter": "bomb_2000lb_003",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3609,7 +3600,8 @@
           "blk": "gameData/Weapons/containers/mer_us_gbu_12_paveway_2_x2_right.blk",
           "emitter": "mer_004",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3625,7 +3617,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_16_paveway_2.blk",
           "emitter": "ter_004",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3642,7 +3635,8 @@
           "emitter": "bomb_2000lb_004",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3819,7 +3813,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare7",
           "bullets": 120,
@@ -3828,7 +3821,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare8",
           "bullets": 120,
@@ -3920,7 +3912,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_12_paveway_2_x2.blk",
           "emitter": "ter_005",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3936,7 +3929,8 @@
           "blk": "gameData/Weapons/containers/ter_us_gbu_16_paveway_2.blk",
           "emitter": "ter_005",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3953,7 +3947,8 @@
           "emitter": "bomb_2000lb_005",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -4130,7 +4125,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare9",
           "bullets": 120,
@@ -4139,7 +4133,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare10",
           "bullets": 120,
@@ -4421,6 +4414,30 @@
     "replace_tex": {
       "from": "a_6e_tram_n*"
     }
+  },
+  "bailout": {
+    "buttonHoldTime": 1.0,
+    "wreckSpeed": 10.0,
+    "wreckDir": [
+      -1.0,
+      1.0,
+      0.0
+    ],
+    "seatEjectDelay": 0.5,
+    "ejectInterval": 0.7,
+    "seatVel": [
+      -10.0,
+      20.0,
+      0.0
+    ],
+    "minHeight": 0.0,
+    "minSpeed": 0.0,
+    "hasSafeExit": true,
+    "wreck": "blister1",
+    "seat": "seat_01",
+    "seat": "seat_02",
+    "fxEmitter": "blister1",
+    "fxType": "catapult_expl_ejection"
   },
   "cutting": {
     "_emtr_break_wing0_l_from": [

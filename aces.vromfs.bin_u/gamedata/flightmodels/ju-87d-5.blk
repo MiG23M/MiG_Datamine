@@ -28,7 +28,37 @@
       "cannon2_dm": {
         "hp": 15.0
       },
+      "cannon3_dm": {
+        "hp": 15.0
+      },
+      "cannon4_dm": {
+        "hp": 15.0
+      },
+      "cannon5_dm": {
+        "hp": 15.0
+      },
+      "cannon6_dm": {
+        "hp": 15.0
+      },
       "gun1_dm": {
+        "hp": 15.0
+      },
+      "mgun1_dm": {
+        "hp": 15.0
+      },
+      "mgun2_dm": {
+        "hp": 15.0
+      },
+      "mgun3_dm": {
+        "hp": 15.0
+      },
+      "mgun4_dm": {
+        "hp": 15.0
+      },
+      "mgun5_dm": {
+        "hp": 15.0
+      },
+      "mgun6_dm": {
         "hp": 15.0
       }
     },
@@ -155,6 +185,18 @@
         "hp": 19.5
       },
       "cover4_dm": {
+        "hp": 19.5
+      },
+      "cover5_dm": {
+        "hp": 19.5
+      },
+      "cover6_dm": {
+        "hp": 19.5
+      },
+      "cover7_dm": {
+        "hp": 19.5
+      },
+      "cover8_dm": {
         "hp": 19.5
       }
     },
@@ -361,6 +403,18 @@
       "name": "cannon2_dm"
     },
     "part": {
+      "name": "cannon3_dm"
+    },
+    "part": {
+      "name": "cannon4_dm"
+    },
+    "part": {
+      "name": "cannon5_dm"
+    },
+    "part": {
+      "name": "cannon6_dm"
+    },
+    "part": {
       "name": "cover1_dm"
     },
     "part": {
@@ -371,6 +425,18 @@
     },
     "part": {
       "name": "cover4_dm"
+    },
+    "part": {
+      "name": "cover5_dm"
+    },
+    "part": {
+      "name": "cover6_dm"
+    },
+    "part": {
+      "name": "cover7_dm"
+    },
+    "part": {
+      "name": "cover8_dm"
     },
     "part": {
       "name": "elevator0_dm",
@@ -844,6 +910,24 @@
     },
     "part": {
       "name": "gunner1_dm"
+    },
+    "part": {
+      "name": "mgun1_dm"
+    },
+    "part": {
+      "name": "mgun2_dm"
+    },
+    "part": {
+      "name": "mgun3_dm"
+    },
+    "part": {
+      "name": "mgun4_dm"
+    },
+    "part": {
+      "name": "mgun5_dm"
+    },
+    "part": {
+      "name": "mgun6_dm"
     },
     "part": {
       "name": "oil1_dm",
@@ -2145,7 +2229,10 @@
     },
     "preset": {
       "name": "ju-87d-5_pc500",
-      "blk": "gameData/FlightModels/weaponPresets/ju-87d-5_pc500.blk"
+      "blk": "gameData/FlightModels/weaponPresets/ju-87d-5_pc500.blk",
+      "weaponConfig": {
+        "presetType": "AIR_TO_SEA"
+      }
     },
     "preset": {
       "name": "ju-87d-5_3x_flamm_250",
@@ -2184,6 +2271,22 @@
       "node": "wb151_r",
       "node": "wb81b_l",
       "node": "wb81b_r"
+    },
+    "HideDmParts": {
+      "node": "cover5_dm",
+      "node": "cannon3_dm",
+      "node": "cannon4_dm",
+      "node": "cover6_dm",
+      "node": "cannon5_dm",
+      "node": "cannon6_dm",
+      "node": "cover7_dm",
+      "node": "mgun1_dm",
+      "node": "mgun2_dm",
+      "node": "mgun3_dm",
+      "node": "cover8_dm",
+      "node": "mgun4_dm",
+      "node": "mgun5_dm",
+      "node": "mgun6_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2919,6 +3022,12 @@
         "iconType": "doublebarreled_box",
         "name": "wb81b",
         "reqModification": "mg81gunpod_mod",
+        "ShowDmParts": {
+          "node": "cover7_dm",
+          "node": "mgun1_dm",
+          "node": "mgun2_dm",
+          "node": "mgun3_dm"
+        },
         "ShowNodes": {
           "node": "wb81b_l",
           "node": "etc50_pylon_l",
@@ -2931,6 +3040,7 @@
           "flash": "flare16",
           "shell": "emtr_shellrejection3",
           "bullets": 250,
+          "dm": "mgun1_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2945,6 +3055,7 @@
           "flash": "flare17",
           "shell": "emtr_shellrejection3",
           "bullets": 250,
+          "dm": "mgun1_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2957,6 +3068,7 @@
           "flash": "flare18",
           "shell": "emtr_shellrejection3",
           "bullets": 250,
+          "dm": "mgun2_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2969,6 +3081,7 @@
           "flash": "flare19",
           "shell": "emtr_shellrejection3",
           "bullets": 250,
+          "dm": "mgun2_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2981,6 +3094,7 @@
           "flash": "flare20",
           "shell": "emtr_shellrejection3",
           "bullets": 250,
+          "dm": "mgun3_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -2993,6 +3107,7 @@
           "flash": "flare21",
           "shell": "emtr_shellrejection3",
           "bullets": 250,
+          "dm": "mgun3_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -3003,6 +3118,11 @@
         "iconType": "doublebarreled_box",
         "name": "wb151",
         "reqModification": "mg15120gunpod_mod",
+        "ShowDmParts": {
+          "node": "cover5_dm",
+          "node": "cannon3_dm",
+          "node": "cannon4_dm"
+        },
         "ShowNodes": {
           "node": "wb151_l",
           "node": "etc50_pylon_l",
@@ -3015,6 +3135,7 @@
           "flash": "flare8",
           "shell": "emtr_shellrejection4",
           "bullets": 200,
+          "dm": "cannon3_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -3027,6 +3148,7 @@
           "flash": "flare9",
           "shell": "emtr_shellrejection4",
           "bullets": 200,
+          "dm": "cannon4_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4134,6 +4256,12 @@
         "iconType": "doublebarreled_box",
         "name": "wb81b",
         "reqModification": "mg81gunpod_mod",
+        "ShowDmParts": {
+          "node": "cover8_dm",
+          "node": "mgun4_dm",
+          "node": "mgun5_dm",
+          "node": "mgun6_dm"
+        },
         "ShowNodes": {
           "node": "wb81b_r",
           "node": "etc50_pylon_r",
@@ -4146,6 +4274,7 @@
           "flash": "flare10",
           "shell": "emtr_shellrejection4",
           "bullets": 250,
+          "dm": "mgun4_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4160,6 +4289,7 @@
           "flash": "flare11",
           "shell": "emtr_shellrejection4",
           "bullets": 250,
+          "dm": "mgun4_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4172,6 +4302,7 @@
           "flash": "flare12",
           "shell": "emtr_shellrejection4",
           "bullets": 250,
+          "dm": "mgun5_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4184,6 +4315,7 @@
           "flash": "flare13",
           "shell": "emtr_shellrejection4",
           "bullets": 250,
+          "dm": "mgun5_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4196,6 +4328,7 @@
           "flash": "flare14",
           "shell": "emtr_shellrejection4",
           "bullets": 250,
+          "dm": "mgun6_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4208,6 +4341,7 @@
           "flash": "flare15",
           "shell": "emtr_shellrejection4",
           "bullets": 250,
+          "dm": "mgun6_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4218,6 +4352,11 @@
         "iconType": "doublebarreled_box",
         "name": "wb151",
         "reqModification": "mg15120gunpod_mod",
+        "ShowDmParts": {
+          "node": "cover6_dm",
+          "node": "cannon5_dm",
+          "node": "cannon6_dm"
+        },
         "ShowNodes": {
           "node": "wb151_r",
           "node": "etc50_pylon_r",
@@ -4230,6 +4369,7 @@
           "flash": "flare6",
           "shell": "emtr_shellrejection3",
           "bullets": 200,
+          "dm": "cannon5_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,
@@ -4242,6 +4382,7 @@
           "flash": "flare7",
           "shell": "emtr_shellrejection3",
           "bullets": 200,
+          "dm": "cannon6_dm",
           "traceOffset": 1,
           "spread": 1.0,
           "counterIndex": 1,

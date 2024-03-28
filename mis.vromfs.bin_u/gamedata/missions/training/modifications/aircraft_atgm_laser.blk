@@ -10,15 +10,49 @@
       "army": 2
     },
     "mission": {
-      "type": "testFlight",
-      "level": "levels/avg_iberian_castle.bin",
+      "type": "training",
+      "gt_training": false,
+      "level": "levels/avg_soviet_suburban.bin",
       "environment": "16",
       "weather": "clear",
-      "locName": "missions/missile_test",
       "gt_reload_explosives": false,
       "isLimitedFuel": false,
       "isLimitedAmmo": false,
       "timeLimit": 30
+    },
+    "briefing": {
+      "place_loc": "",
+      "date_loc": "",
+      "objective_loc": "",
+      "music": "action_01",
+      "viewAreaScale": 3.0,
+      "part": {
+        "event": "",
+        "minTime": 0,
+        "slide": {
+          "map": true,
+          "minTime": 4,
+          "picture": "",
+          "showAirMap": true,
+          "arrow": {
+            "width": 1,
+            "side": "player",
+            "point": "player",
+            "point": "target_tank01"
+          },
+          "icon": {
+            "icontype": "fighter",
+            "side": "player",
+            "target": "player",
+            "lookAt": "target_tank01"
+          },
+          "icon": {
+            "icontype": "tank",
+            "side": "enemy",
+            "target": "target_tank01"
+          }
+        }
+      }
     }
   },
   "imports": {  },
@@ -80,6 +114,10 @@
         "playerSetMouseAim": {
           "lookat": "target_tank01"
         },
+        "unitSetProperties": {
+          "object": "target_tank02",
+          "isImmortal": true
+        },
         "playerControls": {
           "setStatus": "disable",
           "control": "ALL"
@@ -100,7 +138,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -114,6 +152,9 @@
         }
       },
       "else_actions": {
+        "wait": {
+          "time": 0.5
+        },
         "missionSetTimeSpeed": {
           "speed": 0.0,
           "realtimeTriggers": true
@@ -133,7 +174,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -162,7 +203,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -195,7 +236,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -228,7 +269,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 1.0
+          "time": 0.01
         }
       },
       "conditions": {
@@ -279,7 +320,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 1.0
+          "time": 0.01
         }
       },
       "conditions": {      },
@@ -296,7 +337,7 @@
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "item": "ID_AAM"
+          "item": "ID_AGM"
         },
         "missionSetTimeSpeed": {
           "speed": 0.0,
@@ -352,6 +393,9 @@
           "force": true,
           "objects": "player"
         },
+        "wait": {
+          "time": 0.5
+        },
         "missionSetTimeSpeed": {
           "speed": 0.0,
           "realtimeTriggers": true
@@ -359,7 +403,8 @@
         "playerControls": {
           "setStatus": "enable",
           "control": "AXIS_TURRET_X",
-          "control": "AXIS_TURRET_Y"
+          "control": "AXIS_TURRET_Y",
+          "control": "ID_TOGGLE_LASER_DESIGNATOR"
         },
         "triggerEnable": {
           "target": "start_msg"
@@ -503,7 +548,7 @@
           "speed": 1.0,
           "realtimeTriggers": true
         },
-        "playerCenterMouseAim": {        },
+        "__playerCenterMouseAim": {        },
         "wait": {
           "time": 1.0
         },
@@ -541,7 +586,7 @@
         "hudElementSelectionShade": {
           "object": "tank_target",
           "element": "curTarget",
-          "targetName": "target_tank01"
+          "targetName": "target_tank02"
         },
         "playHint": {
           "hintType": "standard",
@@ -555,13 +600,11 @@
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "item": "ID_CAMERA_OPTICS",
           "item": "ID_TOGGLE_VIEW"
         },
         "playerControls": {
           "setStatus": "enable",
-          "control": "ID_TOGGLE_VIEW",
-          "control": "ID_CAMERA_OPTICS"
+          "control": "ID_TOGGLE_VIEW"
         },
         "unitSetProperties": {
           "object": "target_tank01",
@@ -617,8 +660,7 @@
         },
         "playerControls": {
           "setStatus": "disable",
-          "control": "ID_TOGGLE_VIEW",
-          "control": "ID_CAMERA_OPTICS"
+          "control": "ID_TOGGLE_VIEW"
         },
         "hudElementSelectionShade": {
           "element": ""
@@ -626,116 +668,16 @@
         "wait": {
           "time": 2.0
         },
-        "triggerEnable": {
-          "target": "check_starts"
-        },
-        "varSetBool": {
-          "value": true,
-          "var": "is_skip_view"
-        }
-      },
-      "else_actions": {      }
-    },
-    "check_starts": {
-      "is_enabled": false,
-      "comments": "",
-      "props": {
-        "actionsType": "PERFORM_ONE_BY_ONE",
-        "conditionsType": "ANY",
-        "enableAfterComplete": false
-      },
-      "events": {
-        "periodicEvent": {
-          "time": 0.01
-        }
-      },
-      "conditions": {      },
-      "actions": {
-        "hudElementSelectionShade": {
-          "object": "tank_target",
-          "element": "curTarget",
-          "targetName": "target_tank01"
-        },
         "missionSetTimeSpeed": {
           "speed": 0.0,
           "realtimeTriggers": true
         },
-        "playHint": {
-          "hintType": "standard",
-          "name": "hints/aircraft_atgm_laser/activation_rocket1",
-          "action": "show",
-          "shouldFadeOut": false,
-          "isOverFade": false,
-          "time": -1.0,
-          "priority": 0,
-          "target_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0
-        },
-        "wait": {
-          "time": 2.0
-        },
-        "playHint": {
-          "hintType": "standard",
-          "name": "hints/aircraft_modifications/activation_rocket",
-          "action": "show",
-          "shouldFadeOut": false,
-          "isOverFade": false,
-          "time": -1.0,
-          "priority": 0,
-          "target_marking": 0,
-          "object_var_name": "",
-          "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "item": "ID_AGM_LOCK",
-          "item": "@fire_shortcut_id"
-        },
-        "playerControls": {
-          "setStatus": "enable",
-          "control": "ID_AGM_LOCK",
-          "control": "ID_AGM",
-          "control": "ID_FIRE_SECONDARY"
-        },
-        "triggerEnable": {
-          "target": "check_rocket_start"
-        }
-      },
-      "else_actions": {      }
-    },
-    "check_rocket_start": {
-      "is_enabled": false,
-      "comments": "",
-      "props": {
-        "actionsType": "PERFORM_ONE_BY_ONE",
-        "conditionsType": "ANY",
-        "enableAfterComplete": false
-      },
-      "events": {
-        "periodicEvent": {
-          "time": 0.01
-        }
-      },
-      "conditions": {
-        "playerShortcutPressed": {
-          "control": "ID_AGM"
-        },
-        "playerShortcutPressed": {
-          "control": "ID_AGM_LOCK"
-        },
-        "playerShortcutPressed": {
-          "control": "ID_FIRE_SECONDARY"
-        }
-      },
-      "actions": {
-        "playerControls": {
-          "setStatus": "disable",
-          "control": "ID_AGM",
-          "control": "ID_AGM_LOCK",
-          "control": "ID_FIRE_SECONDARY"
-        },
         "triggerEnable": {
           "target": "check_target"
+        },
+        "varSetBool": {
+          "value": true,
+          "var": "is_skip_view"
         }
       },
       "else_actions": {      }
@@ -760,7 +702,7 @@
       },
       "actions": {
         "triggerEnable": {
-          "target": "rocket_start"
+          "target": "check_laser"
         }
       },
       "else_actions": {
@@ -809,6 +751,213 @@
         "playerControls": {
           "setStatus": "disable",
           "control": "ID_LOCK_TARGETING"
+        },
+        "triggerEnable": {
+          "target": "check_laser"
+        }
+      },
+      "else_actions": {      }
+    },
+    "check_laser": {
+      "is_enabled": false,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ALL",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "periodicEvent": {
+          "time": 0.01
+        }
+      },
+      "conditions": {
+        "playerWhenOptions": {
+          "guiOptionBool": "USEROPT_ENABLE_LASER_DESIGNATOR_ON_LAUNCH"
+        }
+      },
+      "actions": {
+        "triggerEnable": {
+          "target": "check_starts"
+        }
+      },
+      "else_actions": {
+        "playHint": {
+          "hintType": "standard",
+          "name": "hints/aircraft_modifications/laser_activate",
+          "action": "show",
+          "shouldFadeOut": false,
+          "isOverFade": false,
+          "time": -1.0,
+          "priority": 0,
+          "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "item": "ID_TOGGLE_LASER_DESIGNATOR"
+        },
+        "triggerEnable": {
+          "target": "laser"
+        }
+      }
+    },
+    "laser": {
+      "is_enabled": false,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ALL",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "periodicEvent": {
+          "time": 0.01
+        }
+      },
+      "conditions": {
+        "playerShortcutPressed": {
+          "control": "ID_TOGGLE_LASER_DESIGNATOR"
+        }
+      },
+      "actions": {
+        "hudElementSelectionShade": {
+          "object": "tank_target",
+          "element": "curTarget",
+          "targetName": "target_tank02"
+        },
+        "missionSetTimeSpeed": {
+          "speed": 1.0,
+          "realtimeTriggers": true
+        },
+        "wait": {
+          "time": 1.0
+        },
+        "missionSetTimeSpeed": {
+          "speed": 0.3,
+          "realtimeTriggers": true
+        },
+        "playHint": {
+          "hintType": "standard",
+          "name": "hints/aircraft_modifications/laser_activation_rocket",
+          "action": "show",
+          "shouldFadeOut": false,
+          "isOverFade": false,
+          "time": -1.0,
+          "priority": 0,
+          "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "item": "ID_AGM_LOCK",
+          "item": "@fire_shortcut_id"
+        },
+        "playerControls": {
+          "setStatus": "enable",
+          "control": "ID_AGM_LOCK",
+          "control": "ID_AGM",
+          "control": "ID_FIRE_SECONDARY"
+        },
+        "triggerEnable": {
+          "target": "check_rocket_start"
+        }
+      },
+      "else_actions": {      }
+    },
+    "check_starts": {
+      "is_enabled": false,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ANY",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "periodicEvent": {
+          "time": 0.01
+        }
+      },
+      "conditions": {      },
+      "actions": {
+        "hudElementSelectionShade": {
+          "object": "tank_target",
+          "element": "curTarget",
+          "targetName": "target_tank02"
+        },
+        "missionSetTimeSpeed": {
+          "speed": 0.0,
+          "realtimeTriggers": true
+        },
+        "__playHint": {
+          "hintType": "standard",
+          "name": "hints/aircraft_atgm_laser/activation_rocket1",
+          "action": "show",
+          "shouldFadeOut": false,
+          "isOverFade": false,
+          "time": -1.0,
+          "priority": 0,
+          "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0
+        },
+        "__wait": {
+          "time": 2.0
+        },
+        "playHint": {
+          "hintType": "standard",
+          "name": "hints/aircraft_modifications/laser_activation_rocket",
+          "action": "show",
+          "shouldFadeOut": false,
+          "isOverFade": false,
+          "time": -1.0,
+          "priority": 0,
+          "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "item": "@fire_shortcut_id"
+        },
+        "playerControls": {
+          "setStatus": "enable",
+          "control": "ID_AGM",
+          "control": "ID_FIRE_SECONDARY"
+        },
+        "triggerEnable": {
+          "target": "check_rocket_start"
+        }
+      },
+      "else_actions": {      }
+    },
+    "check_rocket_start": {
+      "is_enabled": false,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ANY",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "periodicEvent": {
+          "time": 0.01
+        }
+      },
+      "conditions": {
+        "playerShortcutPressed": {
+          "control": "ID_AGM"
+        },
+        "playerShortcutPressed": {
+          "control": "ID_AGM_LOCK"
+        },
+        "playerShortcutPressed": {
+          "control": "ID_FIRE_SECONDARY"
+        }
+      },
+      "actions": {
+        "playerControls": {
+          "setStatus": "disable",
+          "control": "ID_AGM",
+          "control": "ID_AGM_LOCK",
+          "control": "ID_FIRE_SECONDARY"
         },
         "triggerEnable": {
           "target": "rocket_start"
@@ -862,7 +1011,7 @@
         },
         "hudElementSelectionShade": {
           "element": "curTarget",
-          "targetName": "target_tank01"
+          "targetName": "target_tank02"
         },
         "missionSetTimeSpeed": {
           "speed": 0.0,
@@ -965,7 +1114,7 @@
       },
       "actions": {
         "missionSetTimeSpeed": {
-          "speed": 1.0,
+          "speed": 0.4,
           "realtimeTriggers": true
         },
         "hudElementSelectionShade": {
@@ -1005,6 +1154,10 @@
         }
       },
       "actions": {
+        "missionSetTimeSpeed": {
+          "speed": 1.0,
+          "realtimeTriggers": true
+        },
         "triggerDisable": {
           "target": "time_out_timer_rocket"
         },
@@ -1487,9 +1640,9 @@
     0.608761,
     0.0,
     -0.793354,
-    2659.35,
-    66.1037,
-    939.15,
+    2177.63,
+    17.1238,
+    237.395,
 ],
       "unit_class": "germ_apc_m113",
       "objLayer": 1,
@@ -1536,9 +1689,9 @@
     -9.17912e-6,
     -6.49092,
     7.6071,
-    2209.54,
-    280.013,
-    -1146.42,
+    1727.82,
+    231.033,
+    -1848.17,
 ],
       "unit_class": "su_25",
       "objLayer": 1,
@@ -1577,6 +1730,58 @@
         }
       },
       "way": {      }
+    },
+    "structures": {
+      "name": "target_tank02",
+      "tm": [
+    -0.793354,
+    0.0,
+    -0.608761,
+    0.0,
+    1.0,
+    0.0,
+    0.608761,
+    0.0,
+    -0.793354,
+    2177.63,
+    17.1238,
+    237.395,
+],
+      "unit_class": "tank_target_25_char",
+      "objLayer": 1,
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
+      "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
+      "props": {
+        "army": 2,
+        "count": 1,
+        "formation_type": "rows",
+        "formation_div": 3,
+        "formation_step": [
+          2.5,
+          2.0
+        ],
+        "formation_noise": [
+          0.1,
+          0.1
+        ],
+        "isDelayed": true,
+        "setStealth": true,
+        "targetAir": false,
+        "targetGnd": false
+      },
+      "way": {      }
     }
   },
   "areas": {
@@ -1592,9 +1797,9 @@
     -9.83196,
     -0.303028,
     1.8002,
-    2209.55,
-    2358.89,
-    -4185.84,
+    1727.83,
+    2309.91,
+    -4887.59,
 ],
       "objLayer": 0,
       "props": {

@@ -211,6 +211,14 @@
         "hp": 60.5
       }
     },
+    "steel_cooling_sys": {
+      "oil1_dm": {
+        "hp": 17.5
+      },
+      "oil2_dm": {
+        "hp": 17.5
+      }
+    },
     "steel_pilot": {
       "pilot_dm": {
         "fireProtectionHp": 20.0,
@@ -229,12 +237,6 @@
       },
       "tank4_dm": {
         "hp": 67.1
-      },
-      "tank5_dm": {
-        "hp": 39.5
-      },
-      "tank6_dm": {
-        "hp": 39.5
       }
     }
   },
@@ -1004,6 +1006,24 @@
       }
     },
     "part": {
+      "name": "oil1_dm",
+      "onHit": {
+        "leak_oil": 0.95
+      },
+      "onKill": {
+        "leak_oil": 1.0
+      }
+    },
+    "part": {
+      "name": "oil2_dm",
+      "onHit": {
+        "leak_oil": 0.95
+      },
+      "onKill": {
+        "leak_oil": 1.0
+      }
+    },
+    "part": {
       "name": "pilot_dm"
     },
     "part": {
@@ -1300,80 +1320,6 @@
     },
     "part": {
       "name": "tank4_dm",
-      "onHit": {
-        "fire": 0.0001,
-        "leak": 0.3
-      },
-      "onHit": {
-        "damage": 3.0,
-        "fire": 0.001,
-        "leak": 0.5
-      },
-      "onHit": {
-        "damage": 20.0,
-        "fire": 0.005,
-        "leak": 0.7
-      },
-      "onHit": {
-        "damage": 80.0,
-        "expl": 0.5,
-        "fire": 0.01,
-        "leak": 0.9
-      },
-      "onKill": {
-        "fire": 0.01,
-        "leak": 9.99
-      },
-      "onKill": {
-        "damage": 50.0,
-        "fire": 50.0,
-        "leak": 15.0
-      },
-      "onKill": {
-        "damage": 80.0,
-        "fire": 50.0,
-        "leak": 10.0
-      }
-    },
-    "part": {
-      "name": "tank5_dm",
-      "onHit": {
-        "fire": 0.0001,
-        "leak": 0.3
-      },
-      "onHit": {
-        "damage": 3.0,
-        "fire": 0.001,
-        "leak": 0.5
-      },
-      "onHit": {
-        "damage": 20.0,
-        "fire": 0.005,
-        "leak": 0.7
-      },
-      "onHit": {
-        "damage": 80.0,
-        "expl": 0.5,
-        "fire": 0.01,
-        "leak": 0.9
-      },
-      "onKill": {
-        "fire": 0.01,
-        "leak": 9.99
-      },
-      "onKill": {
-        "damage": 50.0,
-        "fire": 50.0,
-        "leak": 15.0
-      },
-      "onKill": {
-        "damage": 80.0,
-        "fire": 50.0,
-        "leak": 10.0
-      }
-    },
-    "part": {
-      "name": "tank6_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3

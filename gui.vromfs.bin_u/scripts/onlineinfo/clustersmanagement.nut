@@ -1,6 +1,8 @@
-//-file:plus-string
 from "%scripts/dagui_natives.nut" import get_cur_circuit_name, is_online_available
 from "%scripts/dagui_library.nut" import *
+from "app" import is_dev_version
+
+let { checkMatchingError } = require("%scripts/matching/api.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
 let { addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { DEFAULT_HANDLER } = require("%scripts/g_listener_priority.nut")
@@ -18,7 +20,7 @@ let clustersList = []
 
 local unstableClusters = null
 
-let function cacheUnstableClustersOnce() {
+function cacheUnstableClustersOnce() {
   if (unstableClusters != null)
     return
   unstableClusters = []
@@ -27,7 +29,7 @@ let function cacheUnstableClustersOnce() {
     eachParam(blk, @(v, k) v ? unstableClusters.append(k) : null)
 }
 
-let function isClusterUnstable(clusterName) {
+function isClusterUnstable(clusterName) {
   cacheUnstableClustersOnce()
   return unstableClusters.contains(clusterName)
 }
@@ -89,7 +91,7 @@ function updateClustersList() {
     function(params) {
       isClustersFetching = false
 
-      if (::checkMatchingError(params, false)
+      if (checkMatchingError(params, false)
           && onClustersLoaded(params)) {
         fetchCounter = 0
         return
@@ -100,7 +102,7 @@ function updateClustersList() {
         log($"fetch cluster error, retry - {fetchCounter}")
         self()
       }
-      else if (!::is_dev_version)
+      else if (!is_dev_version())
         startLogout()
     })
 }

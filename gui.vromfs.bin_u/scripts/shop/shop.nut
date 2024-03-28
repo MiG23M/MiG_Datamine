@@ -3,6 +3,7 @@ from "%scripts/dagui_natives.nut" import clan_get_exp, shop_repair_all, shop_get
 from "%scripts/mainConsts.nut" import SEEN
 from "%scripts/dagui_library.nut" import *
 
+let { g_difficulty } = require("%scripts/difficulty.nut")
 let { isUnitSpecial } = require("%appGlobals/ranks_common_shared.nut")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { Cost } = require("%scripts/money.nut")
@@ -14,7 +15,7 @@ let { format, split_by_chars } = require("string")
 let { abs, ceil, floor } = require("math")
 let { hangar_get_current_unit_name } = require("hangar")
 let { handlerType } = require("%sqDagui/framework/handlerType.nut")
-let { move_mouse_on_child, move_mouse_on_child_by_value, handlersManager, loadHandler
+let { move_mouse_on_child, move_mouse_on_child_by_value, handlersManager
 } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let shopTree = require("%scripts/shop/shopTree.nut")
 let shopSearchBox = require("%scripts/shop/shopSearchBox.nut")
@@ -53,6 +54,9 @@ let { get_ranks_blk } = require("blkGetters")
 let { addTask } = require("%scripts/tasker.nut")
 let { showUnitGoods } = require("%scripts/onlineShop/onlineShopModel.nut")
 let { checkBalanceMsgBox } = require("%scripts/user/balanceFeatures.nut")
+let { guiStartProfile } = require("%scripts/user/profileHandler.nut")
+let takeUnitInSlotbar = require("%scripts/unit/takeUnitInSlotbar.nut")
+let { getCurrentGameModeEdiff } = require("%scripts/gameModes/gameModeManagerState.nut")
 
 local lastUnitType = null
 
@@ -78,10 +82,6 @@ shopData = [
   ...
 ]
 */
-
-::gui_start_shop_research <- function gui_start_shop_research(config) {
-  loadHandler(gui_handlers.ShopCheckResearch, config)
-}
 
 gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
   wndType = handlerType.CUSTOM
@@ -291,7 +291,7 @@ gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
 
   function onUnitMarkerClick(obj) {
     let unitName = obj.holderId
-    ::gui_start_profile({
+    guiStartProfile({
       initialSheet = "UnlockAchievement"
       initialUnlockId = getUnlockIdByUnitName(unitName, this.getCurrentEdiff())
     })
@@ -1677,7 +1677,12 @@ gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
       return
 
     if (!::checkIsInQueue() && !this.shopResearchMode)
-      this.onTake(unit, { isNewUnit = true })
+      takeUnitInSlotbar(unit, {
+        unitObj = this.getAirObj(unit.name)
+        cellClass = "shopClone"
+        isNewUnit = true
+        getEdiffFunc = this.getCurrentEdiff.bindenv(this)
+      })
     else if (this.shopResearchMode)
       this.selectRequiredUnit()
   }
@@ -1757,15 +1762,6 @@ gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
         }
       }
     return false
-  }
-
-  function onTake(unit, params = {}) {
-    base.onTake(unit, {
-      unitObj = this.getAirObj(unit.name)
-      cellClass = "shopClone"
-      isNewUnit = false
-      getEdiffFunc = this.getCurrentEdiff.bindenv(this)
-    }.__merge(params))
   }
 
   function onEventExpConvert(_params) {
@@ -1877,14 +1873,24 @@ gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
       return
     }
 
-    let destType = isCheckboxSelected ? ES_UNIT_TYPE_HELICOPTER : ES_UNIT_TYPE_INVALID
+    if (isCheckboxSelected)
+      this.msgBox("move_exp_to_heli_confirm",
+      loc("shop/research_helicopters_by_ground_vehicles_confirm"),
+      [
+        ["yes", Callback(@() this.moveExpToHeli(true), this)],
+        ["no", Callback(@() checkBoxObj.setValue(false), this)]
+      ], "yes", { cancel_fn = Callback(@() checkBoxObj.setValue(false), this) })
+    else
+      this.moveExpToHeli(false)
+  }
+
+  function moveExpToHeli(isSelected) {
+    let destType = isSelected ? ES_UNIT_TYPE_HELICOPTER : ES_UNIT_TYPE_INVALID
     let blk = DataBlock()
     blk.addStr("country", this.curCountry);
     blk.setInt("destType", destType);
     blk.setInt("srcType", ES_UNIT_TYPE_TANK);
-
     addTask(charSendBlk("cln_set_dest_rp_unit_type", blk), { showProgressBox = true })
-
   }
 
   hasModeList = @() (this.showModeList?.len() ?? 0) > 2
@@ -1901,7 +1907,7 @@ gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
     let storedMode = getShopDiffMode()
     local curMode = -1
     this.showModeList = []
-    foreach (diff in ::g_difficulty.types)
+    foreach (diff in g_difficulty.types)
       if (diff.diffCode == -1 || (!this.shopResearchMode && diff.isAvailable())) {
         this.showModeList.append({
           text = diff.diffCode == -1 ? loc("options/auto") : colorize("warningTextColor", diff.getLocName())
@@ -2006,7 +2012,7 @@ gui_handlers.ShopMenuHandler <- class (gui_handlers.BaseGuiHandlerWT) {
   }
 
   function getCurrentEdiff() {
-    return this.hasModeList() ? getShopDiffCode() : ::get_current_ediff()
+    return this.hasModeList() ? getShopDiffCode() : getCurrentGameModeEdiff()
   }
 
   function updateSlotbarDifficulty() {

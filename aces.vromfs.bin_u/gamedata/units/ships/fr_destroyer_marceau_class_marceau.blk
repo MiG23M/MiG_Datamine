@@ -36,7 +36,7 @@
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_hydroplane",
   "smokeScreenOffset": [
-    -45.0,
+    -40.0,
     2.0,
     0.0
   ],
@@ -2610,28 +2610,28 @@
       "pressureDamageMult": 3.0,
       "napalmDamageMult": 1.0,
       "auxiliary_caliber_turret_02_dm": {
-        "hp": 179.0
+        "hp": 191.0
       },
       "auxiliary_caliber_turret_03_dm": {
-        "hp": 178.0
+        "hp": 191.0
       },
       "auxiliary_caliber_turret_04_dm": {
-        "hp": 178.0
+        "hp": 190.0
       },
       "auxiliary_caliber_turret_05_dm": {
-        "hp": 177.0
+        "hp": 190.0
       },
       "auxiliary_caliber_turret_06_dm": {
-        "hp": 177.0
+        "hp": 190.0
       },
       "auxiliary_caliber_turret_07_dm": {
-        "hp": 178.0
+        "hp": 191.0
       },
       "auxiliary_caliber_turret_08_dm": {
-        "hp": 180.0
+        "hp": 192.0
       },
       "auxiliary_caliber_turret_09_dm": {
-        "hp": 179.0
+        "hp": 191.0
       }
     },
     "turrets_aa_caliber": {
@@ -2642,7 +2642,7 @@
       "pressureDamageMult": 2.0,
       "napalmDamageMult": 1.0,
       "aa_turret_01_dm": {
-        "hp": 80.0
+        "hp": 83.0
       },
       "aa_turret_10_dm": {
         "hp": 100.0
@@ -2736,7 +2736,7 @@
         "hp": 1500.0
       },
       "ammunition_storage_shells_02_dm": {
-        "hp": 1500.0
+        "hp": 1486.0
       },
       "ammunition_storage_shells_03_dm": {
         "hp": 1500.0
@@ -2754,10 +2754,10 @@
         "hp": 2000.0
       },
       "ammunition_storage_charges_02_dm": {
-        "hp": 1604.0
+        "hp": 1600.0
       },
       "ammunition_storage_charges_03_dm": {
-        "hp": 1604.0
+        "hp": 1600.0
       },
       "ammunition_storage_charges_04_dm": {
         "hp": 2000.0
@@ -3288,14 +3288,8 @@
       "name": "compartment_10_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
@@ -3310,8 +3304,8 @@
       "name": "bridge_01_dm",
       "name": "bridge_02_dm",
       "onKill": {
-        "fire": 0.15,
-        "nothing": 0.85,
+        "fire": 0.1,
+        "nothing": 0.9,
         "fHitCritical": false
       }
     },
@@ -3324,20 +3318,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
+        "fire": 0.1,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.15,
-        "damage": 400.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "fire": 0.3,
-        "damage": 900.0,
+        "fire": 0.2,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -3756,6 +3744,7 @@
       "targetLockTime": 20.0,
       "calcTime": 12.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": false,
@@ -7479,6 +7468,15 @@
       "to": "fr_camo_redblack_spots*"
     }
   },
+  "skin": {
+    "name": "fr_camo_blackblue_cubes",
+    "nameLocId": "skin/fr_camo_blackblue_cubes",
+    "descLocId": "skin/fr_camo_blackblue_cubes/desc",
+    "replace_tex": {
+      "from": "camo_flatgullgrey*",
+      "to": "fr_camo_blackblue_cubes*"
+    }
+  },
   "defaultShipFlag": {
     "name": "default",
     "modelFlagTexture": "flag_c*",
@@ -7525,6 +7523,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

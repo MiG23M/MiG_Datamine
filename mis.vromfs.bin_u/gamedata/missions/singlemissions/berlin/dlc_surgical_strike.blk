@@ -110,6 +110,10 @@
       },
       "conditions": {      },
       "actions": {
+        "missionSetWeatherParams": {
+          "waterWindStrengtMin": 4.0,
+          "waterWindStrengtMax": 5.0
+        },
         "unitSetProperties": {
           "object": "germ_artillery_01_squad",
           "object": "germ_artillery_02_squad",
@@ -166,11 +170,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "ussr_tanks_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "ussr_tanks_01"
+          "object_var_value": 0
         },
         "moAddMissionObjective": {
           "target": "dlc_surgical_strike_main"
@@ -235,11 +239,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_artillery_01_squad",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_artillery_01_squad"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "tanks_waypoint_01_in_prepare",
@@ -664,11 +668,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_artillery_02_squad",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_artillery_02_squad"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "tanks_waypoint_02_in_prepare",
@@ -830,11 +834,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_pz_vi_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_pz_vi_01"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "tanks_waypoint_03_in_prepare",
@@ -964,11 +968,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_artillery_03_squad",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_artillery_03_squad"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "tanks_waypoint_04_in_prepare",
@@ -1098,11 +1102,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "pziv_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "pziv_01"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "tanks_waypoint_05_in_prepare",
@@ -1133,11 +1137,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_tigers_wave",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "germ_tigers_wave",
           "delayForObjects": [
             1.0,
             5.0
@@ -1370,11 +1374,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_artillery_04_01",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_artillery_04_01"
+          "object_var_value": 0
         },
         "triggerEnable": {
           "target": "tanks_waypoint_06_in_prepare",
@@ -1595,13 +1599,13 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "germ_tiger_01",
+          "target": "germ_tiger_02",
+          "target": "germ_tiger_03",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "germ_tiger_01",
-          "target": "germ_tiger_02",
-          "target": "germ_tiger_03"
+          "object_var_value": 0
         },
         "unitMark": {
           "target_marking": 1,
@@ -1736,11 +1740,11 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "final_germ_squad",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "final_germ_squad",
           "delayForObjects": [
             1.0,
             5.0

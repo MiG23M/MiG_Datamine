@@ -1,0 +1,41 @@
+{
+  "stateInit": "search",
+  "transitions": {
+    "scan": {
+      "event": "update",
+      "actions": {
+        "scan": {
+          "targetsOfInterestFirst": true
+        }
+      }
+    },
+    "detect": {
+      "event": "targetInSight",
+      "actions": {
+        "setDistGatePos": {
+          "source": "continuousScale",
+          "width": 0.0
+        },
+        "setRelSpeedGatePos": {
+          "source": "continuousScale",
+          "width": 0.0
+        },
+        "detectTarget": {
+          "targetsOfInterestFirst": true
+        }
+      }
+    },
+    "addTarget": {
+      "event": "targetDetected",
+      "actions": {
+        "addTarget": {
+          "targetsOfInterestFirst": true
+        },
+        "updateTargetOfInterest": {
+          "targetsOfInterestFirst": true,
+          "limit": 1000
+        }
+      }
+    }
+  }
+}

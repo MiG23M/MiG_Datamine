@@ -16,7 +16,7 @@ let { getUnlockNameText, doPreviewUnlockPrize, fillUnlockProgressBar, fillUnlock
 } = require("%scripts/unlocks/unlocksViewModule.nut")
 let openUnlockUnitListWnd = require("%scripts/unlocks/unlockUnitListWnd.nut")
 let { isUnlockFav, canAddFavorite, unlockToFavorites, fillUnlockFav } = require("%scripts/unlocks/favoriteUnlocks.nut")
-let { getUnlockCost } = require("%scripts/unlocks/unlocksModule.nut")
+let { getUnlockCost, findUnusableUnitForManualUnlock } = require("%scripts/unlocks/unlocksModule.nut")
 let { openUnlockManually, buyUnlock } = require("%scripts/unlocks/unlocksAction.nut")
 let { getUnlockById } = require("%scripts/unlocks/unlocksCache.nut")
 let { deferOnce } = require("dagor.workcycle")
@@ -27,6 +27,10 @@ let { warningIfGold } = require("%scripts/viewUtils/objectTextUpdate.nut")
 let { hasNightGameModes } = require("%scripts/events/eventInfo.nut")
 let { checkSquadUnreadyAndDo } = require("%scripts/squads/squadUtils.nut")
 let { markSeenNightBattle } = require("%scripts/events/nightBattlesStates.nut")
+let { findItemById } = require("%scripts/items/itemsManager.nut")
+let { getCurrentGameMode, getGameModeById
+} = require("%scripts/gameModes/gameModeManagerState.nut")
+let { getUnitName } = require("%scripts/unit/unitInfo.nut")
 
 const MIN_MRANK_FOR_NIGHT_BATTLES = 27
 
@@ -149,7 +153,7 @@ let class NightBattlesOptionsWnd (gui_handlers.BaseGuiHandlerWT) {
   }
 
   function showUnlockPrizes(obj) {
-    let trophy = ::ItemsManager.findItemById(obj.trophyId)
+    let trophy = findItemById(obj.trophyId)
     let content = trophy.getContent()
       .map(@(i) isDataBlock(i) ? convertBlk(i) : {})
       .sort(rewardsSortComparator)
@@ -173,6 +177,13 @@ let class NightBattlesOptionsWnd (gui_handlers.BaseGuiHandlerWT) {
     let unlockId = obj?.unlockId ?? ""
     if (unlockId == "")
       return
+
+    let unit = findUnusableUnitForManualUnlock(unlockId)
+    if (unit) {
+      this.msgBox("cantClaimReward", loc("msgbox/cantClaimManualUnlockPrize",
+        { unitname = getUnitName(unit)}), [["ok"]], "ok")
+      return
+    }
 
     let onSuccess = Callback(@() this.updateUnlockBlock(unlockId), this)
     openUnlockManually(unlockId, onSuccess)
@@ -232,8 +243,8 @@ gui_handlers.NightBattlesOptionsWnd <- NightBattlesOptionsWnd
 
 function openNightBattles(modeId = null) {
   let curEvent = modeId != null
-    ? ::game_mode_manager.getGameModeById(modeId)?.getEvent()
-    : ::game_mode_manager.getCurrentGameMode()?.getEvent()
+    ? getGameModeById(modeId)?.getEvent()
+    : getCurrentGameMode()?.getEvent()
   if (hasNightGameModes(curEvent))
     checkSquadUnreadyAndDo(@() handlersManager.loadHandler(NightBattlesOptionsWnd, { curEvent }))
 }

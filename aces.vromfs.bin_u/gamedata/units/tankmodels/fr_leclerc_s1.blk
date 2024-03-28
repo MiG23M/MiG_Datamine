@@ -254,7 +254,7 @@
       "turret_02_back_dm": {
         "armorThickness": 40.0
       },
-      "turret_04_back_dm": {
+      "firewall_armor_01_dm": {
         "armorThickness": 35.0,
         "hp": 150.0,
         "ignoreDeadWithSplash": true,
@@ -315,7 +315,6 @@
         "armorClass": "leopard_2a5_turret_nera"
       },
       "composite_armor_turret_02_dm": {      },
-      "composite_armor_turret_03_dm": {      },
       "composite_armor_turret_04_dm": {
         "armorClass": "leopard_2a5_turret_nera"
       },
@@ -735,6 +734,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1828,12 +1829,11 @@
       }
     },
     "armorArrayTurret": {
-      "xrayDmPart": "composite_armor_turret_03_dm",
+      "xrayDmPart": "firewall_armor_01_dm",
       "titleLoc": "RHA_tank_modern",
       "armorArrayText": {
         "layer": {
-          "dmPart": "composite_armor_turret_03_dm",
-          "xrayTextThickness": 35.0
+          "dmPart": "firewall_armor_01_dm"
         }
       }
     },
@@ -2100,10 +2100,10 @@
     "EngineName": "engine_leclerc",
     "TrackSoundPath": "tanks/engines_tanks",
     "TrackSoundPathStudio": "ground/engines",
-    "TrackSoundName": "tracks_mbt",
-    "TrackSoundNameCockpit": "tracks_mbt_interior",
+    "TrackSoundName": "tracks_leclerc",
+    "TrackSoundNameCockpit": "tracks_leclerc_interior",
     "EngineNameAi": "engine_tank_ai_middle",
-    "TrackSoundNameAi": "tracks_ai_mbt",
+    "TrackSoundNameAi": "tracks_ai_leclerc",
     "turret_turn": "turret_turn_servo"
   },
   "tags": {
@@ -2213,7 +2213,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "coaxial",
-      "blk": "gameData/Weapons/groundModels_weapons/12_7mm_M2_HB_user_machinegun.blk",
+      "blk": "gameData/Weapons/groundModels_weapons/12_7mm_M2_HB_user_machinegun_for_leclerc.blk",
       "emitter": "bone_mg_twin_01",
       "flash": "emtr_mg_flame_01",
       "defaultYaw": 0.0,
@@ -2372,7 +2372,7 @@
       "maxBrakeForce": 225000.0,
       "driveGearRadius": 0.35,
       "mainGearRatio": 3.9,
-      "sideGearRatio": 1.0,
+      "sideGearRatio": 0.99,
       "neutralGearRatio": 11.0,
       "manufacturer": "sesm",
       "model": "esm_500",
@@ -2401,7 +2401,7 @@
         -0.17,
         0.13
       ],
-      "defaultGearRadius": 0.32,
+      "defaultGearRadius": 0.33,
       "topGearRadius": 0.11,
       "frontBackGearRadius": 0.27,
       "defaultDampeningForce": [
@@ -3136,15 +3136,6 @@
             "ghosting": 0.6,
             "noiseFactor": 0.2
           },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
           "driverIr": {
             "resolution": [
               800,
@@ -3260,7 +3251,7 @@
           "Weapon": {
             "trigger": "gunner1",
             "triggerGroup": "coaxial",
-            "blk": "gameData/Weapons/groundModels_weapons/12_7mm_M2_HB_user_machinegun.blk",
+            "blk": "gameData/Weapons/groundModels_weapons/12_7mm_M2_HB_user_machinegun_for_leclerc.blk",
             "emitter": "bone_mg_twin_01",
             "flash": "emtr_mg_flame_01",
             "defaultYaw": 0.0,
@@ -3361,7 +3352,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [

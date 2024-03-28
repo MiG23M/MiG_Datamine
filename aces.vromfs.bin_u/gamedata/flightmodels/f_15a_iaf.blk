@@ -1862,6 +1862,22 @@
       "name": "wingcontrol_r_dm"
     }
   },
+  "volumetricAfterBurner": {
+    "maxHeight": 13.0,
+    "maxRadius": 0.46,
+    "relativeCylinderHeightMax": 0.2,
+    "absorption": 3.0,
+    "colorIntensityMax": 2.5,
+    "colorOverHeightMult": 15.0,
+    "colorOverDepthMult": 5.0,
+    "colorOverRadiusMult": 0.3,
+    "ringOffset": 0.0,
+    "ringAbsorption": 5.0,
+    "ringFrequency": 4.83322,
+    "ringIntensity": 5.0,
+    "ringPower": 1,
+    "rampTextureOffset": 0
+  },
   "ikPilot": {
     "model": "pilot_italy_late_char",
     "maxHeadHorAngle": 60.0,
@@ -2281,7 +2297,7 @@
         },
         "page": {
           "type": "radar",
-          "scale": 0.8,
+          "scale": 0.9,
           "hideRadarBackground": true
         },
         "page": {
@@ -2414,10 +2430,10 @@
     }
   },
   "WeaponSlots": {
-    "maxloadMass": 5448.0,
-    "maxloadMassLeftConsoles": 2000.0,
-    "maxloadMassRightConsoles": 2000.0,
-    "maxDisbalance": 1000.0,
+    "maxloadMass": 7711.0,
+    "maxloadMassLeftConsoles": 3855.0,
+    "maxloadMassRightConsoles": 3855.0,
+    "maxDisbalance": 1900.0,
     "HideNodes": {
       "node": "chaff_cap",
       "node": "pylon_1",
@@ -2492,21 +2508,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 120,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 120,
           "external": true,
-          "separate": true
+          "separate": false
         }
       }
     },
@@ -2672,7 +2686,8 @@
           "emitter": "us_2000lb_gbu_8_001",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -2789,7 +2804,7 @@
         "reqModification": "us_aim_7m",
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow_f_15.blk",
           "emitter": "aim_7e_003",
           "bullets": 1,
           "external": true,
@@ -2808,7 +2823,7 @@
         "reqModification": "us_aim_7m",
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow_f_15.blk",
           "emitter": "aim_7e_001",
           "bullets": 1,
           "external": true,
@@ -2917,7 +2932,8 @@
           "emitter": "us_2000lb_gbu_8_002",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -2967,7 +2983,7 @@
         "reqModification": "us_aim_7m",
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow_f_15.blk",
           "emitter": "aim_7e_002",
           "bullets": 1,
           "external": true,
@@ -2986,7 +3002,7 @@
         "reqModification": "us_aim_7m",
         "Weapon": {
           "trigger": "aam",
-          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow.blk",
+          "blk": "gameData/Weapons/rocketGuns/us_aim7m_sparrow_f_15.blk",
           "emitter": "aim_7e_004",
           "bullets": 1,
           "external": true,
@@ -3157,7 +3173,8 @@
           "emitter": "us_2000lb_gbu_8_003",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {

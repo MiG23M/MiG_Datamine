@@ -1,7 +1,7 @@
-//checked for plus_string
 from "%scripts/dagui_library.nut" import *
-let u = require("%sqStdLibs/helpers/u.nut")
 
+let u = require("%sqStdLibs/helpers/u.nut")
+let { request_matching } = require("%scripts/matching/api.nut")
 let { broadcastEvent, addListenersWithoutEnv } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { getMyStateData } = require("%scripts/user/userUtils.nut")
@@ -10,6 +10,9 @@ let { get_time_msec } = require("dagor.time")
 let { isInFlight } = require("gameplayBinding")
 let { userName } = require("%scripts/user/profileStates.nut")
 let { calcBattleRatingFromRank } = require("%appGlobals/ranks_common_shared.nut")
+let { getGlobalModule } = require("%scripts/global_modules.nut")
+let g_squad_manager = getGlobalModule("g_squad_manager")
+let { getCurrentGameMode, getCurrentGameModeEdiff } = require("%scripts/gameModes/gameModeManagerState.nut")
 
 const MATCHING_REQUEST_LIFETIME = 30000
 local lastRequestTimeMsec = 0
@@ -24,7 +27,7 @@ let recentBRData = Computed(@() brInfoByGamemodeId.value?[recentBrSourceGameMode
 
 recentBR.subscribe(@(_) broadcastEvent("BattleRatingChanged"))
 
-let function calcSquadMrank(brData) {
+function calcSquadMrank(brData) {
   if (!brData)
     return -1
 
@@ -38,13 +41,13 @@ let function calcSquadMrank(brData) {
   return maxBR
 }
 
-let function calcSquadBattleRating(brData) {
+function calcSquadBattleRating(brData) {
   let mrank = calcSquadMrank(brData)
   // mrank < 0  means empty received data and no BR string needed in game mode header
   return mrank < 0 ? 0 : calcBattleRatingFromRank(mrank)
 }
 
-let function getBRDataByMrankDiff(diff = 3) {
+function getBRDataByMrankDiff(diff = 3) {
   let squadMrank = calcSquadMrank(recentBRData.value)
   if (squadMrank < 0)
     return []
@@ -54,8 +57,8 @@ let function getBRDataByMrankDiff(diff = 3) {
     .map(@(v) calcBattleRatingFromRank(v[0].mrank))
 }
 
-let function calcBattleRating(brData) {
-  if (::g_squad_manager.isInSquad())
+function calcBattleRating(brData) {
+  if (g_squad_manager.isInSquad())
     return calcSquadBattleRating(brData)
 
   let name = userName.value
@@ -64,7 +67,7 @@ let function calcBattleRating(brData) {
   return myData?[0] == null ? 0 : calcBattleRatingFromRank(myData[0].mrank)
 }
 
-let function getCrafts(data, country = null) {
+function getCrafts(data, country = null) {
   let crafts = []
   let craftData = data?.crewAirs?[country ?? data?.country ?? ""]
   if (craftData == null)
@@ -79,7 +82,7 @@ let function getCrafts(data, country = null) {
      crafts.append({
        name = name
        craftType = craft.expClass.expClassName
-       mrank = craft.getEconomicRank(::get_current_ediff())
+       mrank = craft.getEconomicRank(getCurrentGameModeEdiff())
        rank = craft?.rank ?? -1
      })
   }
@@ -87,13 +90,13 @@ let function getCrafts(data, country = null) {
   return crafts
 }
 
-let function isBRKnown(recentUserData) {
+function isBRKnown(recentUserData) {
   let id = recentUserData?.gameModeId
   return id in brInfoByGamemodeId.value
     && u.isEqual(recentUserData.players, brInfoByGamemodeId.value[id].players)
 }
 
-let function setBattleRating(recentUserData, brData) {
+function setBattleRating(recentUserData, brData) {
   if (recentUserData == null)
     return
 
@@ -106,7 +109,7 @@ let function setBattleRating(recentUserData, brData) {
     brInfoByGamemodeId.mutate(@(v) v?.$rawdelete(gameModeId))
 }
 
-let function getBestCountryData(event) {
+function getBestCountryData(event) {
   if (!event)
     return null
   let teams = ::events.getAvailableTeams(event)
@@ -117,16 +120,16 @@ let function getBestCountryData(event) {
   return ::events.getMembersInfo(membersTeams.teamsData)
 }
 
-let function getUserData() {
+function getUserData() {
   let gameModeId = recentBrSourceGameModeId.value
   if (gameModeId == null)
     return null
 
   let players = []
 
-  if (::g_squad_manager.isSquadLeader()) {
+  if (g_squad_manager.isSquadLeader()) {
     let countryData = getBestCountryData(::events.getEvent(recentBrGameModeId.value))
-    foreach (member in ::g_squad_manager.getMembers()) {
+    foreach (member in g_squad_manager.getMembers()) {
       if (!member.online || member.country == "")
         continue
 
@@ -160,11 +163,11 @@ let function getUserData() {
   }
 }
 
-let function requestBattleRating(cb, recentUserData) {
+function requestBattleRating(cb, recentUserData) {
   isUpdating = true
   lastRequestTimeMsec  = get_time_msec()
   let errorCB = @(...) isUpdating = false
-  ::request_matching("wtmm_static.calc_ranks", cb, errorCB, recentUserData, {
+  request_matching("wtmm_static.calc_ranks", cb, errorCB, recentUserData, {
     showError = false
   })
 }
@@ -172,7 +175,7 @@ let function requestBattleRating(cb, recentUserData) {
 local updateBattleRating
 updateBattleRating = function(gameMode = null, brData = null) { //!!FIX ME: why outside update request and internal callback the same function?
   //it make harder to read it, and can have a lot of errors.
-  gameMode = gameMode ?? ::game_mode_manager.getCurrentGameMode()
+  gameMode = gameMode ?? getCurrentGameMode()
   recentBrGameModeId(gameMode?.id ?? "")
   recentBrSourceGameModeId(gameMode?.source.gameModeId)
   let recentUserData = getUserData()
@@ -205,7 +208,7 @@ updateBattleRating = function(gameMode = null, brData = null) { //!!FIX ME: why 
 }
 
 local isRequestDelayed = false
-let function updateBattleRatingDelayed() {
+function updateBattleRatingDelayed() {
   if (isRequestDelayed || isInFlight() || isNeedFirstCountryChoice()) //do not recalc while in the battle
     return
   isRequestDelayed = true
@@ -215,8 +218,8 @@ let function updateBattleRatingDelayed() {
   })
 }
 
-let function updateLeaderRatingDelayed(_p) {
-  if (::g_squad_manager.isSquadLeader())
+function updateLeaderRatingDelayed(_p) {
+  if (g_squad_manager.isSquadLeader())
     updateBattleRatingDelayed()
 }
 

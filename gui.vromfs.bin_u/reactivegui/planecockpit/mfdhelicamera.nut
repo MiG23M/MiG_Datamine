@@ -16,9 +16,9 @@ let mfdSightParamsTable = paramsTable(MfdSightMask, SecondaryMask,
   true,
   false,
   false,
-  MfdFontScale.value > 0 ? MfdFontScale.value : 21)
+  MfdFontScale.value > 0 ? MfdFontScale.value * 21 : 21)
 
-let function mfdSightHud() {
+function mfdSightHud() {
   return {
     watch = [IsMfdSightHudVisible, MfdFontScale]
     children = IsMfdSightHudVisible.value ?

@@ -469,7 +469,9 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
-      "hp": 500.0,
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
+      "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
       "fireProtectionHp": 20.0,
@@ -1119,8 +1121,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "primary",
-      "blk": "gameData/Weapons/groundModels_weapons/136mm_k3s_hot_rocket_launcher.blk",
-      "weaponType": "rockets",
+      "blk": "gameData/Weapons/groundModels_weapons/136mm_k3s_hot_launcher_user_cannon.blk",
       "flash": "emtr_gun_flame_01",
       "useEmitter": true,
       "emitter": "bone_rocket_01",
@@ -1924,13 +1925,21 @@
   "ammoStowages": {
     "ammo1": {
       "weaponTrigger": "gunner1",
-      "removeLoadedAmmo": false,
       "fatalFire": true,
       "fatalExplosion": true,
+      "shells": {
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "ammo_turret_21_dm": {
+          "count": 1
+        }
+      },
       "shells": {
         "fireEvent": "ammo_fire",
         "explosionEvent": "ammo_explosion",
         "wreckedPartId": 0,
+        "autoLoad": true,
         "ammo_turret_09_dm": {
           "count": 1
         },
@@ -1987,12 +1996,6 @@
         },
         "ammo_turret_08_dm": {
           "count": 1
-        },
-        "ammo_turret_21_dm": {
-          "count": 1,
-          "fatalFire": false,
-          "fatalExplosion": false,
-          "removeLoadedAmmo": false
         }
       }
     }
@@ -2016,6 +2019,7 @@
     "tank_medical_kit_expendable": {
       "image": "#ui/gameuiskin#tank_reinforcement_ger"
     },
+    "136mm_hot_atgm": {    },
     "tank_smoke_screen_system_mod": {
       "tier": 4,
       "effects": {
@@ -2052,8 +2056,7 @@
           "Weapon": {
             "trigger": "gunner1",
             "triggerGroup": "primary",
-            "blk": "gameData/Weapons/groundModels_weapons/136mm_k3s_hot_rocket_launcher.blk",
-            "weaponType": "rockets",
+            "blk": "gameData/Weapons/groundModels_weapons/136mm_k3s_hot_launcher_user_cannon.blk",
             "flash": "emtr_gun_flame_01",
             "useEmitter": true,
             "emitter": "bone_rocket_01",
@@ -2175,7 +2178,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -2238,15 +2240,6 @@
             "noiseFactor": 0.2
           },
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600

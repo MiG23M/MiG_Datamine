@@ -1194,10 +1194,10 @@
       "genericDamageMult": 0.5,
       "explosionDamageMult": 1.5,
       "engine_room_01_dm": {
-        "hp": 3415.0
+        "hp": 3200.0
       },
       "engine_room_02_dm": {
-        "hp": 3507.0
+        "hp": 3200.0
       }
     },
     "engine_rooms": {
@@ -1547,13 +1547,13 @@
       "armorThickness": 2.2,
       "pressureDamageMult": 9.0,
       "main_caliber_turret_01_dm": {
-        "hp": 460.0
+        "hp": 782.0
       },
       "main_caliber_turret_02_dm": {
-        "hp": 460.0
+        "hp": 770.0
       },
       "main_caliber_turret_03_dm": {
-        "hp": 460.0
+        "hp": 770.0
       }
     },
     "turrets_aux_caliber": {
@@ -1563,16 +1563,16 @@
       "pressureDamageMult": 5.0,
       "napalmDamageMult": 1.0,
       "auxiliary_caliber_turret_01_dm": {
-        "hp": 230.0
+        "hp": 330.0
       },
       "auxiliary_caliber_turret_02_dm": {
-        "hp": 230.0
+        "hp": 330.0
       },
       "auxiliary_caliber_turret_03_dm": {
-        "hp": 230.0
+        "hp": 330.0
       },
       "auxiliary_caliber_turret_04_dm": {
-        "hp": 230.0
+        "hp": 330.0
       }
     },
     "turrets_aa_caliber": {
@@ -1743,7 +1743,7 @@
         "hp": 1000.0
       },
       "ammunition_storage_aux_02_dm": {
-        "hp": 1210.0
+        "hp": 1222.0
       }
     },
     "ammo_first_stage": {
@@ -1803,13 +1803,13 @@
       "armorThickness": 2.2,
       "fireProtectionHp": 11.0,
       "elevator_01_dm": {
-        "hp": 1500.0
+        "hp": 1000.0
       },
       "elevator_02_dm": {
-        "hp": 1500.0
+        "hp": 1000.0
       },
       "elevator_03_dm": {
-        "hp": 1500.0
+        "hp": 1000.0
       }
     },
     "pumps": {
@@ -1886,12 +1886,12 @@
     "sailor2": {
       "dmPart": "compartment_01_dm",
       "role": "sailor",
-      "crew": 37
+      "crew": 36
     },
     "sailor3": {
       "dmPart": "compartment_02_dm",
       "role": "sailor",
-      "crew": 47
+      "crew": 46
     },
     "sailor4": {
       "dmPart": "compartment_03_dm",
@@ -1901,7 +1901,7 @@
     "sailor5": {
       "dmPart": "compartment_04_dm",
       "role": "sailor",
-      "crew": 37
+      "crew": 36
     },
     "sailor6": {
       "dmPart": "compartment_05_dm",
@@ -1911,17 +1911,17 @@
     "sailor12": {
       "dmPart": "main_caliber_turret_01_dm",
       "role": "sailor",
-      "crew": 8
+      "crew": 9
     },
     "sailor13": {
       "dmPart": "main_caliber_turret_02_dm",
       "role": "sailor",
-      "crew": 8
+      "crew": 9
     },
     "sailor14": {
       "dmPart": "main_caliber_turret_03_dm",
       "role": "sailor",
-      "crew": 8
+      "crew": 9
     },
     "sailor15": {
       "dmPart": "auxiliary_caliber_turret_01_dm",
@@ -2282,11 +2282,6 @@
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
         "damage": 350.0
       }
@@ -2310,20 +2305,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
         "fire": 0.2,
-        "damage": 900.0,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -2785,6 +2774,7 @@
       "targetLockTime": 15.0,
       "calcTime": 8.0,
       "rotationSpeed": 6.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": true,
@@ -2800,6 +2790,7 @@
       "targetLockTime": 15.0,
       "calcTime": 8.0,
       "rotationSpeed": 6.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": false,
         "secondary": true,
@@ -2816,6 +2807,7 @@
       "targetLockTime": 20.0,
       "calcTime": 12.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": false,
@@ -2831,6 +2823,7 @@
       "targetLockTime": 20.0,
       "calcTime": 12.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": true,
@@ -6605,6 +6598,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

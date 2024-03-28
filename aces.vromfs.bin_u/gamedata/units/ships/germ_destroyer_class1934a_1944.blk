@@ -36,7 +36,7 @@
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_hydroplane",
   "smokeScreenOffset": [
-    -45.0,
+    -40.0,
     2.0,
     0.0
   ],
@@ -2325,9 +2325,6 @@
       },
       "transmission_02_dm": {
         "hp": 2400.0
-      },
-      "transmission_03_dm": {
-        "hp": 2400.0
       }
     },
     "shafts": {
@@ -2376,7 +2373,19 @@
         "hp": 2000.0
       },
       "fuel_tank_02_dm": {
-        "hp": 1500.0
+        "hp": 2000.0
+      },
+      "fuel_tank_03_dm": {
+        "hp": 2000.0
+      },
+      "fuel_tank_04_dm": {
+        "hp": 2000.0
+      },
+      "fuel_tank_05_dm": {
+        "hp": 1748.0
+      },
+      "fuel_tank_06_dm": {
+        "hp": 2000.0
       }
     },
     "coal_bunkers": {
@@ -2544,25 +2553,25 @@
       "pressureDamageMult": 3.0,
       "napalmDamageMult": 1.0,
       "auxiliary_caliber_turret_01_dm": {
-        "hp": 198.0
+        "hp": 211.0
       },
       "auxiliary_caliber_turret_02_dm": {
-        "hp": 192.0
+        "hp": 206.0
       },
       "auxiliary_caliber_turret_03_dm": {
-        "hp": 197.0
+        "hp": 211.0
       },
       "auxiliary_caliber_turret_04_dm": {
-        "hp": 218.0
+        "hp": 220.0
       },
       "auxiliary_caliber_turret_05_dm": {
-        "hp": 209.0
+        "hp": 220.0
       },
       "auxiliary_caliber_turret_06_dm": {
-        "hp": 186.0
+        "hp": 199.0
       },
       "auxiliary_caliber_turret_07_dm": {
-        "hp": 189.0
+        "hp": 202.0
       }
     },
     "turrets_aa_caliber": {
@@ -2573,7 +2582,7 @@
       "pressureDamageMult": 2.0,
       "napalmDamageMult": 1.0,
       "aa_turret_01_dm": {
-        "hp": 86.0
+        "hp": 93.0
       },
       "aa_turret_02_dm": {
         "hp": 100.0
@@ -2655,16 +2664,16 @@
       "fireProtectionHp": 10.0,
       "armorThrough": 200.0,
       "ammunition_storage_shells_01_dm": {
-        "hp": 1500.0
+        "hp": 1242.0
       },
       "ammunition_storage_shells_02_dm": {
-        "hp": 1500.0
+        "hp": 1267.0
       },
       "ammunition_storage_shells_03_dm": {
-        "hp": 1471.0
+        "hp": 1500.0
       },
       "ammunition_storage_shells_04_dm": {
-        "hp": 1303.0
+        "hp": 1500.0
       }
     },
     "ammo_storages_charges": {
@@ -2695,7 +2704,10 @@
         "hp": 800.0
       },
       "ammunition_storage_aux_02_dm": {
-        "hp": 1000.0
+        "hp": 859.0
+      },
+      "ammunition_storage_aux_03_dm": {
+        "hp": 859.0
       }
     },
     "ammo_first_stage": {
@@ -2818,12 +2830,6 @@
       "armorThickness": 4.0,
       "pump_01_dm": {
         "hp": 350.0
-      },
-      "pump_02_dm": {
-        "hp": 350.0
-      },
-      "pump_03_dm": {
-        "hp": 350.0
       }
     },
     "asw_mounts": {
@@ -2882,27 +2888,27 @@
     "sailor1": {
       "dmPart": "bridge_dm",
       "role": "sailor",
-      "crew": 5
+      "crew": 6
     },
     "sailor2": {
       "dmPart": "compartment_01_dm",
       "role": "sailor",
-      "crew": 37
+      "crew": 43
     },
     "sailor3": {
       "dmPart": "compartment_02_dm",
       "role": "sailor",
-      "crew": 33
+      "crew": 39
     },
     "sailor4": {
       "dmPart": "compartment_03_dm",
       "role": "sailor",
-      "crew": 30
+      "crew": 34
     },
     "sailor5": {
       "dmPart": "compartment_04_dm",
       "role": "sailor",
-      "crew": 29
+      "crew": 34
     },
     "sailor6": {
       "dmPart": "main_caliber_turret_01_dm",
@@ -2962,7 +2968,7 @@
     "sailor17": {
       "dmPart": "engine_room_01_dm",
       "role": "sailor",
-      "crew": 32
+      "crew": 35
     },
     "sailor18": {
       "dmPart": "engine_room_02_dm",
@@ -2980,21 +2986,16 @@
       "crew": 25
     },
     "sailor21": {
-      "dmPart": "transmission_03_dm",
-      "role": "sailor",
-      "crew": 25
-    },
-    "sailor22": {
       "dmPart": "fire_control_room_01_dm",
       "role": "sailor",
       "crew": 5
     },
-    "sailor23": {
+    "sailor22": {
       "dmPart": "rangefinder_01_dm",
       "role": "sailor",
       "crew": 2
     },
-    "sailor24": {
+    "sailor23": {
       "dmPart": "rangefinder_02_dm",
       "role": "sailor",
       "crew": 2
@@ -3228,14 +3229,8 @@
       "name": "compartment_10_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
@@ -3250,8 +3245,8 @@
       "name": "bridge_01_dm",
       "name": "bridge_02_dm",
       "onKill": {
-        "fire": 0.15,
-        "nothing": 0.85,
+        "fire": 0.1,
+        "nothing": 0.9,
         "fHitCritical": false
       }
     },
@@ -3264,20 +3259,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
+        "fire": 0.1,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.15,
-        "damage": 400.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "fire": 0.3,
-        "damage": 900.0,
+        "fire": 0.2,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -3690,6 +3679,7 @@
       "targetLockTime": 20.0,
       "calcTime": 12.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": false,
@@ -7028,7 +7018,6 @@
       "weaponTrigger": "gunner0",
       "replenishmentDelay": 3.0,
       "replenishmentTime": 2.2,
-      "removeLoadedAmmo": true,
       "explosionEvent": "ammo_explosion_1",
       "fireEvent": "ammo_fire_1",
       "fireParamsPreset": "ship_ammo_fire_total",
@@ -7135,7 +7124,6 @@
       "weaponTrigger": "gunner1",
       "replenishmentDelay": 3.0,
       "replenishmentTime": 2.2,
-      "removeLoadedAmmo": true,
       "explosionEvent": "ammo_explosion_1",
       "fireEvent": "ammo_fire_1",
       "fireParamsPreset": "ship_ammo_fire_total",
@@ -7242,7 +7230,6 @@
       "weaponTrigger": "gunner2",
       "replenishmentDelay": 3.0,
       "replenishmentTime": 2.2,
-      "removeLoadedAmmo": true,
       "explosionEvent": "ammo_explosion_2",
       "fireEvent": "ammo_fire_2",
       "fireParamsPreset": "ship_ammo_fire_total",
@@ -7349,7 +7336,6 @@
       "weaponTrigger": "gunner3",
       "replenishmentDelay": 3.0,
       "replenishmentTime": 2.2,
-      "removeLoadedAmmo": true,
       "explosionEvent": "ammo_explosion_2",
       "fireEvent": "ammo_fire_2",
       "fireParamsPreset": "ship_ammo_fire_total",
@@ -7599,7 +7585,13 @@
       "shells": {
         "damageEffect": "ammunition_storage_aux",
         "ammunition_storage_aux_02_dm": {
-          "count": 28000
+          "count": 14000
+        }
+      },
+      "shells": {
+        "damageEffect": "ammunition_storage_aux",
+        "ammunition_storage_aux_03_dm": {
+          "count": 14000
         }
       }
     },
@@ -7794,6 +7786,10 @@
         "part": {
           "partNo": "ammunition_storage_charges_02_dm",
           "critWaterLevel": 0.9
+        },
+        "part": {
+          "partNo": "ammunition_storage_aux_01_dm",
+          "critWaterLevel": 0.6
         }
       }
     },
@@ -7862,6 +7858,10 @@
         },
         "part": {
           "partNo": "ammunition_storage_aux_02_dm",
+          "critWaterLevel": 0.6
+        },
+        "part": {
+          "partNo": "ammunition_storage_aux_03_dm",
           "critWaterLevel": 0.6
         }
       }
@@ -8032,6 +8032,15 @@
       "to": "ger_camo_blackgreen_spots*"
     }
   },
+  "skin": {
+    "name": "ger_camo_multicolor_net",
+    "nameLocId": "skin/ger_camo_multicolor_net",
+    "descLocId": "skin/ger_camo_multicolor_net/desc",
+    "replace_tex": {
+      "from": "camo_hellgrau_50*",
+      "to": "ger_camo_multicolor_net*"
+    }
+  },
   "defaultShipFlag": {
     "name": "default",
     "modelFlagTexture": "flag_c*",
@@ -8078,6 +8087,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

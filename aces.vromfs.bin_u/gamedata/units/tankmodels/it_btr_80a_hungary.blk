@@ -498,6 +498,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1800,7 +1802,7 @@
       "errExplTime": 0.0,
       "turret": {
         "head": "bone_mg_twin",
-        "gun": "bone_mg_twin",
+        "gun": "emtr_mg_flame_01",
         "gunnerDm": "gunner_dm"
       },
       "limits": {
@@ -1896,10 +1898,16 @@
       "tracked": false,
       "gearRatios": {
         "ratio": -7.38,
+        "ratio": -13.5,
         "ratio": 0.0,
+        "ratio": 14.3,
         "ratio": 7.82,
+        "ratio": 7.37,
+        "ratio": 4.57,
         "ratio": 4.03,
+        "ratio": 2.8,
         "ratio": 2.5,
+        "ratio": 1.83,
         "ratio": 1.53,
         "ratio": 1.0
       }
@@ -2970,7 +2978,7 @@
       1400.0,
       100.0
     ],
-    "projectorPower": [
+    "power": [
       0.02,
       0.07
     ]
@@ -2989,7 +2997,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -3065,15 +3073,6 @@
             "noiseFactor": 0.2
           },
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600
@@ -3236,7 +3235,7 @@
             "errExplTime": 0.0,
             "turret": {
               "head": "bone_mg_twin",
-              "gun": "bone_mg_twin",
+              "gun": "emtr_mg_flame_01",
               "gunnerDm": "gunner_dm"
             },
             "limits": {
@@ -3283,7 +3282,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [

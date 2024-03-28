@@ -1921,17 +1921,6 @@
         0.0,
         -1.0,
         0.2
-      ],
-      "type": "leftHand",
-      "detachedNodeYpr": [
-        0.0,
-        -15.0,
-        -90.0
-      ],
-      "detachedNodeScale": [
-        1.0,
-        -1.0,
-        1.0
       ]
     },
     "ikNode": {
@@ -1943,17 +1932,6 @@
         0.0,
         -1.0,
         -0.5
-      ],
-      "type": "rightHand",
-      "detachedNodeYpr": [
-        0.0,
-        -15.0,
-        90.0
-      ],
-      "detachedNodeScale": [
-        1.0,
-        -1.0,
-        1.0
       ]
     },
     "ikNode": {
@@ -1962,9 +1940,9 @@
       "upNode": "Bip01 L Thigh",
       "targetNode": "pedal_lfoot_1",
       "flexionDir": [
-        0.0,
+        0.25,
         1.0,
-        0.3
+        0.0
       ]
     },
     "ikNode": {
@@ -1973,9 +1951,9 @@
       "upNode": "Bip01 R Thigh",
       "targetNode": "pedal_rfoot_1",
       "flexionDir": [
-        0.0,
+        -0.2,
         1.0,
-        -0.3
+        0.0
       ]
     }
   },
@@ -2015,9 +1993,9 @@
       "upNode": "Bip01 L Thigh",
       "targetNode": "pedal_lfoot_2",
       "flexionDir": [
-        0.0,
+        0.2,
         1.0,
-        0.3
+        0.0
       ]
     },
     "ikNode": {
@@ -2026,9 +2004,9 @@
       "upNode": "Bip01 R Thigh",
       "targetNode": "pedal_rfoot_2",
       "flexionDir": [
-        0.0,
+        -0.2,
         1.0,
-        -0.3
+        0.0
       ]
     }
   },
@@ -2080,26 +2058,30 @@
         1.0
       ],
       "stick_ailerons": [
-        -2.0,
-        2.0
+        -1.0,
+        1.0
       ],
       "stick_elevator": [
-        -2.0,
-        2.0
+        -1.0,
+        1.0
       ],
       "throttle": [
-        -1.0,
-        1.8
+        0.0,
+        1.0
       ],
       "throttle1": [
-        -1.0,
-        1.8
+        0.0,
+        1.0
       ],
       "prop_pitch": [
         0.0,
         1.0
       ],
       "prop_pitch1": [
+        0.0,
+        1.0
+      ],
+      "weapon1": [
         0.0,
         1.0
       ],
@@ -2204,9 +2186,17 @@
         40.0,
         140.0
       ],
+      "fuel": [
+        0.0,
+        445.0
+      ],
       "fuel1": [
         0.0,
-        650.0
+        478.0
+      ],
+      "fuel2": [
+        0.0,
+        393.0
       ],
       "fuel_pressure": [
         0.0,
@@ -2360,7 +2350,10 @@
     "preset": {
       "name": "mosquito_fb_mk6_2x500lbs_sap",
       "blk": "gameData/FlightModels/weaponPresets/mosquito_fb_mk6_2x500lbs_sap.blk",
-      "reqModification": "mosquitofb_mbc"
+      "reqModification": "mosquitofb_mbc",
+      "weaponConfig": {
+        "presetType": "AIR_TO_SEA"
+      }
     },
     "preset": {
       "name": "mosquito_fb_mk6_rockets",

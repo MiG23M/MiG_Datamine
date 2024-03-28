@@ -267,9 +267,6 @@
       "turret_02_front_dm": {
         "armorThickness": 28.5
       },
-      "turret_04_front_dm": {
-        "armorThickness": 200.0
-      },
       "turret_05_front_dm": {
         "armorThickness": 70.0
       },
@@ -295,7 +292,18 @@
         "armorThickness": 165.0
       },
       "turret_03_bottom_dm": {
-        "armorThickness": 200.0
+        "armorThickness": 200.0,
+        "variableThickness": true,
+        "hidableInViewer": true
+      },
+      "turret_04_front_dm": {
+        "armorThickness": 200.0,
+        "variableThickness": true,
+        "hidableInViewer": true
+      },
+      "composite_armor_hull_01_dm": {
+        "armorThickness": 0.01,
+        "hidableInXrayViewer": true
       },
       "turret_05_bottom_dm": {
         "armorClass": "t_90_rubber_fabric_screens",
@@ -656,6 +664,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1646,6 +1656,17 @@
       "dmPart": "commander_dm",
       "role": "tank_gunner",
       "role": "commander"
+    }
+  },
+  "xray_viewer_data": {
+    "armorArrayHullTop": {
+      "xrayDmPart": "composite_armor_hull_01_dm",
+      "titleLoc": "Stillbrew",
+      "armorArrayText": {
+        "layer": {
+          "dmPart": "turret_03_bottom_dm"
+        }
+      }
     }
   },
   "MetaParts": {
@@ -3243,7 +3264,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3306,15 +3326,6 @@
 ],
             "lightMult": 5.0,
             "ghosting": 0.7,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
             "noiseFactor": 0.2
           }
         }

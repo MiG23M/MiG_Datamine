@@ -2,10 +2,6 @@
   "selected_tag": "",
   "bin_dump_file": "",
   "mission_settings": {
-    "atmosphere": {
-      "pressure": 765.0,
-      "temperature": 15.0
-    },
     "player": {
       "army": 1,
       "wing": "player_wing"
@@ -16,21 +12,17 @@
     "mission": {
       "level": "levels/stalingrad.bin",
       "type": "singleMission",
-      "restoreType": "tactical control",
-      "optionalTakeOff": false,
       "environment": "Day",
       "weather": "hazy",
-      "windSpeed": [
-        2.0,
-        3.0
-      ],
+      "gt_cooperative": true,
+      "country_axis": "germany",
+      "country_allies": "ussr",
+      "restoreType": "tactical control",
+      "optionalTakeOff": false,
       "windDirectionDeg": [
         65.0,
         75.0
       ],
-      "gt_cooperative": true,
-      "country_axis": "germany",
-      "country_allies": "ussr",
       "stars": {
         "latitude": 48.0,
         "longitude": 44.0,
@@ -39,6 +31,10 @@
         "day": 24,
         "localTime": 12.0
       }
+    },
+    "atmosphere": {
+      "pressure": 765.0,
+      "temperature": 15.0
     },
     "briefing": {
       "place_loc": "",
@@ -52,6 +48,7 @@
           "map": true,
           "minTime": 4,
           "picture": "",
+          "showAirMap": false,
           "arrow": {
             "width": 1,
             "side": "player",
@@ -133,18 +130,22 @@
       },
       "conditions": {      },
       "actions": {
+        "missionSetWeatherParams": {
+          "waterWindStrengtMin": 2.0,
+          "waterWindStrengtMax": 3.0
+        },
         "unitSetProperties": {
           "object": "ships_squad",
+          "effShootingRate": 0.0,
           "speed": 0.0,
-          "lockSpeed": true,
-          "effShootingRate": 0.0
+          "lockSpeed": true
         },
         "unitSetProperties": {
           "object": "germ_artillery_squad",
           "object": "germ_air_def_squad",
-          "attack_type": "hold_fire",
-          "stealthRadius": 750.0,
           "targetableByAi": false,
+          "stealthRadius": 750.0,
+          "attack_type": "hold_fire",
           "effShootingRate": 0.5
         },
         "unitSetProperties": {
@@ -276,7 +277,8 @@
           "scale": 1.0,
           "target": "stalingrad_point"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_for_patrol_success": {
       "is_enabled": true,
@@ -305,7 +307,10 @@
       "actions": {
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_main",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "missionMarkAsWaypoint": {
           "visible": false,
@@ -321,7 +326,8 @@
         "triggerEnable": {
           "target": "zis_start"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "zis_start": {
       "is_enabled": false,
@@ -359,7 +365,8 @@
           "speed": 30.0,
           "lockSpeed": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf109_01_start": {
       "is_enabled": false,
@@ -387,6 +394,18 @@
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
           "horizontalDirectionForTeleport": true,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
           "object": "bg109_plane_01",
           "speed": 250.0
         },
@@ -394,7 +413,8 @@
           "target": "bf109_01_check_point",
           "target": "bf109_01_bombs_end"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf109_01_check_point": {
       "is_enabled": false,
@@ -419,6 +439,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "bg109_plane_01",
           "target": "bf109_01_point"
         }
@@ -437,7 +459,8 @@
         "triggerEnable": {
           "target": "bf_109_01_flyaway"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf109_01_bombs_end": {
       "is_enabled": false,
@@ -457,6 +480,11 @@
           "object_type": "noBombs",
           "object_marking": 0,
           "check_objects": "all",
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_type": "isAlive",
+          "check_period": 1.0,
           "object": "bg109_plane_01"
         }
       },
@@ -470,7 +498,8 @@
           "playerAttractedCount": 2,
           "playerAttractedEffRate": 0.8
         }
-      }
+      },
+      "else_actions": {      }
     },
     "update_truck_indicator": {
       "is_enabled": false,
@@ -494,9 +523,13 @@
           "icon": "truck",
           "icon army": 1,
           "set": true,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "cars_squad"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "zis_check_final_point": {
       "is_enabled": false,
@@ -517,6 +550,8 @@
           "object_type": "isMarked",
           "object_marking": 0,
           "check_objects": "any",
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "cars_squad",
           "target": "trucks_final_area"
         }
@@ -527,7 +562,8 @@
           "target": "cars_squad",
           "useForTriggerFiltered": true
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_for_trucks_dead": {
       "is_enabled": false,
@@ -548,13 +584,18 @@
           "object_marking": 0,
           "func": "less",
           "value": 15,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "cars_squad"
         }
       },
       "actions": {
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_trucks",
-          "status": 3
+          "status": 3,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "missionSetTargetsIndicator": {
           "target_type": "isAlive",
@@ -563,13 +604,17 @@
           "icon": "truck",
           "icon army": 1,
           "set": false,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "cars_squad"
         },
         "wait": {
           "time": 3.0
         },
         "missionFailed": {        }
-      }
+      },
+      "else_actions": {      }
     },
     "bf_109_01_flyaway": {
       "is_enabled": false,
@@ -594,6 +639,18 @@
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
           "horizontalDirectionForTeleport": true,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
           "object": "bg109_plane_01"
         },
         "wait": {
@@ -607,7 +664,8 @@
           "object": "bg109_plane_01",
           "stealthRadius": 4500.0
         }
-      }
+      },
+      "else_actions": {      }
     },
     "ships_start_to_swim": {
       "is_enabled": false,
@@ -628,6 +686,8 @@
           "object_marking": 2,
           "func": "notLess",
           "value": 15,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "cars_squad"
         }
       },
@@ -639,17 +699,20 @@
         },
         "unitSetProperties": {
           "object": "ships_squad",
-          "speed": 100.0,
-          "lockSpeed": true,
           "delayForObjects": [
             5.0,
             15.0
           ],
-          "effShootingRate": 0.0
+          "effShootingRate": 0.0,
+          "speed": 100.0,
+          "lockSpeed": true
         },
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_trucks",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "missionSetTargetsIndicator": {
           "target_type": "isAlive",
@@ -658,6 +721,9 @@
           "icon": "truck",
           "icon army": 1,
           "set": false,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "cars_squad"
         },
         "unitSetIndication": {
@@ -688,7 +754,8 @@
           "playerAttractedCount": 1,
           "playerAttractedEffRate": 1.0
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_for_artillery_attacked": {
       "is_enabled": true,
@@ -708,6 +775,11 @@
           "object_type": "damaged",
           "object_marking": 0,
           "check_objects": "any",
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_type": "isAlive",
+          "check_period": 1.0,
           "object": "germ_artillery_squad",
           "object": "germ_air_def_squad"
         }
@@ -716,11 +788,12 @@
         "unitSetProperties": {
           "object": "germ_artillery_squad",
           "object": "germ_air_def_squad",
-          "attack_type": "fire_at_will",
+          "targetableByAi": true,
           "stealthRadius": 10000.0,
-          "targetableByAi": true
+          "attack_type": "fire_at_will"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "artillery_start": {
       "is_enabled": false,
@@ -745,6 +818,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "ships_squad",
           "target": "germ_artillery_point"
         }
@@ -771,8 +846,8 @@
         "unitSetProperties": {
           "object": "germ_artillery_squad",
           "object": "germ_air_def_squad",
-          "attack_type": "fire_at_will",
-          "stealthRadius": 10000.0
+          "stealthRadius": 10000.0,
+          "attack_type": "fire_at_will"
         },
         "moAddMissionObjective": {
           "target": "dlc_stalingrad_evacuate_artillery"
@@ -790,7 +865,8 @@
         "triggerEnable": {
           "target": "ju87_01_start"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "update_artillery_counter": {
       "is_enabled": false,
@@ -814,9 +890,13 @@
           "icon": "cannon",
           "icon army": 2,
           "set": true,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "germ_artillery_squad"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "artillery_check_kill_ships": {
       "is_enabled": false,
@@ -847,6 +927,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "ships_squad",
           "target": "germ_artillery_squad"
         }
@@ -876,10 +958,11 @@
           "useForTriggerFiltered": true
         },
         "varSetInt": {
-          "var": "artillery_timer",
-          "value": 0
+          "value": 0,
+          "var": "artillery_timer"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "check_for_artillery_dead": {
       "is_enabled": false,
@@ -900,6 +983,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "germ_artillery_squad"
         }
       },
@@ -911,9 +996,13 @@
         },
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_artillery",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         }
-      }
+      },
+      "else_actions": {      }
     },
     "artillery_timer_change": {
       "is_enabled": false,
@@ -931,11 +1020,12 @@
       "conditions": {      },
       "actions": {
         "varModify": {
-          "var": "artillery_timer",
           "operator": "add",
-          "value": 1.0
+          "value": 1.0,
+          "var": "artillery_timer"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "artillery_kill_check": {
       "is_enabled": false,
@@ -956,21 +1046,24 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "germ_artillery_squad",
           "var": "artillery_alive"
         }
       },
       "actions": {
         "varSetInt": {
-          "var": "artillery_timer",
-          "value": 0
+          "value": 0,
+          "var": "artillery_timer"
         },
         "varModify": {
-          "var": "artillery_alive",
           "operator": "add",
-          "value": -1.0
+          "value": -1.0,
+          "var": "artillery_alive"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "update_indicator": {
       "is_enabled": false,
@@ -994,9 +1087,13 @@
           "icon": "ship",
           "icon army": 1,
           "set": true,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
           "target": "ships_squad"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "ju87_01_start": {
       "is_enabled": false,
@@ -1025,6 +1122,18 @@
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
           "horizontalDirectionForTeleport": true,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
           "object": "bg109_plane_02",
           "object": "ju87_plane_01"
         },
@@ -1032,7 +1141,8 @@
           "target": "bf109_02_check_point",
           "target": "ju87_01_start"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "change_ju87_params": {
       "is_enabled": false,
@@ -1052,6 +1162,11 @@
           "object_type": "isDamagedByPlayer",
           "object_marking": 0,
           "check_objects": "any",
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_type": "isAlive",
+          "check_period": 1.0,
           "object": "ju87_plane_01"
         }
       },
@@ -1078,7 +1193,8 @@
             }
           }
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf109_02_check_point": {
       "is_enabled": false,
@@ -1103,6 +1219,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "bg109_plane_02",
           "target": "bf109_02_point"
         }
@@ -1146,6 +1264,18 @@
           "shouldKeepFormation": false,
           "teleportHeightValue": 1000.0,
           "horizontalDirectionForTeleport": true,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
           "object": "ju87_plane_01"
         },
         "wait": {
@@ -1165,7 +1295,8 @@
         "triggerEnable": {
           "target": "mission_success"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf_109_03_start": {
       "is_enabled": false,
@@ -1193,12 +1324,25 @@
           "shouldKeepFormation": true,
           "teleportHeightValue": 1000.0,
           "horizontalDirectionForTeleport": true,
+          "object_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
+          "target_marking": 0,
+          "waypointReachedDist": 10.0,
+          "recalculatePathDist": -1.0,
+          "fastClimb": false,
+          "destTimeMode": false,
           "object": "bg109_plane_03"
         },
         "triggerEnable": {
           "target": "bf109_03_check_point"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf109_03_check_point": {
       "is_enabled": false,
@@ -1223,6 +1367,8 @@
           "check_targets": "any",
           "object_marking": 0,
           "target_marking": 0,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "bg109_plane_03",
           "target": "bf109_03_point"
         }
@@ -1241,7 +1387,8 @@
         "triggerEnable": {
           "target": "bf109_03_bombs_end"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "bf109_03_bombs_end": {
       "is_enabled": false,
@@ -1261,6 +1408,11 @@
           "object_type": "noBombs",
           "object_marking": 0,
           "check_objects": "all",
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
+          "object_var_value": 0,
+          "target_type": "isAlive",
+          "check_period": 1.0,
           "object": "bg109_plane_03"
         }
       },
@@ -1274,7 +1426,8 @@
           "playerAttractedCount": 2,
           "playerAttractedEffRate": 0.8
         }
-      }
+      },
+      "else_actions": {      }
     },
     "ships_check_final_point": {
       "is_enabled": false,
@@ -1295,6 +1448,8 @@
           "object_type": "isAlive",
           "object_marking": 0,
           "check_objects": "any",
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "ships_squad",
           "target": "final_area"
         }
@@ -1309,7 +1464,8 @@
         "triggerEnable": {
           "target": "mission_success"
         }
-      }
+      },
+      "else_actions": {      }
     },
     "mission_failed": {
       "is_enabled": true,
@@ -1330,6 +1486,8 @@
           "object_marking": 0,
           "func": "less",
           "value": 1,
+          "object_var_name": "",
+          "object_var_comp_op": "equal",
           "object": "ships_squad"
         }
       },
@@ -1339,13 +1497,17 @@
         },
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_ships",
-          "status": 3
+          "status": 3,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "wait": {
           "time": 3.0
         },
         "missionFailed": {        }
-      }
+      },
+      "else_actions": {      }
     },
     "mission_success": {
       "is_enabled": false,
@@ -1369,22 +1531,28 @@
       },
       "actions": {
         "varSetBool": {
-          "var": "mission_completed",
-          "value": true
+          "value": true,
+          "var": "mission_completed"
         },
         "triggerDisable": {
           "target": "mission_failed"
         },
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_ships",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "wait": {
           "time": 3.0
         },
         "moSetObjectiveStatus": {
           "target": "dlc_stalingrad_evacuate_main",
-          "status": 2
+          "status": 2,
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "wait": {
           "time": 3.0
@@ -1392,7 +1560,8 @@
         "missionCompleted": {
           "timer": false
         }
-      }
+      },
+      "else_actions": {      }
     }
   },
   "mission_objectives": {
@@ -1491,9 +1660,21 @@
     429.952,
     2666.56,
 ],
-      "closed_waypoints": false,
       "unit_class": "yak-1b",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "Yak1b_default",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -1533,9 +1714,21 @@
     -13.15,
     5199.0,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1660,9 +1853,21 @@
     -13.15,
     5282.7,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1809,9 +2014,21 @@
     -13.15,
     5347.7,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -1936,9 +2153,21 @@
     -13.15,
     5405.05,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2041,9 +2270,21 @@
     -13.15,
     5537.9,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -2168,9 +2409,21 @@
     25.25,
     5756.35,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -2382,9 +2635,21 @@
     25.25,
     5923.85,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -2640,9 +2905,21 @@
     25.25,
     5948.25,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -2920,9 +3197,21 @@
     25.25,
     6119.65,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -3222,9 +3511,21 @@
     25.25,
     6403.45,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 2,
@@ -3524,9 +3825,21 @@
     25.25,
     6447.4,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -3562,9 +3875,21 @@
     25.25,
     5955.0,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -3600,9 +3925,21 @@
     25.25,
     5444.9,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -3638,9 +3975,21 @@
     -13.15,
     5133.6,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -3765,9 +4114,21 @@
     -13.15,
     5066.4,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -3892,9 +4253,21 @@
     -13.15,
     4994.0,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -4019,9 +4392,21 @@
     -13.15,
     4921.05,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -4146,9 +4531,21 @@
     -13.15,
     4837.65,
 ],
-      "closed_waypoints": false,
       "unit_class": "cargo_ship_light",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -4273,9 +4670,21 @@
     26.95,
     5349.15,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -4465,9 +4874,21 @@
     26.95,
     4871.3,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -4613,9 +5034,21 @@
     26.95,
     5237.7,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -4915,9 +5348,21 @@
     26.95,
     5673.35,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -5107,9 +5552,21 @@
     26.95,
     6018.55,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_zis5_med",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 4,
@@ -5299,9 +5756,21 @@
     1500.0,
     3344.2,
 ],
-      "closed_waypoints": false,
       "unit_class": "bf-109f-4",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "Bf-109F-4_4xSC50",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 12,
@@ -5341,9 +5810,6 @@
     16.85,
     4287.65,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "zis_01_car",
         "squad_members": "zis_02_car",
@@ -5355,8 +5821,7 @@
         "squad_members": "zis_08_car",
         "squad_members": "zis_09_car",
         "squad_members": "zis_10_car"
-      },
-      "way": {      }
+      }
     },
     "squad": {
       "name": "ships_squad",
@@ -5374,9 +5839,6 @@
     -25.0,
     4082.25,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "cargo_ship_01",
         "squad_members": "cargo_ship_02",
@@ -5388,8 +5850,7 @@
         "squad_members": "cargo_ship_08",
         "squad_members": "cargo_ship_09",
         "squad_members": "cargo_ship_10"
-      },
-      "way": {      }
+      }
     },
     "squad": {
       "name": "all_squad",
@@ -5407,14 +5868,10 @@
     -5.45,
     4570.2,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "ships_squad",
         "squad_members": "cars_squad"
-      },
-      "way": {      }
+      }
     },
     "structures": {
       "name": "germ_artillery_01",
@@ -5432,9 +5889,21 @@
     -6.8,
     8165.6,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_75mm_pak40",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5470,9 +5939,21 @@
     -7.2,
     8066.15,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_75mm_pak40",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5508,9 +5989,21 @@
     -6.65,
     8179.95,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_75mm_pak40",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5546,9 +6039,21 @@
     -6.65,
     8303.95,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_75mm_pak40",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5584,9 +6089,21 @@
     -7.25,
     8423.7,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_75mm_pak40",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5622,9 +6139,21 @@
     -6.5,
     8394.4,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_75mm_pak40",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5660,9 +6189,6 @@
     -6.00648,
     8925.7,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "germ_artillery_01",
         "squad_members": "germ_artillery_02",
@@ -5670,8 +6196,7 @@
         "squad_members": "germ_artillery_04",
         "squad_members": "germ_artillery_05",
         "squad_members": "germ_artillery_06"
-      },
-      "way": {      }
+      }
     },
     "armada": {
       "name": "bg109_plane_02",
@@ -5689,9 +6214,21 @@
     1200.0,
     13242.0,
 ],
-      "closed_waypoints": false,
       "unit_class": "bf-109f-4",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "Bf-109F-4_4xSC50",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 6,
@@ -5731,9 +6268,21 @@
     1200.0,
     26541.6,
 ],
-      "closed_waypoints": false,
       "unit_class": "bf-109f-4",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "Bf-109F-4_4xSC50",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 8,
@@ -5773,9 +6322,21 @@
     -5.65,
     8497.25,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_20mm_flak38",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5810,9 +6371,21 @@
     -5.95,
     8367.7,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_20mm_flak38",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5847,9 +6420,21 @@
     -6.15,
     8056.75,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_20mm_flak38",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5884,9 +6469,21 @@
     -5.75,
     8199.85,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_20mm_flak38",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 1,
@@ -5921,16 +6518,12 @@
     -7.9,
     9274.25,
 ],
-      "closed_waypoints": false,
-      "unit_class": "",
-      "weapons": "",
       "props": {
         "squad_members": "germ_air_def_01",
         "squad_members": "germ_air_def_02",
         "squad_members": "germ_air_def_03",
         "squad_members": "germ_air_def_04"
-      },
-      "way": {      }
+      }
     },
     "objectGroups": {
       "name": "airfield_01",
@@ -5948,14 +6541,11 @@
     31.5054,
     817.103,
 ],
-      "closed_waypoints": false,
       "unit_class": "dynAF_britain_ally",
-      "weapons": "",
       "props": {
         "army": 1,
         "active": true
-      },
-      "way": {      }
+      }
     },
     "armada": {
       "name": "ju87_plane_01",
@@ -5973,9 +6563,21 @@
     750.0,
     12377.2,
 ],
-      "closed_waypoints": false,
       "unit_class": "ju-87d-3",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "Ju87_D3_default",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 8,
@@ -6015,9 +6617,21 @@
     -8.25012,
     13220.0,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6052,9 +6666,21 @@
     -8.25012,
     13476.9,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6089,9 +6715,21 @@
     -8.25012,
     13131.0,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6126,9 +6764,21 @@
     -8.25012,
     13519.9,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_37mm_61k_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -6163,9 +6813,21 @@
     90.3,
     5313.05,
 ],
-      "closed_waypoints": false,
       "unit_class": "ussr_57mm_zis2_noground",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 10,
@@ -6202,9 +6864,21 @@
     96.0,
     5489.25,
 ],
-      "closed_waypoints": false,
       "unit_class": "germ_pzIIIj",
+      "closed_waypoints": false,
+      "isShipSpline": false,
+      "shipTurnRadius": 100.0,
       "weapons": "",
+      "bullets0": "",
+      "bullets1": "",
+      "bullets2": "",
+      "bullets3": "",
+      "bulletsCount0": 0,
+      "bulletsCount1": 0,
+      "bulletsCount2": 0,
+      "bulletsCount3": 0,
+      "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 2,
         "count": 15,
@@ -6569,5 +7243,23 @@
 ],
       "props": {      }
     }
-  }
+  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    }
+  },
+  "wayPoints": {  }
 }

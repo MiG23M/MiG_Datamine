@@ -2350,6 +2350,9 @@
     },
     "sensor": {
       "blk": "gameData/sensors/su_spo-10.blk"
+    },
+    "sensor": {
+      "blk": "gameData/sensors/LaserDesignatorSensor.blk"
     }
   },
   "commonWeapons": {
@@ -2787,6 +2790,28 @@
         "DependentWeaponPreset": {
           "slot": 5,
           "preset": "delta_ng"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_left1",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "pylon_4"
+        },
+        "ShowDmParts": {
+          "node": "tank7_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/su_800l_su_17_silver_left_wing_1.blk",
+          "emitter": "su_800l_su_17_22_25_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 6,
+          "preset": "ptb_right1"
         }
       }
     },
@@ -3817,6 +3842,28 @@
         "DependentWeaponPreset": {
           "slot": 5,
           "preset": "delta_ng"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_right1",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "pylon_3"
+        },
+        "ShowDmParts": {
+          "node": "tank10_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/su_800l_su_17_silver_right_wing_1.blk",
+          "emitter": "su_800l_su_17_22_25_drop_tank_004",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 1,
+          "preset": "ptb_left1"
         }
       }
     }

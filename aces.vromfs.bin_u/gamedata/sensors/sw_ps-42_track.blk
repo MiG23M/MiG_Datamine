@@ -136,6 +136,9 @@
             "source": "const",
             "value": true
           },
+          "setDesignatedTarget": {
+            "set": false
+          },
           "setScanPattern": {
             "scanPattern": "track"
           },
@@ -176,6 +179,7 @@
         "lock": {
           "stateFrom": "standby",
           "command": "selectTarget",
+          "command": "acmSwitch",
           "stateTo": "lock",
           "actions": {
             "setLockMode": {            }
@@ -209,6 +213,7 @@
           "stateFrom": "lock",
           "stateFrom": "track",
           "command": "selectTarget",
+          "command": "acmSwitch",
           "event": "disable",
           "stateTo": "standby",
           "actions": {
@@ -237,7 +242,10 @@
         "detect": {
           "event": "targetInSight",
           "actions": {
-            "detectTarget": {            }
+            "detectTarget": {
+              "ignoreOwnWeapon": true,
+              "rangeMult": 1.0
+            }
           }
         }
       }
@@ -248,7 +256,10 @@
         "detect": {
           "event": "update",
           "actions": {
-            "detectTarget": {            }
+            "detectTarget": {
+              "ignoreOwnWeapon": true,
+              "rangeMult": 1.0
+            }
           }
         },
         "track": {
@@ -276,7 +287,8 @@
           "actions": {
             "extrapolateTargetsOfInterest": {            },
             "clearTargetsOfInterest": {
-              "timeOut": 1.0
+              "timeOut": 1.0,
+              "dirRateLim": 1.0
             },
             "setCenterAzimuth": {
               "source": "activeTargetOfInterest"

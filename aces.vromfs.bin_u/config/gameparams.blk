@@ -120,6 +120,11 @@
   "bombDropDownOnRendInstCollision": false,
   "criticalHillAngle": 25.0,
   "hillClimbingDeclineFricKoef": 25.0,
+  "favorKillerTimeWindowAndOffset": [
+    100.0,
+    300.0,
+    100.0
+  ],
   "helicopterDefaultTpsOffset": [
     -2.0,
     0.0,
@@ -262,7 +267,7 @@
   "criticalOffenderMetricsDiffMin": 0.3,
   "leaveKillerSearchDistanceMax": 3000.0,
   "airfieldSafeLeaveZoneRadius": -1.0,
-  "enableAircraftSevereDamage": false,
+  "enableAircraftSevereDamage": true,
   "showDamageReport": false,
   "damageReportTimeOut": 1.0,
   "showFireDamageReport": true,
@@ -302,6 +307,7 @@
   "cockpit_adaptation_max_mul": 0.9,
   "helicopter_target_brightness_mul": 0.8,
   "helicopter_adaptation_max_mul": 0.6,
+  "clientShellPositionCatchTime": 0.5,
   "preloadWeaponMeshes": true,
   "thresholdTimeForActivateDelayTimerInBombByDrop": 4.5,
   "supportUnitClassForTutorial": "structures/ussr_122mm_m30",
@@ -329,6 +335,7 @@
   "shipSteamEmitterExtremeLifetime": 1.0,
   "canReloadMines": false,
   "enableNoFirstMoveCooldown": true,
+  "maxPartAmmoRearmTime": 30.0,
   "shipAiTargetMaxDist": 25000.0,
   "timeStayOnInGameForDisconnected": 300.0,
   "useFullSectionsOnShips": false,
@@ -414,6 +421,7 @@
   ],
   "forceTraceRendInstSecondLayer": true,
   "traceRendInstSecondLayerMinHeight": 0.5,
+  "shipFireControlIndicationOn": true,
   "tracers": {
     "headFadeTime": 4.0,
     "headSpeedScale": [
@@ -5010,6 +5018,8 @@
       "flutter": false,
       "limitedBombsMissiles": false,
       "radarAssist": true,
+      "sensor": 0,
+      "seeker": 0,
       "rwr": 0,
       "noArcadeBoost": 0,
       "limitViews": 0,
@@ -5064,7 +5074,8 @@
       "shipSupportPlanes": true,
       "lightDM": false,
       "checkActivityByPlayerDamage": false,
-      "shipGunsRearm": true
+      "shipGunsRearm": true,
+      "opticalAgmArcadeControl": true
     },
     "realistic": {
       "baseDifficulty": 1,
@@ -5078,6 +5089,8 @@
       "torqueAndGyro": false,
       "flutter": true,
       "limitedBombsMissiles": true,
+      "sensor": 1,
+      "seeker": 1,
       "radarAssist": true,
       "rwr": 1,
       "noArcadeBoost": 1,
@@ -5147,6 +5160,8 @@
       "torqueAndGyro": true,
       "flutter": true,
       "limitedBombsMissiles": true,
+      "sensor": 2,
+      "seeker": 2,
       "radarAssist": false,
       "rwr": 2,
       "noArcadeBoost": 1,
@@ -5217,6 +5232,8 @@
       "torqueAndGyro": false,
       "flutter": true,
       "limitedBombsMissiles": true,
+      "sensor": 1,
+      "seeker": 1,
       "radarAssist": true,
       "rwr": 1,
       "noArcadeBoost": 1,
@@ -5287,6 +5304,8 @@
       "torqueAndGyro": true,
       "flutter": true,
       "limitedBombsMissiles": true,
+      "sensor": 2,
+      "seeker": 2,
       "radarAssist": false,
       "rwr": 2,
       "noArcadeBoost": 1,
@@ -5357,6 +5376,8 @@
       "flutter": false,
       "limitedBombsMissiles": false,
       "radarAssist": true,
+      "sensor": 0,
+      "seeker": 0,
       "rwr": 0,
       "noArcadeBoost": 0,
       "limitViews": 0,
@@ -5412,6 +5433,7 @@
       "lightDM": false,
       "checkActivityByPlayerDamage": true,
       "shipGunsRearm": true,
+      "opticalAgmArcadeControl": true,
       "setDifficulty": 0
     },
     "ship_realistic": {
@@ -5426,6 +5448,8 @@
       "torqueAndGyro": false,
       "flutter": true,
       "limitedBombsMissiles": true,
+      "sensor": 1,
+      "seeker": 1,
       "radarAssist": true,
       "rwr": 1,
       "noArcadeBoost": 1,
@@ -5570,7 +5594,7 @@
         "shipExtinguishSpeed": 1.0,
         "shipCollisionDamageAllyWithEnemy": 1.0,
         "shipCollisionDamageAllyWithAlly": -1.0,
-        "shipCollisionDamageGround": 1.0,
+        "shipCollisionDamageGround": 0.1,
         "radioGunnerRadioDistanceMult": 1.0,
         "hudDrawBombingZoneThroughCloud": true,
         "shipBrokenRangefinderErrorMult": 2.0,
@@ -5593,7 +5617,8 @@
         "shipRepairRequestHelpRadius": 500.0,
         "shipCruiserRepairAssistRadius": 500.0,
         "shipCruiserRepairRequestHelpRadius": 1500.0,
-        "drawGroundUnitMarkerForAirstreakFighter": false
+        "drawGroundUnitMarkerForAirstreakFighter": false,
+        "agmOpticalArcadeDesignator": true
       },
       "medium": {
         "scoutPreset": "realistic",
@@ -5652,7 +5677,7 @@
         "shipExtinguishSpeed": 1.0,
         "shipCollisionDamageAllyWithEnemy": 1.0,
         "shipCollisionDamageAllyWithAlly": -1.0,
-        "shipCollisionDamageGround": 1.0,
+        "shipCollisionDamageGround": 0.1,
         "radioGunnerRadioDistanceMult": 2.0,
         "hudDrawBombingZoneThroughCloud": true,
         "shipBrokenRangefinderErrorMult": 2.0,
@@ -5677,7 +5702,8 @@
         "shipRepairAssistRadius": 200.0,
         "shipRepairRequestHelpRadius": 500.0,
         "shipCruiserRepairAssistRadius": 500.0,
-        "shipCruiserRepairRequestHelpRadius": 1500.0
+        "shipCruiserRepairRequestHelpRadius": 1500.0,
+        "agmOpticalArcadeDesignator": true
       },
       "hard": {
         "scoutPreset": "hard",
@@ -5736,7 +5762,7 @@
         "shipExtinguishSpeed": 1.0,
         "shipCollisionDamageAllyWithEnemy": 1.0,
         "shipCollisionDamageAllyWithAlly": -1.0,
-        "shipCollisionDamageGround": 1.0,
+        "shipCollisionDamageGround": 0.1,
         "radioGunnerRadioDistanceMult": 2.0,
         "hudDrawBombingZoneThroughCloud": true,
         "shipBrokenRangefinderErrorMult": 2.0,
@@ -5911,6 +5937,70 @@
         "autoRearmStinger": false,
         "autoRearmChaff": false,
         "autoRearmFlare": false
+      }
+    },
+    "sensor": {
+      "easy": {
+        "sensorDetectFriendlies": false,
+        "sensorMultUnitTrack": false,
+        "sensorGroundClutter": false,
+        "sensorTrueTargetDesignation": false,
+        "sensorTrueTwsTargetMatching": false,
+        "sensorSpecificDetectOwnWeapon": false,
+        "sensorAirborneMultipathEffect": false,
+        "sensorGroundMultipathEffect": false,
+        "sensorCompensateGroundMultipathEffect": false,
+        "sensorSideLobes": false
+      },
+      "medium": {
+        "sensorDetectFriendlies": true,
+        "sensorMultUnitTrack": true,
+        "sensorGroundClutter": true,
+        "sensorTrueTargetDesignation": false,
+        "sensorTrueTwsTargetMatching": true,
+        "sensorSpecificDetectOwnWeapon": false,
+        "sensorAirborneMultipathEffect": true,
+        "sensorGroundMultipathEffect": true,
+        "sensorCompensateGroundMultipathEffect": true,
+        "sensorSideLobes": true
+      },
+      "hard": {
+        "sensorDetectFriendlies": true,
+        "sensorMultUnitTrack": true,
+        "sensorGroundClutter": true,
+        "sensorTrueTargetDesignation": true,
+        "sensorTrueTwsTargetMatching": true,
+        "sensorSpecificDetectOwnWeapon": true,
+        "sensorAirborneMultipathEffect": true,
+        "sensorGroundMultipathEffect": true,
+        "sensorCompensateGroundMultipathEffect": false,
+        "sensorSideLobes": true
+      }
+    },
+    "seeker": {
+      "easy": {
+        "seekerTrackFriendlies": false,
+        "seekerLimitTrackRate": false,
+        "seekerMultUnitTrack": false,
+        "seekerGroundClutter": true,
+        "seekerMultipathEffect": true,
+        "seekerSideLobes": true
+      },
+      "medium": {
+        "seekerTrackFriendlies": true,
+        "seekerLimitTrackRate": true,
+        "seekerMultUnitTrack": true,
+        "seekerGroundClutter": true,
+        "seekerMultipathEffect": true,
+        "seekerSideLobes": true
+      },
+      "hard": {
+        "seekerTrackFriendlies": true,
+        "seekerLimitTrackRate": true,
+        "seekerMultUnitTrack": true,
+        "seekerGroundClutter": true,
+        "seekerMultipathEffect": true,
+        "seekerSideLobes": true
       }
     },
     "radarAssist": {
@@ -6790,7 +6880,9 @@
         "shipBrokenTransmissionCooldown": 30.0,
         "shipBrokenShaftCooldown": 30.0,
         "shipBrokenBarrelShotFreqMult": 1.2,
-        "shipBrokenBarrelDispersionMult": 1.05
+        "shipBrokenBarrelDispersionMult": 1.05,
+        "shipBrokenElevatorMult": 0.9,
+        "shipDamagedElevatorMult": 1.0
       },
       "realistic": {
         "brokenBarrelAllowShoot": true,
@@ -6837,7 +6929,9 @@
         "shipBrokenTransmissionCooldown": 30.0,
         "shipBrokenShaftCooldown": 30.0,
         "shipBrokenBarrelShotFreqMult": 1.15,
-        "shipBrokenBarrelDispersionMult": 1.05
+        "shipBrokenBarrelDispersionMult": 1.05,
+        "shipBrokenElevatorMult": 0.9,
+        "shipDamagedElevatorMult": 1.0
       },
       "simulator": {
         "brokenBarrelAllowShoot": true,
@@ -7072,6 +7166,13 @@
       "on": {
         "rearmStackRel": 0.1
       }
+    },
+    "opticalAgmArcadeControl": {
+      "off": {      },
+      "on": {
+        "agmOpticalSeekerTrackSurfaceAsTarget": false,
+        "agmOpticalGuidanceExtraAcquisitionTime": 10.0
+      }
     }
   },
   "ambientWindParams": {
@@ -7103,7 +7204,9 @@
     "treeWindBlendOutStart": 0.3,
     "treeWindBlendOutLength": 0.2,
     "treeWindBlendOutByDistanceDistMul": 0.751,
-    "treeWindBlendOutByDistanceLength": 5.0
+    "treeWindBlendOutByDistanceLength": 5.0,
+    "treeDeformScale": 0.25,
+    "treeDeformStart": 0.9
   },
   "tankFuelLeakFxParams": {
     "fuelLeakFxName": "fire_burning_fuel_smoke",
@@ -7841,7 +7944,7 @@
       "staticCascadeDepthSlopeBias": 0.01,
       "staticCascadeDepthBiasFlip": 0.001,
       "fom_enabled": true,
-      "depthAboveExtraCascade": true
+      "depthAboveTextureSize": 1024
     }
   },
   "ambShadows": {
@@ -8180,6 +8283,10 @@
     "mouseAimGmJoystickSensitivity": 20.0,
     "tankCameraYLimits": [
       -85.0,
+      85.0
+    ],
+    "tankCameraZoomedYLimits": [
+      -50.0,
       85.0
     ],
     "tankCameraVRLimits": [
@@ -12979,6 +13086,7 @@
       "p": "aps_sensor_",
       "p": "aps_launcher_",
       "p": "ex_composite_armor_",
+      "p": "firewall_armor_",
       "p": "ex_era_hull_",
       "p": "ex_aps_launcher_",
       "p": "ex_era_turret_",
@@ -13230,6 +13338,10 @@
       "p": {
         "name": "spall_liner_",
         "xrayColor": [220, 245, 245, 255]
+      },
+      "p": {
+        "name": "firewall_armor_",
+        "xrayColor": [0, 0, 204, 255]
       },
       "p": {
         "name": "antenna_target_location_",
@@ -16263,6 +16375,78 @@
       "p": {
         "name": "wheel_r_03_",
         "modelNames": "tpk_641_vpc"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "cm_34"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "cm_34"
+      },
+      "p": {
+        "name": "wheel_l_03_",
+        "modelNames": "cm_34"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "cm_34"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "cm_34"
+      },
+      "p": {
+        "name": "wheel_r_03_",
+        "modelNames": "cm_34"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "fv721_fox"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "fv721_fox"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "fv721_fox"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "fv721_fox"
+      },
+      "p": {
+        "name": "wheel_r_01_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_l_01_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_r_02_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_l_02_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_r_03_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_l_03_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_r_04_",
+        "modelNames": "centauro_rgo_120"
+      },
+      "p": {
+        "name": "wheel_l_04_",
+        "modelNames": "centauro_rgo_120"
       }
     },
     "crew": {
@@ -16539,6 +16723,11 @@
       },
       "p": {
         "name": "spall_liner_",
+        "hideIfDead": true,
+        "dontShowInDMPanel": true
+      },
+      "p": {
+        "name": "firewall_armor_",
         "hideIfDead": true,
         "dontShowInDMPanel": true
       },
@@ -18106,6 +18295,10 @@
       1.0
     ],
     "maxLifeDistance": 20.0,
+    "bushDestrRadiusMult": 0.25,
+    "useBoxAsCanopyCollision": true,
+    "bushDensity": 60.0,
+    "canopyDensity": 60.0,
     "radiusToImpulse": {
       "row": [
         0.0,
@@ -18736,7 +18929,6 @@
   "scoutPresets": {
     "arcade": {
       "enabled": true,
-      "allHunters": false,
       "excludeVisibilityFromHunters": true,
       "excludeOffendersFromHunters": true,
       "offenderTimeThreshold": 60.0,
@@ -18753,7 +18945,6 @@
       "excludeOffendersFromHunters": true,
       "offenderTimeThreshold": 60.0,
       "showMarker": true,
-      "allHunters": true,
       "onlyBinocularUse": true,
       "radius": 5000.0,
       "scoutingTime": 45.0,
@@ -18770,6 +18961,109 @@
     "hard": {
       "enabled": false
     }
+  },
+  "sensorView": {
+    "playerColor": [
+      1.0,
+      1.0,
+      0.0
+    ],
+    "squadColor": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "friendlyColor": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "enemyColor": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "neutralColor": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "deadColor": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "rocketTrailColor": [
+      1.0,
+      0.8,
+      0.0
+    ],
+    "radarUnitRayColor": [
+      0.1,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "radarUnitSelectedTargetColor": [
+      0.2,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "radarUnitTargetOfIntrestColor": [
+      0.1,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "radarUnitTargetColor": [
+      0.15,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "radarRocketRayColor": [
+      0.1,
+      1.0,
+      0.1,
+      0.1
+    ],
+    "radarRocketTargetColor": [
+      0.1,
+      1.0,
+      0.1,
+      0.1
+    ],
+    "laserUnitRayColor": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "laserRocketRayColor": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "opticRocketSearchColor": [
+      1.0,
+      0.5,
+      0.0,
+      0.0
+    ],
+    "opticRocketTargetColor": [
+      1.0,
+      0.65,
+      0.0,
+      0.0
+    ],
+    "lwsRayColor": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ]
   },
   "shipsShootingTracking": {
     "lifeTime": 2.0,
@@ -19441,7 +19735,7 @@
       3000.0
     ],
     "limBlastPowerForShell": [
-      0.1,
+      0.3,
       1.0
     ],
     "limBlastPowerExplosivMassForBullet": [
@@ -19452,7 +19746,7 @@
       0.1,
       0.6
     ],
-    "rendinstRadiusMultForBlast": 2.0,
+    "rendinstRadiusMultForBlast": 5.0,
     "rendinstMinRadiusForBlast": 4.0,
     "particlesForceMul": 18.0,
     "antennaForceMul": 25.0,
@@ -19480,14 +19774,14 @@
       }
     },
     "clusterWindRendering": {
-      "grassBendingMult": 20.0,
-      "treeBendingMult": 2.0,
-      "impostorBendingMult": 4.75,
+      "grassBendingMult": 18.0,
+      "treeBendingMult": 3.0,
+      "impostorBendingMult": 5.33,
       "treeStaticBendingMult": 0.33,
       "impostorStaticBendingMult": 0.33,
       "grassStaticBendingMult": 17.5,
-      "treeAnimationMult": 1.6,
-      "grassAnimationMult": 1.6
+      "treeAnimationMult": 1.0,
+      "grassAnimationMult": 1.0
     },
     "dynamicWind": {
       "windSpawnTimeMult": 2.0,
@@ -19509,7 +19803,6 @@
 ]
     },
     "shotImpulse": {
-      "windBlastOverFluidWind": true,
       "minShotCaliberForCluster": 0.056,
       "maxShotCaliberForCluster": 0.155,
       "minShotRadiusForCluster": 4.0,
@@ -19723,6 +20016,8 @@
     "name": "dust_pieces"
   },
   "tankAimNodesNames": {
+    "node": "turret",
+    "node": "gun",
     "node": "cannon_breech",
     "node": "drive_turret_h",
     "node": "engine",

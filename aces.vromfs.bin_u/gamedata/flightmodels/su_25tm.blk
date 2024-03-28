@@ -2934,40 +2934,64 @@
           }
         },
         "Weapon": {
+          "dummy": true,
+          "trigger": "gunner0",
+          "triggerGroup": "primary",
+          "blk": "gameData/Weapons/dummy_weapon.blk",
+          "emitter": "optic2_gun",
+          "defaultYaw": 0.0,
+          "defaultPitch": 0.0,
+          "speedYaw": 25.0,
+          "speedPitch": 25.0,
+          "parkInDeadzone": false,
+          "aimForOperatedShell": true,
+          "turret": {
+            "head": "optic2_turret",
+            "gun": "optic2_gun",
+            "mainTurret": true
+          },
+          "limits": {
+            "yaw": [
+              -30.0,
+              30.0
+            ],
+            "pitch": [
+              -80.0,
+              15.0
+            ]
+          }
+        },
+        "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 32,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 32,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare3",
           "bullets": 64,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 64,
           "external": true,
-          "separate": true
+          "separate": false
         }
       }
     },
@@ -3477,6 +3501,28 @@
           "bullets": 1,
           "external": true,
           "separate": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_left1",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "pylon_2_holder"
+        },
+        "ShowDmParts": {
+          "node": "tank6_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/su_800l_su_25tm_silver_left_wing_1.blk",
+          "emitter": "su_800l_su_17_22_25_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 9,
+          "preset": "ptb_right1"
         }
       }
     },
@@ -5073,6 +5119,28 @@
           "external": true,
           "separate": true
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_right1",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "pylon_7_holder"
+        },
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/su_800l_su_25tm_silver_right_wing_1.blk",
+          "emitter": "su_800l_su_17_22_25_drop_tank_004",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 3,
+          "preset": "ptb_left1"
+        }
       }
     },
     "WeaponSlot": {
@@ -5340,6 +5408,24 @@
       "opticType": "",
       "turretNo": 0
     },
+    "TV": {
+      "pos": [
+        2.9,
+        -0.9,
+        0.0
+      ],
+      "head": "optic2_turret",
+      "crosshairPreset": "test_crosshair",
+      "angularLimits": [
+        -38.0,
+        38.0,
+        -55.0,
+        -55.0
+      ],
+      "opticType": "tv",
+      "turretNo": 0,
+      "name": "KH-29T"
+    },
     "Target": {
       "pos": [
         -5.0,
@@ -5555,6 +5641,7 @@
     "GSh-30-2_universal": {    },
     "GSh-30-2_ground_targets": {    },
     "GSh-30-2_air_targets": {    },
+    "GSh-30-2_stealth": {    },
     "GSh-30-2_belt_pack": {
       "tier": 1
     },

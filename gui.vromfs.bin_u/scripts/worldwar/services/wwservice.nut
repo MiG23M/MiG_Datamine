@@ -1,21 +1,21 @@
-//checked for plus_string
 from "%scripts/dagui_library.nut" import *
 
 let subscriptions = require("%sqStdLibs/helpers/subscriptions.nut")
+let { request_matching } = require("%scripts/matching/api.nut")
 
 let curSubscribeOperationId = mkWatched(persist, "curSubscribeOperationId", -1)
 
-let function unsubscribeOperationNotify(operationId, successCallback = null, errorCallback = null, requestOptions = null) {
-  ::request_matching("worldwar.unsubscribe_operation_notify", successCallback,
+function unsubscribeOperationNotify(operationId, successCallback = null, errorCallback = null, requestOptions = null) {
+  request_matching("worldwar.unsubscribe_operation_notify", successCallback,
     errorCallback, { operationId = operationId }, requestOptions)
 }
 
-let function subscribeOperationNotify(operationId, successCallback = null, errorCallback = null, requestOptions = null) {
-  ::request_matching("worldwar.subscribe_operation_notify", successCallback,
+function subscribeOperationNotify(operationId, successCallback = null, errorCallback = null, requestOptions = null) {
+  request_matching("worldwar.subscribe_operation_notify", successCallback,
     errorCallback, { operationId = operationId }, requestOptions)
 }
 
-let function unsubscribeCurOperation() {
+function unsubscribeCurOperation() {
   if (curSubscribeOperationId.value == -1)
     return
 
@@ -23,7 +23,7 @@ let function unsubscribeCurOperation() {
   curSubscribeOperationId(-1)
 }
 
-let function subscribeOperationNotifyOnce(operationId, successCallback = null, errorCallback = null, requestOptions = null) {
+function subscribeOperationNotifyOnce(operationId, successCallback = null, errorCallback = null, requestOptions = null) {
   if (operationId == curSubscribeOperationId.value)
     return
 

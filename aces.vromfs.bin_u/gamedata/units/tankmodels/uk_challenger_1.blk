@@ -125,11 +125,6 @@
         "genericArmorQuality": 0.25,
         "createSecondaryShatters": false
       },
-      "composite_armor_hull_02_dm": {
-        "armorThickness": 0.001,
-        "armorClass": "RHA_tank_modern",
-        "hidableInXrayViewer": true
-      },
       "composite_armor_hull_03_dm": {
         "armorThickness": 0.001,
         "armorClass": "RHA_tank_modern",
@@ -235,7 +230,8 @@
         "armorThickness": 16.0
       },
       "body_back_dm": {
-        "armorThickness": 25.0
+        "armorThickness": 15.0,
+        "variableThickness": true
       },
       "optic_body_03_dm": {
         "armorThickness": 88.0
@@ -262,7 +258,7 @@
         "armorThickness": 200.0
       },
       "turret_02_front_dm": {
-        "armorThickness": 50.0
+        "armorThickness": 10.0
       },
       "turret_04_front_dm": {
         "armorThickness": 19.0
@@ -647,6 +643,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1686,6 +1684,9 @@
       }
     }
   },
+  "attachables": {
+    "ex_armor_03_dm": false
+  },
   "gunConvergence": {
     "updateFromRangefinder": true,
     "minDistance": 200.0,
@@ -1765,15 +1766,6 @@
             50.0,
             250.0
           ]
-        }
-      }
-    },
-    "armorArrayHullSideInner": {
-      "xrayDmPart": "composite_armor_hull_02_dm",
-      "titleLoc": "RHA_tank_modern",
-      "armorArrayText": {
-        "layer": {
-          "dmPart": "turret_05_bottom_dm"
         }
       }
     },
@@ -3166,7 +3158,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3238,15 +3229,6 @@
 ],
             "lightMult": 8.0,
             "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
             "noiseFactor": 0.2
           },
           "driverIr": {

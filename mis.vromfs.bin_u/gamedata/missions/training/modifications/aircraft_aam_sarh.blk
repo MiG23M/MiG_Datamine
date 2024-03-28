@@ -10,15 +10,52 @@
       "army": 2
     },
     "mission": {
-      "type": "testFlight",
-      "level": "levels/avg_iberian_castle.bin",
+      "type": "training",
+      "gt_training": false,
+      "level": "levels/air_afghan.bin",
       "environment": "16",
-      "weather": "clear",
-      "locName": "missions/missile_test",
+      "weather": "cloudy",
       "gt_reload_explosives": false,
       "isLimitedFuel": false,
       "isLimitedAmmo": true,
-      "timeLimit": 30
+      "timeLimit": 30,
+      "forceSkiesInitialRandomSeed": true,
+      "skiesInitialRandomSeed": 1
+    },
+    "briefing": {
+      "place_loc": "",
+      "date_loc": "",
+      "objective_loc": "",
+      "music": "action_01",
+      "viewAreaScale": 5.0,
+      "part": {
+        "event": "",
+        "minTime": 0,
+        "slide": {
+          "map": true,
+          "minTime": 4,
+          "picture": "",
+          "showAirMap": false,
+          "arrow": {
+            "width": 1,
+            "side": "player",
+            "point": "player_respawn_pt",
+            "point": "target_respawn_pt"
+          },
+          "icon": {
+            "icontype": "fighter",
+            "side": "player",
+            "target": "player_respawn_pt",
+            "lookAt": "briefing_lookat_pt"
+          },
+          "icon": {
+            "icontype": "fighter",
+            "side": "enemy",
+            "target": "target_respawn_pt",
+            "lookAt": "player_respawn_pt"
+          }
+        }
+      }
     }
   },
   "imports": {  },
@@ -71,6 +108,7 @@
           "object": "target_air01",
           "move_type": "teleport",
           "speed": 200.0,
+          "lookat": "player",
           "velocity": 200.0
         },
         "unitSetProperties": {
@@ -107,7 +145,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -121,6 +159,9 @@
         }
       },
       "else_actions": {
+        "wait": {
+          "time": 0.5
+        },
         "missionSetTimeSpeed": {
           "speed": 0.0,
           "realtimeTriggers": true
@@ -140,7 +181,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -169,7 +210,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -202,7 +243,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 0.1
+          "time": 0.01
         }
       },
       "conditions": {
@@ -235,7 +276,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 1.0
+          "time": 0.01
         }
       },
       "conditions": {
@@ -286,7 +327,7 @@
       },
       "events": {
         "periodicEvent": {
-          "time": 1.0
+          "time": 0.01
         }
       },
       "conditions": {      },
@@ -1510,18 +1551,18 @@
     "armada": {
       "name": "target_air01",
       "tm": [
-    10.0,
+    -9.93714,
     -2.69158e-27,
-    0.0,
-    -4.76837e-7,
+    1.11943,
+    -4.57487e-7,
     10.0,
-    8.31963e-6,
-    1.24052e-5,
+    -8.32072e-6,
+    -1.11945,
     -5.68434e-13,
-    9.99999,
-    2004.25,
-    2386.95,
-    644.518,
+    -9.93713,
+    5185.54,
+    3091.65,
+    3435.31,
 ],
       "unit_class": "mig-21_f13",
       "objLayer": 1,
@@ -1572,9 +1613,9 @@
     0.0,
     0.0,
     1.0,
-    2300.3,
-    2382.25,
-    635.918,
+    5144.65,
+    3086.95,
+    3249.82,
 ],
           "props": {
             "speed": 700.0,
@@ -1593,9 +1634,9 @@
     0.0,
     0.0,
     1.0,
-    10000.4,
-    2320.3,
-    635.918,
+    4303.62,
+    3025.0,
+    -4404.21,
 ],
           "props": {
             "speed": 700.0,
@@ -1607,18 +1648,18 @@
     "armada": {
       "name": "player",
       "tm": [
-    10.0,
+    -1.09223,
     3.61273e-19,
-    0.0,
-    -5.96979e-7,
+    -9.94017,
+    8.35898e-6,
     10.0,
-    8.3437e-6,
-    1.2517e-5,
+    -3.1792e-7,
+    9.94016,
     1.11022e-16,
-    9.99999,
-    9777.9,
-    2364.95,
-    584.738,
+    -1.09225,
+    4277.05,
+    3069.65,
+    -4177.45,
 ],
       "unit_class": "f_14a_early",
       "objLayer": 1,
@@ -1663,18 +1704,18 @@
     "player_respawn_pt": {
       "type": "Sphere",
       "tm": [
-    -9.99552,
+    1.10909,
     -0.298621,
-    0.0174452,
-    -0.292094,
+    9.93381,
+    1.60593,
     9.86952,
-    1.5835,
-    -0.0645047,
+    0.117391,
+    -9.80769,
     1.58229,
-    -9.87381,
-    9730.85,
-    2327.55,
-    599.842,
+    1.14257,
+    4297.2,
+    3032.25,
+    -4132.33,
 ],
       "objLayer": 0,
       "props": {      }
@@ -1682,18 +1723,37 @@
     "target_respawn_pt": {
       "type": "Sphere",
       "tm": [
-    9.99705,
+    -1.09191,
     -0.238229,
-    5.84059e-6,
-    0.238228,
+    -9.93724,
+    -0.0260175,
     9.99702,
-    2.58393e-6,
-    7.43596e-6,
+    -0.236803,
+    9.94011,
     5.90052e-6,
-    9.99994,
-    2019.0,
-    2382.9,
-    646.668,
+    -1.09224,
+    5186.06,
+    3087.6,
+    3528.26,
+],
+      "objLayer": 0,
+      "props": {      }
+    },
+    "briefing_lookat_pt": {
+      "type": "Sphere",
+      "tm": [
+    -1.09191,
+    -0.238229,
+    -9.93724,
+    -0.0260175,
+    9.99702,
+    -0.236803,
+    9.94011,
+    5.90052e-6,
+    -1.09224,
+    5186.06,
+    3087.6,
+    3528.26,
 ],
       "objLayer": 0,
       "props": {      }

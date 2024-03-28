@@ -580,6 +580,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -846,14 +848,14 @@
     }
   },
   "sound": {
-    "EngineName": "engine_chieftain",
+    "EngineName": "engine_amx30",
     "TrackSoundPath": "tanks/engines_tanks",
     "TrackSoundPathStudio": "ground/engines",
-    "TrackSoundName": "tracks_mbt",
-    "TrackSoundNameCockpit": "tracks_mbt_interior",
+    "TrackSoundName": "tracks_amx30",
+    "TrackSoundNameCockpit": "tracks_amx30_interior",
     "turret_turn": "turret_turn_servo",
     "EngineNameAi": "engine_tank_ai_middle",
-    "TrackSoundNameAi": "tracks_ai_mbt",
+    "TrackSoundNameAi": "tracks_ai_amx30",
     "gun_turn": "turret_turn_mg_light"
   },
   "DamageEffects": {
@@ -1983,16 +1985,24 @@
       "maxBrakeForce": 80000.0,
       "driveGearRadius": 0.3,
       "mainGearRatio": 0.92,
-      "sideGearRatio": 5.0,
+      "sideGearRatio": 8.5,
       "neutralGearRatio": 8.7,
       "gearRatios": {
-        "ratio": -6.7,
+        "ratio": -4.84,
+        "ratio": -9.68,
         "ratio": 0.0,
-        "ratio": 6.7,
-        "ratio": 3.6,
-        "ratio": 2.4,
-        "ratio": 1.5,
-        "ratio": 1.0
+        "ratio": 6.86,
+        "ratio": 3.43,
+        "ratio": 2.72,
+        "ratio": 2.01,
+        "ratio": 1.715,
+        "ratio": 1.42,
+        "ratio": 1.21,
+        "ratio": 1.0,
+        "ratio": 0.915,
+        "ratio": 0.83,
+        "ratio": 0.71,
+        "ratio": 0.59
       }
     },
     "suspension": {
@@ -2960,7 +2970,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/76mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3025,15 +3034,6 @@
             "noiseFactor": 0.04
           },
           "commanderViewIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               1600,
               1200

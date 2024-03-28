@@ -1,15 +1,17 @@
 from "%rGui/globals/ui_library.nut" import *
 
 let DataBlock = require("DataBlock")
+let { setHeadMountedSystemPanelId = @(_) null } = require("hudState")
 
 let { HmdVisibleAAM, HmdFovMult } = require("%rGui/rocketAamAimState.nut")
 let { HmdSensorVisible } = require("%rGui/radarState.nut")
 let { BlkFileName, HmdVisible, HmdBlockIls } = require("planeState/planeToolsState.nut")
-let { PNL_ID_HMD } = require("%rGui/globals/panelIds.nut")
+let { PNL_ID_HMD, PNL_ID_INVALID } = require("%rGui/globals/panelIds.nut")
 
 let hmdShelZoom = require("planeHmds/hmdShelZoom.nut")
 let hmdVtas = require("planeHmds/hmdVtas.nut")
 let hmdF16c = require("planeHmds/hmdF16c.nut")
+let hmdAH64 = require("planeHmds/hmdAh64.nut")
 let { isInVr } = require("%rGui/style/screenState.nut")
 let { IPoint2, Point2, Point3 } = require("dagor.math")
 
@@ -17,7 +19,8 @@ let hmdSetting = Computed(function() {
   let res = {
     isShelZoom = false,
     isVtas = false,
-    isF16c = false
+    isF16c = false,
+    isAh64 = false
   }
   if (BlkFileName.value == "")
     return res
@@ -28,19 +31,21 @@ let hmdSetting = Computed(function() {
   return {
     isShelZoom = blk.getBool("hmdShelZoom", false),
     isVtas = blk.getBool("hmdVtas", false),
-    isF16c = blk.getBool("hmdF16c", false)
+    isF16c = blk.getBool("hmdF16c", false),
+    isAh64 = blk.getBool("hmdAH64", false)
   }
 })
 
 let isVisible = Computed(@() (HmdVisibleAAM.value || HmdSensorVisible.value || HmdVisible.value) && !HmdBlockIls.value)
 let planeHmd = @(width, height) function() {
-  let { isShelZoom, isVtas, isF16c } = hmdSetting.value
+  let { isShelZoom, isVtas, isF16c, isAh64 } = hmdSetting.value
   return {
     watch = [hmdSetting, isVisible]
     children = isVisible.value ? [
       (isShelZoom ? hmdShelZoom(width, height) : null),
       (isVtas ? hmdVtas(width, height) : null),
-      (isF16c ? hmdF16c(width, height) : null)
+      (isF16c ? hmdF16c(width, height) : null),
+      (isAh64 ? hmdAH64(width, height) : null)
     ] : null
   }
 }
@@ -89,8 +94,14 @@ let screenHmdLayout = @() {
 
 let planeHmdElement = {
   size = flex()
-  onAttach = @() gui_scene.addPanel(PNL_ID_HMD, isInVr ? vrHmdLayout : screenHmdLayout)
-  onDetach = @() gui_scene.removePanel(PNL_ID_HMD)
+  onAttach = function() {
+    setHeadMountedSystemPanelId(PNL_ID_HMD)
+    gui_scene.addPanel(PNL_ID_HMD, isInVr ? vrHmdLayout : screenHmdLayout)
+  }
+  onDetach = function() {
+    setHeadMountedSystemPanelId(PNL_ID_INVALID)
+    gui_scene.removePanel(PNL_ID_HMD)
+  }
 }
 
 let root = @() {

@@ -36,7 +36,7 @@
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_hydroplane",
   "smokeScreenOffset": [
-    -45.0,
+    -40.0,
     2.0,
     0.0
   ],
@@ -1964,13 +1964,13 @@
       "pressureDamageMult": 3.0,
       "napalmDamageMult": 1.0,
       "auxiliary_caliber_turret_01_dm": {
-        "hp": 175.0
+        "hp": 179.0
       },
       "auxiliary_caliber_turret_02_dm": {
-        "hp": 175.0
+        "hp": 179.0
       },
       "auxiliary_caliber_turret_03_dm": {
-        "hp": 175.0
+        "hp": 179.0
       },
       "auxiliary_caliber_turret_04_dm": {
         "hp": 220.0
@@ -2083,13 +2083,13 @@
       "fireProtectionHp": 10.0,
       "armorThrough": 200.0,
       "ammunition_storage_shells_01_dm": {
-        "hp": 1328.0
+        "hp": 1273.0
       },
       "ammunition_storage_shells_02_dm": {
         "hp": 1200.0
       },
       "ammunition_storage_shells_03_dm": {
-        "hp": 1232.0
+        "hp": 1200.0
       },
       "ammunition_storage_shells_04_dm": {
         "hp": 1500.0
@@ -2101,7 +2101,7 @@
       "fireProtectionHp": 15.0,
       "armorThrough": 200.0,
       "ammunition_storage_charges_01_dm": {
-        "hp": 2000.0
+        "hp": 1692.0
       },
       "ammunition_storage_charges_02_dm": {
         "hp": 1600.0
@@ -2110,7 +2110,7 @@
         "hp": 1600.0
       },
       "ammunition_storage_charges_04_dm": {
-        "hp": 1805.0
+        "hp": 1600.0
       }
     },
     "ammo_storages_auxiliary": {
@@ -2619,14 +2619,8 @@
       "name": "compartment_10_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
@@ -2641,8 +2635,8 @@
       "name": "bridge_01_dm",
       "name": "bridge_02_dm",
       "onKill": {
-        "fire": 0.15,
-        "nothing": 0.85,
+        "fire": 0.1,
+        "nothing": 0.9,
         "fHitCritical": false
       }
     },
@@ -2655,20 +2649,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
+        "fire": 0.1,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.15,
-        "damage": 400.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "fire": 0.3,
-        "damage": 900.0,
+        "fire": 0.2,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -3079,6 +3067,7 @@
       "targetLockTime": 15.0,
       "calcTime": 8.0,
       "rotationSpeed": 6.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": true,
@@ -3092,6 +3081,7 @@
       "targetLockTime": 20.0,
       "calcTime": 12.0,
       "rotationSpeed": 20.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": true,
@@ -6121,6 +6111,30 @@
       "param": "camo_skin_tex"
     }
   },
+  "skin": {
+    "name": "ussr_camo_green_stripes",
+    "nameLocId": "skin/ussr_camo_green_stripes",
+    "descLocId": "skin/ussr_camo_green_stripes/desc",
+    "replace_tex": {
+      "from": "camo_bluegray*",
+      "to": "ussr_camo_green_stripes*"
+    },
+    "set_tex": {
+      "from": "destroyer_7_besposhchadny_c*",
+      "to": "ccvl_noskin_body_c*",
+      "param": "camo_skin_tex"
+    },
+    "set_tex": {
+      "from": "turret_130mm_b13_c*",
+      "to": "ccvl_noskin_turret_c*",
+      "param": "camo_skin_tex"
+    },
+    "set_tex": {
+      "from": "turret_34k_c*",
+      "to": "ccvl_noskin_turret_c*",
+      "param": "camo_skin_tex"
+    }
+  },
   "user_skin": {
     "name": "destroyer_7_ryany",
     "replace_tex": {
@@ -6197,6 +6211,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

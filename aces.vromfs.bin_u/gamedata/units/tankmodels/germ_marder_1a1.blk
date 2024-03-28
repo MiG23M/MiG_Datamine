@@ -440,6 +440,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1671,8 +1673,7 @@
     "Weapon": {
       "trigger": "gunner2",
       "triggerGroup": "special",
-      "blk": "gameData/Weapons/groundModels_weapons/103mm_MILAN_rocket_launcher.blk",
-      "weaponType": "rockets",
+      "blk": "gameData/Weapons/groundModels_weapons/103mm_milan_launcher_user_cannon.blk",
       "useEmitter": true,
       "emitter": "bone_rocket_01",
       "stopForFire": true,
@@ -1711,7 +1712,7 @@
       "errExplTime": 0.0,
       "turret": {
         "head": "bone_mg_twin",
-        "gun": "bone_mg_twin",
+        "gun": "bone_turret_02",
         "gunnerDm": "gunner_dm",
         "secondGunnerDm": "commander_dm"
       },
@@ -1863,26 +1864,26 @@
       "maxBrakeForce": 120000.0,
       "driveGearRadius": 0.28,
       "mainGearRatio": 1.27,
-      "sideGearRatio": 3.0,
+      "sideGearRatio": 2.97,
       "neutralGearRatio": 10.0,
       "gearRatios": {
-        "ratio": -0.81,
-        "ratio": -1.1,
-        "ratio": -1.28,
-        "ratio": -1.53,
-        "ratio": -2.0,
-        "ratio": -2.83,
-        "ratio": -4.16,
-        "ratio": -11.232,
+        "ratio": -0.82,
+        "ratio": -1.02,
+        "ratio": -1.22,
+        "ratio": -1.52,
+        "ratio": -1.82,
+        "ratio": -2.685,
+        "ratio": -3.55,
+        "ratio": -7.1,
         "ratio": 0.0,
-        "ratio": 11.232,
-        "ratio": 4.16,
-        "ratio": 2.83,
-        "ratio": 2.0,
-        "ratio": 1.53,
-        "ratio": 1.28,
-        "ratio": 1.1,
-        "ratio": 0.81
+        "ratio": 7.1,
+        "ratio": 3.55,
+        "ratio": 2.685,
+        "ratio": 1.82,
+        "ratio": 1.52,
+        "ratio": 1.22,
+        "ratio": 1.02,
+        "ratio": 0.82
       }
     },
     "suspension": {
@@ -2529,7 +2530,7 @@
       1500.0,
       200.0
     ],
-    "projectorPower": [
+    "power": [
       0.03,
       0.07
     ],
@@ -2567,13 +2568,17 @@
     },
     "ammo2": {
       "weaponTrigger": "gunner2",
-      "removeLoadedAmmo": false,
       "fatalFire": true,
       "fatalExplosion": true,
       "shells": {
-        "fireEvent": "ammo_fire",
-        "explosionEvent": "ammo_explosion",
-        "wreckedPartId": 0,
+        "ammoLoadedInGun": true,
+        "fatalFire": false,
+        "fatalExplosion": false,
+        "ammo_body_r_01_dm": {
+          "count": 1
+        }
+      },
+      "shells": {
         "ammo_body_r_02_dm": {
           "count": 1
         },
@@ -2581,9 +2586,6 @@
           "count": 1
         },
         "ammo_body_r_04_dm": {
-          "count": 1
-        },
-        "ammo_body_r_01_dm": {
           "count": 1
         }
       }
@@ -2618,6 +2620,7 @@
     "20mm_rh202_AP_ammo_pack": {
       "tier": 1
     },
+    "103mm_milan_atgm": {    },
     "tank_smoke_screen_system_mod": {
       "modClass": "protection",
       "tier": 4,
@@ -2791,8 +2794,7 @@
           "Weapon": {
             "trigger": "gunner2",
             "triggerGroup": "special",
-            "blk": "gameData/Weapons/groundModels_weapons/103mm_MILAN_rocket_launcher.blk",
-            "weaponType": "rockets",
+            "blk": "gameData/Weapons/groundModels_weapons/103mm_milan_launcher_user_cannon.blk",
             "useEmitter": true,
             "emitter": "bone_rocket_01",
             "stopForFire": true,
@@ -2831,7 +2833,7 @@
             "errExplTime": 0.0,
             "turret": {
               "head": "bone_mg_twin",
-              "gun": "bone_mg_twin",
+              "gun": "bone_turret_02",
               "gunnerDm": "gunner_dm",
               "secondGunnerDm": "commander_dm"
             },
@@ -2926,7 +2928,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3000,15 +3001,6 @@
             "ghosting": 0.75,
             "noiseFactor": 0.2
           },
-          "commanderIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
           "driverIr": {
             "resolution": [
               800,
@@ -3065,7 +3057,7 @@
     }
   },
   "additionalSight": {
-    "fov": 20.0,
+    "fov": 35.0,
     "zoomFov": 7.3,
     "hookNodeName": "atgm_sight"
   }

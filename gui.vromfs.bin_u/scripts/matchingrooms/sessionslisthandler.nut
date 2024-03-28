@@ -1,12 +1,14 @@
 //-file:plus-string
 from "%scripts/dagui_library.nut" import *
+import "%scripts/matchingRooms/sessionLobby.nut" as SessionLobby
+
+let { getGlobalModule } = require("%scripts/global_modules.nut")
+let g_squad_manager = getGlobalModule("g_squad_manager")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { move_mouse_on_child_by_value, handlersManager, loadHandler
 } = require("%scripts/baseGuiHandlerManagerWT.nut")
-let { registerPersistentData } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
-let { sessionsListBlkPath } = require("%scripts/matchingRooms/getSessionsListBlkPath.nut")
 let fillSessionInfo = require("%scripts/matchingRooms/fillSessionInfo.nut")
 let { suggestAndAllowPsnPremiumFeatures } = require("%scripts/user/psnFeatures.nut")
 let { isGameModeCoop } = require("%scripts/matchingRooms/matchingGameModesUtils.nut")
@@ -17,67 +19,16 @@ let { havePremium } = require("%scripts/user/premium.nut")
 let { checkAndShowMultiplayerPrivilegeWarning,
   isMultiplayerPrivilegeAvailable } = require("%scripts/user/xboxFeatures.nut")
 let { isShowGoldBalanceWarning } = require("%scripts/user/balanceFeatures.nut")
-let { get_game_mode } = require("mission")
 let { OPTIONS_MODE_SEARCH, USEROPT_SEARCH_GAMEMODE, USEROPT_SEARCH_DIFFICULTY
 } = require("%scripts/options/optionsExtNames.nut")
 let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 let { sessionLobbyStatus } = require("%scripts/matchingRooms/sessionLobbyState.nut")
 let { create_options_container } = require("%scripts/options/optionsExt.nut")
-let { DYNAMIC_REQ_COUNTRY_RANK } = require("%scripts/missions/missionsUtils.nut")
-
-::match_search_gm <- -1
-
-registerPersistentData("SessionsList", getroottable(), ["match_search_gm"])
-
-::gui_start_session_list <- function gui_start_session_list() {
-  loadHandler(gui_handlers.SessionsList,
-                  {
-                    wndOptionsMode = ::get_options_mode(get_game_mode())
-                    backSceneParams = { globalFunctionName = "gui_start_mainmenu" }
-                  })
-}
-
-::gui_start_missions <- function gui_start_missions() { //!!FIX ME: is it really used in some cases?
-  ::match_search_gm = -1
-  ::gui_start_session_list()
-}
-
-::gui_start_skirmish <- function gui_start_skirmish() {
-  ::prepare_start_skirmish()
-  ::gui_start_session_list()
-}
-
-::prepare_start_skirmish <- function prepare_start_skirmish() {
-  ::match_search_gm = GM_SKIRMISH
-}
-
-::build_check_table <- function build_check_table(session, gm = 0) {
-  let ret = {}
-
-  if (session)
-    gm = session.gameModeInt
-
-  if (gm == GM_BUILDER) {
-    ret.silentFeature <- "ModeBuilder"
-  }
-  else if (gm == GM_DYNAMIC) {
-    if (session) {
-      ret.minRank <- DYNAMIC_REQ_COUNTRY_RANK
-      ret.rankCountry <- session.country
-    }
-    ret.silentFeature <- "ModeDynamic"
-  }
-  else if (gm == GM_SINGLE_MISSION) {
-    if (session)
-      ret.unlock <- session.chapter + "/" + session.map
-    ret.silentFeature <- "ModeSingleMissions"
-  }
-
-  return ret
-}
+let { checkAndCreateGamemodeWnd, setMatchSearchGm, getMatchSearchGm
+} = require("%scripts/missions/startMissionsList.nut")
 
 gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
-  sceneBlkName = sessionsListBlkPath.value
+  sceneBlkName = "%gui/sessionsList.blk"
   sceneNavBlkName = "%gui/navSessionsList.blk"
   optionsContainer = "mp_coop_options"
   isCoop = true
@@ -100,7 +51,7 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
     this.curPageRoomsList = []
     this.roomsListData = ::MRoomsList.getMRoomsListByRequestParams(null) //skirmish when no params
 
-    this.isCoop = isGameModeCoop(::match_search_gm)
+    this.isCoop = isGameModeCoop(getMatchSearchGm())
     this.scene.findObject("sessions_update").setUserData(this)
 
     let head = this.scene.findObject("sessions_diff_header")
@@ -154,7 +105,7 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
         [USEROPT_SEARCH_GAMEMODE, "spinner"],
         [USEROPT_SEARCH_DIFFICULTY, "spinner"],
       ]
-    else if (::match_search_gm == GM_SKIRMISH)
+    else if (getMatchSearchGm() == GM_SKIRMISH)
       options = [
         [USEROPT_SEARCH_DIFFICULTY, "spinner"],
       ]
@@ -178,7 +129,7 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
     if (!(value in option.values))
       return
 
-    ::match_search_gm = option.values[value]
+    setMatchSearchGm(option.values[value])
   }
 
   function onDifficultyChange(obj) {
@@ -198,7 +149,7 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
     this.updateRoomsList()
   }
 
-  function onSkirmish(_obj) { ::checkAndCreateGamemodeWnd(this, GM_SKIRMISH) }
+  function onSkirmish(_obj) { checkAndCreateGamemodeWnd(this, GM_SKIRMISH) }
 
   function onSessionsUpdate(_obj = null, _dt = 0.0) {
     if (handlersManager.isAnyModalHandlerActive()
@@ -235,8 +186,8 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
     //need to add ability to sort rooms by categories chosen by user
     //but temporary better to sort work at least as it was before from matching
     foreach (room in this.roomsList) {
-      let size = ::SessionLobby.getRoomSize(room)
-      room._players <- ::SessionLobby.getRoomMembersCnt(room)
+      let size = SessionLobby.getRoomSize(room)
+      room._players <- SessionLobby.getRoomMembersCnt(room)
       room._full <- room._players >= size
     }
     this.roomsList.sort(function(a, b) {
@@ -341,7 +292,7 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
     if (selectedRow < 0 && this.curPageRoomsList.len())
       selectedRow = clamp(this.sessionsListObj.getValue(), 0, this.curPageRoomsList.len() - 1)
 
-    let roomsInfoTbl = ::SessionLobby.getRoomsInfoTbl(this.curPageRoomsList)
+    let roomsInfoTbl = SessionLobby.getRoomsInfoTbl(this.curPageRoomsList)
     let data = ::build_mp_table(roomsInfoTbl, this.getRoomsListMarkUpData(), this.getColumnsList(), roomsInfoTbl.len())
     this.sessionsListObj.deleteChildren()
     this.guiScene.appendWithBlk(this.sessionsListObj, data, this)
@@ -409,17 +360,17 @@ gui_handlers.SessionsList <- class (gui_handlers.GenericOptions) {
     if (!room)
       return this.msgBox("no_room_selected", loc("ui/nothing_selected"), [["ok"]], "ok")
 
-    if (::g_squad_manager.getSquadRoomId() != room.roomId
+    if (g_squad_manager.getSquadRoomId() != room.roomId
       && !::g_squad_utils.canJoinFlightMsgBox(
           {
-            isLeaderCanJoin = ::can_play_gamemode_by_squad(::SessionLobby.getGameMode(room)),
+            isLeaderCanJoin = ::can_play_gamemode_by_squad(SessionLobby.getGameMode(room)),
             showOfflineSquadMembersPopup = true
           }
         )
       )
       return
 
-    this.checkedNewFlight(@() ::SessionLobby.joinFoundRoom(room))
+    this.checkedNewFlight(@() SessionLobby.joinFoundRoom(room))
   }
 
   function onVehiclesInfo(_obj) {

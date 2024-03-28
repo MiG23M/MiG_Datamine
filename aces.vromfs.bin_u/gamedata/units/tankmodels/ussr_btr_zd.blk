@@ -614,8 +614,7 @@
         "armorThickness": 5.0
       },
       "turret_01_front_dm": {
-        "armorClass": "RHA_tank",
-        "armorThickness": 5.0
+        "armorThickness": 10.0
       },
       "ex_armor_01_dm": {
         "armorThickness": 6.0
@@ -868,11 +867,17 @@
       },
       "cannon_breech_01_dm": {
         "armorThickness": 5.0,
-        "armorThrough": 5.0
+        "armorThrough": 5.0,
+        "restrainDamage": 0.5,
+        "armorThrough": 150.0,
+        "armorThickness": 150.0
       },
       "cannon_breech_02_dm": {
         "armorThickness": 5.0,
-        "armorThrough": 5.0
+        "armorThrough": 5.0,
+        "restrainDamage": 0.5,
+        "armorThrough": 150.0,
+        "armorThickness": 150.0
       },
       "cannon_breech_03_dm": {
         "armorThickness": 5.0,
@@ -898,6 +903,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2826,7 +2833,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -3729,7 +3736,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/81mm_tucha_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -3787,15 +3793,6 @@
       "effects": {
         "nightVision": {
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600

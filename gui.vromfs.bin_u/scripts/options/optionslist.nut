@@ -1,7 +1,8 @@
-//checked for plus_string
 from "%scripts/dagui_natives.nut" import can_add_tank_alt_crosshair, is_tank_gunner_camera_from_sight_available, is_hdr_enabled, is_compatibility_mode, get_user_alt_crosshairs
 from "%scripts/dagui_library.nut" import *
 from "%scripts/options/optionsExtNames.nut" import *
+
+let { g_difficulty } = require("%scripts/difficulty.nut")
 let safeAreaMenu = require("%scripts/options/safeAreaMenu.nut")
 let safeAreaHud = require("%scripts/options/safeAreaHud.nut")
 let contentPreset = require("%scripts/customization/contentPreset.nut")
@@ -18,6 +19,7 @@ let { get_mission_difficulty_int, get_mission_difficulty } = require("guiMission
 let { canSwitchGameLocalization } = require("%scripts/langUtils/language.nut")
 let { hasCustomLocalizationFlag } = require("%scripts/langUtils/customLocalization.nut")
 let { isInFlight } = require("gameplayBinding")
+let { getCurrentCampaignMission } = require("%scripts/missions/startMissionsList.nut")
 
 let getSystemOptions = @() {
   name = "graphicsParameters"
@@ -28,7 +30,7 @@ let getSystemOptions = @() {
 
 local overrideMainOptionsFn = null
 
-let privacyOptionsList = Computed(function() {
+function getPrivacyOptionsList() {
   let hasFeat = hasFeature("PrivacySettings")
   return [
     ["options/header/privacy", null, hasFeat],
@@ -38,7 +40,7 @@ let privacyOptionsList = Computed(function() {
     [USEROPT_ALLOW_ADDED_TO_LEADERBOARDS, "spinner", hasFeat],
     [USEROPT_DISPLAY_REAL_NICKS_PARTICIPANTS, "spinner", hasFeat && is_platform_pc]
   ]
-})
+}
 
 let otherOptionsList = @() [
   ["options/header/otherOptions"],
@@ -54,7 +56,7 @@ let getMainOptions = function() {
     return overrideMainOptionsFn()
 
   let isFirstTutorial = (::current_campaign_name == "tutorial_pacific_41") &&
-    (::current_campaign_mission == "tutorial01")
+    (getCurrentCampaignMission() == "tutorial01")
   let canChangeViewType = !isFirstTutorial && (getPlayerCurUnit()?.unitType.canChangeViewType ?? false)
 
   return {
@@ -139,6 +141,7 @@ let getMainOptions = function() {
       [USEROPT_HELICOPTER_HELMET_AIM, "spinner", !(isPlatformSony || isPlatformXboxOne)],
       [USEROPT_HELICOPTER_AUTOPILOT_ON_GUNNERVIEW, "spinner"],
       [USEROPT_ALTERNATIVE_TPS_CAMERA, "spinner"],
+      [USEROPT_HELI_COCKPIT_HUD_DISABLED, "spinner"],
       [USEROPT_LWS_IND_H_RADIUS, "slider"],
       [USEROPT_LWS_IND_H_ALPHA, "slider"],
       [USEROPT_LWS_IND_H_SCALE, "slider"],
@@ -162,7 +165,7 @@ let getMainOptions = function() {
       [USEROPT_PITCH_BLOCKER_WHILE_BRACKING, "spinner"],
       [USEROPT_COMMANDER_CAMERA_IN_VIEWS, "spinner"],
       [USEROPT_SAVE_DIR_WHILE_SWITCH_TRIGGER, "spinner"],
-      [USEROPT_HUD_SHOW_TANK_GUNS_AMMO, "spinner", hasFeature("MachineGunsAmmoIndicator")],
+      [USEROPT_HUD_SHOW_TANK_GUNS_AMMO, "spinner"],
       [USEROPT_HIT_INDICATOR_SIMPLIFIED, "switchbox", hasFeature("advancedHitIndicator")],
       [USEROPT_HIT_INDICATOR_RADIUS, "slider", hasFeature("advancedHitIndicator")],
       [USEROPT_HIT_INDICATOR_ALPHA, "slider", hasFeature("advancedHitIndicator")],
@@ -186,7 +189,7 @@ let getMainOptions = function() {
       [USEROPT_BULLET_FALL_SOUND_SHIP, "spinner"],
       [USEROPT_AUTO_TARGET_CHANGE_SHIP, "spinner"],
       [USEROPT_REALISTIC_AIMING_SHIP, "spinner",
-        (!isInFlight() || get_mission_difficulty() == ::g_difficulty.ARCADE.gameTypeName)],
+        (!isInFlight() || get_mission_difficulty() == g_difficulty.ARCADE.gameTypeName)],
       // TODO: separate from tank [USEROPT_TACTICAL_MAP_SIZE, "slider"],
       // TODO: separate from tank [USEROPT_MAP_ZOOM_BY_LEVEL, "spinner"],
       [USEROPT_FOLLOW_BULLET_CAMERA, "spinner", hasFeature("enableFollowBulletCamera")],
@@ -211,6 +214,8 @@ let getMainOptions = function() {
       [USEROPT_HUD_VISIBLE_REWARDS_MSG, "switchbox"],
       [USEROPT_HUD_VISIBLE_KILLLOG, "switchbox"],
       [USEROPT_HUD_SHOW_NAMES_IN_KILLLOG, "switchbox"],
+      [USEROPT_HUD_SHOW_AMMO_TYPE_IN_KILLLOG, "switchbox"],
+      [USEROPT_HUD_SHOW_SQUADRON_NAMES_IN_KILLLOG, "switchbox"],
       [USEROPT_HUD_VISIBLE_STREAKS, "switchbox"],
       [USEROPT_HUD_VISIBLE_CHAT_PLACE, "switchbox"],
       [USEROPT_SHOW_ACTION_BAR, "switchbox"],
@@ -223,6 +228,7 @@ let getMainOptions = function() {
       [USEROPT_MEASUREUNITS_TEMPERATURE, "spinner"],
       [USEROPT_MEASUREUNITS_WING_LOADING, "spinner", hasFeature("CardAirplaneWingLoadingParameter")],
       [USEROPT_MEASUREUNITS_POWER_TO_WEIGHT_RATIO, "spinner", hasFeature("CardAirplanePowerParameter")],
+      [USEROPT_MEASUREUNITS_RADIAL_SPEED, "spinner"],
 
       ["options/header/playersMarkers"],
       [USEROPT_SHOW_INDICATORS, "spinner"],
@@ -274,9 +280,9 @@ let getMainOptions = function() {
       [USEROPT_CONTENT_ALLOWED_PRESET_REALISTIC, "combobox", contentPreset.getContentPresets().len()],
       [USEROPT_CONTENT_ALLOWED_PRESET_SIMULATOR, "combobox",
         contentPreset.getContentPresets().len() &&
-        ::g_difficulty.SIMULATOR.isAvailable(GM_DOMINATION)],
+        g_difficulty.SIMULATOR.isAvailable(GM_DOMINATION)],
       [USEROPT_DELAYED_DOWNLOAD_CONTENT, "spinner", hasFeature("delayedDownloadContent")]
-    ].extend(privacyOptionsList.value, otherOptionsList())
+    ].extend(getPrivacyOptionsList(), otherOptionsList())
   }
 }
 

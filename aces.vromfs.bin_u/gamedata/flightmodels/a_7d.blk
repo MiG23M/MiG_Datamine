@@ -17,7 +17,6 @@
   "ilsHaveAVQ7CCIP": true,
   "ilsHaveAVQ7CCRP": true,
   "type": "typeBomber",
-  "paratrooper": "raf_para",
   "overheatBlk": "gameData/FlightModels/DM/overheat.blk",
   "damagePartsToCollisionObjectsMapBlk": "gameData/FlightModels/DM/dm_parts_to_collision_objects.blk",
   "damagePartsToFmPartsMapBlk": "gameData/FlightModels/DM/dm_parts_to_fm_parts_map.blk",
@@ -31,6 +30,7 @@
   "fireParamsPreset": "1200kph",
   "fightAiBehaviour": "assault",
   "autopilotImpl": "FBW",
+  "paratrooper": "usa_irvin_5000_ejection_para",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -2494,7 +2494,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 60,
@@ -2503,7 +2502,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 60,
@@ -2791,7 +2789,8 @@
           "emitter": "bomb_mk84_3",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -2803,7 +2802,8 @@
           "blk": "gameData/Weapons/containers/lau_88a_agm_65a_x_3.blk",
           "emitter": "lau_88a_1",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       }
     },
@@ -2888,7 +2888,8 @@
           "emitter": "bomb_mk84_5",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3086,7 +3087,8 @@
           "emitter": "bomb_mk84_6",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3285,7 +3287,8 @@
           "emitter": "bomb_mk84_4",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3297,7 +3300,8 @@
           "blk": "gameData/Weapons/containers/lau_88a_agm_65a_x_3.blk",
           "emitter": "lau_88a_2",
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       }
     },
@@ -3696,6 +3700,29 @@
       "from": "a_7d_c*",
       "to": "a_7d_c_tomoe*"
     }
+  },
+  "bailout": {
+    "buttonHoldTime": 1.0,
+    "wreckSpeed": 10.0,
+    "wreckDir": [
+      -1.0,
+      1.0,
+      0.0
+    ],
+    "seatEjectDelay": 0.5,
+    "seatVel": [
+      -10.0,
+      20.0,
+      0.0
+    ],
+    "minHeight": 0.0,
+    "minSpeed": 0.0,
+    "hasSafeExit": true,
+    "wreck": "blister1",
+    "hide": "seat_01",
+    "seat": "seat_01",
+    "fxEmitter": "blister1",
+    "fxType": "catapult_expl_ejection"
   },
   "parachutes": {
     "emitterRange": [

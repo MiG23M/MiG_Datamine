@@ -27,6 +27,7 @@ let shipState = {
 
   obstacleIsNear = Watched(false)
   distanceToObstacle = Watched(-1)
+  obstacleAngle = Watched(0)
   timeToDeath = Watched(-1)
 
   //DM:
@@ -65,7 +66,7 @@ let shipState = {
   gunStatesSecondRow
 }
 
-let function isDiff(time1, time2) {
+function isDiff(time1, time2) {
   return fabs(time1 - time2) >= 0.02;
 }
 

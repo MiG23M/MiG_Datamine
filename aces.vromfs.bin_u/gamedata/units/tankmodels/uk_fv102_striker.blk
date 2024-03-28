@@ -420,6 +420,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -1460,24 +1462,24 @@
       "maxBrakeForce": 65000.0,
       "driveGearRadius": 0.3,
       "mainGearRatio": 3.06,
-      "sideGearRatio": 2.7,
+      "sideGearRatio": 1.5,
       "neutralGearRatio": 12.0,
       "gearRatios": {
-        "ratio": -0.81,
-        "ratio": -1.0,
-        "ratio": -1.39,
-        "ratio": -1.936,
-        "ratio": -2.691,
-        "ratio": -3.81,
-        "ratio": -5.294,
+        "ratio": -1.47,
+        "ratio": -2.32,
+        "ratio": -3.05,
+        "ratio": -5.51,
+        "ratio": -9.174,
+        "ratio": -12.77,
+        "ratio": -28.63,
         "ratio": 0.0,
-        "ratio": 5.294,
-        "ratio": 3.81,
-        "ratio": 2.691,
-        "ratio": 1.936,
-        "ratio": 1.39,
-        "ratio": 1.0,
-        "ratio": 0.81
+        "ratio": 28.63,
+        "ratio": 12.77,
+        "ratio": 9.174,
+        "ratio": 5.51,
+        "ratio": 3.05,
+        "ratio": 2.32,
+        "ratio": 1.47
       }
     },
     "suspension": {
@@ -2104,7 +2106,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -2429,7 +2431,6 @@
             "triggerGroup": "smoke",
             "blk": "gameData/Weapons/groundModels_weapons/66mm_modern_smoke_grenade_launcher.blk",
             "weaponType": "rockets",
-            "startFx": "",
             "useEmitter": true,
             "emitter": "emtr_mortar_flame_01",
             "emitterGenRange": [
@@ -2500,15 +2501,6 @@
 ],
             "lightMult": 8.0,
             "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
-            "resolution": [
-              1600,
-              1200
-],
-            "lightMult": 9.0,
-            "ghosting": 0.6,
             "noiseFactor": 0.2
           },
           "driverIr": {

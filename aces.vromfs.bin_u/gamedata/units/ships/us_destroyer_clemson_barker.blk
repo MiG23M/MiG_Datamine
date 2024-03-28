@@ -36,7 +36,7 @@
   "smokeScreenFxType": "tank_smokescreen",
   "smokeScreenFx": "smokescreen_hydroplane",
   "smokeScreenOffset": [
-    -45.0,
+    -40.0,
     2.0,
     0.0
   ],
@@ -1410,14 +1410,8 @@
       "name": "compartment_10_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
         "fire": 0.1,
-        "damage": 400.0,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
@@ -1432,8 +1426,8 @@
       "name": "bridge_01_dm",
       "name": "bridge_02_dm",
       "onKill": {
-        "fire": 0.15,
-        "nothing": 0.85,
+        "fire": 0.1,
+        "nothing": 0.9,
         "fHitCritical": false
       }
     },
@@ -1446,20 +1440,14 @@
       "name": "superstructure_top_dm",
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.05,
-        "damage": 250.0,
+        "fire": 0.1,
+        "damage": 300.0,
         "fHitCritical": false
       },
       "onHit": {
         "damageType": "explosion",
-        "fire": 0.15,
-        "damage": 400.0,
-        "fHitCritical": false
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "fire": 0.3,
-        "damage": 900.0,
+        "fire": 0.2,
+        "damage": 450.0,
         "fHitCritical": false
       }
     },
@@ -1855,6 +1843,7 @@
       "targetLockTime": 10.0,
       "calcTime": 5.0,
       "rotationSpeed": 24.0,
+      "shipIndicationOn": true,
       "triggerGroupUse": {
         "primary": true,
         "secondary": false,
@@ -3134,6 +3123,23 @@
       "to": "usa_camo_blackgray_spots*"
     }
   },
+  "skin": {
+    "name": "usa_camo_threecolors",
+    "nameLocId": "skin/usa_camo_threecolors",
+    "descLocId": "skin/usa_camo_threecolors/desc",
+    "replace_tex": {
+      "from": "camo_navygrey_5*",
+      "to": "usa_camo_threecolors*"
+    },
+    "replace_tex": {
+      "from": "camo_hazegray_line*",
+      "to": "usa_camo_threecolors*"
+    },
+    "replace_tex": {
+      "from": "camo_hazegray*",
+      "to": "usa_camo_threecolors*"
+    }
+  },
   "ikGunner": {
     "model": "usa_sailor_navy_char",
     "maxHeadHorAngle": 60.0,
@@ -3634,7 +3640,7 @@
       "pressureDamageMult": 3.0,
       "napalmDamageMult": 1.0,
       "auxiliary_caliber_turret_01_dm": {
-        "hp": 209.0
+        "hp": 220.0
       }
     },
     "turrets_aa_caliber": {
@@ -4192,12 +4198,44 @@
       },
       "limits": {
         "yaw": [
-          -157.0,
-          10.0
+          -180.0,
+          0.0
         ],
         "pitch": [
-          -4.0,
+          -10.0,
           20.0
+        ]
+      },
+      "limitsTable": {
+        "lim1": [
+          -180.0,
+          -175.0,
+          7.0,
+          7.0
+        ],
+        "lim2": [
+          -175.0,
+          -160.0,
+          -2.0,
+          -2.0
+        ],
+        "lim2": [
+          -160.0,
+          -20.0,
+          -7.0,
+          -7.0
+        ],
+        "lim3": [
+          -20.0,
+          -5.0,
+          -2.0,
+          -2.0
+        ],
+        "lim3": [
+          -5.0,
+          0.0,
+          7.0,
+          7.0
         ]
       },
       "gunStabilizer": {
@@ -4252,12 +4290,44 @@
       },
       "limits": {
         "yaw": [
-          -10.0,
-          157.0
+          0.0,
+          180.0
         ],
         "pitch": [
-          -4.0,
+          -10.0,
           20.0
+        ]
+      },
+      "limitsTable": {
+        "lim1": [
+          0.0,
+          5.0,
+          7.0,
+          7.0
+        ],
+        "lim2": [
+          5.0,
+          20.0,
+          -2.0,
+          -2.0
+        ],
+        "lim2": [
+          20.0,
+          160.0,
+          -7.0,
+          -7.0
+        ],
+        "lim3": [
+          160.0,
+          175.0,
+          -2.0,
+          -2.0
+        ],
+        "lim3": [
+          175.0,
+          180.0,
+          7.0,
+          7.0
         ]
       },
       "gunStabilizer": {
@@ -4492,21 +4562,21 @@
       "limitsTable": {
         "lim1": [
           -180.0,
-          -170.0,
-          10.0,
-          10.0
+          -173.0,
+          6.0,
+          6.0
         ],
         "lim2": [
-          -170.0,
-          5.0,
-          -5.0,
-          -5.0
+          -173.0,
+          -7.0,
+          -6.0,
+          -6.0
         ],
         "lim3": [
-          5.0,
+          -7.0,
           30.0,
-          27.0,
-          27.0
+          18.0,
+          18.0
         ]
       },
       "gunStabilizer": {
@@ -4581,21 +4651,21 @@
       "limitsTable": {
         "lim1": [
           -30.0,
-          5.0,
-          27.0,
-          27.0
+          7.0,
+          18.0,
+          18.0
         ],
         "lim2": [
-          5.0,
-          170.0,
-          -5.0,
-          -5.0
+          7.0,
+          173.0,
+          -6.0,
+          -6.0
         ],
         "lim3": [
-          170.0,
+          173.0,
           180.0,
-          10.0,
-          10.0
+          6.0,
+          6.0
         ]
       },
       "gunStabilizer": {
@@ -5210,6 +5280,12 @@
       "unlockId": "ship_flag_germany_06",
       "nameLocId": "ship_flag_germany_06/name",
       "texture": "flag_germany_06_c*"
+    },
+    "ship_flag_germany_08": {
+      "category": "naval",
+      "unlockId": "ship_flag_germany_08",
+      "nameLocId": "ship_flag_germany_08/name",
+      "texture": "flag_germany_08_c*"
     },
     "ship_flag_ireland_01": {
       "category": "national",

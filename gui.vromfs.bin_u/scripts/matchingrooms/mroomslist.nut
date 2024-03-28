@@ -1,7 +1,8 @@
-//-file:plus-string
 from "%scripts/dagui_library.nut" import *
+import "%scripts/matchingRooms/sessionLobby.nut" as SessionLobby
 
-
+let { checkMatchingError } = require("%scripts/matching/api.nut")
+let { g_difficulty } = require("%scripts/difficulty.nut")
 let { get_time_msec } = require("dagor.time")
 let { script_net_assert_once } = require("%sqStdLibs/helpers/net_errors.nut")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
@@ -38,7 +39,7 @@ const SKIRMISH_ROOMS_LIST_ID = "skirmish"
   static function getMRoomsListByRequestParams(requestParams) {
     local roomsListId = SKIRMISH_ROOMS_LIST_ID //empty request params is a skirmish
     if ("eventEconomicName" in requestParams)
-      roomsListId = "economicName:" + requestParams.eventEconomicName
+      roomsListId = $"economicName:{requestParams.eventEconomicName}"
 
     let listById = ::MRoomsList.mRoomsListById
     if (!(roomsListId in listById))
@@ -115,7 +116,7 @@ const SKIRMISH_ROOMS_LIST_ID = "skirmish"
   function requestListCb(p, hideFullRooms) {
     this.isInUpdate = false
 
-    let digest = ::checkMatchingError(p, false) ? getTblValue("digest", p) : null
+    let digest = checkMatchingError(p, false) ? getTblValue("digest", p) : null
     if (!digest)
       return
 
@@ -181,7 +182,7 @@ const SKIRMISH_ROOMS_LIST_ID = "skirmish"
     if (diff != null && diff != -1) {
       filter["public/mission/difficulty"] <- {
         test = "eq"
-        value = ::g_difficulty.getDifficultyByDiffCode(diff).name
+        value = g_difficulty.getDifficultyByDiffCode(diff).name
       }
     }
     let clusters = ui_filter?.clusters
@@ -219,7 +220,7 @@ const SKIRMISH_ROOMS_LIST_ID = "skirmish"
 
   function updateRoomsList(rooms, hideFullRooms) { //can be called each update
     if (rooms.len() > MAX_SESSIONS_LIST_LEN) {
-      let message = format("Error in SessionLobby::updateRoomsList:\nToo long rooms list - %d", rooms.len())
+      let message = format("Error in SessionLobby.updateRoomsList:\nToo long rooms list - %d", rooms.len())
       script_net_assert_once("too long rooms list", message)
 
       rooms.resize(MAX_SESSIONS_LIST_LEN)
@@ -232,15 +233,15 @@ const SKIRMISH_ROOMS_LIST_ID = "skirmish"
   }
 
   function isRoomVisible(room, hideFullRooms) {
-    let userUid = ::SessionLobby.getRoomCreatorUid(room)
+    let userUid = SessionLobby.getRoomCreatorUid(room)
     if (userUid && ::isPlayerInContacts(userUid, EPL_BLOCKLIST))
       return false
 
     if (hideFullRooms) {
       let mission = room?.public.mission ?? {}
-      if (::SessionLobby.getRoomMembersCnt(room) >= (mission?.maxPlayers ?? 0))
+      if (SessionLobby.getRoomMembersCnt(room) >= (mission?.maxPlayers ?? 0))
         return false
     }
-    return ::SessionLobby.getMisListType(room.public).canJoin(GM_SKIRMISH)
+    return SessionLobby.getMisListType(room.public).canJoin(GM_SKIRMISH)
   }
 }

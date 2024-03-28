@@ -140,9 +140,12 @@
         "armorThickness": 30.0
       },
       "turret_02_top_dm": {
-        "armorThickness": 30.0
+        "armorThickness": 10.0
       },
       "turret_01_top_dm": {
+        "armorThickness": 10.0
+      },
+      "turret_02_bottom_dm": {
         "armorThickness": 10.0
       }
     },
@@ -178,7 +181,6 @@
         "hidableInViewer": true,
         "ex_decor_02_dm": {        }
       },
-      "ex_armor_body_02_dm": {      },
       "ex_decor_body_l_05_dm": {      },
       "ex_decor_body_l_04_dm": {      },
       "ex_decor_body_l_03_dm": {      },
@@ -277,13 +279,14 @@
       "wheel_r_top_02_dm": {      },
       "wheel_r_top_03_dm": {      },
       "wheel_support_dm": {
-        "armorThickness": 10.0
+        "armorThickness": 20.0
       },
       "submodule": {
         "armorClass": "tank_traks",
         "armorThickness": 30.0,
         "hp": 300.0,
-        "ex_armor_body_03_dm": {        }
+        "ex_armor_body_03_dm": {        },
+        "ex_armor_body_02_dm": {        }
       }
     },
     "gun": {
@@ -320,9 +323,10 @@
     "tracks": {
       "armorClass": "tank_traks",
       "allowRicochet": true,
-      "armorThickness": 30.0,
+      "armorThickness": 20.0,
+      "armorEffectiveThicknessMax": 20.0,
       "hp": 300.0,
-      "genericEffectiveThicknessMax": 30.0,
+      "genericEffectiveThicknessMax": 20.0,
       "genericDamageMult": 1.8,
       "cumulativeDamageMult": 1.8,
       "track_r_dm": {      },
@@ -468,6 +472,8 @@
     },
     "ammo": {
       "armorClass": "tank_structural_steel",
+      "genericDamageMult": 2.0,
+      "cumulativeDamageMult": 1.25,
       "hp": 300.0,
       "armorThickness": 2.0,
       "armorThrough": 10.0,
@@ -2666,7 +2672,7 @@
       1400.0,
       100.0
     ],
-    "projectorPower": [
+    "power": [
       0.02,
       0.07
     ]
@@ -2685,7 +2691,7 @@
         600.0,
         50.0
       ],
-      "projectorPower": [
+      "power": [
         0.02,
         0.04
       ]
@@ -2911,15 +2917,6 @@
             "noiseFactor": 0.2
           },
           "commanderViewIr": {
-            "resolution": [
-              800,
-              600
-],
-            "lightMult": 8.0,
-            "ghosting": 0.75,
-            "noiseFactor": 0.2
-          },
-          "commanderIr": {
             "resolution": [
               800,
               600

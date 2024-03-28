@@ -154,11 +154,6 @@
         "hp": 60.5
       }
     },
-    "dural5": {
-      "radar_dm": {
-        "hp": 35.0
-      }
-    },
     "glass64": {
       "armor1_dm": {
         "hp": 100.0
@@ -203,22 +198,24 @@
         "hp": 68.4
       },
       "tank3_dm": {
-        "hp": 64.6
+        "hp": 75.1
       },
       "tank4_dm": {
-        "hp": 64.2
+        "hp": 75.1
       },
       "tank5_dm": {
         "hp": 60.2
       },
       "tank6_dm": {
         "hp": 59.8
-      },
+      }
+    },
+    "steel_tank_s": {
       "tank7_dm": {
-        "hp": 68.4
+        "hp": 80.5
       },
       "tank8_dm": {
-        "hp": 68.4
+        "hp": 80.5
       }
     }
   },
@@ -753,9 +750,6 @@
     },
     "part": {
       "name": "pilot_dm"
-    },
-    "part": {
-      "name": "radar_dm"
     },
     "part": {
       "name": "rudder_dm",
@@ -2195,7 +2189,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
@@ -2204,7 +2197,6 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "startFx": "",
           "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
@@ -2271,7 +2263,8 @@
           "emitter": "swiss_agm_65_pylon_adapter_001",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       },
       "WeaponPreset": {
@@ -2569,7 +2562,8 @@
           "emitter": "swiss_agm_65_pylon_adapter_002",
           "bullets": 1,
           "external": true,
-          "separate": true
+          "separate": true,
+          "machLimit": 1.4
         }
       },
       "WeaponPreset": {

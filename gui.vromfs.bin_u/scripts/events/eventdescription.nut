@@ -2,7 +2,10 @@
 from "%scripts/dagui_library.nut" import *
 from "%scripts/teamsConsts.nut" import Team
 from "%scripts/events/eventsConsts.nut" import EVENT_TYPE, EVENTS_SHORT_LB_VISIBLE_ROWS
+from "%scripts/mainConsts.nut" import HELP_CONTENT_SET
 
+let { g_mission_type } = require("%scripts/missions/missionType.nut")
+let { g_team } = require("%scripts/teams.nut")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
 
@@ -25,6 +28,8 @@ let { getPlayerName } = require("%scripts/user/remapNick.nut")
 let { getLbCategoryTypeByField } = require("%scripts/leaderboard/leaderboardCategoryType.nut")
 let { getMroomInfo } = require("%scripts/matchingRooms/mRoomInfoManager.nut")
 let { guiStartProfile } = require("%scripts/user/profileHandler.nut")
+let { loadCustomCraftTree } = require("%scripts/items/workshop/workshopCraftTreeWnd.nut")
+let { getSetById } = require("%scripts/items/workshop/workshop.nut")
 
 ::create_event_description <- function create_event_description(parent_scene, event = null, needEventHeader = true) {
   let containerObj = parent_scene.findObject("item_desc")
@@ -53,6 +58,8 @@ gui_handlers.EventDescription <- class (gui_handlers.BaseGuiHandlerWT) {
   // Most recent request for short leaderboards.
   newSelfRowRequest = null
 
+  workshopSetHandler = null
+
   function initScreen() {
     this.playersInTable = []
     let blk = handyman.renderCached("%gui/events/eventDescription.tpl", {})
@@ -80,19 +87,70 @@ gui_handlers.EventDescription <- class (gui_handlers.BaseGuiHandlerWT) {
     this.guiScene.setUpdatesEnabled(true, true)
   }
 
-  function _updateContent() {
-    this.currentFullRoomData = this.getFullRoomData()
-    if (this.selectedEvent == null) {
-      this.setEventDescObjVisible(false)
-      return
+  function updateBottomDesc(roomMGM) {
+    // Fill vehicle lists
+    local teamObj = null
+    let sides = ::events.getSidesList(roomMGM)
+    foreach (team in ::events.getSidesList()) {
+      let teamName = ::events.getTeamName(team)
+      teamObj = this.getObject(teamName)
+      if (teamObj == null)
+        continue
+
+      let show = isInArray(team, sides)
+      teamObj.show(show)
+      if (!show)
+        continue
+
+      let titleObj = teamObj.findObject("team_title")
+      if (checkObj(titleObj)) {
+        let isEventFreeForAll = ::events.isEventFreeForAll(roomMGM)
+        titleObj.show(! ::events.isEventSymmetricTeams(roomMGM) || isEventFreeForAll)
+        titleObj.setValue(isEventFreeForAll ? loc("events/ffa")
+          : g_team.getTeamByCode(team).getName())
+      }
+
+      let teamData = ::events.getTeamDataWithRoom(roomMGM, team, this.room)
+      let playersCountObj = this.getObject("players_count", teamObj)
+      if (playersCountObj)
+        playersCountObj.setValue(sides.len() > 1 ? this.getTeamPlayersCountText(team, teamData, roomMGM) : "")
+
+      ::fillCountriesList(this.getObject("countries", teamObj), ::events.getCountries(teamData))
+      let unitTypes = ::events.getUnitTypesByTeamDataAndName(teamData, teamName)
+      let roomSpecialRules = this.room && ::SessionLobby.getRoomSpecialRules(this.room)
+      ::events.fillAirsList(this, teamObj, teamData, unitTypes, roomSpecialRules)
     }
 
-    this.setEventDescObjVisible(true)
+    // Team separator
+    let separatorObj = this.getObject("teams_separator")
+    if (separatorObj != null)
+      separatorObj.show(sides.len() > 1)
 
+    // Misc
+    this.loadMap()
+    this.fetchLbData()
+  }
+
+  function updateBottomCustomDesc() {
+    let craftSetId = this.selectedEvent?.craftTree ?? ""
+    let workshopSet = getSetById(craftSetId)
+    if (workshopSet == null)
+      return
+
+    let obj = this.getObject("bottom_event_custom_desc")
+    if (this.workshopSetHandler == null)
+      this.workshopSetHandler = loadCustomCraftTree({
+        scene = obj
+        workshopSet
+        maxWindowWidth = obj.getSize()[0]
+      }).weakref()
+    else
+      this.workshopSetHandler.updateHandlerData({ workshopSet })
+  }
+
+  function updateTopDesc(roomMGM) {
     if (this.needEventHeader)
       this.updateContentHeader()
-
-    let roomMGM = ::events.getMGameMode(this.selectedEvent, this.room)
 
     let eventDescTextObj = this.getObject("event_desc_text")
     if (eventDescTextObj != null)
@@ -163,49 +221,30 @@ gui_handlers.EventDescription <- class (gui_handlers.BaseGuiHandlerWT) {
     }
 
     showObjById("players_list_btn", !!this.room, this.scene)
-
-    // Fill vehicle lists
-    local teamObj = null
-    let sides = ::events.getSidesList(roomMGM)
-    foreach (team in ::events.getSidesList()) {
-      let teamName = ::events.getTeamName(team)
-      teamObj = this.getObject(teamName)
-      if (teamObj == null)
-        continue
-
-      let show = isInArray(team, sides)
-      teamObj.show(show)
-      if (!show)
-        continue
-
-      let titleObj = teamObj.findObject("team_title")
-      if (checkObj(titleObj)) {
-        let isEventFreeForAll = ::events.isEventFreeForAll(roomMGM)
-        titleObj.show(! ::events.isEventSymmetricTeams(roomMGM) || isEventFreeForAll)
-        titleObj.setValue(isEventFreeForAll ? loc("events/ffa")
-          : ::g_team.getTeamByCode(team).getName())
-      }
-
-      let teamData = ::events.getTeamDataWithRoom(roomMGM, team, this.room)
-      let playersCountObj = this.getObject("players_count", teamObj)
-      if (playersCountObj)
-        playersCountObj.setValue(sides.len() > 1 ? this.getTeamPlayersCountText(team, teamData, roomMGM) : "")
-
-      ::fillCountriesList(this.getObject("countries", teamObj), ::events.getCountries(teamData))
-      let unitTypes = ::events.getUnitTypesByTeamDataAndName(teamData, teamName)
-      let roomSpecialRules = this.room && ::SessionLobby.getRoomSpecialRules(this.room)
-      ::events.fillAirsList(this, teamObj, teamData, unitTypes, roomSpecialRules)
-    }
-
-    // Team separator
-    let separatorObj = this.getObject("teams_separator")
-    if (separatorObj != null)
-      separatorObj.show(sides.len() > 1)
-
-    // Misc
+    showObjById("help_btn", this.selectedEvent?.helpBlkPath != null, this.scene)
     this.updateCostText()
-    this.loadMap()
-    this.fetchLbData()
+  }
+
+  function _updateContent() {
+    this.currentFullRoomData = this.getFullRoomData()
+
+    let eventDescNest = showObjById("event_desc_nest", this.selectedEvent != null, this.scene)
+
+    if (this.selectedEvent == null)
+      return
+
+    let roomMGM = ::events.getMGameMode(this.selectedEvent, this.room)
+    this.updateTopDesc(roomMGM)
+
+    let hasCustomDesc = (this.selectedEvent?.craftTree ?? "") != ""
+    showObjById("bottom_event_desc", !hasCustomDesc, eventDescNest)
+    showObjById("bottom_event_custom_desc", hasCustomDesc, eventDescNest)
+
+    this.getObject("event_desc", eventDescNest)["overflow-y"] = hasCustomDesc ? "no" : "auto"
+    if (hasCustomDesc)
+      this.updateBottomCustomDesc()
+    else
+      this.updateBottomDesc(roomMGM)
   }
 
   function getTeamPlayersCountText(team, teamData, roomMGM) {
@@ -215,7 +254,7 @@ gui_handlers.EventDescription <- class (gui_handlers.BaseGuiHandlerWT) {
       return ""
     }
 
-    let otherTeam = ::g_team.getTeamByCode(team).opponentTeamCode
+    let otherTeam = g_team.getTeamByCode(team).opponentTeamCode
     let countTblReady = ::SessionLobby.getMembersCountByTeams(this.currentFullRoomData, true)
     local countText = countTblReady[team]
     if (countTblReady[team] >= ::events.getTeamSize(teamData)
@@ -450,12 +489,6 @@ gui_handlers.EventDescription <- class (gui_handlers.BaseGuiHandlerWT) {
     return data
   }
 
-  function setEventDescObjVisible(value) {
-    let eventDescObj = this.getObject("event_desc")
-    if (eventDescObj != null)
-      eventDescObj.show(value)
-  }
-
   function getObject(id, parentObject = null) {
     if (parentObject == null)
       parentObject = this.scene
@@ -507,6 +540,17 @@ gui_handlers.EventDescription <- class (gui_handlers.BaseGuiHandlerWT) {
 
   function onPlayersList() {
     gui_handlers.MRoomMembersWnd.open(this.room)
+  }
+
+  function onHelp() {
+    if (this.selectedEvent?.helpBlkPath == null)
+      return
+
+    let misType = g_mission_type.getTypeByMissionName(this.selectedEvent.name)
+    if (misType == g_mission_type.UNKNOWN)
+      return
+
+    ::gui_modal_help(false, HELP_CONTENT_SET.MISSION_WINDOW, misType)
   }
 
   function hideEventLeaderboard(showWaitBox = true) {

@@ -18,11 +18,19 @@ let contactsWndSizes = Watched(null)
 const EPLX_SEARCH = "search"
 const EPLX_CLAN = "clan"
 const EPLX_PS4_FRIENDS = "ps4_friends"
+const EPLX_STEAM = "s"
 
 let contactsGroupsDefault = [EPLX_SEARCH, EPL_FRIENDLIST, EPL_RECENT_SQUAD, EPL_BLOCKLIST]
 
+let contactsGroupWithoutMaxCount = {
+  [EPLX_STEAM] = true,
+  [EPLX_PS4_FRIENDS] = true,
+  [EPLX_CLAN] = true,
+}
+
 local isDisableContactsBroadcastEvents = false
 
+let steamContactsGroup = mkWatched(persist, "steamContactsGroup", null)
 let recentGroup = hardPersistWatched("recentGroup", null)
 let blockedMeUids = hardPersistWatched("blockedMeUids", {})
 let psnApprovedUids = hardPersistWatched("psnApprovedUids", {})
@@ -31,6 +39,7 @@ let xboxApprovedUids = hardPersistWatched("xboxApprovedUids", {})
 let xboxBlockedUids = hardPersistWatched("xboxBlockedUids", {})
 
 let contactsGroups = persist("contactsGroups", @() [])
+let contactsByName = persist("contactsByName", @() {})
 let contactsPlayers = persist("contactsPlayers", @() {})
 /*
   "12345" = {  //uid
@@ -72,11 +81,14 @@ let additionalConsolesContacts = //TO DO: save wt groups to watched and use comp
     }
   : {}
 
+let cacheContactByName = @(contact) contactsByName[contact.name] <- contact
+let getContactByName = @(name) contactsByName?[name]
+
 function verifyContact(params) {
   let name = params?.playerName
   local newContact = ::getContact(params?.uid, name, params?.clanTag)
   if (!newContact && name)
-    newContact = ::Contact.getByName(name)
+    newContact = getContactByName(name)
 
   return newContact
 }
@@ -196,6 +208,19 @@ function updateConsolesGroups() {
   }
 }
 
+function updateSteamContactsGroup(steamContactsGroupV) {
+  if (steamContactsGroupV == null)
+    return
+
+  addContactGroup(EPLX_STEAM)
+  foreach(steamId, contact in steamContactsGroupV)
+    contactsByGroups[EPLX_STEAM][steamId] <- contact
+  if (!isDisableContactsBroadcastEvents)
+    broadcastEvent(contactEvent.CONTACTS_GROUP_UPDATE, { groupName = EPLX_STEAM })
+}
+
+steamContactsGroup.subscribe(updateSteamContactsGroup)
+
 function updateContactsGroups(groups) {
   isDisableContactsBroadcastEvents = true
 
@@ -230,6 +255,7 @@ function updateContactsGroups(groups) {
   }
 
   updateRecentGroup(recentGroup.value)
+  updateSteamContactsGroup(steamContactsGroup.get())
 
   isDisableContactsBroadcastEvents = false
 }
@@ -262,6 +288,8 @@ function updateContactsListFromContactsServer(res) {
       contactsPlayers[uid].updateMuteStatus()
 }
 
+let findContactBySteamId = @(steamId) contactsPlayers.findvalue(@(player) player.steamId == steamId)
+
 if (contactsByGroups.len() == 0)
   clear_contacts()
 
@@ -279,7 +307,7 @@ return {
   EPLX_SEARCH
   EPLX_CLAN
   EPLX_PS4_FRIENDS
-  contactsGroupsDefault
+  EPLX_STEAM
 
   verifyContact
   addContact
@@ -299,4 +327,9 @@ return {
   contactsGroups
   contactsPlayers
   contactsByGroups
+  cacheContactByName
+  getContactByName
+  findContactBySteamId
+  steamContactsGroup
+  contactsGroupWithoutMaxCount
 }

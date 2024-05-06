@@ -1,10 +1,19 @@
 from "%scripts/dagui_library.nut" import *
 let { eventbus_subscribe } = require("eventbus")
-let { resetTimeout, clearTimer, deferOnce } = require("dagor.workcycle")
+let { resetTimeout, setTimeout, clearTimer, deferOnce } = require("dagor.workcycle")
 let { get_charserver_time_sec } = require("chard")
 let { getExpireText } = require("%scripts/time.nut")
 let { buidPartialTimeStr } = require("%appGlobals/timeLoc.nut")
-let { isInMenu, isInBattleState } = require("%scripts/clientState/clientStates.nut")
+let { isInMenu } = require("%scripts/clientState/clientStates.nut")
+let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
+let { loadHandler } = require("%scripts/baseGuiHandlerManagerWT.nut")
+let { saveLocalAccountSettings, loadLocalAccountSettings
+} = require("%scripts/clientState/localProfile.nut")
+let { isDeniedProfileJwtDueToAasLimits } = require("%scripts/queue/queueBattleData.nut")
+
+const SKIPPED_AAS_WARNING_MSG = "skipped_msg/aasWarningMessage"
+
+local showMultiplayerAvailableMsgTimer = null
 
 let antiAddictSystemVariable = mkWatched(persist, "antiAddictSystemVariable", {
   curMin = 0         // current activity level in minutes
@@ -13,9 +22,7 @@ let antiAddictSystemVariable = mkWatched(persist, "antiAddictSystemVariable", {
   nextCanPlayTs = 0  // unix timestamp when it is possible to play, comes only if the possibility to play is forbidden
 })
 
-let isShowAasWarningMessage = mkWatched(persist, "isShowAasWarningMessage", false)
 let needCheckShowAasLimitMessage = mkWatched(persist, "needCheckShowAasLimitMessage", false)
-let hasBattleForAasMessage = mkWatched(persist, "hasBattleForAasMessage", false)
 
 let hasMultiplayerLimitByAas = keepref(Computed(function() {
   let { curMin, limitMin, nextCanPlayTs } = antiAddictSystemVariable.get()
@@ -24,61 +31,88 @@ let hasMultiplayerLimitByAas = keepref(Computed(function() {
 
 let needShowAasMessageLimit = keepref(Computed(@() isInMenu.get()
   && hasMultiplayerLimitByAas.get() && needCheckShowAasLimitMessage.get()))
-let needShowAasMessageWarning = keepref(Computed(function() {
-  if (!isInMenu.get() || hasMultiplayerLimitByAas.get() || isShowAasWarningMessage.get() || !hasBattleForAasMessage.get())
-    return false
-  let { curMin, warnMin } = antiAddictSystemVariable.get()
-  return curMin >= warnMin
-}))
+
+let canShowMultiplayerAvailableMsg = mkWatched(persist, "canShowMultiplayerAvailableMsg", false)
+let needShowMultiplayerAvailableMsg = keepref(Computed(@() canShowMultiplayerAvailableMsg.get() && isInMenu.get()))
 
 function clearCache() {
   antiAddictSystemVariable.mutate(@(v) v.__update({ curMin = 0, nextCanPlayTs = 0 }))
-  isShowAasWarningMessage.set(false)
   needCheckShowAasLimitMessage.set(false)
-  hasBattleForAasMessage.set(false)
 }
 
 function showMultiplayerAvailableMsg() {
   showInfoMsgBox(loc("antiAddictSystem/multiplayerAvailable"), "anti_addict_system_multiplayer_available")
 }
 
-function showMultiplayerLimitByAasMsg() {
+function showMultiplayerLimitByAasMsg(onAcceptCb, onCancelCb) {
+  let needShowAvailableMsg = needCheckShowAasLimitMessage.get()
+    || showMultiplayerAvailableMsgTimer != null
   needCheckShowAasLimitMessage.set(false)
+  clearTimer(showMultiplayerAvailableMsgTimer)
   let { curMin, nextCanPlayTs } = antiAddictSystemVariable.get()
   let limitSec = nextCanPlayTs - get_charserver_time_sec()
-  if (isShowAasWarningMessage.get())
-    showInfoMsgBox(loc("antiAddictSystem/limitExceededMsg",
-        { playTime = getExpireText(curMin), limitTime = buidPartialTimeStr(limitSec) }),
-      "anti_addict_system_limit")
-  else
-    showInfoMsgBox(loc("antiAddictSystem/multiplayerForbiddenMsg",
-        { playTime = getExpireText(curMin), limitTime = buidPartialTimeStr(limitSec) }),
-      "anti_addict_system_limit")
+  let messageLocId = isDeniedProfileJwtDueToAasLimits.get() ? "antiAddictSystem/limitExceededMsg"
+    : "antiAddictSystem/warningMsgOnlyPlayTime"
 
-  resetTimeout(limitSec, showMultiplayerAvailableMsg)
+  loadHandler(gui_handlers.SkipableMsgBox, {
+    parentHandler = {}
+    message = loc(messageLocId,
+      { playTime = getExpireText(curMin), limitTime = buidPartialTimeStr(limitSec) })
+    startBtnText = loc("msgbox/btn_continue")
+    ableToStartAndSkip = onAcceptCb != null && !isDeniedProfileJwtDueToAasLimits.get()
+    onStartPressed = onAcceptCb
+    cancelFunc = onCancelCb
+  })
+  if (needShowAvailableMsg)
+    showMultiplayerAvailableMsgTimer = setTimeout(limitSec, @() canShowMultiplayerAvailableMsg.set(true))
 }
 
 function markToShowMultiplayerLimitByAasMsg() {
   needCheckShowAasLimitMessage.set(true)
 }
 
-function showAasWarningMsg() {
-  isShowAasWarningMessage.set(true)
-  let { curMin, limitMin } = antiAddictSystemVariable.get()
-  showInfoMsgBox(loc("antiAddictSystem/warningMsg",
-      { playTime = getExpireText(curMin), limitAfterTime = getExpireText(limitMin - curMin) }),
-    "anti_addict_system_warning")
+function checkShowMultiplayerAasWarningMsg(onAcceptCb, onCancelCb = null) {
+  if (hasMultiplayerLimitByAas.get()) {
+    showMultiplayerLimitByAasMsg(onAcceptCb, onCancelCb)
+    return
+  }
+
+  let { curMin, warnMin } = antiAddictSystemVariable.get()
+  if (curMin < warnMin) {
+    onAcceptCb()
+    return
+  }
+
+  if (loadLocalAccountSettings(SKIPPED_AAS_WARNING_MSG, false)) {
+    onAcceptCb()
+    return
+  }
+
+  loadHandler(gui_handlers.SkipableMsgBox, {
+    parentHandler = {}
+    message = loc("antiAddictSystem/warningMsgOnlyPlayTime", { playTime = getExpireText(curMin) })
+    startBtnText = loc("msgbox/btn_continue")
+    skipFunc = @(value) saveLocalAccountSettings(SKIPPED_AAS_WARNING_MSG, value)
+    onStartPressed = onAcceptCb
+    cancelFunc = onCancelCb
+  })
 }
 
-eventbus_subscribe("aasNotification", @(params) antiAddictSystemVariable.mutate(@(v) v.__update(params)))
+eventbus_subscribe("aasNotification", function(params) {
+  if (!hasFeature("AntiAddictSystemMessages"))
+    return
+  antiAddictSystemVariable.mutate(@(v) v.__update(params))
+})
+
 eventbus_subscribe("on_sign_out", function(_) {
   clearCache()
-  clearTimer(showMultiplayerAvailableMsg)
+  clearTimer(showMultiplayerAvailableMsgTimer)
   clearTimer(clearCache)
+  canShowMultiplayerAvailableMsg.set(false)
 })
 
 needShowAasMessageLimit.subscribe(@(v) v ? deferOnce(showMultiplayerLimitByAasMsg) : null)
-needShowAasMessageWarning.subscribe(@(v) v ? deferOnce(showAasWarningMsg) : null)
+needShowMultiplayerAvailableMsg.subscribe(@(_v) deferOnce(showMultiplayerAvailableMsg))
 
 function onAntiAddictSystemVariableChange() {
   let { nextCanPlayTs } = antiAddictSystemVariable.get()
@@ -91,14 +125,7 @@ function onAntiAddictSystemVariableChange() {
 
 antiAddictSystemVariable.subscribe(@(_v) deferOnce(onAntiAddictSystemVariableChange))
 
-isInBattleState.subscribe(function(v) {
-  if (v)
-    hasBattleForAasMessage.set(true)
-})
-
 return {
-  showMultiplayerLimitByAasMsg
   markToShowMultiplayerLimitByAasMsg
-  hasMultiplayerLimitByAas
-  antiAddictSystemVariable
+  checkShowMultiplayerAasWarningMsg
 }

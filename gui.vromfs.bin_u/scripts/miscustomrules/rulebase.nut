@@ -2,6 +2,7 @@ from "%scripts/dagui_natives.nut" import is_crew_slot_was_ready_at_host, stay_on
 from "%scripts/dagui_library.nut" import *
 from "%scripts/teamsConsts.nut" import Team
 
+let { g_team } = require("%scripts/teams.nut")
 let { g_mis_loading_state } = require("%scripts/respawn/misLoadingState.nut")
 let { get_team_name_by_mp_team } = require("%appGlobals/ranks_common_shared.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
@@ -15,18 +16,20 @@ let { GUI } = require("%scripts/utils/configs.nut")
 let { get_game_mode, get_game_type, get_local_mplayer, get_mp_local_team } = require("mission")
 let { get_mission_difficulty_int, get_respawns_left,
   get_current_mission_desc } = require("guiMission")
-let { get_current_mission_info_cached } = require("blkGetters")
+let { get_current_mission_info_cached, get_warpoints_blk  } = require("blkGetters")
 let { userIdInt64 } = require("%scripts/user/profileStates.nut")
 let { isCrewAvailableInSession } = require("%scripts/respawn/respawnState.nut")
 let { registerMissionRules } = require("%scripts/misCustomRules/missionCustomState.nut")
 let { getCrewsListByCountry } = require("%scripts/slotbar/slotbarState.nut")
 let { getCrewUnit } = require("%scripts/crew/crew.nut")
+let { isMissionExtrByName } = require("%scripts/missions/missionsUtils.nut")
 
 let Base = class {
   missionParams = null
   isSpawnDelayEnabled = false
   isScoreRespawnEnabled = false
   isTeamScoreRespawnEnabled = false
+  isRageTokensRespawnEnabled = false
   isWarpointsRespawnEnabled = false
   hasRespawnCost = false
   needShowLockedSlots = true
@@ -52,6 +55,7 @@ let Base = class {
     this.isSpawnDelayEnabled = isVersus && getTblValue("useSpawnDelay", this.missionParams, false)
     this.isTeamScoreRespawnEnabled = isVersus && getTblValue("useTeamSpawnScore", this.missionParams, false)
     this.isScoreRespawnEnabled = this.isTeamScoreRespawnEnabled || (isVersus && getTblValue("useSpawnScore", this.missionParams, false))
+    this.isRageTokensRespawnEnabled = isMissionExtrByName(this.missionParams?.name ?? "")
     this.isWarpointsRespawnEnabled = isVersus && getTblValue("multiRespawn", this.missionParams, false)
     this.hasRespawnCost = this.isScoreRespawnEnabled || this.isWarpointsRespawnEnabled
     this.isWorldWar = isVersus && getTblValue("isWorldWar", this.missionParams, false)
@@ -268,6 +272,9 @@ let Base = class {
           comment = loc("respawn/withCheaperWeapon")
       }
 
+      if (!this.canRespawnOnUnitByRageTokens(unit))
+        continue
+
       res.append({
         unit = unit
         comment = comment
@@ -329,7 +336,7 @@ let Base = class {
   }
 
   function getEnemyTeamDataBlk(keyName = "teams") {
-    let opponentTeamCode = ::g_team.getTeamByCode(get_mp_local_team()).opponentTeamCode
+    let opponentTeamCode = g_team.getTeamByCode(get_mp_local_team()).opponentTeamCode
     if (opponentTeamCode == Team.none || opponentTeamCode == Team.Any)
       return null
 
@@ -529,6 +536,11 @@ let Base = class {
   }
 
   isAllowSpareInMission = @() this.missionParams?.allowSpare ?? false
+
+  getSpawnRageTokens = @() this.isRageTokensRespawnEnabled ? get_local_mplayer()?.rageTokens ?? 0 : 0
+  getUnitSpawnRageTokens = @(unit) this.isRageTokensRespawnEnabled ? get_warpoints_blk()?.rageCost[unit.name] ?? 0 : 0
+  canRespawnOnUnitByRageTokens = @(unit) !this.isRageTokensRespawnEnabled
+    || this.getUnitSpawnRageTokens(unit) <= this.getSpawnRageTokens()
 }
 
 registerMissionRules("Base", Base)

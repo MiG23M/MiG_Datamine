@@ -3652,11 +3652,13 @@
           "target": "tutorialB_t&l_takeoff",
           "status": 2,
           "object_var_comp_op": "equal",
-          "object_var_name": ""
+          "object_var_name": "",
+          "object_marking": 0
         },
         "bigQueryAddRecord": {
           "name": "tutorialB_takeoff_and_landing",
-          "params": "task 1/2: player took off"
+          "params": "task 1/2: player took off",
+          "event": ""
         },
         "wait": {
           "time": 1.0
@@ -4098,6 +4100,9 @@
           "object_var_value": 0,
           "fastClimb": false,
           "destTimeMode": false,
+          "target_var_name": "",
+          "target_var_comp_op": "equal",
+          "target_var_value": 0,
           "object": "player",
           "move_type": "teleport",
           "speed": 250.0,
@@ -7772,7 +7777,8 @@
           "target": "tutorialB_t&l_landing",
           "status": 2,
           "object_var_comp_op": "equal",
-          "object_var_name": ""
+          "object_var_name": "",
+          "object_marking": 0
         },
         "wait": {
           "time": 0.5
@@ -7839,7 +7845,8 @@
         },
         "bigQueryAddRecord": {
           "name": "tutorialB_takeoff_and_landing",
-          "params": "task 2/2: player landed the plane and finished the tutorial"
+          "params": "task 2/2: player landed the plane and finished the tutorial",
+          "event": ""
         },
         "wait": {
           "time": 0.5
@@ -7848,7 +7855,8 @@
           "target": "tutorialB_t&l_landing",
           "status": 2,
           "object_var_comp_op": "equal",
-          "object_var_name": ""
+          "object_var_name": "",
+          "object_marking": 0
         },
         "wait": {
           "time": 2.0
@@ -9134,7 +9142,8 @@
         },
         "bigQueryAddRecord": {
           "name": "tutorialB_takeoff_and_landing",
-          "params": "task 2/2: player landed the plane and finished the tutorial"
+          "params": "task 2/2: player landed the plane and finished the tutorial",
+          "event": ""
         },
         "wait": {
           "time": 0.5
@@ -9624,6 +9633,7 @@
       "bulletsCount2": 0,
       "bulletsCount3": 0,
       "crewSkillK": 0.0,
+      "applyAllMods": false,
       "props": {
         "army": 1,
         "count": 1,
@@ -9661,10 +9671,11 @@
     0.0,
     0.0,
     10000.0,
-    -3223.0,
+    -3117.7,
     161.0,
-    1099.4,
+    1239.75,
 ],
+      "objLayer": 3,
       "props": {
         "forceReplication": true
       }
@@ -9681,9 +9692,9 @@
     0.0,
     0.0,
     600.0,
-    -4207.55,
+    -4106.0,
     442.35,
-    338.65,
+    483.65,
 ],
       "props": {
         "forceReplication": true
@@ -9701,9 +9712,9 @@
     0.0,
     0.0,
     100.0,
-    -2756.8,
+    -2655.25,
     161.0,
-    1432.95,
+    1577.95,
 ],
       "props": {
         "forceReplication": true
@@ -9721,9 +9732,9 @@
     0.0,
     0.0,
     100.0,
-    -3830.65,
+    -3729.1,
     161.0,
-    608.45,
+    753.45,
 ],
       "props": {
         "forceReplication": true
@@ -9741,9 +9752,9 @@
     0.0,
     0.0,
     20.0,
-    -2764.9,
+    -2663.35,
     161.0,
-    1427.35,
+    1572.35,
 ],
       "props": {
         "forceReplication": true
@@ -9761,9 +9772,9 @@
     0.0,
     0.0,
     40.0,
-    -5924.7,
+    -5819.4,
     382.35,
-    -1017.5,
+    -877.15,
 ],
       "props": {
         "forceReplication": true
@@ -9781,9 +9792,9 @@
     0.0,
     0.0,
     200.0,
-    -5181.25,
+    -5079.7,
     300.9,
-    -440.2,
+    -295.2,
 ],
       "props": {
         "forceReplication": true
@@ -9801,9 +9812,9 @@
     0.0,
     0.0,
     200.0,
-    -4533.45,
+    -4431.9,
     258.85,
-    61.6,
+    206.6,
 ],
       "props": {
         "forceReplication": true
@@ -9821,15 +9832,28 @@
     0.0,
     0.0,
     420.0,
-    -3787.85,
+    -3686.3,
     169.2,
-    637.9,
+    782.9,
 ],
       "props": {
         "forceReplication": true
       }
     }
   },
-  "objLayers": {  },
+  "objLayers": {
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": true
+    },
+    "layer": {
+      "enabled": false
+    }
+  },
   "wayPoints": {  }
 }

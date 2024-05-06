@@ -17,9 +17,10 @@ let { getLastWeapon,
         isWeaponUnlocked,
         getLastPrimaryWeapon } = require("%scripts/weaponry/weaponryInfo.nut")
 let { canBuyMod, canResearchMod, isModUpgradeable, isReqModificationsUnlocked,
-  getModificationByName } = require("%scripts/weaponry/modificationInfo.nut")
+  getModificationByName, isModificationEnabled } = require("%scripts/weaponry/modificationInfo.nut")
 let { getSavedBullets } = require("%scripts/weaponry/savedWeaponry.nut")
-let { shopIsModificationEnabled } = require("chardResearch")
+
+const MAX_SPARE_AMOUNT = 100
 
 function getItemAmount(unit, item) {
   return ::g_weaponry_types.getUpgradeTypeByItem(item).getAmount(unit, item)
@@ -85,7 +86,7 @@ function getItemStatusTbl(unit, item) {
       res.unlocked = isOwn
     else {
       res.maxAmount = wp_get_modification_max_count(unit.name, item.name)
-      res.equipped = res.amount && shopIsModificationEnabled(unit.name, item.name)
+      res.equipped = res.amount && isModificationEnabled(unit.name, item.name)
       res.unlocked = res.amount || canBuyMod(unit, item)
       res.showPrice = false //amount < maxAmount
     }
@@ -110,7 +111,7 @@ function getItemStatusTbl(unit, item) {
           && res.maxAmount == 1
           && res.canBuyMore
           && getItemCost(unit, item).wp > 0
-        res.equipped = res.amount && shopIsModificationEnabled(unit.name, item.name)
+        res.equipped = res.amount && isModificationEnabled(unit.name, item.name)
         res.goldUnlockable = !res.unlocked && hasFeature("SpendGold")
           && isReqModificationsUnlocked(unit, item) && canBeResearched(unit, item, false)
         if (item.type == weaponsItem.expendables)
@@ -140,7 +141,7 @@ function getItemStatusTbl(unit, item) {
   }
   else if (item.type == weaponsItem.spare) {
     res.equipped = res.amount > 0
-    res.maxAmount = ::max_spare_amount
+    res.maxAmount = MAX_SPARE_AMOUNT
     res.showMaxAmount = false
     res.canBuyMore = res.amount < res.maxAmount
     res.unlocked = isOwn
@@ -226,7 +227,7 @@ function countWeaponsUpgrade(unit, item) {
     upgradesTotal++
 
     foreach (modName in modsArray)
-      if (shopIsModificationEnabled(unit.name, modName)) {
+      if (isModificationEnabled(unit.name, modName)) {
         upgraded++
         break
       }
@@ -306,6 +307,7 @@ function getAllModsCost(unit, open = false) {
 }
 
 return {
+  MAX_SPARE_AMOUNT
   getItemAmount         = getItemAmount
   isResearchableItem    = isResearchableItem
   canBeResearched       = canBeResearched

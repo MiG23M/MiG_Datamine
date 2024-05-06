@@ -1205,6 +1205,7 @@
       "armorThickness": 2.0,
       "armorThrough": 12.0,
       "fireProtectionHp": 15.0,
+      "createSecondaryShatters": false,
       "fireParamsPreset": "fuel_exterior",
       "stopChanceOnDeadPart": 0.0,
       "createSecondaryShatters": false,
@@ -1830,106 +1831,6 @@
         "notDamageType": "overheat",
         "fire": 0.4,
         "nothing": 0.6,
-        "fHitCritical": true
-      }
-    },
-    "part": {
-      "name": "fuel_tank_dm",
-      "name": "fuel_tank_01_dm",
-      "name": "fuel_tank_02_dm",
-      "name": "fuel_tank_03_dm",
-      "name": "fuel_tank_04_dm",
-      "name": "fuel_tank_05_dm",
-      "name": "fuel_tank_r_01_dm",
-      "name": "fuel_tank_r_02_dm",
-      "name": "fuel_tank_r_03_dm",
-      "name": "fuel_tank_r_04_dm",
-      "name": "fuel_tank_r_05_dm",
-      "name": "fuel_tank_l_01_dm",
-      "name": "fuel_tank_l_02_dm",
-      "name": "fuel_tank_l_03_dm",
-      "name": "fuel_tank_l_04_dm",
-      "name": "fuel_tank_l_05_dm",
-      "name": "fuel_tank_exterior_r_01_dm",
-      "name": "fuel_tank_exterior_r_02_dm",
-      "name": "fuel_tank_exterior_l_01_dm",
-      "name": "fuel_tank_exterior_l_02_dm",
-      "onHit": {
-        "damageType": "cumulative",
-        "expl": 0.08,
-        "fire": 0.1,
-        "damage": 100.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "cumulative",
-        "expl": 0.15,
-        "fire": 0.2,
-        "damage": 250.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "expl": 0.125,
-        "fire": 0.15,
-        "damage": 25.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "expl": 0.2,
-        "fire": 0.2,
-        "damage": 50.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.05,
-        "damage": 20.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.1,
-        "damage": 70.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.2,
-        "expl": 0.2,
-        "damage": 200.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.4,
-        "expl": 0.25,
-        "damage": 300.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.45,
-        "expl": 0.45,
-        "damage": 400.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.2,
-        "expl": 0.8,
-        "damage": 600.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "fire",
-        "fire": 0.2
-      },
-      "onKill": {
-        "fire": 0.35,
-        "expl": 0.35,
-        "nothing": 0.3,
         "fHitCritical": true
       }
     },
@@ -2722,6 +2623,11 @@
     "preset": {
       "name": "ussr_t_90m_2020_default",
       "blk": "gameData/units/tankModels/weaponPresets/ussr_t_90m_2020_default.blk"
+    }
+  },
+  "sensors": {
+    "sensor": {
+      "blk": "gameData/sensors/LaserBeamRidingSensor.blk"
     }
   },
   "VehiclePhys": {
@@ -3788,6 +3694,9 @@
         ],
         "rcostAddParam": 0.98,
         "sensors": {
+          "sensor": {
+            "blk": "gameData/sensors/LaserBeamRidingSensor.blk"
+          },
           "sensor": {
             "blk": "gameData/sensors/LaserDesignatorSensor.blk"
           },

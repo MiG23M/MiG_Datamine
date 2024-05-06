@@ -76,8 +76,6 @@
     "mission": {
       "level": "levels/avg_egypt_sinai.bin",
       "type": "domination",
-      "restoreType": "attempts",
-      "optionalTakeOff": false,
       "environment": "Day",
       "weather": "clear",
       "locName": "missions/_Conq1;sinai/name",
@@ -92,14 +90,16 @@
       "randomSpawnTeams": false,
       "remapAiTankModels": true,
       "battleAreaColorPreset": "battleArea",
+      "showTacticalMapCellSize": true,
       "country_axis": "germany",
       "country_allies": "ussr",
-      "showTacticalMapCellSize": true,
+      "restoreType": "attempts",
+      "optionalTakeOff": false,
       "allowedUnitTypes": {
         "isAirplanesAllowed": true,
         "isTanksAllowed": true,
-        "isHelicoptersAllowed": true,
-        "isShipsAllowed": false
+        "isShipsAllowed": false,
+        "isHelicoptersAllowed": true
       },
       "mission": {
         "difficulty": "realistic",
@@ -137,18 +137,8 @@
           },
           "icon": {
             "icontype": "tank",
-            "side": "ally",
-            "target": "briefing_t1_resp02"
-          },
-          "icon": {
-            "icontype": "tank",
             "side": "enemy",
             "target": "briefing_t2_resp01"
-          },
-          "icon": {
-            "icontype": "tank",
-            "side": "enemy",
-            "target": "briefing_t2_resp02"
           },
           "icon": {
             "icontype": "basezone_A",
@@ -163,6 +153,20 @@
     }
   },
   "imports": {
+    "import_record": {
+      "file": "gameData/missions/cta/tanks/sinai/battleareas/template_sinai_exclude_battleareas.blk",
+      "importAreas": true,
+      "importUnits": true,
+      "importTriggers": true,
+      "importMissionObjectives": true,
+      "importWayPoints": true,
+      "showAreas": true,
+      "showUnits": true,
+      "showTriggers": true,
+      "showMissionObjectives": true,
+      "showWayPoints": true,
+      "excludes": {      }
+    },
     "import_record": {
       "file": "gameData/missions/templates/tank_templates/tank_base_logic_template.blk",
       "importAreas": true,

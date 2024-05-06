@@ -2,6 +2,7 @@
 from "%scripts/dagui_natives.nut" import is_user_log_for_current_room, get_player_army_for_hud, get_user_logs_count, get_local_player_country, get_user_log_blk_body, get_race_winners_count
 from "%scripts/dagui_library.nut" import *
 from "%scripts/debriefing/debriefingConsts.nut" import debrState
+from "%scripts/teams.nut" import g_team
 
 let { g_mission_type } = require("%scripts/missions/missionType.nut")
 let { get_pve_trophy_name } = require("%appGlobals/ranks_common_shared.nut")
@@ -32,6 +33,7 @@ let { isInSessionRoom } = require("%scripts/matchingRooms/sessionLobbyState.nut"
 let { getEventEconomicName } = require("%scripts/events/eventInfo.nut")
 let { getCurMissionRules } = require("%scripts/misCustomRules/missionCustomState.nut")
 let { findItemById } = require("%scripts/items/itemsManager.nut")
+let { isMissionExtr } = require("%scripts/missions/missionsUtils.nut")
 
 local debriefingResult = null
 local dynamicResult = -1
@@ -480,6 +482,7 @@ debriefingRows = [
     icon = ""
     hideTooltip = true
     hideUnitSessionTimeInTooltip = true
+    canShowForMissionExtr = true
   }
   { id = "Free"
     text = "debriefing/freeExp"
@@ -584,9 +587,11 @@ function calculateDebriefingTabularData(addVirtPremAcc = false) {
 function recountDebriefingResult() {
   let gm = get_game_mode()
   let gt = get_game_type()
+  let isCurMisionExtr = isMissionExtr()
 
   foreach (row in debriefingRows) {
-    row.show = row.isVisible(gm, gt, isDebriefingResultFull)
+    row.show = ((isCurMisionExtr && (row?.canShowForMissionExtr ?? false)) || !isCurMisionExtr)
+      && row.isVisible(gm, gt, isDebriefingResultFull)
     row.showInTooltips = row.show || row.isVisible(gm, gt, isDebriefingResultFull, true)
     if (!row.show && !row.showInTooltips)
       continue
@@ -947,6 +952,19 @@ function getDebriefingGiftItemsInfo(skipItemId = null) {
   return res.len() ? res : null
 }
 
+function updateDebriefingResultGiftItemsInfo() {
+  if (debriefingResult == null)
+    return
+
+  let { activity = 0, sessionTime = 0 } = debriefingResult?.exp
+  let pveRewardInfo = getPveRewardTrophyInfo(sessionTime, activity, debriefingResult?.isSucceed ?? false)
+  let giftItemsInfo = getDebriefingGiftItemsInfo(pveRewardInfo?.receivedTrophyName)
+  if (giftItemsInfo == null)
+    return
+
+  debriefingResult.giftItemsInfo <- giftItemsInfo
+}
+
 function gatherDebriefingResult() {
   let gm = get_game_mode()
   if (gm == GM_DYNAMIC)
@@ -1084,8 +1102,8 @@ function gatherDebriefingResult() {
 
   let missionRules = getCurMissionRules()
   debriefingResult.overrideCountryIconByTeam <- {
-    [::g_team.A.code] = missionRules.getOverrideCountryIconByTeam(::g_team.A.code),
-    [::g_team.B.code] = missionRules.getOverrideCountryIconByTeam(::g_team.B.code)
+    [g_team.A.code] = missionRules.getOverrideCountryIconByTeam(g_team.A.code),
+    [g_team.B.code] = missionRules.getOverrideCountryIconByTeam(g_team.B.code)
   }
   updateDebriefingExpInvestmentData()
   calculateDebriefingTabularData(false)
@@ -1183,4 +1201,5 @@ return {
   getCountedResultId
   debriefingAddVirtualPremAcc
   getTableNameById
+  updateDebriefingResultGiftItemsInfo
 }

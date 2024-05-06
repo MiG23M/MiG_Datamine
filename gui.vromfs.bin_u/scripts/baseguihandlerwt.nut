@@ -23,6 +23,7 @@ let updateContacts = require("%scripts/contacts/updateContacts.nut")
 let unitContextMenuState = require("%scripts/unit/unitContextMenuState.nut")
 let { isChatEnabled, hasMenuChat } = require("%scripts/chat/chatStates.nut")
 let { openUrl } = require("%scripts/onlineShop/url.nut")
+let { getCurCircuitUrl } = require("%appGlobals/urlCustom.nut")
 let { get_time_msec } = require("dagor.time")
 let { useTouchscreen } = require("%scripts/clientState/touchScreen.nut")
 let { setGuiOptionsMode, getGuiOptionsMode } = require("guiOptions")
@@ -35,6 +36,7 @@ let { addTask, charCallback, restoreCharCallback } = require("%scripts/tasker.nu
 let { checkSquadUnreadyAndDo } = require("%scripts/squads/squadUtils.nut")
 let { getCrewById } = require("%scripts/slotbar/slotbarState.nut")
 let { openGenericTooltip, closeGenericTooltip } = require("%scripts/utils/genericTooltip.nut")
+let { steamContactsGroup } = require("%scripts/contacts/contactsManager.nut")
 
 local stickedDropDown = null
 let defaultSlotbarActions = [
@@ -625,13 +627,13 @@ let BaseGuiHandlerWT = class (BaseGuiHandler) {
   }
 
   function onContactTooltipOpen(obj) {
-    let uid = obj?.uid
-    local canShow = false
+    let { uid = "", steamId = "" } = obj
     local contact = null
-    if (uid) {
+    if (uid != "")
       contact = ::getContact(uid)
-      canShow = this.canShowContactTooltip(contact)
-    }
+    else if (steamId != "")
+      contact = steamContactsGroup.get()?[steamId.tointeger()]
+    let canShow = this.canShowContactTooltip(contact)
     obj["class"] = canShow ? "" : "empty"
 
     if (canShow)
@@ -670,9 +672,9 @@ let BaseGuiHandlerWT = class (BaseGuiHandler) {
     ::view_fullscreen_image(obj)
   }
 
-  function onFaq()             { openUrl(loc("url/faq")) }
+  function onFaq()             { openUrl(getCurCircuitUrl("faqURL", loc("url/faq"))) }
   function onForum()           { openUrl(loc("url/forum")) }
-  function onSupport()         { openUrl(loc("url/support")) }
+  function onSupport()         { openUrl(getCurCircuitUrl("supportURL", loc("url/support"))) }
   function onWiki()            { openUrl(loc("url/wiki")) }
 
   function unstickLastDropDown(newObj = null, forceMove = "no") {

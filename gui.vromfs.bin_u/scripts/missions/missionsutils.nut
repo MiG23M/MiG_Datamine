@@ -1,6 +1,7 @@
 from "%scripts/dagui_natives.nut" import add_last_played, get_player_army_for_hud, get_game_mode_name, has_entitlement
 from "%scripts/dagui_library.nut" import *
 
+let { g_team } = require("%scripts/teams.nut")
 let { g_url_missions } = require("%scripts/missions/urlMissionsList.nut")
 let { getGlobalModule } = require("%scripts/global_modules.nut")
 let g_squad_manager = getGlobalModule("g_squad_manager")
@@ -12,11 +13,12 @@ let { getMissionLocName, isMissionComplete, getCombineLocNameMission } = require
 let { get_meta_mission_info_by_name, get_meta_missions_info_by_campaigns,
   add_custom_mission_list_full, get_meta_mission_info_by_gm_and_name,
   get_current_mission_desc, get_meta_missions_info } = require("guiMission")
-let { get_game_mode, get_game_type } = require("mission")
+let { get_game_mode, get_game_type, get_current_mission_name } = require("mission")
 let { getEsUnitType } = require("%scripts/unit/unitInfo.nut")
 let { isStringInteger, isStringFloat, toUpper } = require("%sqstd/string.nut")
 let { getDynamicLayoutsBlk } = require("dynamicMission")
 let { g_mislist_type } = require("%scripts/missions/misListType.nut")
+let regexp2 = require("regexp2")
 
 const COOP_MAX_PLAYERS = 4
 
@@ -205,7 +207,7 @@ function cacheCampaignNames() {
 function locCurrentMissionName(needComment = true) {
   let misBlk = DataBlock()
   get_current_mission_desc(misBlk)
-  let teamId = ::g_team.getTeamByCode(get_player_army_for_hud()).id
+  let teamId = g_team.getTeamByCode(get_player_army_for_hud()).id
   let locNameByTeamParamName = $"locNameTeam{teamId}"
   local ret = ""
 
@@ -230,7 +232,7 @@ function locCurrentMissionName(needComment = true) {
 ::loc_current_mission_desc <- function loc_current_mission_desc() {
   let misBlk = DataBlock()
   get_current_mission_desc(misBlk)
-  let teamId = ::g_team.getTeamByCode(get_player_army_for_hud()).id
+  let teamId = g_team.getTeamByCode(get_player_army_for_hud()).id
   let locDecsByTeamParamName = $"locDescTeam{teamId}"
 
   local locDesc = ""
@@ -328,6 +330,10 @@ function clearMapsCache() {
   dynamicLayouts.clear()
 }
 
+// first april 2024
+let isMissionExtrByName = @(misName = "") regexp2(@"_extr$").match(misName)
+let isMissionExtr = @() isMissionExtrByName(get_current_mission_name())
+
 return {
   getUrlOrFileMissionMetaInfo
   isMissionComplete
@@ -339,4 +345,6 @@ return {
   getGameModeMaps
   getDynamicLayouts
   clearMapsCache
+  isMissionExtr
+  isMissionExtrByName
 }

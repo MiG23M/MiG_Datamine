@@ -18,6 +18,7 @@ let { isPlatformSony, isPlatformPC, consoleRevision, targetPlatform
 let encyclopedia = require("%scripts/encyclopedia.nut")
 let { openChangelog } = require("%scripts/changelog/changeLogState.nut")
 let { openUrlByObj } = require("%scripts/onlineShop/url.nut")
+let { getCurCircuitUrl } = require("%appGlobals/urlCustom.nut")
 let openQrWindow = require("%scripts/wndLib/qrWindow.nut")
 let { getTextWithCrossplayIcon, needShowCrossPlayInfo, isCrossPlayEnabled
 } = require("%scripts/social/crossplay.nut")
@@ -38,7 +39,7 @@ let { isBattleTasksAvailable } = require("%scripts/unlocks/battleTasks.nut")
 let { setShopDevMode, getShopDevMode, ShopDevModeOption } = require("%scripts/debugTools/dbgShop.nut")
 let { add_msg_box } = require("%sqDagui/framework/msgBox.nut")
 let { openEulaWnd } = require("%scripts/eulaWnd.nut")
-let { isInMenu, loadHandler } = require("%scripts/baseGuiHandlerManagerWT.nut")
+let { isInMenu, loadHandler, handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { isMeNewbie } = require("%scripts/myStats.nut")
 let { gui_start_itemsShop, gui_start_inventory, gui_start_items_list
 } = require("%scripts/items/startItemsShop.nut")
@@ -47,6 +48,10 @@ let { guiStartSkirmish, checkAndCreateGamemodeWnd, guiStartCampaign, guiStartBen
 } = require("%scripts/missions/startMissionsList.nut")
 let { guiStartCredits } = require("%scripts/credits.nut")
 let { guiStartReplays } = require("%scripts/replays/replayScreen.nut")
+let { openWishlist } = require("%scripts/wishlist/wishlistHandler.nut")
+
+let isInResearchMode = @()
+  handlersManager.findHandlerClassInScene(gui_handlers.ShopCheckResearch)?.shopResearchMode == true
 
 let list = {
   SKIRMISH = {
@@ -183,7 +188,7 @@ let list = {
   CHANGE_LOG = {
     text = @() "#mainmenu/btnChangelog"
     onClickFunc = @(...) openChangelog()
-    isHidden = @(...) !hasFeature("Changelog") || !isInMenu()
+    isHidden = @(...) !hasFeature("Changelog") || !isInMenu() || isInResearchMode()
   }
   EXIT = {
     text = @() "#mainmenu/btnExit"
@@ -237,7 +242,7 @@ let list = {
         checkAndShowCrossplayWarning(@() showInfoMsgBox(loc("xbox/actionNotAvailableCrossNetworkPlay")))
     }
     isDelayed = false
-    link = "#url/tss"
+    link = @() "#url/tss"
     isLink = @() true
     isFeatured = @() true
     isHidden = @(...) !hasFeature("AllowExternalLink") || !hasFeature("Tournaments") || isMeNewbie()
@@ -255,7 +260,7 @@ let list = {
         })
       : openUrlByObj(obj, true)
     isDelayed = false
-    link = loc("url/reportAnIssue", { platform = consoleRevision.len() > 0 ? $"{targetPlatform}_{consoleRevision}" : targetPlatform, version = get_game_version_str() })
+    link = @() loc("url/reportAnIssue", { platform = consoleRevision.len() > 0 ? $"{targetPlatform}_{consoleRevision}" : targetPlatform, version = get_game_version_str() })
     isLink = @() isPlatformPC
     isFeatured = @() true
     isHidden = @(...) !hasFeature("ReportAnIssue") || (!hasFeature("AllowExternalLink") && isPlatformPC) || !isInMenu()
@@ -272,7 +277,7 @@ let list = {
         })
       : openUrlByObj(obj)
     isDelayed = false
-    link = "#url/streamsAndReplays"
+    link = @() "#url/streamsAndReplays"
     isLink = @() !hasFeature("ShowUrlQrCode")
     isFeatured = @() !hasFeature("ShowUrlQrCode")
     isHidden = @(...) !hasFeature("ServerReplay") || (!hasFeature("AllowExternalLink") && !hasFeature("ShowUrlQrCode"))
@@ -285,41 +290,49 @@ let list = {
       : showInfoMsgBox(loc("msgbox/notAvailbleGoldPurchase"))
     image = @() "#ui/gameuiskin#shop_warpoints_premium.svg"
     needDiscountIcon = true
-    isHidden = @(...) !hasFeature("SpendGold") || !isInMenu()
+    isHidden = @(...) !hasFeature("SpendGold") || !isInMenu() || isInResearchMode()
   }
   PREMIUM = {
     text = @() "#charServer/chapter/premium"
     onClickFunc = @(_obj, handler) handler.startOnlineShop("premium")
     image = @() "#ui/gameuiskin#sub_premiumaccount.svg"
     needDiscountIcon = true
-    isHidden = @(...) !hasFeature("EnablePremiumPurchase") || !isInMenu()
+    isHidden = @(...) !hasFeature("EnablePremiumPurchase") || !isInMenu() || isInResearchMode()
   }
   WARPOINTS = {
     text = @() "#charServer/chapter/warpoints"
-    onClickFunc = @(_obj, handler) handler.startOnlineShop("warpoints")
+    onClickFunc = @(_obj, handler) handler.startOnlineShop("warpoints") || isInResearchMode()
     image = @() "#ui/gameuiskin#shop_warpoints.svg"
     needDiscountIcon = true
-    isHidden = @(...) !hasFeature("SpendGold") || !isInMenu()
+    isHidden = @(...) !hasFeature("SpendGold") || !isInMenu() || isInResearchMode()
+  }
+  WISHLIST = {
+    text = @() "#mainmenu/wishlist"
+    onClickFunc = @(...) openWishlist()
+    image = @() "#ui/gameuiskin#open_wishlist.svg"
+    isHidden = @(...) !hasFeature("Wishlist") || !isInMenu() || isInResearchMode()
   }
   INVENTORY = {
     text = @() "#items/inventory"
     onClickFunc = @(...) gui_start_inventory()
     image = @() "#ui/gameuiskin#inventory_icon.svg"
-    isHidden = @(...) !::ItemsManager.isItemsManagerEnabled() || !isInMenu()
+    isHidden = @(...) !::ItemsManager.isItemsManagerEnabled() || !isInMenu() || isInResearchMode()
     unseenIcon = @() SEEN.INVENTORY
   }
   ITEMS_SHOP = {
     text = @() "#items/shop"
     onClickFunc = @(...) gui_start_itemsShop()
     image = @() "#ui/gameuiskin#store_icon.svg"
-    isHidden = @(...) !::ItemsManager.isItemsManagerEnabled() || !isInMenu() || !hasFeature("ItemsShopInTopMenu")
+    isHidden = @(...) !::ItemsManager.isItemsManagerEnabled() || !isInMenu()
+      || !hasFeature("ItemsShopInTopMenu") || isInResearchMode()
     unseenIcon = @() SEEN.ITEMS_SHOP
   }
   WORKSHOP = {
     text = @() "#items/workshop"
     onClickFunc = @(...) gui_start_items_list(itemsTab.WORKSHOP)
     image = @() "#ui/gameuiskin#btn_modifications.svg"
-    isHidden = @(...) !::ItemsManager.isItemsManagerEnabled() || !isInMenu() || !workshop.isAvailable()
+    isHidden = @(...) !::ItemsManager.isItemsManagerEnabled() || !isInMenu()
+      || !workshop.isAvailable() || isInResearchMode()
     unseenIcon = @() SEEN.WORKSHOP
   }
   WARBONDS_SHOP = {
@@ -328,34 +341,34 @@ let list = {
     image = @() "#ui/gameuiskin#wb.svg"
     isHidden = @(...) !isBattleTasksAvailable()
       || !::g_warbonds.isShopAvailable()
-      || !isInMenu()
+      || !isInMenu() || isInResearchMode()
     unseenIcon = @() SEEN.WARBONDS_SHOP
   }
   ONLINE_SHOP = {
     text = getEntStoreLocId
     onClickFunc = openEntStoreTopMenuFunc
-    link = ""
+    link = @()""
     isLink = @() !canUseIngameShop()
     isFeatured = @() !canUseIngameShop()
     image = getEntStoreIcon
     needDiscountIcon = needEntStoreDiscountIcon
-    isHidden = isEntStoreTopMenuItemHidden
+    isHidden = @(...) isEntStoreTopMenuItemHidden() || isInResearchMode()
     unseenIcon = getEntStoreUnseenIcon
   }
   MARKETPLACE = {
     text = @() "#mainmenu/marketplace"
     onClickFunc = @(_obj, _handler) goToMarketplace()
-    link = ""
+    link = @() ""
     isLink = @() true
     isFeatured = @() true
     image = @() "#ui/gameuiskin#gc.svg"
-    isHidden = @(...) !isMarketplaceEnabled() || !isInMenu()
+    isHidden = @(...) !isMarketplaceEnabled() || !isInMenu() || isInResearchMode()
   }
   COLLECTIONS = {
     text = @() "#mainmenu/btnCollections"
     onClickFunc = @(...) openCollectionsWnd()
     image = @() "#ui/gameuiskin#collection.svg"
-    isHidden = @(...) !hasAvailableCollections() || !isInMenu()
+    isHidden = @(...) !hasAvailableCollections() || !isInMenu() || isInResearchMode()
   }
   WINDOW_HELP = {
     text = @() "#flightmenu/btnControlsHelp"
@@ -371,7 +384,7 @@ let list = {
     text = @() "#mainmenu/faq"
     onClickFunc = @(obj, _handler) openUrlByObj(obj)
     isDelayed = false
-    link = "#url/faq"
+    link = @() getCurCircuitUrl("faqURL", loc("url/faq"))
     isLink = @() true
     isFeatured = @() true
     isHidden = @(...) !hasFeature("AllowExternalLink") || !isInMenu()
@@ -382,12 +395,12 @@ let list = {
       ? openQrWindow({
           headerText = loc("mainmenu/support")
           qrCodesData = [
-            {url = loc("url/support")}
+            {url = getCurCircuitUrl("supportURL", loc("url/support"))}
           ]
         })
       : openUrlByObj(obj)
     isDelayed = false
-    link = "#url/support"
+    link = @() getCurCircuitUrl("supportURL", loc("url/support"))
     isLink = @() !hasFeature("ShowUrlQrCode")
     isFeatured = @() !hasFeature("ShowUrlQrCode")
     isHidden = @(...) (!hasFeature("AllowExternalLink") && !hasFeature("ShowUrlQrCode"))
@@ -397,7 +410,7 @@ let list = {
     text = @() "#mainmenu/wiki"
     onClickFunc = @(obj, _handler) openUrlByObj(obj)
     isDelayed = false
-    link = "#url/wiki"
+    link = @() "#url/wiki"
     isLink = @() true
     isFeatured = @() true
     isHidden = @(...) !hasFeature("AllowExternalLink") || !isInMenu()
@@ -408,7 +421,7 @@ let list = {
       ? openUrlByObj(obj)
       : openEulaWnd()
     isDelayed = false
-    link = "#url/eula"
+    link = @() getCurCircuitUrl("eulaURL", loc("url/eula"))
     isLink = @() hasFeature("AllowExternalLink")
     isFeatured = true
     isHidden = @(...) !hasFeature("EulaInMenu") || !isInMenu()

@@ -1,4 +1,4 @@
-from "%scripts/dagui_natives.nut" import disable_network, run_reactive_gui, steam_is_running, make_invalid_user_id, get_cur_circuit_name
+from "%scripts/dagui_natives.nut" import disable_network, run_reactive_gui, make_invalid_user_id, get_cur_circuit_name
 from "%scripts/dagui_library.nut" import *
 from "ecs" import clear_vm_entity_systems, start_es_loading, end_es_loading
 from "%scripts/mainConsts.nut" import COLOR_TAG
@@ -130,7 +130,6 @@ foreach (fn in [
   "%scripts/controls/input/inputBase.nut"
   "%scripts/controls/input/nullInput.nut"
   "%scripts/controls/shortcutType.nut"
-  "%scripts/viewUtils/hintTags.nut"
   "%scripts/viewUtils/hints.nut"
   "%scripts/viewUtils/bhvHint.nut"
 
@@ -236,8 +235,7 @@ local isFullScriptsLoaded = false
     require("%scripts/gameModes/enablePsnActivitiesGameIntents.nut")
   }
 
-  if (steam_is_running())
-    require("%scripts/inventory/steamCheckNewItems.nut")
+  require("%scripts/contacts/steamContactManager.nut")
   // end of Independent Modules
 
   require("%scripts/utils/systemMsg.nut").registerColors(colorTagToColors)

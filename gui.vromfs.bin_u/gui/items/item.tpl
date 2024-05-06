@@ -40,6 +40,23 @@ itemDiv {
   on_unhover:t='<<onHover>>'
   <</onHover>>
 
+  <<#margin>>
+  margin:t='<<margin>>'
+  <</margin>>
+
+  <<#border>>
+  border {
+    position:t='absolute'
+    size:t='pw, ph'
+    re-type:t='9rect'
+    foreground-image:t="#ui/gameuiskin#item_selection"
+    foreground-position:t="8, 10, 8, 8"
+    foreground-repeat:t="expand"
+    foreground-color:t="@commonMenuButtonColor"
+    input-transparent:t='yes'
+  }
+  <</border>>
+
   <<#active>>
     wink { pattern { type:t='bright_texture'; position:t='absolute' } }
   <</active>>
@@ -306,6 +323,14 @@ itemDiv {
       <<^isAllBought>>display:t='hide'<</isAllBought>>
     }
     <</needAllBoughtIcon>>
+    <<#needImageMarkIcon>>
+    markImageIcon {
+      position:t='absolute'
+      background-color:t='<<markIconColor>>'
+      background-image:t='<<markIcon>>'
+      background-repeat:t='aspect-ratio'
+    }
+    <</needImageMarkIcon>>
     <<#needMarkIcon>>
     markIcon{
       position:t='absolute'

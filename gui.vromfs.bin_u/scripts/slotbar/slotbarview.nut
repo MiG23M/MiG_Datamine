@@ -36,6 +36,7 @@ let { getCurrentGameModeEdiff, isUnitAllowedForGameMode
 } = require("%scripts/gameModes/gameModeManagerState.nut")
 let { isInSessionRoom } = require("%scripts/matchingRooms/sessionLobbyState.nut")
 let { getCrewLevel } = require("%scripts/crew/crew.nut")
+let { getSpecTypeByCrewAndUnit } = require("%scripts/crew/crewSpecType.nut")
 
 const DEFAULT_STATUS = "none"
 
@@ -102,7 +103,7 @@ function getUnitSlotPriceText(unit, params) {
   let { isLocalState = true, haveRespawnCost = false, haveSpawnDelay = false,
     curSlotIdInCountry = -1, slotDelayData = null, unlocked = true,
     sessionWpBalance = 0, weaponPrice = 0, totalSpawnScore = -1, overlayPrice = -1,
-    showAsTrophyContent = false, isReceivedPrizes = false, crew = null
+    showAsTrophyContent = false, isReceivedPrizes = false, crew = null, missionRules = null
   } = params
 
   local priceText = ""
@@ -110,7 +111,7 @@ function getUnitSlotPriceText(unit, params) {
       && (isSpareAircraftInSlot(curSlotIdInCountry) || isRespawnWithUniversalSpare(crew, unit)))
     priceText = $"{priceText}{loc("spare/spare/short")} "
 
-  if ((haveRespawnCost || haveSpawnDelay) && unlocked) {
+  if ((haveRespawnCost || haveSpawnDelay || missionRules?.isRageTokensRespawnEnabled) && unlocked) {
     let spawnDelay = slotDelayData != null
       ? slotDelayData.slotDelay - ((get_time_msec() - slotDelayData.updateTime) / 1000).tointeger()
       : get_slot_delay(unit.name)
@@ -133,6 +134,14 @@ function getUnitSlotPriceText(unit, params) {
         txtList.append(loc("shop/spawnScore", { cost = spawnScoreText }))
       }
 
+      let reqUnitSpawnRageTokens = missionRules?.getUnitSpawnRageTokens(unit) ?? 0
+      if (reqUnitSpawnRageTokens > 0) {
+        local spawnRageTokensText = reqUnitSpawnRageTokens
+        if (reqUnitSpawnRageTokens > missionRules.getSpawnRageTokens())
+          spawnRageTokensText = $"<color=@badTextColor>{reqUnitSpawnRageTokens}</color>"
+        txtList.append(loc("shop/rageTokens", { cost = spawnRageTokensText }))
+      }
+
       if (txtList.len()) {
         local spawnCostText = ", ".join(txtList, true)
         if (priceText.len())
@@ -146,7 +155,7 @@ function getUnitSlotPriceText(unit, params) {
     let maxSpawns = get_max_spawns_unit_count(unit.name)
     if (curSlotIdInCountry >= 0 && maxSpawns > 1) {
       let leftSpawns = maxSpawns - get_num_used_unit_spawns(curSlotIdInCountry)
-      priceText = $"{priceText}{leftSpawns}/{maxSpawns}"
+      priceText = $"{priceText}({leftSpawns}/{maxSpawns})"
     }
   }
   else if (isLocalState && priceText == "") {
@@ -283,7 +292,7 @@ function buildEmptySlot(id, _unit, params) {
     if (crew != null) {
       let crewLevelText = getCrewLevel(crew, forceCrewInfoUnit,
         forceCrewInfoUnit.getCrewUnitType()).tointeger().tostring()
-      let crewSpecIcon = ::g_crew_spec_type.getTypeByCrewAndUnit(crew, forceCrewInfoUnit).trainedIcon
+      let crewSpecIcon = getSpecTypeByCrewAndUnit(crew, forceCrewInfoUnit).trainedIcon
 
       let crewLevelInfoView = {
         hasExtraInfoBlock = true
@@ -568,7 +577,7 @@ function buildCommonUnitSlot(id, unit, params) {
   let crewLevelText = crew && unitForCrewInfo
     ? getCrewLevel(crew, unitForCrewInfo, unitForCrewInfo.getCrewUnitType()).tointeger().tostring()
     : ""
-  let crewSpecIcon = ::g_crew_spec_type.getTypeByCrewAndUnit(crew, unitForCrewInfo).trainedIcon
+  let crewSpecIcon = getSpecTypeByCrewAndUnit(crew, unitForCrewInfo).trainedIcon
 
   let itemButtonsView = {
     itemButtons = {

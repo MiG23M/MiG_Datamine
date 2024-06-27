@@ -1,0 +1,136 @@
+@const awsCounterMeasureHeight: (0.032*@shHud)\1;
+@const awsItemHeight: (0.06*@shHud)\1;
+@const awsPadBottom: (0.022*@shHud)\1;
+@const awsPadCounterMeasures: (0.008*@shHud)\1;
+@const awsHeight: 3@awsPadCounterMeasures + 1@awsPadBottom + 1@awsItemHeight + 1@awsCounterMeasureHeight;
+
+airWeaponSelectorItem {
+  background-color:#292C32;
+  css-hier-invalidate:yes;
+  size:@awsItemHeight, @awsItemHeight;
+  border-color:#171B23;
+  border:yes;
+  behaviour:button;
+  interactive:yes;
+}
+
+[show_console_buttons=yes] airWeaponSelectorItem:hover {
+  needFocusBorder:yes;
+}
+
+[show_console_buttons=yes] airWeaponSelectorCountermeasure:hover {
+  needFocusBorder:yes;
+}
+airWeaponSelectorItem[isSelected=yes] {
+  background-color:#2F353E;
+}
+
+airWeaponSelectorItem[isBordered=yes] {
+  border-color:#E2E2E2;
+}
+
+airWeaponSelectorIcon {
+  size:@awsItemHeight, @awsItemHeight;
+  position:relative;
+  pos:(pw-w)/2, (ph-h)/2;
+  background-repeat:expand;
+  background-svg-size:@awsItemHeight, @awsItemHeight;
+  background-color:#FFFFFF;
+  input-transparent:yes;
+}
+
+airWeaponSelectorItem[enable=no],
+airWeaponSelectorItem[weaponIdx=-1],
+airWeaponSelectorItem[hasBullets=no] {
+  interactive:no;
+}
+
+airWeaponSelectorItem[hasBullets=no] > airWeaponSelectorIcon {
+  background-color:#44444444;
+}
+
+airWeaponSelectorItem[enable=no] > airWeaponSelectorIcon,
+airWeaponSelectorItem[weaponIdx=-1] > airWeaponSelectorIcon {
+  display:hide;
+}
+
+airWeaponSelector > Button_text {
+  color:#AAAAAA;
+  bgcolor:#292C32;
+  border-color:#171B23;
+  border:yes;
+  text:"";
+  min-width:0;
+}
+
+airWeaponSelector > Button_text:hover {
+  color:#FFFFFF;
+  color-factor:255;
+}
+
+[show_console_buttons=yes] airWeaponSelector > Button_text {
+  width:2@buttonHeight;
+  min-width:2@buttonHeight;
+  display:show;
+}
+
+[show_console_buttons=yes] airWeaponSelector > DummyButton[btnName=B] {
+  display:hide;
+}
+
+airWeaponSelectorCloseBtn {
+  behaviour:button;
+  re-type:9rect;
+  color:#AAAAAA;
+  bgcolor:#292C32;
+  color-factor:125;
+  border-color:#000000;
+  border:yes;
+  font:small_text;
+}
+
+[show_console_buttons=yes] airWeaponSelectorCloseBtn {
+  display:hide;
+}
+
+airWeaponSelectorCountermeasure {
+  total-input-transparent:yes;
+  background-color:#292C32;
+  css-hier-invalidate:yes;
+  min-width:0.128@shHud;
+  height:@awsCounterMeasureHeight;
+  border-color:#171B23;
+  border:yes;
+  behaviour:button;
+  interactive:yes;
+  margin-left:0.004@shHud;
+}
+
+[show_console_buttons=yes] airWeaponSelectorCountermeasure:hover {
+  needFocusBorder:yes;
+}
+
+airWeaponSelectorCountermeasure[isSelected=yes] {
+  background-color:#2F353E;
+}
+
+airWeaponSelectorCountermeasure[isBordered=yes] {
+  border-color:#E2E2E2;
+}
+
+airWeaponSelectorCountermeasure > label {
+  re-type:text;
+  color:#FFFFFF;
+  font:@fontSmall;
+}
+
+airWeaponSelectorCountermeasure > img {
+  position:absolute;
+  rotation:90;
+  top:(ph-h)/2;
+  left:pw - h/2 -0.008@shHud;
+  size:0.016@shHud, 0.064@shHud;
+  background-svg-size:0.016@shHud, 0.064@shHud;
+  background-repeat:aspect-ratio;
+  bgcolor:#FFFFFF;
+}

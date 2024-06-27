@@ -1265,6 +1265,29 @@
           "fxEventName": "fire_after_hit_big"
         }
       }
+    },
+    "part": {
+      "name": "wheel_l_drive_dm",
+      "name": "wheel_r_drive_dm",
+      "name": "wheel_r_back_dm",
+      "name": "wheel_r_front_dm",
+      "name": "wheel_l_back_dm",
+      "name": "wheel_l_front_dm",
+      "name": "wheel_l_01_dm",
+      "name": "wheel_r_01_dm",
+      "name": "wheel_l_02_dm",
+      "name": "wheel_r_02_dm",
+      "name": "wheel_l_03_dm",
+      "name": "wheel_r_03_dm",
+      "name": "wheel_l_04_dm",
+      "name": "wheel_r_04_dm",
+      "name": "wheel_l_05_dm",
+      "name": "wheel_r_05_dm",
+      "name": "wheel_l_06_dm",
+      "name": "wheel_r_06_dm",
+      "onKill": {
+        "cut": 1.0
+      }
     }
   },
   "tank_crew": {
@@ -1744,15 +1767,21 @@
         "wheel_l_drive": 0.3,
         "wheel_r_drive": 0.3
       },
+      "wheelsDamageWeight": {
+        "wheel_l_01": 0.05,
+        "wheel_r_01": 0.05,
+        "wheel_l_02": 0.05,
+        "wheel_r_02": 0.05,
+        "wheel_l_03": 0.05,
+        "wheel_r_03": 0.05,
+        "wheel_l_04": 0.05,
+        "wheel_r_04": 0.05,
+        "wheel_r_drive": 0.25,
+        "wheel_l_drive": 0.25
+      },
       "driven": {
         "wheel_l_drive": true,
         "wheel_l_drive": true
-      },
-      "wheelsDamageWeight": {
-        "wheel_l_01": 0.45,
-        "wheel_r_01": 0.45,
-        "wheel_l_drive": 0.8,
-        "wheel_r_drive": 0.8
       }
     }
   },
@@ -2481,6 +2510,27 @@
     },
     "event": {
       "name": "fuel_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "hydraulic_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_exterior",
       "fx": {
         "name": "tank_ex_fuel_explosion",
         "centerDmgPart": true

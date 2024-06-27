@@ -201,6 +201,9 @@
       }
     },
     "steel_tank_armor": {
+      "tank10_dm": {
+        "hp": 120.5
+      },
       "tank1_dm": {
         "hp": 120.5
       },
@@ -224,6 +227,9 @@
       },
       "tank8_dm": {
         "hp": 97.5
+      },
+      "tank9_dm": {
+        "hp": 120.5
       }
     },
     "wood": {
@@ -884,6 +890,43 @@
       "name": "tailcontrol_dm"
     },
     "part": {
+      "name": "tank10_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
       "name": "tank1_dm",
       "onHit": {
         "fire": 0.0001,
@@ -1144,6 +1187,43 @@
     },
     "part": {
       "name": "tank8_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank9_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3
@@ -2147,7 +2227,9 @@
     "HideDmParts": {
       "node": "cannon1_dm",
       "node": "cannon2_dm",
-      "node": "tank7_dm"
+      "node": "tank7_dm",
+      "node": "tank9_dm",
+      "node": "tank10_dm"
     },
     "WeaponSlot": {
       "index": 1,
@@ -2218,6 +2300,28 @@
           "blk": "gameData/Weapons/containers/jl_100r_fr_matra_sneb_type23.blk",
           "emitter": "matra_jl100r_001",
           "external": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_1300_slot2",
+        "showInWeaponMenu": true,
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "ShowNodes": {
+          "node": "pylon_crp18_jl100r_001"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/il_1300l_rp62_drop_tank_ghost_grey_1.blk",
+          "emitter": "1300l_rp62_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 6,
+          "preset": "ptb_1300_slot6"
         }
       }
     },
@@ -2475,6 +2579,28 @@
           "blk": "gameData/Weapons/containers/jl_100r_fr_matra_sneb_type23.blk",
           "emitter": "matra_jl100r_002",
           "external": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_1300_slot6",
+        "showInWeaponMenu": true,
+        "ShowDmParts": {
+          "node": "tank10_dm"
+        },
+        "ShowNodes": {
+          "node": "pylon_crp18_jl100r_002"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/il_1300l_rp62_drop_tank_ghost_grey_2.blk",
+          "emitter": "1300l_rp62_drop_tank_002",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 2,
+          "preset": "ptb_1300_slot2"
         }
       }
     },

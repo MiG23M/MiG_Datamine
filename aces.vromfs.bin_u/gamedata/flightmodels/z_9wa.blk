@@ -1409,7 +1409,7 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/tv_tracker.blk",
+      "blk": "gameData/sensors/ir_tracker.blk",
       "node": "optic1_gun"
     },
     "sensor": {
@@ -1420,6 +1420,10 @@
     },
     "sensor": {
       "blk": "gameData/sensors/cn_helicopter_z_mlws.blk"
+    },
+    "sensor": {
+      "blk": "gameData/sensors/LaserDesignatorSensor.blk",
+      "node": "optic1_gun"
     }
   },
   "commonWeapons": {
@@ -1527,17 +1531,10 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
-          "bullets": 24,
-          "external": true,
-          "separate": false
-        },
-        "Weapon": {
-          "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
-          "emitter": "emtr_flare1",
-          "bullets": 48,
+          "bullets": 168,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -1916,10 +1913,7 @@
       "modClass": "weapon",
       "tier": 4
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "weapon",
       "turn_it_off": false,

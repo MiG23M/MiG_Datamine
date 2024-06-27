@@ -6,21 +6,22 @@ let { HudBattleLog } = require("%scripts/hud/hudBattleLog.nut")
 let { getGlobalModule } = require("%scripts/global_modules.nut")
 let g_squad_manager = getGlobalModule("g_squad_manager")
 let g_listener_priority = require("%scripts/g_listener_priority.nut")
-let u = require("%sqStdLibs/helpers/u.nut")
 let { registerPersistentData } = require("%sqStdLibs/scriptReloader/scriptReloader.nut")
 let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { select_editbox, handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { format } = require("string")
 let time = require("%scripts/time.nut")
-let ingame_chat = require("%scripts/chat/mpChatModel.nut")
+let { onInternalMessage, getLogForBanhammer, unblockMessage, getMpChatLog,
+  onIncomingMessage
+} = require("%scripts/chat/mpChatModel.nut")
 let penalties = require("%scripts/penitentiary/penalties.nut")
 let playerContextMenu = require("%scripts/user/playerContextMenu.nut")
 let spectatorWatchedHero = require("%scripts/replays/spectatorWatchedHero.nut")
-let { isChatEnabled, isChatEnableWithPlayer } = require("%scripts/chat/chatStates.nut")
+let { isChatEnabled, checkChatEnableWithPlayer } = require("%scripts/chat/chatStates.nut")
 let { is_replay_playing } = require("replays")
 let { eventbus_send, eventbus_subscribe } = require("eventbus")
 let { chat_on_text_update, toggle_ingame_chat, chat_on_send, chat_set_mode } = require("chat")
-let { get_mplayers_list } = require("mission")
+let { get_mplayers_list, get_mplayer_by_userid } = require("mission")
 let { USEROPT_AUTO_SHOW_CHAT } = require("%scripts/options/optionsExtNames.nut")
 let { getPlayerName } = require("%scripts/user/remapNick.nut")
 let { isInFlight } = require("gameplayBinding")
@@ -367,7 +368,7 @@ local MP_CHAT_PARAMS = {
     local devoiceMsgText = penalties.getDevoiceMessage()
     if (devoiceMsgText) {
       devoiceMsgText = $"<color=@chatInfoColor>{devoiceMsgText}</color>"
-      ingame_chat.onInternalMessage(devoiceMsgText)
+      onInternalMessage(devoiceMsgText)
       this.setInputField("")
     }
     return devoiceMsgText != null
@@ -525,7 +526,7 @@ local MP_CHAT_PARAMS = {
     })
   }
 
-  getChatLogForBanhammer = @() ingame_chat.getLogForBanhammer()
+  getChatLogForBanhammer = @() getLogForBanhammer()
 
   function onChatLinkClick(obj, _itype, link)  { this.onChatLink(obj, link, is_platform_pc) }
   function onChatLinkRClick(obj, _itype, link) { this.onChatLink(obj, link, false) }
@@ -547,7 +548,7 @@ local MP_CHAT_PARAMS = {
       this.log_text = ::g_chat.revealBlockedMsg(this.log_text, link)
 
       let pureMessage = ::g_chat.convertLinkToBlockedMsg(link)
-      ingame_chat.unblockMessage(pureMessage)
+      unblockMessage(pureMessage)
       this.updateAllLogs()
     }
   }
@@ -565,44 +566,44 @@ local MP_CHAT_PARAMS = {
   }
 
   function makeChatTextFromLog() {
-    let logObj = ingame_chat.getLog()
-    this.log_text = ""
-    for (local i = 0; i < logObj.len(); ++i)
-      this.log_text = "\n".join([this.log_text,  this.makeTextFromMessage(logObj[i])], true)
-    this.updateAllLogs()
-
-    let autoShowOpt = ::get_option(USEROPT_AUTO_SHOW_CHAT)
-    if (autoShowOpt.value) {
-      this.doForAllScenes(function(sceneData) {
-        if (!sceneData.scene.isVisible())
-          return
-
-        sceneData.transparency = 1.0
-        this.updateChatScene(sceneData, 0.0)
-      })
+    local thisCapture = this
+    local afterLogFormat = function() {
+      thisCapture.updateAllLogs()
+      let autoShowOpt = ::get_option(USEROPT_AUTO_SHOW_CHAT)
+      if (autoShowOpt.value) {
+        thisCapture.doForAllScenes(function(sceneData) {
+          if (!sceneData.scene.isVisible())
+            return
+          sceneData.transparency = 1.0
+          thisCapture.updateChatScene(sceneData, 0.0)
+        })
+      }
     }
+
+    local processLog = null
+    processLog = function(logObj, idx, formattedLogs) {
+      if (idx < logObj.len()) {
+        local logMsg = logObj[idx]
+        thisCapture.makeTextFromMessage(logMsg, function(text) {
+          formattedLogs.append(text)
+          processLog(logObj, idx + 1, formattedLogs)
+        })
+      } else {
+        for (local i = 0; i < formattedLogs.len(); ++i)
+          thisCapture.log_text = "\n".join([thisCapture.log_text, formattedLogs[i]], true)
+        afterLogFormat()
+      }
+    }
+
+    let logObj = getMpChatLog()
+    this.log_text = ""
+    local formattedLogs = []
+    processLog(logObj, 0, formattedLogs)
   }
 
 
-  function makeTextFromMessage(message) {
+  function formatMessageText(message, text) {
     let timeString = time.secondsToString(message.time, false)
-    if (message.sender == "") //system
-      return format(
-        "%s <color=@chatActiveInfoColor>%s</color>",
-        timeString,
-        loc(message.text))
-
-    local text = message.isAutomatic
-      ? message.text
-      : ::g_chat.filterMessageText(message.text, message.isMyself)
-
-    if (!message.isMyself && !message.isAutomatic) {
-      if (::isPlayerNickInContacts(message.sender, EPL_BLOCKLIST))
-        text = ::g_chat.makeBlockedMsg(message.text)
-      else if (!isChatEnableWithPlayer(message.sender))
-        text = ::g_chat.makeXBoxRestrictedMsg(message.text)
-    }
-
     let userColor = this.getSenderColor(message)
     let msgColor = this.getMessageColor(message)
     let clanTag = ::get_player_tag(message.sender)
@@ -623,6 +624,45 @@ local MP_CHAT_PARAMS = {
       msgColor,
       text
     )
+  }
+
+
+  function makeTextFromMessage(message, callback) {
+    let timeString = time.secondsToString(message.time, false)
+    if (message.sender == "") {//system
+      callback?(
+        format(
+          "%s <color=@chatActiveInfoColor>%s</color>",
+          timeString,
+          loc(message.text)
+        )
+      )
+      return
+    }
+
+    local text = message.isAutomatic
+      ? message.text
+      : ::g_chat.filterMessageText(message.text, message.isMyself)
+
+    if (!message.isMyself && !message.isAutomatic) {
+      if (::isPlayerNickInContacts(message.sender, EPL_BLOCKLIST))
+        text = ::g_chat.makeBlockedMsg(message.text)
+      else {
+        local thisCapture = this
+        checkChatEnableWithPlayer(message.sender, function(canChat) {
+          if (!canChat) {
+            callback?(thisCapture.formatMessageText(message, ::g_chat.makeXBoxRestrictedMsg(message.text)))
+            return
+          } else {
+            callback?(thisCapture.formatMessageText(message, text))
+            return
+          }
+        })
+        return
+      }
+    }
+
+    callback?(this.formatMessageText(message, text))
   }
 
 
@@ -660,7 +700,9 @@ local MP_CHAT_PARAMS = {
 
   function isSenderInMySquad(message) {
     if (is_replay_playing()) {
-      let player = u.search(get_mplayers_list(GET_MPLAYERS_LIST, true), @(p) p.userId.tointeger() == message.uid)
+      if (message?.uid == null)
+        return false
+      let player = get_mplayer_by_userid(message.uid)
       return ::SessionLobby.isEqualSquadId(spectatorWatchedHero.squadId, player?.squadId)
     }
     return g_squad_manager.isInMySquadById(message.uid)
@@ -771,11 +813,6 @@ eventbus_subscribe("enable_game_chat_input", @(p) enable_game_chat_input(p))
   ::get_game_chat_handler().hideChatInput(sceneData, value)
 }
 
-::clear_game_chat <- function clear_game_chat() {
-  debugTableData(ingame_chat)
-  ingame_chat.clearLog()
-}
-
 ::get_gamechat_log_text <- function get_gamechat_log_text() {
   return ::get_game_chat_handler().getLogText()
 }
@@ -791,7 +828,7 @@ eventbus_subscribe("enable_game_chat_input", @(p) enable_game_chat_input(p))
 }
 
 ::chat_system_message <- function chat_system_message(text) {
-  ingame_chat.onIncomingMessage("", text, false, 0, true)
+  onIncomingMessage("", text, false, 0, true)
 }
 
 ::add_tags_for_mp_players <- function add_tags_for_mp_players() {

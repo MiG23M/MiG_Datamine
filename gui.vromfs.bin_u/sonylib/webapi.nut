@@ -1,11 +1,13 @@
 let DataBlock = require("DataBlock")
-let {json_to_string=null} = require_optional("json")
-let toJson = json_to_string ?? getroottable()?.save_to_json
+let {eventbus_subscribe_onehit, eventbus_subscribe, eventbus_unsubscribe} = require("eventbus")
+let {object_to_json_string=null} = require_optional("json")
+let toJson = object_to_json_string ?? getroottable()?.save_to_json
 
 assert(toJson!=null, "no json module found")
 
 let nativeApi = require_optional("sony.webapi")
 let {abortAllPendingRequests= @() null,
+  getNewRequestId = @() 0,
   getPreferredVersion = @() 2,
   subscribeToBlocklistUpdates= @(...) null,
   subscribeToFriendsUpdates = @(...) null,
@@ -13,6 +15,9 @@ let {abortAllPendingRequests= @() null,
   unsubscribeFromBlocklistUpdates = @(...) null,
   unsubscribeFromFriendsUpdates = @(...) null,
   unsubscribeFromPresenceUpdates = @(...) null,
+  FRIENDS_CHANGE_EVENT_NAME = "",
+  BLOCKLIST_CHANGE_EVENT_NAME = "",
+  PRESENCE_CHANGE_EVENT_NAME = ""
   } = nativeApi
 
 let nativeSend = nativeApi?.send ?? @(...) null
@@ -20,10 +25,6 @@ let nativeSend = nativeApi?.send ?? @(...) null
 let { dgs_get_settings } = require("dagor.system")
 let { get_platform_string_id } = require("platform")
 let platformId = dgs_get_settings().getStr("platform", get_platform_string_id())
-
-let webApiMimeTypeBinary = "application/octet-stream"
-let webApiMimeTypeImage = "image/jpeg"
-let webApiMimeTypeJson = "application/json; encoding=utf-8"
 
 let webApiMethodGet = 0
 let webApiMethodPost = 1
@@ -64,21 +65,6 @@ function createRequest(api, method, path=null, params={}, data=null, forceBinary
   return request
 }
 
-function createPart(mimeType, name, data) {
-  let part = DataBlock()
-  part.reqHeaders = DataBlock()
-  part.reqHeaders["Content-Type"] = mimeType
-  part.reqHeaders["Content-Description"] = name
-  if (mimeType == webApiMimeTypeImage || mimeType == webApiMimeTypeBinary)
-    part.reqHeaders["Content-Disposition"] = "attachment"
-
-  if (mimeType == webApiMimeTypeImage)
-    part.filePath = data
-  else
-    part.data = (type(data) == "table") ? toJson(data) : data
-  return part
-}
-
 function makeIterable(request, pos, size) {
   // Some APIs accept either start (majority) or offset (friendlist), other param is ignored
   request.params.start = pos
@@ -92,48 +78,6 @@ function noOpCb(_response, _err) { /* NO OP */ }
 
 
 // ------------ Session actions
-let sessionApi = { group = "sdk:sessionInvitation", path = "/v1/sessions" }
-let session = {
-  function create(info, image, data) {
-    let parts = [createPart(webApiMimeTypeJson, "session-request", info)]
-    if (image != null && image.len() > 0)
-      parts.append(createPart(webApiMimeTypeImage, "session-image", image))
-    if (data != null && data.len() > 0)
-      parts.append(createPart(webApiMimeTypeBinary, "changeable-session-data", data))
-    return createRequest(sessionApi, webApiMethodPost, null, {}, parts)
-  }
-
-  function update(sessionId, sessionInfo) {
-    return createRequest(sessionApi, webApiMethodPut, sessionId, {}, sessionInfo)
-  }
-
-  function join(sessionId, index=0) {
-    return createRequest(sessionApi, webApiMethodPost, $"{sessionId}/members", {index=index})
-  }
-
-  function leave(sessionId) {
-    return createRequest(sessionApi, webApiMethodDelete, $"{sessionId}/members/me")
-  }
-
-  function data(sessionId) {
-    return createRequest(sessionApi, webApiMethodGet, $"{sessionId}/changeableSessionData")
-  }
-
-  function change(sessionId, changedata) {
-    return createRequest(sessionApi, webApiMethodPut, $"{sessionId}/changeableSessionData", {}, changedata, true)
-  }
-
-  function invite(sessionId, accounts, invitedata={}) {
-    if (type(accounts) == "string")
-      accounts = [accounts]
-    let parts = [createPart(webApiMimeTypeJson, "invitation-request", {to=accounts})]
-    if (invitedata != null && invitedata.len() > 0)
-      parts.append(createPart(webApiMimeTypeBinary, "invitation-data", invitedata))
-    return createRequest(sessionApi, webApiMethodPost, $"{sessionId}/invitations", {}, parts)
-  }
-}
-
-
 let sessionManagerApi = { group = "sessionManager", path = "/v1/playerSessions" }
 let sessionManager = {
   function create(data) {
@@ -347,21 +291,27 @@ let matches = {
 
 
 // ---------- Utility functions and wrappers
-function is_http_success(code) { return code >= 200 && code < 300 }
+function isHttpSuccess(code) { return code >= 200 && code < 300 }
 
-function send(action, onResponse=noOpCb) {
-  let cb = function(r) {
+function getNewRequestIdImpl() {
+  let reqId = getNewRequestId()
+  return $"sony_webapi_request_{reqId}"
+}
+
+function send(action, onResponse=null) {
+  let eventId = getNewRequestIdImpl()
+  eventbus_subscribe_onehit(eventId, function(r) {
     local err = r?.error
-    let httpErr = (!is_http_success(r?.httpStatus ?? 0)) ? (r?.httpStatus ?? 0) : null
+    let httpErr = (!isHttpSuccess(r?.httpStatus ?? 0)) ? (r?.httpStatus ?? 0) : null
     if (httpErr != null && err == null)
       err = { }
     if (err && err?.code == null)
       err.code <- httpErr ? httpErr : "undefined";
 
-    onResponse(r?.response, err)
-  }
+    onResponse?(r?.response, err)
+  })
 
-  nativeSend(action, cb)
+  nativeSend(action, eventId)
 }
 
 function fetch(action, onChunkReceived, chunkSize = 20) {
@@ -382,6 +332,36 @@ function fetch(action, onChunkReceived, chunkSize = 20) {
   send(makeIterable(action, 0, chunkSize), onResponse);
 }
 
+function subscribeToFriendsUpdatesImpl(on_update) {
+  eventbus_subscribe(FRIENDS_CHANGE_EVENT_NAME, on_update)
+  subscribeToFriendsUpdates()
+}
+
+function subscribeToBlocklistUpdatesImpl(on_update) {
+  eventbus_subscribe(BLOCKLIST_CHANGE_EVENT_NAME, on_update)
+  subscribeToBlocklistUpdates()
+}
+
+function unsubscribeFromFriendsUpdatesImpl(on_update) {
+  unsubscribeFromFriendsUpdates()
+  eventbus_unsubscribe(FRIENDS_CHANGE_EVENT_NAME, on_update)
+}
+
+function unsubscribeFromBlocklistUpdatesImpl(on_update) {
+  unsubscribeFromBlocklistUpdates()
+  eventbus_unsubscribe(BLOCKLIST_CHANGE_EVENT_NAME, on_update)
+}
+
+function subscribeToPresenceUpdatesImpl(on_update) {
+  eventbus_subscribe(PRESENCE_CHANGE_EVENT_NAME, on_update)
+  subscribeToPresenceUpdates()
+}
+
+function unsubscribeFromPresenceUpdatesImpl(on_update) {
+  unsubscribeFromPresenceUpdates()
+  eventbus_unsubscribe(PRESENCE_CHANGE_EVENT_NAME, on_update)
+}
+
 
 return {
   psnSend = send
@@ -400,7 +380,6 @@ return {
   abortAllPendingRequests = abortAllPendingRequests ?? @() null
   getPreferredVersion = getPreferredVersion
 
-  session
   sessionManager
   gameSessionManager
 
@@ -420,16 +399,16 @@ return {
   noOpCb
 
   subscribe = {
-    friendslist = subscribeToFriendsUpdates
-    blocklist = subscribeToBlocklistUpdates
+    friendslist = subscribeToFriendsUpdatesImpl
+    blocklist = subscribeToBlocklistUpdatesImpl
   }
   unsubscribe = {
-    friendslist = unsubscribeFromFriendsUpdates
-    blocklist = unsubscribeFromBlocklistUpdates
+    friendslist = unsubscribeFromFriendsUpdatesImpl
+    blocklist = unsubscribeFromBlocklistUpdatesImpl
   }
 
-  subscribeToPresenceUpdates
-  unsubscribeFromPresenceUpdates
+  subscribeToPresenceUpdates = subscribeToPresenceUpdatesImpl
+  unsubscribeFromPresenceUpdates = unsubscribeFromPresenceUpdatesImpl
 
   serviceLabel = platformId == "ps5"? 1 : 0
 }

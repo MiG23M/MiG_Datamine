@@ -1545,19 +1545,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       },
       "WeaponPreset": {
@@ -1698,19 +1700,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -1974,7 +1978,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -2033,11 +2086,6 @@
     "new_heli_cover": {    },
     "heli_flak_jacket": {    },
     "heli_structure": {    },
-    "air_extinguisher": {
-      "prevModification": "heli_structure",
-      "tier": 3,
-      "invertEnableLogic": false
-    },
     "t_160_universal": {    },
     "t_160_air_targets": {    },
     "t_160_armor_targets": {    },
@@ -2078,10 +2126,7 @@
       "modClass": "weapon",
       "tier": 4
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "weapon",
       "tier": 1,

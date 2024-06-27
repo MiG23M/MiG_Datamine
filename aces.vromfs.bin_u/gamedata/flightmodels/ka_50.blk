@@ -1953,19 +1953,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
-          "separate": false,
-          "dragCx": 0.05,
-          "mass": 2.0
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2457,7 +2457,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -2564,11 +2613,8 @@
       "reqModification": "mi_24_fab_250",
       "tier": 2
     },
-    "maw_countermeasures_launcher_chaff_only": {    },
-    "maw_countermeasures_launcher_flare_only": {    },
-    "maw_countermeasures_launcher_chaff_priority": {    },
-    "maw_countermeasures_launcher_flare_priority": {    },
-    "MAW_system_heli_false_thermal_targets": {
+    "maw_countermeasures_launcher_chaff": {    },
+    "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "weapon",
       "turn_it_off": false,
       "invertEnableLogic": false,
@@ -2597,7 +2643,7 @@
       }
     },
     "heli_night_vision_system": {
-      "prevModification": "MAW_system_heli_false_thermal_targets",
+      "prevModification": "MAW_system_heli_false_thermal_targets_large",
       "tier": 3,
       "modClass": "weapon",
       "effects": {

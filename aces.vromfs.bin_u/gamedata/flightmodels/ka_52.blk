@@ -1809,7 +1809,13 @@
           "type": "map"
         },
         "page": {
-          "type": "rwr"
+          "type": "rwr",
+          "circleCnt": 1,
+          "angleMarkStep": 30.0,
+          "hidePlaneSymbol": true,
+          "hasCompass": true,
+          "scale": 0.7,
+          "relativCircleRadius": 10.0
         },
         "page": {
           "type": "radar",
@@ -1824,7 +1830,13 @@
           0.5
         ],
         "page": {
-          "type": "rwr"
+          "type": "rwr",
+          "circleCnt": 1,
+          "angleMarkStep": 30.0,
+          "hidePlaneSymbol": true,
+          "hasCompass": true,
+          "scale": 0.7,
+          "relativCircleRadius": 10.0
         },
         "page": {
           "type": "devices",
@@ -2327,7 +2339,13 @@
           "type": "map"
         },
         "page": {
-          "type": "rwr"
+          "type": "rwr",
+          "circleCnt": 1,
+          "angleMarkStep": 30.0,
+          "hidePlaneSymbol": true,
+          "hasCompass": true,
+          "scale": 0.7,
+          "relativCircleRadius": 10.0
         }
       },
       "display": {
@@ -2580,7 +2598,13 @@
           "type": "map"
         },
         "page": {
-          "type": "rwr"
+          "type": "rwr",
+          "circleCnt": 1,
+          "angleMarkStep": 30.0,
+          "hidePlaneSymbol": true,
+          "hasCompass": true,
+          "scale": 0.7,
+          "relativCircleRadius": 10.0
         },
         "page": {
           "type": "radar",
@@ -2854,17 +2878,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2944,17 +2970,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -3727,7 +3755,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -3864,11 +3941,8 @@
         }
       }
     },
-    "maw_countermeasures_launcher_chaff_only": {    },
-    "maw_countermeasures_launcher_flare_only": {    },
-    "maw_countermeasures_launcher_chaff_priority": {    },
-    "maw_countermeasures_launcher_flare_priority": {    },
-    "MAW_system_heli_false_thermal_targets": {
+    "maw_countermeasures_launcher_chaff": {    },
+    "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "weapon",
       "reqModification": "heli_screen_exhaust_device",
       "turn_it_off": false,
@@ -3910,13 +3984,13 @@
     "heli_night_vision_system": {
       "image": "#ui/gameuiskin#thermal_sight",
       "tier": 3,
-      "prevModification": "MAW_system_heli_false_thermal_targets",
+      "prevModification": "MAW_system_heli_false_thermal_targets_large",
       "effects": {
         "nightVision": {
           "gunnerIr": {
             "resolution": [
-              1024,
-              768
+              1920,
+              1080
 ],
             "lightMult": 10.0,
             "ghosting": 0.7,
@@ -3924,8 +3998,8 @@
           },
           "pilotIr": {
             "resolution": [
-              1024,
-              768
+              1920,
+              1080
 ],
             "lightMult": 10.0,
             "ghosting": 0.7,
@@ -3933,8 +4007,8 @@
           },
           "sightThermal": {
             "resolution": [
-              1024,
-              768
+              1920,
+              1080
 ],
             "noiseFactor": 0.05
           }

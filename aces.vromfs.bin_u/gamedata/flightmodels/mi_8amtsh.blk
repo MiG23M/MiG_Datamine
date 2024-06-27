@@ -1771,19 +1771,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
-          "separate": true
+          "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
-          "separate": true
+          "separate": false
         }
       }
     },
@@ -2969,7 +2971,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -2982,6 +3033,10 @@
       "dp": "ub_57_16_b004",
       "dp": "ub_57_16_b005",
       "dp": "ub_57_16_b006"
+    },
+    "dp": {
+      "dm": "fin_dm",
+      "dp": "propeller_shaft2_dm"
     }
   },
   "user_skin": {
@@ -3021,10 +3076,7 @@
       "tier": 1,
       "modClass": "armor"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "prevModification": "heli_flak_jacket",
       "modClass": "armor",
@@ -3148,7 +3200,7 @@
       -10.8836
     ],
     "emtr_break_wing_tail": [
-      12.4864,
+      -12.4864,
       0.0,
       0.0
     ],

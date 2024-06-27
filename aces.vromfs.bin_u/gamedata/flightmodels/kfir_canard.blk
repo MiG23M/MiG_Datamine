@@ -61,7 +61,7 @@
         "hp": 15.0
       }
     },
-    "armor_engine": {
+    "armor_jet_engine": {
       "engine1_dm": {
         "genericDamageMult": 1.6,
         "hp": 50.5
@@ -229,7 +229,13 @@
         "hp": 57.0
       },
       "tank6_dm": {
-        "hp": 97.5
+        "hp": 97.6
+      },
+      "tank7_dm": {
+        "hp": 120.5
+      },
+      "tank8_dm": {
+        "hp": 120.5
       }
     },
     "wood": {
@@ -1079,6 +1085,80 @@
     },
     "part": {
       "name": "tank6_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank7_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank8_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3
@@ -2088,11 +2168,14 @@
       "node": "pylon_ces3_shafrir2_001",
       "node": "pylon_ces3_shafrir2_002",
       "node": "pylon_lau7_001",
-      "node": "pylon_lau7_002"
+      "node": "pylon_lau7_002",
+      "node": "pylon_crp372_fuel_iaf"
     },
     "HideDmParts": {
       "node": "cannon3_dm",
-      "node": "cannon4_dm"
+      "node": "cannon4_dm",
+      "node": "tank7_dm",
+      "node": "tank8_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2126,9 +2209,10 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 36,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -2472,6 +2556,24 @@
           "external": true,
           "separate": true,
           "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_880",
+        "showInWeaponMenu": true,
+        "ShowDmParts": {
+          "node": "tank8_dm"
+        },
+        "ShowNodes": {
+          "node": "pylon_crp372_fuel_iaf"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/il_880l_rp825_drop_tank_mirage_3cj.blk",
+          "emitter": "880l_rp825_drop_tank",
+          "bullets": 1,
+          "external": true
         }
       }
     },
@@ -2919,10 +3021,7 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,

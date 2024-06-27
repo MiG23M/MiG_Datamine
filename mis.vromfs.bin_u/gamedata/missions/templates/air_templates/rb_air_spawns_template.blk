@@ -50,7 +50,7 @@
           },
           "varSetString": {
             "value": "t1_assault_spawn",
-            "var": "t1_assault_spawn_default_name"
+            "var": "t1_assault_spawn_default"
           },
           "varSetString": {
             "value": "t1_assault_high_spawn",
@@ -69,49 +69,49 @@
             "var": "t1_assault_spawn_top_name"
           },
           "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "t1_assault_top_spawn_01",
-            "var": "t1_assault_spawn_top_01_name"
+            "value": "add_01"
           },
           "varSetString": {
             "value": "t1_assault_high_spawn_01",
-            "var": "t1_assault_spawn_high_01_name"
+            "var": "t1_assault_spawn_high_add_01_name"
           },
           "varSetString": {
             "value": "t1_assault_mid_spawn_01",
-            "var": "t1_assault_spawn_mid_01_name"
+            "var": "t1_assault_spawn_mid_add_01_name"
           },
           "varSetString": {
             "value": "t1_assault_low_spawn_01",
-            "var": "t1_assault_spawn_low_01_name"
-          },
-          "comment": {
-            "value": ""
+            "var": "t1_assault_spawn_low_add_01_name"
           },
           "varSetString": {
-            "value": "t1_assault_top_spawn_02",
-            "var": "t1_assault_spawn_top_02_name"
+            "value": "t1_assault_top_spawn_01",
+            "var": "t1_assault_spawn_top_add_01_name"
+          },
+          "comment": {
+            "value": "add_02"
           },
           "varSetString": {
             "value": "t1_assault_high_spawn_02",
-            "var": "t1_assault_spawn_high_02_name"
+            "var": "t1_assault_spawn_high_add_02_name"
           },
           "varSetString": {
             "value": "t1_assault_mid_spawn_02",
-            "var": "t1_assault_spawn_mid_02_name"
+            "var": "t1_assault_spawn_mid_add_02_name"
           },
           "varSetString": {
             "value": "t1_assault_low_spawn_02",
-            "var": "t1_assault_spawn_low_02_name"
+            "var": "t1_assault_spawn_low_add_02_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_top_spawn_02",
+            "var": "t1_assault_spawn_top_add_02_name"
           },
           "comment": {
             "value": "t2"
           },
           "varSetString": {
             "value": "t2_assault_spawn",
-            "var": "t2_assault_spawn_default_name"
+            "var": "t2_assault_spawn_default"
           },
           "varSetString": {
             "value": "t2_assault_high_spawn",
@@ -130,42 +130,42 @@
             "var": "t2_assault_spawn_top_name"
           },
           "comment": {
-            "value": ""
-          },
-          "varSetString": {
-            "value": "t2_assault_top_spawn_01",
-            "var": "t2_assault_spawn_top_01_name"
+            "value": "add_01"
           },
           "varSetString": {
             "value": "t2_assault_high_spawn_01",
-            "var": "t2_assault_spawn_high_01_name"
+            "var": "t2_assault_spawn_high_add_01_name"
           },
           "varSetString": {
             "value": "t2_assault_mid_spawn_01",
-            "var": "t2_assault_spawn_mid_01_name"
+            "var": "t2_assault_spawn_mid_add_01_name"
           },
           "varSetString": {
             "value": "t2_assault_low_spawn_01",
-            "var": "t2_assault_spawn_low_01_name"
-          },
-          "comment": {
-            "value": ""
+            "var": "t2_assault_spawn_low_add_01_name"
           },
           "varSetString": {
-            "value": "t2_assault_top_spawn_02",
-            "var": "t2_assault_spawn_top_02_name"
+            "value": "t2_assault_top_spawn_01",
+            "var": "t2_assault_spawn_top_add_01_name"
+          },
+          "comment": {
+            "value": "add_02"
           },
           "varSetString": {
             "value": "t2_assault_high_spawn_02",
-            "var": "t2_assault_spawn_high_02_name"
+            "var": "t2_assault_spawn_high_add_02_name"
           },
           "varSetString": {
             "value": "t2_assault_mid_spawn_02",
-            "var": "t2_assault_spawn_mid_02_name"
+            "var": "t2_assault_spawn_mid_add_02_name"
           },
           "varSetString": {
             "value": "t2_assault_low_spawn_02",
-            "var": "t2_assault_spawn_low_02_name"
+            "var": "t2_assault_spawn_low_add_02_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_top_spawn_02",
+            "var": "t2_assault_spawn_top_add_02_name"
           },
           "comment": {
             "value": ""
@@ -174,12 +174,8 @@
             "target": "t1_assault_spawn_default",
             "target": "t2_assault_spawn_default"
           },
-          "comment": {
-            "value": ""
-          },
           "triggerEnable": {
-            "target": "t1_assault_spawn_additional_top",
-            "target": "t2_assault_spawn_additional_top"
+            "target": "assaults_check_additional_spawns"
           }
         },
         "else_actions": {
@@ -187,6 +183,32 @@
             "target": "create_assults_spawn_names"
           }
         }
+      },
+      "assaults_check_additional_spawns": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_add_top",
+            "target": "t2_assault_spawn_add_top"
+          }
+        },
+        "else_actions": {        }
       },
       "t1_assault_spawn_default": {
         "is_enabled": false,
@@ -201,7 +223,7 @@
         },
         "conditions": {
           "objectExists": {
-            "target": "@t1_assault_spawn_default_name",
+            "target": "@t1_assault_spawn_default",
             "type": "area"
           }
         },
@@ -226,11 +248,10 @@
             "replaceAreas": false,
             "forceCreate": false,
             "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_default_name",
+            "target": "@t1_assault_spawn_default",
             "team": "A",
             "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
+              "type_assault": true
             }
           }
         },
@@ -253,7 +274,7 @@
         },
         "conditions": {
           "objectExists": {
-            "target": "@t2_assault_spawn_default_name",
+            "target": "@t2_assault_spawn_default",
             "type": "area"
           }
         },
@@ -278,11 +299,10 @@
             "replaceAreas": false,
             "forceCreate": false,
             "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_default_name",
+            "target": "@t2_assault_spawn_default",
             "team": "B",
             "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
+              "type_assault": true
             }
           }
         },
@@ -313,6 +333,66 @@
           "comment": {
             "value": "assault spawns exists"
           },
+          "triggerEnable": {
+            "target": "t1_assault_spawn_top_air_check"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_high"
+          }
+        }
+      },
+      "t1_assault_spawn_top_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_top_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
+          },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
             "spawnEffect": false,
@@ -337,91 +417,6 @@
               "airfield_take_off_air_rb": false
             }
           }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t1_assault_spawn_high"
-          }
-        }
-      },
-      "t1_assault_spawn_additional_top": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t1_assault_spawns_top_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t1_assault_spawns_top_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_top_01_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_top_02_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t1_assault_spawn_additional_high"
-          }
         }
       },
       "t2_assault_spawn_top": {
@@ -444,6 +439,66 @@
         "actions": {
           "comment": {
             "value": "assault spawns exists"
+          },
+          "triggerEnable": {
+            "target": "t2_assault_spawn_top_air_check"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t2_assault_spawn_high"
+          }
+        }
+      },
+      "t2_assault_spawn_top_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_top_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
           },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
@@ -468,91 +523,6 @@
               "type_assault": true,
               "airfield_take_off_air_rb": false
             }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t2_assault_spawn_high"
-          }
-        }
-      },
-      "t2_assault_spawn_additional_top": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t2_assault_spawns_top_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t2_assault_spawns_top_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_top_01_name",
-            "team": "B",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_top_02_name",
-            "team": "B",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t2_assault_spawn_additional_high"
           }
         }
       },
@@ -577,6 +547,66 @@
           "comment": {
             "value": "assault spawns exists"
           },
+          "triggerEnable": {
+            "target": "t1_assault_spawn_high_air_check"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_mid"
+          }
+        }
+      },
+      "t1_assault_spawn_high_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_high_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
+          },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
             "spawnEffect": false,
@@ -601,91 +631,6 @@
               "airfield_take_off_air_rb": false
             }
           }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t1_assault_spawn_mid"
-          }
-        }
-      },
-      "t1_assault_spawn_additional_high": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t1_assault_spawn_high_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t1_assault_spawn_high_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_high_01_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_high_02_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t1_assault_spawn_additional_mid"
-          }
         }
       },
       "t2_assault_spawn_high": {
@@ -708,6 +653,66 @@
         "actions": {
           "comment": {
             "value": "assault spawns exists"
+          },
+          "triggerEnable": {
+            "target": "t2_assault_spawn_high_air_check"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t2_assault_spawn_mid"
+          }
+        }
+      },
+      "t2_assault_spawn_high_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_high_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
           },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
@@ -732,91 +737,6 @@
               "type_assault": true,
               "airfield_take_off_air_rb": false
             }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t2_assault_spawn_mid"
-          }
-        }
-      },
-      "t2_assault_spawn_additional_high": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t2_assault_spawn_high_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t2_assault_spawn_high_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_high_01_name",
-            "team": "B",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_high_02_name",
-            "team": "B",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t2_assault_spawn_additional_mid"
           }
         }
       },
@@ -841,6 +761,66 @@
           "comment": {
             "value": "assault spawns exists"
           },
+          "triggerEnable": {
+            "target": "t1_assault_spawn_mid_air_check"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_low"
+          }
+        }
+      },
+      "t1_assault_spawn_mid_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_mid_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
+          },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
             "spawnEffect": false,
@@ -865,91 +845,6 @@
               "airfield_take_off_air_rb": false
             }
           }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t1_assault_spawn_low"
-          }
-        }
-      },
-      "t1_assault_spawn_additional_mid": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t1_assault_spawn_mid_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t1_assault_spawn_mid_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_mid_01_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_mid_02_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t1_assault_spawn_additional_low"
-          }
         }
       },
       "t2_assault_spawn_mid": {
@@ -972,6 +867,66 @@
         "actions": {
           "comment": {
             "value": "assault spawns exists"
+          },
+          "triggerEnable": {
+            "target": "t2_assault_spawn_mid_air_check"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t2_assault_spawn_low"
+          }
+        }
+      },
+      "t2_assault_spawn_mid_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_mid_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
           },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
@@ -996,91 +951,6 @@
               "type_assault": true,
               "airfield_take_off_air_rb": false
             }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t2_assault_spawn_low"
-          }
-        }
-      },
-      "t2_assault_spawn_additional_mid": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t2_assault_spawn_mid_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t2_assault_spawn_mid_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_mid_01_name",
-            "team": "B",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_mid_02_name",
-            "team": "B",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {
-          "triggerEnable": {
-            "target": "t2_assault_spawn_additional_low"
           }
         }
       },
@@ -1105,6 +975,62 @@
           "comment": {
             "value": "assault spawns exists"
           },
+          "triggerEnable": {
+            "target": "t1_assault_spawn_low_air_check"
+          }
+        },
+        "else_actions": {        }
+      },
+      "t1_assault_spawn_low_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_low_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
+          },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
             "spawnEffect": false,
@@ -1129,84 +1055,7 @@
               "airfield_take_off_air_rb": false
             }
           }
-        },
-        "else_actions": {        }
-      },
-      "t1_assault_spawn_additional_low": {
-        "is_enabled": false,
-        "comments": "",
-        "props": {
-          "actionsType": "PERFORM_ONE_BY_ONE",
-          "conditionsType": "ALL",
-          "enableAfterComplete": false
-        },
-        "events": {
-          "initMission": {          }
-        },
-        "conditions": {
-          "objectExists": {
-            "target": "@t1_assault_spawn_low_01_name",
-            "type": "area"
-          },
-          "objectExists": {
-            "target": "@t1_assault_spawn_low_02_name",
-            "type": "area"
-          }
-        },
-        "actions": {
-          "comment": {
-            "value": "assault spawns exists"
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_low_01_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          },
-          "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
-            "spawnEffect": false,
-            "isStrictSpawn": false,
-            "isAirfield": false,
-            "isUnit": false,
-            "useExisting": false,
-            "isIndividual": false,
-            "removeAreas": false,
-            "canSpawnOnNeutral": false,
-            "showOnMap": true,
-            "radius": -1.0,
-            "onlyOnePlayerPerSpawnPoint": false,
-            "resetStrictSpawnIndex": false,
-            "replaceAreas": false,
-            "forceCreate": false,
-            "ignoreTeamsOnReuse": false,
-            "target": "@t1_assault_spawn_low_02_name",
-            "team": "A",
-            "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
-            }
-          }
-        },
-        "else_actions": {        }
+        }
       },
       "t2_assault_spawn_low": {
         "is_enabled": false,
@@ -1228,6 +1077,62 @@
         "actions": {
           "comment": {
             "value": "assault spawns exists"
+          },
+          "triggerEnable": {
+            "target": "t2_assault_spawn_low_air_check"
+          }
+        },
+        "else_actions": {        }
+      },
+      "t2_assault_spawn_low_air_check": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "assaults_air_spawn",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns at air"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_low_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "assaults_spawn at land"
           },
           "missionMarkAsRespawnPoint": {
             "loc_name": "missions/assault_spawn",
@@ -1253,10 +1158,9 @@
               "airfield_take_off_air_rb": false
             }
           }
-        },
-        "else_actions": {        }
+        }
       },
-      "t2_assault_spawn_additional_low": {
+      "t1_assault_spawn_add_top": {
         "is_enabled": false,
         "comments": "",
         "props": {
@@ -1269,11 +1173,11 @@
         },
         "conditions": {
           "objectExists": {
-            "target": "@t2_assault_spawn_low_01_name",
+            "target": "@t1_assault_spawn_top_add_01_name",
             "type": "area"
           },
           "objectExists": {
-            "target": "@t2_assault_spawn_low_02_name",
+            "target": "@t1_assault_spawn_top_add_02_name",
             "type": "area"
           }
         },
@@ -1282,7 +1186,7 @@
             "value": "assault spawns exists"
           },
           "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn1",
+            "loc_name": "missions/assault_spawn",
             "spawnEffect": false,
             "isStrictSpawn": false,
             "isAirfield": false,
@@ -1298,15 +1202,14 @@
             "replaceAreas": false,
             "forceCreate": false,
             "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_low_01_name",
-            "team": "B",
+            "target": "@t1_assault_spawn_top_add_01_name",
+            "team": "A",
             "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
+              "type_assault": true
             }
           },
           "missionMarkAsRespawnPoint": {
-            "loc_name": "missions/assault_spawn2",
+            "loc_name": "missions/assault_spawn",
             "spawnEffect": false,
             "isStrictSpawn": false,
             "isAirfield": false,
@@ -1322,11 +1225,552 @@
             "replaceAreas": false,
             "forceCreate": false,
             "ignoreTeamsOnReuse": false,
-            "target": "@t2_assault_spawn_low_02_name",
+            "target": "@t1_assault_spawn_top_add_02_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_add_high"
+          }
+        }
+      },
+      "t2_assault_spawn_add_top": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t2_assault_spawn_top_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t2_assault_spawn_top_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_top_add_01_name",
             "team": "B",
             "tags": {
-              "type_assault": true,
-              "airfield_take_off_air_rb": false
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_top_add_02_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t2_assault_spawn_add_high"
+          }
+        }
+      },
+      "t1_assault_spawn_add_high": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t1_assault_spawn_high_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t1_assault_spawn_high_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_high_add_01_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_high_add_02_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_add_mid"
+          }
+        }
+      },
+      "t2_assault_spawn_add_high": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t2_assault_spawn_high_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t2_assault_spawn_high_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_high_add_01_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_high_add_02_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t2_assault_spawn_add_mid"
+          }
+        }
+      },
+      "t1_assault_spawn_add_mid": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t1_assault_spawn_mid_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t1_assault_spawn_mid_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_mid_add_01_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_mid_add_02_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t1_assault_spawn_add_low"
+          }
+        }
+      },
+      "t2_assault_spawn_add_mid": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t2_assault_spawn_mid_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t2_assault_spawn_mid_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_mid_add_01_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_mid_add_02_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "t2_assault_spawn_add_low"
+          }
+        }
+      },
+      "t1_assault_spawn_add_low": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t1_assault_spawn_low_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t1_assault_spawn_low_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_low_add_01_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t1_assault_spawn_low_add_02_name",
+            "team": "A",
+            "tags": {
+              "type_assault": true
+            }
+          }
+        },
+        "else_actions": {        }
+      },
+      "t2_assault_spawn_add_low": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "initMission": {          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@t2_assault_spawn_low_add_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@t2_assault_spawn_low_add_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "assault spawns exists"
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_low_add_01_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
+            }
+          },
+          "missionMarkAsRespawnPoint": {
+            "loc_name": "missions/assault_spawn",
+            "spawnEffect": false,
+            "isStrictSpawn": false,
+            "isAirfield": false,
+            "isUnit": false,
+            "useExisting": false,
+            "isIndividual": false,
+            "removeAreas": false,
+            "canSpawnOnNeutral": false,
+            "showOnMap": true,
+            "radius": -1.0,
+            "onlyOnePlayerPerSpawnPoint": false,
+            "resetStrictSpawnIndex": false,
+            "replaceAreas": false,
+            "forceCreate": false,
+            "ignoreTeamsOnReuse": false,
+            "target": "@t2_assault_spawn_low_add_02_name",
+            "team": "B",
+            "tags": {
+              "type_assault": true
             }
           }
         },
@@ -7536,32 +7980,32 @@
     "force_air_spawn": false,
     "t1_bombers_rearm_area_name": "",
     "t2_bombers_rearm_area_name": "",
-    "t1_assault_spawn_default_name": "",
-    "t1_assault_spawn_top_name": "",
+    "t1_assault_spawn_default": "",
     "t1_assault_spawn_high_name": "",
     "t1_assault_spawn_mid_name": "",
     "t1_assault_spawn_low_name": "",
-    "t1_assault_spawn_top_01_name": "",
-    "t1_assault_spawn_high_01_name": "",
-    "t1_assault_spawn_mid_01_name": "",
-    "t1_assault_spawn_low_01_name": "",
-    "t1_assault_spawn_top_02_name": "",
-    "t1_assault_spawn_high_02_name": "",
-    "t1_assault_spawn_mid_02_name": "",
-    "t1_assault_spawn_low_02_name": "",
-    "t2_assault_spawn_default_name": "",
+    "t1_assault_spawn_top_name": "",
+    "t1_assault_spawn_high_add_01_name": "",
+    "t1_assault_spawn_mid_add_01_name": "",
+    "t1_assault_spawn_low_add_01_name": "",
+    "t1_assault_spawn_top_add_01_name": "",
+    "t1_assault_spawn_high_add_02_name": "",
+    "t1_assault_spawn_mid_add_02_name": "",
+    "t1_assault_spawn_low_add_02_name": "",
+    "t1_assault_spawn_top_add_02_name": "",
+    "t2_assault_spawn_default": "",
     "t2_assault_spawn_high_name": "",
     "t2_assault_spawn_mid_name": "",
     "t2_assault_spawn_low_name": "",
     "t2_assault_spawn_top_name": "",
-    "t2_assault_spawn_top_01_name": "",
-    "t2_assault_spawn_high_01_name": "",
-    "t2_assault_spawn_mid_01_name": "",
-    "t2_assault_spawn_low_01_name": "",
-    "t2_assault_spawn_top_02_name": "",
-    "t2_assault_spawn_high_02_name": "",
-    "t2_assault_spawn_mid_02_name": "",
-    "t2_assault_spawn_low_02_name": "",
+    "t2_assault_spawn_high_add_01_name": "",
+    "t2_assault_spawn_mid_add_01_name": "",
+    "t2_assault_spawn_low_add_01_name": "",
+    "t2_assault_spawn_top_add_01_name": "",
+    "t2_assault_spawn_high_add_02_name": "",
+    "t2_assault_spawn_mid_add_02_name": "",
+    "t2_assault_spawn_low_add_02_name": "",
+    "t2_assault_spawn_top_add_02_name": "",
     "t1_interceptor_spawn_default_name": "",
     "t1_interceptor_spawn_high_name": "",
     "t1_interceptor_spawn_mid_name": "",
@@ -7652,7 +8096,8 @@
     "t2_wide_spawn_high_name": "",
     "t2_wide_spawn_mid_name": "",
     "t2_wide_spawn_low_name": "",
-    "t2_wide_spawn_top_name": ""
+    "t2_wide_spawn_top_name": "",
+    "assaults_air_spawn": false
   },
   "dialogs": {  },
   "airfields": {  },

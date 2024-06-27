@@ -320,6 +320,11 @@ return [
     needShowInHelp = true
   }
   {
+    id = "ID_OPEN_VISUAL_WEAPON_SELECTOR"
+    checkAssign = false
+    needShowInHelp = true
+  }
+  {
     id = "ID_JETTISON_SECONDARY"
     checkAssign = false
   }
@@ -404,6 +409,17 @@ return [
     needShowInHelp = true
   }
   {
+    id = "ID_TOGGLE_BOMBS_AUTO_RELEASE"
+    checkAssign = false
+    needShowInHelp = true
+  }
+  {
+    id = "ID_SWITCH_SHOOTING_CYCLE_COUNTER_MEASURE"
+    checkAssign = false
+    needShowInHelp = true
+    showFunc = @() hasFeature("SeparateCountermeasures")
+  }
+  {
     id = "ID_IRCM_SWITCH_PLANE"
     checkAssign = false
     needShowInHelp = true
@@ -412,6 +428,18 @@ return [
     id = "ID_FLARES"
     checkAssign = false
     needShowInHelp = true
+  }
+  {
+    id = "ID_COUNTERMEASURES_FLARES"
+    checkAssign = false
+    needShowInHelp = true
+    showFunc = @() hasFeature("SeparateCountermeasures")
+  }
+  {
+    id = "ID_COUNTERMEASURES_CHAFF"
+    checkAssign = false
+    needShowInHelp = true
+    showFunc = @() hasFeature("SeparateCountermeasures")
   }
   {
     id = "ID_TOGGLE_PERIODIC_FLARES"

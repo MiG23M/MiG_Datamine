@@ -96,7 +96,9 @@ gui_handlers.MPLobby <- class (gui_handlers.BaseGuiHandlerWT) {
       SessionLobby.setTeam(SessionLobby.getRandomTeam(), true)
 
     this.updateSessionInfo()
-    this.createSlotbar({ getLockedCountryData = @() SessionLobby.getLockedCountryData() })
+    this.createSlotbar({
+      getLockedCountryData = @() SessionLobby.getLockedCountryData()
+    })
     this.setSceneTitle(loc("multiplayer/lobby"))
     this.updateWindow()
     this.updateRoomInSession()

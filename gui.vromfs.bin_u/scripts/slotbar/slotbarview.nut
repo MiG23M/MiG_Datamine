@@ -27,7 +27,7 @@ let { showConsoleButtons } = require("%scripts/options/consoleMode.nut")
 let { getLastWeapon, checkUnitWeapons, getWeaponsStatusName
 } = require("%scripts/weaponry/weaponryInfo.nut")
 let { getUnitLastBullets } = require("%scripts/weaponry/bulletsInfo.nut")
-let { isCrewAvailableInSession, isSpareAircraftInSlot, isRespawnWithUniversalSpare
+let { isCrewAvailableInSession, isSpareAircraftInSlot, isRespawnWithUniversalSpare,
 } = require("%scripts/respawn/respawnState.nut")
 let { getUnitShopPriceText } = require("%scripts/shop/unitCardPkg.nut")
 let { getCurMissionRules } = require("%scripts/misCustomRules/missionCustomState.nut")
@@ -35,10 +35,16 @@ let { getCrewById, isUnitInSlotbar } = require("%scripts/slotbar/slotbarState.nu
 let { getCurrentGameModeEdiff, isUnitAllowedForGameMode
 } = require("%scripts/gameModes/gameModeManagerState.nut")
 let { isInSessionRoom } = require("%scripts/matchingRooms/sessionLobbyState.nut")
-let { getCrewLevel } = require("%scripts/crew/crew.nut")
+let { getCrewLevel, getCrewStatus, isCrewMaxLevel } = require("%scripts/crew/crew.nut")
 let { getSpecTypeByCrewAndUnit } = require("%scripts/crew/crewSpecType.nut")
+let { getCrewSpText } = require("%scripts/crew/crewPointsText.nut")
+let { getStringWidthPx } = require("%scripts/viewUtils/daguiFonts.nut")
+let { isHandlerInScene } = require("%sqDagui/framework/baseGuiHandlerManager.nut")
+let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 
 const DEFAULT_STATUS = "none"
+
+let hasCrewModalWndInScene = @() isHandlerInScene(gui_handlers.CrewModalHandler)
 
 function getUnitSlotRentInfo(unit, params) {
   let info = {
@@ -68,7 +74,7 @@ function getUnitSlotRentInfo(unit, params) {
 
 function getSlotUnitNameText(unit, params) {
   local res = getUnitName(unit)
-  let { missionRules = null } = params
+  let { missionRules = null, showAdditionExtraInfo = false } = params
   let groupName = missionRules ? missionRules.getRandomUnitsGroupName(unit.name) : null
   if (groupName)
     res = missionRules.getRandomUnitsGroupLocName(groupName)
@@ -78,7 +84,7 @@ function getSlotUnitNameText(unit, params) {
   if (missionRules.isWorldWarUnit(unit.name))
     res = $"{loc("icon/worldWar/colored")}{res}"
 
-  if (!missionRules.needLeftRespawnOnSlots)
+  if (!missionRules.needLeftRespawnOnSlots || showAdditionExtraInfo)
     return res
 
   let leftRespawns = missionRules.getUnitLeftRespawns(unit)
@@ -101,16 +107,12 @@ function getSlotUnitNameText(unit, params) {
 
 function getUnitSlotPriceText(unit, params) {
   let { isLocalState = true, haveRespawnCost = false, haveSpawnDelay = false,
-    curSlotIdInCountry = -1, slotDelayData = null, unlocked = true,
-    sessionWpBalance = 0, weaponPrice = 0, totalSpawnScore = -1, overlayPrice = -1,
-    showAsTrophyContent = false, isReceivedPrizes = false, crew = null, missionRules = null
+    slotDelayData = null, unlocked = true, sessionWpBalance = 0, weaponPrice = 0,
+    totalSpawnScore = -1, overlayPrice = -1, showAsTrophyContent = false,
+    isReceivedPrizes = false, crew = null, missionRules = null
   } = params
 
   local priceText = ""
-  if (curSlotIdInCountry >= 0 && (crew != null && isCrewAvailableInSession(crew, unit))
-      && (isSpareAircraftInSlot(curSlotIdInCountry) || isRespawnWithUniversalSpare(crew, unit)))
-    priceText = $"{priceText}{loc("spare/spare/short")} "
-
   if ((haveRespawnCost || haveSpawnDelay || missionRules?.isRageTokensRespawnEnabled) && unlocked) {
     let spawnDelay = slotDelayData != null
       ? slotDelayData.slotDelay - ((get_time_msec() - slotDelayData.updateTime) / 1000).tointeger()
@@ -128,10 +130,11 @@ function getUnitSlotPriceText(unit, params) {
 
       let reqUnitSpawnScore = shop_get_spawn_score(unit.name, getLastWeapon(unit.name), getUnitLastBullets(unit))
       if (reqUnitSpawnScore > 0 && totalSpawnScore > -1) {
-        local spawnScoreText = reqUnitSpawnScore
+        local spawnScoreText = loc("shop/spawnScore", { cost = reqUnitSpawnScore })
         if (reqUnitSpawnScore > totalSpawnScore)
-          spawnScoreText = $"<color=@badTextColor>{reqUnitSpawnScore}</color>"
-        txtList.append(loc("shop/spawnScore", { cost = spawnScoreText }))
+          txtList.append(colorize("badTextColor", spawnScoreText))
+        else
+          txtList.append(spawnScoreText)
       }
 
       let reqUnitSpawnRageTokens = missionRules?.getUnitSpawnRageTokens(unit) ?? 0
@@ -151,14 +154,7 @@ function getUnitSlotPriceText(unit, params) {
     }
   }
 
-  if (isInFlight()) {
-    let maxSpawns = get_max_spawns_unit_count(unit.name)
-    if (curSlotIdInCountry >= 0 && maxSpawns > 1) {
-      let leftSpawns = maxSpawns - get_num_used_unit_spawns(curSlotIdInCountry)
-      priceText = $"{priceText}({leftSpawns}/{maxSpawns})"
-    }
-  }
-  else if (isLocalState && priceText == "") {
+  if (!isInFlight() && isLocalState && priceText == "") {
     priceText = overlayPrice >= 0 ? Cost(overlayPrice).getTextAccordingToBalance()
       : getUnitShopPriceText(unit)
 
@@ -166,7 +162,7 @@ function getUnitSlotPriceText(unit, params) {
       priceText = colorize("goodTextColor", loc("mainmenu/itemReceived"))
   }
 
-  return priceText
+  return priceText.replace(" ", nbsp)
 }
 
 function getUnitSlotResearchProgressText(unit, priceText = "") {
@@ -249,6 +245,120 @@ function getUnitSlotRankText(unit, crew = null, showBR = false, ediff = -1) {
 
 let isUnitPriceTextLong = @(text) utf8_strlen(removeTextareaTags(text)) > 13
 
+function getSpareCountText(spareCount, crew, unit, missionRules) {
+  let hasSpare = spareCount > 0
+  if (!isInFlight())
+    return hasSpare ? $"{spareCount}{loc("icon/spare")}" : ""
+
+  let isSpareAllowedInMission = missionRules == null || missionRules.isAllowSpareInMission()
+  if (!isSpareAllowedInMission)
+    return ""
+  if (!crew)
+    return ""
+  if (isRespawnWithUniversalSpare(crew, unit))
+    return loc("icon/universalSpare")
+  if (!hasSpare)
+    return ""
+
+  let isSpareInSlot = isSpareAircraftInSlot(crew.idInCountry)
+  if (isSpareInSlot && isCrewAvailableInSession(crew, unit))
+    return $"{spareCount}{loc("icon/universalSpare")}"
+  if (!isSpareInSlot)
+    return $"{spareCount}{loc("icon/spare")}"
+  return ""
+}
+
+function calcUnitSlotMissionInfoTextsWidth(priceText, addHistoricalRespawnsText,
+    addRespawnsText, spareText) {
+  let res = {
+    priceWidth = "fw"
+    addHistoricalRespawnsWidth = "fw"
+    addRespawnsWidth = "fw"
+  }
+  local countVisibleBlocks = 1
+    + (addHistoricalRespawnsText != "" ? 1 : 0)
+    + (addRespawnsText != "" ? 1 : 0)
+    + (spareText != "" ? 1 : 0)
+
+  if (countVisibleBlocks <= 2)
+    return res
+
+  let guiScene = get_cur_gui_scene()
+  let gapWidth = toPixels(guiScene, "1@sf/@pf")
+  local fullInfoWidth = toPixels(guiScene, "@slot_width") + gapWidth * countVisibleBlocks
+  let texts = [{ text = priceText, widthId = "priceWidth" },
+    { text = addHistoricalRespawnsText, widthId = "addHistoricalRespawnsWidth" },
+    { text = addRespawnsText, widthId = "addRespawnsWidth" }]
+  foreach (value in texts) {
+    let { text, widthId } = value
+    if (text == "")
+      continue
+    if (countVisibleBlocks == 1)
+      continue
+    let partWidth = (fullInfoWidth / countVisibleBlocks - 0.5).tointeger()
+    let textWidth = max(
+      getStringWidthPx(removeTextareaTags(text), "fontSmall", guiScene) + 2*gapWidth,
+      partWidth)
+    fullInfoWidth = fullInfoWidth - textWidth
+    countVisibleBlocks = countVisibleBlocks - 1
+    res[widthId] <- textWidth
+  }
+  return res
+}
+
+function getSpareCountHintText(spareCount, crew, unit, missionRules) {
+  let hasSpare = spareCount > 0
+  if (!isInFlight())
+    return ""
+  let isSpareAllowedInMission = missionRules == null || missionRules.isAllowSpareInMission()
+  if (!isSpareAllowedInMission)
+    return ""
+  if (crew && isRespawnWithUniversalSpare(crew, unit))
+    return $"{loc("icon/universalSpare")}{loc("ui/minus")}{loc("mission_hint/spare/universal_spawn")}"
+  if (crew && isSpareAircraftInSlot(crew.idInCountry))
+    return hasSpare
+      ? $"{spareCount}{loc("icon/universalSpare")}{loc("ui/minus")}{loc("mission_hint/spare/spawn")}"
+      : loc("icon/universalSpare")
+  if (hasSpare)
+    return $"{spareCount}{loc("icon/spare")}{loc("ui/minus")}{loc("mission_hint/spare")}"
+  return ""
+}
+
+function getUnitSlotPriceHintText(unit, params) {
+  let { haveRespawnCost = false, haveSpawnDelay = false,
+    slotDelayData = null, unlocked = true, sessionWpBalance = 0, weaponPrice = 0,
+    totalSpawnScore = -1, crew = null
+  } = params
+
+  if (!unlocked || !(haveRespawnCost || haveSpawnDelay))
+    return ""
+
+  let spawnDelay = slotDelayData != null
+    ? slotDelayData.slotDelay - ((get_time_msec() - slotDelayData.updateTime) / 1000).tointeger()
+    : get_slot_delay(unit.name)
+  if (haveSpawnDelay && spawnDelay > 0)
+    return ""
+
+  local wpToRespawn = get_unit_wp_to_respawn(unit.name)
+  if (wpToRespawn > 0 && crew != null && isCrewAvailableInSession(crew, unit)) {
+    wpToRespawn += weaponPrice
+    let wpToRespawnText = ::colorTextByValues(Cost(wpToRespawn).toStringWithParams({ isWpAlwaysShown = true }),
+      sessionWpBalance, wpToRespawn, true, false)
+    return $"{wpToRespawnText}{loc("ui/minus")}{loc("mission_hint/cost_sl")}"
+  }
+
+  let reqUnitSpawnScore = shop_get_spawn_score(unit.name, getLastWeapon(unit.name), getUnitLastBullets(unit))
+  if (reqUnitSpawnScore > 0 && totalSpawnScore > -1) {
+    local reqSpawnScoreText = loc("shop/spawnScore", { cost = reqUnitSpawnScore })
+    let totalSpawnScoreText = loc("shop/spawnScore", { cost = totalSpawnScore })
+    if (reqUnitSpawnScore > totalSpawnScore)
+      reqSpawnScoreText = colorize("badTextColor", reqSpawnScoreText)
+    return $"{reqSpawnScoreText}{loc("ui/minus")}{loc("mission_hint/cost_sp", { current_cost_sp = totalSpawnScoreText})}"
+  }
+
+  return ""
+}
+
 function buildFakeSlot(id, unit, params) {
   let { isLocalState = true, showBR = hasFeature("GlobalShowBattleRating") } = params
   let curEdiff = params?.getEdiffFunc() ?? getCurrentGameModeEdiff()
@@ -278,7 +388,8 @@ function buildFakeSlot(id, unit, params) {
 }
 
 function buildEmptySlot(id, _unit, params) {
-  let { specType = null, forceCrewInfoUnit = null, emptyCost = null, crewId = -1 } = params
+  let { specType = null, forceCrewInfoUnit = null, emptyCost = null,
+    crewId = -1, hasActions = false, hasCrewHint = false } = params
   let itemButtons = specType == null ? { specIconBlock = false }
     : {
       specIconBlock = true
@@ -287,21 +398,37 @@ function buildEmptySlot(id, _unit, params) {
     }
 
   local crewLevelInfoData = ""
-  if (forceCrewInfoUnit != null) {
-    let crew = crewId >= 0 ? getCrewById(crewId) : null
-    if (crew != null) {
-      let crewLevelText = getCrewLevel(crew, forceCrewInfoUnit,
-        forceCrewInfoUnit.getCrewUnitType()).tointeger().tostring()
-      let crewSpecIcon = getSpecTypeByCrewAndUnit(crew, forceCrewInfoUnit).trainedIcon
+  let crew = crewId >= 0 ? getCrewById(crewId) : null
+  let hasCrew = crew != null
+  if (forceCrewInfoUnit != null && hasCrew) {
+    let crewLevelText = getCrewLevel(crew, forceCrewInfoUnit,
+      forceCrewInfoUnit.getCrewUnitType()).tointeger().tostring()
+    let crewSpecIcon = getSpecTypeByCrewAndUnit(crew, forceCrewInfoUnit).trainedIcon
 
-      let crewLevelInfoView = {
-        hasExtraInfoBlock = true
-        hasCrewInfo       = true
-        crewLevel         = crewLevelText
-        crewSpecIcon      = crewSpecIcon
-      }
-      crewLevelInfoData = handyman.renderCached("%gui/slotbar/slotExtraInfoBlock.tpl", crewLevelInfoView)
+    let crewLevelInfoView = {
+      hasExtraInfoBlock = true
+      hasCrewInfo       = true
+      crewLevel         = crewLevelText
+      crewSpecIcon      = crewSpecIcon
     }
+    crewLevelInfoData = handyman.renderCached("%gui/slotbar/slotExtraInfoBlock.tpl", crewLevelInfoView)
+  }
+  else if (hasCrew) {
+    crewLevelInfoData = handyman.renderCached("%gui/slotbar/slotExtraInfoBlock.tpl", {
+      hasExtraInfoBlock = true
+      hasCrewIdTextInfo = true
+      hasCrewIdInfo = true
+      hasActions
+      canOpenCrewWnd = hasActions && !hasCrewModalWndInScene()
+      hasCrewHint
+      crewNum = $"{crew.idInCountry + 1}"
+      isEmptySlot = "yes"
+      crewNumWithTitle = $"{loc("mainmenu/crewTitle")}{crew.idInCountry + 1}"
+      crewPoints = getCrewSpText(crew?.skillPoints ?? 0)
+      crewId
+      crewIdInCountry = crew?.idInCountry
+      needCurPoints = true
+    })
   }
 
   let priceText = emptyCost ? emptyCost.getTextAccordingToBalance() : ""
@@ -314,6 +441,7 @@ function buildEmptySlot(id, _unit, params) {
     shopItemPriceText = priceText
     itemButtons = handyman.renderCached("%gui/slotbar/slotbarItemButtons.tpl", { itemButtons })
     extraInfoBlock = crewLevelInfoData
+    crewNumWithTitle = hasCrew ? $"{loc("mainmenu/crewTitle")}{crew.idInCountry + 1}" : "No crew"
   })
 
   return handyman.renderCached("%gui/slotbar/slotbarSlotEmpty.tpl", emptySlotView)
@@ -508,11 +636,13 @@ function buildCommonUnitSlot(id, unit, params) {
   let { isLocalState = true, showBR = hasFeature("GlobalShowBattleRating"),
     forceNotInResearch = false, shopResearchMode = false, hasActions = false,
     mainActionFunc = "", mainActionText = "", mainActionIcon = "", forceCrewInfoUnit = null,
-    crewId = -1, showWarningIcon = false, specType = null, tooltipParams = null,
+    crewId = -1, showWarningIcon = false, specType = null,
     missionRules = null, bottomLineText = null, isSlotbarItem = false, isInTable = true,
-    showInService = false, hasExtraInfoBlock = false, toBattle = false, toBattleButtonAction = "onSlotBattle"
+    showInService = false, hasExtraInfoBlock = false, hasExtraInfoBlockTop = false,
+    toBattle = false, toBattleButtonAction = "onSlotBattle", hasCrewHint = false,
+    showAdditionExtraInfo = false, showCrewHintUnderSlot = false
   } = params
-  local { inactive = false, status = DEFAULT_STATUS } = params
+  local { inactive = false, status = DEFAULT_STATUS, tooltipParams = null } = params
   let curEdiff = params?.getEdiffFunc() ?? getCurrentGameModeEdiff()
 
   let isOwn               = ::isUnitBought(unit)
@@ -546,6 +676,31 @@ function buildCommonUnitSlot(id, unit, params) {
   }
 
   //
+  // Item buttons view
+  //
+
+  let rentInfo = getUnitSlotRentInfo(unit, params)
+
+  let itemButtonsView = {
+    itemButtons = {
+      hasToBattleButton       = toBattle
+      toBattleButtonAction
+      hasExtraInfoBlockTop
+      specIconBlock           = showWarningIcon || specType != null
+      showWarningIcon         = showWarningIcon
+      hasRepairIcon           = isLocalState && isBroken
+      weaponsStatus           = getWeaponsStatusName(isLocalState && isUsable ? checkUnitWeapons(unit) : UNIT_WEAPONS_READY)
+      hasRentIcon             = rentInfo.hasIcon
+      hasRentProgress         = rentInfo.hasProgress
+      rentProgress            = rentInfo.progress
+    }
+  }
+
+  let hasCrewInfo = crewId >= 0
+  let crew = hasCrewInfo ? getCrewById(crewId) : null
+  let unitForCrewInfo = forceCrewInfoUnit || unit
+
+  //
   // Bottom button view
   //
 
@@ -561,48 +716,148 @@ function buildCommonUnitSlot(id, unit, params) {
     mainButtonAction    = mainButtonAction
     hasMainButtonIcon   = mainButtonIcon.len()
     mainButtonIcon      = mainButtonIcon
+    crewIdInCountry     = crew?.idInCountry
   }
 
-  //
-  // Item buttons view
-  //
-
-  let rentInfo = getUnitSlotRentInfo(unit, params)
-  let spareCount = isLocalState ? get_spare_aircrafts_count(unit.name) : 0
-
-  let hasCrewInfo = crewId >= 0
-  let crew = hasCrewInfo ? getCrewById(crewId) : null
-
-  let unitForCrewInfo = forceCrewInfoUnit || unit
-  let crewLevelText = crew && unitForCrewInfo
+  let crewLevelText = (crew && unitForCrewInfo)
     ? getCrewLevel(crew, unitForCrewInfo, unitForCrewInfo.getCrewUnitType()).tointeger().tostring()
     : ""
-  let crewSpecIcon = getSpecTypeByCrewAndUnit(crew, unitForCrewInfo).trainedIcon
+  let isMaxLevel = (crew && unitForCrewInfo)
+    ? isCrewMaxLevel(crew, unitForCrewInfo, crew.country, unitForCrewInfo.getCrewUnitType())
+    : ""
+  local crewLevelTextFull = ""
+  if (isMaxLevel && crewLevelText != "") {
+    let maxLevelTxt = colorize("@commonTextColor",
+      loc("ui/parentheses/space", { text = loc("options/quality_max") }))
+    crewLevelTextFull = $"{crewLevelText}{maxLevelTxt}"
+  }
 
-  let itemButtonsView = {
-    itemButtons = {
-      hasToBattleButton       = toBattle
-      toBattleButtonAction
+  let crewSpec = getSpecTypeByCrewAndUnit(crew, unitForCrewInfo)
+  let hasUnit = !(crew?.isEmpty ?? false)
+  let needCurPoints = (crew != null) && !isMaxLevel
 
-      specIconBlock           = showWarningIcon || specType != null
-      showWarningIcon         = showWarningIcon
-      hasRepairIcon           = isLocalState && isBroken
-      weaponsStatus           = getWeaponsStatusName(isLocalState && isUsable ? checkUnitWeapons(unit) : UNIT_WEAPONS_READY)
-      hasRentIcon             = rentInfo.hasIcon
-      hasRentProgress         = rentInfo.hasProgress
-      rentProgress            = rentInfo.progress
+  local extraInfoViewBottom = {}
+  if (hasExtraInfoBlock && hasCrewInfo) {
+    extraInfoViewBottom = {
+      hasExtraInfoBlock
+      hasCrewInfo
+      hasUnit
+      needCurPoints
+      hasActions
+      canOpenCrewWnd = hasActions && !hasCrewModalWndInScene()
+      hasCrewHint
+      showCrewHintUnderSlot
+      showAdditionExtraInfo
+      crewLevel = crewLevelText
+      crewLevelFull = crewLevelTextFull
+      crewSpecIcon = crewSpec.trainedIcon
+      crewStatus = getCrewStatus(crew, unitForCrewInfo)
+      hasCrewIdInfo = true
+      crewNum = $"{crew.idInCountry + 1}"
+      crewNumWithTitle = $"{loc("mainmenu/crewTitle")}{crew.idInCountry + 1}"
+      crewSpecializationLabel = hasUnit ? $"{loc("crew/trained")}{loc("ui/colon")}" : ""
+      crewSpecializationIcon = hasUnit ? crewSpec.trainedIcon : ""
+      crewSpecialization = hasUnit ? crewSpec.getName() : ""
+      crewPoints = (hasUnit && needCurPoints) ? getCrewSpText(crew?.skillPoints ?? 0) : ""
+      crewId
+      crewIdInCountry = crew?.idInCountry
+      isEmptySlot = "no"
+    }
+
+    tooltipParams = tooltipParams ?? {}
+    tooltipParams = tooltipParams.__merge({ needCrewInfo = false })
+  }
+
+  let priceText = getUnitSlotPriceText(unit, params.__merge({crew}))
+
+  local additionalRespawns = ""
+  local armyLocName = ""
+  if (showAdditionExtraInfo && missionRules?.needLeftRespawnOnSlots == true) {
+    let unitTypeName = unit.unitType.typeName
+    local unitTypeIcon = unit.unitType.fontIcon
+    if (unitTypeName == "BOAT")
+      unitTypeIcon = unitTypes.SHIP.fontIcon
+    else if (unitTypeName == "HELICOPTER")
+      unitTypeIcon = unitTypes.AIRCRAFT.fontIcon
+    let respawnsLeft = missionRules.getUnitLeftRespawns(unit)
+    let respawnsInitial = missionRules.getUnitInitialRespawns(unit)
+    if (respawnsInitial > 0)
+      additionalRespawns = $"{unitTypeIcon}{respawnsLeft}/{respawnsInitial}"
+    if (additionalRespawns != "" && respawnsLeft == 0)
+      additionalRespawns = colorize("badTextColor", additionalRespawns)
+    if (additionalRespawns != "")
+      armyLocName = (unitTypeName == "SHIP" || unitTypeName == "BOAT") ? loc("mainmenu/fleet")
+        : (unitTypeName == "HELICOPTER") ? loc("mainmenu/aviation")
+        : unit.unitType.getArmyLocName()
+  }
+
+  local additionalHistoricalRespawns = ""
+  local leftHistoricalSpawns = 0
+  local unitClassIcoColor = "@commonTextColor"
+  if (crew && isInFlight()) {
+    let maxSpawns = get_max_spawns_unit_count(unit.name)
+    if (crew.idInCountry >= 0 && maxSpawns > 1) {
+      let numSpawns = get_num_used_unit_spawns(crew.idInCountry)
+      leftHistoricalSpawns = maxSpawns - numSpawns
+      additionalHistoricalRespawns = $"{leftHistoricalSpawns}/{maxSpawns}"
+      if (leftHistoricalSpawns == 0) {
+        additionalHistoricalRespawns = colorize("badTextColor", additionalHistoricalRespawns)
+        unitClassIcoColor = "@badTextColor"
+      }
     }
   }
 
-  let extraInfoView = {
-    hasExtraInfoBlock
-    hasCrewInfo               = hasCrewInfo
-    crewLevel                 = hasCrewInfo ? crewLevelText : ""
-    crewSpecIcon              = hasCrewInfo ? crewSpecIcon : ""
-    crewStatus                = hasCrewInfo ? ::get_crew_status(crew, unitForCrewInfo) : ""
-    hasSpareCount             = spareCount > 0
-    spareCount                = spareCount ? $"{spareCount}{loc("icon/spare")}" : ""
+  let hasPriceText = showAdditionExtraInfo && priceText != ""
+  let spareCount = isLocalState ? get_spare_aircrafts_count(unit.name) : 0
+  let spareText = leftHistoricalSpawns == 0
+    ? getSpareCountText(spareCount, crew, unit, missionRules)
+    : ""
+  let hasSpareInfo = spareText != ""
+  let hasAdditionalRespawns = additionalRespawns != ""
+  let hasAdditionalHistoricalRespawns = additionalHistoricalRespawns != "" && !hasSpareInfo
+
+  let spareHintText = hasSpareInfo ? getSpareCountHintText(spareCount, crew, unit, missionRules) : ""
+  let priceHintText = hasPriceText ? getUnitSlotPriceHintText(unit, params.__merge({crew})) : ""
+  let additionalHistoricalRespawnsHintText = hasAdditionalHistoricalRespawns
+    ? $"{additionalHistoricalRespawns}{loc("ui/minus")}{loc("mission_hint/spawns_per_battle", { unit_name = getUnitName(unit.name)})}"
+    : ""
+  let additionalRespawnsHintText = hasAdditionalRespawns
+    ? $"{additionalRespawns}{loc("ui/minus")}{loc("mission_hint/spawns_per_unit", {army = armyLocName})}"
+    : ""
+
+  let extraInfoTopView = {
+    showAdditionExtraInfo
+    spareHintText
+    priceHintText
+    additionalRespawnsHintText
+    additionalHistoricalRespawnsHintText
+    hasExtraInfoBlockTop
+    hasPriceText
+    hasAdditionalHistoricalRespawns
+    additionalHistoricalRespawns
+    addHistoricalRespawnsWidth = "fw"
+    hasAdditionalRespawns
+    additionalRespawns
+    addRespawnsWidth = "fw"
+    unitClassIco = ::getUnitClassIco(unit.name)
+    unitClassIcoColor
+    priceText
+    priceWidth = "fw"
+    hasSpareInfo
+    spareCount = spareText
+    hasPriceSeparator = hasPriceText && hasAdditionalHistoricalRespawns
+    hasAdditionalRespawnsSeparator = hasAdditionalRespawns
+      && (hasPriceText || hasAdditionalHistoricalRespawns)
+    hasSpareSeparator = hasSpareInfo
+      && (hasPriceText || hasAdditionalRespawns || hasAdditionalHistoricalRespawns)
+    isMissingExtraInfo = !hasPriceText && !hasAdditionalRespawns && !hasSpareInfo && !hasAdditionalHistoricalRespawns
   }
+
+  if (hasPriceText)
+    extraInfoTopView.__update(
+      calcUnitSlotMissionInfoTextsWidth(priceText, additionalRespawns,
+        hasAdditionalHistoricalRespawns ? additionalHistoricalRespawns : "",
+        spareText))
 
   if (specType) {
     itemButtonsView.itemButtons.specTypeIcon <- specType.trainedIcon
@@ -643,7 +898,6 @@ function buildCommonUnitSlot(id, unit, params) {
   // Res view
   //
 
-  let priceText = getUnitSlotPriceText(unit, params.__merge({crew}))
   let progressText = showProgress ? getUnitSlotResearchProgressText(unit, priceText) : ""
   let checkNotification = ::g_discount.getEntitlementUnitDiscount(unit.name)
 
@@ -673,7 +927,7 @@ function buildCommonUnitSlot(id, unit, params) {
     progressBlk         = handyman.renderCached("%gui/slotbar/airResearchProgress.tpl", airResearchProgressView)
     showInService       = showInService && isUsable
     isMounted           = isMounted
-    priceText           = priceText
+    priceText           = showAdditionExtraInfo ? "" : priceText
     isLongPriceText     = isUnitPriceTextLong(priceText)
     isElite             = (isLocalState && isOwn && ::isUnitElite(unit)) || (!isOwn && special)
     unitRankText        = getUnitSlotRankText(unit, crew, showBR, curEdiff)
@@ -684,8 +938,10 @@ function buildCommonUnitSlot(id, unit, params) {
     tooltipId           = getTooltipType("UNIT").getTooltipId(unit.name, tooltipParams)
     isTooltipByHold     = showConsoleButtons.value
     bottomButton        = handyman.renderCached("%gui/slotbar/slotbarItemBottomButton.tpl", bottomButtonView)
-    extraInfoBlock      = handyman.renderCached("%gui/slotbar/slotExtraInfoBlock.tpl", extraInfoView)
+    extraInfoBlock      = handyman.renderCached("%gui/slotbar/slotExtraInfoBlock.tpl", extraInfoViewBottom)
+    extraInfoBlockTop   = handyman.renderCached("%gui/slotbar/slotExtraInfoBlockTop.tpl", extraInfoTopView)
     refuseOpenHoverMenu = !hasActions
+    crewNumWithTitle    = hasCrewInfo ? $"{loc("mainmenu/crewTitle")}{crew.idInCountry + 1}" : ""
   })
   let groupName = missionRules ? missionRules.getRandomUnitsGroupName(unit.name) : null
   let isShowAsRandomUnit = groupName
@@ -962,6 +1218,9 @@ return {
   getSlotUnitNameText
   isUnitPriceTextLong
   getUnitSlotPriceText
+  getUnitSlotPriceHintText
   getUnitSlotRankText
   isUnitEnabledForSlotbar
+  getSpareCountText
+  calcUnitSlotMissionInfoTextsWidth
 }

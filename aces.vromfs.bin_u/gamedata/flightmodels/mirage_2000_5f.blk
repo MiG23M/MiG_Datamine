@@ -1883,11 +1883,16 @@
   },
   "cockpit": {
     "targetingPodFov": [
-      12.0,
-      0.75
+      18.0,
+      1.0
     ],
     "sightInFov": 1.0,
-    "sightOutFov": 4.0,
+    "sightOutFov": 18.0,
+    "sightFov": 1.0,
+    "mfdTextureSize": [
+      2048,
+      1024
+],
     "headPos": [
       4.0,
       0.54,
@@ -1899,6 +1904,13 @@
       0.0
     ],
     "collimatorSize": 0.2,
+    "hmdBlockIlsArea": [
+      0.37,
+      0.37,
+      0.63,
+      0.63
+    ],
+    "hmdEnabledByDefault": true,
     "mirror": true,
     "mirrorPos": [
       4.35,
@@ -2151,7 +2163,7 @@
         ],
         "page": {
           "type": "map",
-          "hideRadarBackground": true
+          "hideBackground": true
         }
       },
       "display": {
@@ -2163,16 +2175,27 @@
         ],
         "page": {
           "type": "rwr",
-          "scale": 1.0
-        },
+          "scale": 0.6,
+          "circleCnt": 1,
+          "centralMark": "cross"
+        }
+      },
+      "display": {
+        "textureArea": [
+          0.25,
+          0.565,
+          0.5,
+          0.5
+        ],
+        "cameraFromTargetingPod": true,
         "page": {
           "type": "devices",
           "aviahorizon_pitch": {
             "texture": "su_mfd_ahorizon",
             "arrowTex": "su_mfd_ahorizon_scale",
             "position": [
-              170.0,
-              256.0
+              256.0,
+              180.0
             ],
             "backgroundTexCoord": [
               0.11,
@@ -2187,8 +2210,8 @@
               1.0
             ],
             "size": [
-              260.0,
-              340.0
+              256.0,
+              256.0
             ],
             "ranges": {
               "limits": [
@@ -2202,8 +2225,8 @@
           "aviahorizon_roll": {
             "texture": "su_mfd_ahorizon",
             "position": [
-              170.0,
-              256.0
+              256.0,
+              180.0
             ],
             "arrowTexCoord": [
               0.2,
@@ -2212,8 +2235,8 @@
               0.8
             ],
             "size": [
-              260.0,
-              340.0
+              256.0,
+              256.0
             ],
             "notDrawBackground": true,
             "ranges": {
@@ -2225,16 +2248,7 @@
               ]
             }
           }
-        }
-      },
-      "display": {
-        "textureArea": [
-          0.25,
-          0.565,
-          0.5,
-          0.5
-        ],
-        "cameraFromTargetingPod": true,
+        },
         "page": {
           "type": "thermal",
           "turretIdx": 0
@@ -2242,6 +2256,12 @@
         "page": {
           "type": "target_tracking",
           "turretIdx": 0
+        },
+        "page": {
+          "type": "rwr",
+          "scale": 0.6,
+          "circleCnt": 1,
+          "centralMark": "cross"
         }
       },
       "display": {
@@ -2254,8 +2274,30 @@
         "fontScale": 0.6,
         "page": {
           "type": "radar",
-          "scale": 0.85,
-          "hideRadarBackground": true
+          "font": "mirage_ils",
+          "scale": 0.75,
+          "hideBackground": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "hasAviaHorizont": true,
+          "centerRadar": true,
+          "showScanAzimuth": true,
+          "showCueHeights": true,
+          "cueTopHeiColor": [
+    0,
+    255,
+    0,
+],
+          "cueLowHeiColor": [
+    0,
+    255,
+    0,
+],
+          "cueUndergroundColor": [
+    0,
+    255,
+    0,
+]
         }
       },
       "display": {
@@ -2579,6 +2621,10 @@
       "blk": "gameData/FlightModels/weaponPresets/mirage_2000_5f_matra_super_530d.blk"
     },
     "preset": {
+      "name": "mirage_2000_5f_6x_mica_em",
+      "blk": "gameData/FlightModels/weaponPresets/mirage_2000_5f_6x_mica_em.blk"
+    },
+    "preset": {
       "name": "mirage_2000_5f_matra_super_250_samp_type_25",
       "blk": "gameData/FlightModels/weaponPresets/mirage_2000_5f_matra_super_250_samp_type_25.blk"
     },
@@ -2670,7 +2716,11 @@
       "node": "pylon_mica_001",
       "node": "pylon_mica_002",
       "node": "pylon_mica_004",
-      "node": "pylon_mica_006"
+      "node": "pylon_mica_006",
+      "node": "pylon_mica_001_lift",
+      "node": "pylon_mica_002_lift",
+      "node": "pylon_mica_003_lift",
+      "node": "pylon_mica_004_lift"
     },
     "HideDmParts": {
       "node": "armor1_dm",
@@ -2768,19 +2818,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
-          "bullets": 18,
+          "bullets": 8,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
-          "bullets": 18,
+          "bullets": 8,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       },
       "WeaponPreset": {
@@ -2867,42 +2919,86 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
-          "bullets": 18,
+          "bullets": 10,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
           ],
-          "ammoMechRange": false
+          "ammoMechRange": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
-          "bullets": 18,
+          "bullets": 10,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
           ],
-          "ammoMechRange": false
+          "ammoMechRange": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
-          "emitter": "emtr_flare3",
-          "bullets": 132,
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
+          "emitter": "nozzle1_112",
+          "bullets": 10,
           "external": true,
-          "separate": true,
+          "separate": false,
           "brakeChuteRange": [
             0.0,
             0.0
           ],
-          "ammoMechRange": false
+          "ammoMechRange": false,
+          "bulletsCartridge": 1
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
+          "emitter": "nozzle1_65",
+          "bullets": 10,
+          "external": true,
+          "separate": false,
+          "brakeChuteRange": [
+            0.0,
+            0.0
+          ],
+          "ammoMechRange": false,
+          "bulletsCartridge": 1
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
+          "emitter": "emtr_flare3",
+          "bullets": 24,
+          "external": true,
+          "separate": false,
+          "brakeChuteRange": [
+            0.0,
+            0.0
+          ],
+          "ammoMechRange": false,
+          "bulletsCartridge": 1
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_only_chaff_large.blk",
+          "emitter": "emtr_chute",
+          "bullets": 48,
+          "external": true,
+          "separate": false,
+          "brakeChuteRange": [
+            0.0,
+            0.0
+          ],
+          "bulletsCartridge": 1
         }
       }
     },
@@ -2922,6 +3018,22 @@
           "separate": true,
           "blk": "gameData/Weapons/rocketGuns/fr_r_550_magic_2_default.blk",
           "emitter": "rocket_r550_magic_001",
+          "bullets": 1
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "mica_em",
+        "reqModification": "fr_mica_em",
+        "ShowNodes": {
+          "node": "pylon_mica_005"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "external": true,
+          "separate": true,
+          "blk": "gameData/Weapons/rocketGuns/fr_mica_em.blk",
+          "emitter": "rocket_mica_005",
           "bullets": 1
         }
       },
@@ -2952,7 +3064,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb6",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -2985,7 +3098,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb6",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3071,7 +3185,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb7",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3104,7 +3219,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb7",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3235,6 +3351,22 @@
       "order": 5,
       "notUseforDisbalanceCalculation": true,
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "mica_em",
+        "reqModification": "fr_mica_em",
+        "ShowNodes": {
+          "node": "pylon_mica_003"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "external": true,
+          "separate": true,
+          "blk": "gameData/Weapons/rocketGuns/fr_mica_em.blk",
+          "emitter": "rocket_mica_003",
+          "bullets": 1
+        }
+      },
+      "WeaponPreset": {
         "iconType": "bombs_middle",
         "name": "bomb_250",
         "reqModification": "fr_250kg_type_25c",
@@ -3247,7 +3379,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb4",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3280,7 +3413,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb4",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3307,6 +3441,22 @@
       "order": 7,
       "notUseforDisbalanceCalculation": true,
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "mica_em",
+        "reqModification": "fr_mica_em",
+        "ShowNodes": {
+          "node": "pylon_mica_001"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "external": true,
+          "separate": true,
+          "blk": "gameData/Weapons/rocketGuns/fr_mica_em.blk",
+          "emitter": "rocket_mica_001",
+          "bullets": 1
+        }
+      },
+      "WeaponPreset": {
         "iconType": "bombs_middle",
         "name": "bomb_250",
         "reqModification": "fr_250kg_type_25c",
@@ -3319,7 +3469,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb1",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3352,7 +3503,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb1",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3445,7 +3597,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb3",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3494,7 +3647,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb3",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3629,7 +3783,7 @@
       "WeaponPreset": {
         "iconType": "guided_bomb_special_laser",
         "name": "us_gbu_24",
-        "reqModification": "us_gbu_24",
+        "reqModification": "fr_bgl1000",
         "ShowNodes": {
           "node": "pylon_central"
         },
@@ -3773,6 +3927,22 @@
       "order": 8,
       "notUseforDisbalanceCalculation": true,
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "mica_em",
+        "reqModification": "fr_mica_em",
+        "ShowNodes": {
+          "node": "pylon_mica_002"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "external": true,
+          "separate": true,
+          "blk": "gameData/Weapons/rocketGuns/fr_mica_em.blk",
+          "emitter": "rocket_mica_002",
+          "bullets": 1
+        }
+      },
+      "WeaponPreset": {
         "iconType": "bombs_middle",
         "name": "bomb_250",
         "reqModification": "fr_250kg_type_25c",
@@ -3785,7 +3955,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb2",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3818,7 +3989,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb2",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3867,6 +4039,22 @@
       "order": 6,
       "notUseforDisbalanceCalculation": true,
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "mica_em",
+        "reqModification": "fr_mica_em",
+        "ShowNodes": {
+          "node": "pylon_mica_004"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "external": true,
+          "separate": true,
+          "blk": "gameData/Weapons/rocketGuns/fr_mica_em.blk",
+          "emitter": "rocket_mica_004",
+          "bullets": 1
+        }
+      },
+      "WeaponPreset": {
         "iconType": "bombs_middle",
         "name": "bomb_250",
         "reqModification": "fr_250kg_type_25c",
@@ -3879,7 +4067,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb5",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3912,7 +4101,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb5",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -3998,7 +4188,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb8",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -4031,7 +4222,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb8",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -4176,6 +4368,22 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "mica_em",
+        "reqModification": "fr_mica_em",
+        "ShowNodes": {
+          "node": "pylon_mica_006"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "external": true,
+          "separate": true,
+          "blk": "gameData/Weapons/rocketGuns/fr_mica_em.blk",
+          "emitter": "rocket_mica_006",
+          "bullets": 1
+        }
+      },
+      "WeaponPreset": {
         "iconType": "nar_ap_small",
         "name": "lr_f4",
         "reqModification": "fr_jl_100r",
@@ -4202,7 +4410,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25.blk",
           "emitter": "bomb9",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -4235,7 +4444,8 @@
           "separate": true,
           "blk": "gameData/Weapons/BombGuns/fr_250_samp_type_25_200.blk",
           "emitter": "bomb9",
-          "bullets": 1
+          "bullets": 1,
+          "machLimit": 1.01
         }
       },
       "WeaponPreset": {
@@ -4402,11 +4612,9 @@
       "tier": 4,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
-    "countermeasures_belt_pack": {
+    "maw_countermeasures_launcher_chaff": {    },
+    "maw_countermeasures_launcher_chaff_large": {    },
+    "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "armor",
       "turn_it_off": false,
       "invertEnableLogic": false,
@@ -4418,11 +4626,30 @@
             "slot": 0,
             "preset": "defa_554_ltc"
           }
+        },
+        "sensors": {
+          "sensor": {
+            "blk": "gameData/sensors/fr_thales_rdy.blk",
+            "dmPart": "radar_dm"
+          },
+          "sensor": {
+            "blk": "gameData/sensors/tv_tracker_tgp.blk",
+            "node": "optic1_gun"
+          },
+          "sensor": {
+            "blk": "gameData/sensors/fr_serval_rwr.blk"
+          },
+          "sensor": {
+            "blk": "gameData/sensors/LaserDesignatorSensor.blk"
+          },
+          "sensor": {
+            "blk": "gameData/sensors/fr_ddm2000.blk"
+          }
         }
       }
     },
     "f_4c_g_suit": {
-      "prevModification": "countermeasures_belt_pack",
+      "prevModification": "MAW_system_heli_false_thermal_targets_large",
       "tier": 2,
       "modClass": "armor"
     },
@@ -4487,24 +4714,6 @@
       "tier": 4,
       "modClass": "weapon"
     },
-    "fr_matra_r_530_f": {
-      "tier": 1,
-      "modClass": "weapon"
-    },
-    "fr_matra_r_530_d": {
-      "reqModification": "fr_matra_r_530_f",
-      "tier": 2,
-      "modClass": "weapon"
-    },
-    "fr_cc630_gun_pod": {
-      "prevModification": "fr_matra_r_530_d",
-      "tier": 3
-    },
-    "fr_matra_r_550_magic_2": {
-      "tier": 4,
-      "modClass": "weapon",
-      "prevModification": "fr_cc630_gun_pod"
-    },
     "fr_damocles_pod": {
       "modClass": "weapon",
       "tier": 1
@@ -4540,11 +4749,29 @@
       "modClass": "weapon",
       "tier": 3
     },
-    "us_gbu_24": {
-      "prevModification": "fr_as_30l",
-      "reqModification": "fr_bgl1000",
+    "fr_matra_r_550_magic_2": {
+      "tier": 4,
       "modClass": "weapon",
-      "tier": 4
+      "prevModification": "fr_pgm_2000"
+    },
+    "fr_matra_r_530_f": {
+      "tier": 1,
+      "modClass": "weapon"
+    },
+    "fr_matra_r_530_d": {
+      "reqModification": "fr_matra_r_530_f",
+      "tier": 2,
+      "modClass": "weapon"
+    },
+    "fr_cc630_gun_pod": {
+      "prevModification": "fr_matra_r_530_d",
+      "tier": 3
+    },
+    "fr_mica_em": {
+      "prevModification": "fr_cc630_gun_pod",
+      "reqModification": "fr_matra_r_550_magic_2",
+      "tier": 4,
+      "modClass": "weapon"
     }
   },
   "user_skin": {

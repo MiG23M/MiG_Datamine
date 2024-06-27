@@ -2361,6 +2361,13 @@
     "eventThrustReverse": "thrust_reverse"
   },
   "cockpit": {
+    "targetingPodFov": [
+      18.0,
+      1.5
+    ],
+    "sightInFov": 1.5,
+    "sightOutFov": 18.0,
+    "sightFov": 1.0,
     "headPos": [
       4.222,
       0.605,
@@ -2419,13 +2426,6 @@
       0.0
     ],
     "lightRadius2": 0.35,
-    "sightInFov": 50.5,
-    "sightOutFov": 40.5,
-    "sightFov": 1.0,
-    "targetingPodFov": [
-      12.0,
-      3.2
-    ],
     "devices": {
       "stick_ailerons": [
         -1.0,
@@ -2704,7 +2704,9 @@
         ],
         "page": {
           "type": "rwr",
-          "scale": 1.15
+          "scale": 1.15,
+          "circleCnt": 2,
+          "centralMark": "cross"
         }
       },
       "display": {
@@ -2922,11 +2924,12 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 28,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -3803,6 +3806,10 @@
           "bullets": 1,
           "external": true,
           "separate": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 3,
+          "preset": "ptb_1"
         }
       }
     },
@@ -3841,11 +3848,12 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 28,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     }
@@ -4142,11 +4150,8 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only_unchecked": {    },
-    "countermeasures_launcher_flare_only_unchecked": {    },
-    "countermeasures_launcher_chaff_priority_unchecked": {    },
-    "countermeasures_launcher_flare_priority_unchecked": {    },
-    "countermeasures_belt_pack_unchecked": {
+    "countermeasures_launcher_chaff_large": {    },
+    "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,
       "invertEnableLogic": false,
@@ -4154,7 +4159,7 @@
       "tier": 1
     },
     "f_4c_g_suit": {
-      "prevModification": "countermeasures_belt_pack_unchecked",
+      "prevModification": "countermeasures_belt_pack",
       "tier": 2,
       "modClass": "armor"
     },

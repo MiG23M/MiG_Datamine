@@ -1,6 +1,7 @@
 {
   "type": "radar",
   "name": "N019_S31",
+  "weaponTargetsMax": 1,
   "showMissileLaunchZone": true,
   "showMissileDgftLaunchZone": true,
   "transivers": {
@@ -11,6 +12,12 @@
       "rcs": 3.0,
       "range": 35000.0,
       "rangeMax": 50000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.5,
         "sideLobesSensitivity": -32.0
@@ -23,6 +30,12 @@
       "rcs": 3.0,
       "range": 65000.0,
       "rangeMax": 85000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.5,
         "sideLobesSensitivity": -32.0
@@ -34,7 +47,7 @@
       "rcs": 24000.0,
       "range": 22000.0,
       "range1": 5000.0,
-      "rangeMax": 30000.0,
+      "rangeMax": 60000.0,
       "visibilityType": "infraRed",
       "antenna": {
         "azimuth": {
@@ -165,8 +178,8 @@
       ],
       "period": 2.5,
       "width": 15.0,
-      "barHeight": 4.0,
-      "barsCount": 15,
+      "barHeight": 2.0,
+      "barsCount": 30,
       "rowMajor": false,
       "isSmoothMajor": true,
       "barsOneWay": false
@@ -183,8 +196,8 @@
       ],
       "period": 1.25,
       "width": 15.0,
-      "barHeight": 3.75,
-      "barsCount": 8,
+      "barHeight": 1.875,
+      "barsCount": 16,
       "rowMajor": false,
       "isSmoothMajor": true,
       "barsOneWay": false
@@ -232,7 +245,7 @@
       ],
       "elevationLimits": [
         -15.0,
-        15.0
+        30.0
       ],
       "period": 0.2,
       "width": 2.0,
@@ -1417,6 +1430,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -1425,6 +1442,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"
@@ -2288,10 +2309,6 @@
         },
         "setIrst": {
           "setIrstLockTrack": {          },
-          "doCustomActionTemplate": {
-            "fsm": "main",
-            "name": "resetSearchMode"
-          },
           "clearTargets": {          },
           "setFsmActive": {
             "fsm": "main",

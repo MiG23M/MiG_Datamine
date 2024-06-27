@@ -2135,8 +2135,8 @@
     }
   },
   "attach": {
-    "pilot1": "pilot_it_late_500",
-    "gunner1": "pilot_it_late_500"
+    "gunner1": "pilot_it_late_500",
+    "pilot1": "pilot_it_late_500"
   },
   "Params": {
     "Range": 1380.0
@@ -2445,7 +2445,32 @@
         ],
         "page": {
           "type": "radar",
-          "scale": 0.7
+          "font": "usa_ils",
+          "fontScale": 0.65,
+          "scale": 0.75,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "hasAviaHorizont": true,
+          "hideBackground": true,
+          "hideScale": false,
+          "hideHorAngle": false,
+          "hideVerAngle": false,
+          "netRowCnt": 4,
+          "netColor": [
+    0,
+    255,
+    0,
+],
+          "hideWeaponIndication": true,
+          "modeColor": [
+    0,
+    255,
+    0,
+],
+          "centerRadar": true
         }
       },
       "display": {
@@ -2601,17 +2626,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -3197,7 +3224,7 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/us_an_apg_59.blk",
+      "blk": "gameData/sensors/us_an_apg_59u.blk",
       "dmPart": "radar_dm"
     },
     "sensor": {
@@ -3458,10 +3485,7 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,
@@ -3632,13 +3656,13 @@
       -4.78873
     ],
     "emtr_break_wing_tail": [
-      -4.72282,
+      -5.43957,
       0.0,
       0.0
     ],
     "finCut": true,
     "emtr_break_tail_from": [
-      -4.33957,
+      -5.43957,
       -0.100092,
       4.57764e-7
     ],

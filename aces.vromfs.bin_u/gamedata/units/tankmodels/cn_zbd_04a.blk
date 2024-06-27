@@ -417,7 +417,8 @@
     },
     "equipment_body_turret": {
       "armorClass": "tank_structural_steel",
-      "hp": 150.0,
+      "hp": 250.0,
+      "armorThickness": 2.0,
       "armorThrough": 15.0,
       "fireProtectionHp": 5.0,
       "hidableInViewer": false,
@@ -425,6 +426,9 @@
         "armorThrough": 15.0
       },
       "drive_turret_h_dm": {
+        "armorThrough": 15.0
+      },
+      "driver_controls_dm": {
         "armorThrough": 15.0
       },
       "drive_turret_v_01_dm": {
@@ -483,9 +487,17 @@
         "hp": 50.0,
         "armorThrough": 3.0
       },
-      "radio_station_01_dm": {
-        "hp": 50.0,
+      "electronic_equipment_dm": {
+        "hp": 60.0,
         "armorThrough": 3.0
+      },
+      "fire_control_system_dm": {
+        "hp": 60.0,
+        "armorThrough": 3.0
+      },
+      "power_system_dm": {
+        "hp": 60.0,
+        "armorThrough": 15.0
       }
     },
     "cannon_breech": {
@@ -495,26 +507,24 @@
       "fireProtectionHp": 5.0,
       "hidableInViewer": false,
       "cannon_breech_dm": {
-        "restrainDamage": 0.5,
-        "armorThrough": 150.0
+        "restrainDamage": 0.5
       },
       "cannon_breech_01_dm": {
-        "armorThickness": 5.0,
-        "armorThrough": 5.0
+        "armorThickness": 10.0
       },
       "cannon_breech_02_dm": {
-        "armorThickness": 5.0,
-        "armorThrough": 5.0
+        "armorThickness": 10.0
       },
       "cannon_breech_03_dm": {
-        "armorThickness": 5.0,
-        "armorThrough": 5.0
+        "armorThickness": 10.0
       },
       "cannon_breech_04_dm": {
-        "armorThickness": 5.0,
-        "armorThrough": 5.0
+        "armorThickness": 10.0
       },
       "cannon_breech_05_dm": {
+        "armorThickness": 10.0
+      },
+      "autoloader_dm": {
         "armorThickness": 5.0,
         "armorThrough": 5.0
       }
@@ -522,7 +532,7 @@
     "power_block": {
       "armorClass": "armor_tank_engine",
       "hp": 100.0,
-      "armorThickness": 50.0,
+      "armorThickness": 150.0,
       "fireProtectionHp": 5.0,
       "restrainDamage": 0.5,
       "engine_dm": {      },
@@ -699,15 +709,6 @@
       "ammo_body_l_13_dm": {      },
       "ammo_body_l_14_dm": {      },
       "ammo_body_l_15_dm": {      },
-      "ammo_body_l_16_dm": {      },
-      "ammo_body_l_17_dm": {      },
-      "ammo_body_l_18_dm": {      },
-      "ammo_body_l_19_dm": {      },
-      "ammo_body_l_20_dm": {      },
-      "ammo_body_l_21_dm": {      },
-      "ammo_body_l_22_dm": {      },
-      "ammo_body_l_23_dm": {      },
-      "ammo_body_l_24_dm": {      },
       "ammo_body_r_01_dm": {      },
       "ammo_body_r_02_dm": {      },
       "ammo_body_r_03_dm": {      },
@@ -726,27 +727,27 @@
       "ammo_body_r_16_dm": {      },
       "ammo_body_r_17_dm": {      },
       "ammo_body_r_18_dm": {      },
-      "ammo_body_r_19_dm": {      },
-      "ammo_body_r_20_dm": {      },
-      "ammo_body_r_21_dm": {      },
-      "ammo_body_r_22_dm": {      },
-      "ammo_body_r_23_dm": {      },
-      "ammo_body_r_24_dm": {      }
+      "ammo_body_r_19_dm": {      }
     },
     "fuel_tanks_exterior": {
       "armorClass": "tank_structural_steel",
       "hp": 250.0,
       "armorThickness": 2.0,
-      "armorThrough": 10.0,
-      "fireProtectionHp": 10.0,
+      "armorThrough": 12.0,
+      "fireProtectionHp": 15.0,
       "createSecondaryShatters": false,
       "fireParamsPreset": "fuel_exterior",
+      "stopChanceOnDeadPart": 0.0,
       "fuel_tank_exterior_r_01_dm": {      },
       "fuel_tank_exterior_r_02_dm": {      },
       "fuel_tank_exterior_r_03_dm": {      },
+      "fuel_tank_exterior_r_04_dm": {      },
+      "fuel_tank_exterior_r_05_dm": {      },
       "fuel_tank_exterior_l_01_dm": {      },
       "fuel_tank_exterior_l_02_dm": {      },
       "fuel_tank_exterior_l_03_dm": {      },
+      "fuel_tank_exterior_l_04_dm": {      },
+      "fuel_tank_exterior_l_05_dm": {      },
       "fuel_tank_exterior_01_dm": {      },
       "fuel_tank_exterior_02_dm": {      },
       "fuel_tank_exterior_03_dm": {      }
@@ -763,11 +764,11 @@
       "armorClass": "tank_structural_steel",
       "hp": 250.0,
       "armorThickness": 2.0,
-      "genericArmorQuality": 0.05,
-      "cumulativeArmorQuality": 0.1,
-      "secondaryShatterArmorQuality": 0.05,
+      "armorThrough": 10.0,
+      "fireProtectionHp": 10.0,
       "createSecondaryShatters": false,
-      "fireProtectionHp": 15.0,
+      "fireParamsPreset": "fuel_internal",
+      "stopChanceOnDeadPart": 0.0,
       "fuel_tank_dm": {      },
       "fuel_tank_01_dm": {      },
       "fuel_tank_02_dm": {      },
@@ -1225,6 +1226,19 @@
         "fHitCritical": true
       },
       "onHit": {
+        "damageType": "cumulative",
+        "expl": 0.6,
+        "fire": 0.4,
+        "damage": 400.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "cumulative",
+        "expl": 1.0,
+        "damage": 800.0,
+        "fHitCritical": true
+      },
+      "onHit": {
         "damageType": "explosion",
         "expl": 0.125,
         "fire": 0.15,
@@ -1260,21 +1274,20 @@
       "onHit": {
         "damageType": "generic",
         "fire": 0.4,
-        "expl": 0.25,
+        "expl": 0.6,
+        "damage": 250.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "generic",
+        "fire": 0.3,
+        "expl": 0.7,
         "damage": 300.0,
         "fHitCritical": true
       },
       "onHit": {
         "damageType": "generic",
-        "fire": 0.45,
-        "expl": 0.45,
-        "damage": 400.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.2,
-        "expl": 0.8,
+        "expl": 1.0,
         "damage": 600.0,
         "fHitCritical": true
       },
@@ -1283,9 +1296,7 @@
         "fire": 0.2
       },
       "onKill": {
-        "fire": 0.35,
-        "expl": 0.35,
-        "nothing": 0.3,
+        "fire": 1.0,
         "fHitCritical": true
       }
     },
@@ -1826,7 +1837,7 @@
   "commonWeapons": {
     "remotelyGuidedWeaponsMax": 1,
     "Weapon": {
-      "trigger": "gunner0",
+      "trigger": "gunner1",
       "triggerGroup": "primary",
       "blk": "gameData/Weapons/groundModels_weapons/30mm_zpt_99_user_cannon.blk",
       "emitter": "bone_gun_barrel_02",
@@ -1946,7 +1957,7 @@
       }
     },
     "Weapon": {
-      "trigger": "gunner1",
+      "trigger": "gunner0",
       "triggerGroup": "secondary",
       "blk": "gameData/Weapons/groundModels_weapons/100mm_2a70_zbd_user_cannon.blk",
       "emitter": "bone_gun_barrel_01",
@@ -2083,8 +2094,7 @@
         "head": "bone_mg_gun_twin",
         "gun": "bone_mg_gun_twin",
         "gunnerDm": "gunner_dm",
-        "secondGunnerDm": "commander_dm",
-        "rotatedTurret": "bone_turret"
+        "secondGunnerDm": "commander_dm"
       },
       "limits": {
         "yaw": [
@@ -2105,7 +2115,7 @@
       "defaultYaw": 0.0,
       "defaultPitch": 0.0,
       "parkInDeadzone": false,
-      "speedYaw": 90.0,
+      "speedYaw": 120.0,
       "speedPitch": 90.0,
       "turret": {
         "head": "bone_commander_sight_h",
@@ -2114,18 +2124,9 @@
         "verDriveDm": "commander_panoramic_sight_dm",
         "horDriveDm": "commander_panoramic_sight_dm"
       },
-      "limits": {
-        "yaw": [
-          -180.0,
-          180.0
-        ],
-        "pitch": [
-          -5.0,
-          10.0
-        ]
-      },
       "gunStabilizer": {
         "hasVerticalGunFreeMode": false,
+        "forceEnabled": true,
         "hasHorizontal": true,
         "horizontalOmegaMult": 1.0,
         "horizontalSpeedLimitKPH": 75.0,
@@ -2140,13 +2141,23 @@
           ],
           "row": [
             45.0,
-            0.015
+            0.00015
           ],
           "row": [
             80.0,
-            0.02
+            0.0002
           ]
         }
+      },
+      "limits": {
+        "yaw": [
+          -180.0,
+          180.0
+        ],
+        "pitch": [
+          -15.0,
+          60.0
+        ]
       }
     }
   },
@@ -3154,6 +3165,27 @@
         "centerDmgPart": true
       }
     },
+    "event": {
+      "name": "hydraulic_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_exterior",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
     "procedural": {
       "name": "default",
       "fx": {
@@ -3412,7 +3444,7 @@
   },
   "ammoStowages": {
     "ammo1": {
-      "weaponTrigger": "gunner0",
+      "weaponTrigger": "gunner1",
       "removeLoadedAmmo": false,
       "fatalFire": true,
       "fatalExplosion": true,
@@ -3426,7 +3458,7 @@
       }
     },
     "ammo2": {
-      "weaponTrigger": "gunner1",
+      "weaponTrigger": "gunner0",
       "removeLoadedAmmo": true,
       "fatalFire": true,
       "fatalExplosion": true,
@@ -3619,6 +3651,7 @@
       "animation": "video/unitModifications/night_vision_system_thermal.ivf",
       "effects": {
         "nightVision": {
+          "nightVisionDmPart": "fire_control_system_dm",
           "gunnerThermal": {
             "resolution": [
               800,
@@ -3726,7 +3759,7 @@
         "commonWeapons": {
           "remotelyGuidedWeaponsMax": 1,
           "Weapon": {
-            "trigger": "gunner0",
+            "trigger": "gunner1",
             "triggerGroup": "primary",
             "blk": "gameData/Weapons/groundModels_weapons/30mm_zpt_99_user_cannon.blk",
             "emitter": "bone_gun_barrel_02",
@@ -3846,7 +3879,7 @@
             }
           },
           "Weapon": {
-            "trigger": "gunner1",
+            "trigger": "gunner0",
             "triggerGroup": "secondary",
             "blk": "gameData/Weapons/groundModels_weapons/100mm_2a70_zbd_user_cannon.blk",
             "emitter": "bone_gun_barrel_01",
@@ -3983,8 +4016,7 @@
               "head": "bone_mg_gun_twin",
               "gun": "bone_mg_gun_twin",
               "gunnerDm": "gunner_dm",
-              "secondGunnerDm": "commander_dm",
-              "rotatedTurret": "bone_turret"
+              "secondGunnerDm": "commander_dm"
             },
             "limits": {
               "yaw": [
@@ -4005,7 +4037,7 @@
             "defaultYaw": 0.0,
             "defaultPitch": 0.0,
             "parkInDeadzone": false,
-            "speedYaw": 90.0,
+            "speedYaw": 120.0,
             "speedPitch": 90.0,
             "turret": {
               "head": "bone_commander_sight_h",
@@ -4014,18 +4046,9 @@
               "verDriveDm": "commander_panoramic_sight_dm",
               "horDriveDm": "commander_panoramic_sight_dm"
             },
-            "limits": {
-              "yaw": [
-                -180.0,
-                180.0
-              ],
-              "pitch": [
-                -5.0,
-                10.0
-              ]
-            },
             "gunStabilizer": {
               "hasVerticalGunFreeMode": false,
+              "forceEnabled": true,
               "hasHorizontal": true,
               "horizontalOmegaMult": 1.0,
               "horizontalSpeedLimitKPH": 75.0,
@@ -4040,13 +4063,23 @@
                 ],
                 "row": [
                   45.0,
-                  0.015
+                  0.00015
                 ],
                 "row": [
                   80.0,
-                  0.02
+                  0.0002
                 ]
               }
+            },
+            "limits": {
+              "yaw": [
+                -180.0,
+                180.0
+              ],
+              "pitch": [
+                -15.0,
+                60.0
+              ]
             }
           },
           "Weapon": {

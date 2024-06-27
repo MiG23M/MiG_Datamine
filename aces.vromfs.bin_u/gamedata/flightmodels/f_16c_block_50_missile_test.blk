@@ -12,6 +12,7 @@
   "haveCCRPForBombs": true,
   "haveCCRPForGun": true,
   "ilsElbit967": true,
+  "mfdCamTads": true,
   "hasPointOfInterestMemory": true,
   "hmdF16c": true,
   "hasMissileCommandLine": false,
@@ -1798,7 +1799,7 @@
     }
   },
   "ikPilot": {
-    "model": "pilot_italy_late_char",
+    "model": "usaf_pilot_1977_1991_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -1813,7 +1814,7 @@
       "flexionDir": [
         0.0,
         -1.0,
-        0.2
+        0.3
       ],
       "type": "leftHand",
       "detachedNodeYpr": [
@@ -1835,7 +1836,7 @@
       "flexionDir": [
         0.0,
         -1.0,
-        -0.5
+        -0.3
       ],
       "type": "rightHand",
       "detachedNodeYpr": [
@@ -1857,7 +1858,7 @@
       "flexionDir": [
         0.0,
         1.0,
-        0.3
+        0.2
       ]
     },
     "ikNode": {
@@ -1868,7 +1869,7 @@
       "flexionDir": [
         0.0,
         1.0,
-        -0.3
+        -0.2
       ]
     }
   },
@@ -1923,11 +1924,11 @@
   },
   "cockpit": {
     "targetingPodFov": [
-      12.0,
-      3.2
+      18.0,
+      1.5
     ],
-    "sightInFov": 12.299,
-    "sightOutFov": 12.299,
+    "sightInFov": 1.5,
+    "sightOutFov": 18.0,
     "sightFov": 1.0,
     "isDoubleBulletImpactLine": true,
     "hmdBlockIlsArea": [
@@ -1946,6 +1947,7 @@
       0.85,
       0.0
     ],
+    "hmdEnabledByDefault": true,
     "lightPos": [
       4.95,
       0.5,
@@ -2217,17 +2219,70 @@
         ],
         "cameraFromTargetingPod": true,
         "page": {
+          "type": "radar",
+          "scale": 0.92,
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "fontScale": 0.65,
+          "lineColor": [
+    20,
+    90,
+    200,
+],
+          "targetForm": "square",
+          "modeColor": [
+    255,
+    255,
+    255,
+],
+          "verAngleColor": [
+    255,
+    255,
+    255,
+],
+          "horAngleColor": [
+    255,
+    255,
+    255,
+],
+          "scaleColor": [
+    255,
+    255,
+    255,
+],
+          "targetColor": [
+    255,
+    255,
+    255,
+],
+          "showCueHeights": true,
+          "showScanAzimuth": true,
+          "cueTopHeiColor": [
+    200,
+    200,
+    200,
+],
+          "cueLowHeiColor": [
+    20,
+    90,
+    200,
+],
+          "cueUndergroundColor": [
+    255,
+    20,
+    20,
+],
+          "centerRadar": true
+        },
+        "page": {
           "type": "thermal",
           "turretIdx": 0
         },
         "page": {
           "type": "target_tracking",
           "turretIdx": 0
-        },
-        "page": {
-          "type": "radar",
-          "scale": 0.92,
-          "hideRadarBackground": true
         },
         "page": {
           "type": "map"
@@ -2255,7 +2310,60 @@
         "page": {
           "type": "radar",
           "scale": 0.92,
-          "hideRadarBackground": true
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "fontScale": 0.65,
+          "lineColor": [
+    20,
+    90,
+    200,
+],
+          "targetForm": "square",
+          "modeColor": [
+    255,
+    255,
+    255,
+],
+          "verAngleColor": [
+    255,
+    255,
+    255,
+],
+          "horAngleColor": [
+    255,
+    255,
+    255,
+],
+          "scaleColor": [
+    255,
+    255,
+    255,
+],
+          "targetColor": [
+    255,
+    255,
+    255,
+],
+          "showCueHeights": true,
+          "showScanAzimuth": true,
+          "cueTopHeiColor": [
+    200,
+    200,
+    200,
+],
+          "cueLowHeiColor": [
+    20,
+    90,
+    200,
+],
+          "cueUndergroundColor": [
+    255,
+    20,
+    20,
+],
+          "centerRadar": true
         }
       },
       "display": {
@@ -2267,7 +2375,9 @@
         ],
         "page": {
           "type": "rwr",
-          "scale": 1.15
+          "scale": 1.15,
+          "hideBackground": true,
+          "hidePlaneSymbol": true
         }
       },
       "display": {
@@ -2369,7 +2479,7 @@
       ],
       "opticType": "targeting",
       "turretNo": 0,
-      "nvIndex": 2
+      "nvIndex": 1
     }
   },
   "commonWeapons": {
@@ -2512,10 +2622,7 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,
@@ -2570,12 +2677,6 @@
           }
         }
       }
-    },
-    "air_extinguisher": {
-      "prevModification": "f_4c_g_suit",
-      "tier": 4,
-      "modClass": "armor",
-      "invertEnableLogic": false
     },
     "M60_air_targets": {    },
     "M60_armor_targets": {    },
@@ -2636,17 +2737,22 @@
       "modClass": "weapon",
       "tier": 3
     },
+    "us_aim_9l": {
+      "tier": 1,
+      "modClass": "weapon"
+    },
     "us_aim_7m": {
+      "reqModification": "us_aim_9l",
       "tier": 2,
       "modClass": "weapon"
     },
-    "us_aim_9l": {
+    "us_aim_9m": {
       "reqModification": "us_aim_7m",
       "tier": 3,
       "modClass": "weapon"
     },
-    "us_aim_9m": {
-      "reqModification": "us_aim_9l",
+    "us_aim_120a": {
+      "reqModification": "us_aim_9m",
       "tier": 4,
       "modClass": "weapon"
     }
@@ -2866,19 +2972,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 60,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 60,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -2888,7 +2996,7 @@
       "order": 1,
       "WeaponPreset": {
         "iconType": "missile_air_to_air_midrange_special",
-        "name": "aim_120a_wingtip",
+        "name": "aim_120a_wingtip_slot1",
         "Weapon": {
           "trigger": "aam",
           "blk": "gameData/Weapons/rocketGuns/us_aim_120a.blk",
@@ -3031,7 +3139,7 @@
       "order": 2,
       "WeaponPreset": {
         "iconType": "missile_air_to_air_midrange_special",
-        "name": "aim_120a_wingtip",
+        "name": "aim_120a_wingtip_slot10",
         "Weapon": {
           "trigger": "aam",
           "blk": "gameData/Weapons/rocketGuns/us_aim_120a.blk",

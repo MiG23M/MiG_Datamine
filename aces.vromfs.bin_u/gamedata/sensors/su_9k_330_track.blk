@@ -130,7 +130,7 @@
       "groundClutter": false,
       "angularAccuracy": 0.018,
       "distanceAccuracy": 7.0,
-      "targetRadiusMin": 1.475,
+      "targetRadiusMin": 0.7375,
       "absDopplerSpeed": true,
       "track": true,
       "distance": {
@@ -432,6 +432,50 @@
             "init": {            },
             "setRadarStandbyMode": {            },
             "setRadar": {            }
+          }
+        },
+        "unparkRadar": {
+          "stateFrom": "radarParked",
+          "event": "enable",
+          "stateTo": "radarStandby"
+        },
+        "unparkIrst": {
+          "stateFrom": "irstParked",
+          "event": "enable",
+          "stateTo": "irstStandby"
+        },
+        "parkRadar": {
+          "stateFrom": "radarStandby",
+          "event": "disable",
+          "stateTo": "radarParked"
+        },
+        "parkIrst": {
+          "stateFrom": "irstStandby",
+          "event": "disable",
+          "stateTo": "irstParked"
+        },
+        "disableFromRadarTrack": {
+          "stateFrom": "radarTrack",
+          "event": "disable",
+          "stateTo": "radarParked",
+          "actions": {
+            "setRadarStandbyMode": {            },
+            "setFsmActive": {
+              "fsm": "track",
+              "active": false
+            }
+          }
+        },
+        "disableFromIrstTrack": {
+          "stateFrom": "irstTrack",
+          "event": "disable",
+          "stateTo": "irstParked",
+          "actions": {
+            "setIrstStandbyMode": {            },
+            "setFsmActive": {
+              "fsm": "track",
+              "active": false
+            }
           }
         },
         "radarCheckLockType0": {

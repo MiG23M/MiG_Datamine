@@ -28,6 +28,8 @@ let { getCurrentGameModeId, setCurrentGameModeById, getGameModeById,
   getGameModeByUnitType, findCurrentGameModeId, isPresetValidForGameMode
 } = require("%scripts/gameModes/gameModeManagerState.nut")
 let { getCrewUnit } = require("%scripts/crew/crew.nut")
+let { flushSlotbarUpdate, suspendSlotbarUpdates, getCrewsList
+} = require("%scripts/slotbar/crewsList.nut")
 
 // Independed Modules
 require("%scripts/slotbar/hangarVehiclesPreset.nut")
@@ -391,7 +393,8 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
                                       ",".join(p.crews),
                                       ",".join(p.units),
                                       p.title,
-                                      getTblValue("gameModeId", p, "")
+                                      getTblValue("gameModeId", p, ""),
+                                      ",".join(p.crewInSlots)
                                     ]))
       }
       if (presetsList.len() == 0)
@@ -449,7 +452,6 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
   function load(idx, countryId = null, skipGameModeSelect = false) {
     if (!this.canLoad())
       return false
-
     countryId = countryId ?? profileCountrySq.value
     this.save(countryId) //save current preset slotbar changes
 
@@ -462,7 +464,7 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
 
     local countryIdx = -1
     local countryCrews = []
-    foreach (cIdx, tbl in ::g_crews_list.get())
+    foreach (cIdx, tbl in getCrewsList())
       if (tbl.country == countryId) {
         countryIdx = cIdx
         countryCrews = tbl.crews
@@ -470,7 +472,6 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
       }
     if (countryIdx == -1 || !countryCrews.len())
       return false
-
     let unitsList = {}
     local selUnitId = ""
     local selCrewIdx = 0
@@ -515,14 +516,20 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
         tasksData.append({ crewId = crew.id, airName = unitId })
     }
 
+    if(tasksData.len() == 0) {
+      this.onTrainCrewTasksSuccess(idx, countryIdx, countryId, selCrewIdx, selUnitId, skipGameModeSelect, preset)
+      broadcastEvent("SlotbarPresetChangedWithoutProfileUpdate")
+      return
+    }
+
     this.isLoading = true // Blocking slotbar content and game mode id from overwritting during 'batchTrainCrew' call.
 
-    ::g_crews_list.suspendSlotbarUpdates()
+    suspendSlotbarUpdates()
     this.invalidateUnitsModificators(countryIdx)
     batchTrainCrew(tasksData, { showProgressBox = true },
       @() this.onTrainCrewTasksSuccess(idx, countryIdx, countryId, selCrewIdx, selUnitId, skipGameModeSelect, preset),
       function (_taskResult = -1) {
-        ::g_crews_list.flushSlotbarUpdate()
+        flushSlotbarUpdate()
         this.onTrainCrewTasksFail()
       },
       ::slotbarPresets)
@@ -533,9 +540,10 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
   function onTrainCrewTasksSuccess(idx, countryIdx, countryId, selCrewIdx, _selUnitId, skipGameModeSelect, preset) {
     slotbarPresetsSeletected[countryId] = idx
 
+    this.isLoading = false
     selectCrew(countryIdx, selCrewIdx, true)
     this.invalidateUnitsModificators(countryIdx)
-    ::g_crews_list.flushSlotbarUpdate()
+    flushSlotbarUpdate()
 
     // Game mode select is performed only
     // after successful slotbar vehicles change.
@@ -543,7 +551,6 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
       this.setCurrentGameModeByPreset(countryId, preset)
     }
 
-    this.isLoading = false
     this.save(countryId)
 
     broadcastEvent("SlotbarPresetLoaded", { crewsChanged = true })
@@ -583,7 +590,7 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
   }
 
   function invalidateUnitsModificators(countryIdx) {
-    let crews = ::g_crews_list.get()?[countryIdx]?.crews ?? []
+    let crews = getCrewsList()?[countryIdx]?.crews ?? []
     foreach (crew in crews) {
       let unit = getCrewUnit(crew)
       if (unit)
@@ -610,6 +617,9 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
         if (title.len())
           preset.title = title
         preset.gameModeId = getTblValue(4, data, "")
+
+        if(data.len() > 5 && data[5] != "")
+          preset.crewInSlots = data[5].split(",").map(@(v) to_integer_safe(v, 0, false))
 
         let unitNames = split(data[2], ",")
         let crewIds = split(data[1], ",")
@@ -657,6 +667,7 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
     return {
       units = []
       crews = []
+      crewInSlots = []
       selected = -1
       title = loc("shop/slotbarPresets/item", { number = presetIdx + 1 })
       gameModeId = ""
@@ -689,7 +700,7 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
     let units = []
     let crews = []
     local selected = preset.selected
-    foreach (tbl in ::g_crews_list.get())
+    foreach (tbl in getCrewsList())
       if (tbl.country == countryId) {
         foreach (crew in tbl.crews)
           if (("aircraft" in crew)) {
@@ -762,6 +773,27 @@ let slotbarPresetsVersion = persist("slotbarPresetsVersion", @() {ver=0})
   function onEventCurrentGameModeIdChanged(params) {
     if (params.isUserSelected)
       this.savePresetGameMode(profileCountrySq.value)
+  }
+
+  function swapCrewsInCurrentPreset(crewIds) {
+    let crewInSlots = this.getCurrentPreset()?.crewInSlots
+    if(crewInSlots == null)
+      return
+    this.swapValues(crewInSlots, crewIds)
+    this.save()
+  }
+
+  function updateCrewsInCurrentPreset(countryId, crewIds) {
+    let crewInSlots = this.getCurrentPreset(countryId)?.crewInSlots
+    if(crewInSlots == null)
+      return
+    let newCrews = crewIds.filter(@(c) crewInSlots.indexof(c) == null)
+    crewInSlots.extend(newCrews)
+    this.save(countryId)
+  }
+
+  function swapValues(arr, values) {
+    arr.apply(@(v) (v in values) ? values[v] : v)
   }
 }
 

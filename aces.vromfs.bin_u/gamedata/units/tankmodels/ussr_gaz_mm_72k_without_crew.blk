@@ -245,48 +245,42 @@
       "name": "fuel_tank_l_03_dm",
       "name": "fuel_tank_l_04_dm",
       "name": "fuel_tank_l_05_dm",
-      "name": "fuel_tank_exterior_r_01_dm",
-      "name": "fuel_tank_exterior_r_02_dm",
-      "name": "fuel_tank_exterior_l_01_dm",
-      "name": "fuel_tank_exterior_l_02_dm",
       "onHit": {
         "damageType": "cumulative",
-        "expl": 0.1,
-        "fire": 0.2,
+        "expl": 1.0,
         "damage": 100.0,
         "fHitCritical": true
       },
       "onHit": {
-        "damageType": "cumulative",
-        "expl": 0.2,
-        "fire": 0.3,
-        "damage": 250.0,
+        "damageType": "explosion",
+        "expl": 1.0,
+        "damage": 35.0,
         "fHitCritical": true
       },
       "onHit": {
         "damageType": "explosion",
-        "expl": 0.125,
-        "fire": 0.225,
-        "damage": 25.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "explosion",
-        "expl": 0.25,
-        "fire": 0.35,
-        "damage": 50.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.1,
+        "expl": 0.7,
         "damage": 20.0,
         "fHitCritical": true
       },
       "onHit": {
+        "damageType": "shatter",
+        "expl": 1.0,
+        "fire": 0.75,
+        "damage": 20.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "shatter",
+        "expl": 0.4,
+        "fire": 0.5,
+        "damage": 8.0,
+        "fHitCritical": true
+      },
+      "onHit": {
         "damageType": "generic",
-        "fire": 0.25,
-        "damage": 70.0,
+        "fire": 1.0,
+        "damage": 100.0,
         "fHitCritical": true
       },
       "onHit": {
@@ -298,7 +292,7 @@
       "onHit": {
         "damageType": "generic",
         "fire": 0.7,
-        "expl": 0.1,
+        "expl": 0.2,
         "damage": 300.0,
         "fHitCritical": true
       },
@@ -311,19 +305,25 @@
       },
       "onHit": {
         "damageType": "generic",
-        "fire": 0.2,
-        "expl": 0.8,
+        "fire": 0.1,
+        "expl": 0.9,
         "damage": 600.0,
         "fHitCritical": true
       },
       "onHit": {
+        "damageType": "generic",
+        "fire": 0.1,
+        "damage": 5.0,
+        "fHitCritical": true
+      },
+      "onHit": {
         "damageType": "fire",
-        "fire": 0.2
+        "fire": 0.2,
+        "expl": 0.1
       },
       "onKill": {
         "fire": 0.5,
-        "expl": 0.3,
-        "nothing": 0.2,
+        "expl": 0.5,
         "fHitCritical": true
       }
     },
@@ -405,42 +405,6 @@
       "onHit": {
         "damageType": "fire",
         "fire": 0.02
-      }
-    },
-    "part": {
-      "name": "wheel_r_drive_dm",
-      "onKill": {
-        "track_r_dm": 1.0
-      }
-    },
-    "part": {
-      "name": "wheel_r_back_dm",
-      "onKill": {
-        "track_r_dm": 1.0
-      }
-    },
-    "part": {
-      "name": "wheel_r_front_dm",
-      "onKill": {
-        "track_r_dm": 1.0
-      }
-    },
-    "part": {
-      "name": "wheel_l_drive_dm",
-      "onKill": {
-        "track_l_dm": 1.0
-      }
-    },
-    "part": {
-      "name": "wheel_l_back_dm",
-      "onKill": {
-        "track_l_dm": 1.0
-      }
-    },
-    "part": {
-      "name": "wheel_l_front_dm",
-      "onKill": {
-        "track_l_dm": 1.0
       }
     },
     "part": {
@@ -881,6 +845,29 @@
           "probability": 0.7,
           "fxEventName": "fire_after_hit_big"
         }
+      }
+    },
+    "part": {
+      "name": "wheel_l_drive_dm",
+      "name": "wheel_r_drive_dm",
+      "name": "wheel_r_back_dm",
+      "name": "wheel_r_front_dm",
+      "name": "wheel_l_back_dm",
+      "name": "wheel_l_front_dm",
+      "name": "wheel_l_01_dm",
+      "name": "wheel_r_01_dm",
+      "name": "wheel_l_02_dm",
+      "name": "wheel_r_02_dm",
+      "name": "wheel_l_03_dm",
+      "name": "wheel_r_03_dm",
+      "name": "wheel_l_04_dm",
+      "name": "wheel_r_04_dm",
+      "name": "wheel_l_05_dm",
+      "name": "wheel_r_05_dm",
+      "name": "wheel_l_06_dm",
+      "name": "wheel_r_06_dm",
+      "onKill": {
+        "cut": 1.0
       }
     }
   },
@@ -1409,6 +1396,27 @@
     },
     "event": {
       "name": "fuel_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "hydraulic_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_exterior",
       "fx": {
         "name": "tank_ex_fuel_explosion",
         "centerDmgPart": true

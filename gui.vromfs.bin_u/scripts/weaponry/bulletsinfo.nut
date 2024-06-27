@@ -8,7 +8,7 @@ let { format } = require("string")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { blkFromPath, eachParam, copyParamsToTable } = require("%sqstd/datablock.nut")
 let { ceil, change_bit } = require("%sqstd/math.nut")
-let { WEAPON_TYPE, getLastWeapon, isCaliberCannon, getLinkedGunIdx, getCommonWeapons,
+let { WEAPON_TYPE, getLastWeapon, isCaliberCannon, getCommonWeapons,
   getLastPrimaryWeapon, getPrimaryWeaponsList, getWeaponNameByBlkPath
 } = require("%scripts/weaponry/weaponryInfo.nut")
 let { AMMO, getAmmoAmountData } = require("%scripts/weaponry/ammoInfo.nut")
@@ -16,7 +16,7 @@ let { isModResearched, isModAvailableOrFree, getModificationByName,
   updateRelationModificationList, getModificationBulletsGroup
 } = require("%scripts/weaponry/modificationInfo.nut")
 let { isModificationInTree } = require("%scripts/weaponry/modsTree.nut")
-let { getGuiOptionsMode, set_unit_option } = require("guiOptions")
+let { getGuiOptionsMode, set_unit_option, get_gui_option } = require("guiOptions")
 let { getSavedBullets } = require("%scripts/weaponry/savedWeaponry.nut")
 let { unique } = require("%sqstd/underscore.nut")
 let { getPresetWeapons, getUnitWeapons } = require("%scripts/weaponry/weaponryPresets.nut")
@@ -24,7 +24,7 @@ let { appendOnce } = u
 let DataBlock = require("DataBlock")
 let { set_last_bullets } = require("unitCustomization")
 let { startsWith, slice } = require("%sqstd/string.nut")
-let { OPTIONS_MODE_TRAINING, USEROPT_BULLETS0
+let { OPTIONS_MODE_TRAINING, USEROPT_BULLETS0, USEROPT_MODIFICATIONS
 } = require("%scripts/options/optionsExtNames.nut")
 let { shopIsModificationPurchased } = require("chardResearch")
 let { get_ranks_blk, get_modifications_blk } = require("blkGetters")
@@ -40,8 +40,10 @@ let BULLET_TYPE = {
 }
 
 let DEFAULT_PRIMARY_BULLETS_INFO = {
+  weapName                  = ""
   guns                      = 1
   total                     = 0 //cartridges total
+  isBulletBelt              = true
   cartridge                 = 1
   groupIndex                = -1
   forcedMaxBulletsInRespawn = false
@@ -54,8 +56,6 @@ let BULLETS_LIST_PARAMS = {
   needTexts             = false
   isForcedAvailable     = false
 }
-
-const BULLETS_CALIBER_QUANTITY = 4
 
 let unitsPrimaryBulletsInfo = {}
 
@@ -226,7 +226,8 @@ function getBulletsSetData(air, modifName, noModList = null) {
     let bulletsModBlk = wBlk?[getModificationBulletsEffect(modifName)]
     let bulletsBlk = bulletsModBlk ? bulletsModBlk : wBlk
     local bulletsList = bulletsBlk % "bullet"
-    local weaponType = triggerList[index] == "countermeasures"
+    let weaponTrigger = triggerList[index]
+    local weaponType = weaponTrigger == "countermeasures"
       ? WEAPON_TYPE.COUNTERMEASURES : WEAPON_TYPE.GUNS
     if (!bulletsList.len()) {
       bulletsList = bulletsBlk % "rocket"
@@ -260,6 +261,7 @@ function getBulletsSetData(air, modifName, noModList = null) {
                   isBulletBelt = isBulletBelt
                   cartridge = wBlk?.bulletsCartridge ?? 0
                   weaponType = weaponType
+                  weaponTrigger = weaponTrigger
                   useDefaultBullet = !wBlk?.notUseDefaultBulletInGui,
                   weaponBlkName = wBlkName
                   maxToRespawn = mod?.maxToRespawn ?? 0
@@ -470,26 +472,36 @@ function getBulletsInfoForPrimaryGuns(air) {
     return []
 
   let primaryWeapon = getLastPrimaryWeapon(air)
-  let cachedWeapons = unitsPrimaryBulletsInfo?[air.name][primaryWeapon]
+  let presetWeapon = getLastWeapon(air.name)
+
+  let cachedWeapons = unitsPrimaryBulletsInfo?[air.name]?[primaryWeapon][presetWeapon]
   if (cachedWeapons != null)
     return cachedWeapons
 
   let res = []
   if (unitsPrimaryBulletsInfo?[air.name] == null)
     unitsPrimaryBulletsInfo[air.name] <- {}
-  unitsPrimaryBulletsInfo[air.name][primaryWeapon] <- res
+  if (unitsPrimaryBulletsInfo?[air.name][primaryWeapon] == null)
+    unitsPrimaryBulletsInfo[air.name][primaryWeapon] <- {}
+  unitsPrimaryBulletsInfo[air.name][primaryWeapon][presetWeapon] <- res
 
   let airBlk = ::get_full_unit_blk(air.name)
   if (!airBlk)
     return res
 
   let commonWeapons = getCommonWeapons(airBlk, primaryWeapon)
-  if (commonWeapons.len() == 0)
+  let secondaryWeapon = air.getWeapons().findvalue(@(w) w.name == presetWeapon)
+  let presetWeapons = getPresetWeapons(airBlk, secondaryWeapon)
+
+  local weapons = commonWeapons
+  weapons.extend(presetWeapons)
+
+  if (weapons.len() == 0)
     return res
 
   let modsList = getBulletsModListByGroups(air)
   let wpList = {} // name = amount
-  foreach (weapon in commonWeapons)
+  foreach (weapon in weapons)
     if (weapon?.blk && !weapon?.dummy) {
       let weapName = findIdenticalWeapon(weapon.blk, wpList, modsList)
       if (weapName) {
@@ -497,6 +509,7 @@ function getBulletsInfoForPrimaryGuns(air) {
       }
       else {
         wpList[weapon.blk] <- clone DEFAULT_PRIMARY_BULLETS_INFO
+        wpList[weapon.blk].weapName = getWeaponNameByBlkPath(weapon.blk)
         if (!("bullets" in weapon))
           continue
 
@@ -505,7 +518,8 @@ function getBulletsInfoForPrimaryGuns(air) {
         if (u.isEmpty(wBlk))
           continue
 
-        wpList[weapon.blk].cartridge = wBlk?.bulletsCartridge || 1
+        wpList[weapon.blk].isBulletBelt = wBlk?.isBulletBelt ?? true
+        wpList[weapon.blk].cartridge = (weapon?.bulletsCartridge ?? wBlk?.bulletsCartridge ?? 1) || 1
         wpList[weapon.blk].total = ceil(wpList[weapon.blk].total * 1.0 /
           wpList[weapon.blk].cartridge).tointeger()
 
@@ -535,10 +549,38 @@ function canBulletsBeDuplicate(unit) {
   return unit?.unitType.canUseSeveralBulletsForGun ?? false
 }
 
+function getLinkedGunIdx(groupIdx, totalGroups, bulletSetsQuantity, unit, canBeDuplicate = true) {
+  if (!canBeDuplicate)
+    return groupIdx
+
+  if (totalGroups * 2 <= bulletSetsQuantity)
+    return (groupIdx.tofloat() * totalGroups / bulletSetsQuantity + 0.001).tointeger()
+
+  //If there are too many groups it is necessary not to take up space
+  //for those duplicate groups for which we do not show duplicates at all
+  let gunsInfo = getBulletsInfoForPrimaryGuns(unit)
+  local groupCount = 0
+  let gunIdxWithDupicate = []
+  foreach (gunIdx, gunInfo in gunsInfo) {
+    if (!gunInfo.isBulletBelt) {
+      gunIdxWithDupicate.append(gunIdx)
+      continue
+    }
+    if (groupIdx == groupCount)
+      return gunIdx
+    groupCount++
+  }
+  if (gunIdxWithDupicate.len() == 0)
+    return groupIdx
+
+  return gunIdxWithDupicate[((groupIdx.tofloat() - groupCount) * gunIdxWithDupicate.len()
+    / (bulletSetsQuantity - groupCount) + 0.001).tointeger()]
+}
+
 function getLastFakeBulletsIndex(unit) {
   if (!canBulletsBeDuplicate(unit))
     return getBulletsGroupCount(unit, true)
-  return BULLETS_CALIBER_QUANTITY - getBulletsGroupCount(unit, false) +
+  return unit.unitType.bulletSetsQuantity - getBulletsGroupCount(unit, false) +
     getBulletsGroupCount(unit, true)
 }
 
@@ -592,6 +634,28 @@ function getNVDSightText(sight) {
   if (system == "")
     return ""
   return colorize("goodTextColor", $"{crew}{loc("ui/colon")} {system}")
+}
+
+function getBulletsNamesBySet(set) {
+  //bullets description
+  let separator = loc("bullet_type_separator/name")
+  let usedLocs = []
+  let annArr = []
+  let txtArr = []
+  foreach (b in set.bullets) {
+    let part = b.indexof("@")
+    txtArr.append("".join(part == null ? [loc($"{b}/name/short")]
+      : [loc($"{b.slice(0, part)}/name/short"), loc($"{b.slice(part+1)}/name/short")]))
+    if (!isInArray(b, usedLocs)) {
+      annArr.append(part == null ? getBulletAnnotation(b)
+        : getBulletAnnotation(b.slice(0, part), b.slice(part + 1)))
+      usedLocs.append(b)
+    }
+  }
+  return {
+    setText = separator.join(txtArr)
+    annotation = "\n".join(annArr)
+  }
 }
 
 // Generate text description for air.modifications[modificationNo]
@@ -715,23 +779,7 @@ local function getModificationInfo(air, modifName, isShortDesc = false,
     }
   }
 
-  //bullets description
-  let separator = loc("bullet_type_separator/name")
-  let usedLocs = []
-  let annArr = []
-  let txtArr = []
-  foreach (b in set.bullets) {
-    let part = b.indexof("@")
-    txtArr.append("".join(part == null ? [loc($"{b}/name/short")]
-      : [loc($"{b.slice(0, part)}/name/short"), loc($"{b.slice(part+1)}/name/short")]))
-    if (!isInArray(b, usedLocs)) {
-      annArr.append(part == null ? getBulletAnnotation(b)
-        : getBulletAnnotation(b.slice(0, part), b.slice(part + 1)))
-      usedLocs.append(b)
-    }
-  }
-  let setText = separator.join(txtArr)
-  let annotation = "\n".join(annArr)
+  let { setText, annotation } = getBulletsNamesBySet(set)
 
   if (ammo_pack_len)
     res.desc = shortDescr + "\n"
@@ -766,6 +814,7 @@ local function getBulletsList(airName, groupIdx, params = BULLETS_LIST_PARAMS) {
     values = []
     saveValues = []
     isTurretBelt = false
+    isBulletBelt = true
     weaponType = WEAPON_TYPE.GUNS
     caliber = 0
     duplicate = false //tank gun bullets can be duplicate to change bullets during the battle
@@ -794,15 +843,16 @@ local function getBulletsList(airName, groupIdx, params = BULLETS_LIST_PARAMS) {
         return descr
       descr.caliber = bData.caliber
       descr.weaponType = bData.weaponType
+      descr.isBulletBelt = bData?.isBulletBelt ?? true
     }
 
     appendOneBulletsItem(descr, modifName, air, "", params.needTexts) //fake default bullet item
     return descr
   }
 
-  let linked_index = getLinkedGunIdx(groupIdx, modTotal, bulletSetsQuantity, canBeDuplicate)
+  let linked_index = getLinkedGunIdx(groupIdx, modTotal, bulletSetsQuantity, air, canBeDuplicate)
   descr.duplicate = canBeDuplicate && groupIdx > 0 &&
-    linked_index == getLinkedGunIdx(groupIdx - 1, modTotal, bulletSetsQuantity, canBeDuplicate)
+    linked_index == getLinkedGunIdx(groupIdx - 1, modTotal, bulletSetsQuantity, air, canBeDuplicate)
 
   let groups = []
   for (local modifNo = 0; modifNo < air.modifications.len(); modifNo++) {
@@ -831,6 +881,7 @@ local function getBulletsList(airName, groupIdx, params = BULLETS_LIST_PARAMS) {
       if (bData) {
         descr.caliber = bData.caliber
         descr.weaponType = bData.weaponType
+        descr.isBulletBelt = bData?.isBulletBelt ?? true
       }
     }
 
@@ -857,25 +908,27 @@ function getActiveBulletsGroupIntForDuplicates(unit, params) {
   local maxCatridges = 0
   let bulletSetsQuantity = unit.unitType.bulletSetsQuantity
   for (local i = 0; i < bulletSetsQuantity; i++) {
-    let linkedIdx = getLinkedGunIdx(i, groupsCount, bulletSetsQuantity)
+    let linkedIdx = getLinkedGunIdx(i, groupsCount, bulletSetsQuantity, unit)
     if (linkedIdx == lastLinkedIdx) {
       duplicates++
     }
     else {
-      let checkPurchased = params?.checkPurchased ?? true
-      let bullets = getBulletsList(unit.name, i, {
-        isOnlyBought = checkPurchased,
-        needCheckUnitPurchase = checkPurchased,
-        isForcedAvailable = params?.isForcedAvailable ?? false
-      })
-      lastIdxTotal = bullets.values.len()
+      let bInfo = getBulletsInfoForGun(unit, linkedIdx)
+      if (getTblValue("isBulletBelt", bInfo, true))
+        lastIdxTotal = 1
+      else {
+        let checkPurchased = params?.checkPurchased ?? true
+        let bullets = getBulletsList(unit.name, i, {
+          isOnlyBought = checkPurchased,
+          needCheckUnitPurchase = checkPurchased,
+          isForcedAvailable = params?.isForcedAvailable ?? false
+        })
+        lastIdxTotal = bullets.values.len()
+      }
       lastLinkedIdx = linkedIdx
       duplicates = 0
-
-      let bInfo = getBulletsInfoForGun(unit, linkedIdx)
       maxCatridges = getTblValue("total", bInfo, 0)
     }
-
     if (lastIdxTotal > duplicates && duplicates < maxCatridges)
       res = res | (1 << i)
   }
@@ -993,13 +1046,14 @@ function isBulletsWithoutTracer(unit, item) {
     return false
 
   let bulletsSet = getBulletsSetData(unit, item.name)
-  let weaponName = getWeaponNameByBlkPath(bulletsSet.weaponBlkName)
+  let weaponName = getWeaponNameByBlkPath(bulletsSet?.weaponBlkName ?? "")
   return unit?.defaultBeltParam[weaponName].hasTracer == false
 }
 
 //to get exact same bullets list as in standart options
 function getOptionsBulletsList(air, groupIndex, needTexts = false, isForcedAvailable = false) {
   let checkPurchased = getGuiOptionsMode() != OPTIONS_MODE_TRAINING
+    || get_gui_option(USEROPT_MODIFICATIONS)
   let res = getBulletsList(air.name, groupIndex, {
     isOnlyBought = checkPurchased
     needCheckUnitPurchase = checkPurchased
@@ -1067,6 +1121,55 @@ function getModifIconItem(unit, item) {
   return null
 }
 
+function getAmmoStowageConstraintsByTrigger(unit) {
+  let constraintsByTrigger = {}
+  let unitBlk = ::get_full_unit_blk(unit.name)
+  if (!unitBlk?.ammoStowages || !(unitBlk.ammoStowages?.enablePerAmmoTypesAndConstraints ?? false))
+    return constraintsByTrigger
+  let stowagesBlk = unitBlk.ammoStowages
+  for (local iStowage = 0; iStowage < stowagesBlk.blockCount(); iStowage++) {
+    let stowageBlk = stowagesBlk.getBlock(iStowage)
+    foreach (triggerName in stowageBlk % "weaponTrigger") {
+      if (!(triggerName in constraintsByTrigger))
+        constraintsByTrigger[triggerName] <- {
+          total = 0,
+          explosive = 0
+        }
+      let constraints = constraintsByTrigger[triggerName]
+
+      foreach (clusterBlk in stowageBlk % "shells") {
+        for (local iSlot = 0; iSlot < clusterBlk.blockCount(); iSlot++) {
+          let slotBlk = clusterBlk.getBlock(iSlot)
+          if (!slotBlk)
+            continue
+          let numAmmo = slotBlk?.count ?? 0
+          constraints.total += numAmmo
+          if (slotBlk?.type != "inert")
+            constraints.explosive += numAmmo
+        }
+      }
+    }
+  }
+  return constraintsByTrigger
+}
+
+function getBulletsSetMaxAmmoWithConstraints(constraintsByTrigger, bulletsSet) {
+  if (!(bulletsSet?.weaponTrigger && bulletsSet.weaponTrigger in constraintsByTrigger))
+    return 0
+  let constraints = constraintsByTrigger[bulletsSet.weaponTrigger]
+  if (constraints.total == 0)
+    return 0
+  local ammo = constraints.total;
+  if (bulletsSet?.explosiveMass && bulletsSet.explosiveMass > 0)
+    ammo = min(constraints.explosive, ammo)
+  return ammo
+}
+
+//Can take both bullets at once, dividing the total number of bullets between them.
+let isPairBulletsGroup = @(bullets) bullets.values.len() == 2
+  && bullets.weaponType == WEAPON_TYPE.COUNTERMEASURES
+  && !(bullets?.isBulletBelt ?? true)
+
 return {
   BULLET_TYPE
   //
@@ -1099,4 +1202,9 @@ return {
   getModifIconItem
   getWeaponToFakeBulletMask
   updateSecondaryBullets
+  getAmmoStowageConstraintsByTrigger
+  getBulletsSetMaxAmmoWithConstraints
+  getBulletsNamesBySet
+  isPairBulletsGroup
+  getLinkedGunIdx
 }

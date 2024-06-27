@@ -12,7 +12,7 @@
   "emitTime": 0.03,
   "aimMinDist": 10.0,
   "aimMaxDist": 3000.0,
-  "maxDeltaAngle": 0.08,
+  "maxDeltaAngle": 0.05,
   "shotFreq": 12.0,
   "traceFreq": 4,
   "bEnablePause": false,
@@ -27,14 +27,13 @@
     "mass": 0.275,
     "caliber": 0.03,
     "speed": 810.0,
-    "explosiveType": "rdx_aluminium",
-    "explosiveMass": 0.016,
     "maxDistance": 7000.0,
     "selfDestructionInAir": true,
-    "recoilMultiplier": 0.35,
+    "explosiveType": "rdx_aluminium",
+    "explosiveMass": 0.016,
     "normalizationPreset": "heat",
     "ricochetPreset": "he",
-    "groundRicochetPreset": "he",
+    "groundRicochetPreset": "he_small_caliber_ground",
     "secondaryShattersPreset": "ap",
     "stabilityThreshold": 0.5,
     "stabilityCaliberToArmorThreshold": 5.0,
@@ -49,20 +48,21 @@
     ],
     "explodeOnRendinst": true,
     "shellAnimation": "video/shells_animations/sapi_shell.ivf",
+    "explodeTreshold": 1.0,
+    "fuseDelayDist": 0.2,
+    "recoilMultiplier": 0.35,
     "onHitChanceMultFire": 8.0,
     "relativeVelHitShift": [
       300.0,
       1000.0
     ],
+    "selfDestructionFx": "explosion_air_selfexplosion_small",
+    "waterRicochetEffect": "hit_28_38mm_water",
+    "groundRicochetEffect": "hit_28_38mm_dirt_ap",
     "relativeVelHitShift": [
       300.0,
       1000.0
     ],
-    "explodeTreshold": 1.0,
-    "fuseDelayDist": 0.2,
-    "selfDestructionFx": "explosion_air_selfexplosion_small",
-    "waterRicochetEffect": "hit_28_38mm_water",
-    "groundRicochetEffect": "hit_28_38mm_dirt_ap",
     "selfDestructionFx": "explosion_air_selfexplosion_small",
     "explosionEffect": "hit_28_38mm_metal_he_rapid",
     "groundCollisionEffect": "hit_28_38mm_dirt_he_rapid",
@@ -85,6 +85,15 @@
         0.99
       ]
     },
+    "damage": {
+      "kinetic": {
+        "damageType": "generic",
+        "demarrePenetrationK": 0.9,
+        "demarreSpeedPow": 1.43,
+        "demarreMassPow": 0.71,
+        "demarreCaliberPow": 1.07
+      }
+    },
     "hitpower": {
       "HitPower0m": [
         1.0,
@@ -98,15 +107,6 @@
         0.8,
         10000.0
       ]
-    },
-    "damage": {
-      "kinetic": {
-        "damageType": "generic",
-        "demarrePenetrationK": 0.9,
-        "demarreSpeedPow": 1.43,
-        "demarreMassPow": 0.71,
-        "demarreCaliberPow": 1.07
-      }
     },
     "visual": {
       "range_percent_of_ammo": [
@@ -253,7 +253,7 @@
     ]
   },
   "aden_new_gun": {
-    "maxDeltaAngle": 0.12,
+    "maxDeltaAngle": 0.08,
     "overheat": {
       "overheat": [
         20.0,

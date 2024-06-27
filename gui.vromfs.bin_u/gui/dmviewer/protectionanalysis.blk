@@ -89,6 +89,17 @@
             "enable": "no",
             "ButtonImg": {            }
           },
+          "Button_text": {
+            "id": "btnCrewMap",
+            "position": "relative",
+            "text": "#mainmenu/crewMap",
+            "on_click": "onCrewMap",
+            "btnName": "X",
+            "noMargin": "yes",
+            "display": "hide",
+            "enable": "no",
+            "ButtonImg": {            }
+          },
           "tdiv": {
             "id": "pa_info_block",
             "height": "1@buttonHeight",
@@ -393,8 +404,23 @@
               "isTextArea": "yes",
               "display": "hide",
               "on_click": "onCustomLangInfo",
-              "focus_border": {              },
-              "ButtonImg": {              }
+              "reduceHeight": "yes",
+              "smallFont": "yes",
+              "focus_border": {              }
+            },
+            "Button_text": {
+              "id": "custom_sound_mods",
+              "hasWarningText": "yes",
+              "position": "relative",
+              "visualStyle": "noBgr",
+              "isTextArea": "yes",
+              "text": "#mainmenu/customSoundMods",
+              "tooltip": "#mainmenu/customSoundMods/tooltip",
+              "display": "hide",
+              "on_click": "onCustomSoundMods",
+              "reduceHeight": "yes",
+              "smallFont": "yes",
+              "focus_border": {              }
             },
             "tdiv": {
               "id": "mission_texts_block_left",

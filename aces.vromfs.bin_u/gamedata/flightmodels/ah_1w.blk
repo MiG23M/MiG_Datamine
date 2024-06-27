@@ -1241,21 +1241,20 @@
     "turretTurnSfxName": "turret_turn_servo"
   },
   "cockpit": {
-    "textToShowInCockpit": "msg/textToShowInCockpit",
     "headPos": [
       2.0,
-      0.28,
+      0.262,
       0.0
     ],
     "headPosOnShooting": [
       2.0,
-      0.28,
+      0.262,
       0.0
     ],
     "lightPos": [
-      1.979847,
-      -0.213676,
-      -0.012096
+      2.392535,
+      -0.12,
+      -0.0
     ],
     "lightColor": [
       0.0,
@@ -1282,6 +1281,10 @@
         1.0
       ],
       "throttle": [
+        0.0,
+        1.0
+      ],
+      "throttle1": [
         0.0,
         1.0
       ],
@@ -1334,18 +1337,10 @@
         360.0
       ],
       "aviahorizon_pitch": [
-        -60.0,
-        60.0
+        -90.0,
+        90.0
       ],
       "aviahorizon_roll": [
-        -180.0,
-        180.0
-      ],
-      "aviahorizon_pitch1": [
-        -60.0,
-        60.0
-      ],
-      "aviahorizon_roll1": [
         -180.0,
         180.0
       ],
@@ -1363,11 +1358,7 @@
       ],
       "fuel": [
         0.0,
-        800.0
-      ],
-      "fuel1": [
-        0.0,
-        80.0
+        998.0
       ],
       "fuel_pressure": [
         0.0,
@@ -1379,7 +1370,7 @@
       ],
       "speed": [
         0.0,
-        128.61
+        128.611
       ],
       "vario": [
         -30.48,
@@ -1398,18 +1389,26 @@
         60.0
       ],
       "water_temperature": [
-        100.0,
-        1200.0
+        0.0,
+        1000.0
       ],
       "water_temperature1": [
-        100.0,
-        1200.0
+        0.0,
+        1000.0
       ],
       "oil_temperature": [
+        0.0,
+        200.0
+      ],
+      "oil_temperature1": [
+        0.0,
+        200.0
+      ],
+      "oil_temperature_transmission": [
         -50.0,
         150.0
       ],
-      "oil_temperature1": [
+      "oil_temperature_transmission1": [
         -50.0,
         150.0
       ],
@@ -1421,17 +1420,25 @@
         0.0,
         100.0
       ],
+      "oil_pressure_transmission": [
+        0.0,
+        100.0
+      ],
+      "oil_pressure_transmission1": [
+        0.0,
+        100.0
+      ],
       "rpm": [
         0.0,
-        8500.0
+        22200.0
       ],
       "rpm1": [
         0.0,
-        8500.0
+        22200.0
       ],
       "rpm_hour": [
         0.0,
-        7000.0
+        25500.0
       ],
       "rpm_min": [
         0.0,
@@ -1439,15 +1446,27 @@
       ],
       "rpm1_hour": [
         0.0,
-        7000.0
+        25500.0
       ],
       "rpm1_min": [
         0.0,
         1000.0
       ],
+      "propeller_torque": [
+        0.0,
+        5.0
+      ],
+      "engine_torque": [
+        0.0,
+        5.0
+      ],
+      "engine_torque1": [
+        0.0,
+        5.0
+      ],
       "prop_rpm": [
         0.0,
-        350.0
+        385.0
       ],
       "altitude_10k": [
         0.0,
@@ -1459,7 +1478,7 @@
       ],
       "altitude_min": [
         0.0,
-        100.0
+        1000.0
       ],
       "altitude_min1": [
         0.0,
@@ -1467,465 +1486,15 @@
       ],
       "radio_altitude": [
         0.0,
-        1000.0
+        10000.0
       ],
-      "altitude_koef": 3.28
+      "altitude_koef": 3.28,
+      "carb_temperature": [
+        -45.0,
+        35.0
+      ]
     },
     "multifunctionDisplays": {
-      "display": {
-        "textureArea": [
-          0.0,
-          0.5,
-          0.5,
-          0.5
-        ],
-        "monoDisplayColor": [
-          0.4,
-          0.8,
-          0.4
-        ],
-        "page": {
-          "type": "map",
-          "turretIdx": 0
-        },
-        "page": {
-          "type": "devices",
-          "speed": {
-            "texture": "us_mfd_speed",
-            "position": [
-              120.0,
-              160.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "backgroundTexCoord": [
-              0.32,
-              0.51,
-              0.61,
-              0.61
-            ],
-            "size": [
-              79.0,
-              25.0
-            ],
-            "color": [0, 255, 0, 255],
-            "valueTextSize": 1.0,
-            "valueMul": 0.539957,
-            "ranges": {
-              "limits": [
-                50.0,
-                100.0,
-                -0.24,
-                -0.24
-              ],
-              "limits": [
-                100.0,
-                150.0,
-                0.3,
-                0.3
-              ],
-              "limits": [
-                150.0,
-                200.0,
-                0.69,
-                0.69
-              ],
-              "limits": [
-                200.0,
-                250.0,
-                1.0,
-                1.0
-              ]
-            }
-          },
-          "speed": {
-            "texture": "us_mfd_speed",
-            "position": [
-              120.0,
-              110.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.01,
-              0.0,
-              0.0
-            ],
-            "size": [
-              1.0,
-              1.0
-            ],
-            "color": [0, 255, 0, 255],
-            "valueTextSize": 60.0,
-            "valueMul": 0.539957,
-            "notDrawBackground": true,
-            "ranges": {
-              "limits": [
-                50.0,
-                100.0,
-                -0.24,
-                -0.24
-              ],
-              "limits": [
-                100.0,
-                150.0,
-                0.3,
-                0.3
-              ],
-              "limits": [
-                150.0,
-                200.0,
-                0.69,
-                0.69
-              ],
-              "limits": [
-                200.0,
-                250.0,
-                1.0,
-                1.0
-              ]
-            }
-          },
-          "vario": {
-            "texture": "us_mfd_vario",
-            "position": [
-              552.0,
-              160.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "backgroundTexCoord": [
-              0.3,
-              0.22,
-              0.58,
-              0.58
-            ],
-            "size": [
-              79.0,
-              25.0
-            ],
-            "color": [0, 255, 0, 255],
-            "valueTextSize": 1.0,
-            "valueMul": 0.19685,
-            "ranges": {
-              "limits": [
-                -6.0,
-                -4.0,
-                0.05,
-                0.05
-              ],
-              "limits": [
-                -4.0,
-                -2.0,
-                0.22,
-                0.22
-              ],
-              "limits": [
-                -2.0,
-                -1.0,
-                0.56,
-                0.56
-              ],
-              "limits": [
-                -1.0,
-                1.0,
-                0.72,
-                0.72
-              ],
-              "limits": [
-                1.0,
-                2.0,
-                1.28,
-                1.28
-              ],
-              "limits": [
-                2.0,
-                4.0,
-                1.44,
-                1.44
-              ],
-              "limits": [
-                4.0,
-                6.0,
-                1.78,
-                1.78
-              ]
-            }
-          },
-          "vario": {
-            "texture": "us_mfd_vario",
-            "position": [
-              552.0,
-              110.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "size": [
-              1.0,
-              1.0
-            ],
-            "color": [0, 255, 0, 255],
-            "valueTextSize": 60.0,
-            "valueMul": 196.85,
-            "ranges": {
-              "limits": [
-                -6.0,
-                -4.0,
-                0.05,
-                0.05
-              ],
-              "limits": [
-                -4.0,
-                -2.0,
-                0.22,
-                0.22
-              ],
-              "limits": [
-                -2.0,
-                -1.0,
-                0.56,
-                0.56
-              ],
-              "limits": [
-                -1.0,
-                1.0,
-                0.72,
-                0.72
-              ],
-              "limits": [
-                1.0,
-                2.0,
-                1.28,
-                1.28
-              ],
-              "limits": [
-                2.0,
-                4.0,
-                1.44,
-                1.44
-              ],
-              "limits": [
-                4.0,
-                6.0,
-                1.78,
-                1.78
-              ]
-            }
-          },
-          "altitude_hour": {
-            "texture": "us_mfd_altitude",
-            "position": [
-              552.0,
-              360.0
-            ],
-            "backgroundTexCoord": [
-              0.37,
-              0.21,
-              0.54,
-              0.54
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "size": [
-              58.0,
-              30.0
-            ],
-            "color": [255, 255, 0, 255],
-            "valueTextSize": 1.0,
-            "notDrawBackground": false,
-            "ranges": {
-              "limits": [
-                0.0,
-                1000.0,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
-          "altitude_min": {
-            "texture": "us_mfd_altitude",
-            "position": [
-              552.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "size": [
-              1.0,
-              1.0
-            ],
-            "color": [0, 255, 0, 255],
-            "valueTextSize": 60.0,
-            "valueMul": 3.2808,
-            "notDrawBackground": true,
-            "ranges": {
-              "limits": [
-                0.0,
-                1000.0,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
-          "compass": {
-            "texture": "us_mfd_compass",
-            "position": [
-              130.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.01,
-              0.01,
-              0.01
-            ],
-            "valueTextSize": 60.0,
-            "color": [0, 255, 0, 255],
-            "size": [
-              1.0,
-              1.0
-            ],
-            "arrowSize": [
-              1.0,
-              1.0
-            ],
-            "ranges": {
-              "limits": [
-                0.0,
-                360.0,
-                0.0,
-                0.0
-              ]
-            }
-          },
-          "aviahorizon_pitch": {
-            "arrowTex": "us_mfd_ahorizon_scale",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.4,
-              1.0,
-              1.0
-            ],
-            "size": [
-              300.0,
-              300.0
-            ],
-            "notDrawBackground": false,
-            "ranges": {
-              "limits": [
-                -90.0,
-                90.0,
-                0.35,
-                0.35
-              ]
-            }
-          },
-          "aviahorizon_roll": {
-            "texture": "us_mfd_ahorizon_body",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "backgroundTexCoord": [
-              0.11,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "size": [
-              300.0,
-              300.0
-            ],
-            "notDrawBackground": false,
-            "ranges": {
-              "limits": [
-                -180.0,
-                180.0,
-                -1.0,
-                -1.0
-              ]
-            }
-          },
-          "aviahorizon_roll": {
-            "texture": "us_mfd_ahorizon",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "arrowTexCoord": [
-              0.2,
-              0.9,
-              0.8,
-              0.8
-            ],
-            "size": [
-              300.0,
-              300.0
-            ],
-            "notDrawBackground": false,
-            "ranges": {
-              "limits": [
-                -180.0,
-                180.0,
-                -1.0,
-                -1.0
-              ]
-            }
-          }
-        },
-        "page": {
-          "type": "rwr",
-          "scale": 1.0,
-          "hideRwrBackground": true
-        }
-      },
       "display": {
         "textureArea": [
           0.5,
@@ -1936,7 +1505,7 @@
         "page": {
           "type": "rwr",
           "scale": 1.0,
-          "hideRwrBackground": true
+          "hideBackground": true
         }
       },
       "display": {
@@ -1950,8 +1519,8 @@
           "type": "plane_ils",
           "ilsNode": "ils",
           "ilsSize": [
-            0.13,
-            0.13
+            0.2,
+            0.2
           ],
           "ilsOffsetForce": 0.0,
           "brightnessMult": 3.5,
@@ -2237,35 +1806,39 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare3",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare5",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare4",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare6",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         }
       },
       "WeaponPreset": {
@@ -2405,35 +1978,39 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare3",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare5",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare4",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare6",
           "bullets": 30,
           "external": true,
-          "separate": true
+          "separate": true,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -2457,7 +2034,6 @@
       "WeaponPreset": {
         "iconType": "nar_ap_large",
         "name": "aero_7a",
-        "reqModification": "ah_1_m200_2",
         "Weapon": {
           "trigger": "rockets",
           "external": true,
@@ -2599,7 +2175,6 @@
       "WeaponPreset": {
         "iconType": "nar_ap_large",
         "name": "aero_7a",
-        "reqModification": "ah_1_m200_2",
         "Weapon": {
           "trigger": "rockets",
           "external": true,
@@ -2688,7 +2263,6 @@
       "WeaponPreset": {
         "iconType": "nar_ap_large",
         "name": "aero_7a",
-        "reqModification": "ah_1_m200_2",
         "Weapon": {
           "trigger": "rockets",
           "external": true,
@@ -2777,7 +2351,6 @@
       "WeaponPreset": {
         "iconType": "nar_ap_large",
         "name": "aero_7a",
-        "reqModification": "ah_1_m200_2",
         "Weapon": {
           "trigger": "rockets",
           "external": true,
@@ -2927,7 +2500,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -2996,11 +2618,8 @@
       "tier": 3,
       "invertEnableLogic": false
     },
-    "maw_countermeasures_launcher_chaff_only": {    },
-    "maw_countermeasures_launcher_flare_only": {    },
-    "maw_countermeasures_launcher_chaff_priority": {    },
-    "maw_countermeasures_launcher_flare_priority": {    },
-    "MAW_system_heli_false_thermal_targets": {
+    "maw_countermeasures_launcher_chaff": {    },
+    "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "armor",
       "turn_it_off": false,
       "tier": 1,
@@ -3030,7 +2649,7 @@
     },
     "heli_counterMeasures": {
       "modClass": "armor",
-      "reqModification": "MAW_system_heli_false_thermal_targets",
+      "reqModification": "MAW_system_heli_false_thermal_targets_large",
       "turn_it_off": false,
       "invertEnableLogic": false,
       "tier": 2,
@@ -3120,13 +2739,7 @@
       "tier": 4,
       "modClass": "weapon"
     },
-    "ah_1_m200_2": {
-      "deactivationIsAllowed": false,
-      "modClass": "weapon",
-      "tier": 2
-    },
     "f4c_zuni": {
-      "reqModification": "ah_1_m200_2",
       "tier": 3,
       "modClass": "weapon"
     },

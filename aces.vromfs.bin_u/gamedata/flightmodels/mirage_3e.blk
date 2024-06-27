@@ -95,7 +95,7 @@
         "hp": 95.5
       },
       "fuse_dm": {
-        "hp": 72.8
+        "hp": 87.3
       },
       "tail_dm": {
         "genericDamageMult": 0.5,
@@ -206,6 +206,9 @@
       }
     },
     "steel_tank_armor": {
+      "tank10_dm": {
+        "hp": 120.5
+      },
       "tank1_dm": {
         "hp": 120.5
       },
@@ -229,6 +232,9 @@
       },
       "tank8_dm": {
         "hp": 97.5
+      },
+      "tank9_dm": {
+        "hp": 120.5
       }
     },
     "wood": {
@@ -889,6 +895,43 @@
       "name": "tailcontrol_dm"
     },
     "part": {
+      "name": "tank10_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
       "name": "tank1_dm",
       "onHit": {
         "fire": 0.0001,
@@ -1149,6 +1192,43 @@
     },
     "part": {
       "name": "tank8_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank9_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3
@@ -2019,6 +2099,187 @@
         0.0
       ]
     },
+    "rwr": {
+      "type": "rwr",
+      "name": "Mirage Detecteur",
+      "power": 250.0,
+      "txAngle": [
+        5.0,
+        15.0
+      ],
+      "txSidelobes": -30.0,
+      "rxAngle": [
+        180.0,
+        90.0
+      ],
+      "range": 50000.0,
+      "signalSfxName": "alarm_radar",
+      "band8": true,
+      "band9": true,
+      "detectTracking": false,
+      "targetTracking": false,
+      "mandatoryRecognition": false,
+      "receivers": {
+        "receiver": {
+          "azimuth": 0.0,
+          "elevation": 0.0,
+          "azimuthWidth": 120.0,
+          "elevationWidth": 90.0,
+          "angleFinder": false
+        },
+        "receiver": {
+          "azimuth": -110.0,
+          "elevation": 0.0,
+          "azimuthWidth": 100.0,
+          "elevationWidth": 90.0,
+          "angleFinder": false
+        },
+        "receiver": {
+          "azimuth": 110.0,
+          "elevation": 0.0,
+          "azimuthWidth": 100.0,
+          "elevationWidth": 90.0,
+          "angleFinder": false
+        },
+        "receiver": {
+          "azimuth": 180.0,
+          "elevation": 0.0,
+          "azimuthWidth": 120.0,
+          "elevationWidth": 90.0,
+          "angleFinder": false
+        }
+      },
+      "groups": {
+        "group": {
+          "name": "Pulse + CW",
+          "search": false,
+          "track": false,
+          "launch": true,
+          "type": "AN/APQ-51",
+          "type": "AN/APQ-72",
+          "type": "AN/APQ-100",
+          "type": "AN/APQ-120",
+          "type": "AN/APG-59",
+          "type": "AN/ASG-14",
+          "type": "NASARR",
+          "type": "US R21G M1",
+          "type": "Type 208A",
+          "type": "Sapphire-23d_tp_23",
+          "type": "Sapphire-23ml_tp_23m",
+          "type": "Sapphire-23mla_tp_23m",
+          "type": "Sapphire-23mla-2_tp_23m"
+        },
+        "group": {
+          "name": "Pulse Doppler",
+          "block": true,
+          "search": true,
+          "track": true,
+          "launch": false,
+          "type": "AN/APG-66",
+          "type": "AN/APG-66(V)1",
+          "type": "AN/APG-66(V)3",
+          "type": "AN/APG-66J",
+          "type": "AN/APG-68(V)5",
+          "type": "AN/APG-68(V)7",
+          "type": "AN/APG-68(V)9",
+          "type": "AN/APG-63",
+          "type": "AN/APG-63(V)1",
+          "type": "AN/APG-65Q",
+          "type": "AN/APG-67",
+          "type": "AN/APG-76 / AN/ASX-1",
+          "type": "Thales RDY",
+          "type": "N001",
+          "type": "N001VEP",
+          "type": "N019_S31",
+          "type": "N010 Zhuk",
+          "type": "N010M Zhuk-M",
+          "type": "ELTA EL/M-2001B",
+          "type": "PS-371A",
+          "type": "PS-37A",
+          "type": "PS-46A",
+          "type": "PS-05A",
+          "type": "Ferranti Blue Vixen",
+          "type": "AN/APG-59",
+          "type": "AN/AWG-9",
+          "type": "AN/AWG-9 / AN/AXX-1 TCS",
+          "type": "Thomson-CSF RDI",
+          "type": "Thomson-CSF RDM-3",
+          "type": "marconi_ai_mk24",
+          "type": "marconi_ai_mk24z",
+          "type": "AI.24 Foxhunter Stage 2G",
+          "type": "weapon"
+        },
+        "group": {
+          "name": "Pulse Doppler + CW",
+          "search": false,
+          "track": false,
+          "launch": true,
+          "type": "AN/APG-66",
+          "type": "AN/APG-66(V)1",
+          "type": "AN/APG-66(V)3",
+          "type": "AN/APG-66J",
+          "type": "AN/APG-68(V)5",
+          "type": "AN/APG-68(V)7",
+          "type": "AN/APG-68(V)9",
+          "type": "AN/APG-63",
+          "type": "AN/APG-63(V)1",
+          "type": "AN/APG-65Q",
+          "type": "AN/APG-67",
+          "type": "AN/APG-76 / AN/ASX-1",
+          "type": "Thales RDY",
+          "type": "N001",
+          "type": "N001VEP",
+          "type": "N019_S31",
+          "type": "N010 Zhuk",
+          "type": "N010M Zhuk-M",
+          "type": "ELTA EL/M-2001B",
+          "type": "PS-371A",
+          "type": "PS-37A",
+          "type": "PS-46A",
+          "type": "PS-05A",
+          "type": "Ferranti Blue Vixen",
+          "type": "AN/APG-59",
+          "type": "AN/AWG-9",
+          "type": "AN/AWG-9 / AN/AXX-1 TCS",
+          "type": "Thomson-CSF RDI",
+          "type": "Thomson-CSF RDM-3",
+          "type": "marconi_ai_mk24",
+          "type": "marconi_ai_mk24z",
+          "type": "AI.24 Foxhunter Stage 2G",
+          "type": "weapon"
+        }
+      },
+      "targetsPresenceGroups": {
+        "targetsPresenceGroup": {
+          "text": "hud/rwr_threat_pulse",
+          "default": true,
+          "group": "Pulse + CW"
+        },
+        "targetsPresenceGroup": {
+          "text": "hud/rwr_threat_cw",
+          "group": "Pulse + CW",
+          "group": "Pulse Doppler + CW"
+        }
+      },
+      "directionLamps": {
+        "directionLamp": {
+          "receiver": 0,
+          "lamp": 0
+        },
+        "directionLamp": {
+          "receiver": 1,
+          "lamp": 1
+        },
+        "directionLamp": {
+          "receiver": 2,
+          "lamp": 2
+        },
+        "directionLamp": {
+          "receiver": 3,
+          "lamp": 3
+        }
+      }
+    },
     "multifunctionDisplays": {
       "display": {
         "textureArea": [
@@ -2161,7 +2422,9 @@
     "HideDmParts": {
       "node": "cannon1_dm",
       "node": "cannon2_dm",
-      "node": "tank7_dm"
+      "node": "tank7_dm",
+      "node": "tank9_dm",
+      "node": "tank10_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2173,9 +2436,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
-          "bullets": 60,
+          "bullets": 30,
+          "bulletsCartridge": 1,
+          "external": true,
+          "separate": true
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
+          "emitter": "emtr_flare1",
+          "bullets": 15,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -2250,6 +2523,25 @@
           "blk": "gameData/Weapons/containers/jl_100r_fr_matra_sneb_type23.blk",
           "emitter": "matra_jl100r_001",
           "external": true
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_1700_slot2",
+        "showInWeaponMenu": true,
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/fr_1700l_rp30_mirage_3e_drop_tank_1.blk",
+          "emitter": "1700l_rp30_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 6,
+          "preset": "ptb_1700_slot6"
         }
       }
     },
@@ -2490,6 +2782,25 @@
           "emitter": "matra_jl100r_002",
           "external": true
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_1700_slot6",
+        "showInWeaponMenu": true,
+        "ShowDmParts": {
+          "node": "tank10_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/fr_1700l_rp30_mirage_3e_drop_tank_2.blk",
+          "emitter": "1700l_rp30_drop_tank_002",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 2,
+          "preset": "ptb_1700_slot2"
+        }
       }
     },
     "WeaponSlot": {
@@ -2699,10 +3010,8 @@
       "modClass": "weapon",
       "tier": 3
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff_large": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "weapon",
       "turn_it_off": false,

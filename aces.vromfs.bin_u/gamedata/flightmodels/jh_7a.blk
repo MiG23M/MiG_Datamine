@@ -12,7 +12,6 @@
   "gyroSight": true,
   "haveCCIPForGun": true,
   "haveCCRPForBombs": true,
-  "hasOpticTurret": true,
   "havePointOfInterestDesignator": true,
   "hasPointOfInterestMemory": true,
   "ilsJ8HK": true,
@@ -249,6 +248,15 @@
       },
       "tank5_dm": {
         "hp": 87.4
+      },
+      "tank6_dm": {
+        "hp": 120.5
+      },
+      "tank7_dm": {
+        "hp": 120.5
+      },
+      "tank8_dm": {
+        "hp": 120.5
       }
     }
   },
@@ -1067,6 +1075,117 @@
     },
     "part": {
       "name": "tank5_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank6_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank7_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank8_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3
@@ -2162,9 +2281,15 @@
         ],
         "cameraFromTargetingPod": true,
         "page": {
-          "type": "radar",
-          "scale": 0.95,
-          "hideRadarBackground": true
+          "type": "thermal",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "target_tracking",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "ils_on_camera"
         },
         "page": {
           "type": "rwr",
@@ -2173,18 +2298,36 @@
         },
         "page": {
           "type": "map",
-          "hideRadarBackground": true
+          "hideBackground": true
         },
         "page": {
-          "type": "ils_on_camera"
-        },
-        "page": {
-          "type": "thermal",
-          "turretIdx": 0
-        },
-        "page": {
-          "type": "target_tracking",
-          "turretIdx": 0
+          "type": "radar",
+          "font": "usa_ils",
+          "fontScale": 0.65,
+          "scale": 0.9,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "hasAviaHorizont": true,
+          "hideBackground": true,
+          "hideScale": false,
+          "hideHorAngle": false,
+          "hideVerAngle": false,
+          "netRowCnt": 4,
+          "netColor": [
+    0,
+    255,
+    0,
+],
+          "hideWeaponIndication": true,
+          "modeColor": [
+    0,
+    255,
+    0,
+],
+          "centerRadar": true
         }
       },
       "display": {
@@ -2194,17 +2337,35 @@
           1.0,
           1.0
         ],
-        "cameraFromTargetingPod": true,
+        "cameraFromShell": true,
         "page": {
-          "type": "thermal",
-          "turretIdx": 0
-        },
-        "page": {
-          "type": "target_tracking",
-          "turretIdx": 0
-        },
-        "page": {
-          "type": "ils_on_camera"
+          "type": "radar",
+          "font": "usa_ils",
+          "fontScale": 0.65,
+          "scale": 0.9,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "hasAviaHorizont": true,
+          "hideBackground": true,
+          "hideScale": false,
+          "hideHorAngle": false,
+          "hideVerAngle": false,
+          "netRowCnt": 4,
+          "netColor": [
+    0,
+    255,
+    0,
+],
+          "hideWeaponIndication": true,
+          "modeColor": [
+    0,
+    255,
+    0,
+],
+          "centerRadar": true
         },
         "page": {
           "type": "rwr",
@@ -2213,12 +2374,14 @@
         },
         "page": {
           "type": "map",
-          "hideRadarBackground": true
+          "hideBackground": true
         },
         "page": {
-          "type": "radar",
-          "scale": 0.95,
-          "hideRadarBackground": true
+          "type": "ils_on_camera"
+        },
+        "page": {
+          "type": "target_tracking",
+          "turretIdx": 0
         }
       },
       "display": {
@@ -2251,24 +2414,6 @@
     }
   },
   "gunnerOpticFps": {
-    "Target": {
-      "pos": [
-        -0.8,
-        -1.2,
-        -0.5
-      ],
-      "head": "optic1_turret",
-      "crosshairPreset": "test_crosshair",
-      "angularLimits": [
-        -90.0,
-        90.0,
-        -155.0,
-        -155.0
-      ],
-      "opticType": "targeting",
-      "turretNo": 0,
-      "nvIndex": 1
-    },
     "TV": {
       "pos": [
         1.2,
@@ -2284,8 +2429,26 @@
         -30.0
       ],
       "opticType": "tv",
-      "turretNo": 1,
+      "turretNo": 0,
       "name": "KH-29T"
+    },
+    "Target": {
+      "pos": [
+        -6.3,
+        -0.7,
+        -0.7
+      ],
+      "head": "optic2_turret",
+      "crosshairPreset": "test_crosshair",
+      "angularLimits": [
+        -90.0,
+        90.0,
+        -155.0,
+        -155.0
+      ],
+      "opticType": "targeting",
+      "turretNo": 0,
+      "nvIndex": 1
     }
   },
   "nightVision": {
@@ -2426,42 +2589,20 @@
       "node": "aku_58_fin3_b002",
       "node": "aku_58_fin4_b002",
       "node": "aku_58_fin5_b002",
-      "node": "aku_58_fin6_b002"
+      "node": "aku_58_fin6_b002",
+      "node": "1140l_drop_tank_pylon_001",
+      "node": "1140l_drop_tank_pylon_002"
+    },
+    "HideDmParts": {
+      "node": "tank6_dm",
+      "node": "tank7_dm",
+      "node": "tank8_dm"
     },
     "WeaponSlot": {
       "index": 0,
       "notUseforDisbalanceCalculation": true,
       "WeaponPreset": {
         "name": "type_23_3_common",
-        "Weapon": {
-          "dummy": true,
-          "trigger": "gunner0",
-          "triggerGroup": "primary",
-          "blk": "gameData/Weapons/dummy_weapon.blk",
-          "emitter": "optic1_gun",
-          "defaultYaw": 0.0,
-          "defaultPitch": 0.0,
-          "speedYaw": 200.0,
-          "speedPitch": 200.0,
-          "parkInDeadzone": true,
-          "aimForOperatedShell": true,
-          "turret": {
-            "head": "optic1_turret",
-            "gun": "optic1_gun",
-            "mainTurret": true,
-            "playerControllable": false
-          },
-          "limits": {
-            "yaw": [
-              -90.0,
-              90.0
-            ],
-            "pitch": [
-              -90.0,
-              90.0
-            ]
-          }
-        },
         "Weapon": {
           "dummy": true,
           "trigger": "gunner0",
@@ -2477,8 +2618,7 @@
           "turret": {
             "head": "optic2_turret",
             "gun": "optic2_gun",
-            "mainTurret": true,
-            "playerControllable": false
+            "mainTurret": true
           },
           "limits": {
             "yaw": [
@@ -2504,17 +2644,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 42,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 42,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -2845,6 +2987,24 @@
           "slot": 5,
           "preset": "k_adc03a"
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot3",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "1140l_drop_tank_pylon_002"
+        },
+        "ShowDmParts": {
+          "node": "tank7_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/cn_1400l_fyx1400_drop_tank_1.blk",
+          "emitter": "1140l_drop_tank_002",
+          "bullets": 1,
+          "external": true
+        }
       }
     },
     "WeaponSlot": {
@@ -3057,6 +3217,30 @@
           "blk": "gameData/Weapons/equipment/cn_k_adc03a_targeting_pod.blk",
           "emitter": "flare1",
           "bullets": 1
+        }
+      }
+    },
+    "WeaponSlot": {
+      "index": 6,
+      "tier": 6,
+      "order": 10,
+      "notUseforDisbalanceCalculation": true,
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot6",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "1140l_drop_tank_pylon_001"
+        },
+        "ShowDmParts": {
+          "node": "tank6_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/cn_1400l_fyx1400_drop_tank_3.blk",
+          "emitter": "1140l_drop_tank_001",
+          "bullets": 1,
+          "external": true
         }
       }
     },
@@ -3415,6 +3599,24 @@
         "DependentWeaponPreset": {
           "slot": 5,
           "preset": "k_adc03a"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot8",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "1140l_drop_tank_pylon_003"
+        },
+        "ShowDmParts": {
+          "node": "tank8_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/cn_1400l_fyx1400_drop_tank_2.blk",
+          "emitter": "1140l_drop_tank_003",
+          "bullets": 1,
+          "external": true
         }
       }
     },
@@ -3824,10 +4026,7 @@
       "tier": 4,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff_large": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,

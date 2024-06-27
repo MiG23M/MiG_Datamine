@@ -34,6 +34,7 @@ excludesdata =
     key = "h",
     arr =
     [
+      "homochka",
       "hor[adimnorstu]",
     ]
   },
@@ -42,6 +43,13 @@ excludesdata =
     arr =
     [
       "japan"
+    ]
+  },
+  {
+    key = "k",
+    arr =
+    [
+      "^kukuruz"
     ]
   },
   {
@@ -253,7 +261,6 @@ fouldata =
       "^fujinoyamai",
       "^fupa",
       "^fxuxcxk",
-      "^fu$"
     ]
   },
   {
@@ -680,10 +687,12 @@ fouldata =
 
 badphrases =
 [
+  "h[i1İl]tl[e3]r"
 ]
 
 badcombination =
 [
+  "14.{0,3}88",
   "bin laden",
   "coon hunt",
   "coon kill",
@@ -719,6 +728,7 @@ badcombination =
   "succhia cazzi",
   "tea bag",
   "testa di cazzo",
+  "waffen.?ss",
   "white power",
   "xbl pet",
   "8(=)+[d@]",

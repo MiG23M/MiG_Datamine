@@ -101,9 +101,6 @@
       }
     },
     "c_dural15": {
-      "fin_dm": {
-        "hp": 84.5
-      },
       "fuse_dm": {
         "hp": 125.5
       }
@@ -112,6 +109,9 @@
       "elevator_dm": {
         "genericDamageMult": 0.3,
         "hp": 30.5
+      },
+      "fin_dm": {
+        "hp": 50.5
       }
     },
     "dural": {
@@ -327,63 +327,27 @@
     "part": {
       "name": "fin_dm",
       "onHit": {
-        "flame": 0.2,
-        "smoke": 0.2
+        "damage": 30.0,
+        "cut": 0.6
       },
       "onHit": {
-        "damage": 50.0,
-        "tail_dm": 0.6
-      },
-      "onHit": {
-        "damage": 70.0,
-        "tail_dm": 0.8
-      },
-      "onHit": {
-        "damage": 100.0,
-        "tail_dm": 1.0
-      },
-      "onKill": {
-        "tail_dm": 1.0,
-        "nothing": 12.0
-      },
-      "onKill": {
-        "damage": 3.0,
-        "tail_dm": 1.0,
-        "nothing": 9.0
-      },
-      "onKill": {
-        "damage": 7.0,
-        "tail_dm": 1.0,
-        "nothing": 8.0
+        "damage": 65.0,
+        "cut": 1.0
       },
       "onKill": {
         "damage": 10.0,
-        "tail_dm": 1.0,
-        "nothing": 7.0
+        "cut": 1.0,
+        "nothing": 11.0
       },
       "onKill": {
-        "damage": 20.0,
-        "tail_dm": 1.0,
-        "nothing": 6.0
-      },
-      "onKill": {
-        "damage": 30.0,
-        "tail_dm": 1.0,
-        "nothing": 5.0
-      },
-      "onKill": {
-        "damage": 50.0,
-        "tail_dm": 1.0,
-        "nothing": 4.0
-      },
-      "onKill": {
-        "damage": 70.0,
-        "tail_dm": 1.0,
+        "damage": 31.0,
+        "cut": 1.0,
         "nothing": 3.0
       },
       "onKill": {
-        "damage": 100.0,
-        "tail_dm": 1.0
+        "damage": 50.0,
+        "cut": 1.0,
+        "nothing": 0.0
       }
     },
     "part": {
@@ -1878,24 +1842,27 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
-          "external": true
+          "external": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare3",
           "bullets": 30,
-          "external": true
+          "external": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
-          "external": true
+          "external": true,
+          "bulletsCartridge": 1
         }
       },
       "WeaponPreset": {
@@ -1933,24 +1900,27 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
-          "external": true
+          "external": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare3",
           "bullets": 30,
-          "external": true
+          "external": true,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
-          "external": true
+          "external": true,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -2624,11 +2594,8 @@
       "tier": 3,
       "enabled": false
     },
-    "maw_countermeasures_launcher_chaff_only": {    },
-    "maw_countermeasures_launcher_flare_only": {    },
-    "maw_countermeasures_launcher_chaff_priority": {    },
-    "maw_countermeasures_launcher_flare_priority": {    },
-    "MAW_system_heli_false_thermal_targets": {
+    "maw_countermeasures_launcher_chaff": {    },
+    "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "weapon",
       "turn_it_off": false,
       "tier": 1,
@@ -2657,11 +2624,11 @@
       }
     },
     "heli_counterMeasures": {
-      "reqModification": "MAW_system_heli_false_thermal_targets",
+      "reqModification": "MAW_system_heli_false_thermal_targets_large",
       "modClass": "weapon",
       "turn_it_off": false,
       "invertEnableLogic": false,
-      "prevModification": "MAW_system_heli_false_thermal_targets",
+      "prevModification": "MAW_system_heli_false_thermal_targets_large",
       "tier": 2,
       "group": "countermeasures",
       "effects": {

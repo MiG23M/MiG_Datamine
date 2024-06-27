@@ -10,6 +10,7 @@
   "haveCCRPForGun": false,
   "haveCCRPForTurret": true,
   "ils28K": true,
+  "mfdCamShkvalKa52": true,
   "gearSinkRangeLR": 0.287,
   "gearSinkRangeC": 0.237,
   "tpsCameraTargetOffsetAtZoom": [
@@ -1309,7 +1310,6 @@
     }
   },
   "cockpit": {
-    "textToShowInCockpit": "msg/textToShowInCockpit",
     "headPos": [
       1.5,
       1.15,
@@ -1336,6 +1336,7 @@
     "sightFov": 0.5,
     "sightOutFov": 20.0,
     "sightInFov": 1.0,
+    "mfdCamShkvalKa52": true,
     "devices": {
       "stick_ailerons": [
         -1.0,
@@ -1405,37 +1406,13 @@
         -90.0,
         90.0
       ],
-      "aviahorizon_pitch1": [
-        -90.0,
-        90.0
-      ],
-      "aviahorizon_roll1": [
-        -90.0,
-        90.0
-      ],
       "bank": [
-        -1.0,
-        1.0
-      ],
-      "bank1": [
         -1.0,
         1.0
       ],
       "turn": [
         -45.0,
         45.0
-      ],
-      "g_meter": [
-        -2.0,
-        4.0
-      ],
-      "g_meter_min": [
-        -2.0,
-        4.0
-      ],
-      "g_meter_max": [
-        -2.0,
-        4.0
       ],
       "clock_hour": [
         0.0,
@@ -1473,46 +1450,22 @@
         0.0,
         1000.0
       ],
-      "altitude_min1": [
+      "radio_altitude": [
         0.0,
-        800.0
+        300.0
       ],
       "altitude_koef": 1.0,
-      "head_temperature": [
-        0.0,
-        1200.0
+      "g_meter": [
+        -2.0,
+        4.0
       ],
-      "head_temperature1": [
-        0.0,
-        1200.0
+      "g_meter_min": [
+        -2.0,
+        4.0
       ],
-      "water_temperature": [
-        0.0,
-        1000.0
-      ],
-      "water_temperature1": [
-        0.0,
-        1000.0
-      ],
-      "oil_pressure": [
-        0.0,
-        8.0
-      ],
-      "oil_pressure1": [
-        0.0,
-        8.0
-      ],
-      "oil_temperature": [
-        -50.0,
-        150.0
-      ],
-      "oil_temperature1": [
-        -50.0,
-        150.0
-      ],
-      "fuel1": [
-        0.0,
-        2500.0
+      "g_meter_max": [
+        -2.0,
+        4.0
       ],
       "rpm": [
         0.0,
@@ -1522,9 +1475,9 @@
         0.0,
         15400.0
       ],
-      "gears_lamp": [
+      "prop_rpm": [
         0.0,
-        0.0
+        275.0
       ]
     },
     "multifunctionDisplays": {
@@ -1535,12 +1488,6 @@
           0.5,
           0.5
         ],
-        "page": {
-          "type": "map"
-        },
-        "page": {
-          "type": "rwr"
-        },
         "page": {
           "type": "devices",
           "speed": {
@@ -1803,6 +1750,17 @@
               ]
             }
           }
+        },
+        "page": {
+          "type": "map"
+        },
+        "page": {
+          "type": "rwr",
+          "circleCnt": 1,
+          "angleMarkStep": 30.0,
+          "hidePlaneSymbol": true,
+          "hasCompass": true,
+          "scale": 0.7
         }
       },
       "display": {
@@ -1817,6 +1775,10 @@
           0.9,
           0.8
         ],
+        "page": {
+          "type": "thermal",
+          "turretIdx": 0
+        },
         "page": {
           "type": "target_tracking",
           "turretIdx": 0
@@ -2087,8 +2049,12 @@
           }
         },
         "page": {
-          "type": "thermal",
-          "turretIdx": 0
+          "type": "rwr",
+          "circleCnt": 1,
+          "angleMarkStep": 30.0,
+          "hidePlaneSymbol": true,
+          "hasCompass": true,
+          "scale": 0.7
         }
       },
       "display": {
@@ -2133,7 +2099,7 @@
       "node": "optic1_gun"
     },
     "sensor": {
-      "blk": "gameData/sensors/su_spo-15.blk"
+      "blk": "gameData/sensors/su_spo-150.blk"
     }
   },
   "gunnerFps": {
@@ -2292,17 +2258,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2561,7 +2529,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -2671,10 +2688,7 @@
       "modClass": "weapon",
       "tier": 4
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "weapon",
       "turn_it_off": false,

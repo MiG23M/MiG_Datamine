@@ -1,7 +1,9 @@
 from "%scripts/dagui_natives.nut" import get_option_xray_kill
 from "%scripts/dagui_library.nut" import *
 from "hitCamera" import *
+from "app" import is_dev_version
 
+let u = require("%sqStdLibs/helpers/u.nut")
 let { get_mission_time } = require("mission")
 let { g_hud_enemy_debuffs } = require("%scripts/hud/hudEnemyDebuffsType.nut")
 let { g_hud_event_manager } = require("%scripts/hud/hudEventManager.nut")
@@ -16,6 +18,7 @@ let { get_mission_difficulty_int } = require("guiMission")
 let { getDaguiObjAabb } = require("%sqDagui/daguiUtil.nut")
 let { isInFlight } = require("gameplayBinding")
 let { format } =  require("string")
+let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let stdMath = require("%sqstd/math.nut")
 
 const TIME_TITLE_SHOW_SEC = 3
@@ -48,15 +51,20 @@ let debuffTemplates = {
   [ES_UNIT_TYPE_SHIP] = "%gui/hud/hudEnemyDebuffsShip.blk",
 }
 
-let damageStatusTemplates = {
+let damageStatusTemplates = is_dev_version() ? {
   [ES_UNIT_TYPE_BOAT] = "%gui/hud/hudEnemyDamageStatusShip.blk",
   [ES_UNIT_TYPE_SHIP] = "%gui/hud/hudEnemyDamageStatusShip.blk",
+} : {
+  [ES_UNIT_TYPE_BOAT] = "%gui/hud/hudEnemyDamageStatusShipLegacy.blk",
+  [ES_UNIT_TYPE_SHIP] = "%gui/hud/hudEnemyDamageStatusShipLegacy.blk",
 }
 
 let importantEventKeys = ["partEvent", "ammoEvent"]
+let criticalFireTypes = ["ship_barbettes", "ship_cruiser_barbettes", "ship_ammo_fire", "ship_ammo_fire_total", "ship_ammo_fire_aux"]
 
 let debuffsListsByUnitType = {}
 let trackedPartNamesByUnitType = {}
+let fireIndicators = {}
 
 local scene     = null
 local titleObj  = null
@@ -90,7 +98,7 @@ let getDamageStatusByHealth = @(health)
     : health == 0   ? "fatal"
     : "none"
 
-function setDamageStatus(statusObjId, health, text = null) {
+function setDamageStatusLegacy(statusObjId, health, text = null) {
   if (!damageStatusObj?.isValid())
     return
 
@@ -110,9 +118,37 @@ function setDamageStatus(statusObjId, health, text = null) {
   labelObj.setValue(text)
 }
 
+function stopDamageStatusBlink(statusObjId) {
+  let obj = damageStatusObj?.isValid() ? damageStatusObj.findObject(statusObjId) : null
+  if (obj?.isValid())
+    obj._blink = "no"
+}
+
+function setDamageStatus(statusObjId, health, isCritical = true) {
+  if (!damageStatusObj?.isValid())
+    return
+
+  let obj = damageStatusObj.findObject(statusObjId)
+  if (!obj?.isValid())
+    return
+
+  let newStatus = health == 100 || health < 0 ? "none"
+    : isCritical ? "critical" : "moderate"
+
+  if (newStatus == obj.damage)
+    return
+
+  obj.damage = newStatus
+  obj._blink = "yes"
+  setTimeout(10, @() stopDamageStatusBlink(statusObjId))
+}
+
 function updateDebuffItem(item, unitInfo, partName = null, dmgParams = null) {
   let data = item.getInfo(camInfo, unitInfo, partName, dmgParams)
   let isShow = data != null
+  if (item?.needShowChange) {
+    unitInfo.crewRelativeCurr = stdMath.round(data?.value ?? unitInfo.crewRelativePrev)
+  }
 
   if (!(infoObj?.isValid() ?? false))
     return
@@ -149,7 +185,7 @@ function reset() {
   curUnitVersion = -1
   curUnitType = ES_UNIT_TYPE_INVALID
   canShowCritAnimation = false
-
+  fireIndicators.clear()
   camInfo.clear()
   unitsInfo.clear()
 }
@@ -168,8 +204,8 @@ function getTargetInfo(unitId, unitVersion, unitType, isUnitKilled) {
       crewCount = -1
       crewTotalCount = 0
       crewLostCount = 0
-      crewRelative = -1
-      crewLostRelative = 0
+      crewRelativePrev = -1
+      crewRelativeCurr = -1
       importantEvents = {}
     }
 
@@ -252,19 +288,21 @@ function updateTitle() {
 
 function showRelativeCrewLoss() {
   let unitInfo = getTargetInfo(curUnitId, curUnitVersion, curUnitType, isKillingHitResult(hitResult))
-  let { crewRelative, crewLostRelative } = unitInfo
-
-  let hasCrewChange = crewLostRelative < -1 || crewRelative % 1 - crewLostRelative < 0
-  if (!crewLostRelative || !hasCrewChange || !(scene?.isValid() ?? false))
+  let { crewRelativePrev, crewRelativeCurr } = unitInfo
+  if (crewRelativePrev <= 0) {
+    unitInfo.crewRelativePrev = crewRelativeCurr
+    return
+  }
+  let crewLostRelative = crewRelativeCurr - crewRelativePrev
+  if (!crewLostRelative || crewLostRelative > -1 || !(scene?.isValid() ?? false))
     return
 
-  unitInfo.crewLostRelative = 0
+  unitInfo.crewRelativePrev = crewRelativeCurr
 
   let crewNestObj = scene.findObject("crew_relative_nest")
   crewNestObj._blink = "yes"
 
-
-  let lostTxt = format("%2.f%s", min(stdMath.round(crewLostRelative), -1), loc("measureUnits/percent"))
+  let lostTxt = format("%2.f%s", crewLostRelative, loc("measureUnits/percent"))
   let data = "".concat("hitCamLostCrewRelativeText { text:t='", lostTxt, "' }")
   get_cur_gui_scene().prependWithBlk(crewNestObj.findObject("crew_relative_lost"), data, this)
 }
@@ -310,16 +348,6 @@ function updateCrewCount(unitInfo, data = null) {
   if (unitInfo.crewCount == -1)
     unitInfo.crewCount = crewCount
   let crewLostCount = crewCount - unitInfo.crewCount
-
-  let minCrewCount = data?.crewAliveMin ?? camInfo?.crewAliveMin ?? 0
-  let bestMinCrewCount = camInfo?.bestMinCrewCount ?? minCrewCount
-  let maxCrewLeftPercent = (1.0 + (bestMinCrewCount.tofloat() - minCrewCount) / unitInfo.crewTotalCount) * 100
-  let newCrewRelative = clamp(stdMath.lerp(minCrewCount - 1, unitInfo.crewTotalCount, 0, maxCrewLeftPercent, crewCount), 0, 100)
-  let crewChangeRelative = unitInfo.crewRelative > 0 ? unitInfo.crewRelative - newCrewRelative : 0
-  unitInfo.crewRelative = newCrewRelative
-  let needShowDelta = crewCount > 0 && crewChangeRelative > 0.0 && (camInfo?.needShowCrewLoss ?? false)
-  if (needShowDelta)
-    unitInfo.crewLostRelative -= crewChangeRelative
 
   setTimeout(TIME_TO_SUM_RELATIVE_CREW_LOST, showRelativeCrewLoss)
 
@@ -424,10 +452,15 @@ function onHitCameraEvent(mode, result, info) {
   }
 
   if (isVisible) {
-    let unitInfo = getTargetInfo(curUnitId, curUnitVersion,
+    local unitInfo = getTargetInfo(curUnitId, curUnitVersion,
       curUnitType, isKillingHitResult(hitResult))
-    foreach (item in (debuffsListsByUnitType?[curUnitType] ?? []))
+    foreach (item in (debuffsListsByUnitType?[curUnitType] ?? [])) {
       updateDebuffItem(item, unitInfo)
+
+      if (item?.needShowChange && (!isStarted || needFade)) {
+        unitInfo.crewRelativePrev = unitInfo.crewRelativeCurr
+      }
+    }
 
     if (unitInfo.isKilled)
       unitInfo.isKillProcessed = true
@@ -439,10 +472,74 @@ function onHitCameraEvent(mode, result, info) {
   update()
 }
 
+
+function addFireIndicator(fireData) {
+  let iconBlk = handyman.renderCached("%gui/hud/hitCamIndicator.tpl",
+    {
+      posX = fireData.screenPosX, posY = fireData.screenPosY,
+      icon = "#ui/gameuiskin#fire_indicator.avif",
+      outlineIcon = "#ui/gameuiskin#fire_indicator_outline.avif",
+      icWidth = "0.5@enemyDmgStatusWidth", icHeight = "0.5@enemyDmgStatusWidth",
+      id = $"fire_{fireData.partId}"
+    }
+  )
+
+  let camRenderObj = scene.findObject("indicators_nest")
+  scene.getScene().appendWithBlk(camRenderObj, iconBlk, null)
+  let indicator = scene.findObject($"fire_{fireData.partId}")
+  fireIndicators[$"{fireData.partId}"] <- {data = fireData, obj = indicator, waitRemove = false}
+}
+
+function removeFireIndicator(fireName) {
+  let fire = fireIndicators[fireName]
+  if (fire.obj.isValid())
+    scene.getScene().destroyElement(fire.obj)
+  fireIndicators.$rawdelete(fireName)
+}
+
+function removeAllFireIndicators() {
+  foreach (fire in fireIndicators) {
+    scene.getScene().destroyElement(fire.obj)
+  }
+  fireIndicators.clear()
+}
+
 function onHitCameraUpdateFiresEvent(fireArr) {
-  if ((fireArr?.len() ?? 0) == 0)
+  if (scene == null || !scene.isValid())
     return
-  // Something or other
+
+  if ((fireArr?.len() ?? 0) == 0) {
+    if (fireIndicators.len() != 0)
+      removeAllFireIndicators()
+    return
+  }
+
+  foreach (fire in fireIndicators)
+    fire.waitRemove = true
+
+  local hasCriticalFire = false
+  foreach (fireData in fireArr) {
+    let fireName = $"{fireData.partId}"
+    if (!fireIndicators?[fireName]) {
+      addFireIndicator(fireData)
+    } else {
+      let fire = fireIndicators[fireName]
+      if (!fire.obj.isValid()) {
+        fireIndicators.$rawdelete(fireName)
+        continue
+      }
+      fire.waitRemove = false
+      if (!u.isEqual(fireData, fire.data))
+        fire.obj.pos = $"{fireData.screenPosX}, {fireData.screenPosY}"
+    }
+    if (criticalFireTypes.contains(fireData.firePreset))
+      hasCriticalFire = true
+  }
+  setDamageStatus("fire_status", 1, hasCriticalFire)
+
+  foreach (fireName, fire in fireIndicators)
+    if (fire.waitRemove)
+      removeFireIndicator(fireName)
 }
 
 function onEnemyPartDamage(data) {
@@ -507,10 +604,17 @@ function onHitCameraImportantEvents(data) {
     if (events.len() == 0)
       continue
     let unitInfoEvents = unitInfo.importantEvents?[key] ?? []
-    if (type(events) == "table")
+    if (type(events) == "table") {
       unitInfoEvents.append(events)
-    else
+      if (key == "ammoEvent")
+        setDamageStatus(events.damageType == 0 ? "ammo_fire_status" : "ammo_explosion_status", 1)
+    } else {
       unitInfoEvents.extend(events)
+      if (key == "ammoEvent") {
+        foreach (event in events)
+          setDamageStatus(event.damageType == 0 ? "ammo_fire_status" : "ammo_explosion_status", 1)
+      }
+    }
     unitInfo.importantEvents[key] <- unitInfoEvents
   }
 
@@ -520,17 +624,25 @@ function onHitCameraImportantEvents(data) {
 
 function onEnemyDamageState(event) {
   if (curUnitType in (damageStatusTemplates)) {
-    let { artilleryTotalCount  = 5, torpedoTotalCount = 5, artilleryHealth = 100, hasFire = false, engineHealth = 100,
-      torpedoTubesHealth = 100, ruddersHealth = 100, hasBreach = false  } = event
+    let { artilleryTotalCount = 5, torpedoTotalCount = 5, artilleryHealth = 100, auxiliaryHealth = 100, hasFire = false,
+    hasCriticalFire = false, engineHealth = 100, torpedoTubesHealth = 100, ruddersHealth = 100, hasBreach = false } = event
+    setDamageStatus("artillery_health", artilleryHealth)
+    setDamageStatus("auxiliary_health", auxiliaryHealth)
+    setDamageStatus("fire_status", hasFire ? 1 : -1, hasCriticalFire)
+    setDamageStatus("engine_health", engineHealth)
+    setDamageStatus("torpedo_tubes_health", torpedoTubesHealth)
+    setDamageStatus("rudders_health", ruddersHealth)
+    setDamageStatus("breach_status", hasBreach ? 1 : -1)
+
     let artilleryText = format("%d/%d", stdMath.round(artilleryHealth*artilleryTotalCount/100.), artilleryTotalCount)
     let torpedoText =
       torpedoTotalCount != 0 ? format("%d/%d", stdMath.round(torpedoTubesHealth*torpedoTotalCount/100.), torpedoTotalCount) : ""
-    setDamageStatus("artillery_health", artilleryHealth, artilleryText)
-    setDamageStatus("fire_status", hasFire ? 1 : -1)
-    setDamageStatus("engine_health", engineHealth, format("%d%%", engineHealth))
-    setDamageStatus("torpedo_tubes_health", torpedoTubesHealth, torpedoText)
-    setDamageStatus("rudders_health", ruddersHealth)
-    setDamageStatus("breach_status", hasBreach ? 1 : -1)
+    setDamageStatusLegacy("artillery_health_legacy", artilleryHealth, artilleryText)
+    setDamageStatusLegacy("fire_status_legacy", hasFire ? 1 : -1)
+    setDamageStatusLegacy("engine_health_legacy", engineHealth, format("%d%%", engineHealth))
+    setDamageStatusLegacy("torpedo_tubes_health_legacy", torpedoTubesHealth, torpedoText)
+    setDamageStatusLegacy("rudders_health_legacy", ruddersHealth)
+    setDamageStatusLegacy("breach_status_legacy", hasBreach ? 1 : -1)
   }
 
   let unitInfo = getTargetInfo(curUnitId, curUnitVersion,

@@ -17,6 +17,7 @@
   "ilsSU145": true,
   "isBwOpticSight": true,
   "needTpsNightVision": true,
+  "mfdCamTads": true,
   "type": "typeFighter",
   "advancedInstructor": true,
   "advancedMouseAim": true,
@@ -1849,11 +1850,11 @@
   },
   "cockpit": {
     "targetingPodFov": [
-      12.0,
-      3.2
+      18.0,
+      1.5
     ],
-    "sightInFov": 12.299,
-    "sightOutFov": 12.299,
+    "sightInFov": 1.5,
+    "sightOutFov": 18.0,
     "sightFov": 1.0,
     "headPos": [
       3.7,
@@ -2142,14 +2143,80 @@
         ],
         "page": {
           "type": "rwr",
-          "scale": 1.15
+          "scale": 0.85,
+          "circleCnt": 3,
+          "angleMarkStep": 30.0,
+          "centralMark": "empty"
         },
         "page": {
           "type": "radar",
-          "scale": 0.95
+          "font": "usa_ils",
+          "scale": 0.9,
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "targetForm": "square",
+          "fontScale": 0.65,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "modeColor": [
+    0,
+    255,
+    7,
+],
+          "verAngleColor": [
+    0,
+    255,
+    7,
+],
+          "horAngleColor": [
+    0,
+    255,
+    7,
+],
+          "scaleColor": [
+    0,
+    255,
+    7,
+],
+          "targetColor": [
+    0,
+    255,
+    7,
+],
+          "netRowCnt": 4,
+          "netColor": [
+    0,
+    255,
+    7,
+],
+          "hideWeaponIndication": true,
+          "showCueHeights": true,
+          "lineWidth": 0.5,
+          "centerRadar": true
+        },
+        "page": {
+          "type": "ils_duplicate",
+          "scale": 1.3
         },
         "page": {
           "type": "map"
+        },
+        "page": {
+          "type": "thermal",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "target_tracking",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "night_vision",
+          "turretIdx": 0
         }
       },
       "display": {
@@ -2166,6 +2233,17 @@
         "page": {
           "type": "target_tracking",
           "turretIdx": 0
+        },
+        "page": {
+          "type": "night_vision",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "ils_duplicate",
+          "scale": 1.3
+        },
+        "page": {
+          "type": "map"
         }
       },
       "display": {
@@ -2248,7 +2326,7 @@
       ],
       "opticType": "",
       "turretNo": 0,
-      "nvIndex": 1
+      "nvIndex": 2
     },
     "TV": {
       "pos": [
@@ -2284,7 +2362,7 @@
       ],
       "opticType": "targeting",
       "turretNo": 0,
-      "nvIndex": 2
+      "nvIndex": 1
     }
   },
   "commonWeapons": {
@@ -2353,6 +2431,14 @@
     "preset": {
       "name": "av_8b_plus_mk77",
       "blk": "gameData/FlightModels/weaponPresets/av_8b_plus_mk77.blk"
+    },
+    "preset": {
+      "name": "av_8b_plus_italy_agm_65g",
+      "blk": "gameData/FlightModels/weaponPresets/av_8b_plus_italy_agm_65g.blk"
+    },
+    "preset": {
+      "name": "av_8b_plus_italy_amraam_120",
+      "blk": "gameData/FlightModels/weaponPresets/av_8b_plus_italy_amraam_120.blk"
     }
   },
   "WeaponSlots": {
@@ -2363,7 +2449,9 @@
     "HideNodes": {
       "node": "lau7_l",
       "node": "lau7_l1",
+      "node": "lau7_l2",
       "node": "lau7_r1",
+      "node": "lau7_r2",
       "node": "lau7_r",
       "node": "lau_117_1",
       "node": "lau_117_2",
@@ -2431,25 +2519,28 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 60,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare6",
           "bullets": 60,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 60,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2598,6 +2689,22 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "aim_120a",
+        "reqModification": "us_aim_120a",
+        "ShowNodes": {
+          "node": "lau7_l1"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim_120a.blk",
+          "emitter": "aim_9_003",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
         "iconType": "missile_air_to_uni",
         "name": "agm_65d",
         "reqModification": "us_agm_65d",
@@ -2607,6 +2714,23 @@
         "Weapon": {
           "trigger": "atgm",
           "blk": "gameData/Weapons/rocketGuns/us_agm_65d.blk",
+          "emitter": "agm_65b_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.4
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_air_to_uni_large",
+        "name": "agm_65g",
+        "reqModification": "us_agm_65g",
+        "ShowNodes": {
+          "node": "lau_117_1"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_65g.blk",
           "emitter": "agm_65b_001",
           "bullets": 1,
           "external": true,
@@ -2758,6 +2882,22 @@
       "tier": 8,
       "order": 5,
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "aim_120a",
+        "reqModification": "us_aim_120a",
+        "ShowNodes": {
+          "node": "lau7_l2"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim_120a.blk",
+          "emitter": "aim_120a_missile_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
         "iconType": "missile_air_to_uni",
         "name": "agm_65d",
         "reqModification": "us_agm_65d",
@@ -2767,6 +2907,23 @@
         "Weapon": {
           "trigger": "atgm",
           "blk": "gameData/Weapons/rocketGuns/us_agm_65d.blk",
+          "emitter": "agm_65b_003",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.4
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_air_to_uni_large",
+        "name": "agm_65g",
+        "reqModification": "us_agm_65g",
+        "ShowNodes": {
+          "node": "lau_117_3"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_65g.blk",
           "emitter": "agm_65b_003",
           "bullets": 1,
           "external": true,
@@ -3046,6 +3203,22 @@
       "tier": 4,
       "order": 6,
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "aim_120a",
+        "reqModification": "us_aim_120a",
+        "ShowNodes": {
+          "node": "lau7_r2"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim_120a.blk",
+          "emitter": "aim_120a_missile_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
         "iconType": "missile_air_to_uni",
         "name": "agm_65d",
         "reqModification": "us_agm_65d",
@@ -3055,6 +3228,23 @@
         "Weapon": {
           "trigger": "atgm",
           "blk": "gameData/Weapons/rocketGuns/us_agm_65d.blk",
+          "emitter": "agm_65b_004",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.4
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_air_to_uni_large",
+        "name": "agm_65g",
+        "reqModification": "us_agm_65g",
+        "ShowNodes": {
+          "node": "lau_117_4"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_65g.blk",
           "emitter": "agm_65b_004",
           "bullets": 1,
           "external": true,
@@ -3237,6 +3427,22 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "missile_type_f_air_to_air_midrange",
+        "name": "aim_120a",
+        "reqModification": "us_aim_120a",
+        "ShowNodes": {
+          "node": "lau7_r1"
+        },
+        "Weapon": {
+          "trigger": "aam",
+          "blk": "gameData/Weapons/rocketGuns/us_aim_120a.blk",
+          "emitter": "aim_9_004",
+          "bullets": 1,
+          "external": true,
+          "separate": true
+        }
+      },
+      "WeaponPreset": {
         "iconType": "missile_air_to_uni",
         "name": "agm_65d",
         "reqModification": "us_agm_65d",
@@ -3246,6 +3452,23 @@
         "Weapon": {
           "trigger": "atgm",
           "blk": "gameData/Weapons/rocketGuns/us_agm_65d.blk",
+          "emitter": "agm_65b_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.4
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "missile_air_to_uni_large",
+        "name": "agm_65g",
+        "reqModification": "us_agm_65g",
+        "ShowNodes": {
+          "node": "lau_117_2"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_65g.blk",
           "emitter": "agm_65b_002",
           "bullets": 1,
           "external": true,
@@ -3653,72 +3876,7 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "gau_12_ground_targets": {    },
-    "gau_12_air_targets": {    },
-    "gau_12_stealth": {    },
-    "gau_12_belt_pack": {
-      "tier": 1
-    },
-    "gau_12_new_gun": {
-      "reqModification": "gau_12_belt_pack",
-      "tier": 3
-    },
-    "us_mk_77": {
-      "tier": 1,
-      "modClass": "weapon"
-    },
-    "us_500lb_mk82": {
-      "prevModification": "us_mk_77",
-      "modClass": "weapon",
-      "tier": 2
-    },
-    "us_1000lb_mk83": {
-      "reqModification": "us_500lb_mk82",
-      "modClass": "weapon",
-      "tier": 3
-    },
-    "gr_litening_pod": {
-      "modClass": "weapon",
-      "tier": 1
-    },
-    "us_gbu_12": {
-      "reqModification": "gr_litening_pod",
-      "modClass": "weapon",
-      "tier": 2
-    },
-    "us_gbu_16": {
-      "reqModification": "us_gbu_12",
-      "tier": 3,
-      "modClass": "weapon"
-    },
-    "us_agm_65d": {
-      "prevModification": "us_gbu_16",
-      "tier": 4,
-      "modClass": "weapon"
-    },
-    "us_2_75_in_ffar_lau_3a": {
-      "tier": 1,
-      "modClass": "weapon"
-    },
-    "f4c_zuni": {
-      "reqModification": "us_2_75_in_ffar_lau_3a",
-      "tier": 2,
-      "modClass": "weapon"
-    },
-    "us_aim_9l": {
-      "prevModification": "f4c_zuni",
-      "tier": 3,
-      "modClass": "weapon"
-    },
-    "us_aim_9m": {
-      "reqModification": "us_aim_9l",
-      "tier": 4,
-      "modClass": "weapon"
-    },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,
@@ -3779,6 +3937,80 @@
       "tier": 4,
       "modClass": "armor",
       "invertEnableLogic": false
+    },
+    "us_2_75_in_ffar_lau_3a": {
+      "tier": 1,
+      "modClass": "weapon"
+    },
+    "f4c_zuni": {
+      "reqModification": "us_2_75_in_ffar_lau_3a",
+      "tier": 2,
+      "modClass": "weapon"
+    },
+    "us_aim_9l": {
+      "prevModification": "f4c_zuni",
+      "tier": 3,
+      "modClass": "weapon"
+    },
+    "us_aim_9m": {
+      "reqModification": "us_aim_9l",
+      "tier": 4,
+      "modClass": "weapon"
+    },
+    "gau_12_ground_targets": {    },
+    "gau_12_air_targets": {    },
+    "gau_12_stealth": {    },
+    "gau_12_belt_pack": {
+      "tier": 1
+    },
+    "gau_12_new_gun": {
+      "reqModification": "gau_12_belt_pack",
+      "tier": 3
+    },
+    "us_aim_120a": {
+      "prevModification": "gau_12_new_gun",
+      "reqModification": "us_aim_9m",
+      "tier": 4,
+      "modClass": "weapon"
+    },
+    "gr_litening_pod": {
+      "modClass": "weapon",
+      "tier": 1
+    },
+    "us_gbu_12": {
+      "reqModification": "gr_litening_pod",
+      "modClass": "weapon",
+      "tier": 2
+    },
+    "us_gbu_16": {
+      "reqModification": "us_gbu_12",
+      "tier": 3,
+      "modClass": "weapon"
+    },
+    "us_agm_65d": {
+      "prevModification": "us_gbu_16",
+      "tier": 4,
+      "modClass": "weapon"
+    },
+    "us_mk_77": {
+      "tier": 1,
+      "modClass": "weapon"
+    },
+    "us_500lb_mk82": {
+      "prevModification": "us_mk_77",
+      "modClass": "weapon",
+      "tier": 2
+    },
+    "us_1000lb_mk83": {
+      "reqModification": "us_500lb_mk82",
+      "modClass": "weapon",
+      "tier": 3
+    },
+    "us_agm_65g": {
+      "reqModification": "us_agm_65d",
+      "prevModification": "us_1000lb_mk83",
+      "tier": 4,
+      "modClass": "weapon"
     }
   },
   "user_skin": {

@@ -73,10 +73,11 @@
   "lockResetMinAcquisitionTime": 5.0,
   "weaponLockDeadUnits": true,
   "weaponLosCheckTimeOut": 1.0,
+  "distributeBulletSetsAmongTriggerGroupWeapons": false,
   "minFreeCrewIntegrity": -1.0,
   "avionicsDamageTreshold": 0.7,
   "maxShipCalcDistanceTimeout": 1.5,
-  "hudForceBombingZoneHeight": 100.0,
+  "hudForceBombingZoneHeight": 10.0,
   "missionSupportPlane": {
     "tank_event_in_random_battles_historical": {
       "UnitPreset": {
@@ -4742,7 +4743,7 @@
     },
     "attacker": {
       "name": "sea_fury_fb11",
-      "weap": "rockets",
+      "weap": "sea_fury_rockets_x12",
       "rankRange": [
         15,
         18
@@ -7315,6 +7316,7 @@
     "aimFromServerErrorMax": 6.0,
     "prolongateBeforeTrack": true,
     "interpolationForSanityCheck": true,
+    "useTimeOfFlightFromBallisticComputer": true,
     "DesignationType": {
       "camera": 0,
       "sensor": 1,
@@ -7367,6 +7369,7 @@
     "radarModeName": "PD BST",
     "radarModeName": "PD VSL",
     "radarModeName": "PD track",
+    "radarModeName": "PD RAM",
     "radarModeName": "PD HDN standby",
     "radarModeName": "PD HDN search",
     "radarModeName": "PD HDN acquisition",
@@ -8314,6 +8317,7 @@
     "ships": {
       "allowNode": "compartment_<n>_dm",
       "allowNode": "cover_<n>_dm",
+      "allowNode": "superstructure_<n>_dm",
       "allowNode": "superstructure_dm",
       "allowNode": "superstructure_front_dm",
       "allowNode": "superstructure_back_dm",

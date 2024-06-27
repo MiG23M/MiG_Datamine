@@ -77,7 +77,7 @@
       "panoramaBlend": false,
       "panoramaResolution": 0,
       "lenseFlares": false,
-      "waterReflectionTexDiv": 0,
+      "planarReflectionTexDiv": 0,
       "landquality": 0,
       "fxDensityMul": 0.0,
       "hqHangarWeather": false,
@@ -106,7 +106,6 @@
     "sound": {
       "speakerMode": "",
       "fmod_sound_enable": false,
-      "enable_mod": false,
       "useLoopsForGunSound": false,
       "useLoopsForGMGunSound": true,
       "fmodEnableSpatialSound": true
@@ -227,7 +226,8 @@
       "enableNvHighlights": "",
       "enableRawInput": true,
       "replayExportUnitPos": false,
-      "drawFov": false
+      "drawFov": false,
+      "useExternalOperatorAuth": false
     },
     "network": {
       "stubServerIp": "",
@@ -564,7 +564,8 @@
       "src": "../develop/gameBase",
       "src": "../develop/gameBase/pkg_dev",
       "src": "../develop/gameBase/_pc",
-      "src": "../develop/gameBase/lang_src"
+      "src": "../develop/gameBase/lang_src",
+      "src": "../prog/gameBase/content"
     },
     "addon": {
       "vrom": "char.vromfs.bin"
@@ -710,7 +711,8 @@
     "maxTexCount": 65535,
     "sRGBrw": true,
     "enableHmdSupport": true,
-    "allowDx10Fallback": true
+    "allowDx10Fallback": true,
+    "threadedWindow": true
   },
   "graphics": {
     "useHdr": true,
@@ -724,7 +726,13 @@
     "backgroundAptiveSharpenAdaptiveness": 16.0,
     "backgroundAptiveSharpenQuality": 12.0,
     "riGpuObjects": true,
-    "vrMipBias": -0.8
+    "vrMipBias": -0.8,
+    "useCellSBuffer": false,
+    "riUseStructuredBuffer": false
+  },
+  "cfdWind": {
+    "particleInfluenceThresholdMin": 1.0,
+    "particleInfluenceThresholdMax": 15.0
   },
   "ps4": {
     "garlic_size_mb": 2510,

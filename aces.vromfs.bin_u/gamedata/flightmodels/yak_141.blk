@@ -1850,7 +1850,7 @@
     }
   },
   "ikPilot": {
-    "model": "su_pilot_late_char",
+    "model": "su_pilot_late_zsh_7ap_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -1938,6 +1938,13 @@
   "cockpit": {
     "hasAirCannonIlsMode": true,
     "isDoubleBulletImpactLine": true,
+    "hmdBlockIlsArea": [
+      0.37,
+      0.37,
+      0.63,
+      0.63
+    ],
+    "hmdEnabledByDefault": true,
     "headPos": [
       6.02,
       0.572,
@@ -2165,9 +2172,8 @@
           1.0
         ],
         "page": {
-          "type": "radar",
-          "scale": 0.95,
-          "hideRadarBackground": true
+          "type": "ils_duplicate",
+          "scale": 2.3
         }
       },
       "display": {
@@ -2402,19 +2408,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -3850,10 +3858,7 @@
       "prevModification": "new_cover",
       "tier": 4
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "tier": 1,
@@ -4053,6 +4058,16 @@
       0.0,
       0.0
     ],
-    "finCut": false
+    "finCut": false,
+    "emtr_break_tail_from": [
+      -3.21985,
+      -0.1292358,
+      0.0
+    ],
+    "emtr_break_tail_to": [
+      -5.19516,
+      -0.1292358,
+      0.0
+    ]
   }
 }

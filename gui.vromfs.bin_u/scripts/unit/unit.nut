@@ -21,7 +21,8 @@ let { unitClassType, getUnitClassTypeByExpClass } = require("%scripts/unit/unitC
 let unitTypes = require("%scripts/unit/unitTypesList.nut")
 let { GUI } = require("%scripts/utils/configs.nut")
 let { getDefaultPresetId } = require("%scripts/weaponry/weaponryPresets.nut")
-let { initUnitWeapons, initWeaponryUpgrades, initUnitModifications, initUnitWeaponsContainers
+let { initUnitWeapons, initWeaponryUpgrades, initUnitModifications, initUnitWeaponsContainers,
+  getWeaponImage
 } = require("%scripts/unit/initUnitWeapons.nut")
 let { getWeaponryCustomPresets } = require("%scripts/unit/unitWeaponryCustomPresets.nut")
 let { promoteUnits } = require("%scripts/unit/remainingTimeUnit.nut")
@@ -36,7 +37,7 @@ let { get_wpcost_blk, get_warpoints_blk, get_unittags_blk,
 let { decoratorTypes } = require("%scripts/customization/types.nut")
 let { getUnitCountry, isUnitGift } = require("%scripts/unit/unitInfo.nut")
 let { getLanguageName } = require("%scripts/langUtils/language.nut")
-let { isUnitSpecial, CAN_USE_EDIFF, EDIFF_SHIFT, calcBattleRatingFromRank, get_unit_blk_economic_rank_by_mode } = require("%appGlobals/ranks_common_shared.nut")
+let { isUnitSpecial, calcBattleRatingFromRank, get_unit_blk_economic_rank_by_mode } = require("%appGlobals/ranks_common_shared.nut")
 let { searchEntitlementsByUnit } = require("%scripts/onlineShop/onlineShopState.nut")
 
 let MOD_TIERS_COUNT = 4
@@ -224,7 +225,7 @@ local Unit = class {
         name = "spare"
         type = ::g_weaponry_types.SPARE.type
         cost = uWpCost?.spare.value || 0
-        image = ::get_weapon_image(this.esUnitType, spareBlk, uWpCost?.spare)
+        image = getWeaponImage(this.esUnitType, spareBlk, uWpCost?.spare)
         animation = spareBlk && (spareBlk % "animationByUnit")
           .findvalue((@(anim) anim.unitType == this.esUnitType).bindenv(this))?.src
       }
@@ -350,8 +351,6 @@ local Unit = class {
   }
 
   function getBattleRating(ediff) {
-    if (!CAN_USE_EDIFF)
-      ediff = ediff % EDIFF_SHIFT
     let mrank = this.getEconomicRank(ediff)
     return calcBattleRatingFromRank(mrank)
   }

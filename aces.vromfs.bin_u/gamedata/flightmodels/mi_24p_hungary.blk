@@ -129,9 +129,6 @@
       }
     },
     "c_dural15": {
-      "fin_dm": {
-        "hp": 84.5
-      },
       "fuse_dm": {
         "hp": 125.5
       }
@@ -144,6 +141,9 @@
       "elevator1_dm": {
         "genericDamageMult": 0.3,
         "hp": 21.8
+      },
+      "fin_dm": {
+        "hp": 50.5
       }
     },
     "dural": {
@@ -467,63 +467,27 @@
     "part": {
       "name": "fin_dm",
       "onHit": {
-        "flame": 0.2,
-        "smoke": 0.2
+        "damage": 30.0,
+        "cut": 0.6
       },
       "onHit": {
-        "damage": 50.0,
-        "tail_dm": 0.6
-      },
-      "onHit": {
-        "damage": 70.0,
-        "tail_dm": 0.8
-      },
-      "onHit": {
-        "damage": 100.0,
-        "tail_dm": 1.0
-      },
-      "onKill": {
-        "tail_dm": 1.0,
-        "nothing": 12.0
-      },
-      "onKill": {
-        "damage": 3.0,
-        "tail_dm": 1.0,
-        "nothing": 9.0
-      },
-      "onKill": {
-        "damage": 7.0,
-        "tail_dm": 1.0,
-        "nothing": 8.0
+        "damage": 65.0,
+        "cut": 1.0
       },
       "onKill": {
         "damage": 10.0,
-        "tail_dm": 1.0,
-        "nothing": 7.0
+        "cut": 1.0,
+        "nothing": 11.0
       },
       "onKill": {
-        "damage": 20.0,
-        "tail_dm": 1.0,
-        "nothing": 6.0
-      },
-      "onKill": {
-        "damage": 30.0,
-        "tail_dm": 1.0,
-        "nothing": 5.0
-      },
-      "onKill": {
-        "damage": 50.0,
-        "tail_dm": 1.0,
-        "nothing": 4.0
-      },
-      "onKill": {
-        "damage": 70.0,
-        "tail_dm": 1.0,
+        "damage": 31.0,
+        "cut": 1.0,
         "nothing": 3.0
       },
       "onKill": {
-        "damage": 100.0,
-        "tail_dm": 1.0
+        "damage": 50.0,
+        "cut": 1.0,
+        "nothing": 0.0
       }
     },
     "part": {
@@ -1925,19 +1889,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare3",
           "bullets": 96,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 96,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       },
       "WeaponPreset": {
@@ -1988,19 +1954,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare3",
           "bullets": 96,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 96,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       },
       "WeaponPreset": {
@@ -2052,19 +2020,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare3",
           "bullets": 96,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare4",
           "bullets": 96,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -2922,7 +2892,56 @@
       "dp": "antenna",
       "dp": "wire_lc",
       "dp": "wire_rc",
-      "dp": "wire_c"
+      "dp": "wire_c",
+      "dp": "aerial_c"
+    },
+    "dp": {
+      "dm": "spar_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar1_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar2_l_dm",
+      "dp": "wire_l",
+      "dp": "wire_lc",
+      "dp": "wires_l",
+      "dp": "wires_lc",
+      "dp": "aerial_l"
+    },
+    "dp": {
+      "dm": "spar_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar1_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
+    },
+    "dp": {
+      "dm": "spar2_r_dm",
+      "dp": "wire_r",
+      "dp": "wire_rc",
+      "dp": "wires_r",
+      "dp": "wires_rc",
+      "dp": "aerial_r"
     },
     "dp": {
       "dm": "wing_l_dm",
@@ -2963,6 +2982,10 @@
       "dp": "pylon_9m114_004",
       "dp": "pylon_9m114_004_cap1",
       "dp": "pylon_9m114_004_cap2"
+    },
+    "dp": {
+      "dm": "fin_dm",
+      "dp": "propeller_shaft2_dm"
     }
   },
   "modifications": {
@@ -3077,10 +3100,7 @@
         }
       }
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "weapon",
       "turn_it_off": false,
@@ -3215,7 +3235,7 @@
     ],
     "finCut": false,
     "emtr_break_fin_from": [
-      -10.7215,
+      -9.7215,
       0.824562,
       0.0963593
     ],

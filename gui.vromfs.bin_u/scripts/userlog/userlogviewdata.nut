@@ -38,7 +38,7 @@ let { getBattleTaskById, getDifficultyByProposals, getBattleTaskUserLogText,
 let { getCountryIcon } = require("%scripts/options/countryFlagsPreset.nut")
 let { getUnitName } = require("%scripts/unit/unitInfo.nut")
 let { decoratorTypes, getTypeByResourceType } = require("%scripts/customization/types.nut")
-let { getCrewSpTextIfNotZero } = require("%scripts/crew/crewPoints.nut")
+let { getCrewSpTextIfNotZero } = require("%scripts/crew/crewPointsText.nut")
 let { getCrewById } = require("%scripts/slotbar/slotbarState.nut")
 let { items_classes } = require("%scripts/items/itemsClasses/itemsClasses.nut")
 let { BaseItem } = require("%scripts/items/itemsClasses/itemsBase.nut")
@@ -47,8 +47,10 @@ let { findItemById } = require("%scripts/items/itemsManager.nut")
 let { cloneDefaultUnlockData } = require("%scripts/unlocks/unlocksModule.nut")
 let { getBonus } = require("%scripts/bonusModule.nut")
 let { measureType } = require("%scripts/measureType.nut")
-let { getSkillCrewLevel, crewSkillPages } = require("%scripts/crew/crew.nut")
+let { getSkillCrewLevel, crewSkillPages, loadCrewSkillsOnce
+} = require("%scripts/crew/crew.nut")
 let { isMissionExtrByName } = require("%scripts/missions/missionsUtils.nut")
+let { getCurCircuitOverride } = require("%appGlobals/curCircuitOverride.nut")
 
 let imgFormat = "img {size:t='%s'; background-image:t='%s'; margin-right:t='0.01@scrn_tgt;'} "
 let textareaFormat = "textareaNoTab {id:t='description'; width:t='pw'; text:t='%s'} "
@@ -443,8 +445,8 @@ function getLinkMarkup(text, url, acccessKeyName = null) {
       let wwSpawnScore = logObj?.wwSpawnScore ?? 0
       if (wwSpawnScore > 0)
         descBottom = "".concat(descBottom, "\n",
-          colorize("@userlogColoredText", "".concat(loc("debriefing/total/wwSpawnScore"), loc("ui/colon")),
-          colorize("@activeTextColor", wwSpawnScore)))
+          colorize("@userlogColoredText", "".concat(loc("debriefing/total/wwSpawnScore"), loc("ui/colon"))),
+          colorize("@activeTextColor", wwSpawnScore))
     }
 
     if (desc != "")
@@ -462,7 +464,7 @@ function getLinkMarkup(text, url, acccessKeyName = null) {
         if (!("descriptionBlk" in res))
           res.descriptionBlk <- ""
         res.descriptionBlk += getLinkMarkup(loc("mainmenu/btnViewServerReplay"),
-                                                loc("url/serv_replay", { roomId = logObj.roomId }), "Y")
+          getCurCircuitOverride("serverReplayURL", loc("url/serv_replay")).subst({ roomId = logObj.roomId }), "Y")
       }
   }
   else if (logObj.type == EULT_AWARD_FOR_PVE_MODE) {
@@ -657,7 +659,7 @@ function getLinkMarkup(text, url, acccessKeyName = null) {
     res.name += priceText
 
     if (logObj.type == EULT_UPGRADING_CREW) {
-      ::load_crew_skills_once()
+      loadCrewSkillsOnce()
       local desc = ""
       local total = 0
       foreach (page in crewSkillPages)
@@ -1572,7 +1574,7 @@ function getLinkMarkup(text, url, acccessKeyName = null) {
           res.descriptionBlk <- ""
         if ("circuit" in logObj)
           res.descriptionBlk += getLinkMarkup(loc("mainmenu/btnPickTSS"),
-            loc("url/serv_pick_tss", { port = logObj.port, circuit = logObj.circuit }), "Y")
+            getCurCircuitOverride("serverPickTssURL", loc("url/serv_pick_tss")).subst({ port = logObj.port, circuit = logObj.circuit }), "Y")
         desc += loc("invite_to_pick_tss/desc")
       }
       else if (action_tss == "invite_to_tournament") {

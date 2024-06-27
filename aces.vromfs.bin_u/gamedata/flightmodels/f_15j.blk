@@ -201,20 +201,20 @@
       }
     },
     "steel_tank_armor": {
+      "tank1_dm": {
+        "hp": 120.5
+      },
       "tank2_dm": {
         "hp": 110.1
+      },
+      "tank3_dm": {
+        "hp": 73.6
+      },
+      "tank4_dm": {
+        "hp": 39.5
       }
     },
     "steel_tank_m": {
-      "tank1_dm": {
-        "hp": 75.5
-      },
-      "tank3_dm": {
-        "hp": 74.5
-      },
-      "tank4_dm": {
-        "hp": 44.5
-      },
       "tank5_dm": {
         "hp": 75.5
       },
@@ -993,24 +993,28 @@
     "part": {
       "name": "tank1_dm",
       "onHit": {
-        "fire": 0.01,
-        "leak": 0.7
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
       },
       "onHit": {
         "damage": 20.0,
-        "fire": 0.6,
-        "leak": 0.8
+        "fire": 0.005,
+        "leak": 0.7
       },
       "onHit": {
         "damage": 80.0,
         "expl": 0.5,
-        "fire": 0.9,
+        "fire": 0.01,
         "leak": 0.9
       },
       "onKill": {
-        "fire": 10.0,
-        "leak": 10.0,
-        "nothing": 80.0
+        "fire": 0.01,
+        "leak": 9.99
       },
       "onKill": {
         "damage": 50.0,
@@ -1063,24 +1067,28 @@
     "part": {
       "name": "tank3_dm",
       "onHit": {
-        "fire": 0.01,
-        "leak": 0.7
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
       },
       "onHit": {
         "damage": 20.0,
-        "fire": 0.6,
-        "leak": 0.8
+        "fire": 0.005,
+        "leak": 0.7
       },
       "onHit": {
         "damage": 80.0,
         "expl": 0.5,
-        "fire": 0.9,
+        "fire": 0.01,
         "leak": 0.9
       },
       "onKill": {
-        "fire": 10.0,
-        "leak": 10.0,
-        "nothing": 80.0
+        "fire": 0.01,
+        "leak": 9.99
       },
       "onKill": {
         "damage": 50.0,
@@ -1096,24 +1104,28 @@
     "part": {
       "name": "tank4_dm",
       "onHit": {
-        "fire": 0.01,
-        "leak": 0.7
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
       },
       "onHit": {
         "damage": 20.0,
-        "fire": 0.6,
-        "leak": 0.8
+        "fire": 0.005,
+        "leak": 0.7
       },
       "onHit": {
         "damage": 80.0,
         "expl": 0.5,
-        "fire": 0.9,
+        "fire": 0.01,
         "leak": 0.9
       },
       "onKill": {
-        "fire": 10.0,
-        "leak": 10.0,
-        "nothing": 80.0
+        "fire": 0.01,
+        "leak": 9.99
       },
       "onKill": {
         "damage": 50.0,
@@ -1864,9 +1876,9 @@
     }
   },
   "volumetricAfterBurner": {
-    "maxHeight": 13.0,
-    "maxRadius": 0.46,
-    "relativeCylinderHeightMax": 0.2,
+    "maxHeight": 10.0,
+    "maxRadius": 0.445,
+    "relativeCylinderHeightMax": 0.3,
     "absorption": 3.0,
     "colorIntensityMax": 2.5,
     "colorOverHeightMult": 15.0,
@@ -2287,9 +2299,9 @@
           0.5
         ],
         "monoDisplayColor": [
-          0.1,
-          0.25,
-          0.1
+          0.37,
+          0.5,
+          0.4
         ],
         "cameraFromShell": true,
         "page": {
@@ -2298,8 +2310,53 @@
         },
         "page": {
           "type": "radar",
+          "font": "usa_ils",
           "scale": 0.9,
-          "hideRadarBackground": true
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "targetForm": "square",
+          "fontScale": 0.65,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "modeColor": [
+    0,
+    255,
+    7,
+],
+          "verAngleColor": [
+    0,
+    255,
+    7,
+],
+          "horAngleColor": [
+    0,
+    255,
+    7,
+],
+          "scaleColor": [
+    0,
+    255,
+    7,
+],
+          "targetColor": [
+    0,
+    255,
+    7,
+],
+          "netRowCnt": 4,
+          "netColor": [
+    0,
+    255,
+    7,
+],
+          "hideWeaponIndication": true,
+          "centerRadar": true,
+          "showCueHeights": true
         },
         "page": {
           "type": "ils_duplicate"
@@ -2314,7 +2371,8 @@
         ],
         "page": {
           "type": "rwr",
-          "scale": 1.15
+          "scale": 1.15,
+          "centralMark": "cross"
         }
       },
       "display": {
@@ -2355,7 +2413,7 @@
   },
   "sensors": {
     "sensor": {
-      "blk": "gameData/sensors/us_an_apg_63.blk",
+      "blk": "gameData/sensors/us_an_apg_63_psp.blk",
       "dmPart": "radar_dm"
     },
     "sensor": {
@@ -2451,19 +2509,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 120,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 120,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -3388,10 +3448,7 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,

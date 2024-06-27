@@ -3,6 +3,8 @@
   "name": "AN/APG-68(V)9",
   "showMissileLaunchZone": true,
   "showMissileDgftLaunchZone": true,
+  "weaponTargetsMax": 6,
+  "launchedMissilesPredictedPositionsMax": 6,
   "transivers": {
     "mprf": {
       "sideLobesAttenuation": -20.0,
@@ -11,6 +13,12 @@
       "rcs": 3.0,
       "range": 70000.0,
       "rangeMax": 150000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "azimuth": {
           "angleHalfSens": 3.3,
@@ -29,6 +37,12 @@
       "rcs": 3.0,
       "range": 90000.0,
       "rangeMax": 150000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "azimuth": {
           "angleHalfSens": 3.3,
@@ -47,6 +61,12 @@
       "rcs": 5.0,
       "range": 95000.0,
       "rangeMax": 150000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "azimuth": {
           "angleHalfSens": 3.3,
@@ -1103,6 +1123,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -1111,6 +1135,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"

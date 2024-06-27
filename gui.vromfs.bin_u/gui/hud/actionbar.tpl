@@ -10,4 +10,8 @@ actionBar {
   <<#items>>
     <<>items>>
   <</items>>
+
+  <<#extraItems>>
+    <<>extraItems>>
+  <</extraItems>>
 }

@@ -8,7 +8,7 @@ let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { broadcastEvent, add_event_listener } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
-let { hasXInputDevice } = require("controls")
+let { hasXInputDevice, emulateShortcut } = require("controls")
 let { format } = require("string")
 let { debug_dump_stack } = require("dagor.debug")
 let { read_text_from_file } = require("dagor.fs")
@@ -21,8 +21,7 @@ let { LONG_ACTIONBAR_TEXT_LEN, getActionItemAmountText, getActionItemModificatio
 let { toggleShortcut } = require("%globalScripts/controls/shortcutActions.nut")
 let { getWheelBarItems, activateActionBarAction, getActionBarUnitName } = require("hudActionBar")
 let { EII_BULLET, EII_ARTILLERY_TARGET, EII_EXTINGUISHER, EII_ROCKET, EII_FORCED_GUN,
-  EII_GUIDANCE_MODE, EII_SELECT_SPECIAL_WEAPON, EII_GRENADE
-} = require("hudActionBarConst")
+  EII_GUIDANCE_MODE, EII_SELECT_SPECIAL_WEAPON, EII_GRENADE } = require("hudActionBarConst")
 let { arrangeStreakWheelActions } = require("%scripts/hud/hudActionBarStreakWheel.nut")
 let { is_replay_playing } = require("replays")
 let { getHudUnitType } = require("hudState")
@@ -39,6 +38,8 @@ let { loadLocalByAccount, saveLocalByAccount
 let { closeCurVoicemenu } = require("%scripts/wheelmenu/voiceMessages.nut")
 let { guiStartWheelmenu, closeCurWheelmenu } = require("%scripts/wheelmenu/wheelmenu.nut")
 let { openGenericTooltip, closeGenericTooltip } = require("%scripts/utils/genericTooltip.nut")
+let { openHudAirWeaponSelector, isVisualHudAirWeaponSelectorOpened } = require("%scripts/hud/hudAirWeaponSelector.nut")
+let { getExtraActionItemsView } = require("%scripts/hud/hudActionBarExtraActions.nut")
 
 local sectorAngle1PID = dagui_propid_add_name_id("sector-angle-1")
 
@@ -73,7 +74,11 @@ function needFullUpdate(item, prevItem, hudUnitType) {
 const ACTION_ID_PREFIX = "action_bar_item_"
 let getActionBarObjId = @(itemId) $"{ACTION_ID_PREFIX}{itemId}"
 
+const SECOND_ACTION_ID_PREFIX = "second_action_bar_item_"
+let getSecondActionBarObjId = @(itemId) $"{SECOND_ACTION_ID_PREFIX}{itemId}"
+
 const COLLAPSE_ACTION_BAR_SH_ID = "ID_COLLAPSE_ACTION_BAR"
+const SECOND_ACTIONS_MENU_LIFETIME = 15
 
 function getCollapseShText() {
   let shType = ::g_shortcut_type.getShortcutTypeByShortcutId(COLLAPSE_ACTION_BAR_SH_ID)
@@ -107,6 +112,9 @@ let class ActionBar {
   isCollapsed = false
   isVisible = false
   hasXInputSh = false
+  closeSecondActionsTimer = null
+
+  currentActionWithMenu = null
 
   constructor(nestObj) {
     if (!checkObj(nestObj))
@@ -173,7 +181,7 @@ let class ActionBar {
     eventbus_send("setIsActionBarCollapsed", this.isCollapsed)
   }
 
-  getTextShHeight = @() to_pixels("0.022@shHud")
+  getTextShHeight = @() to_pixels("@hudActionBarTextShHight")
   getXInputShHeight = @() to_pixels("0.036@shHud")
 
   function getActionBarAABB() {
@@ -203,7 +211,7 @@ let class ActionBar {
       isVisible = this.isVisible
       pos
       size
-      shortcutText = getCollapseShText().getText()
+      shortcutText = getCollapseShText().getTextShort()
     }
   }
 
@@ -231,18 +239,23 @@ let class ActionBar {
       return
 
     this.curActionBarUnitName = getActionBarUnitName()
-
+    let unit = this.getActionBarUnit()
     let view = {
-      items = this.actionItems.map((@(a) this.buildItemView(a, true)).bindenv(this))
+      items = this.actionItems.map((@(a, nestIndex) this.buildItemView(a, nestIndex, true)).bindenv(this))
+      extraItems = getExtraActionItemsView(unit)
     }
 
     let partails = {
       items           = loadTemplateText("%gui/hud/actionBarItem.tpl")
+      extraItems      = loadTemplateText("%gui/hud/actionBarItem.tpl")
       textShortcut    = this.canControl ? loadTemplateText("%gui/hud/actionBarItemTextShortcut.tpl")    : ""
       gamepadShortcut = this.canControl ? loadTemplateText("%gui/hud/actionBarItemGamepadShortcut.tpl") : ""
     }
 
+    local newActionWithMenu = null
     foreach (idx, item in this.actionItems) {
+      if (item?.isWaitSelectSecondAction)
+        newActionWithMenu = item
       let cooldownTimeout = (item?.cooldownEndTime ?? 0) - get_mission_time()
       if (cooldownTimeout > 0)
         this.enableBarItemAfterCooldown(idx, cooldownTimeout)
@@ -263,11 +276,12 @@ let class ActionBar {
     animObj["_transp-timer"] = isShow ? "1" : "0"
     animObj["_pos-timer"] = isShow ? "0" : "1"
 
+    this.openSecondActionsMenu(newActionWithMenu)
     get_cur_gui_scene().performDelayed(this, @() eventbus_send("setActionBarState", this.getState()))
   }
 
   //creates view for handyman by one actionBar item
-  function buildItemView(item, needShortcuts = false) {
+  function buildItemView(item, nestIndex = -1, needShortcuts = false) {
     let hudUnitType = getHudUnitType()
     let ship = hudUnitType == HUD_UNIT_TYPE.SHIP
       || hudUnitType == HUD_UNIT_TYPE.SHIP_EX
@@ -287,7 +301,7 @@ let class ActionBar {
 
       let shType = ::g_shortcut_type.getShortcutTypeByShortcutId(shortcutId)
       let scInput = shType.getFirstInput(shortcutId)
-      shortcutText = scInput.getText()
+      shortcutText = scInput.getTextShort()
       isXinput = scInput.hasImage() && scInput.getDeviceId() != STD_KEYBOARD_DEVICE_ID
       showShortcut = isXinput || shortcutText != ""
     }
@@ -300,6 +314,7 @@ let class ActionBar {
     let progressCooldownParams = this.getWaitGaugeDegreeParams(inProgressEndTime, inProgressTime, !active)
     let viewItem = {
       id               = getActionBarObjId(item.id)
+      nestIndex        = nestIndex < 0 ? null : nestIndex.tostring()
       selected         = item.selected ? "yes" : "no"
       active           = item.active ? "yes" : "no"
       enable           = isReady ? "yes" : "no"
@@ -318,6 +333,8 @@ let class ActionBar {
       progressCooldown          = progressCooldownParams.degree
       progressCooldownIncFactor = progressCooldownParams.incFactor
       automatic                 = ship && (item?.automatic ?? false)
+      hasSecondActionsBtn = item?.additionalBulletInfo != null
+      isCloseSecondActionsBtn = item?.isWaitSelectSecondAction ?? false
     }
 
     let unit = this.getActionBarUnit()
@@ -348,6 +365,50 @@ let class ActionBar {
     return viewItem
   }
 
+  function buildSecondItemView(item, itemId) {
+    let { cooldownEndTime = 0, cooldownTime = 0, inProgressTime = 1, inProgressEndTime = 0,
+      blockedCooldownEndTime = 0, blockedCooldownTime = 1, active = true, available = true } = item
+    let cooldownParams = this.getWaitGaugeDegreeParams(cooldownEndTime, cooldownTime)
+    let blockedCooldownParams = this.getWaitGaugeDegreeParams(blockedCooldownEndTime, blockedCooldownTime)
+    let progressCooldownParams = this.getWaitGaugeDegreeParams(inProgressEndTime, inProgressTime, !active)
+
+    let viewItem = {
+      id = getSecondActionBarObjId(itemId)
+      selected = item.selected ? "yes" : "no"
+      active = item.selected ? "yes" : "no"
+      available = available
+      enable = item.count > 0
+      amount = item.count
+      cooldown = cooldownParams.degree
+      cooldownIncFactor = cooldownParams.incFactor
+      blockedCooldown           = blockedCooldownParams.degree
+      blockedCooldownIncFactor  = blockedCooldownParams.incFactor
+      progressCooldown          = progressCooldownParams.degree
+      progressCooldownIncFactor = progressCooldownParams.incFactor
+      inProgressTime = 0.0
+      nopadding = "yes"
+      countEx = -1
+      onClick = "onSecondActionClick"
+      broken = false
+    }
+
+    let unit = this.getActionBarUnit()
+    if (item?.type == EII_BULLET) {
+      let data = getBulletsSetData(unit, item.modificationName)
+      viewItem.bullets <- handyman.renderCached("%gui/weaponry/bullets.tpl", getBulletsIconView(data))
+      viewItem.tooltipId <- MODIFICATION.getTooltipId(unit.name, item.modificationName, { isInHudActionBar = true })
+    } else if (item?.type != null && item.type != EII_BULLET && item.type != EII_FORCED_GUN) {
+      let actionBarType = g_hud_action_bar_type.getByActionItem(item)
+      let killStreakTag = getTblValue("killStreakTag", item)
+      let killStreakUnitTag = getTblValue("killStreakUnitTag", item)
+      viewItem.icon <- actionBarType.getIcon(item, killStreakUnitTag)
+      viewItem.name <- actionBarType.getTitle(item, killStreakTag)
+      viewItem.tooltipText <- actionBarType.getTooltipText(item)
+    }
+
+    return viewItem
+  }
+
   function getWaitGaugeDegreeParams(cooldownEndTime, cooldownTime, isReverse = false) {
     let res = { degree = 360, incFactor = 0 }
     let cooldownDuration = cooldownEndTime - get_mission_time()
@@ -360,6 +421,19 @@ let class ActionBar {
       incFactor = degree == 360 ? 0
         : (360 - degree) / cooldownDuration * (isReverse ? -1 : 1)
     }
+  }
+
+  function replaceItem(item, nestIndex) {
+    let partails = {
+      textShortcut    = this.canControl ? loadTemplateText("%gui/hud/actionBarItemTextShortcut.tpl")    : ""
+      gamepadShortcut = this.canControl ? loadTemplateText("%gui/hud/actionBarItemGamepadShortcut.tpl") : ""
+    }
+
+    let action_bar_items_nest = this.scene.findObject("action_bar")
+    let itemView = this.buildItemView(item, nestIndex, true)
+    itemView["noNeedNest"] <- true
+    let itemBlk = handyman.renderCached("%gui/hud/actionBarItem.tpl", itemView, partails)
+    this.guiScene.replaceContentFromText(action_bar_items_nest.findObject( $"{nestIndex}_nest"), itemBlk, itemBlk.len(), this)
   }
 
   function updateWaitGaugeDegree(obj, waitGaugeDegreeParams) {
@@ -383,6 +457,7 @@ let class ActionBar {
     this.updateKillStreakWheel()
 
     if ((prevActionItems?.len() ?? 0) != this.actionItems.len() || this.actionItems.len() == 0) {
+      this.openSecondActionsMenu(null)
       this.fill()
       broadcastEvent("HudActionbarResized", { size = this.actionItems.len() })
       return
@@ -392,14 +467,22 @@ let class ActionBar {
     let unit = this.getActionBarUnit()
     let ship = hudUnitType == HUD_UNIT_TYPE.SHIP
       || hudUnitType == HUD_UNIT_TYPE.SHIP_EX
+
+    local newActionWithMenu = this.currentActionWithMenu
+
     foreach (id, item in this.actionItems) {
       let prevItem = prevActionItems[id]
       if (item == prevItem)
         continue
 
+      if (newActionWithMenu == prevItem)
+        newActionWithMenu = item?.isWaitSelectSecondAction ? item : null
+      else if (item?.isWaitSelectSecondAction)
+        newActionWithMenu = item
+
       if (needFullUpdate(item, prevItem, hudUnitType)) {
-        this.fill()
-        return
+        this.replaceItem(item, id)
+        continue
       }
 
       if (this.cooldownTimers?[id])
@@ -407,6 +490,7 @@ let class ActionBar {
 
       let itemObjId = getActionBarObjId(item.id)
       let itemObj = this.scene.findObject(itemObjId)
+
       if (!(itemObj?.isValid() ?? false))
         continue
 
@@ -415,7 +499,11 @@ let class ActionBar {
 
       let actionType = item.type
       let { isReady } = getActionItemStatus(item)
-      if (actionType != EII_BULLET && !itemObj.isEnabled() && isReady)
+
+      if (item?.importantFire != null)
+        this.blinkImportantFire(itemObj, item.importantFire && isReady)
+
+      if (actionType != EII_BULLET && !itemObj.isEnabled() && isReady && item?.importantFire != true)
         this.blink(itemObj)
 
       let actionBarType = g_hud_action_bar_type.getByActionItem(item)
@@ -425,6 +513,11 @@ let class ActionBar {
       itemObj.selected = item.selected ? "yes" : "no"
       itemObj.active = item.active ? "yes" : "no"
       itemObj.enable(isReady)
+      if (item?.isWaitSelectSecondAction != prevItem?.isWaitSelectSecondAction ) {
+        let collapseBtn = itemObj.findObject("actionCollapseBtn")
+        if (collapseBtn != null)
+          collapseBtn["rotation"] = item?.isWaitSelectSecondAction ? "180" : "0"
+      }
 
       let mainActionButtonObj = itemObj.findObject("mainActionButton")
       let activatedActionButtonObj = itemObj.findObject("activatedActionButton")
@@ -466,6 +559,8 @@ let class ActionBar {
       this.updateWaitGaugeDegree(itemObj.findObject("progressCooldown"),
         this.getWaitGaugeDegreeParams(inProgressEndTime, inProgressTime, !active))
     }
+
+    this.openSecondActionsMenu(newActionWithMenu)
   }
 
   function enableBarItemAfterCooldown(itemIdx, timeout) {
@@ -518,22 +613,149 @@ let class ActionBar {
       blinkObj["_blink"] = "yes"
   }
 
+  function blinkImportantFire(obj, enabled) {
+    let blinkObj = obj.findObject("importantFire")
+    if (checkObj(blinkObj))
+      blinkObj["_blink"] = enabled ? "loop" : "no"
+  }
+
   function updateVisibility() {
     if (!this.isValid())
       return
 
     let showActionBarOption = ::get_gui_option_in_mode(USEROPT_SHOW_ACTION_BAR, OPTIONS_MODE_GAMEPLAY, true)
-    this.isVisible = showActionBarOption && !g_hud_live_stats.isVisible()
+    this.isVisible = showActionBarOption && !g_hud_live_stats.isVisible() && !isVisualHudAirWeaponSelectorOpened()
     this.scene.show(this.isVisible)
     eventbus_send("setIsActionBarVisible", this.isVisible)
   }
 
   function activateAction(obj) {
     let action = this.getActionByObj(obj)
-    if (action) {
-      let shortcut = g_hud_action_bar_type.getByActionItem(action).getShortcut(action, getHudUnitType())
-      if (shortcut)
-        toggleShortcut(shortcut)
+    if (action == null)
+      return
+    if (this.currentActionWithMenu && this.currentActionWithMenu.isWaitSelectSecondAction) {
+      foreach (idx, secondAction in this.currentActionWithMenu.additionalBulletInfo) {
+        if (secondAction.selected) {
+          emulateShortcut(g_hud_action_bar_type.BULLET.getShortcut({shortcutIdx = idx}))
+          if (this.currentActionWithMenu == action) {
+            updateActionBar()
+            return
+          }
+          break
+        }
+      }
+    }
+
+    let shortcut = g_hud_action_bar_type.getByActionItem(action).getShortcut(action, getHudUnitType())
+    if (shortcut)
+      toggleShortcut(shortcut)
+
+    if (action?.additionalBulletInfo)
+      updateActionBar()
+  }
+
+  function openSecondActionsMenu(action) {
+    if (action == this.currentActionWithMenu)
+      return
+
+    if (action == null) {
+      this.closeSecondActionsMenu()
+      return
+    }
+    this.currentActionWithMenu = action
+    if (action?.additionalBulletInfo) {
+      let actionObjId = getActionBarObjId(action.id)
+      let actionObj = this.scene.findObject(actionObjId)
+      this.showSecondActions(actionObj, action)
+    }
+  }
+
+  function closeSecondActionsMenu() {
+    if (!this.currentActionWithMenu)
+      return
+
+    this.hideSecondActions()
+    this.currentActionWithMenu = null
+    clearTimer(this.closeSecondActionsTimer)
+  }
+
+  function emulateCloseSecondActions() {
+    if (!this.currentActionWithMenu?.isWaitSelectSecondAction)
+      return
+    foreach (idx, secondAction in this.currentActionWithMenu.additionalBulletInfo)
+      if (secondAction.selected) {
+        emulateShortcut(g_hud_action_bar_type.BULLET.getShortcut({shortcutIdx = idx}))
+        break
+      }
+  }
+
+  function onSecondActionClick(obj) {
+    let itemId = obj.id.slice(-(obj.id.len() - SECOND_ACTION_ID_PREFIX.len())).tointeger()
+    emulateShortcut(g_hud_action_bar_type.BULLET.getShortcut({shortcutIdx = itemId}))
+    updateActionBar()
+  }
+
+  function showSecondActions(obj, action = null) {
+    action = action ?? this.getActionByObj(obj)
+
+    if ((action?.additionalBulletInfo.len() ?? 0) == 0)
+      return
+
+    let secondItemsParams = this.generateSecondActions(action.additionalBulletInfo, action.triggerGroupNo)
+    secondItemsParams.posx <- obj.getPos()[0]
+    secondItemsParams.posy <- this.hasXInputSh ? this.getXInputShHeight() : this.getTextShHeight()
+
+    let blk = handyman.renderCached(("%gui/hud/actionBarSecondItems.tpl"), secondItemsParams)
+    this.guiScene.replaceContentFromText(this.scene.findObject("secondActions"), blk, blk.len(), this)
+
+    clearTimer(this.closeSecondActionsTimer)
+    let handler = this
+    this.closeSecondActionsTimer = setTimeout(SECOND_ACTIONS_MENU_LIFETIME, @() handler.isValid() ? handler.emulateCloseSecondActions() : null)
+  }
+
+  function hideSecondActions() {
+    this.guiScene.replaceContentFromText(this.scene.findObject("secondActions"), "", 0, this)
+  }
+
+  function generateSecondActions(secondActions, triggerGroupNo = 0) {
+    local header = null
+    if (triggerGroupNo == 0)
+      header = loc("controls/help/ship/manual-targeting-primary")
+    else if (triggerGroupNo == 1)
+      header = loc("controls/help/ship/manual-targeting-secondary")
+    else
+      header = loc("HUD/ALL_ADDITIONAL_GUNS")
+
+    let shortcuts = []
+    let items = []
+    let actionShortNames = []
+    let unit = this.getActionBarUnit()
+
+    foreach (index, action in secondActions) {
+      let item = this.buildSecondItemView(action, index)
+      local code = $"ID_SHIP_ACTION_BAR_ITEM_{index+1}"
+
+      let shType = ::g_shortcut_type.getShortcutTypeByShortcutId(code)
+      let scInput = shType.getFirstInput(code)
+      let shortcutText = scInput.getTextShort()
+      let isXinput = scInput.hasImage() && scInput.getDeviceId() != STD_KEYBOARD_DEVICE_ID
+      shortcuts.append({shortcut = shortcutText, isXinput, mainShortcutId = code})
+
+      items.append(item)
+      local shortName = "--"
+      if (action.modificationName) {
+        let bullets = getBulletsSetData(unit, action.modificationName)
+        shortName = loc($"{bullets.bullets[0]}/name/short")
+      }
+      actionShortNames.append({shortName})
+    }
+
+    return {
+      itemsCount = items.len()
+      shortcuts
+      items
+      header
+      actionShortNames
     }
   }
 
@@ -682,6 +904,7 @@ let class ActionBar {
     }
     guiStartWheelmenu(params)
   }
+
   function onTooltipObjClose(obj) {
     closeGenericTooltip(obj, this)
   }
@@ -689,6 +912,11 @@ let class ActionBar {
   function onGenericTooltipOpen(obj) {
     openGenericTooltip(obj, this)
   }
+
+  function onVisualSelectorClick(_obj) {
+    openHudAirWeaponSelector()
+  }
+
 }
 
 return {

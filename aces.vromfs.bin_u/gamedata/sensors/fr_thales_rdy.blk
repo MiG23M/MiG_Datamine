@@ -2,6 +2,8 @@
   "type": "radar",
   "name": "Thales RDY",
   "showMissileLaunchZone": true,
+  "weaponTargetsMax": 4,
+  "launchedMissilesPredictedPositionsMax": 6,
   "transivers": {
     "lprf": {
       "sideLobesAttenuation": -20.0,
@@ -10,6 +12,12 @@
       "rcs": 5.0,
       "range": 80000.0,
       "rangeMax": 100000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.0,
         "sideLobesSensitivity": -35.0
@@ -22,6 +30,12 @@
       "rcs": 5.0,
       "range": 120000.0,
       "rangeMax": 150000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.0,
         "sideLobesSensitivity": -35.0
@@ -34,6 +48,12 @@
       "rcs": 5.0,
       "range": 150000.0,
       "rangeMax": 180000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.0,
         "sideLobesSensitivity": -35.0
@@ -46,6 +66,12 @@
       "rcs": 5.0,
       "range": 50000.0,
       "rangeMax": 75000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.0,
         "sideLobesSensitivity": -35.0
@@ -1284,6 +1310,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -1292,6 +1322,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"

@@ -8,9 +8,8 @@ let { calculate_tank_bullet_parameters } = require("unitCalculcation")
 let enums = require("%sqStdLibs/helpers/enums.nut")
 let stdMath = require("%sqstd/math.nut")
 let { WEAPON_TYPE, TRIGGER_TYPE,
-        getLinkedGunIdx,
         getWeaponNameByBlkPath } = require("%scripts/weaponry/weaponryInfo.nut")
-let { getBulletsList,
+let { getBulletsList, getLinkedGunIdx,
         getBulletsSetData,
         getBulletsSearchName,
         getBulletsGroupCount,
@@ -31,6 +30,7 @@ let { getUnitName } = require("%scripts/unit/unitInfo.nut")
 let { enableObjsByTable } = require("%sqDagui/daguiUtil.nut")
 let { getCurrentGameModeEdiff } = require("%scripts/gameModes/gameModeManagerState.nut")
 let { measureType } = require("%scripts/measureType.nut")
+let { MAX_COUNTRY_RANK } = require("%scripts/ranks.nut")
 
 local options = {
   types = []
@@ -252,7 +252,7 @@ options.addTypes({
       let unitType = options.UNITTYPE.value
       let country = options.COUNTRY.value
       this.values = []
-      for (local rank = 1; rank <= ::max_country_rank; rank++)
+      for (local rank = 1; rank <= MAX_COUNTRY_RANK; rank++)
         if (hasUnitAtRank(rank, unitType, country, true, false))
           this.values.append(rank)
       this.items = this.values.map(@(r) {
@@ -375,7 +375,7 @@ options.addTypes({
 
       // Offensive Armament
       for (local groupIndex = 0; groupIndex < getLastFakeBulletsIndex(unit); groupIndex++) {
-        let gunIdx = getLinkedGunIdx(groupIndex, groupsCount, unit.unitType.bulletSetsQuantity, false)
+        let gunIdx = getLinkedGunIdx(groupIndex, groupsCount, unit.unitType.bulletSetsQuantity, unit, false)
         if (gunIdx == curGunIdx)
           continue
 

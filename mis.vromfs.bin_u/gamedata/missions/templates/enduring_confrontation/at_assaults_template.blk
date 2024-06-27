@@ -32,24 +32,7 @@
         "enableAfterComplete": false
       },
       "events": {
-        "initMission": {
-          "object": "@cover_name",
-          "target": "squad_01",
-          "fireRandom": true,
-          "targetDistMax": 4000.0,
-          "playerAttracted": false,
-          "maxNumAttackersPerTarget": 1,
-          "attackAltRange": [
-            250.0,
-            7000.0
-          ],
-          "anchorTarget": "@target_name",
-          "targetToAnchorDist": [
-            3000.0,
-            4000.0
-          ],
-          "resetObjectToFollow": false
-        }
+        "initMission": {        }
       },
       "conditions": {      },
       "actions": {
@@ -864,7 +847,7 @@
           "value": "zapuskaem proverku togo nuzhen li spavn ili prikaz otdaetsya uzhe otspavnennym yunitam"
         },
         "triggerEnable": {
-          "target": "at_assaults_t1_spawn"
+          "target": "at_t1_check_spawn_rule"
         },
         "comment": {
           "value": "sbrasyvaem aktivnost'"
@@ -915,7 +898,7 @@
           "value": "zapuskaem proverku togo nuzhen li spavn ili prikaz otdaetsya uzhe otspavnennym yunitam"
         },
         "triggerEnable": {
-          "target": "at_assaults_t2_spawn"
+          "target": "at_t2_check_spawn_rule"
         },
         "comment": {
           "value": "sbrasyvaem aktivnost'"
@@ -934,6 +917,43 @@
         },
         "triggerEnable": {
           "target": "at_assaults_t2_sub_init"
+        }
+      }
+    },
+    "at_t1_check_spawn_rule": {
+      "is_enabled": false,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ALL",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "periodicEvent": {
+          "time": 1.0
+        }
+      },
+      "conditions": {
+        "varCompareBool": {
+          "var_value": "at_spawn_with_players",
+          "value": false,
+          "comparasion_func": "equal"
+        }
+      },
+      "actions": {
+        "comment": {
+          "value": "regular spawn"
+        },
+        "triggerEnable": {
+          "target": "at_assaults_t1_spawn"
+        }
+      },
+      "else_actions": {
+        "comment": {
+          "value": "spawn with players"
+        },
+        "triggerEnable": {
+          "target": "at_t1_spawn_names_create"
         }
       }
     },
@@ -987,11 +1007,11 @@
           "value": "base properties for assaults"
         },
         "unitSetProperties": {
+          "object": "@at_assaults_t1_name",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "@at_assaults_t1_name",
           "accuracy": 0.7,
           "effShootingRate": 0.7,
           "airEffShootingRate": 0.7,
@@ -1053,12 +1073,12 @@
           "value": "zapreshchaem prikryshke boyat'sya i zadaem tochnost'"
         },
         "unitSetProperties": {
+          "realisticAI": false,
+          "object": "@at_assaults_t1_cover_name",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "realisticAI": false,
-          "object": "@at_assaults_t1_cover_name",
           "stealthRadius": 3500.0,
           "accuracy": 0.6,
           "effShootingRate": 0.6,
@@ -1078,6 +1098,43 @@
         },
         "triggerEnable": {
           "target": "at_assaults_t1_tasks_gain"
+        }
+      }
+    },
+    "at_t2_check_spawn_rule": {
+      "is_enabled": false,
+      "comments": "",
+      "props": {
+        "actionsType": "PERFORM_ONE_BY_ONE",
+        "conditionsType": "ALL",
+        "enableAfterComplete": false
+      },
+      "events": {
+        "periodicEvent": {
+          "time": 1.0
+        }
+      },
+      "conditions": {
+        "varCompareBool": {
+          "var_value": "at_spawn_with_players",
+          "value": false,
+          "comparasion_func": "equal"
+        }
+      },
+      "actions": {
+        "comment": {
+          "value": "regular spawn"
+        },
+        "triggerEnable": {
+          "target": "at_assaults_t2_spawn"
+        }
+      },
+      "else_actions": {
+        "comment": {
+          "value": "spawn with players"
+        },
+        "triggerEnable": {
+          "target": "at_t2_spawn_names_create"
         }
       }
     },
@@ -1131,11 +1188,11 @@
           "value": "base properties for assaults"
         },
         "unitSetProperties": {
+          "object": "@at_assaults_t2_name",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "@at_assaults_t2_name",
           "accuracy": 0.7,
           "effShootingRate": 0.7,
           "airEffShootingRate": 0.7,
@@ -1197,12 +1254,12 @@
           "value": "zapreshchaem prikryshke boyat'sya i zadaem tochnost'"
         },
         "unitSetProperties": {
+          "realisticAI": false,
+          "object": "@at_assaults_t2_cover_name",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "realisticAI": false,
-          "object": "@at_assaults_t2_cover_name",
           "stealthRadius": 3500.0,
           "accuracy": 0.6,
           "effShootingRate": 0.6,
@@ -1339,12 +1396,12 @@
           "value": "vklyuchaem miganie na karte"
         },
         "unitSetIndication": {
-          "target_marking": 0,
           "set": true,
+          "target": "@at_assaults_t1_name",
+          "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t1_name",
           "team": "Both"
         },
         "comment": {
@@ -1484,12 +1541,12 @@
           "value": "vklyuchaem miganie na karte"
         },
         "unitSetIndication": {
-          "target_marking": 0,
           "set": true,
+          "target": "@at_assaults_t2_name",
+          "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t2_name",
           "team": "Both"
         },
         "comment": {
@@ -2910,11 +2967,11 @@
           ]
         },
         "unitSetProperties": {
+          "object": "@at_assaults_t1_name",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "@at_assaults_t1_name",
           "throttle": 0.8
         },
         "comment": {
@@ -2994,11 +3051,11 @@
           ]
         },
         "unitSetProperties": {
+          "object": "@at_assaults_t2_name",
           "object_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "object": "@at_assaults_t2_name",
           "throttle": 0.8
         },
         "comment": {
@@ -3216,20 +3273,20 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t1_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t1_name",
           "team": "A"
         },
         "unitSetIndication": {
           "set": false,
+          "target": "@at_assaults_t1_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t1_name",
           "team": "B"
         },
         "comment": {
@@ -3237,11 +3294,11 @@
         },
         "moAddMissionObjective": {
           "target": "bfd_t1_assaults_defend",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t1_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "comment": {
           "value": "vklyuchaem otslezhivanie pozicii bomberov"
@@ -3274,28 +3331,28 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t1_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t1_name",
           "team": "Both"
         },
         "moAddMissionObjective": {
           "target": "bfd_t1_assaults_defend",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t1_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "moAddMissionObjective": {
           "target": "bfd_t2_assaults_attack",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t1_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "triggerEnable": {
           "target": "at_assaults_t1_def_objective_update",
@@ -3350,19 +3407,19 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t1_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "@at_assaults_t1_name"
+          "object_var_value": 0
         },
         "moAddMissionObjective": {
           "target": "bfd_t2_assaults_attack",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t1_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         }
       },
       "else_actions": {      }
@@ -3418,19 +3475,19 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t1_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "@at_assaults_t1_name"
+          "object_var_value": 0
         },
         "moAddMissionObjective": {
           "target": "bfd_t2_assaults_attack",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t1_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "comment": {
           "value": ""
@@ -3481,20 +3538,20 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t2_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t2_name",
           "team": "B"
         },
         "unitSetIndication": {
           "set": false,
+          "target": "@at_assaults_t2_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t2_name",
           "team": "A"
         },
         "comment": {
@@ -3502,11 +3559,11 @@
         },
         "moAddMissionObjective": {
           "target": "bfd_t2_assaults_defend",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t2_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "comment": {
           "value": "vklyuchaem otslezhivanie pozicii bomberov"
@@ -3539,28 +3596,28 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t2_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
           "object_var_value": 0,
-          "target": "@at_assaults_t2_name",
           "team": "Both"
         },
         "moAddMissionObjective": {
           "target": "bfd_t2_assaults_defend",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t2_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "moAddMissionObjective": {
           "target": "bfd_t1_assaults_attack",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t2_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "triggerEnable": {
           "target": "at_assaults_t2_def_objective_update",
@@ -3615,19 +3672,19 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t2_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "@at_assaults_t2_name"
+          "object_var_value": 0
         },
         "moAddMissionObjective": {
           "target": "bfd_t1_assaults_attack",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t2_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         }
       },
       "else_actions": {      }
@@ -3683,19 +3740,19 @@
         },
         "unitSetIndication": {
           "set": true,
+          "target": "@at_assaults_t2_name",
           "target_marking": 0,
           "object_var_name": "",
           "object_var_comp_op": "equal",
-          "object_var_value": 0,
-          "target": "@at_assaults_t2_name"
+          "object_var_value": 0
         },
         "moAddMissionObjective": {
           "target": "bfd_t1_assaults_attack",
-          "object_var_comp_op": "equal",
-          "object_var_name": "",
-          "object_marking": 0,
           "unit_or_area": "@at_assaults_t2_name",
-          "object_type": "isActive"
+          "object_type": "isActive",
+          "object_marking": 0,
+          "object_var_comp_op": "equal",
+          "object_var_name": ""
         },
         "comment": {
           "value": ""
@@ -4606,11 +4663,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t1_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t1_name",
             "throttle": 0.8
           }
         },
@@ -4665,11 +4722,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t1_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t1_name",
             "throttle": 0.8
           }
         },
@@ -4724,11 +4781,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t1_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t1_name",
             "throttle": 0.8
           }
         },
@@ -4783,11 +4840,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t1_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t1_name",
             "throttle": 0.8
           }
         },
@@ -4842,11 +4899,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t1_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t1_name",
             "throttle": 0.8
           }
         },
@@ -4901,11 +4958,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t1_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t1_name",
             "throttle": 0.8
           }
         },
@@ -4960,11 +5017,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t2_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t2_name",
             "throttle": 0.8
           }
         },
@@ -5019,11 +5076,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t2_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t2_name",
             "throttle": 0.8
           }
         },
@@ -5078,11 +5135,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t2_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t2_name",
             "throttle": 0.8
           }
         },
@@ -5137,11 +5194,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t2_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t2_name",
             "throttle": 0.8
           }
         },
@@ -5196,11 +5253,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t2_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t2_name",
             "throttle": 0.8
           }
         },
@@ -5255,11 +5312,11 @@
             ]
           },
           "unitSetProperties": {
+            "object": "@at_assaults_t2_name",
             "object_marking": 0,
             "object_var_name": "",
             "object_var_comp_op": "equal",
             "object_var_value": 0,
-            "object": "@at_assaults_t2_name",
             "throttle": 0.8
           }
         },
@@ -6483,6 +6540,674 @@
           }
         }
       }
+    },
+    "at_spawns_with_players": {
+      "isCategory": true,
+      "is_enabled": true,
+      "at_t1_spawn_names_create": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "at_spawn_with_players",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "default spawns from ARB"
+          },
+          "varSetString": {
+            "value": "t1_assault_top_spawn_01",
+            "var": "at_t1_players_spawn_top_01_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_high_spawn_01",
+            "var": "at_t1_players_spawn_high_01_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_mid_spawn_01",
+            "var": "at_t1_players_spawn_mid_01_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_low_spawn_01",
+            "var": "at_t1_players_spawn_low_01_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_top_spawn_02",
+            "var": "at_t1_players_spawn_top_02_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_high_spawn_02",
+            "var": "at_t1_players_spawn_high_02_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_mid_spawn_02",
+            "var": "at_t1_players_spawn_mid_02_name"
+          },
+          "varSetString": {
+            "value": "t1_assault_low_spawn_02",
+            "var": "at_t1_players_spawn_low_02_name"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_t1_spawn_top"
+          }
+        },
+        "else_actions": {        }
+      },
+      "at_t1_spawn_top": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t1_players_spawn_top_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t1_players_spawn_top_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_top_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_top_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t1_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "at_t1_spawn_high"
+          }
+        }
+      },
+      "at_t1_spawn_high": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t1_players_spawn_high_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t1_players_spawn_high_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_high_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_high_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t1_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "at_t1_spawn_mid"
+          }
+        }
+      },
+      "at_t1_spawn_mid": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t1_players_spawn_mid_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t1_players_spawn_mid_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_mid_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_mid_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t1_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "at_t1_spawn_low"
+          }
+        }
+      },
+      "at_t1_spawn_low": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t1_players_spawn_low_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t1_players_spawn_low_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_low_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t1_name",
+            "object_type": "isInactive",
+            "target": "@at_t1_players_spawn_low_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t1_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "no new spawns found. trying old way"
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t1_spawn"
+          }
+        }
+      },
+      "at_t2_spawn_names_create": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "varCompareBool": {
+            "var_value": "at_spawn_with_players",
+            "value": true,
+            "comparasion_func": "equal"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": "default spawns from ARB"
+          },
+          "varSetString": {
+            "value": "t2_assault_top_spawn_01",
+            "var": "at_t2_players_spawn_top_01_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_high_spawn_01",
+            "var": "at_t2_players_spawn_high_01_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_mid_spawn_01",
+            "var": "at_t2_players_spawn_mid_01_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_low_spawn_01",
+            "var": "at_t2_players_spawn_low_01_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_top_spawn_02",
+            "var": "at_t2_players_spawn_top_02_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_high_spawn_02",
+            "var": "at_t2_players_spawn_high_02_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_mid_spawn_02",
+            "var": "at_t2_players_spawn_mid_02_name"
+          },
+          "varSetString": {
+            "value": "t2_assault_low_spawn_02",
+            "var": "at_t2_players_spawn_low_02_name"
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_t2_spawn_top"
+          }
+        },
+        "else_actions": {        }
+      },
+      "at_t2_spawn_top": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t2_players_spawn_top_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t2_players_spawn_top_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_top_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_top_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t2_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "at_t2_spawn_high"
+          }
+        }
+      },
+      "at_t2_spawn_high": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t2_players_spawn_high_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t2_players_spawn_high_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_high_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_high_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t2_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "at_t2_spawn_mid"
+          }
+        }
+      },
+      "at_t2_spawn_mid": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t2_players_spawn_mid_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t2_players_spawn_mid_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_mid_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_mid_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t2_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "triggerEnable": {
+            "target": "at_t2_spawn_low"
+          }
+        }
+      },
+      "at_t2_spawn_low": {
+        "is_enabled": false,
+        "comments": "",
+        "props": {
+          "actionsType": "PERFORM_ONE_BY_ONE",
+          "conditionsType": "ALL",
+          "enableAfterComplete": false
+        },
+        "events": {
+          "periodicEvent": {
+            "time": 1.0
+          }
+        },
+        "conditions": {
+          "objectExists": {
+            "target": "@at_t2_players_spawn_low_01_name",
+            "type": "area"
+          },
+          "objectExists": {
+            "target": "@at_t2_players_spawn_low_02_name",
+            "type": "area"
+          }
+        },
+        "actions": {
+          "comment": {
+            "value": ""
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_low_01_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "unitRespawn": {
+            "delay": 0.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "object": "@at_assaults_t2_name",
+            "object_type": "isInactive",
+            "target": "@at_t2_players_spawn_low_02_name",
+            "randomObjectsCount": 5,
+            "resetFormation": false
+          },
+          "comment": {
+            "value": ""
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t2_tasks_gain"
+          }
+        },
+        "else_actions": {
+          "comment": {
+            "value": "no new spawns found. trying old way"
+          },
+          "triggerEnable": {
+            "target": "at_assaults_t2_spawn"
+          }
+        }
+      }
     }
   },
   "mission_objectives": {
@@ -6599,7 +7324,24 @@
     "at_t1_hunter_name": "ht_t1_hunter",
     "at_t2_hunter_name": "ht_t2_hunter",
     "at_t1_attack_done": false,
-    "at_t2_attack_done": false
+    "at_t2_attack_done": false,
+    "at_t1_players_spawn_high_01_name": "",
+    "at_t1_players_spawn_mid_01_name": "",
+    "at_t1_players_spawn_low_01_name": "",
+    "at_t1_players_spawn_top_01_name": "",
+    "at_t1_players_spawn_high_02_name": "",
+    "at_t1_players_spawn_mid_02_name": "",
+    "at_t1_players_spawn_low_02_name": "",
+    "at_t1_players_spawn_top_02_name": "",
+    "at_t2_players_spawn_high_01_name": "",
+    "at_t2_players_spawn_mid_01_name": "",
+    "at_t2_players_spawn_low_01_name": "",
+    "at_t2_players_spawn_top_01_name": "",
+    "at_t2_players_spawn_high_02_name": "",
+    "at_t2_players_spawn_mid_02_name": "",
+    "at_t2_players_spawn_low_02_name": "",
+    "at_t2_players_spawn_top_02_name": "",
+    "at_spawn_with_players": false
   },
   "dialogs": {  },
   "airfields": {  },

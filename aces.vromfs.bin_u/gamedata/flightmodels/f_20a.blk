@@ -13,6 +13,7 @@
   "haveCCIPForGun": true,
   "haveCCRPForBombs": true,
   "haveCCRPForGun": true,
+  "mfdCamTads": true,
   "havePointOfInterestDesignator": true,
   "ilsF20": true,
   "type": "typeFighter",
@@ -203,13 +204,24 @@
         "hp": 65.4
       },
       "tank2_dm": {
-        "hp": 116.3
+        "hp": 120.5
       },
       "tank3_dm": {
         "hp": 74.3
       },
       "tank4_dm": {
         "hp": 74.3
+      }
+    },
+    "steel_tank_s": {
+      "tank5_dm": {
+        "hp": 80.5
+      },
+      "tank6_dm": {
+        "hp": 78.2
+      },
+      "tank7_dm": {
+        "hp": 80.5
       }
     }
   },
@@ -1013,6 +1025,120 @@
         "damage": 80.0,
         "fire": 50.0,
         "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank5_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
+      }
+    },
+    "part": {
+      "name": "tank6_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
+      }
+    },
+    "part": {
+      "name": "tank7_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
       }
     },
     "part": {
@@ -1981,7 +2107,45 @@
         "cameraFromShell": true,
         "page": {
           "type": "radar",
-          "scale": 0.9
+          "scale": 0.92,
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "fontScale": 0.65,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "targetForm": "square",
+          "modeColor": [
+    0,
+    255,
+    7,
+],
+          "verAngleColor": [
+    0,
+    255,
+    7,
+],
+          "horAngleColor": [
+    0,
+    255,
+    7,
+],
+          "scaleColor": [
+    0,
+    255,
+    7,
+],
+          "targetColor": [
+    0,
+    255,
+    7,
+],
+          "centerRadar": true,
+          "showCueHeights": true
         },
         "page": {
           "type": "devices",
@@ -2469,7 +2633,45 @@
         },
         "page": {
           "type": "radar",
-          "scale": 0.9
+          "scale": 0.92,
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "fontScale": 0.65,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "targetForm": "square",
+          "modeColor": [
+    0,
+    255,
+    7,
+],
+          "verAngleColor": [
+    0,
+    255,
+    7,
+],
+          "horAngleColor": [
+    0,
+    255,
+    7,
+],
+          "scaleColor": [
+    0,
+    255,
+    7,
+],
+          "targetColor": [
+    0,
+    255,
+    7,
+],
+          "centerRadar": true,
+          "showCueHeights": true
         }
       },
       "display": {
@@ -2482,7 +2684,7 @@
         "page": {
           "type": "rwr",
           "scale": 1.15,
-          "hideRwrBackground": true
+          "hideBackground": true
         }
       },
       "display": {
@@ -2813,7 +3015,10 @@
       "node": "cannon5_dm",
       "node": "cover2_dm",
       "node": "cover3_dm",
-      "node": "cover4_dm"
+      "node": "cover4_dm",
+      "node": "tank5_dm",
+      "node": "tank6_dm",
+      "node": "tank7_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2877,9 +3082,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
-          "bullets": 45,
+          "bullets": 30,
+          "bulletsCartridge": 1,
+          "external": true,
+          "separate": false
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
+          "emitter": "emtr_flare1",
+          "bullets": 15,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2921,6 +3136,10 @@
           "separate": true,
           "blk": "gameData/Weapons/containers/dra_lau_105a_aim_9l.blk",
           "emitter": "dra_lau105a_1"
+        },
+        "BannedWeaponPreset": {
+          "slot": 3,
+          "preset": "ptb_slot3"
         }
       },
       "WeaponPreset": {
@@ -3173,6 +3392,37 @@
           "separate": true,
           "machLimit": 1.4
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot3",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "bomb_pylon_2",
+          "node": "bomb_pylon_2_upor"
+        },
+        "ShowDmParts": {
+          "node": "tank5_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_150gal_early_f_20_drop_tank_1.blk",
+          "emitter": "us_150gal_early_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 5,
+          "preset": "ptb_slot5"
+        },
+        "BannedWeaponPreset": {
+          "slot": 2,
+          "preset": "us_aim9l_sidewinder_x2"
+        },
+        "BannedWeaponPreset": {
+          "slot": 6,
+          "preset": "us_aim9l_sidewinder_x2"
+        }
       }
     },
     "WeaponSlot": {
@@ -3363,6 +3613,25 @@
           ],
           "gearName": "gear_c"
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot4",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "pylon_003",
+          "node": "pylon_003_upor"
+        },
+        "ShowDmParts": {
+          "node": "tank6_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_150gal_fuse_f_20_drop_tank.blk",
+          "emitter": "us_150gal_fuse_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        }
       }
     },
     "WeaponSlot": {
@@ -3487,6 +3756,37 @@
           "separate": true,
           "machLimit": 1.4
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot5",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "bomb_pylon_3",
+          "node": "bomb_pylon_3_upor"
+        },
+        "ShowDmParts": {
+          "node": "tank7_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/us_150gal_early_drop_tank_2.blk",
+          "emitter": "us_150gal_early_drop_tank_002",
+          "bullets": 1,
+          "external": true
+        },
+        "DependentWeaponPreset": {
+          "slot": 3,
+          "preset": "ptb_slot3"
+        },
+        "BannedWeaponPreset": {
+          "slot": 6,
+          "preset": "us_aim9l_sidewinder_x2"
+        },
+        "BannedWeaponPreset": {
+          "slot": 2,
+          "preset": "us_aim9l_sidewinder_x2"
+        }
       }
     },
     "WeaponSlot": {
@@ -3508,6 +3808,10 @@
           "separate": true,
           "blk": "gameData/Weapons/containers/dra_lau_105a_aim_9l.blk",
           "emitter": "dra_lau105a_2"
+        },
+        "BannedWeaponPreset": {
+          "slot": 5,
+          "preset": "ptb_slot5"
         }
       },
       "WeaponPreset": {
@@ -3845,10 +4149,8 @@
       "tier": 1,
       "modClass": "weapon"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff_large": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "prevModification": "us_blu_1",
       "modClass": "weapon",

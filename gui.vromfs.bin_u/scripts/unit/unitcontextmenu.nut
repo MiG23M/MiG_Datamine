@@ -40,10 +40,13 @@ let { getCrewByAir, isUnitInSlotbar } = require("%scripts/slotbar/slotbarState.n
 let { findItemById } = require("%scripts/items/itemsManager.nut")
 let { gui_start_decals } = require("%scripts/customization/contentPreview.nut")
 let { guiStartTestflight } = require("%scripts/missionBuilder/testFlightState.nut")
-let { getCrewMaxDiscountByInfo, getCrewDiscountInfo } = require("%scripts/crew/crewDiscount.nut")
 let { hasInWishlist, isWishlistFull } = require("%scripts/wishlist/wishlistManager.nut")
 let { addToWishlist } = require("%scripts/wishlist/addWishWnd.nut")
+let { getCrewMaxDiscountByInfo, getCrewDiscountInfo } = require("%scripts/crew/crewDiscount.nut")
 let { openWishlist } = require("%scripts/wishlist/wishlistHandler.nut")
+let { getCrewStatus } = require("%scripts/crew/crew.nut")
+let { getCurCircuitOverride } = require("%appGlobals/curCircuitOverride.nut")
+let { getUnitCoupon, hasUnitCoupon } = require("%scripts/items/unitCoupons.nut")
 
 let getActions = kwarg(function getActions(unitObj, unit, actionsNames, crew = null, curEdiff = -1,
   isSlotbarEnabled = true, setResearchManually = null, needChosenResearchOfSquadron = false,
@@ -113,7 +116,7 @@ let getActions = kwarg(function getActions(unitObj, unit, actionsNames, crew = n
 
       actionText = loc("mainmenu/btnCrew")
       icon       = "#ui/gameuiskin#slot_crew.svg"
-      haveWarning = isInArray(::get_crew_status(crew, unit), [ "ready", "full" ])
+      haveWarning = isInArray(getCrewStatus(crew, unit), [ "ready", "full" ])
       haveDiscount = getCrewMaxDiscountByInfo(discountInfo) > 0
       showAction = inMenu
       let params = {
@@ -307,7 +310,7 @@ let getActions = kwarg(function getActions(unitObj, unit, actionsNames, crew = n
       isLink     = hasFeature("WikiUnitInfo")
       actionFunc = function () {
         if (hasFeature("WikiUnitInfo"))
-          openUrl(format(loc("url/wiki_objects"), unit.name), false, false, "unit_actions")
+          openUrl(format(getCurCircuitOverride("wikiObjectsURL", loc("url/wiki_objects")), unit.name), false, false, "unit_actions")
         else
           showInfoMsgBox(colorize("activeTextColor", getUnitName(unit, false)) + "\n" + loc("profile/wiki_link"))
       }
@@ -315,12 +318,20 @@ let getActions = kwarg(function getActions(unitObj, unit, actionsNames, crew = n
     else if (action == "find_in_market") {
       actionText = loc("msgbox/btn_find_on_marketplace")
       icon       = "#ui/gameuiskin#gc.svg"
-      showAction = ::canBuyUnitOnMarketplace(unit)
+      showAction = !hasUnitCoupon(unit.name) && ::canBuyUnitOnMarketplace(unit)
       isLink     = true
       actionFunc = function() {
         let item = findItemById(unit.marketplaceItemdefId)
         if (item && item.hasLink())
           item.openLink()
+      }
+    }
+    else if (action == "use_coupon") {
+      actionText = loc("item/consume/coupon")
+      icon       = "#ui/gameuiskin#gc.svg"
+      showAction = hasUnitCoupon(unit.name)
+      actionFunc = function() {
+        getUnitCoupon(unit.name).consume(null, null)
       }
     }
     else if (action == "changeUnitsGroup") {

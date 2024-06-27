@@ -240,6 +240,15 @@
       },
       "tank4_dm": {
         "hp": 72.7
+      },
+      "tank5_dm": {
+        "hp": 120.5
+      },
+      "tank6_dm": {
+        "hp": 120.5
+      },
+      "tank7_dm": {
+        "hp": 120.5
       }
     }
   },
@@ -1068,6 +1077,117 @@
     },
     "part": {
       "name": "tank4_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank5_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank6_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank7_dm",
       "onHit": {
         "fire": 0.0001,
         "leak": 0.3
@@ -2122,11 +2242,12 @@
         ],
         "page": {
           "type": "thermal",
-          "turretIdx": 1
+          "turretIdx": 0,
+          "cameraFromTargetingPod": true
         },
         "page": {
           "type": "target_tracking",
-          "turretIdx": 1
+          "turretIdx": 0
         },
         "page": {
           "type": "map"
@@ -2231,7 +2352,16 @@
       "node": "ch_kpzs_1_pod",
       "node": "optic1_turret",
       "node": "rocket_pylon2",
-      "node": "rocket_pylon4"
+      "node": "rocket_pylon4",
+      "node": "1140l_drop_tank_pylon_001",
+      "node": "1140l_drop_tank_pylon_002",
+      "node": "1140l_drop_tank_pylon_003",
+      "node": "ltc_cap"
+    },
+    "HideDmParts": {
+      "node": "tank5_dm",
+      "node": "tank6_dm",
+      "node": "tank7_dm"
     },
     "WeaponSlot": {
       "index": 0,
@@ -2243,35 +2373,7 @@
           "trigger": "gunner0",
           "triggerGroup": "primary",
           "blk": "gameData/Weapons/dummy_weapon.blk",
-          "emitter": "optic1_turret",
-          "defaultYaw": 0.0,
-          "defaultPitch": 15.0,
-          "speedYaw": 200.0,
-          "speedPitch": 200.0,
-          "parkInDeadzone": true,
-          "aimForOperatedShell": true,
-          "turret": {
-            "head": "optic1_turret",
-            "gun": "optic1_gun",
-            "mainTurret": true
-          },
-          "limits": {
-            "yaw": [
-              -90.0,
-              90.0
-            ],
-            "pitch": [
-              -90.0,
-              90.0
-            ]
-          }
-        },
-        "Weapon": {
-          "dummy": true,
-          "trigger": "gunner0",
-          "triggerGroup": "primary",
-          "blk": "gameData/Weapons/dummy_weapon.blk",
-          "emitter": "optic2_turret",
+          "emitter": "optic2_gun",
           "defaultYaw": 0.0,
           "defaultPitch": 0.0,
           "speedYaw": 200.0,
@@ -2279,8 +2381,8 @@
           "parkInDeadzone": true,
           "aimForOperatedShell": true,
           "turret": {
-            "head": "optic2_gun",
-            "gun": "optic2_turret",
+            "head": "optic2_turret",
+            "gun": "optic2_gun",
             "mainTurret": true
           },
           "limits": {
@@ -2315,6 +2417,15 @@
           "bullets": 120,
           "spread": 1.0,
           "counterIndex": 3
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet.blk",
+          "emitter": "emtr_flare1",
+          "bullets": 18,
+          "bulletsCartridge": 1,
+          "external": true,
+          "separate": false
         }
       }
     },
@@ -2865,7 +2976,7 @@
         -55.0
       ],
       "opticType": "",
-      "turretNo": 1
+      "turretNo": 0
     },
     "Target": {
       "pos": [
@@ -2873,7 +2984,7 @@
         -0.3,
         0.0
       ],
-      "head": "optic1_gun",
+      "head": "optic2_gun",
       "crosshairPreset": "test_crosshair",
       "angularLimits": [
         -90.0,
@@ -2911,6 +3022,13 @@
   },
   "nightVision": {
     "sightTPodThermal": {
+      "resolution": [
+        500,
+        300
+],
+      "noiseFactor": 0.05
+    },
+    "sightThermal": {
       "resolution": [
         500,
         300
@@ -3125,6 +3243,14 @@
     },
     "new_compressor_jet": {
       "tier": 1
+    },
+    "countermeasures_launcher_chaff_large": {    },
+    "countermeasures_belt_pack": {
+      "modClass": "armor",
+      "turn_it_off": false,
+      "invertEnableLogic": false,
+      "tier": 1,
+      "group": "countermeasures"
     },
     "ns23_armor_targets": {    },
     "ns23_air_targets": {    },

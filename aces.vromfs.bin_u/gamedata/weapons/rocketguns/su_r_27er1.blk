@@ -46,7 +46,7 @@
     ],
     "normalizationPreset": "heat",
     "ricochetPreset": "he",
-    "groundRicochetPreset": "he",
+    "groundRicochetPreset": "he_ground",
     "secondaryShattersPreset": "ap",
     "stabilityThreshold": 0.05,
     "stabilityCaliberToArmorThreshold": 5.0,
@@ -110,6 +110,7 @@
       "uncageBeforeLaunch": true,
       "lockAfterLaunch": true,
       "lockTimeOut": 0.75,
+      "lockDistance": 25000.0,
       "afterLaunchSpeedUp": 200.0,
       "breakLockMaxTime": 60.0,
       "inertialGuidance": {
@@ -120,6 +121,12 @@
       "radarSeeker": {
         "band": 8,
         "sideLobesAttenuation": -20.0,
+        "multipathEffect": [
+          0.0,
+          1.0,
+          60.0,
+          60.0
+        ],
         "lockAngleMax": 55.0,
         "angleMax": 55.0,
         "rateMax": 20.0,
@@ -241,16 +248,6 @@
         "rangeMaxDogfightAltDiff": [
           500.0,
           50.0
-        ],
-        "timeMax": [
-          24.0835,
-          55.5787,
-          24.7085,
-          24.7085
-        ],
-        "timeMaxAltDiff": [
-          500.0,
-          0.5
         ]
       },
       "table1": {
@@ -295,16 +292,6 @@
         "rangeMaxDogfightAltDiff": [
           500.0,
           50.0
-        ],
-        "timeMax": [
-          35.8312,
-          59.9581,
-          36.8476,
-          36.8476
-        ],
-        "timeMaxAltDiff": [
-          500.0,
-          0.5
         ]
       },
       "table2": {
@@ -349,16 +336,6 @@
         "rangeMaxDogfightAltDiff": [
           500.0,
           50.0
-        ],
-        "timeMax": [
-          59.9482,
-          59.9939,
-          59.9898,
-          59.9898
-        ],
-        "timeMaxAltDiff": [
-          500.0,
-          0.5
         ]
       },
       "table3": {
@@ -403,16 +380,6 @@
         "rangeMaxDogfightAltDiff": [
           500.0,
           50.0
-        ],
-        "timeMax": [
-          59.9239,
-          59.919,
-          59.969,
-          59.969
-        ],
-        "timeMaxAltDiff": [
-          500.0,
-          0.5
         ]
       }
     },

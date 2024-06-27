@@ -426,6 +426,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -434,6 +438,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"
@@ -1048,6 +1056,12 @@
       "rcs": 3.0,
       "range": 80000.0,
       "rangeMax": 104000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "azimuth": {
           "angleHalfSens": 3.5,

@@ -11,6 +11,12 @@
       "range": 35000.0,
       "rangeMax": 150000.0,
       "timeGainControl": true,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.5,
         "sideLobesSensitivity": -30.0
@@ -24,6 +30,12 @@
       "range": 70000.0,
       "rangeMax": 150000.0,
       "timeGainControl": true,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.5,
         "sideLobesSensitivity": -30.0
@@ -844,6 +856,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -852,6 +868,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"

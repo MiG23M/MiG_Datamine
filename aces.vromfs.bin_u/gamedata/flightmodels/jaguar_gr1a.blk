@@ -207,6 +207,17 @@
       },
       "tank6_dm": {
         "hp": 120.5
+      },
+      "tank7_dm": {
+        "hp": 120.5
+      },
+      "tank8_dm": {
+        "hp": 120.5
+      }
+    },
+    "steel_tank_s": {
+      "tank9_dm": {
+        "hp": 80.5
       }
     }
   },
@@ -1177,6 +1188,118 @@
       }
     },
     "part": {
+      "name": "tank7_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank8_dm",
+      "onHit": {
+        "fire": 0.0001,
+        "leak": 0.3
+      },
+      "onHit": {
+        "damage": 3.0,
+        "fire": 0.001,
+        "leak": 0.5
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.005,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.01,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 0.01,
+        "leak": 9.99
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 50.0,
+        "leak": 15.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 10.0
+      }
+    },
+    "part": {
+      "name": "tank9_dm",
+      "onHit": {
+        "fire": 0.05,
+        "leak": 0.7
+      },
+      "onHit": {
+        "damage": 20.0,
+        "fire": 0.3,
+        "leak": 0.8
+      },
+      "onHit": {
+        "damage": 50.0,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onHit": {
+        "damage": 80.0,
+        "expl": 0.5,
+        "fire": 0.9,
+        "leak": 0.9
+      },
+      "onKill": {
+        "fire": 10.0,
+        "leak": 10.0,
+        "nothing": 80.0
+      },
+      "onKill": {
+        "damage": 50.0,
+        "fire": 25.0,
+        "leak": 35.0
+      },
+      "onKill": {
+        "damage": 80.0,
+        "fire": 50.0,
+        "leak": 30.0
+      }
+    },
+    "part": {
       "name": "wing1_l_dm",
       "defaultEffectPart": "spar1_l_dm",
       "onHit": {
@@ -1835,8 +1958,8 @@
       10.0,
       2.4
     ],
-    "sightInFov": 50.5,
-    "sightOutFov": 40.5,
+    "sightInFov": 2.4,
+    "sightOutFov": 10.0,
     "sightFov": 1.0,
     "headPos": [
       4.2,
@@ -2248,6 +2371,11 @@
       "node": "mfd_b",
       "node": "panel_b"
     },
+    "HideDmParts": {
+      "node": "tank7_dm",
+      "node": "tank8_dm",
+      "node": "tank9_dm"
+    },
     "WeaponSlot": {
       "index": 0,
       "notUseforDisbalanceCalculation": true,
@@ -2308,19 +2436,21 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },
@@ -2507,6 +2637,24 @@
           "slot": 4,
           "preset": "tiald"
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot2",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "jaguar_gr1_pylon_2_l"
+        },
+        "ShowDmParts": {
+          "node": "tank7_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/uk_264gal_drop_tank_1.blk",
+          "emitter": "uk_264gal_drop_tank_001",
+          "bullets": 1,
+          "external": true
+        }
       }
     },
     "WeaponSlot": {
@@ -2636,6 +2784,24 @@
           "emitter": "1000lb_mk_83_002",
           "bullets": 1
         }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot4",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "jaguar_gr1_pylon_3"
+        },
+        "ShowDmParts": {
+          "node": "tank8_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/uk_264gal_drop_tank_3.blk",
+          "emitter": "uk_264gal_drop_tank_002",
+          "bullets": 1,
+          "external": true
+        }
       }
     },
     "WeaponSlot": {
@@ -2757,6 +2923,24 @@
         "DependentWeaponPreset": {
           "slot": 4,
           "preset": "tiald"
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "ptb",
+        "name": "ptb_slot6",
+        "showInWeaponMenu": true,
+        "ShowNodes": {
+          "node": "jaguar_gr1_pylon_2_r"
+        },
+        "ShowDmParts": {
+          "node": "tank9_dm"
+        },
+        "Weapon": {
+          "trigger": "fuel tanks",
+          "blk": "gameData/Weapons/drop_tank/uk_264gal_drop_tank_1.blk",
+          "emitter": "uk_264gal_drop_tank_003",
+          "bullets": 1,
+          "external": true
         }
       }
     },
@@ -3041,10 +3225,7 @@
       "modClass": "weapon",
       "reqModification": "uk_mk_n1_540lb"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,

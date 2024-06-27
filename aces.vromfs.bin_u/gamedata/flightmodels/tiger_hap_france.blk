@@ -9,6 +9,9 @@
   "haveCCIPForTurret": true,
   "haveCCRPForGun": false,
   "haveCCRPForTurret": true,
+  "hmdAH64": true,
+  "hasHelmetDesignator": true,
+  "mfdCamTads": true,
   "gearSinkRangeLR": 0.193,
   "gearSinkRangeC": 0.086,
   "tpsCameraTargetOffsetAtZoom": [
@@ -1115,6 +1118,10 @@
     "gun": "gun_default"
   },
   "cockpit": {
+    "mfdTextureSize": [
+      1024,
+      1024
+],
     "headPos": [
       2.52,
       0.611,
@@ -1125,6 +1132,7 @@
       0.611,
       0.0
     ],
+    "hmdEnabledByDefault": true,
     "mirror": true,
     "mirrorPos": [
       2.898,
@@ -1279,293 +1287,26 @@
           0.5
         ],
         "page": {
-          "type": "map"
+          "type": "custom",
+          "pageName": "ah64Flt"
         },
         "page": {
           "type": "rwr"
         },
         "page": {
-          "type": "devices",
-          "speed": {
-            "texture": "us_mfd_speed",
-            "position": [
-              120.0,
-              110.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.93,
-              0.4,
-              0.4
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.91,
-              0.91
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "color": [0, 255, 255, 255],
-            "valueTextSize": 30.0,
-            "valueMul": 0.539957,
-            "ranges": {
-              "limits": [
-                50.0,
-                100.0,
-                -0.24,
-                -0.24
-              ],
-              "limits": [
-                100.0,
-                150.0,
-                0.3,
-                0.3
-              ],
-              "limits": [
-                150.0,
-                200.0,
-                0.69,
-                0.69
-              ],
-              "limits": [
-                200.0,
-                250.0,
-                1.0,
-                1.0
-              ]
-            }
-          },
-          "vario": {
-            "texture": "us_mfd_vario",
-            "position": [
-              552.0,
-              110.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.93,
-              0.4,
-              0.4
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "color": [255, 30, 30, 255],
-            "valueTextSize": 30.0,
-            "valueMul": 0.19685,
-            "ranges": {
-              "limits": [
-                -6.0,
-                -4.0,
-                0.05,
-                0.05
-              ],
-              "limits": [
-                -4.0,
-                -2.0,
-                0.22,
-                0.22
-              ],
-              "limits": [
-                -2.0,
-                -1.0,
-                0.56,
-                0.56
-              ],
-              "limits": [
-                -1.0,
-                1.0,
-                0.72,
-                0.72
-              ],
-              "limits": [
-                1.0,
-                2.0,
-                1.28,
-                1.28
-              ],
-              "limits": [
-                2.0,
-                4.0,
-                1.44,
-                1.44
-              ],
-              "limits": [
-                4.0,
-                6.0,
-                1.78,
-                1.78
-              ]
-            }
-          },
-          "altitude_hour": {
-            "texture": "us_mfd_altitude",
-            "position": [
-              552.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "arrowTexCoord": [
-              0.47,
-              0.92,
-              0.86,
-              0.86
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "ranges": {
-              "limits": [
-                0.0,
-                10.0,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
-          "altitude_min": {
-            "texture": "us_mfd_altitude",
-            "position": [
-              552.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.93,
-              0.4,
-              0.4
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "color": [255, 30, 30, 255],
-            "valueTextSize": 30.0,
-            "notDrawBackground": true,
-            "ranges": {
-              "limits": [
-                0.0,
-                1000.0,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
-          "compass": {
-            "texture": "us_mfd_compass",
-            "position": [
-              130.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.5,
-              0.5
-            ],
-            "arrowTexCoord": [
-              0.5,
-              0.0,
-              1.0,
-              1.0
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "arrowSize": [
-              192.0,
-              192.0
-            ],
-            "ranges": {
-              "limits": [
-                0.0,
-                360.0,
-                0.0,
-                0.0
-              ]
-            }
-          },
-          "aviahorizon_pitch": {
-            "texture": "us_mfd_ahorizon",
-            "arrowTex": "us_mfd_ahorizon_scale",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "backgroundTexCoord": [
-              0.11,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.4,
-              1.0,
-              1.0
-            ],
-            "size": [
-              180.0,
-              180.0
-            ],
-            "ranges": {
-              "limits": [
-                -90.0,
-                90.0,
-                0.35,
-                0.35
-              ]
-            }
-          },
-          "aviahorizon_roll": {
-            "texture": "us_mfd_ahorizon",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "arrowTexCoord": [
-              0.2,
-              0.9,
-              0.8,
-              0.8
-            ],
-            "size": [
-              180.0,
-              180.0
-            ],
-            "notDrawBackground": true,
-            "ranges": {
-              "limits": [
-                -180.0,
-                180.0,
-                -1.0,
-                -1.0
-              ]
-            }
-          }
+          "type": "thermal",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "target_tracking",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "night_vision",
+          "turretIdx": 0
+        },
+        "page": {
+          "type": "map"
         }
       },
       "display": {
@@ -1580,13 +1321,12 @@
           0.8,
           0.4
         ],
-        "type": "target_tracking",
         "page": {
-          "type": "target_tracking",
+          "type": "thermal",
           "turretIdx": 0
         },
         "page": {
-          "type": "thermal",
+          "type": "target_tracking",
           "turretIdx": 0
         },
         "page": {
@@ -1594,287 +1334,11 @@
           "turretIdx": 0
         },
         "page": {
-          "type": "devices",
-          "speed": {
-            "texture": "us_mfd_speed",
-            "position": [
-              120.0,
-              110.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.93,
-              0.4,
-              0.4
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.91,
-              0.91
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "color": [0, 255, 255, 255],
-            "valueTextSize": 30.0,
-            "valueMul": 0.539957,
-            "ranges": {
-              "limits": [
-                50.0,
-                100.0,
-                -0.24,
-                -0.24
-              ],
-              "limits": [
-                100.0,
-                150.0,
-                0.3,
-                0.3
-              ],
-              "limits": [
-                150.0,
-                200.0,
-                0.69,
-                0.69
-              ],
-              "limits": [
-                200.0,
-                250.0,
-                1.0,
-                1.0
-              ]
-            }
-          },
-          "vario": {
-            "texture": "us_mfd_vario",
-            "position": [
-              552.0,
-              110.0
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.93,
-              0.4,
-              0.4
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "color": [255, 30, 30, 255],
-            "valueTextSize": 30.0,
-            "valueMul": 0.19685,
-            "ranges": {
-              "limits": [
-                -6.0,
-                -4.0,
-                0.05,
-                0.05
-              ],
-              "limits": [
-                -4.0,
-                -2.0,
-                0.22,
-                0.22
-              ],
-              "limits": [
-                -2.0,
-                -1.0,
-                0.56,
-                0.56
-              ],
-              "limits": [
-                -1.0,
-                1.0,
-                0.72,
-                0.72
-              ],
-              "limits": [
-                1.0,
-                2.0,
-                1.28,
-                1.28
-              ],
-              "limits": [
-                2.0,
-                4.0,
-                1.44,
-                1.44
-              ],
-              "limits": [
-                4.0,
-                6.0,
-                1.78,
-                1.78
-              ]
-            }
-          },
-          "altitude_hour": {
-            "texture": "us_mfd_altitude",
-            "position": [
-              552.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "arrowTexCoord": [
-              0.47,
-              0.92,
-              0.86,
-              0.86
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "ranges": {
-              "limits": [
-                0.0,
-                10.0,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
-          "altitude_min": {
-            "texture": "us_mfd_altitude",
-            "position": [
-              552.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.93,
-              0.4,
-              0.4
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "color": [255, 30, 30, 255],
-            "valueTextSize": 30.0,
-            "notDrawBackground": true,
-            "ranges": {
-              "limits": [
-                0.0,
-                1000.0,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
-          "compass": {
-            "texture": "us_mfd_compass",
-            "position": [
-              130.0,
-              402.0
-            ],
-            "backgroundTexCoord": [
-              0.0,
-              0.0,
-              0.5,
-              0.5
-            ],
-            "arrowTexCoord": [
-              0.5,
-              0.0,
-              1.0,
-              1.0
-            ],
-            "size": [
-              192.0,
-              192.0
-            ],
-            "arrowSize": [
-              192.0,
-              192.0
-            ],
-            "ranges": {
-              "limits": [
-                0.0,
-                360.0,
-                0.0,
-                0.0
-              ]
-            }
-          },
-          "aviahorizon_pitch": {
-            "texture": "us_mfd_ahorizon",
-            "arrowTex": "us_mfd_ahorizon_scale",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "backgroundTexCoord": [
-              0.11,
-              0.0,
-              0.89,
-              0.89
-            ],
-            "arrowTexCoord": [
-              0.0,
-              0.4,
-              1.0,
-              1.0
-            ],
-            "size": [
-              180.0,
-              180.0
-            ],
-            "ranges": {
-              "limits": [
-                -90.0,
-                90.0,
-                0.35,
-                0.35
-              ]
-            }
-          },
-          "aviahorizon_roll": {
-            "texture": "us_mfd_ahorizon",
-            "position": [
-              340.0,
-              256.0
-            ],
-            "arrowTexCoord": [
-              0.2,
-              0.9,
-              0.8,
-              0.8
-            ],
-            "size": [
-              180.0,
-              180.0
-            ],
-            "notDrawBackground": true,
-            "ranges": {
-              "limits": [
-                -180.0,
-                180.0,
-                -1.0,
-                -1.0
-              ]
-            }
-          }
+          "type": "custom",
+          "pageName": "ah64Flt"
+        },
+        "page": {
+          "type": "map"
         }
       },
       "display": {
@@ -2141,17 +1605,37 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
-          "bullets": 32,
+          "bullets": 16,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
+          "emitter": "emtr_flare1",
+          "bullets": 8,
+          "bulletsCartridge": 1,
+          "external": true,
+          "separate": false
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
-          "bullets": 32,
+          "bullets": 16,
+          "bulletsCartridge": 1,
+          "external": true,
+          "separate": false
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
+          "emitter": "emtr_flare2",
+          "bullets": 8,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2187,7 +1671,7 @@
           "trigger": "aam",
           "external": true,
           "separate": true,
-          "blk": "gameData/Weapons/containers/atas_2x_stinger.blk",
+          "blk": "gameData/Weapons/containers/atas_2x_stinger_atas_tiger.blk",
           "emitter": "aim92_stinger_pod_001"
         }
       },
@@ -2323,7 +1807,7 @@
           "trigger": "aam",
           "external": true,
           "separate": true,
-          "blk": "gameData/Weapons/containers/atas_2x_stinger.blk",
+          "blk": "gameData/Weapons/containers/atas_2x_stinger_atas_tiger.blk",
           "emitter": "aim92_stinger_pod_002"
         }
       },
@@ -2412,11 +1896,9 @@
       "modClass": "weapon",
       "tier": 4
     },
-    "maw_countermeasures_launcher_chaff_only": {    },
-    "maw_countermeasures_launcher_flare_only": {    },
-    "maw_countermeasures_launcher_chaff_priority": {    },
-    "maw_countermeasures_launcher_flare_priority": {    },
-    "MAW_system_heli_false_thermal_targets": {
+    "maw_countermeasures_launcher_chaff": {    },
+    "maw_countermeasures_launcher_chaff_large": {    },
+    "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "weapon",
       "turn_it_off": false,
       "tier": 1,
@@ -2440,7 +1922,7 @@
       }
     },
     "heli_night_vision_system": {
-      "prevModification": "MAW_system_heli_false_thermal_targets",
+      "prevModification": "MAW_system_heli_false_thermal_targets_large",
       "tier": 3,
       "modClass": "weapon",
       "image": "#ui/gameuiskin#thermal_sight",
@@ -2524,7 +2006,7 @@
       0.0
     ],
     "emtr_break_wing_tail": [
-      -7.30788,
+      -7.00788,
       0.0,
       0.0
     ],

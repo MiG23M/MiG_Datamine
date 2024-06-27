@@ -6,7 +6,6 @@ let { eventbus_subscribe } = require("eventbus")
 let { getGlobalModule } = require("%scripts/global_modules.nut")
 let g_squad_manager = getGlobalModule("g_squad_manager")
 let { calc_boost_for_cyber_cafe, calc_boost_for_squads_members_from_same_cyber_cafe } = require("%appGlobals/ranks_common_shared.nut")
-let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
 let { handyman } = require("%sqStdLibs/helpers/handyman.nut")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
@@ -17,7 +16,7 @@ let DataBlock = require("DataBlock")
 let { get_time_msec } = require("dagor.time")
 let { floor, fabs } = require("math")
 let { rnd } = require("dagor.random")
-let { json_to_string } = require("json")
+let { object_to_json_string } = require("json")
 //ATTENTION! this file is coupling things to much! Split it!
 //shouldDecreaseSize, allowedSizeIncrease = 100
 let { is_mplayer_host, is_mplayer_peer, destroy_session } = require("multiplayer")
@@ -181,6 +180,8 @@ function on_lost_psn() {
   }
 }
 
+eventbus_subscribe("PsnLoginStateChanged", @(p) p?.isSignedIn ? null : on_lost_psn())
+
 ::check_logout_scheduled <- function check_logout_scheduled() {
   if (gui_start_logout_scheduled) {
     gui_start_logout_scheduled = false
@@ -203,13 +204,6 @@ let optionsModeByGameMode = {
 ::get_options_mode <- function get_options_mode(game_mode) {
   return optionsModeByGameMode?[game_mode] ?? OPTIONS_MODE_GAMEPLAY
 }
-
-eventbus_subscribe("preload_ingame_scenes", function preload_ingame_scenes(...) {
-  handlersManager.clearScene()
-  handlersManager.loadHandler(gui_handlers.Hud)
-
-  require("%scripts/chat/mpChatModel.nut").init()
-})
 
 ::get_squad_bonus_for_same_cyber_cafe <- function get_squad_bonus_for_same_cyber_cafe(effectType, num = -1) {
   if (num < 0)
@@ -463,7 +457,7 @@ function _invoke_multi_array(multiArray, currentArray, currentIndex, invokeCallb
   assert(isInArray(type(obj), [ "table", "array" ]),
     "Data type not suitable for save_to_json: " + type(obj))
 
-  return json_to_string(obj, false)
+  return object_to_json_string(obj, false)
 }
 
 ::roman_numerals <- ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",

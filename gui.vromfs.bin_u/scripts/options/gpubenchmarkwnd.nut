@@ -8,7 +8,7 @@ let { handlerType } = require("%sqDagui/framework/handlerType.nut")
 let { handlersManager } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let { initGraphicsAutodetect, getGpuBenchmarkDuration, startGpuBenchmark,
   closeGraphicsAutodetect, getPresetFor60Fps, getPresetForMaxQuality,
-  getPresetForMaxFPS, isGpuBenchmarkRunning } = require("gpuBenchmark")
+  getPresetForMaxFPS, isGpuBenchmarkRunning, getGpuName } = require("gpuBenchmark")
 let { setQualityPreset, canShowGpuBenchmark, onConfigApplyWithoutUiUpdate,
   localizaQualityPreset } = require("%scripts/options/systemOptions.nut")
 let { secondsToString } = require("%scripts/time.nut")
@@ -35,10 +35,12 @@ local class GpuBenchmarkWnd (gui_handlers.BaseGuiHandlerWT) {
   needUiUpdate = false
   timeEndBenchmark = -1
   selectedPresetName = ""
+  hasInitedGraphicsAutodetect = false
 
   function initScreen() {
     saveLocalAccountSettings("gpuBenchmark/seen", true)
     initGraphicsAutodetect()
+    this.hasInitedGraphicsAutodetect = true
     showObjById("btnApply", false, this.scene)
   }
 
@@ -67,6 +69,9 @@ local class GpuBenchmarkWnd (gui_handlers.BaseGuiHandlerWT) {
   }
 
   function onBenchmarkStart() {
+    if (!this.hasInitedGraphicsAutodetect)
+      return
+
     showObjById("benchmarkStart", false, this.scene)
     showObjById("btnStart", false, this.scene)
     showObjById("waitAnimation", true, this.scene)
@@ -132,6 +137,7 @@ local class GpuBenchmarkWnd (gui_handlers.BaseGuiHandlerWT) {
   }
 
   function goBack() {
+    this.hasInitedGraphicsAutodetect = false
     closeGraphicsAutodetect()
     base.goBack()
   }
@@ -143,7 +149,13 @@ function checkShowGpuBenchmarkWnd() {
   if (!canShowGpuBenchmark())
     return
 
-  if (loadLocalAccountSettings("gpuBenchmark/seen", false))
+  local currentGpuName = getGpuName()
+  local lastSeenGpuName = loadLocalAccountSettings("gpuBenchmark/gpuName")
+
+  local gpuChanged = (currentGpuName != lastSeenGpuName)
+  if(gpuChanged)
+    saveLocalAccountSettings("gpuBenchmark/gpuName", currentGpuName)
+  else if (loadLocalAccountSettings("gpuBenchmark/seen", false))
     return
 
   handlersManager.loadHandler(GpuBenchmarkWnd)

@@ -84,8 +84,6 @@ let EDifficultiesEconRankStr = {
 
 let spawn_score_tbl = {}
 
-const CAN_USE_EDIFF = false
-
 local cur_mission_mode = -1
 let reset_cur_mission_mode = @() cur_mission_mode = -1
 
@@ -147,8 +145,9 @@ function get_unit_type_by_unit_name(unitId) {
 }
 
 function get_unit_blk_economic_rank_by_mode(unitBlk, ediff) {
-  let mode_name = get_econRank_emode_name(ediff)
-  return unitBlk?[$"economicRank{mode_name}"] ?? 0
+  let modeName = get_emode_name(ediff)
+  let diffName = get_econRank_emode_name(ediff)
+  return unitBlk?[$"economicRank{modeName}"] ?? unitBlk?[$"economicRank{diffName}"] ?? 0
 }
 
 function isUnitSpecial(unit) {
@@ -165,12 +164,12 @@ function calc_public_boost(bostersArray) {
   for (local i = 0; i < count; i++) {
     if (i < countOfK)
       res = res + k[i] * bostersArray[i]
-    else if (k[countOfK - 1] * bostersArray[i] > 0.01)
+    else if (k[countOfK - 1] * bostersArray[i] > 1.0)
       res = res + k[countOfK - 1] * bostersArray[i]
     else
-      res = res + 0.01
+      res = res + 1.0
   }
-
+  res = round_by_value(res, 1.0) // decimal percentages
   return res
 }
 
@@ -205,7 +204,7 @@ function getSpawnScoreWeaponMulParamValue(unitName, unitClass, paramName) {
     ?? weaponMulBlk?["Common"][paramName]
 }
 
-function getSpawnScoreWeaponMulByParams(unitName, unitClass, massParams, atgmParams) {
+function getSpawnScoreWeaponMulByParams(unitName, unitClass, massParams, atgmParams, aamParams) {
   local weaponMul = 1.0
   if (massParams.totalBombRocketMass > 0) {
     let bombRocketWeaponBlk = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "BombRocketWeapon")
@@ -238,11 +237,10 @@ function getSpawnScoreWeaponMulByParams(unitName, unitClass, massParams, atgmPar
       }
     }
   }
-  if (massParams.maxRocketMass > 0) {
-    let largeRocketMass = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "largeRocketMass")
-    let largeRocketMul = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "largeRocketMul")
-    if (largeRocketMass != null && largeRocketMul != null && massParams.maxRocketMass >= largeRocketMass) {
-      weaponMul = math.max(weaponMul, largeRocketMul)
+  if (aamParams.guidanceTypeArr.len() > 0) {
+    let aamGuidanceTypeMulBlk = getSpawnScoreWeaponMulParamValue(unitName, unitClass, "AamGuidanceTypeMul")
+    foreach (aamGuidanceType in aamParams.guidanceTypeArr) {
+      weaponMul = math.max(weaponMul, aamGuidanceTypeMulBlk?[aamGuidanceType] ?? 0.0)
     }
   }
   if (massParams.maxRocketTntMass > 0) {
@@ -257,8 +255,9 @@ function getSpawnScoreWeaponMulByParams(unitName, unitClass, massParams, atgmPar
 
 function getCustomWeaponPresetParams(unitname, weaponTable) {
   let resTable = {
-    massParams = { totalBombRocketMass = 0, totalNapalmBombMass = 0, maxRocketMass = 0, maxRocketTntMass = 0 }
+    massParams = { totalBombRocketMass = 0, totalNapalmBombMass = 0, maxRocketTntMass = 0 }
     atgmParams = { visibilityTypeArr = [], maxDistance = 0, hasProximityFuse = false }
+    aamParams = { guidanceTypeArr = [] }
   }
 
   let weaponsBlk = get_wpcost_blk()?[unitname].weapons
@@ -268,15 +267,14 @@ function getCustomWeaponPresetParams(unitname, weaponTable) {
   foreach (weaponName, count in weaponTable) {
     let totalBombRocketMass = weaponsBlk?[weaponName].totalBombRocketMass ?? 0
     let totalNapalmBombMass = weaponsBlk?[weaponName].totalNapalmBombMass ?? 0
-    let maxRocketMass = weaponsBlk?[weaponName].maxRocketMass ?? 0
     let maxRocketTntMass = weaponsBlk?[weaponName].maxRocketTntMass ?? 0
     let atgmVisibilityType = weaponsBlk?[weaponName].atgmVisibilityType ?? ""
     let atgmMaxDistance = weaponsBlk?[weaponName].atgmMaxDistance ?? 0
     let atgmHasProximityFuse = weaponsBlk?[weaponName].atgmHasProximityFuse ?? false
+    let aamGuidanceType = weaponsBlk?[weaponName].aamGuidanceType ?? ""
 
     resTable.massParams.totalBombRocketMass += (totalBombRocketMass * count)
     resTable.massParams.totalNapalmBombMass += (totalNapalmBombMass * count)
-    resTable.massParams.maxRocketMass = math.max(maxRocketMass, resTable.massParams.maxRocketMass)
     resTable.massParams.maxRocketTntMass = math.max(maxRocketTntMass, resTable.massParams.maxRocketTntMass)
 
     if (atgmVisibilityType != "" && resTable.atgmParams.visibilityTypeArr.indexof(atgmVisibilityType) == null) {
@@ -285,6 +283,10 @@ function getCustomWeaponPresetParams(unitname, weaponTable) {
     resTable.atgmParams.maxDistance = math.max(atgmMaxDistance, resTable.atgmParams.maxDistance)
     if (atgmHasProximityFuse) {
       resTable.atgmParams.hasProximityFuse = true
+    }
+
+    if (aamGuidanceType != "" && resTable.aamParams.guidanceTypeArr.indexof(aamGuidanceType) == null) {
+      resTable.aamParams.guidanceTypeArr.append(aamGuidanceType)
     }
   }
 
@@ -313,7 +315,6 @@ function get_unit_spawn_score_weapon_mul(unitname, weapon, bulletArray, presetTb
         let massParams = {
           totalBombRocketMass = weaponBlk?.totalBombRocketMass ?? 0
           totalNapalmBombMass = weaponBlk?.totalNapalmBombMass ?? 0
-          maxRocketMass = weaponBlk?.maxRocketMass ?? 0
           maxRocketTntMass = weaponBlk?.maxRocketTntMass ?? 0
         }
         let atgmParams = {
@@ -321,7 +322,10 @@ function get_unit_spawn_score_weapon_mul(unitname, weapon, bulletArray, presetTb
           maxDistance = weaponBlk?.atgmMaxDistance ?? 0,
           hasProximityFuse = weaponBlk?.atgmHasProximityFuse ?? false
         }
-        weaponMul = getSpawnScoreWeaponMulByParams(unitname, unitClass, massParams, atgmParams)
+        let aamParams = {
+          guidanceTypeArr = (weaponBlk % "aamGuidanceType") ?? []
+        }
+        weaponMul = getSpawnScoreWeaponMulByParams(unitname, unitClass, massParams, atgmParams, aamParams)
       }
     }
     else if (presetTbl?.presetWeapons != null && presetTbl.presetWeapons.len() > 0) {
@@ -330,7 +334,8 @@ function get_unit_spawn_score_weapon_mul(unitname, weapon, bulletArray, presetTb
         unitname,
         unitClass,
         customWeaponPresetParams.massParams,
-        customWeaponPresetParams.atgmParams
+        customWeaponPresetParams.atgmParams,
+        customWeaponPresetParams.aamParams
       )
     }
   }
@@ -536,7 +541,6 @@ return {
   mapWpUnitClassToWpUnitType
   EDifficultiesStr
   reset_cur_mission_mode
-  CAN_USE_EDIFF
   get_cyber_cafe_max_level
   get_pve_time_award_stage
   get_pve_trophy_name

@@ -2549,7 +2549,6 @@
           1.0
         ],
         "fontScale": 0.7,
-        "ameraFromTargetingPod": true,
         "page": {
           "type": "thermal",
           "turretIdx": 0
@@ -2557,11 +2556,6 @@
         "page": {
           "type": "target_tracking",
           "turretIdx": 0
-        },
-        "page": {
-          "type": "rwr",
-          "scale": 0.8,
-          "relativCircleRadius": 2.0
         },
         "page": {
           "type": "devices",
@@ -2796,7 +2790,7 @@
         },
         "page": {
           "type": "map",
-          "hideRadarBackground": true
+          "hideBackground": true
         }
       },
       "display": {
@@ -2810,8 +2804,12 @@
         "cameraFromShell": true,
         "page": {
           "type": "rwr",
-          "scale": 0.8,
-          "relativCircleRadius": 2.0
+          "scale": 0.9,
+          "circleCnt": 2,
+          "angleMarkStep": 30.0,
+          "centralMark": "bigCross",
+          "hasCompass": true,
+          "digitalCompass": true
         },
         "page": {
           "type": "target_tracking",
@@ -2822,7 +2820,7 @@
         },
         "page": {
           "type": "map",
-          "hideRadarBackground": true
+          "hideBackground": true
         },
         "page": {
           "type": "devices",
@@ -3277,8 +3275,8 @@
       "blk": "gameData/FlightModels/weaponPresets/su_25sm3_kf_29l.blk"
     },
     "preset": {
-      "name": "su_25sm3_kf_29t",
-      "blk": "gameData/FlightModels/weaponPresets/su_25sm3_kf_29t.blk"
+      "name": "su_25sm3_kf_29te",
+      "blk": "gameData/FlightModels/weaponPresets/su_25sm3_kf_29te.blk"
     },
     "preset": {
       "name": "su_25sm3_sppu_22",
@@ -3490,33 +3488,37 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare3",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare4",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -3593,49 +3595,55 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare1",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare2",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare5",
           "bullets": 14,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_large_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare5",
           "bullets": 14,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare3",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_maw.blk",
           "emitter": "emtr_flare4",
           "bullets": 64,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -4751,8 +4759,8 @@
       },
       "WeaponPreset": {
         "iconType": "guided_bomb_red",
-        "name": "kh_29t",
-        "reqModification": "mig_27_x29t",
+        "name": "kh_29te",
+        "reqModification": "su_25_x29te",
         "ShowNodes": {
           "node": "aku_58_b001",
           "node": "aku_58_fin1_b001",
@@ -5114,8 +5122,8 @@
       },
       "WeaponPreset": {
         "iconType": "guided_bomb_red",
-        "name": "kh_29t",
-        "reqModification": "mig_27_x29t",
+        "name": "kh_29te",
+        "reqModification": "su_25_x29te",
         "ShowNodes": {
           "node": "aku_58_b002",
           "node": "aku_58_fin1_b002",
@@ -6254,10 +6262,8 @@
       "tier": 4,
       "modClass": "lth"
     },
-    "maw_countermeasures_launcher_chaff_only_large": {    },
-    "maw_countermeasures_launcher_flare_only_large": {    },
-    "maw_countermeasures_launcher_chaff_priority_large": {    },
-    "maw_countermeasures_launcher_flare_priority_large": {    },
+    "maw_countermeasures_launcher_chaff": {    },
+    "maw_countermeasures_launcher_chaff_large": {    },
     "MAW_system_heli_false_thermal_targets_large": {
       "modClass": "armor",
       "turn_it_off": false,
@@ -6351,14 +6357,14 @@
       "modClass": "weapon",
       "tier": 2
     },
-    "mig_27_x29t": {
+    "su_25_x29te": {
       "modClass": "weapon",
       "reqModification": "su_17_x29l",
       "tier": 3
     },
     "su_25_x38ml": {
       "modClass": "weapon",
-      "reqModification": "mig_27_x29t",
+      "reqModification": "su_25_x29te",
       "tier": 4
     },
     "il_28sh_s24": {

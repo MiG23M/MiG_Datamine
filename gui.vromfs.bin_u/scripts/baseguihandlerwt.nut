@@ -6,7 +6,7 @@ from "app" import is_dev_version
 
 let { g_difficulty } = require("%scripts/difficulty.nut")
 let { eventbus_send } = require("eventbus")
-let { isRanksAllowed } = require("%scripts/ranks.nut")
+let { isRanksAllowed } = require("%scripts/ranksAllowed.nut")
 let { BaseGuiHandler } = require("%sqDagui/framework/baseGuiHandler.nut")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
 let u = require("%sqStdLibs/helpers/u.nut")
@@ -23,7 +23,7 @@ let updateContacts = require("%scripts/contacts/updateContacts.nut")
 let unitContextMenuState = require("%scripts/unit/unitContextMenuState.nut")
 let { isChatEnabled, hasMenuChat } = require("%scripts/chat/chatStates.nut")
 let { openUrl } = require("%scripts/onlineShop/url.nut")
-let { getCurCircuitUrl } = require("%appGlobals/urlCustom.nut")
+let { getCurCircuitOverride } = require("%appGlobals/curCircuitOverride.nut")
 let { get_time_msec } = require("dagor.time")
 let { useTouchscreen } = require("%scripts/clientState/touchScreen.nut")
 let { setGuiOptionsMode, getGuiOptionsMode } = require("guiOptions")
@@ -672,10 +672,9 @@ let BaseGuiHandlerWT = class (BaseGuiHandler) {
     ::view_fullscreen_image(obj)
   }
 
-  function onFaq()             { openUrl(getCurCircuitUrl("faqURL", loc("url/faq"))) }
-  function onForum()           { openUrl(loc("url/forum")) }
-  function onSupport()         { openUrl(getCurCircuitUrl("supportURL", loc("url/support"))) }
-  function onWiki()            { openUrl(loc("url/wiki")) }
+  function onFaq()             { openUrl(getCurCircuitOverride("faqURL", loc("url/faq"))) }
+  function onSupport()         { openUrl(getCurCircuitOverride("supportURL", loc("url/support"))) }
+  function onWiki()            { openUrl(getCurCircuitOverride("wikiURL", loc("url/wiki"))) }
 
   function unstickLastDropDown(newObj = null, forceMove = "no") {
     if (checkObj(stickedDropDown) && (!newObj || !stickedDropDown.isEqual(newObj))) {
@@ -917,8 +916,11 @@ let BaseGuiHandlerWT = class (BaseGuiHandler) {
   function onShowMapRenderFilters() {}
 
   function onCustomLangInfo() {
-   this.guiScene.performDelayed(this, @() broadcastEvent("showOptionsWnd"))
+    this.guiScene.performDelayed(this, @() broadcastEvent("showOptionsWnd"))
   }
+
+  onCustomSoundMods = @() this.guiScene.performDelayed(this,
+    @() broadcastEvent("showOptionsWnd", { group = "sound" }))
 }
 
 gui_handlers.BaseGuiHandlerWT <- BaseGuiHandlerWT

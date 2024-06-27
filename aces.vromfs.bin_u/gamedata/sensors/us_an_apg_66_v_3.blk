@@ -3,6 +3,8 @@
   "name": "AN/APG-66(V)3",
   "showMissileLaunchZone": true,
   "showMissileDgftLaunchZone": true,
+  "weaponTargetsMax": 6,
+  "launchedMissilesPredictedPositionsMax": 6,
   "transivers": {
     "mprf": {
       "sideLobesAttenuation": -22.0,
@@ -11,6 +13,12 @@
       "rcs": 3.0,
       "range": 55000.0,
       "rangeMax": 150000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "azimuth": {
           "angleHalfSens": 3.5,
@@ -29,6 +37,12 @@
       "rcs": 3.0,
       "range": 75000.0,
       "rangeMax": 150000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "azimuth": {
           "angleHalfSens": 3.5,
@@ -883,6 +897,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -891,6 +909,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"

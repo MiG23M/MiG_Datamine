@@ -7,12 +7,10 @@ from "%scripts/login/loginConsts.nut" import LOGIN_STATE
 let { is_user_mission } = require("%scripts/missions/missionsUtilsModule.nut")
 let { eventbus_subscribe } = require("eventbus")
 let { gui_handlers } = require("%sqDagui/framework/gui_handlers.nut")
-let { format } = require("string")
 let { broadcastEvent } = require("%sqStdLibs/helpers/subscriptions.nut")
 let { handlersManager, loadHandler } = require("%scripts/baseGuiHandlerManagerWT.nut")
 let statsd = require("statsd")
 let DataBlock = require("DataBlock")
-let { get_authenticated_url_sso } = require("url")
 let penalties = require("%scripts/penitentiary/penalties.nut")
 let tutorialModule = require("%scripts/user/newbieTutorialDisplay.nut")
 let contentStateModule = require("%scripts/clientState/contentState.nut")
@@ -24,13 +22,12 @@ let { checkBadWeapons } = require("%scripts/weaponry/weaponryInfo.nut")
 let { isPlatformSony, isPlatformSteamDeck, is_console, isPlatformShieldTv, isPlatformXboxOne
 } = require("%scripts/clientState/platform.nut")
 let { startLogout } = require("%scripts/login/logout.nut")
-let { updatePlayerRankByCountries } = require("%scripts/ranks.nut")
 let { PT_STEP_STATUS, startPseudoThread } = require("%scripts/utils/pseudoThread.nut")
 let { PRICE, ENTITLEMENTS_PRICE } = require("%scripts/utils/configs.nut")
 let { isNeedFirstCountryChoice, clearUnlockedCountries, checkUnlockedCountries,
   checkUnlockedCountriesByAirs, isFirstChoiceShown
 } = require("%scripts/firstChoice/firstChoice.nut")
-let { bqSendStart }    = require("%scripts/bigQuery/bigQueryClient.nut")
+let { bqSendNoAuthStart } = require("%scripts/bigQuery/bigQueryClient.nut")
 let { get_meta_missions_info } = require("guiMission")
 let { forceUpdateGameModes } = require("%scripts/matching/matchingGameModes.nut")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
@@ -45,7 +42,7 @@ let { get_user_skins_blk, get_user_skins_profile_blk } = require("blkGetters")
 let { steam_is_running } = require("steam")
 let { steam_process_dlc } = require("steam_wt")
 let { userIdStr, havePlayerTag } = require("%scripts/user/profileStates.nut")
-let { getProfileInfo } = require("%scripts/user/userInfoStats.nut")
+let { getProfileInfo, updatePlayerRankByCountries } = require("%scripts/user/userInfoStats.nut")
 let { getCurLangShortName } = require("%scripts/langUtils/language.nut")
 let samsung = require("samsung")
 let { initSelectedCrews } = require("%scripts/slotbar/slotbarState.nut")
@@ -53,6 +50,7 @@ let { isMeNewbie } = require("%scripts/myStats.nut")
 let { gui_start_mainmenu } = require("%scripts/mainmenu/guiStartMainmenu.nut")
 let { gui_start_controls_type_choice } = require("%scripts/controls/startControls.nut")
 let { addPopup } = require("%scripts/popups/popups.nut")
+let { getCurCircuitOverride } = require("%appGlobals/curCircuitOverride.nut")
 
 const EMAIL_VERIFICATION_SEEN_DATE_SETTING_PATH = "emailVerification/lastSeenDate"
 let EMAIL_VERIFICATION_INTERVAL_SEC = 7 * 24 * 60 * 60
@@ -60,7 +58,7 @@ let EMAIL_VERIFICATION_INTERVAL_SEC = 7 * 24 * 60 * 60
 let loginWTState = persist("loginWTState", @(){ initOptionsPseudoThread = null, shouldRestartPseudoThread = true})
 
 function gui_start_startscreen(_) {
-  bqSendStart()
+  bqSendNoAuthStart()
 
   log($"platformId is '{platformId }'")
   pause_game(false);
@@ -79,8 +77,9 @@ eventbus_subscribe("gui_start_startscreen", gui_start_startscreen)
 eventbus_subscribe("gui_start_after_scripts_reload", gui_start_after_scripts_reload)
 
 function go_to_account_web_page(bqKey = "") {
-  let urlBase = format("https://store.gaijin.net/user.php?skin_lang=%s", getCurLangShortName())
-  openUrl(get_authenticated_url_sso(urlBase, "any").url, false, true, bqKey)
+  let urlBase = getCurCircuitOverride("accountWebPage",
+    $"auto_login https://store.gaijin.net/user.php?skin_lang={getCurLangShortName()}")
+  openUrl(urlBase, false, false, bqKey)
 }
 
 ::g_login.loadLoginHandler <- function loadLoginHandler() {

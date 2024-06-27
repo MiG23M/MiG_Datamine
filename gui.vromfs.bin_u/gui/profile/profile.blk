@@ -655,14 +655,13 @@
           },
           "Button_text": {
             "id": "btn_codeApp",
-            "text": "#mainmenu/2step/getGP",
             "btnName": "R3",
             "on_click": "onCodeAppClick",
             "externalLink": "yes",
             "hideText": "yes",
             "ButtonImg": {            },
             "btnText": {
-              "text": "#mainmenu/2step/getGP",
+              "id": "btn_codeApp_text",
               "underline": {              }
             }
           },
@@ -676,6 +675,7 @@
             "hideText": "yes",
             "ButtonImg": {            },
             "btnText": {
+              "id": "btn_achievements_url_text",
               "text": "#mainmenu/showAchievements",
               "underline": {              }
             }
@@ -977,8 +977,23 @@
               "isTextArea": "yes",
               "display": "hide",
               "on_click": "onCustomLangInfo",
-              "focus_border": {              },
-              "ButtonImg": {              }
+              "reduceHeight": "yes",
+              "smallFont": "yes",
+              "focus_border": {              }
+            },
+            "Button_text": {
+              "id": "custom_sound_mods",
+              "hasWarningText": "yes",
+              "position": "relative",
+              "visualStyle": "noBgr",
+              "isTextArea": "yes",
+              "text": "#mainmenu/customSoundMods",
+              "tooltip": "#mainmenu/customSoundMods/tooltip",
+              "display": "hide",
+              "on_click": "onCustomSoundMods",
+              "reduceHeight": "yes",
+              "smallFont": "yes",
+              "focus_border": {              }
             },
             "tdiv": {
               "id": "mission_texts_block_left",

@@ -6,10 +6,10 @@ from "%scripts/dagui_library.nut" import *
 from "app" import is_dev_version
 
 let ww_leaderboard = require("ww_leaderboard")
-let { get_local_unixtime   } = require("dagor.time")
-let { rnd                  } = require("dagor.random")
+let { get_local_unixtime, ref_time_ticks } = require("dagor.time")
+let { rnd, get_rnd_seed, set_rnd_seed }    = require("dagor.random")
 let { format               } = require("string")
-let { json_to_string       } = require("json")
+let { object_to_json_string} = require("json")
 let { getDistr             } = require("auth_wt")
 let { get_user_system_info } = require("sysinfo")
 let { sendBqEvent } = require("%scripts/bqQueue/bqQueue.nut")
@@ -81,7 +81,7 @@ function add_user_info(table) {
 function bq_client_no_auth(event, uniqueId, table) {
   add_user_info(table)
 
-  let params = json_to_string(table, false)
+  let params = object_to_json_string(table, false)
   let request =
   {
     action = "noa_bigquery_client_noauth"
@@ -101,31 +101,56 @@ function bq_client_no_auth(event, uniqueId, table) {
 }
 
 
-function bqSendStart() {  // NOTE: call after 'reset PlayerProfile' in log
-  if (bqStat.sendStartOnce)
-    return
+function generate_unique_id() {
+  // period of one second is not enough for random-seed, let's increase it
+  let seed = get_rnd_seed()
+  set_rnd_seed(ref_time_ticks())
+  let uniqueId = format("%.8X%.8X", get_local_unixtime(), rnd() * rnd())
+  set_rnd_seed(seed)
+  return uniqueId
+}
 
+
+function bqSendNoAuth(event, start = false) {  // NOTE: call after 'reset PlayerProfile' in log
   local blk = get_common_local_settings_blk()
+  local save = false
 
   if ("uniqueId" not in blk || type(blk.uniqueId) != "string" || blk.uniqueId.len() < 16) {
-    blk.uniqueId <- format("%.8X%.8X", get_local_unixtime(), rnd() * rnd())
+    blk.uniqueId <- generate_unique_id()
     assert(blk.uniqueId.len() == 16)
+    save = true
   }
 
   if ("runCount" not in blk || type(blk.runCount) != "integer" || blk.runCount < 0) {
     blk.runCount <- 0;
+    save = true
   }
-  blk.runCount += 1
 
-  save_common_local_settings()
+  if (start)
+    blk.runCount += 1
+
+  if (start || save)
+    save_common_local_settings()
 
   local table = { "run" : blk.runCount }
   if (blk?.autologin == true)
     table.auto <- true
 
-  bq_client_no_auth("start", blk.uniqueId, table)
+  bq_client_no_auth(event, blk.uniqueId, table)
+}
 
+
+function bqSendNoAuthStart() {
+  if (bqStat.sendStartOnce)
+    return
+  bqSendNoAuth("start", true)
   bqStat.sendStartOnce = true
+}
+
+
+function bqSendNoAuthWeb(event) {
+  bqSendNoAuth(hasFeature("AllowExternalLink") ? $"web:{event}"
+                                               : $"web:{event}:disabled")
 }
 
 
@@ -138,7 +163,7 @@ function bqSendLoginState(table) {
     table.auto <- true
 
   add_user_info(table)
-  let params = json_to_string(table)
+  let params = object_to_json_string(table)
 
   sendBqEvent("CLIENT_LOGIN_2", "login_state", table)
   log($"BQ CLIENT login_state {params}")
@@ -146,6 +171,9 @@ function bqSendLoginState(table) {
 
 
 return {
-  bqSendStart,
+  bqSendNoAuth,
+  bqSendNoAuthStart,
+  bqSendNoAuthWeb,
+
   bqSendLoginState
 }

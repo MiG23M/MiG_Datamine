@@ -1,6 +1,7 @@
 {
   "type": "radar",
   "name": "N010 Zhuk",
+  "weaponTargetsMax": 1,
   "showMissileLaunchZone": true,
   "showMissileDgftLaunchZone": true,
   "fsms": {
@@ -996,6 +997,10 @@
           "actions": {
             "doCustomActionTemplate": {
               "fsm": "main",
+              "name": "resetStandbyMode"
+            },
+            "doCustomActionTemplate": {
+              "fsm": "main",
               "name": "setStandbyMode"
             }
           }
@@ -1004,6 +1009,10 @@
           "stateFrom": "search",
           "event": "fsmActivate",
           "actions": {
+            "doCustomActionTemplate": {
+              "fsm": "main",
+              "name": "resetSearchMode"
+            },
             "doCustomActionTemplate": {
               "fsm": "main",
               "name": "setSearchMode"
@@ -1887,10 +1896,6 @@
         },
         "setIrst": {
           "setIrstLockTrack": {          },
-          "doCustomActionTemplate": {
-            "fsm": "main",
-            "name": "resetSearchMode"
-          },
           "clearTargets": {          },
           "setFsmActive": {
             "fsm": "main",
@@ -2786,6 +2791,12 @@
       "rcs": 5.0,
       "range": 40000.0,
       "rangeMax": 55000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.5,
         "sideLobesSensitivity": -32.0
@@ -2798,6 +2809,12 @@
       "rcs": 5.0,
       "range": 80000.0,
       "rangeMax": 100000.0,
+      "multipathEffect": [
+        0.0,
+        1.0,
+        60.0,
+        60.0
+      ],
       "antenna": {
         "angleHalfSens": 3.5,
         "sideLobesSensitivity": -32.0
@@ -2917,7 +2934,7 @@
       ],
       "rollStabLimit": 90.0,
       "pitchStabLimit": 60.0,
-      "period": 4.6,
+      "period": 2.3,
       "width": 40.0,
       "barHeight": 2.5,
       "barsCount": 2,
@@ -3133,7 +3150,7 @@
       ],
       "elevationLimits": [
         -15.0,
-        15.0
+        30.0
       ],
       "period": 0.2,
       "width": 2.0,

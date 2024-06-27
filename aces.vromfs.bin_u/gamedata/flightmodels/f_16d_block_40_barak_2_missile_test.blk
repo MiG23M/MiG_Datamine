@@ -13,6 +13,7 @@
   "haveCCRPForGun": true,
   "ilsElbit967": true,
   "hmdF16c": true,
+  "mfdCamTads": true,
   "hasMissileCommandLine": false,
   "havePointOfInterestDesignator": true,
   "isBwOpticSight": true,
@@ -1805,7 +1806,8 @@
     }
   },
   "ikPilot": {
-    "model": "pilot_italy_late_char",
+    "model": "usaf_pilot_1977_1991_char",
+    "model": "usaf_pilot_1977_1991_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -1820,7 +1822,7 @@
       "flexionDir": [
         0.0,
         -1.0,
-        0.2
+        0.3
       ],
       "type": "leftHand",
       "detachedNodeYpr": [
@@ -1842,7 +1844,7 @@
       "flexionDir": [
         0.0,
         -1.0,
-        -0.5
+        -0.3
       ],
       "type": "rightHand",
       "detachedNodeYpr": [
@@ -1864,7 +1866,7 @@
       "flexionDir": [
         0.0,
         1.0,
-        0.3
+        0.2
       ]
     },
     "ikNode": {
@@ -1875,12 +1877,12 @@
       "flexionDir": [
         0.0,
         1.0,
-        -0.3
+        -0.2
       ]
     }
   },
   "ikGunner": {
-    "model": "pilot_italy_late_char",
+    "model": "usaf_pilot_1977_1991_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -1896,7 +1898,7 @@
       "flexionDir": [
         0.0,
         -1.0,
-        0.1
+        0.3
       ]
     },
     "ikNode": {
@@ -1907,7 +1909,7 @@
       "flexionDir": [
         0.0,
         -1.0,
-        -0.1
+        -0.3
       ]
     },
     "ikNode": {
@@ -1918,7 +1920,7 @@
       "flexionDir": [
         0.0,
         1.0,
-        -0.2
+        0.2
       ]
     },
     "ikNode": {
@@ -1929,7 +1931,7 @@
       "flexionDir": [
         0.0,
         1.0,
-        0.2
+        -0.2
       ]
     }
   },
@@ -2035,13 +2037,13 @@
     }
   },
   "cockpit": {
-    "sightInFov": 50.5,
-    "sightOutFov": 40.5,
-    "sightFov": 1.0,
     "targetingPodFov": [
-      12.0,
-      3.2
+      18.0,
+      1.5
     ],
+    "sightInFov": 1.5,
+    "sightOutFov": 18.0,
+    "sightFov": 1.0,
     "isDoubleBulletImpactLine": true,
     "hmdBlockIlsArea": [
       0.37,
@@ -2328,12 +2330,49 @@
           0.5,
           0.5
         ],
-        "monoDisplayColor": [
-          0.37,
-          0.45,
-          0.4
-        ],
         "cameraFromTargetingPod": true,
+        "page": {
+          "type": "radar",
+          "scale": 0.92,
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "fontScale": 0.65,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "targetForm": "square",
+          "modeColor": [
+    0,
+    255,
+    7,
+],
+          "verAngleColor": [
+    0,
+    255,
+    7,
+],
+          "horAngleColor": [
+    0,
+    255,
+    7,
+],
+          "scaleColor": [
+    0,
+    255,
+    7,
+],
+          "targetColor": [
+    0,
+    255,
+    7,
+],
+          "centerRadar": true,
+          "showCueHeights": true
+        },
         "page": {
           "type": "thermal",
           "turretIdx": 0
@@ -2341,11 +2380,6 @@
         "page": {
           "type": "target_tracking",
           "turretIdx": 0
-        },
-        "page": {
-          "type": "radar",
-          "scale": 0.92,
-          "hideRadarBackground": true
         },
         "page": {
           "type": "map"
@@ -2373,7 +2407,44 @@
         "page": {
           "type": "radar",
           "scale": 0.92,
-          "hideRadarBackground": true
+          "hideBackground": true,
+          "hasAviaHorizont": true,
+          "hideBeam": false,
+          "beamShape": "caret",
+          "fontScale": 0.65,
+          "lineColor": [
+    0,
+    255,
+    7,
+],
+          "targetForm": "square",
+          "modeColor": [
+    0,
+    255,
+    7,
+],
+          "verAngleColor": [
+    0,
+    255,
+    7,
+],
+          "horAngleColor": [
+    0,
+    255,
+    7,
+],
+          "scaleColor": [
+    0,
+    255,
+    7,
+],
+          "targetColor": [
+    0,
+    255,
+    7,
+],
+          "centerRadar": true,
+          "showCueHeights": true
         }
       },
       "display": {
@@ -2385,7 +2456,8 @@
         ],
         "page": {
           "type": "rwr",
-          "scale": 1.1
+          "scale": 1.15,
+          "hideBackground": true
         }
       },
       "display": {
@@ -2453,6 +2525,23 @@
     }
   },
   "gunnerOpticFps": {
+    "TV": {
+      "pos": [
+        2.6,
+        -0.15,
+        0.0
+      ],
+      "head": "optic1_turret",
+      "crosshairPreset": "test_crosshair",
+      "angularLimits": [
+        -30.0,
+        30.0,
+        -30.0,
+        -30.0
+      ],
+      "opticType": "tv",
+      "turretNo": 0
+    },
     "Target": {
       "pos": [
         1.0,
@@ -2469,25 +2558,7 @@
       ],
       "opticType": "targeting",
       "turretNo": 0,
-      "nvIndex": 2
-    },
-    "TV": {
-      "pos": [
-        2.6,
-        -0.15,
-        0.0
-      ],
-      "head": "optic1_turret",
-      "crosshairPreset": "test_crosshair",
-      "angularLimits": [
-        -30.0,
-        30.0,
-        -30.0,
-        -30.0
-      ],
-      "opticType": "tv",
-      "turretNo": 0,
-      "nvIndex": 2
+      "nvIndex": 1
     }
   },
   "commonWeapons": {
@@ -2630,10 +2701,7 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,
@@ -2689,12 +2757,6 @@
         }
       }
     },
-    "air_extinguisher": {
-      "prevModification": "heli_night_vision_system",
-      "tier": 4,
-      "modClass": "armor",
-      "invertEnableLogic": false
-    },
     "us_500lb_mk82": {
       "modClass": "weapon",
       "tier": 1
@@ -2749,22 +2811,22 @@
       "prevModification": "M60_new_gun",
       "reqModification": "us_gbu_10"
     },
-    "us_aim_9p": {
+    "us_aim_9l": {
       "tier": 1,
       "modClass": "weapon"
     },
     "us_aim_7m": {
-      "reqModification": "us_aim_9p",
+      "reqModification": "us_aim_9l",
       "tier": 2,
       "modClass": "weapon"
     },
-    "us_aim_9l": {
+    "us_aim_9m": {
       "reqModification": "us_aim_7m",
       "tier": 3,
       "modClass": "weapon"
     },
-    "us_aim_9m": {
-      "reqModification": "us_aim_9l",
+    "il_derby": {
+      "reqModification": "us_aim_9m",
       "tier": 4,
       "modClass": "weapon"
     }
@@ -3049,35 +3111,57 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare3",
-          "bullets": 70,
+          "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare4",
-          "bullets": 70,
+          "bullets": 30,
           "external": true,
-          "separate": false
+          "separate": false,
+          "bulletsCartridge": 1
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
+          "emitter": "emtr_flare3",
+          "bullets": 30,
+          "external": true,
+          "separate": false,
+          "bulletsCartridge": 1
+        },
+        "Weapon": {
+          "trigger": "countermeasures",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
+          "emitter": "emtr_flare4",
+          "bullets": 30,
+          "external": true,
+          "separate": false,
+          "bulletsCartridge": 1
         }
       }
     },

@@ -630,6 +630,22 @@
         "ButtonImg": {        }
       },
       "Button_text": {
+        "id": "btn_use_coupon_unit",
+        "text": "#item/consume/coupon",
+        "btnName": "X",
+        "on_click": "onBtnUseCoupon",
+        "display": "hide",
+        "showButtonImageOnConsole": "no",
+        "visualStyle": "secondary",
+        "skip-navigation": "yes",
+        "class": "image",
+        "buttonWink": {        },
+        "img": {
+          "background-image": "#ui/gameuiskin#gc.svg"
+        },
+        "ButtonImg": {        }
+      },
+      "Button_text": {
         "id": "btn_buy_skin",
         "text": "#mainmenu/btnOrder",
         "btnName": "X",
@@ -688,6 +704,19 @@
         "buttonWink": {        },
         "img": {
           "background-image": "#ui/gameuiskin#gc.svg"
+        },
+        "ButtonImg": {        }
+      },
+      "Button_text": {
+        "id": "btn_add_to_wishlist",
+        "on_click": "onAddToWishlist",
+        "showButtonImageOnConsole": "no",
+        "text": "#mainmenu/add_to_wishlist",
+        "btnName": "LT",
+        "skip-navigation": "yes",
+        "class": "image",
+        "img": {
+          "background-image": "#ui/gameuiskin#add_to_wishlist.svg"
         },
         "ButtonImg": {        }
       },
@@ -1148,8 +1177,23 @@
             "isTextArea": "yes",
             "display": "hide",
             "on_click": "onCustomLangInfo",
-            "focus_border": {            },
-            "ButtonImg": {            }
+            "reduceHeight": "yes",
+            "smallFont": "yes",
+            "focus_border": {            }
+          },
+          "Button_text": {
+            "id": "custom_sound_mods",
+            "hasWarningText": "yes",
+            "position": "relative",
+            "visualStyle": "noBgr",
+            "isTextArea": "yes",
+            "text": "#mainmenu/customSoundMods",
+            "tooltip": "#mainmenu/customSoundMods/tooltip",
+            "display": "hide",
+            "on_click": "onCustomSoundMods",
+            "reduceHeight": "yes",
+            "smallFont": "yes",
+            "focus_border": {            }
           },
           "tdiv": {
             "id": "mission_texts_block_left",

@@ -262,6 +262,16 @@ return [
     checkAssign = false
   }
   {
+    id = "ID_TOGGLE_BOMBS_AUTO_RELEASE_HELICOPTER"
+    checkAssign = false
+    needShowInHelp = true
+  }
+  {
+    id = "ID_SWITCH_SHOOTING_CYCLE_COUNTER_MEASURE_HELICOPTER"
+    checkAssign = false
+    showFunc = @() hasFeature("SeparateCountermeasures")
+  }
+  {
     id = "ID_TOGGLE_LASER_DESIGNATOR_HELICOPTER"
     checkAssign = false
   }
@@ -323,6 +333,16 @@ return [
   {
     id = "ID_FLARES_HELICOPTER"
     checkAssign = false
+  }
+  {
+    id = "ID_COUNTERMEASURE_FLARES_HELICOPTER"
+    checkAssign = false
+    showFunc = @() hasFeature("SeparateCountermeasures")
+  }
+  {
+    id = "ID_COUNTERMEASURE_CHAFF_HELICOPTER"
+    checkAssign = false
+    showFunc = @() hasFeature("SeparateCountermeasures")
   }
   {
     id = "ID_FLARES_SERIES_HELICOPTER"

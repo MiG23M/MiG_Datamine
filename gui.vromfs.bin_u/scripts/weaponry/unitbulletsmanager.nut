@@ -9,13 +9,15 @@ let { subscribe_handler, broadcastEvent } = require("%sqStdLibs/helpers/subscrip
 let { get_gui_option, getGuiOptionsMode } = require("guiOptions")
 let stdMath = require("%sqstd/math.nut")
 let { AMMO, getAmmoWarningMinimum } = require("%scripts/weaponry/ammoInfo.nut")
-let { getLinkedGunIdx, getOverrideBullets } = require("%scripts/weaponry/weaponryInfo.nut")
-let { getBulletsSetData,
+let { getOverrideBullets } = require("%scripts/weaponry/weaponryInfo.nut")
+let { getBulletsSetData, getLinkedGunIdx,
         getOptionsBulletsList,
         getBulletsGroupCount,
         getActiveBulletsGroupInt,
-        getBulletsInfoForPrimaryGuns } = require("%scripts/weaponry/bulletsInfo.nut")
-let { OPTIONS_MODE_TRAINING, USEROPT_SKIP_LEFT_BULLETS_WARNING
+        getBulletsInfoForPrimaryGuns,
+        getAmmoStowageConstraintsByTrigger,
+        getBulletsSetMaxAmmoWithConstraints } = require("%scripts/weaponry/bulletsInfo.nut")
+let { OPTIONS_MODE_TRAINING, USEROPT_SKIP_LEFT_BULLETS_WARNING, USEROPT_MODIFICATIONS
 } = require("%scripts/options/optionsExtNames.nut")
 let { shopIsModificationPurchased } = require("chardResearch")
 let { loadHandler } = require("%scripts/baseGuiHandlerManagerWT.nut")
@@ -39,7 +41,6 @@ enum bulletsAmountState {
 
   constructor(v_unit, params = {}) {
     this.gunsInfo = []
-    this.checkPurchased = getGuiOptionsMode() != OPTIONS_MODE_TRAINING
     this.isForcedAvailable = params?.isForcedAvailable ?? false
 
     this.setUnit(v_unit)
@@ -58,6 +59,8 @@ enum bulletsAmountState {
 
     this.unit = v_unit
     this.bulGroups = null
+    this.checkPurchased = getGuiOptionsMode() != OPTIONS_MODE_TRAINING
+      || get_gui_option(USEROPT_MODIFICATIONS)
   }
 
   function getBulletsGroups() {
@@ -93,16 +96,32 @@ enum bulletsAmountState {
     if (count == newCount)
       return false
 
-    let unallocated = this.getUnallocatedBulletCount(bulGroup)
-    let maxCount = min(unallocated + count, bulGroup.maxBulletsCount)
-    newCount = clamp(newCount, 0, maxCount)
+    let isPairBulletsGroup = bulGroup.isPairBulletsGroup()
+    local unallocated = this.getUnallocatedBulletCount(bulGroup)
+    let maxCount = isPairBulletsGroup ? bulGroup.maxBulletsCount
+      : min(unallocated + count, bulGroup.maxBulletsCount)
+    newCount = isPairBulletsGroup && !bulGroup.canChangePairBulletsCount()
+      ? maxCount
+      : clamp(newCount, 0, maxCount)
 
     if (count == newCount)
       return false
 
     bulGroup.setBulletsCount(newCount)
-    if (bulGroup.gunInfo)
-      bulGroup.gunInfo.unallocated <- unallocated + count - newCount
+    let { gunInfo }= bulGroup
+    if (gunInfo) {
+      unallocated = unallocated + count - newCount
+      if (isPairBulletsGroup && unallocated != 0) {
+        let linkedBulGroup = this.getLinkedBulletsGroup(bulGroup)
+        if (linkedBulGroup != null && linkedBulGroup) {
+          let linkedCount = linkedBulGroup.bulletsCount
+          let newLinkedCount = clamp(linkedCount + unallocated, 0, maxCount)
+          unallocated = unallocated + linkedCount - newLinkedCount
+          linkedBulGroup.setBulletsCount(newLinkedCount)
+        }
+      }
+      bulGroup.gunInfo.unallocated <- unallocated
+    }
     broadcastEvent("BulletsCountChanged", { unit = this.unit })
     return true
   }
@@ -163,6 +182,8 @@ enum bulletsAmountState {
       if (unallocated <= 0)
         continue
       if (gInfo?.forcedMaxBulletsInRespawn ?? false) // Player can't change counts.
+        continue
+      if (gInfo?.isBulletBelt ?? true)
         continue
 
       local status = bulletsAmountState.READY
@@ -305,6 +326,8 @@ enum bulletsAmountState {
     if (!this.unit)
       return
 
+    let ammoCounstraintsByTrigger = getAmmoStowageConstraintsByTrigger(this.unit)
+
     // Preparatory work of Bullet Groups creation
     let bulletDataByGroup = {}
     let bullGroupsCountersByGun = {}
@@ -313,16 +336,22 @@ enum bulletsAmountState {
 
     for (local groupIndex = 0; groupIndex < bulletsTotal; groupIndex++) {
       let linkedIdx = getLinkedGunIdx(groupIndex, this.getGunTypesCount(),
-        this.unit.unitType.bulletSetsQuantity)
+        this.unit.unitType.bulletSetsQuantity, this.unit)
+
       let bullets = getOptionsBulletsList(this.unit, groupIndex, false, this.isForcedAvailable)
       let selectedName = bullets.values?[bullets.value] ?? ""
       let bulletsSet = getBulletsSetData(this.unit, selectedName)
-      let maxToRespawn = bulletsSet?.maxToRespawn ?? 0
+      let constrainedTotalCount = getBulletsSetMaxAmmoWithConstraints(ammoCounstraintsByTrigger, bulletsSet)
+      local maxToRespawn = bulletsSet?.maxToRespawn ?? 0
+      if (maxToRespawn > 0 && constrainedTotalCount > 0)
+        maxToRespawn = min(constrainedTotalCount, maxToRespawn)
+
       //!!FIX ME: Needs to have a bit more reliable way to determine bullets type like by TRIGGER_TYPE for example
       let currBulletType = bulletsSet?.isBulletBelt ? "belt" : bulletsSet?.bullets[0].split("_")[0]
       bulletDataByGroup[groupIndex] <- {
         linkedIdx = linkedIdx
         maxToRespawn = maxToRespawn
+        constrainedTotalCount = constrainedTotalCount
       }
 
       if (!bullGroupsCountersByGun?[linkedIdx])
@@ -351,12 +380,13 @@ enum bulletsAmountState {
       let currCounters = bullGroupsCountersByGun[data.linkedIdx]
       let isUniformNoBelts = (currCounters.isUniform && currCounters.beltsCount == 0
         && currCounters.limitedGroupCount == currCounters.groupCount)
-      this.bulGroups.append(::BulletGroup(this.unit, groupIndex,
-        this.getGroupGunInfo(data.linkedIdx, isUniformNoBelts, data.maxToRespawn), {
+      this.bulGroups.append(::BulletGroup(this.unit, groupIndex, this.getGroupGunInfo(data.linkedIdx, isUniformNoBelts, data.maxToRespawn),
+        {
           isActive = stdMath.is_bit_set(this.groupsActiveMask, groupIndex)
           canChangeActivity = this.canChangeBulletsActivity()
           isForcedAvailable = this.isForcedAvailable
           maxToRespawn = data.maxToRespawn
+          constrainedTotalCount = data.constrainedTotalCount
         }))
     }
   }
@@ -418,6 +448,7 @@ enum bulletsAmountState {
     }
 
     //update unallocated bullets, collect not inited
+    let unallocatedPairBulGroup = {}
     local haveNotInited = false
     foreach (_gIdx, bulGroup in this.bulGroups) {
       let gInfo = bulGroup.gunInfo
@@ -430,12 +461,26 @@ enum bulletsAmountState {
         continue
       }
 
-      if (gInfo.unallocated < bulGroup.bulletsCount) {
+      let isPairBulletsGroup = bulGroup.isPairBulletsGroup()
+      if (isPairBulletsGroup && !bulGroup.canChangePairBulletsCount()) {
+        bulGroup.setBulletsCount(gInfo.unallocated)
+        gInfo.unallocated = 0
+        continue
+      }
+
+      let isSecondPairBulletsGroup = (gInfo.gunIdx in unallocatedPairBulGroup)
+      if (gInfo.unallocated < bulGroup.bulletsCount || isSecondPairBulletsGroup) { //need set all count for pairs bullets
         bulGroup.setBulletsCount(gInfo.unallocated)
         gInfo.unallocated = 0
       }
       else
         gInfo.unallocated -= bulGroup.bulletsCount
+
+      if (isSecondPairBulletsGroup)
+        continue
+
+      if (isPairBulletsGroup)
+        unallocatedPairBulGroup[gInfo.gunIdx] <- true
     }
 
     if (!haveNotInited)
@@ -480,5 +525,18 @@ enum bulletsAmountState {
     this.loadBulletsData() // Need to reload data because of maxToRespawn in bullet group might be recalculated
     if (p.groupIdx in this.bulGroups)
       this.changeBulletsValue(this.bulGroups[p.groupIdx], p.bulletName)
+  }
+
+  function getLinkedBulletsGroup(bulGroup) {
+    let { gunInfo, groupIndex }= bulGroup
+    if (gunInfo == null)
+      return null
+
+    let { gunIdx } = gunInfo
+    foreach (linkedBulGroup in this.bulGroups)
+      if (linkedBulGroup.groupIndex != groupIndex
+          && linkedBulGroup.gunInfo?.gunIdx == gunIdx)
+        return linkedBulGroup
+    return null
   }
 }

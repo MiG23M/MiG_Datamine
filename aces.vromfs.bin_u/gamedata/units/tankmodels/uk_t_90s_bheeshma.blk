@@ -644,11 +644,12 @@
       "fireProtectionHp": 5.0,
       "hidableInViewer": false,
       "drive_turret_v_dm": {
-        "hp": 150.0,
         "armorThrough": 15.0
       },
       "drive_turret_h_dm": {
-        "hp": 150.0,
+        "armorThrough": 15.0
+      },
+      "driver_controls_dm": {
         "armorThrough": 15.0
       },
       "drive_turret_v_01_dm": {
@@ -667,21 +668,57 @@
         "hp": 40.0,
         "armorThrough": 15.0
       },
-      "radiator_dm": {
+      "drive_turret_v_03_dm": {
         "hp": 40.0,
+        "armorThrough": 15.0
+      },
+      "drive_turret_h_03_dm": {
+        "hp": 40.0,
+        "armorThrough": 15.0
+      },
+      "drive_turret_v_04_dm": {
+        "hp": 40.0,
+        "armorThrough": 15.0
+      },
+      "drive_turret_h_04_dm": {
+        "hp": 40.0,
+        "armorThrough": 15.0
+      },
+      "drive_turret_v_05_dm": {
+        "hp": 40.0,
+        "armorThrough": 15.0
+      },
+      "drive_turret_h_05_dm": {
+        "hp": 40.0,
+        "armorThrough": 15.0
+      },
+      "radiator_dm": {
+        "hp": 50.0,
         "armorThrough": 5.0
       },
       "radiator_l_dm": {
-        "hp": 40.0,
+        "hp": 50.0,
         "armorThrough": 5.0
       },
       "radiator_r_dm": {
-        "hp": 40.0,
+        "hp": 50.0,
         "armorThrough": 5.0
       },
       "radio_station_dm": {
-        "hp": 20.0,
+        "hp": 50.0,
         "armorThrough": 3.0
+      },
+      "electronic_equipment_dm": {
+        "hp": 60.0,
+        "armorThrough": 3.0
+      },
+      "fire_control_system_dm": {
+        "hp": 60.0,
+        "armorThrough": 3.0
+      },
+      "power_system_dm": {
+        "hp": 60.0,
+        "armorThrough": 15.0
       }
     },
     "cannon_breech": {
@@ -707,6 +744,10 @@
       },
       "cannon_breech_05_dm": {
         "armorThickness": 10.0
+      },
+      "autoloader_dm": {
+        "armorThickness": 5.0,
+        "armorThrough": 5.0
       }
     },
     "power_block": {
@@ -911,7 +952,7 @@
     },
     "fuel_tanks": {
       "armorClass": "tank_structural_steel",
-      "hp": 250.0,
+      "hp": 400.0,
       "armorThickness": 2.0,
       "armorThrough": 12.0,
       "fireProtectionHp": 15.0,
@@ -1446,6 +1487,19 @@
         "fHitCritical": true
       },
       "onHit": {
+        "damageType": "cumulative",
+        "expl": 0.6,
+        "fire": 0.4,
+        "damage": 400.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "cumulative",
+        "expl": 1.0,
+        "damage": 800.0,
+        "fHitCritical": true
+      },
+      "onHit": {
         "damageType": "explosion",
         "expl": 0.125,
         "fire": 0.15,
@@ -1481,21 +1535,20 @@
       "onHit": {
         "damageType": "generic",
         "fire": 0.4,
-        "expl": 0.25,
+        "expl": 0.6,
+        "damage": 250.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "generic",
+        "fire": 0.3,
+        "expl": 0.7,
         "damage": 300.0,
         "fHitCritical": true
       },
       "onHit": {
         "damageType": "generic",
-        "fire": 0.45,
-        "expl": 0.45,
-        "damage": 400.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.2,
-        "expl": 0.8,
+        "expl": 1.0,
         "damage": 600.0,
         "fHitCritical": true
       },
@@ -1504,9 +1557,7 @@
         "fire": 0.2
       },
       "onKill": {
-        "fire": 0.35,
-        "expl": 0.35,
-        "nothing": 0.3,
+        "fire": 1.0,
         "fHitCritical": true
       }
     },
@@ -2057,7 +2108,7 @@
     "remotelyGuidedWeaponsMax": 1,
     "Weapon": {
       "trigger": "gunner0",
-      "blk": "gameData/Weapons/groundModels_weapons/125mm_2A46_M5_T_90A_user_cannon.blk",
+      "blk": "gameData/Weapons/groundModels_weapons/125mm_2A46_M5_t_90s_bheeshma_user_cannon.blk",
       "emitter": "bone_gun_barrel",
       "flash": "emtr_gun_flame",
       "shotFreq": 0.1408,
@@ -2173,7 +2224,7 @@
     "Weapon": {
       "trigger": "gunner1",
       "triggerGroup": "coaxial",
-      "blk": "gameData/Weapons/groundModels_weapons/7_62mm_PKT_user_machinegun.blk",
+      "blk": "gameData/Weapons/groundModels_weapons/7_62mm_PKTM_user_machinegun.blk",
       "emitter": "bone_mg_gun_twin",
       "flash": "emtr_mg_flame_01",
       "defaultYaw": 0.0,
@@ -2337,6 +2388,11 @@
     "preset": {
       "name": "uk_t_90s_bheeshma_default",
       "blk": "gameData/units/tankModels/weaponPresets/uk_t_90s_bheeshma_default.blk"
+    }
+  },
+  "sensors": {
+    "sensor": {
+      "blk": "gameData/sensors/LaserBeamRidingSensor.blk"
     }
   },
   "VehiclePhys": {
@@ -3131,6 +3187,27 @@
         "centerDmgPart": true
       }
     },
+    "event": {
+      "name": "hydraulic_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_exterior",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
     "procedural": {
       "name": "default",
       "fx": {
@@ -3349,6 +3426,7 @@
         "fireEvent": "ammo_fire",
         "explosionEvent": "ammo_explosion",
         "wreckedPartId": 0,
+        "autoloader": "autoloader_dm",
         "ammo_turret_01_dm": {
           "count": 1
         },
@@ -3648,7 +3726,61 @@
     "tank_medical_kit_expendable": {
       "image": "#ui/gameuiskin#tank_reinforcement_uk"
     },
-    "modern_tank_laser_rangefinder": {    },
+    "modern_tank_laser_rangefinder": {
+      "effects": {
+        "rangefinderMounted": true,
+        "isLaser": true,
+        "distanceError": [
+          1.0,
+          1.0,
+          5.0,
+          5.0
+        ],
+        "distanceThresholdMin": [
+          1000.0,
+          3000.0,
+          5000.0,
+          5000.0
+        ],
+        "distanceThresholdMax": [
+          1000.0,
+          3000.0,
+          5000.0,
+          5000.0
+        ],
+        "distanceErrorRealistic": [
+          1.0,
+          1.0,
+          5.0,
+          5.0
+        ],
+        "distanceThresholdMinRealistic": [
+          1000.0,
+          3000.0,
+          5000.0,
+          5000.0
+        ],
+        "distanceThresholdMaxRealistic": [
+          1000.0,
+          3000.0,
+          5000.0,
+          5000.0
+        ],
+        "timeMeasurementRange": [
+          0.5,
+          0.5
+        ],
+        "rcostAddParam": 0.98,
+        "sensors": {
+          "sensor": {
+            "blk": "gameData/sensors/LaserBeamRidingSensor.blk"
+          },
+          "sensor": {
+            "blk": "gameData/sensors/LaserDesignatorSensor.blk"
+          }
+        }
+      }
+    },
     "125mm_ussr_HE_VT": {    },
     "125mm_ussr_APDS_FS": {    },
     "125mm_ussr_ATGM": {
@@ -3667,8 +3799,8 @@
         "rcostAddParam": 0.99,
         "diggingAvailable": true,
         "diggingActivateTime": 3.0,
-        "diggingLevel": 0.25,
-        "digMaxSpeed": 7.0,
+        "diggingLevel": 0.35,
+        "digMaxSpeed": 15.0,
         "digMaxRevSpeed": -12.0,
         "collisionProps": {
           "cls_body": "convex_hull",
@@ -3707,7 +3839,7 @@
           "remotelyGuidedWeaponsMax": 1,
           "Weapon": {
             "trigger": "gunner0",
-            "blk": "gameData/Weapons/groundModels_weapons/125mm_2A46_M5_T_90A_user_cannon.blk",
+            "blk": "gameData/Weapons/groundModels_weapons/125mm_2A46_M5_t_90s_bheeshma_user_cannon.blk",
             "emitter": "bone_gun_barrel",
             "flash": "emtr_gun_flame",
             "shotFreq": 0.1408,
@@ -3823,7 +3955,7 @@
           "Weapon": {
             "trigger": "gunner1",
             "triggerGroup": "coaxial",
-            "blk": "gameData/Weapons/groundModels_weapons/7_62mm_PKT_user_machinegun.blk",
+            "blk": "gameData/Weapons/groundModels_weapons/7_62mm_PKTM_user_machinegun.blk",
             "emitter": "bone_mg_gun_twin",
             "flash": "emtr_mg_flame_01",
             "defaultYaw": 0.0,
@@ -4045,6 +4177,7 @@
       "modClass": "protection",
       "effects": {
         "nightVision": {
+          "nightVisionDmPart": "fire_control_system_dm",
           "gunnerThermal": {
             "resolution": [
               800,

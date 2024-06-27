@@ -6,7 +6,6 @@
   "gearSinkRangeLR": 0.19,
   "gyroSight": true,
   "type": "typeFighter",
-  "paratrooper": "italy_late_para",
   "advancedInstructor": true,
   "standardExhaustFxType": "jet_exhaust",
   "afterburnerExhaustFxType": "jet_afterburner_exhaust",
@@ -24,6 +23,7 @@
   "explosion_dmBlk": "gameData/FlightModels/DM/commonExplosion.blk",
   "fireParamsPreset": "1000kph",
   "fightAiBehaviour": "fighter",
+  "paratrooper": "usa_irvin_i_24_ejection_para",
   "DamageParts": {
     "armor10": {
       "cannon1_dm": {
@@ -2166,18 +2166,44 @@
     "turnTime": 23.0
   },
   "modifications": {
-    "cd_98": {    },
+    "CdMin_Fuse": {
+      "tier": 1,
+      "modClass": "lth"
+    },
+    "structure_str": {
+      "prevModification": "CdMin_Fuse",
+      "tier": 2,
+      "modClass": "lth"
+    },
+    "cd_98": {
+      "prevModification": "structure_str",
+      "tier": 3,
+      "modClass": "lth"
+    },
+    "new_cover": {
+      "prevModification": "cd_98",
+      "tier": 4,
+      "modClass": "lth"
+    },
+    "new_compressor_jet": {
+      "tier": 2,
+      "modClass": "lth"
+    },
+    "hp_105_jet": {
+      "tier": 3,
+      "modClass": "lth",
+      "prevModification": "new_compressor_jet"
+    },
+    "g_suit": {
+      "tier": 3,
+      "modClass": "armor"
+    },
     "air_extinguisher": {
       "tier": 4,
-      "modClass": "weapon",
-      "invertEnableLogic": false
+      "modClass": "armor",
+      "invertEnableLogic": false,
+      "prevModification": "g_suit"
     },
-    "CdMin_Fuse": {    },
-    "new_cover": {    },
-    "structure_str": {    },
-    "hp_105_jet": {    },
-    "g_suit": {    },
-    "new_compressor_jet": {    },
     "hispano_universal": {    },
     "hispano_ground_targets": {    },
     "hispano_air_targets": {    },
@@ -2194,6 +2220,28 @@
       "modClass": "weapon",
       "tier": 2
     }
+  },
+  "bailout": {
+    "buttonHoldTime": 1.0,
+    "wreckSpeed": 10.0,
+    "wreckDir": [
+      -1.0,
+      1.0,
+      0.0
+    ],
+    "seatEjectDelay": 0.5,
+    "seatVel": [
+      -10.0,
+      20.0,
+      0.0
+    ],
+    "minHeight": 0.0,
+    "minSpeed": 0.0,
+    "hasSafeExit": true,
+    "hide": "blister5",
+    "seat": "seat_01",
+    "fxEmitter": "blister5",
+    "fxType": "catapult_expl_ejection"
   },
   "cutting": {
     "_emtr_break_wing0_l_from": [

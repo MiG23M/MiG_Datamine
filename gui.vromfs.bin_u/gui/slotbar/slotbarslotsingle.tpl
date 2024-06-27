@@ -3,6 +3,10 @@ position:t='<<position>>'
 pos:t='<<posX>>w, <<posY>>h'
 <</position>>
 
+<<#selectOnHover>>
+on_mouse_enter:t='onUnitSlotMouseEnter'
+<</selectOnHover>>
+
 <<#isInTable>>
 id:t='<<slotId>>'
 
@@ -11,8 +15,8 @@ inactive:t='yes'
 <</slotInactive>>
 
 <<#isSlotbarItem>>
-slotbarCurAir {}
 chosen:t='no'
+selected:t='no'
 <</isSlotbarItem>>
 <</isInTable>>
 
@@ -23,6 +27,7 @@ shopItem {
   behavior:t='Timer'
   timer_interval_msec:t='1000'
   unit_name:t='<<unitName>>'
+  proxyEventsParentTag:t='slotbarTable';
   <<#crewId>>crew_id:t='<<crewId>>'<</crewId>>
 
   <<^isInTable>>
@@ -38,6 +43,7 @@ shopItem {
   <<#refuseOpenHoverMenu>>refuseOpenHoverMenu:t='yes'<</refuseOpenHoverMenu>>
 
   <<@extraInfoBlock>>
+  <<@extraInfoBlockTop>>
 
   <<#showInService>>
   shopInServiceImg {
@@ -61,7 +67,7 @@ shopItem {
     }
   }
 
-  hoverHighlight {}
+  slotHoverHighlight {}
 
   shopStat:t='<<shopStatus>>'
   unitRarity:t='<<unitRarity>>'
@@ -92,6 +98,10 @@ shopItem {
 
   eliteIcon {}
 
+  <<#isSlotbarItem>>
+  slotTopGradientLine {}
+  slotBottomGradientLine {}
+  <</isSlotbarItem>>
 
   <<#isRecentlyReleased>>
   recentlyReleasedIcon {}
@@ -147,7 +157,6 @@ shopItem {
     }
 
     shopItemPrice {
-      id:t='bottom_item_price_text'
       <<#isLongPriceText>>
       tinyFont:t='yes'
       <</isLongPriceText>>
@@ -198,6 +207,10 @@ shopItem {
         shopItemType:t='<<shopItemType>>'
       }
     }
+    crewNumText {
+      text:t='<<crewNumWithTitle>>'
+      display:t='hide'
+    }
   }
 
   <<@itemButtons>>
@@ -224,4 +237,11 @@ shopItem {
   focus_border {}
 
   <<@bottomButton>>
+
+  <<#needDnD>>
+  on_drag_start:t='onUnitCellDragStart'
+  on_drag_drop:t='onUnitCellDrop'
+  on_move:t='onUnitCellMove'
+  dragParent:t='yes'
+  <</needDnD>>
 }

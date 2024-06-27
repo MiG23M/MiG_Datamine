@@ -430,6 +430,27 @@
         "centerDmgPart": true
       }
     },
+    "event": {
+      "name": "hydraulic_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_internal",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
+    "event": {
+      "name": "powersystem_exterior",
+      "fx": {
+        "name": "tank_ex_fuel_explosion",
+        "centerDmgPart": true
+      }
+    },
     "procedural": {
       "name": "default",
       "fx": {
@@ -614,7 +635,7 @@
     "horizontal": true
   },
   "ikGunner": {
-    "model": "german_gunner_early_char",
+    "model": "german_summer_1943_gunner_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -676,7 +697,7 @@
     }
   },
   "ikGunner": {
-    "model": "german_gunner_early_char",
+    "model": "german_summer_1943_gunner_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -852,7 +873,7 @@
     }
   },
   "ikGunner": {
-    "model": "german_gunner_early_char",
+    "model": "german_summer_1943_gunner_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -914,7 +935,7 @@
     }
   },
   "ikGunner": {
-    "model": "german_gunner_early_officer_char",
+    "model": "german_summer_1943_gunner_officer_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -976,7 +997,7 @@
     }
   },
   "ikGunner": {
-    "model": "german_gunner_early_char",
+    "model": "german_summer_1943_gunner_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -1038,7 +1059,7 @@
     }
   },
   "ikGunner": {
-    "model": "german_gunner_early_char",
+    "model": "german_summer_1943_gunner_char",
     "maxHeadHorAngle": 60.0,
     "maxHeadDownAngle": 60.0,
     "maxHeadUpAngle": 10.0,
@@ -1365,7 +1386,8 @@
     },
     "equipment_body_turret": {
       "armorClass": "tank_structural_steel",
-      "hp": 150.0,
+      "hp": 250.0,
+      "armorThickness": 2.0,
       "armorThrough": 15.0,
       "fireProtectionHp": 5.0,
       "hidableInViewer": false,
@@ -1373,6 +1395,9 @@
         "armorThrough": 15.0
       },
       "drive_turret_h_dm": {
+        "armorThrough": 15.0
+      },
+      "driver_controls_dm": {
         "armorThrough": 15.0
       },
       "drive_turret_v_01_dm": {
@@ -1431,15 +1456,23 @@
         "hp": 50.0,
         "armorThrough": 3.0
       },
-      "radio_station_01_dm": {
-        "hp": 50.0,
+      "electronic_equipment_dm": {
+        "hp": 60.0,
         "armorThrough": 3.0
+      },
+      "fire_control_system_dm": {
+        "hp": 60.0,
+        "armorThrough": 3.0
+      },
+      "power_system_dm": {
+        "hp": 60.0,
+        "armorThrough": 15.0
       }
     },
     "power_block": {
       "armorClass": "armor_tank_engine",
       "hp": 100.0,
-      "armorThickness": 50.0,
+      "armorThickness": 150.0,
       "fireProtectionHp": 5.0,
       "restrainDamage": 0.5,
       "engine_dm": {      },
@@ -1616,15 +1649,6 @@
       "ammo_body_l_13_dm": {      },
       "ammo_body_l_14_dm": {      },
       "ammo_body_l_15_dm": {      },
-      "ammo_body_l_16_dm": {      },
-      "ammo_body_l_17_dm": {      },
-      "ammo_body_l_18_dm": {      },
-      "ammo_body_l_19_dm": {      },
-      "ammo_body_l_20_dm": {      },
-      "ammo_body_l_21_dm": {      },
-      "ammo_body_l_22_dm": {      },
-      "ammo_body_l_23_dm": {      },
-      "ammo_body_l_24_dm": {      },
       "ammo_body_r_01_dm": {      },
       "ammo_body_r_02_dm": {      },
       "ammo_body_r_03_dm": {      },
@@ -1643,22 +1667,17 @@
       "ammo_body_r_16_dm": {      },
       "ammo_body_r_17_dm": {      },
       "ammo_body_r_18_dm": {      },
-      "ammo_body_r_19_dm": {      },
-      "ammo_body_r_20_dm": {      },
-      "ammo_body_r_21_dm": {      },
-      "ammo_body_r_22_dm": {      },
-      "ammo_body_r_23_dm": {      },
-      "ammo_body_r_24_dm": {      }
+      "ammo_body_r_19_dm": {      }
     },
     "fuel_tanks": {
       "armorClass": "tank_structural_steel",
-      "hp": 250.0,
+      "hp": 400.0,
       "armorThickness": 2.0,
-      "armorThrough": 10.0,
-      "fireProtectionHp": 10.0,
+      "armorThrough": 12.0,
+      "fireProtectionHp": 15.0,
       "createSecondaryShatters": false,
-      "fireParamsPreset": "fuel_internal",
       "stopChanceOnDeadPart": 0.0,
+      "fireParamsPreset": "fuel_internal",
       "fuel_tank_dm": {      },
       "fuel_tank_01_dm": {      },
       "fuel_tank_02_dm": {      },
@@ -1680,16 +1699,21 @@
       "armorClass": "tank_structural_steel",
       "hp": 250.0,
       "armorThickness": 2.0,
-      "armorThrough": 10.0,
-      "fireProtectionHp": 10.0,
+      "armorThrough": 12.0,
+      "fireProtectionHp": 15.0,
       "createSecondaryShatters": false,
       "fireParamsPreset": "fuel_exterior",
+      "stopChanceOnDeadPart": 0.0,
       "fuel_tank_exterior_r_01_dm": {      },
       "fuel_tank_exterior_r_02_dm": {      },
       "fuel_tank_exterior_r_03_dm": {      },
+      "fuel_tank_exterior_r_04_dm": {      },
+      "fuel_tank_exterior_r_05_dm": {      },
       "fuel_tank_exterior_l_01_dm": {      },
       "fuel_tank_exterior_l_02_dm": {      },
       "fuel_tank_exterior_l_03_dm": {      },
+      "fuel_tank_exterior_l_04_dm": {      },
+      "fuel_tank_exterior_l_05_dm": {      },
       "fuel_tank_exterior_01_dm": {      },
       "fuel_tank_exterior_02_dm": {      },
       "fuel_tank_exterior_03_dm": {      }
@@ -2072,6 +2096,19 @@
         "fHitCritical": true
       },
       "onHit": {
+        "damageType": "cumulative",
+        "expl": 0.5,
+        "fire": 0.5,
+        "damage": 400.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "cumulative",
+        "expl": 1.0,
+        "damage": 800.0,
+        "fHitCritical": true
+      },
+      "onHit": {
         "damageType": "explosion",
         "expl": 0.125,
         "fire": 0.225,
@@ -2105,22 +2142,21 @@
       },
       "onHit": {
         "damageType": "generic",
-        "fire": 0.7,
-        "expl": 0.1,
+        "fire": 0.5,
+        "expl": 0.5,
+        "damage": 250.0,
+        "fHitCritical": true
+      },
+      "onHit": {
+        "damageType": "generic",
+        "fire": 0.3,
+        "expl": 0.7,
         "damage": 300.0,
         "fHitCritical": true
       },
       "onHit": {
         "damageType": "generic",
-        "fire": 0.5,
-        "expl": 0.5,
-        "damage": 400.0,
-        "fHitCritical": true
-      },
-      "onHit": {
-        "damageType": "generic",
-        "fire": 0.2,
-        "expl": 0.8,
+        "expl": 1.0,
         "damage": 600.0,
         "fHitCritical": true
       },
@@ -2129,9 +2165,7 @@
         "fire": 0.2
       },
       "onKill": {
-        "fire": 0.5,
-        "expl": 0.3,
-        "nothing": 0.2,
+        "fire": 1.0,
         "fHitCritical": true
       }
     },
@@ -2807,6 +2841,8 @@
         "head": "bone_turret",
         "gun": "bone_gun",
         "barrel": "bone_gun_barrel_01",
+        "verDriveDm": "drive_turret_v_dm",
+        "horDriveDm": "drive_turret_h_dm",
         "linkedAnimPart": {
           "verNode": "bone_gun_piston_01",
           "verLimits": [
@@ -2926,7 +2962,9 @@
       "turret": {
         "head": "bone_mg_body_h",
         "gun": "bone_mg_body_v",
-        "gunnerDm": "machine_gunner_dm"
+        "gunnerDm": "machine_gunner_dm",
+        "verDriveDm": "drive_turret_v_dm",
+        "horDriveDm": "drive_turret_h_dm"
       },
       "limits": {
         "yaw": [

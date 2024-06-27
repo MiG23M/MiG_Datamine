@@ -34,6 +34,7 @@ let { getCurSlotbarUnit, isUnitInSlotbar } = require("%scripts/slotbar/slotbarSt
 let { guiStartBuilder, guiStartFlight, guiStartCdOptions, setCurrentCampaignMission
 } = require("%scripts/missions/startMissionsList.nut")
 let { getCurrentGameModeEdiff } = require("%scripts/gameModes/gameModeManagerState.nut")
+let { getBattleTypeByUnit } = require("%scripts/airInfo.nut")
 
 ::missionBuilderVehicleConfigForBlk <- {} //!!FIX ME: Should to remove this
 
@@ -419,11 +420,12 @@ gui_handlers.TestFlight <- class (gui_handlers.GenericOptionsModal) {
       local count = 0
       if (bulGroup.active) {
         name = bulGroup.getBulletNameForCode(bulGroup.selectedName)
-        count = bulGroup.bulletsCount * bulGroup.guns
+        count = bulGroup.bulletsCount
       }
       set_unit_option(updUnit.name, USEROPT_BULLETS0 + bulIdx, name)
       set_option(USEROPT_BULLETS0 + bulIdx, name)
       set_gui_option(USEROPT_BULLET_COUNT0 + bulIdx, count)
+      set_gui_option(USEROPT_BULLETS_WEAPON0 + bulIdx, bulGroup.getWeaponName())
     }
     ++bulIdx
 
@@ -431,6 +433,7 @@ gui_handlers.TestFlight <- class (gui_handlers.GenericOptionsModal) {
       set_unit_option(updUnit.name, USEROPT_BULLETS0 + bulIdx, "")
       set_option(USEROPT_BULLETS0 + bulIdx, "")
       set_gui_option(USEROPT_BULLET_COUNT0 + bulIdx, 0)
+      set_gui_option(USEROPT_BULLETS_WEAPON0 + bulIdx, "")
       ++bulIdx
     }
   }
@@ -465,7 +468,7 @@ gui_handlers.TestFlight <- class (gui_handlers.GenericOptionsModal) {
       g_difficulty.getDifficultyByDiffCode(getCdBaseDifficulty()) :
       g_difficulty.getDifficultyByName(diffValue)
     if (difficulty.diffCode != -1) {
-      let battleType = ::get_battle_type_by_unit(this.unit)
+      let battleType = getBattleTypeByUnit(this.unit)
       return difficulty.getEdiff(battleType)
     }
     return getCurrentGameModeEdiff()

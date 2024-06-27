@@ -2490,7 +2490,7 @@
       "node": "optic1_gun"
     },
     "sensor": {
-      "blk": "gameData/sensors/us_an_alr_45v.blk"
+      "blk": "gameData/sensors/us_an_alr_67.blk"
     },
     "sensor": {
       "blk": "gameData/sensors/LaserDesignatorSensor.blk",
@@ -2535,6 +2535,10 @@
     "preset": {
       "name": "a_6e_tram_gbu_10",
       "blk": "gameData/FlightModels/weaponPresets/a_6e_tram_gbu_10.blk"
+    },
+    "preset": {
+      "name": "a_6e_tram_agm_123",
+      "blk": "gameData/FlightModels/weaponPresets/a_6e_tram_agm_123.blk"
     },
     "preset": {
       "name": "a_6e_tram_mk81",
@@ -2682,17 +2686,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare1",
           "bullets": 30,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet.blk",
           "emitter": "emtr_flare2",
           "bullets": 30,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": false
         }
@@ -2813,6 +2819,24 @@
         "Weapon": {
           "trigger": "guided bombs",
           "blk": "gameData/Weapons/BombGuns/us_gbu_10_paveway_2.blk",
+          "emitter": "bomb_2000lb_001",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_large_jdam",
+        "name": "us_agm_123",
+        "reqModification": "us_agm_123",
+        "ShowNodes": {
+          "node": "pylon1_l",
+          "node": "pylon1_l_upor"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_123.blk",
           "emitter": "bomb_2000lb_001",
           "bullets": 1,
           "external": true,
@@ -2994,17 +3018,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare3",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare4",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -3125,6 +3151,24 @@
         "Weapon": {
           "trigger": "guided bombs",
           "blk": "gameData/Weapons/BombGuns/us_gbu_10_paveway_2.blk",
+          "emitter": "bomb_2000lb_002",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_large_jdam",
+        "name": "us_agm_123",
+        "reqModification": "us_agm_123",
+        "ShowNodes": {
+          "node": "pylon_l",
+          "node": "pylon_l_upor"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_123.blk",
           "emitter": "bomb_2000lb_002",
           "bullets": 1,
           "external": true,
@@ -3306,17 +3350,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare5",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare6",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -3640,6 +3686,24 @@
         }
       },
       "WeaponPreset": {
+        "iconType": "guided_bomb_large_jdam",
+        "name": "us_agm_123",
+        "reqModification": "us_agm_123",
+        "ShowNodes": {
+          "node": "pylon_r",
+          "node": "pylon_r_upor"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_123.blk",
+          "emitter": "bomb_2000lb_004",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
         "iconType": "bombs_small_group_x5",
         "name": "mer_mk81_x5_right",
         "reqModification": "us_250lb_mk81",
@@ -3813,17 +3877,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare7",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare8",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -3944,6 +4010,24 @@
         "Weapon": {
           "trigger": "guided bombs",
           "blk": "gameData/Weapons/BombGuns/us_gbu_10_paveway_2.blk",
+          "emitter": "bomb_2000lb_005",
+          "bullets": 1,
+          "external": true,
+          "separate": true,
+          "machLimit": 1.01
+        }
+      },
+      "WeaponPreset": {
+        "iconType": "guided_bomb_large_jdam",
+        "name": "us_agm_123",
+        "reqModification": "us_agm_123",
+        "ShowNodes": {
+          "node": "pylon1_r",
+          "node": "pylon1_r_upor"
+        },
+        "Weapon": {
+          "trigger": "atgm",
+          "blk": "gameData/Weapons/rocketGuns/us_agm_123.blk",
           "emitter": "bomb_2000lb_005",
           "bullets": 1,
           "external": true,
@@ -4125,17 +4209,19 @@
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare9",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         },
         "Weapon": {
           "trigger": "countermeasures",
-          "blk": "gameData/Weapons/rocketGuns/countermeasure_launcher_jet.blk",
+          "blk": "gameData/Weapons/rocketGuns/countermeasure_split_launcher_jet_bol_pod.blk",
           "emitter": "emtr_flare10",
           "bullets": 120,
+          "bulletsCartridge": 1,
           "external": true,
           "separate": true
         }
@@ -4282,10 +4368,8 @@
       "tier": 3,
       "modClass": "lth"
     },
-    "countermeasures_launcher_chaff_only": {    },
-    "countermeasures_launcher_flare_only": {    },
-    "countermeasures_launcher_chaff_priority": {    },
-    "countermeasures_launcher_flare_priority": {    },
+    "countermeasures_launcher_chaff_bol_pod": {    },
+    "countermeasures_launcher_chaff": {    },
     "countermeasures_belt_pack": {
       "modClass": "armor",
       "turn_it_off": false,
@@ -4305,26 +4389,26 @@
         "nightVision": {
           "gunnerIr": {
             "resolution": [
-              1920,
-              1080
+              800,
+              600
 ],
-            "lightMult": 10.0,
-            "ghosting": 0.7,
-            "noiseFactor": 0.15
+            "lightMult": 8.0,
+            "ghosting": 0.75,
+            "noiseFactor": 0.2
           },
           "pilotIr": {
             "resolution": [
-              1920,
-              1080
+              800,
+              600
 ],
-            "lightMult": 10.0,
-            "ghosting": 0.7,
-            "noiseFactor": 0.15
+            "lightMult": 8.0,
+            "ghosting": 0.75,
+            "noiseFactor": 0.2
           },
           "sightThermal": {
             "resolution": [
-              1024,
-              768
+              500,
+              300
 ],
             "noiseFactor": 0.05
           }
@@ -4338,7 +4422,7 @@
     "us_aim_9g": {
       "prevModification": "us_mk_77",
       "modClass": "weapon",
-      "tier": 3
+      "tier": 2
     },
     "us_aim_9l": {
       "reqModification": "us_aim_9g",
@@ -4357,7 +4441,7 @@
     "us_1000lb_mk83": {
       "reqModification": "us_500lb_mk82",
       "modClass": "weapon",
-      "tier": 4
+      "tier": 3
     },
     "us_2000lb_mk84": {
       "prevModification": "us_gbu_10",
@@ -4377,6 +4461,11 @@
     "us_gbu_10": {
       "reqModification": "us_gbu_16",
       "tier": 3,
+      "modClass": "weapon"
+    },
+    "us_agm_123": {
+      "reqModification": "us_gbu_10",
+      "tier": 4,
       "modClass": "weapon"
     },
     "mk4_mod0_gunpod": {

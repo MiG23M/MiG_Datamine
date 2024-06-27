@@ -5,7 +5,7 @@ let { format } = require("string")
 let { get_unit_option, set_unit_option, clearUnitOption } = require("guiOptions")
 let { getBulletsListHeader } = require("%scripts/weaponry/weaponryDescription.nut")
 let { getModificationByName } = require("%scripts/weaponry/modificationInfo.nut")
-let { setUnitLastBullets,
+let { setUnitLastBullets, isPairBulletsGroup
         getOptionsBulletsList } = require("%scripts/weaponry/bulletsInfo.nut")
 let { AMMO,
         getAmmoAmount,
@@ -26,6 +26,7 @@ let { USEROPT_BULLETS0, USEROPT_BULLET_COUNT0 } = require("%scripts/options/opti
   canChangeActivity = false
   isForcedAvailable = false
   maxToRespawn = 0
+  constrainedTotalCount = 0
 
   option = null //bullet option. initialize only on request because generate descriptions
   selectedBullet = null //selected bullet from modifications list
@@ -39,6 +40,7 @@ let { USEROPT_BULLETS0, USEROPT_BULLET_COUNT0 } = require("%scripts/options/opti
     this.canChangeActivity = params?.canChangeActivity ?? this.canChangeActivity
     this.isForcedAvailable = params?.isForcedAvailable ?? this.isForcedAvailable
     this.maxToRespawn = params?.maxToRespawn ?? this.maxToRespawn
+    this.constrainedTotalCount = params?.constrainedTotalCount ?? this.constrainedTotalCount
 
     this.bullets = getOptionsBulletsList(this.unit, this.groupIndex, false, this.isForcedAvailable)
     this.selectedName = getTblValue(this.bullets.value, this.bullets.values, "")
@@ -59,6 +61,9 @@ let { USEROPT_BULLETS0, USEROPT_BULLET_COUNT0 } = require("%scripts/options/opti
   function canChangeBulletsCount() {
     return this.gunInfo != null
   }
+
+  hasEnableSecondValue =@() this.bullets.items?[1].enabled ?? false
+  canChangePairBulletsCount = @() this.hasEnableSecondValue()
 
   function getGunIdx() {
     return getTblValue("gunIdx", this.gunInfo, 0)
@@ -116,10 +121,14 @@ let { USEROPT_BULLETS0, USEROPT_BULLET_COUNT0 } = require("%scripts/options/opti
     if (!this.gunInfo)
       return false
 
-    this.maxBulletsCount = this.gunInfo.total
+    local totalBulletsInGun = this.gunInfo.total
+    if (this.constrainedTotalCount > 0)
+      totalBulletsInGun = min(totalBulletsInGun, (this.constrainedTotalCount / this.guns).tointeger())
+
+    this.maxBulletsCount = totalBulletsInGun
     if (!isAmmoFree(this.unit, this.selectedName, AMMO.PRIMARY)) {
       let boughtCount = (getAmmoAmount(this.unit, this.selectedName, AMMO.PRIMARY) / this.guns).tointeger()
-      this.maxBulletsCount = this.isForcedAvailable ? this.gunInfo.total : min(boughtCount, this.gunInfo.total)
+      this.maxBulletsCount = this.isForcedAvailable ? totalBulletsInGun : min(boughtCount, totalBulletsInGun)
     }
 
     if (this.maxToRespawn > 0)
@@ -185,5 +194,15 @@ let { USEROPT_BULLETS0, USEROPT_BULLET_COUNT0 } = require("%scripts/options/opti
 
   function shouldHideBullet() {
     return this.gunInfo?.forcedMaxBulletsInRespawn ?? false
+  }
+
+  canChangeBullet = @() this.bullets.values.len() > 1
+    && !this.isPairBulletsGroup()
+
+  isPairBulletsGroup = @() isPairBulletsGroup(this.bullets)
+
+  function getWeaponName() {
+    let needSetWeaponName = this.unit.isAir() || this.unit.isHelicopter()
+    return needSetWeaponName ? this.gunInfo?.weapName ?? "" : ""
   }
 }

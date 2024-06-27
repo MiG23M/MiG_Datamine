@@ -1,5 +1,5 @@
 //-file:plus-string
-from "%scripts/dagui_natives.nut" import get_login_pass, check_login_pass, save_profile, dgs_argv, dgs_argc, dgs_get_argv, get_cur_circuit_name, set_login_pass, webauth_start, load_local_settings, enable_keyboard_layout_change_tracking, is_steam_big_picture, webauth_stop, enable_keyboard_locks_change_tracking, webauth_get_url, get_two_step_code_async2, set_network_circuit
+from "%scripts/dagui_natives.nut" import get_login_pass, check_login_pass, save_profile, dgs_argv, dgs_argc, dgs_get_argv, get_cur_circuit_name, set_login_pass, load_local_settings, enable_keyboard_layout_change_tracking, is_steam_big_picture, enable_keyboard_locks_change_tracking, get_two_step_code_async2, set_network_circuit
 
 from "%scripts/dagui_library.nut" import *
 from "%scripts/login/loginConsts.nut" import LOGIN_STATE, USE_STEAM_LOGIN_AUTO_SETTING_ID
@@ -19,7 +19,7 @@ let twoStepModal = require("%scripts/login/twoStepModal.nut")
 let exitGame = require("%scripts/utils/exitGame.nut")
 let { setFocusToNextObj, getObjValue } = require("%sqDagui/daguiUtil.nut")
 let { setGuiOptionsMode } = require("guiOptions")
-let { getDistr } = require("auth_wt")
+let { getDistr, convertExternalJwtToAuthJwt } = require("auth_wt")
 let { dgs_get_settings } = require("dagor.system")
 let { get_user_system_info } = require("sysinfo")
 let regexp2 = require("regexp2")
@@ -33,11 +33,15 @@ let { saveLocalSharedSettings, loadLocalSharedSettings
 let { OPTIONS_MODE_GAMEPLAY } = require("%scripts/options/optionsExtNames.nut")
 let { getGameLocalizationInfo, setGameLocalization, canSwitchGameLocalization } = require("%scripts/langUtils/language.nut")
 let { get_network_block } = require("blkGetters")
-let { getCurCircuitUrl } = require("%appGlobals/urlCustom.nut")
+let { getCurCircuitOverride } = require("%appGlobals/curCircuitOverride.nut")
 let { steam_is_running } = require("steam")
+let { havePlayerTag } = require("%scripts/user/profileStates.nut")
+let { bqSendNoAuth, bqSendNoAuthWeb } = require("%scripts/bigQuery/bigQueryClient.nut")
+let { webauth_start, webauth_stop, webauth_get_url, webauth_completion_event } = require("webauth")
 
 const MAX_GET_2STEP_CODE_ATTEMPTS = 10
 const GUEST_LOGIN_SAVE_ID = "guestLoginId"
+const MIGRATION_URL = "migration.warthunder.com"
 
 let validateNickRegexp = regexp2(@"[^_0-9a-zA-Z]")
 
@@ -53,6 +57,19 @@ function setDbgGuestLoginIdPrefix(prefix) {
   console_print(getGuestLoginId())
 }
 register_command(setDbgGuestLoginIdPrefix, "debug.set_guest_login_id_prefix")
+
+function isExternalOperator() {
+  return getCurCircuitOverride("operatorName") != null
+}
+
+function isShowMessageAboutProfileMoved() {
+  if (isExternalOperator() || !havePlayerTag("pix_wt"))
+    return false
+  scene_msg_box("errorMessageBox", get_gui_scene(),
+    "\n".concat(loc("msgbox/error_login_migrated_player_profile"), $"<url={MIGRATION_URL}>{MIGRATION_URL}</url>"),
+    [["exit", exitGame], ["tryAgain", @() null]], "tryAgain", { cancel_fn = @() null })
+  return true
+}
 
 gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
   sceneBlkName = "%gui/loginBox.blk"
@@ -127,7 +144,7 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
     this.setDisableSslCertBox(disableSSLCheck)
     let isSteamRunning = steam_is_running()
     let showSteamLogin = isSteamRunning
-    let showWebLogin = !isSteamRunning && webauth_start(this, this.onSsoAuthorizationComplete)
+    let showWebLogin = !isSteamRunning && webauth_start()
     showObjById("steam_login_action_button", showSteamLogin, this.scene)
     showObjById("sso_login_action_button", showWebLogin, this.scene)
     showObjById("btn_signUp_link", !showSteamLogin, this.scene)
@@ -147,8 +164,8 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
     let isVisibleLinks = !isPlatformShieldTv()
     let linksObj = showObjById("links_block", isVisibleLinks, this.scene)
     if (isVisibleLinks && (linksObj?.isValid() ?? false)) {
-      linksObj.findObject("btn_faq_link").link = getCurCircuitUrl("faqURL", loc("url/faq"))
-      linksObj.findObject("btn_support_link").link = getCurCircuitUrl("supportURL", loc("url/support"))
+      linksObj.findObject("btn_faq_link").link = getCurCircuitOverride("faqURL", loc("url/faq"))
+      linksObj.findObject("btn_support_link").link = getCurCircuitOverride("supportURL", loc("url/support"))
     }
 
     if ("dgs_get_argv" in getroottable()) {
@@ -377,6 +394,16 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
   }
 
   function continueLogin(no_dump_login) {
+    if (isShowMessageAboutProfileMoved())
+      return
+
+    if (isExternalOperator())
+      convertExternalJwtToAuthJwt("ConvertExternalJwt")
+    else
+      this.finishLogin(no_dump_login)
+  }
+
+  function finishLogin(no_dump_login) {
     if (this.shardItems) {
       if (this.shardItems.len() == 1)
         set_network_circuit(this.shardItems[0].item)
@@ -456,7 +483,8 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
 
     if (params.success) {
       let no_dump_login = getObjValue(this.scene, "loginbox_username", "")
-      load_local_settings()
+      if (!isExternalOperator())
+        load_local_settings()
       this.continueLogin(no_dump_login);
     }
   }
@@ -502,6 +530,7 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
     }
 
     else if ( result == YU2_2STEP_AUTH) {
+      bqSendNoAuth("auth:2step")
       //error, received if user not logged, because he have 2step authorization activated
       this.check2StepAuthCode = true
       showObjById("loginbox_code_remember_this_device", true, this.scene)
@@ -520,22 +549,25 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
     }
 
     else if ( result == YU2_PSN_RESTRICTED) {
+      bqSendNoAuth("auth:psn_restricted")
       this.msgBox("psn_restricted", loc("yn1/login/PSN_RESTRICTED"),
          [["exit", exitGame ]], "exit")
     }
 
     else if ( result == YU2_WRONG_LOGIN || result == YU2_WRONG_PARAMETER) {
+      bqSendNoAuth(result == YU2_WRONG_LOGIN ? "auth:wrong_login" : "auth:wrong_param")
       if (this.was_using_stoken)
         return;
       ::error_message_box("yn1/connect_error", result, // auth error
       [
-        ["recovery", @() openUrl(getCurCircuitUrl("recoveryPasswordURL", loc("url/recovery")), false, false, "login_wnd")],
+        ["recovery", @() openUrl(getCurCircuitOverride("recoveryPasswordURL", loc("url/recovery")), false, false, "login_wnd")],
         ["exit", exitGame],
         ["tryAgain", Callback(this.onLoginErrorTryAgain, this)]
       ], "tryAgain", { cancel_fn = Callback(this.onLoginErrorTryAgain, this) })
     }
 
     else if ( result == YU2_SSL_CACERT) {
+      bqSendNoAuth("auth:ssl_error")
       if (this.was_using_stoken)
         return;
       ::error_message_box("yn1/connect_error", result,
@@ -547,20 +579,24 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
     }
 
     else if ( result == YU2_DOI_INCOMPLETE) {
+      bqSendNoAuth("auth:verify_email")
       showInfoMsgBox(loc("yn1/login/DOI_INCOMPLETE"), "verification_email_to_complete")
     }
 
     else if ( result == YU2_NOT_FOUND) {
       if (!this.isGuestLogin) {
+        bqSendNoAuth("auth:not_found")
         this.showConnectionErrorMessageBox(result)
         return
       }
 
+      bqSendNoAuth("auth:not_found:guest")
       saveLocalSharedSettings(GUEST_LOGIN_SAVE_ID, null)
       this.onGuestAuthorization()
     }
 
     else {
+      bqSendNoAuth($"auth:error:{result}")
       if (this.was_using_stoken)
         return
 
@@ -595,19 +631,25 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
   }
 
   function onSignUp() {
-    local urlLocId
-    if (steam_is_running())
+    local urlLocId, platform = ""
+    if (steam_is_running()) {
+      platform = ":steam"
       urlLocId = "url/signUpSteam"
-    else if (isPlatformShieldTv())
+    }
+    else if (isPlatformShieldTv()) {
+      platform = ":shield_tv"
       urlLocId = "url/signUpShieldTV"
+    }
     else
       urlLocId = "url/signUp"
 
-    openUrl(getCurCircuitUrl("signUpURL", loc(urlLocId)).subst({ distr = getDistr() }), false, false, "login_wnd")
+    bqSendNoAuthWeb($"sign_up{platform}")
+    openUrl(getCurCircuitOverride("signUpURL", loc(urlLocId)).subst({ distr = getDistr() }), false, false, "login_wnd")
   }
 
   function onForgetPassword() {
-    openUrl(getCurCircuitUrl("recoveryPasswordURL", loc("url/recovery")), false, false, "login_wnd")
+    bqSendNoAuthWeb("forget_pass")
+    openUrl(getCurCircuitOverride("recoveryPasswordURL", loc("url/recovery")), false, false, "login_wnd")
   }
 
   function onChangeLogin(obj) {
@@ -657,11 +699,14 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
     set_disable_autorelogin_once(false)
     statsd.send_counter("sq.game_start.request_login", 1, { login_type = "guest" })
     log("Guest Login: check_login_pass")
+    bqSendNoAuth("guest:login")
     let result = check_login_pass(guestLoginId, nick, "guest", $"guest{known ? "-known" : ""}", false, false)
     this.proceedAuthorizationResult(result, "")
   }
 
   function onGuestAuthorization() {
+    bqSendNoAuth("guest")
+
     let guestLoginId = getGuestLoginId()
     if (guestLoginId == loadLocalSharedSettings(GUEST_LOGIN_SAVE_ID)) {
       this.guestProceedAuthorization(guestLoginId, "", true)
@@ -679,6 +724,7 @@ gui_handlers.LoginWndHandler <- class (BaseGuiHandler) {
       owner = this
       function okFunc(nick) {
         if (!isPhrasePassing(nick)) {
+          bqSendNoAuth("guest:bad_nick")
           showInfoMsgBox(loc("invalid_nickname"), "guest_login_invalid_nickname")
           return
         }
@@ -693,4 +739,19 @@ eventbus_subscribe("ProceedGetTwoStepCode", function ProceedGetTwoStepCode(p) {
   if (loginWnd == null)
     return
   loginWnd.proceedGetTwoStepCode(p)
+})
+
+eventbus_subscribe("ConvertExternalJwt", function ContinueExternalLogin(_) {
+  let loginWnd = handlersManager.findHandlerClassInScene(gui_handlers.LoginWndHandler)
+  if (loginWnd == null)
+    return
+  let no_dump_login = getObjValue(loginWnd.scene, "loginbox_username", "")
+  loginWnd.finishLogin(no_dump_login)
+})
+
+eventbus_subscribe(webauth_completion_event, function ProceedWebAuth(p) {
+  let loginWnd = handlersManager.findHandlerClassInScene(gui_handlers.LoginWndHandler)
+  if (loginWnd == null)
+    return
+  loginWnd.onSsoAuthorizationComplete(p)
 })

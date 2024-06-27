@@ -11,9 +11,9 @@ let { hudFontHgt } = require("%rGui/style/airHudStyle.nut")
 let { TargetX, TargetY } = require("%rGui/hud/targetTrackerState.nut")
 let string = require("string")
 let { HmdYaw, HmdPitch, AimLockYaw, AimLockPitch, AimLocked, ScreenFwdDirPos, TvvHMDMark,
- RocketMode, HmdTargetPosValid, HmdTargetPos } = require("%rGui/planeState/planeToolsState.nut")
+ RocketMode, HmdTargetPosValid, HmdTargetPos, HmdGunTargeting } = require("%rGui/planeState/planeToolsState.nut")
 
-let baseColor = isInVr ? Color(0, 255, 0, 255) : Color(0, 255, 0, 10)
+let baseColor = isInVr ? Color(0, 255, 0, 30) : Color(0, 255, 0, 10)
 let baseLineWidth = floor(LINE_WIDTH + 0.5)
 let TrtModeForRpm = TrtMode[0]
 let isHoverMode = Computed(@() TrtModeForRpm.value == AirThrottleMode.CLIMB)
@@ -480,7 +480,7 @@ let phmd = {
 }
 
 let gunsModeLocal = CannonMode[0]
-let gunModeWatched = Computed(@() (gunsModeLocal.value & (1 << WeaponMode.CCRP_MODE)) ? "TADS" : "FXD")
+let gunModeWatched = Computed(@() (gunsModeLocal.value & (1 << WeaponMode.CCRP_MODE)) ? "TADS" : (HmdGunTargeting.get() ? "PHS" : "FXD"))
 let gunMode = @(){
   watch = gunModeWatched
   size = SIZE_TO_CONTENT
